@@ -10,6 +10,8 @@ import tensorflow as tf
 from tensorflow.keras import layers, models
 from sklearn.preprocessing import StandardScaler
 import joblib
+import logging
+from typing import Dict
 
 
 class MaritimeAnomalyDetector:
@@ -20,19 +22,30 @@ class MaritimeAnomalyDetector:
     that deviate from normal maritime behavior.
     """
     
-    def __init__(self, input_dim=10, encoding_dim=5):
+    def __init__(self, input_dim: int = 10, encoding_dim: int = 5):
         """
         Initialize the anomaly detector.
         
         Args:
             input_dim (int): Number of input features
             encoding_dim (int): Dimension of the encoded representation
+            
+        Raises:
+            ValueError: If input_dim or encoding_dim are invalid
         """
+        if not isinstance(input_dim, int) or input_dim <= 0:
+            raise ValueError(f"input_dim must be a positive integer, got {input_dim}")
+        if not isinstance(encoding_dim, int) or encoding_dim <= 0:
+            raise ValueError(f"encoding_dim must be a positive integer, got {encoding_dim}")
+        if encoding_dim >= input_dim:
+            raise ValueError(f"encoding_dim ({encoding_dim}) must be less than input_dim ({input_dim})")
+            
         self.input_dim = input_dim
         self.encoding_dim = encoding_dim
         self.model = None
         self.scaler = StandardScaler()
         self.threshold = None
+        self.logger = logging.getLogger(__name__)
         
     def _build_autoencoder(self):
         """Build the autoencoder architecture."""
@@ -53,7 +66,7 @@ class MaritimeAnomalyDetector:
         
         return autoencoder
     
-    def extract_features(self, vessel_data):
+    def extract_features(self, vessel_data: Dict) -> np.ndarray:
         """
         Extract features for anomaly detection.
         
@@ -62,23 +75,39 @@ class MaritimeAnomalyDetector:
             
         Returns:
             np.array: Feature vector for the vessel
+            
+        Raises:
+            TypeError: If vessel_data is not a dictionary
+            ValueError: If extracted features contain invalid values
         """
-        features = [
-            vessel_data.get('distance_to_cable', 0),
-            vessel_data.get('distance_to_military_base', 0),
-            vessel_data.get('vessel_size', 0),
-            vessel_data.get('estimated_speed', 0),
-            vessel_data.get('time_stationary', 0),
-            vessel_data.get('time_of_day', 0),  # 0-23
-            vessel_data.get('day_of_week', 0),   # 0-6
-            vessel_data.get('distance_to_port', 0),
-            vessel_data.get('weather_severity', 0),  # 0-10
-            vessel_data.get('repeat_visits', 0)
-        ]
+        if not isinstance(vessel_data, dict):
+            raise TypeError(f"vessel_data must be a dictionary, got {type(vessel_data)}")
+            
+        try:
+            features = [
+                max(0, float(vessel_data.get('distance_to_cable', 0))),
+                max(0, float(vessel_data.get('distance_to_military_base', 0))),
+                max(0, float(vessel_data.get('vessel_size', 0))),
+                max(0, float(vessel_data.get('estimated_speed', 0))),
+                max(0, float(vessel_data.get('time_stationary', 0))),
+                max(0, min(23, float(vessel_data.get('time_of_day', 0)))),  # 0-23
+                max(0, min(6, float(vessel_data.get('day_of_week', 0)))),   # 0-6
+                max(0, float(vessel_data.get('distance_to_port', 0))),
+                max(0, min(10, float(vessel_data.get('weather_severity', 0)))),  # 0-10
+                max(0, float(vessel_data.get('repeat_visits', 0)))
+            ]
+        except (ValueError, TypeError) as e:
+            raise ValueError(f"Invalid feature values in vessel_data: {e}")
+            
+        feature_array = np.array(features).reshape(1, -1)
         
-        return np.array(features).reshape(1, -1)
+        if np.any(np.isnan(feature_array)) or np.any(np.isinf(feature_array)):
+            raise ValueError("Features contain NaN or infinite values")
+            
+        return feature_array
     
-    def train(self, training_data, epochs=100, batch_size=32, validation_split=0.2):
+    def train(self, training_data: np.ndarray, epochs: int = 100, 
+             batch_size: int = 32, validation_split: float = 0.2) -> tf.keras.callbacks.History:
         """
         Train the autoencoder on normal vessel behavior.
         
@@ -87,33 +116,59 @@ class MaritimeAnomalyDetector:
             epochs (int): Number of training epochs
             batch_size (int): Training batch size
             validation_split (float): Fraction of data for validation
+            
+        Returns:
+            tf.keras.callbacks.History: Training history
+            
+        Raises:
+            ValueError: If training parameters are invalid
+            TypeError: If training_data is not a numpy array
         """
-        # Normalize the data
-        training_data_scaled = self.scaler.fit_transform(training_data)
-        
-        # Build and train the model
-        self.model = self._build_autoencoder()
-        
-        history = self.model.fit(
-            training_data_scaled,
-            training_data_scaled,
-            epochs=epochs,
-            batch_size=batch_size,
-            validation_split=validation_split,
-            shuffle=True,
-            verbose=1
-        )
-        
-        # Calculate threshold based on training reconstruction errors
-        train_predictions = self.model.predict(training_data_scaled)
-        train_errors = np.mean(np.square(training_data_scaled - train_predictions), axis=1)
-        
-        # Set threshold as 95th percentile of training errors
-        self.threshold = np.percentile(train_errors, 95)
-        
-        return history
+        if not isinstance(training_data, np.ndarray):
+            raise TypeError(f"training_data must be a numpy array, got {type(training_data)}")
+        if training_data.shape[1] != self.input_dim:
+            raise ValueError(f"Training data features ({training_data.shape[1]}) don't match input_dim ({self.input_dim})")
+        if epochs <= 0 or not isinstance(epochs, int):
+            raise ValueError(f"epochs must be a positive integer, got {epochs}")
+        if batch_size <= 0 or not isinstance(batch_size, int):
+            raise ValueError(f"batch_size must be a positive integer, got {batch_size}")
+        if not 0 < validation_split < 1:
+            raise ValueError(f"validation_split must be between 0 and 1, got {validation_split}")
+        if len(training_data) < 10:
+            raise ValueError(f"Need at least 10 training samples, got {len(training_data)}")
+            
+        try:
+            # Normalize the data
+            training_data_scaled = self.scaler.fit_transform(training_data)
+            
+            # Build and train the model
+            self.model = self._build_autoencoder()
+            
+            history = self.model.fit(
+                training_data_scaled,
+                training_data_scaled,
+                epochs=epochs,
+                batch_size=batch_size,
+                validation_split=validation_split,
+                shuffle=True,
+                verbose=1
+            )
+            
+            # Calculate threshold based on training reconstruction errors
+            train_predictions = self.model.predict(training_data_scaled, verbose=0)
+            train_errors = np.mean(np.square(training_data_scaled - train_predictions), axis=1)
+            
+            # Set threshold as 95th percentile of training errors
+            self.threshold = np.percentile(train_errors, 95)
+            
+            self.logger.info(f"Training completed: {epochs} epochs, threshold: {self.threshold:.6f}")
+            return history
+            
+        except Exception as e:
+            self.logger.error(f"Training failed: {e}")
+            raise RuntimeError(f"Training failed: {e}")
     
-    def predict_anomaly(self, vessel_data):
+    def predict_anomaly(self, vessel_data) -> Dict:
         """
         Predict if a vessel exhibits anomalous behavior.
         
@@ -122,33 +177,50 @@ class MaritimeAnomalyDetector:
             
         Returns:
             dict: Prediction results including anomaly score and classification
+            
+        Raises:
+            RuntimeError: If model is not trained
+            ValueError: If vessel_data is invalid
         """
-        if isinstance(vessel_data, dict):
-            features = self.extract_features(vessel_data)
-        else:
-            features = vessel_data.reshape(1, -1)
-        
-        # Normalize features
-        features_scaled = self.scaler.transform(features)
-        
-        # Get reconstruction
-        reconstruction = self.model.predict(features_scaled, verbose=0)
-        
-        # Calculate reconstruction error
-        reconstruction_error = np.mean(np.square(features_scaled - reconstruction))
-        
-        # Classify as anomaly
-        is_anomaly = reconstruction_error > self.threshold
-        
-        # Calculate normalized anomaly score (0-10)
-        anomaly_score = min(10, (reconstruction_error / self.threshold) * 5)
-        
-        return {
-            'is_anomaly': bool(is_anomaly),
-            'anomaly_score': float(anomaly_score),
-            'reconstruction_error': float(reconstruction_error),
-            'threshold': float(self.threshold)
-        }
+        if self.model is None:
+            raise RuntimeError("Model not trained. Call train() first.")
+        if self.threshold is None:
+            raise RuntimeError("Threshold not set. Model training incomplete.")
+            
+        try:
+            if isinstance(vessel_data, dict):
+                features = self.extract_features(vessel_data)
+            elif isinstance(vessel_data, np.ndarray):
+                features = vessel_data.reshape(1, -1)
+                if features.shape[1] != self.input_dim:
+                    raise ValueError(f"Feature dimensions ({features.shape[1]}) don't match model input_dim ({self.input_dim})")
+            else:
+                raise TypeError(f"vessel_data must be dict or np.ndarray, got {type(vessel_data)}")
+            
+            # Normalize features
+            features_scaled = self.scaler.transform(features)
+            
+            # Get reconstruction
+            reconstruction = self.model.predict(features_scaled, verbose=0)
+            
+            # Calculate reconstruction error
+            reconstruction_error = float(np.mean(np.square(features_scaled - reconstruction)))
+            
+            # Classify as anomaly
+            is_anomaly = reconstruction_error > self.threshold
+            
+            # Calculate normalized anomaly score (0-10)
+            anomaly_score = min(10.0, (reconstruction_error / self.threshold) * 5)
+            
+            return {
+                'is_anomaly': bool(is_anomaly),
+                'anomaly_score': float(anomaly_score),
+                'reconstruction_error': reconstruction_error,
+                'threshold': float(self.threshold)
+            }
+            
+        except Exception as e:
+            raise RuntimeError(f"Anomaly prediction failed: {e}")
     
     def save_model(self, filepath):
         """Save the trained model and scaler."""

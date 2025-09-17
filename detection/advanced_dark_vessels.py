@@ -20,24 +20,34 @@ class DarkVesselDetector:
     with AIS broadcast data.
     """
     
-    def __init__(self, matching_threshold_meters=500, 
-                 vessel_size_threshold=20,
-                 confidence_threshold=0.7):
+    def __init__(self, matching_threshold_meters: float = 500, 
+                 vessel_size_threshold: int = 20,
+                 confidence_threshold: float = 0.7):
         """
         Initialize the dark vessel detector.
         
         Args:
-            matching_threshold_meters (int): Max distance to match SAR vessel with AIS signal
+            matching_threshold_meters (float): Max distance to match SAR vessel with AIS signal
             vessel_size_threshold (int): Minimum vessel size in pixels
             confidence_threshold (float): Minimum confidence for vessel detection
+            
+        Raises:
+            ValueError: If parameters are invalid
         """
+        if matching_threshold_meters <= 0:
+            raise ValueError(f"matching_threshold_meters must be positive, got {matching_threshold_meters}")
+        if vessel_size_threshold <= 0:
+            raise ValueError(f"vessel_size_threshold must be positive, got {vessel_size_threshold}")
+        if not 0 <= confidence_threshold <= 1:
+            raise ValueError(f"confidence_threshold must be between 0 and 1, got {confidence_threshold}")
+            
         self.matching_threshold = matching_threshold_meters
         self.size_threshold = vessel_size_threshold
         self.confidence_threshold = confidence_threshold
         self.logger = logging.getLogger(__name__)
         
     def detect_vessels_in_sar(self, sar_image_path: str, 
-                             roi_bounds: Optional[Tuple] = None) -> List[Dict]:
+                             roi_bounds: Optional[Tuple[float, float, float, float]] = None) -> List[Dict]:
         """
         Detect vessels in SAR imagery using image processing techniques.
         
@@ -47,7 +57,24 @@ class DarkVesselDetector:
             
         Returns:
             List[Dict]: List of detected vessels with coordinates and metadata
+            
+        Raises:
+            FileNotFoundError: If SAR image file doesn't exist
+            ValueError: If image format is invalid or ROI bounds are malformed
+            RuntimeError: If image processing fails
         """
+        if not isinstance(sar_image_path, str) or not sar_image_path.strip():
+            raise ValueError("sar_image_path must be a non-empty string")
+            
+        if roi_bounds is not None:
+            if not isinstance(roi_bounds, (tuple, list)) or len(roi_bounds) != 4:
+                raise ValueError("roi_bounds must be a 4-element tuple: (min_lat, min_lon, max_lat, max_lon)")
+            min_lat, min_lon, max_lat, max_lon = roi_bounds
+            if not (-90 <= min_lat <= max_lat <= 90):
+                raise ValueError(f"Invalid latitude bounds: {min_lat}, {max_lat}")
+            if not (-180 <= min_lon <= max_lon <= 180):
+                raise ValueError(f"Invalid longitude bounds: {min_lon}, {max_lon}")
+        
         detected_vessels = []
         
         try:
@@ -55,6 +82,9 @@ class DarkVesselDetector:
             with rasterio.open(sar_image_path) as src:
                 # Read image data
                 image = src.read(1)  # Assuming single band SAR
+                if image is None or image.size == 0:
+                    raise ValueError("Empty or invalid SAR image")
+                    
                 transform = src.transform
                 crs = src.crs
                 
@@ -66,33 +96,47 @@ class DarkVesselDetector:
                 
                 # Convert pixel coordinates to geographic coordinates
                 for vessel_pixel in vessel_pixels:
-                    lat, lon = self._pixel_to_geo(vessel_pixel['centroid'], transform)
-                    
-                    # Check if vessel is within ROI if specified
-                    if roi_bounds and not self._point_in_bounds(lat, lon, roi_bounds):
+                    try:
+                        lat, lon = self._pixel_to_geo(vessel_pixel['centroid'], transform)
+                        
+                        # Validate coordinates
+                        if not (-90 <= lat <= 90) or not (-180 <= lon <= 180):
+                            self.logger.warning(f"Invalid coordinates: {lat}, {lon}")
+                            continue
+                        
+                        # Check if vessel is within ROI if specified
+                        if roi_bounds and not self._point_in_bounds(lat, lon, roi_bounds):
+                            continue
+                        
+                        vessel_data = {
+                            'detection_id': f"SAR_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{len(detected_vessels)}",
+                            'latitude': float(lat),
+                            'longitude': float(lon),
+                            'pixel_coordinates': vessel_pixel['centroid'],
+                            'estimated_length': float(vessel_pixel['length_pixels'] * self._get_pixel_size(transform)),
+                            'estimated_width': float(vessel_pixel['width_pixels'] * self._get_pixel_size(transform)),
+                            'vessel_area_pixels': int(vessel_pixel['area']),
+                            'intensity_mean': float(vessel_pixel['intensity_mean']),
+                            'intensity_max': float(vessel_pixel['intensity_max']),
+                            'confidence': float(vessel_pixel['confidence']),
+                            'detection_time': datetime.now().isoformat(),
+                            'image_source': str(sar_image_path)
+                        }
+                        
+                        # Only include high-confidence detections
+                        if vessel_data['confidence'] >= self.confidence_threshold:
+                            detected_vessels.append(vessel_data)
+                            
+                    except Exception as e:
+                        self.logger.warning(f"Error processing vessel detection: {e}")
                         continue
-                    
-                    vessel_data = {
-                        'detection_id': f"SAR_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{len(detected_vessels)}",
-                        'latitude': lat,
-                        'longitude': lon,
-                        'pixel_coordinates': vessel_pixel['centroid'],
-                        'estimated_length': vessel_pixel['length_pixels'] * self._get_pixel_size(transform),
-                        'estimated_width': vessel_pixel['width_pixels'] * self._get_pixel_size(transform),
-                        'vessel_area_pixels': vessel_pixel['area'],
-                        'intensity_mean': vessel_pixel['intensity_mean'],
-                        'intensity_max': vessel_pixel['intensity_max'],
-                        'confidence': vessel_pixel['confidence'],
-                        'detection_time': datetime.now().isoformat(),
-                        'image_source': sar_image_path
-                    }
-                    
-                    # Only include high-confidence detections
-                    if vessel_data['confidence'] >= self.confidence_threshold:
-                        detected_vessels.append(vessel_data)
         
+        except FileNotFoundError:
+            raise FileNotFoundError(f"SAR image file not found: {sar_image_path}")
+        except rasterio.errors.RasterioIOError as e:
+            raise ValueError(f"Invalid SAR image format: {e}")
         except Exception as e:
-            self.logger.error(f"Error detecting vessels in SAR image: {e}")
+            raise RuntimeError(f"SAR image processing failed: {e}")
             
         self.logger.info(f"Detected {len(detected_vessels)} vessels in SAR imagery")
         return detected_vessels
@@ -247,47 +291,107 @@ class DarkVesselDetector:
             
         Returns:
             List[Dict]: Dark vessels (SAR detections without matching AIS)
+            
+        Raises:
+            ValueError: If input data is invalid
+            TypeError: If input types are incorrect
         """
+        if not isinstance(sar_detections, list):
+            raise TypeError(f"sar_detections must be a list, got {type(sar_detections)}")
+        if not isinstance(ais_data, list):
+            raise TypeError(f"ais_data must be a list, got {type(ais_data)}")
+        if time_tolerance_minutes <= 0:
+            raise ValueError(f"time_tolerance_minutes must be positive, got {time_tolerance_minutes}")
+            
+        # Validate SAR detection format
+        for i, detection in enumerate(sar_detections):
+            if not isinstance(detection, dict):
+                raise TypeError(f"SAR detection {i} must be a dictionary")
+            required_fields = ['detection_time', 'latitude', 'longitude']
+            for field in required_fields:
+                if field not in detection:
+                    raise ValueError(f"SAR detection {i} missing required field: {field}")
+                    
+        # Validate AIS data format
+        for i, ais in enumerate(ais_data):
+            if not isinstance(ais, dict):
+                raise TypeError(f"AIS message {i} must be a dictionary")
+            required_fields = ['timestamp', 'latitude', 'longitude']
+            for field in required_fields:
+                if field not in ais:
+                    raise ValueError(f"AIS message {i} missing required field: {field}")
+        
+        # Pre-process and validate AIS data for better performance
+        valid_ais_data = []
+        for i, ais in enumerate(ais_data):
+            try:
+                ais_time = datetime.fromisoformat(ais['timestamp'])
+                ais_pos = (float(ais['latitude']), float(ais['longitude']))
+                
+                # Validate AIS coordinates
+                if (-90 <= ais_pos[0] <= 90) and (-180 <= ais_pos[1] <= 180):
+                    valid_ais_data.append({
+                        'original': ais,
+                        'time': ais_time,
+                        'position': ais_pos
+                    })
+            except (ValueError, KeyError) as e:
+                self.logger.warning(f"Invalid AIS message {i}: {e}")
+                continue
+        
+        self.logger.debug(f"Pre-processed {len(valid_ais_data)} valid AIS messages from {len(ais_data)} total")
+        
         dark_vessels = []
         
         for sar_vessel in sar_detections:
-            sar_time = datetime.fromisoformat(sar_vessel['detection_time'])
-            sar_pos = (sar_vessel['latitude'], sar_vessel['longitude'])
+            try:
+                sar_time = datetime.fromisoformat(sar_vessel['detection_time'])
+                sar_pos = (float(sar_vessel['latitude']), float(sar_vessel['longitude']))
+                
+                # Validate coordinates
+                if not (-90 <= sar_pos[0] <= 90) or not (-180 <= sar_pos[1] <= 180):
+                    self.logger.warning(f"Invalid SAR coordinates: {sar_pos}")
+                    continue
+                
+            except (ValueError, KeyError) as e:
+                self.logger.warning(f"Invalid SAR vessel data: {e}")
+                continue
             
-            # Look for matching AIS signals
+            # Look for matching AIS signals (optimized)
             matched = False
             closest_ais = None
             closest_distance = float('inf')
             
-            for ais_message in ais_data:
-                ais_time = datetime.fromisoformat(ais_message['timestamp'])
-                ais_pos = (ais_message['latitude'], ais_message['longitude'])
-                
-                # Check time tolerance
-                time_diff = abs((sar_time - ais_time).total_seconds() / 60)
+            for ais_data_item in valid_ais_data:
+                # Check time tolerance first (fastest check)
+                time_diff = abs((sar_time - ais_data_item['time']).total_seconds() / 60)
                 if time_diff > time_tolerance_minutes:
                     continue
                 
-                # Calculate distance
-                distance = geodesic(sar_pos, ais_pos).meters
+                # Calculate distance only if time tolerance is met
+                distance = geodesic(sar_pos, ais_data_item['position']).meters
                 
                 if distance < self.matching_threshold:
                     matched = True
                     break
                 elif distance < closest_distance:
                     closest_distance = distance
-                    closest_ais = ais_message
+                    closest_ais = ais_data_item['original']
             
             if not matched:
                 # This is a dark vessel
                 dark_vessel = sar_vessel.copy()
                 dark_vessel['status'] = 'dark_vessel'
-                dark_vessel['closest_ais_distance'] = closest_distance
+                dark_vessel['closest_ais_distance'] = float(closest_distance) if closest_distance != float('inf') else None
                 dark_vessel['closest_ais_vessel'] = closest_ais
                 dark_vessel['analysis_time'] = datetime.now().isoformat()
                 
-                # Add risk assessment
-                dark_vessel['risk_score'] = self._assess_dark_vessel_risk(dark_vessel)
+                # Add risk assessment with error handling
+                try:
+                    dark_vessel['risk_score'] = self._assess_dark_vessel_risk(dark_vessel)
+                except Exception as e:
+                    self.logger.warning(f"Risk assessment failed for {dark_vessel.get('detection_id', 'unknown')}: {e}")
+                    dark_vessel['risk_score'] = 5.0  # Default moderate risk
                 
                 dark_vessels.append(dark_vessel)
         
