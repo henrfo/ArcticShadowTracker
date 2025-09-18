@@ -27,10 +27,10 @@ class BarentsWatchAuth:
         self.base_url = "https://www.barentswatch.no/bwapi/v1/"
         
         # OAuth2 client credentials
-        self.client_id = "henrikformoe@gmail.com:ArcticShadowTracker"
+        self.client_id = "henrikformoe@gmail.com:ArcticShadowTrackerAIS"  # Updated to AIS-specific client
         self.client_id_encoded = "henrikformoe%40gmail.com%3AArcticShadowTracker"
         self.grant_type = "client_credentials"
-        self.scope = "api"
+        self.scope = "ais"  # Changed from "api" to "ais" for AIS access
         
         # Token management
         self.access_token = None
