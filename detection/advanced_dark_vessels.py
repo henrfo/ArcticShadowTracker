@@ -614,8 +614,11 @@ class VesselTracker:
         lat_range = max(lats) - min(lats)
         lon_range = max(lons) - min(lons)
         
-        # Convert degrees to approximate km (rough calculation)
-        lat_km = lat_range * 111  # 1 degree lat ≈ 111 km
+        # Convert lat range to km using geodesic calculation for Arctic accuracy
+        # Calculate distance for latitude range at this longitude
+        lat_min, lat_max = min(lats), max(lats)
+        lon_min, lon_max = min(lons), max(lons)
+        lat_km = geodesic((lat_min, lon_min), (lat_max, lon_min)).kilometers
         lon_km = lon_range * 111 * np.cos(np.radians(np.mean(lats)))  # Adjust for latitude
         
         return lat_km * lon_km

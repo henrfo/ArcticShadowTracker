@@ -272,6 +272,207 @@ def pytest_configure(config):
     config.addinivalue_line(
         "markers", "unit: marks tests as unit tests"
     )
+    config.addinivalue_line(
+        "markers", "performance: marks tests as performance/benchmark tests"
+    )
+    config.addinivalue_line(
+        "markers", "edge_case: marks tests that handle edge cases and error conditions"
+    )
+
+
+@pytest.fixture
+def realistic_ais_data():
+    """Generate realistic AIS data for Arctic surveillance testing."""
+    base_time = datetime.now()
+    vessels = []
+    
+    # Fishing vessel near Svalbard
+    vessels.append({
+        'mmsi': '257012340',
+        'latitude': 78.2,
+        'longitude': 15.6,
+        'timestamp': base_time.isoformat(),
+        'speed_over_ground': 8.5,
+        'course_over_ground': 180,
+        'vessel_name': 'Arctic Fisher',
+        'ship_type': 30,
+        'type': 'fishing'
+    })
+    
+    # Cargo vessel in Barents Sea
+    vessels.append({
+        'mmsi': '259876543',
+        'latitude': 70.5,
+        'longitude': 31.2,
+        'timestamp': (base_time - timedelta(minutes=15)).isoformat(),
+        'speed_over_ground': 12.0,
+        'course_over_ground': 45,
+        'vessel_name': 'Barents Cargo',
+        'ship_type': 70,
+        'type': 'cargo'
+    })
+    
+    # Research vessel
+    vessels.append({
+        'mmsi': '257123456',
+        'latitude': 79.0,
+        'longitude': 11.9,
+        'timestamp': (base_time - timedelta(minutes=5)).isoformat(),
+        'speed_over_ground': 5.2,
+        'course_over_ground': 270,
+        'vessel_name': 'Arctic Research',
+        'ship_type': 35,
+        'type': 'research'
+    })
+    
+    return vessels
+
+
+@pytest.fixture
+def realistic_sar_detections():
+    """Generate realistic SAR detections matching some AIS data."""
+    base_time = datetime.now()
+    detections = []
+    
+    # Detection matching fishing vessel (with slight offset)
+    detections.append({
+        'detection_id': 'SAR_S1A_001',
+        'lat': 78.201,  # Slight offset from AIS position
+        'lon': 15.599,
+        'confidence': 0.85,
+        'detection_time': base_time.isoformat(),
+        'source_file': 'S1A_test.tif',
+        'vessel_length_estimate': 45
+    })
+    
+    # Dark vessel detection (no matching AIS)
+    detections.append({
+        'detection_id': 'SAR_S1A_002',
+        'lat': 78.5,
+        'lon': 16.2,
+        'confidence': 0.72,
+        'detection_time': base_time.isoformat(),
+        'source_file': 'S1A_test.tif',
+        'vessel_length_estimate': 120
+    })
+    
+    # Another dark vessel near cable
+    detections.append({
+        'detection_id': 'SAR_S1A_003',
+        'lat': 71.17,
+        'lon': 25.78,
+        'confidence': 0.78,
+        'detection_time': base_time.isoformat(),
+        'source_file': 'S1A_test.tif',
+        'vessel_length_estimate': 85
+    })
+    
+    return detections
+
+
+@pytest.fixture
+def corrupted_test_data():
+    """Generate various types of corrupted data for edge case testing."""
+    return {
+        'invalid_coordinates': [
+            {'mmsi': '123456789', 'latitude': 200, 'longitude': 15.0, 'timestamp': '2025-09-18T12:00:00'},
+            {'mmsi': '123456790', 'latitude': 78.0, 'longitude': 200, 'timestamp': '2025-09-18T12:00:00'}
+        ],
+        'missing_fields': [
+            {'mmsi': '123456791', 'latitude': 78.0},  # Missing longitude and timestamp
+            {'latitude': 78.0, 'longitude': 15.0, 'timestamp': '2025-09-18T12:00:00'}  # Missing MMSI
+        ],
+        'malformed_timestamps': [
+            {'mmsi': '123456792', 'latitude': 78.0, 'longitude': 15.0, 'timestamp': 'not-a-timestamp'},
+            {'mmsi': '123456793', 'latitude': 78.0, 'longitude': 15.0, 'timestamp': None}
+        ],
+        'invalid_types': [
+            {'mmsi': '123456794', 'latitude': 'not-a-number', 'longitude': 15.0, 'timestamp': '2025-09-18T12:00:00'},
+            {'mmsi': 123456795, 'latitude': 78.0, 'longitude': 15.0, 'timestamp': '2025-09-18T12:00:00'}
+        ]
+    }
+
+
+@pytest.fixture
+def performance_test_data():
+    """Generate large datasets for performance testing."""
+    import random
+    
+    large_ais_dataset = []
+    large_sar_dataset = []
+    
+    # Generate 1000 AIS records
+    base_time = datetime.now()
+    for i in range(1000):
+        large_ais_dataset.append({
+            'mmsi': f'25701{i:04d}',
+            'latitude': random.uniform(68.0, 82.0),
+            'longitude': random.uniform(-10.0, 50.0),
+            'timestamp': (base_time - timedelta(minutes=random.randint(0, 1440))).isoformat(),
+            'speed_over_ground': random.uniform(0, 25),
+            'course_over_ground': random.uniform(0, 360),
+            'type': random.choice(['fishing', 'cargo', 'tanker', 'research'])
+        })
+    
+    # Generate 200 SAR detections
+    for i in range(200):
+        large_sar_dataset.append({
+            'detection_id': f'SAR_PERF_{i:03d}',
+            'lat': random.uniform(68.0, 82.0),
+            'lon': random.uniform(-10.0, 50.0),
+            'confidence': random.uniform(0.6, 0.95),
+            'detection_time': (base_time - timedelta(minutes=random.randint(0, 120))).isoformat(),
+            'source_file': f'test_image_{i//20}.tif',
+            'vessel_length_estimate': random.uniform(30, 200)
+        })
+    
+    return {
+        'ais_data': large_ais_dataset,
+        'sar_detections': large_sar_dataset
+    }
+
+
+@pytest.fixture
+def mock_placeholder_sar_file(tmp_path):
+    """Create a mock placeholder SAR file for testing."""
+    import json
+    
+    placeholder_data = {
+        "type": "placeholder",
+        "mission_id": "S1A_IW_GRDH_1SDV_20250918T060000",
+        "center_location": [78.22, 15.63],
+        "coverage_area": {
+            "bounds": [15.0, 77.8, 16.0, 78.6]
+        },
+        "acquisition_time": "2025-09-18T06:00:00Z",
+        "status": "simulated"
+    }
+    
+    placeholder_file = tmp_path / "test_sar_image.placeholder"
+    with open(placeholder_file, 'w') as f:
+        json.dump(placeholder_data, f)
+    
+    return str(placeholder_file)
+
+
+@pytest.fixture
+def expected_test_results():
+    """Expected results for validation testing."""
+    return {
+        'dark_vessel_detection': {
+            'expected_dark_vessels': 2,  # From realistic test data
+            'expected_matched_vessels': 1
+        },
+        'cable_proximity': {
+            'vessels_near_cables': 1,
+            'critical_alerts': 0,
+            'high_alerts': 0
+        },
+        'risk_scoring': {
+            'min_risk_score': 0.4,  # Base dark vessel risk
+            'max_risk_score': 1.0
+        }
+    }
 
 
 def pytest_collection_modifyitems(config, items):
@@ -280,6 +481,10 @@ def pytest_collection_modifyitems(config, items):
         # Mark integration tests
         if "integration" in item.nodeid.lower() or "end_to_end" in item.name.lower():
             item.add_marker(pytest.mark.integration)
+        
+        # Mark performance tests
+        if "performance" in item.name.lower() or "benchmark" in item.name.lower():
+            item.add_marker(pytest.mark.slow)
         
         # Mark tests that use actual ML models as slow
         if any(keyword in item.name.lower() for keyword in ["train", "model", "pipeline"]):

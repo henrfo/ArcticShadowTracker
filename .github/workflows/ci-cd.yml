@@ -1,0 +1,285 @@
+name: Arctic Shadow Tracker CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Daily builds to ensure dependencies are up to date
+    - cron: '0 6 * * *'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # Security scanning and code quality
+  security-and-quality:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install -r config/requirements.txt
+        pip install bandit safety black flake8 pytest-cov
+
+    - name: Security scan with Bandit
+      run: bandit -r . -f json -o bandit-report.json || true
+
+    - name: Dependency vulnerability scan
+      run: safety check --json --output safety-report.json || true
+
+    - name: Code quality check
+      run: |
+        black --check .
+        flake8 --max-line-length=88 --extend-ignore=E203,W503 .
+
+    - name: Upload security reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-reports
+        path: |
+          bandit-report.json
+          safety-report.json
+
+  # Unit and integration tests
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10']
+    
+    services:
+      redis:
+        image: redis:7-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
+      postgres:
+        image: postgis/postgis:14-3.2
+        env:
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: test_arctic_surveillance
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gdal-bin libgdal-dev libproj-dev libgeos-dev
+
+    - name: Install Python dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r config/requirements.txt
+        pip install pytest pytest-cov pytest-xdist
+
+    - name: Run tests with coverage
+      env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
+        POSTGRES_DB: test_arctic_surveillance
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: test_password
+        REDIS_HOST: localhost
+        REDIS_PORT: 6379
+      run: |
+        pytest tests/ -v --cov=. --cov-report=xml --cov-report=html -n auto
+
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+
+  # Container image build and security scan
+  build-and-scan:
+    runs-on: ubuntu-latest
+    needs: [security-and-quality, test]
+    outputs:
+      image-digest: ${{ steps.build.outputs.digest }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Log in to Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Extract metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest,enable={{is_default_branch}}
+
+    - name: Build and push Docker image
+      id: build
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+
+    - name: Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: 'trivy-results.sarif'
+
+  # Deploy to staging environment
+  deploy-staging:
+    runs-on: ubuntu-latest
+    needs: build-and-scan
+    if: github.ref == 'refs/heads/develop'
+    environment: staging
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Configure kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'v1.28.0'
+
+    - name: Set up Kubernetes config
+      run: |
+        mkdir -p ~/.kube
+        echo "${{ secrets.KUBE_CONFIG_STAGING }}" | base64 -d > ~/.kube/config
+
+    - name: Deploy to staging
+      run: |
+        # Update image tag in deployment
+        sed -i "s|image: arctic-tracker:latest|image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}|g" k8s/deployment.yaml
+        
+        # Apply Kubernetes manifests
+        kubectl apply -f k8s/namespace.yaml
+        kubectl apply -f k8s/configmap.yaml
+        kubectl apply -f k8s/secret.yaml
+        kubectl apply -f k8s/pvc.yaml
+        kubectl apply -f k8s/deployment.yaml
+        kubectl apply -f k8s/service.yaml
+        
+        # Wait for deployment to be ready
+        kubectl rollout status deployment/arctic-tracker-deployment -n arctic-surveillance --timeout=600s
+
+    - name: Run smoke tests
+      run: |
+        # Wait for service to be ready
+        kubectl wait --for=condition=ready pod -l app=arctic-tracker -n arctic-surveillance --timeout=300s
+        
+        # Get service URL
+        SERVICE_IP=$(kubectl get service arctic-tracker-service -n arctic-surveillance -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+        
+        # Run basic health checks
+        curl -f http://${SERVICE_IP}:8000/health || exit 1
+        curl -f http://${SERVICE_IP}:8000/ready || exit 1
+
+  # Deploy to production environment
+  deploy-production:
+    runs-on: ubuntu-latest
+    needs: build-and-scan
+    if: github.ref == 'refs/heads/main'
+    environment: production
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Configure kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'v1.28.0'
+
+    - name: Set up Kubernetes config
+      run: |
+        mkdir -p ~/.kube
+        echo "${{ secrets.KUBE_CONFIG_PRODUCTION }}" | base64 -d > ~/.kube/config
+
+    - name: Deploy to production
+      run: |
+        # Update image tag in deployment
+        sed -i "s|image: arctic-tracker:latest|image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}|g" k8s/deployment.yaml
+        
+        # Apply production configurations
+        kubectl apply -f k8s/namespace.yaml
+        kubectl apply -f k8s/configmap.yaml
+        kubectl apply -f k8s/secret.yaml
+        kubectl apply -f k8s/pvc.yaml
+        
+        # Rolling update with zero downtime
+        kubectl apply -f k8s/deployment.yaml
+        kubectl apply -f k8s/service.yaml
+        
+        # Wait for rollout to complete
+        kubectl rollout status deployment/arctic-tracker-deployment -n arctic-surveillance --timeout=600s
+
+    - name: Production health check
+      run: |
+        # Wait for all pods to be ready
+        kubectl wait --for=condition=ready pod -l app=arctic-tracker -n arctic-surveillance --timeout=300s
+        
+        # Verify service endpoints
+        kubectl get endpoints arctic-tracker-service -n arctic-surveillance
+        
+        # Check deployment status
+        kubectl get deployment arctic-tracker-deployment -n arctic-surveillance
+
+    - name: Notify monitoring systems
+      run: |
+        # Send deployment notification to monitoring
+        curl -X POST "${{ secrets.WEBHOOK_URL }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "event": "deployment",
+            "service": "arctic-shadow-tracker",
+            "version": "${{ github.sha }}",
+            "environment": "production",
+            "status": "success"
+          }'

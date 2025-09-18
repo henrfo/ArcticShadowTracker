@@ -1,0 +1,52 @@
+[Unit]
+Description=Arctic Shadow Tracker - Data Collection Service
+Documentation=https://github.com/henrfo/ArcticShadowTracker
+After=network.target arctic-shadow-tracker.service
+PartOf=arctic-shadow-tracker.service
+
+[Service]
+Type=exec
+User=arctic
+Group=arctic
+WorkingDirectory=/app
+
+# Environment configuration
+Environment=PYTHONPATH=/app
+Environment=PYTHONUNBUFFERED=1
+Environment=LOG_LEVEL=INFO
+EnvironmentFile=-/app/config/.env
+
+# Data collection service
+ExecStart=/usr/bin/python3 -m utils.sentinel_downloader --daemon
+ExecReload=/bin/kill -HUP $MAINPID
+
+# Process management
+Restart=always
+RestartSec=30
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=60
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/app/data /app/logs
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+
+# Resource limits
+LimitNOFILE=32768
+LimitNPROC=2048
+MemoryLimit=1G
+CPUQuota=100%
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=arctic-data-collector
+
+[Install]
+WantedBy=multi-user.target

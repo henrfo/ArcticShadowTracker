@@ -1,0 +1,74 @@
+# Arctic Shadow Tracker - Docker ignore patterns
+
+# Development files
+.git
+.gitignore
+README.md
+*.md
+.vscode
+.idea
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env
+pip-log.txt
+pip-delete-this-directory.txt
+.tox
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git
+.mypy_cache
+.pytest_cache
+.hypothesis
+
+# Virtual environments
+arcticshadowtracker_env/
+venv/
+ENV/
+env/
+.venv/
+
+# Data directories (mount separately)
+data/
+outputs/
+logs/
+
+# Jupyter notebooks (for security)
+notebooks/
+*.ipynb
+
+# Docker files
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Test files
+tests/
+test_*.py
+*_test.py
+
+# Documentation
+docs/
+
+# Large model files (download at runtime)
+*.h5
+*.pkl
+*.joblib
+models/*.h5
+models/*.pkl
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

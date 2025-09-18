@@ -1,0 +1,145 @@
+# Backup CronJob for Arctic Shadow Tracker
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: arctic-tracker-backup
+  namespace: arctic-surveillance
+spec:
+  schedule: "0 2 * * *"  # Daily at 2 AM UTC
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 3600
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: backup
+        spec:
+          serviceAccountName: backup-sa
+          containers:
+          - name: backup
+            image: postgres:14
+            env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: arctic-tracker-secrets
+                  key: POSTGRES_PASSWORD
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: backup-secrets
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: backup-secrets
+                  key: AWS_SECRET_ACCESS_KEY
+            command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+              
+              # Database backup
+              echo "Starting database backup..."
+              pg_dump -h postgres-service -U arctic_user -d arctic_surveillance \
+                --verbose --clean --no-owner --no-privileges \
+                > /tmp/arctic_db_$(date +%Y%m%d_%H%M%S).sql
+              
+              # Compress backup
+              gzip /tmp/arctic_db_*.sql
+              
+              # Upload to S3 (or object storage)
+              aws s3 cp /tmp/arctic_db_*.sql.gz \
+                s3://arctic-surveillance-backups/database/ \
+                --storage-class STANDARD_IA
+              
+              # Data files backup (selective - exclude large SAR files)
+              echo "Starting data files backup..."
+              tar -czf /tmp/arctic_data_$(date +%Y%m%d_%H%M%S).tar.gz \
+                --exclude='*.SAFE' \
+                --exclude='*.zip' \
+                /app/data/ais/ \
+                /app/outputs/ \
+                /app/config/
+              
+              # Upload data backup
+              aws s3 cp /tmp/arctic_data_*.tar.gz \
+                s3://arctic-surveillance-backups/data/ \
+                --storage-class STANDARD_IA
+              
+              # Cleanup local files older than 1 day
+              find /tmp -name "arctic_*" -mtime +1 -delete
+              
+              echo "Backup completed successfully"
+            volumeMounts:
+            - name: data-volume
+              mountPath: /app/data
+              readOnly: true
+            - name: outputs-volume
+              mountPath: /app/outputs
+              readOnly: true
+            resources:
+              requests:
+                memory: "512Mi"
+                cpu: "250m"
+              limits:
+                memory: "1Gi"
+                cpu: "500m"
+          volumes:
+          - name: data-volume
+            persistentVolumeClaim:
+              claimName: arctic-tracker-data-pvc
+          - name: outputs-volume
+            persistentVolumeClaim:
+              claimName: arctic-tracker-outputs-pvc
+          restartPolicy: OnFailure
+          activeDeadlineSeconds: 7200  # 2 hours timeout
+---
+# Weekly cleanup job for old satellite data
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: arctic-data-cleanup
+  namespace: arctic-surveillance
+spec:
+  schedule: "0 3 * * 0"  # Weekly on Sunday at 3 AM UTC
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cleanup
+            image: alpine:latest
+            command:
+            - /bin/sh
+            - -c
+            - |
+              # Remove satellite data older than 30 days
+              find /app/data/satellite -name "*.SAFE" -mtime +30 -delete
+              find /app/data/satellite -name "*.zip" -mtime +30 -delete
+              
+              # Remove old AIS data older than 7 days
+              find /app/data/ais -name "arctic_ais_*.json" -mtime +7 -delete
+              
+              # Remove old output files older than 90 days
+              find /app/outputs -name "*.json" -mtime +90 -delete
+              find /app/outputs -name "*.csv" -mtime +90 -delete
+              
+              echo "Cleanup completed"
+            volumeMounts:
+            - name: data-volume
+              mountPath: /app/data
+            - name: outputs-volume
+              mountPath: /app/outputs
+          volumes:
+          - name: data-volume
+            persistentVolumeClaim:
+              claimName: arctic-tracker-data-pvc
+          - name: outputs-volume
+            persistentVolumeClaim:
+              claimName: arctic-tracker-outputs-pvc
+          restartPolicy: OnFailure

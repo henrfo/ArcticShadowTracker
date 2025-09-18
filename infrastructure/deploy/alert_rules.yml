@@ -1,0 +1,155 @@
+# Arctic Shadow Tracker - Prometheus Alert Rules
+groups:
+  - name: arctic_surveillance_critical
+    rules:
+      # Critical threat detection alerts
+      - alert: CriticalThreatDetected
+        expr: arctic_threats_critical_total > 0
+        for: 0m
+        labels:
+          severity: critical
+          service: arctic-tracker
+        annotations:
+          summary: "Critical maritime threat detected in Arctic waters"
+          description: "{{ $value }} critical threats detected near submarine cables"
+          
+      - alert: DarkVesselNearCable
+        expr: arctic_dark_vessels_near_cable_total > 0
+        for: 1m
+        labels:
+          severity: critical
+          service: arctic-tracker
+        annotations:
+          summary: "Dark vessel detected near submarine cable"
+          description: "Vessel without AIS operating within cable protection zone"
+          
+      # Application health alerts
+      - alert: ArcticTrackerDown
+        expr: up{job="arctic-tracker"} == 0
+        for: 5m
+        labels:
+          severity: critical
+          service: arctic-tracker
+        annotations:
+          summary: "Arctic Shadow Tracker is down"
+          description: "Arctic surveillance system has been down for more than 5 minutes"
+          
+      - alert: DataPipelineFailure
+        expr: arctic_data_pipeline_errors_total > 5
+        for: 2m
+        labels:
+          severity: critical
+          service: arctic-tracker
+        annotations:
+          summary: "Data pipeline experiencing multiple failures"
+          description: "{{ $value }} data pipeline errors in the last 2 minutes"
+
+  - name: arctic_surveillance_warning
+    rules:
+      # Performance and capacity alerts
+      - alert: HighMemoryUsage
+        expr: (container_memory_usage_bytes{pod=~"arctic-tracker-.*"} / container_spec_memory_limit_bytes) > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          service: arctic-tracker
+        annotations:
+          summary: "High memory usage detected"
+          description: "Memory usage is above 80% for {{ $labels.pod }}"
+          
+      - alert: HighCPUUsage
+        expr: rate(container_cpu_usage_seconds_total{pod=~"arctic-tracker-.*"}[5m]) > 0.8
+        for: 10m
+        labels:
+          severity: warning
+          service: arctic-tracker
+        annotations:
+          summary: "High CPU usage detected"
+          description: "CPU usage is above 80% for {{ $labels.pod }}"
+          
+      - alert: DataIngestionDelay
+        expr: time() - arctic_last_ais_update_timestamp > 1800
+        for: 0m
+        labels:
+          severity: warning
+          service: arctic-tracker
+        annotations:
+          summary: "AIS data ingestion delayed"
+          description: "No new AIS data received for {{ $value }} seconds"
+          
+      - alert: SatelliteDataStale
+        expr: time() - arctic_last_satellite_update_timestamp > 21600
+        for: 0m
+        labels:
+          severity: warning
+          service: arctic-tracker
+        annotations:
+          summary: "Satellite data is stale"
+          description: "No new satellite data received for {{ $value }} seconds (> 6 hours)"
+
+  - name: infrastructure_monitoring
+    rules:
+      # Database health
+      - alert: PostgreSQLDown
+        expr: up{job="postgres"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: postgres
+        annotations:
+          summary: "PostgreSQL database is down"
+          description: "PostgreSQL has been down for more than 2 minutes"
+          
+      - alert: PostgreSQLHighConnections
+        expr: pg_stat_database_numbackends / pg_settings_max_connections > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          service: postgres
+        annotations:
+          summary: "PostgreSQL high connection count"
+          description: "PostgreSQL is using {{ $value }}% of available connections"
+          
+      # Redis health
+      - alert: RedisDown
+        expr: up{job="redis"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: redis
+        annotations:
+          summary: "Redis cache is down"
+          description: "Redis has been down for more than 1 minute"
+          
+      - alert: RedisHighMemoryUsage
+        expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.9
+        for: 5m
+        labels:
+          severity: warning
+          service: redis
+        annotations:
+          summary: "Redis high memory usage"
+          description: "Redis memory usage is above 90%"
+
+  - name: security_monitoring
+    rules:
+      # Security and compliance alerts
+      - alert: UnauthorizedAPIAccess
+        expr: rate(arctic_api_unauthorized_requests_total[5m]) > 0.1
+        for: 1m
+        labels:
+          severity: warning
+          service: arctic-tracker
+        annotations:
+          summary: "Unauthorized API access attempts detected"
+          description: "{{ $value }} unauthorized requests per second"
+          
+      - alert: SuspiciousActivityPattern
+        expr: arctic_suspicious_vessel_patterns_total > 0
+        for: 0m
+        labels:
+          severity: warning
+          service: arctic-tracker
+        annotations:
+          summary: "Suspicious vessel activity pattern detected"
+          description: "{{ $value }} suspicious activity patterns identified"
