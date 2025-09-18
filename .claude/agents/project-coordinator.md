@@ -1,7 +1,7 @@
 ---
 name: project-coordinator
 description: Use this agent when you need to maintain project health, coordinate between multiple development workstreams, or clean up technical debt. Examples: <example>Context: User has been rapidly developing features and wants to clean up the codebase before a major release. user: 'I've been adding a lot of features quickly and my project is getting messy. Can you help clean it up?' assistant: 'I'll use the project-coordinator agent to analyze your codebase structure, identify cleanup opportunities, and coordinate the necessary refactoring tasks.' <commentary>The user needs comprehensive project cleanup and coordination, which is exactly what the project-coordinator agent is designed for.</commentary></example> <example>Context: User notices duplicate code and wants to consolidate modules. user: 'I think I have duplicate authentication modules in my project. Can you help me consolidate them?' assistant: 'Let me use the project-coordinator agent to identify duplicate modules and create a consolidation plan.' <commentary>This involves code organization and technical debt cleanup, core responsibilities of the project-coordinator agent.</commentary></example> <example>Context: User wants to coordinate work between different development areas. user: 'I need to make sure my data science work integrates properly with my deployment pipeline' assistant: 'I'll use the project-coordinator agent to analyze the integration points and coordinate between the different components of your project.' <commentary>This requires coordination between different development workstreams, which is a key function of the project-coordinator.</commentary></example>
-model: opus
+model: sonnet
 color: green
 ---
 
