@@ -5,11 +5,11 @@ config.yaml
 # Environment files
 arcticshadowtracker_env/
 
-# Data files
-arctic_intelligence/
+# Data files (allow arctic_intelligence for GitHub Actions data persistence)
 data/
 *.json
-*.csv
+# *.csv - Allow CSV files for data tracking
+# arctic_intelligence/ - Allow this directory for GitHub Actions
 
 # Jupyter notebook checkpoints
 .ipynb_checkpoints/
@@ -39,7 +39,7 @@ Thumbs.db
 *.log
 logs/
 
-# Output files
+# Output files (allow HTML dashboards for GitHub Pages)
 *.png
 *.pdf
-*.html
+# *.html - Allow HTML dashboards for web access

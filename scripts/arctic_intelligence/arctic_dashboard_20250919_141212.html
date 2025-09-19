@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_b346e5f0f985db2305f4e2e31c29a48b {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style='position: fixed; top: 10px; right: 10px; background: white; padding: 10px; border: 2px solid blue; border-radius: 5px; z-index: 9999;'>
+    <h4>Arctic Intelligence</h4>
+    <p>🚢 Vessels: 0</p>
+    <p>🌑 Dark: 0</p>
+    <p>⚠️ Alerts: 0</p>
+    <p>🕐 14:12:12</p>
+    </div>
+    
+    
+            <div class="folium-map" id="map_b346e5f0f985db2305f4e2e31c29a48b" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_b346e5f0f985db2305f4e2e31c29a48b = L.map(
+                "map_b346e5f0f985db2305f4e2e31c29a48b",
+                {
+                    center: [72.0, 25.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 4,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a6fe23e2b18cf0f3eed20df6e779244d = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_a6fe23e2b18cf0f3eed20df6e779244d.addTo(map_b346e5f0f985db2305f4e2e31c29a48b);
+        
+    
+            var poly_line_43635206751fcd5ddaeea5b2eee191ce = L.polyline(
+                [[78.9, 11.9], [71.0, 25.8]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_b346e5f0f985db2305f4e2e31c29a48b);
+        
+    
+        var popup_418ff4c69ed727b6e4c6e20411e22ffd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3ac651811c5570c75ab7f35c35c990ad = $(`<div id="html_3ac651811c5570c75ab7f35c35c990ad" style="width: 100.0%; height: 100.0%;">🔌 Svalbard Undersea Cable System</div>`)[0];
+                popup_418ff4c69ed727b6e4c6e20411e22ffd.setContent(html_3ac651811c5570c75ab7f35c35c990ad);
+            
+        
+
+        poly_line_43635206751fcd5ddaeea5b2eee191ce.bindPopup(popup_418ff4c69ed727b6e4c6e20411e22ffd)
+        ;
+
+        
+    
+    
+            var poly_line_bcdb34994b382f3de4cc926fd5a9484b = L.polyline(
+                [[68.8, 13.6], [69.3, 16.0]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_b346e5f0f985db2305f4e2e31c29a48b);
+        
+    
+        var popup_50ea22e4ea6be867f314dd13a1b2c06e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4f3ed69f0ab128e1ec52df73f90771d3 = $(`<div id="html_4f3ed69f0ab128e1ec52df73f90771d3" style="width: 100.0%; height: 100.0%;">🔌 Lofoten-Vesterålen Cable</div>`)[0];
+                popup_50ea22e4ea6be867f314dd13a1b2c06e.setContent(html_4f3ed69f0ab128e1ec52df73f90771d3);
+            
+        
+
+        poly_line_bcdb34994b382f3de4cc926fd5a9484b.bindPopup(popup_50ea22e4ea6be867f314dd13a1b2c06e)
+        ;
+
+        
+    
+    
+            var poly_line_bbe2be54c18efb6c608cc1959237d1d3 = L.polyline(
+                [[70.0, 23.0], [69.0, 18.0]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_b346e5f0f985db2305f4e2e31c29a48b);
+        
+    
+        var popup_c67ae1791dfd5b97ef77a15f68f41d71 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0cf6838104940511a69e3d6a3865f45d = $(`<div id="html_0cf6838104940511a69e3d6a3865f45d" style="width: 100.0%; height: 100.0%;">🔌 Norway-UK Cable (Arctic Section)</div>`)[0];
+                popup_c67ae1791dfd5b97ef77a15f68f41d71.setContent(html_0cf6838104940511a69e3d6a3865f45d);
+            
+        
+
+        poly_line_bbe2be54c18efb6c608cc1959237d1d3.bindPopup(popup_c67ae1791dfd5b97ef77a15f68f41d71)
+        ;
+
+        
+    
+</script>
+</html>

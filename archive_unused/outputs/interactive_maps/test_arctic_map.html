@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_3311de2ce140a21a29556cdadffe0cf8 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ardhi/Leaflet.MousePosition/src/L.Control.MousePosition.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ardhi/Leaflet.MousePosition/src/L.Control.MousePosition.min.css"/>
+</head>
+<body>
+    
+    
+        <h3 align="center" style="font-size:16px; color:darkblue; margin-top:0;">
+        <b>Test Arctic Intelligence Map</b>
+        </h3>
+        
+    
+            <div class="folium-map" id="map_3311de2ce140a21a29556cdadffe0cf8" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_3311de2ce140a21a29556cdadffe0cf8 = L.map(
+                "map_3311de2ce140a21a29556cdadffe0cf8",
+                {
+                    center: [75.5, 20.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 4,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_79a1bc8b963aeb7af85e249df14135fd = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_79a1bc8b963aeb7af85e249df14135fd.addTo(map_3311de2ce140a21a29556cdadffe0cf8);
+        
+    
+            var tile_layer_97ef2da95222a3a806885c9becf94051 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u00a9 CartoDB, \u00a9 OpenStreetMap contributors",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_97ef2da95222a3a806885c9becf94051.addTo(map_3311de2ce140a21a29556cdadffe0cf8);
+        
+    
+            var tile_layer_e68e736e80f79bdc25d18fe64d6ae499 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u00a9 CartoDB, \u00a9 OpenStreetMap contributors",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_e68e736e80f79bdc25d18fe64d6ae499.addTo(map_3311de2ce140a21a29556cdadffe0cf8);
+        
+    
+            var feature_group_b4df2f09003b9086fbf1bb89c9c5b84e = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var poly_line_d3881451a444cd352745f3593cecef72 = L.polyline(
+                [[78.22, 15.63], [77.5, 16.0], [71.17, 25.78]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b4df2f09003b9086fbf1bb89c9c5b84e);
+        
+    
+        var popup_81e0943e56d13c76ea10ef9c2e3ebbcb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9d645d4d90be3d5ae34dd850b503b458 = $(`<div id="html_9d645d4d90be3d5ae34dd850b503b458" style="width: 100.0%; height: 100.0%;"><b>Svalbard Underwater Cable System (SUCS)</b><br>Critical: True</div>`)[0];
+                popup_81e0943e56d13c76ea10ef9c2e3ebbcb.setContent(html_9d645d4d90be3d5ae34dd850b503b458);
+            
+        
+
+        poly_line_d3881451a444cd352745f3593cecef72.bindPopup(popup_81e0943e56d13c76ea10ef9c2e3ebbcb)
+        ;
+
+        
+    
+    
+            var circle_b81f48cc7248523d8332240419947d11 = L.circle(
+                [78.22, 15.63],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5000, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b4df2f09003b9086fbf1bb89c9c5b84e);
+        
+    
+        var popup_7986217e419a3e1ebabc579614828d5f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dd429da274d04681dbd67cf802659af9 = $(`<div id="html_dd429da274d04681dbd67cf802659af9" style="width: 100.0%; height: 100.0%;">Protection Zone: Svalbard Underwater Cable System (SUCS)</div>`)[0];
+                popup_7986217e419a3e1ebabc579614828d5f.setContent(html_dd429da274d04681dbd67cf802659af9);
+            
+        
+
+        circle_b81f48cc7248523d8332240419947d11.bindPopup(popup_7986217e419a3e1ebabc579614828d5f)
+        ;
+
+        
+    
+    
+            var circle_fac49a409806622a80f62ab258d27e6a = L.circle(
+                [71.17, 25.78],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5000, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b4df2f09003b9086fbf1bb89c9c5b84e);
+        
+    
+        var popup_da8f02a53ff94dfb8274b56605cdcab7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f09b66cc85527458de926a400d0674d7 = $(`<div id="html_f09b66cc85527458de926a400d0674d7" style="width: 100.0%; height: 100.0%;">Protection Zone: Svalbard Underwater Cable System (SUCS)</div>`)[0];
+                popup_da8f02a53ff94dfb8274b56605cdcab7.setContent(html_f09b66cc85527458de926a400d0674d7);
+            
+        
+
+        circle_fac49a409806622a80f62ab258d27e6a.bindPopup(popup_da8f02a53ff94dfb8274b56605cdcab7)
+        ;
+
+        
+    
+    
+            var poly_line_19659b38eae8b3431b6b650b6fb10d1e = L.polyline(
+                [[78.22, 15.63], [78.065, 14.233]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b4df2f09003b9086fbf1bb89c9c5b84e);
+        
+    
+        var popup_ccea6d5dfe7fc56fc463b74bf37462ae = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f023359bbd4e635885d230f0b5815541 = $(`<div id="html_f023359bbd4e635885d230f0b5815541" style="width: 100.0%; height: 100.0%;"><b>Longyearbyen-Barentsburg Cable</b><br>Critical: False</div>`)[0];
+                popup_ccea6d5dfe7fc56fc463b74bf37462ae.setContent(html_f023359bbd4e635885d230f0b5815541);
+            
+        
+
+        poly_line_19659b38eae8b3431b6b650b6fb10d1e.bindPopup(popup_ccea6d5dfe7fc56fc463b74bf37462ae)
+        ;
+
+        
+    
+    
+            var circle_b13858493b92122e802c39cebca721a3 = L.circle(
+                [78.22, 15.63],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5000, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b4df2f09003b9086fbf1bb89c9c5b84e);
+        
+    
+        var popup_e13066d236966c0edfbc6dd9bf787c80 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_62aed7a559069e3ec545dabb5703c78f = $(`<div id="html_62aed7a559069e3ec545dabb5703c78f" style="width: 100.0%; height: 100.0%;">Protection Zone: Longyearbyen-Barentsburg Cable</div>`)[0];
+                popup_e13066d236966c0edfbc6dd9bf787c80.setContent(html_62aed7a559069e3ec545dabb5703c78f);
+            
+        
+
+        circle_b13858493b92122e802c39cebca721a3.bindPopup(popup_e13066d236966c0edfbc6dd9bf787c80)
+        ;
+
+        
+    
+    
+            var circle_b7c772a72a576e607662a1296ada6df3 = L.circle(
+                [78.065, 14.233],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5000, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b4df2f09003b9086fbf1bb89c9c5b84e);
+        
+    
+        var popup_96f2b67356bbb46c0f376802aa69dc75 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4aa728f4b2eccc2dc82ce5e70a08e53c = $(`<div id="html_4aa728f4b2eccc2dc82ce5e70a08e53c" style="width: 100.0%; height: 100.0%;">Protection Zone: Longyearbyen-Barentsburg Cable</div>`)[0];
+                popup_96f2b67356bbb46c0f376802aa69dc75.setContent(html_4aa728f4b2eccc2dc82ce5e70a08e53c);
+            
+        
+
+        circle_b7c772a72a576e607662a1296ada6df3.bindPopup(popup_96f2b67356bbb46c0f376802aa69dc75)
+        ;
+
+        
+    
+    
+            var poly_line_74f73572b6130719d7790a4c183119cd = L.polyline(
+                [[71.17, 25.78], [74.0, 30.0], [78.22, 15.63], [81.0, 20.0]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b4df2f09003b9086fbf1bb89c9c5b84e);
+        
+    
+        var popup_c4cd35d274bf039e61c17e35a0b511c7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b21e31536e4c00a313acb8f61c8b2425 = $(`<div id="html_b21e31536e4c00a313acb8f61c8b2425" style="width: 100.0%; height: 100.0%;"><b>Arctic Connect (Planned)</b><br>Critical: True</div>`)[0];
+                popup_c4cd35d274bf039e61c17e35a0b511c7.setContent(html_b21e31536e4c00a313acb8f61c8b2425);
+            
+        
+
+        poly_line_74f73572b6130719d7790a4c183119cd.bindPopup(popup_c4cd35d274bf039e61c17e35a0b511c7)
+        ;
+
+        
+    
+    
+            var circle_f5ab5e850417e8310396a7e87042707b = L.circle(
+                [71.17, 25.78],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5000, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b4df2f09003b9086fbf1bb89c9c5b84e);
+        
+    
+        var popup_683008080fa587b84f8c20f18a187f02 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_517056c1fa8b37dbf12650a5859cc6e0 = $(`<div id="html_517056c1fa8b37dbf12650a5859cc6e0" style="width: 100.0%; height: 100.0%;">Protection Zone: Arctic Connect (Planned)</div>`)[0];
+                popup_683008080fa587b84f8c20f18a187f02.setContent(html_517056c1fa8b37dbf12650a5859cc6e0);
+            
+        
+
+        circle_f5ab5e850417e8310396a7e87042707b.bindPopup(popup_683008080fa587b84f8c20f18a187f02)
+        ;
+
+        
+    
+    
+            var circle_df620b72a3570a914ed5356627bed70d = L.circle(
+                [81.0, 20.0],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5000, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b4df2f09003b9086fbf1bb89c9c5b84e);
+        
+    
+        var popup_3eaa2c3abb6316f21385e69dfed47904 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7146d55b493762e05f5421c7b81f82ca = $(`<div id="html_7146d55b493762e05f5421c7b81f82ca" style="width: 100.0%; height: 100.0%;">Protection Zone: Arctic Connect (Planned)</div>`)[0];
+                popup_3eaa2c3abb6316f21385e69dfed47904.setContent(html_7146d55b493762e05f5421c7b81f82ca);
+            
+        
+
+        circle_df620b72a3570a914ed5356627bed70d.bindPopup(popup_3eaa2c3abb6316f21385e69dfed47904)
+        ;
+
+        
+    
+    
+            var poly_line_566558a198f32c7974f36f7440748149 = L.polyline(
+                [[68.97, 33.08], [74.5, 35.0], [78.22, 15.63]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b4df2f09003b9086fbf1bb89c9c5b84e);
+        
+    
+        var popup_6682f6ba4f92b2d92dac635bb92eef07 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a695f7783f37669c458086d67503910f = $(`<div id="html_a695f7783f37669c458086d67503910f" style="width: 100.0%; height: 100.0%;"><b>Murmansk-Svalbard Research Link</b><br>Critical: False</div>`)[0];
+                popup_6682f6ba4f92b2d92dac635bb92eef07.setContent(html_a695f7783f37669c458086d67503910f);
+            
+        
+
+        poly_line_566558a198f32c7974f36f7440748149.bindPopup(popup_6682f6ba4f92b2d92dac635bb92eef07)
+        ;
+
+        
+    
+    
+            var circle_7be19d782fb2e9b64a04ad86f3530a08 = L.circle(
+                [68.97, 33.08],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5000, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b4df2f09003b9086fbf1bb89c9c5b84e);
+        
+    
+        var popup_842f4caf8d0a86fbd35c8b3ca4f6cd80 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1fed33f285cc810c4fc9d40c0d262a93 = $(`<div id="html_1fed33f285cc810c4fc9d40c0d262a93" style="width: 100.0%; height: 100.0%;">Protection Zone: Murmansk-Svalbard Research Link</div>`)[0];
+                popup_842f4caf8d0a86fbd35c8b3ca4f6cd80.setContent(html_1fed33f285cc810c4fc9d40c0d262a93);
+            
+        
+
+        circle_7be19d782fb2e9b64a04ad86f3530a08.bindPopup(popup_842f4caf8d0a86fbd35c8b3ca4f6cd80)
+        ;
+
+        
+    
+    
+            var circle_8adb1e4211089669707c876453577744 = L.circle(
+                [78.22, 15.63],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5000, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b4df2f09003b9086fbf1bb89c9c5b84e);
+        
+    
+        var popup_23107229e5b4a1095f2d96d616f7f3cd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_397b56ea331c7031a09de819470e1759 = $(`<div id="html_397b56ea331c7031a09de819470e1759" style="width: 100.0%; height: 100.0%;">Protection Zone: Murmansk-Svalbard Research Link</div>`)[0];
+                popup_23107229e5b4a1095f2d96d616f7f3cd.setContent(html_397b56ea331c7031a09de819470e1759);
+            
+        
+
+        circle_8adb1e4211089669707c876453577744.bindPopup(popup_23107229e5b4a1095f2d96d616f7f3cd)
+        ;
+
+        
+    
+    
+            feature_group_b4df2f09003b9086fbf1bb89c9c5b84e.addTo(map_3311de2ce140a21a29556cdadffe0cf8);
+        
+    
+            var feature_group_9647b003f30cd6d4e65e1ca64368bd81 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_8a6eae25f3482492e113a986dbf5438d = L.circle(
+                [69.0, 33.0],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.05, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 50000, "stroke": true, "weight": 3}
+            ).addTo(feature_group_9647b003f30cd6d4e65e1ca64368bd81);
+        
+    
+        var popup_07a7fa6ccb321e6bf8acddf5cbe43574 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_825d881649f36214e2dc015871dbbfdb = $(`<div id="html_825d881649f36214e2dc015871dbbfdb" style="width: 100.0%; height: 100.0%;"><b>Kola Peninsula</b><br>Threat Level: HIGH</div>`)[0];
+                popup_07a7fa6ccb321e6bf8acddf5cbe43574.setContent(html_825d881649f36214e2dc015871dbbfdb);
+            
+        
+
+        circle_8a6eae25f3482492e113a986dbf5438d.bindPopup(popup_07a7fa6ccb321e6bf8acddf5cbe43574)
+        ;
+
+        
+    
+    
+            var circle_3b5888a04705d41499dd78a339e371f2 = L.circle(
+                [78.5, 16.0],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.05, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 75000, "stroke": true, "weight": 3}
+            ).addTo(feature_group_9647b003f30cd6d4e65e1ca64368bd81);
+        
+    
+        var popup_1c66c777831ce7317cef932f6666464b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3ef8eac755410f78c9ffc091317a42ce = $(`<div id="html_3ef8eac755410f78c9ffc091317a42ce" style="width: 100.0%; height: 100.0%;"><b>Svalbard Waters</b><br>Threat Level: MEDIUM</div>`)[0];
+                popup_1c66c777831ce7317cef932f6666464b.setContent(html_3ef8eac755410f78c9ffc091317a42ce);
+            
+        
+
+        circle_3b5888a04705d41499dd78a339e371f2.bindPopup(popup_1c66c777831ce7317cef932f6666464b)
+        ;
+
+        
+    
+    
+            var circle_aee254c290e3dcc4baffec54c2f241b9 = L.circle(
+                [74.0, 30.0],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.05, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 100000, "stroke": true, "weight": 3}
+            ).addTo(feature_group_9647b003f30cd6d4e65e1ca64368bd81);
+        
+    
+        var popup_cf4377ce9dbd712c7c475326be939967 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7e983c19d4fef2ba2a5bb0fa78ac325a = $(`<div id="html_7e983c19d4fef2ba2a5bb0fa78ac325a" style="width: 100.0%; height: 100.0%;"><b>Barents Sea Central</b><br>Threat Level: MEDIUM</div>`)[0];
+                popup_cf4377ce9dbd712c7c475326be939967.setContent(html_7e983c19d4fef2ba2a5bb0fa78ac325a);
+            
+        
+
+        circle_aee254c290e3dcc4baffec54c2f241b9.bindPopup(popup_cf4377ce9dbd712c7c475326be939967)
+        ;
+
+        
+    
+    
+            var circle_0bf29da19bebffef498d8c73b0785f28 = L.circle(
+                [80.5, 55.0],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.05, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 60000, "stroke": true, "weight": 3}
+            ).addTo(feature_group_9647b003f30cd6d4e65e1ca64368bd81);
+        
+    
+        var popup_ba4da3be0ce395a83d2f9aa0997fbfbf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9fecc688f88cdb64821e65473af0a58b = $(`<div id="html_9fecc688f88cdb64821e65473af0a58b" style="width: 100.0%; height: 100.0%;"><b>Franz Josef Land</b><br>Threat Level: HIGH</div>`)[0];
+                popup_ba4da3be0ce395a83d2f9aa0997fbfbf.setContent(html_9fecc688f88cdb64821e65473af0a58b);
+            
+        
+
+        circle_0bf29da19bebffef498d8c73b0785f28.bindPopup(popup_ba4da3be0ce395a83d2f9aa0997fbfbf)
+        ;
+
+        
+    
+    
+            feature_group_9647b003f30cd6d4e65e1ca64368bd81.addTo(map_3311de2ce140a21a29556cdadffe0cf8);
+        
+    
+            var feature_group_8752124774246de325eba588953b1b73 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_9da3654e4960f92542bb763925db21ad = L.marker(
+                [65.372222, 12.193442],
+                {
+}
+            ).addTo(feature_group_8752124774246de325eba588953b1b73);
+        
+    
+            var icon_be1fdec878387de60f8f5b40a37c21e8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1a4655f85cae07315e0cc33787aedd45 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a4062ab67a1ede121cf382a1717cef01 = $(`<div id="html_a4062ab67a1ede121cf382a1717cef01" style="width: 100.0%; height: 100.0%;">                 <b>OV_HEKKINGEN</b><br>                 MMSI: 257111020<br>                 Type: Unknown<br>                 Speed: 0.0 knots<br>                 Course: 127°<br>                 Position: 65.372°N, 12.193°E<br>                 Time: 2025-09-01T00:00:00                 </div>`)[0];
+                popup_1a4655f85cae07315e0cc33787aedd45.setContent(html_a4062ab67a1ede121cf382a1717cef01);
+            
+        
+
+        marker_9da3654e4960f92542bb763925db21ad.bindPopup(popup_1a4655f85cae07315e0cc33787aedd45)
+        ;
+
+        
+    
+    
+                marker_9da3654e4960f92542bb763925db21ad.setIcon(icon_be1fdec878387de60f8f5b40a37c21e8);
+            
+    
+            var marker_76649af1eb07fddff2421ff8250ea9cf = L.marker(
+                [65.372222, 12.193442],
+                {
+}
+            ).addTo(feature_group_8752124774246de325eba588953b1b73);
+        
+    
+            var icon_caf93bee1269eb22a5f7880312403111 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_31c13154eb4a296bbc386d3502496a34 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2906142f73b69073fe933629178137c4 = $(`<div id="html_2906142f73b69073fe933629178137c4" style="width: 100.0%; height: 100.0%;">                 <b>OV_HEKKINGEN</b><br>                 MMSI: 257111020<br>                 Type: Unknown<br>                 Speed: 0.0 knots<br>                 Course: 127°<br>                 Position: 65.372°N, 12.193°E<br>                 Time: 2025-09-15T00:00:00                 </div>`)[0];
+                popup_31c13154eb4a296bbc386d3502496a34.setContent(html_2906142f73b69073fe933629178137c4);
+            
+        
+
+        marker_76649af1eb07fddff2421ff8250ea9cf.bindPopup(popup_31c13154eb4a296bbc386d3502496a34)
+        ;
+
+        
+    
+    
+                marker_76649af1eb07fddff2421ff8250ea9cf.setIcon(icon_caf93bee1269eb22a5f7880312403111);
+            
+    
+            var marker_8bbca139859fd80f77e41ca2bd0668ab = L.marker(
+                [65.372222, 12.193442],
+                {
+}
+            ).addTo(feature_group_8752124774246de325eba588953b1b73);
+        
+    
+            var icon_7890d1867409f69f049a26fa63be3e62 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_beed5f7196251829fd2c9eacb30d5f42 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cfd7d42880b03d227a38c3feeffd976e = $(`<div id="html_cfd7d42880b03d227a38c3feeffd976e" style="width: 100.0%; height: 100.0%;">                 <b>OV_HEKKINGEN</b><br>                 MMSI: 257111020<br>                 Type: Unknown<br>                 Speed: 0.0 knots<br>                 Course: 127°<br>                 Position: 65.372°N, 12.193°E<br>                 Time: 2025-09-30T00:00:00                 </div>`)[0];
+                popup_beed5f7196251829fd2c9eacb30d5f42.setContent(html_cfd7d42880b03d227a38c3feeffd976e);
+            
+        
+
+        marker_8bbca139859fd80f77e41ca2bd0668ab.bindPopup(popup_beed5f7196251829fd2c9eacb30d5f42)
+        ;
+
+        
+    
+    
+                marker_8bbca139859fd80f77e41ca2bd0668ab.setIcon(icon_7890d1867409f69f049a26fa63be3e62);
+            
+    
+            feature_group_8752124774246de325eba588953b1b73.addTo(map_3311de2ce140a21a29556cdadffe0cf8);
+        
+    
+            var layer_control_3897e77f13056fd119eb76481b2a5be4_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_79a1bc8b963aeb7af85e249df14135fd,
+                    "Light Theme" : tile_layer_97ef2da95222a3a806885c9becf94051,
+                    "Dark Theme" : tile_layer_e68e736e80f79bdc25d18fe64d6ae499,
+                },
+                overlays :  {
+                    "Submarine Cables" : feature_group_b4df2f09003b9086fbf1bb89c9c5b84e,
+                    "Threat Zones" : feature_group_9647b003f30cd6d4e65e1ca64368bd81,
+                    "AIS Vessels" : feature_group_8752124774246de325eba588953b1b73,
+                },
+            };
+            let layer_control_3897e77f13056fd119eb76481b2a5be4 = L.control.layers(
+                layer_control_3897e77f13056fd119eb76481b2a5be4_layers.base_layers,
+                layer_control_3897e77f13056fd119eb76481b2a5be4_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_3311de2ce140a21a29556cdadffe0cf8);
+
+        
+    
+            var measure_control_7acce461a75840c3223779212b3b2ef4 = new L.Control.Measure(
+                {
+  "position": "topright",
+  "primaryLengthUnit": "meters",
+  "secondaryLengthUnit": "miles",
+  "primaryAreaUnit": "sqmeters",
+  "secondaryAreaUnit": "acres",
+});
+            map_3311de2ce140a21a29556cdadffe0cf8.addControl(measure_control_7acce461a75840c3223779212b3b2ef4);
+
+            // Workaround for using this plugin with Leaflet>=1.8.0
+            // https://github.com/ljagis/leaflet-measure/issues/171
+            L.Control.Measure.include({
+                _setCaptureMarkerIcon: function () {
+                    // disable autopan
+                    this._captureMarker.options.autoPanOnFocus = false;
+                    // default function
+                    this._captureMarker.setIcon(
+                        L.divIcon({
+                            iconSize: this._map.getSize().multiplyBy(2)
+                        })
+                    );
+                },
+            });
+
+        
+    
+            var mouse_position_4fedbc5a27e6c8edf0ca35367e8731ec = new L.Control.MousePosition(
+                {
+  "position": "bottomright",
+  "separator": " : ",
+  "emptyString": "Unavailable",
+  "lngFirst": false,
+  "numDigits": 5,
+  "prefix": "",
+}
+            );
+            mouse_position_4fedbc5a27e6c8edf0ca35367e8731ec.options["latFormatter"] =
+                undefined;
+            mouse_position_4fedbc5a27e6c8edf0ca35367e8731ec.options["lngFormatter"] =
+                undefined;
+            map_3311de2ce140a21a29556cdadffe0cf8.addControl(mouse_position_4fedbc5a27e6c8edf0ca35367e8731ec);
+        
+</script>
+</html>

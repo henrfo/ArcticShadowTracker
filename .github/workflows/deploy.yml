@@ -1,0 +1,321 @@
+name: Arctic Shadow Tracker - Deploy to VPS
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'arctic_shadow_streamer.py'
+      - 'requirements.txt'
+      - 'infrastructure/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
+    inputs:
+      deployment_type:
+        description: 'Deployment type'
+        required: true
+        default: 'update'
+        type: choice
+        options:
+        - update
+        - restart
+        - full-deploy
+
+env:
+  DEPLOYMENT_PATH: /opt/arctic-shadow-tracker
+  SERVICE_NAME: arctic-shadow-tracker
+  PYTHON_VERSION: '3.10'
+
+jobs:
+  deploy:
+    name: Deploy to Production VPS
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        
+    - name: Validate requirements.txt
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt --dry-run
+        
+    - name: Test application syntax
+      run: |
+        python -m py_compile arctic_shadow_streamer.py
+        
+    - name: Setup SSH key
+      uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+        
+    - name: Add VPS to known hosts
+      run: |
+        ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+        
+    - name: Check VPS connectivity
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "echo 'VPS connection successful'"
+        
+    - name: Create deployment package
+      run: |
+        mkdir -p deployment-package
+        cp arctic_shadow_streamer.py deployment-package/
+        cp requirements.txt deployment-package/
+        cp -r infrastructure/ deployment-package/ 2>/dev/null || true
+        
+    - name: Deploy application files
+      run: |
+        # Stop service before deployment
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          sudo systemctl stop ${{ env.SERVICE_NAME }} || echo 'Service not running'
+        "
+        
+        # Create backup of current version
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          if [ -f ${{ env.DEPLOYMENT_PATH }}/arctic_shadow_streamer.py ]; then
+            cp ${{ env.DEPLOYMENT_PATH }}/arctic_shadow_streamer.py ${{ env.DEPLOYMENT_PATH }}/arctic_shadow_streamer.py.backup.\$(date +%Y%m%d_%H%M%S)
+          fi
+        "
+        
+        # Deploy new files
+        scp -r deployment-package/* ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ env.DEPLOYMENT_PATH }}/
+        
+    - name: Update Python dependencies
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          cd ${{ env.DEPLOYMENT_PATH }}
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+        "
+        
+    - name: Deploy configuration
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          # Create config.yaml from secrets
+          cat > ${{ env.DEPLOYMENT_PATH }}/config.yaml << 'EOF'
+        barentswatch:
+          client_id: '${{ secrets.BARENTSWATCH_CLIENT_ID }}'
+          client_secret: '${{ secrets.BARENTSWATCH_CLIENT_SECRET }}'
+          scope: 'ais'
+        
+        sentinel_hub:
+          client_id: '${{ secrets.SENTINEL_HUB_CLIENT_ID }}'
+          client_secret: '${{ secrets.SENTINEL_HUB_CLIENT_SECRET }}'
+        
+        copernicus:
+          username: '${{ secrets.COPERNICUS_USERNAME }}'
+          password: '${{ secrets.COPERNICUS_PASSWORD }}'
+        
+        image:
+          resolution: 100
+          max_size: 2000
+          default_days: 30
+        EOF
+          
+          chmod 600 ${{ env.DEPLOYMENT_PATH }}/config.yaml
+        "
+        
+    - name: Deploy systemd service
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          sudo tee /etc/systemd/system/${{ env.SERVICE_NAME }}.service > /dev/null << 'EOF'
+        [Unit]
+        Description=Arctic Shadow Tracker - Vessel Monitoring System
+        After=network.target
+        Wants=network-online.target
+        
+        [Service]
+        Type=simple
+        User=arctic-user
+        Group=arctic-user
+        WorkingDirectory=${{ env.DEPLOYMENT_PATH }}
+        Environment=PATH=${{ env.DEPLOYMENT_PATH }}/venv/bin
+        ExecStart=${{ env.DEPLOYMENT_PATH }}/venv/bin/python arctic_shadow_streamer.py
+        ExecReload=/bin/kill -HUP \\\$MAINPID
+        Restart=always
+        RestartSec=10
+        StandardOutput=journal
+        StandardError=journal
+        SyslogIdentifier=arctic-shadow-tracker
+        
+        # Security settings
+        NoNewPrivileges=true
+        ProtectSystem=strict
+        ReadWritePaths=/data/arctic /var/log/arctic
+        PrivateTmp=true
+        
+        [Install]
+        WantedBy=multi-user.target
+        EOF
+        "
+        
+    - name: Reload systemd and start service
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          sudo systemctl daemon-reload
+          sudo systemctl enable ${{ env.SERVICE_NAME }}
+          sudo systemctl start ${{ env.SERVICE_NAME }}
+        "
+        
+    - name: Wait for service startup
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          for i in {1..30}; do
+            if systemctl is-active --quiet ${{ env.SERVICE_NAME }}; then
+              echo 'Service started successfully'
+              break
+            fi
+            echo 'Waiting for service to start...'
+            sleep 2
+          done
+        "
+        
+    - name: Health check
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          # Check if service is running
+          systemctl status ${{ env.SERVICE_NAME }} --no-pager
+          
+          # Check if log file is being created
+          sleep 5
+          if [ -f /data/arctic/streaming.log ]; then
+            echo 'Log file created successfully'
+            tail -n 10 /data/arctic/streaming.log
+          else
+            echo 'Warning: Log file not found'
+          fi
+          
+          # Check if CSV files directory exists
+          ls -la /data/arctic/ || echo 'Data directory not accessible'
+        "
+        
+    - name: Deploy monitoring script
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          cat > ${{ env.DEPLOYMENT_PATH }}/health_check.py << 'EOF'
+        #!/usr/bin/env python3
+        import json
+        import os
+        import subprocess
+        import time
+        from datetime import datetime
+        from pathlib import Path
+        
+        def check_service_status():
+            try:
+                result = subprocess.run(['systemctl', 'is-active', '${{ env.SERVICE_NAME }}'], 
+                                      capture_output=True, text=True)
+                return result.stdout.strip() == 'active'
+            except:
+                return False
+        
+        def check_log_activity():
+            log_file = Path('/data/arctic/streaming.log')
+            if not log_file.exists():
+                return False
+            
+            # Check if log was modified in last 60 minutes
+            mod_time = log_file.stat().st_mtime
+            return (time.time() - mod_time) < 3600
+        
+        def check_data_output():
+            data_dir = Path('/data/arctic')
+            csv_files = list(data_dir.glob('*.csv'))
+            return len(csv_files) > 0
+        
+        def main():
+            status = {
+                'timestamp': datetime.now().isoformat(),
+                'service_running': check_service_status(),
+                'log_active': check_log_activity(),
+                'data_output': check_data_output(),
+                'overall_health': 'healthy'
+            }
+            
+            if not all([status['service_running'], status['log_active']]):
+                status['overall_health'] = 'unhealthy'
+            elif not status['data_output']:
+                status['overall_health'] = 'warning'
+            
+            print(json.dumps(status, indent=2))
+            return 0 if status['overall_health'] == 'healthy' else 1
+        
+        if __name__ == '__main__':
+            exit(main())
+        EOF
+          
+          chmod +x ${{ env.DEPLOYMENT_PATH }}/health_check.py
+        "
+        
+    - name: Final health check
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          cd ${{ env.DEPLOYMENT_PATH }}
+          python3 health_check.py
+        "
+        
+    - name: Setup log rotation
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          sudo tee /etc/logrotate.d/arctic-shadow-tracker > /dev/null << 'EOF'
+        /data/arctic/streaming.log {
+            daily
+            rotate 7
+            compress
+            delaycompress
+            missingok
+            notifempty
+            create 644 arctic-user arctic-user
+            postrotate
+                /bin/systemctl reload ${{ env.SERVICE_NAME }} > /dev/null 2>&1 || true
+            endscript
+        }
+        EOF
+        "
+
+    - name: Deployment summary
+      run: |
+        echo "✅ Deployment completed successfully!"
+        echo "🔗 Service: ${{ env.SERVICE_NAME }}"
+        echo "📁 Path: ${{ env.DEPLOYMENT_PATH }}"
+        echo "🕐 Time: $(date)"
+        
+  rollback:
+    name: Rollback if deployment fails
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: failure()
+    
+    steps:
+    - name: Setup SSH key
+      uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+        
+    - name: Add VPS to known hosts
+      run: |
+        ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+        
+    - name: Rollback to previous version
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          sudo systemctl stop ${{ env.SERVICE_NAME }} || true
+          
+          # Find latest backup
+          BACKUP_FILE=\$(ls -t ${{ env.DEPLOYMENT_PATH }}/arctic_shadow_streamer.py.backup.* 2>/dev/null | head -n1)
+          
+          if [ -n \"\$BACKUP_FILE\" ]; then
+            echo 'Restoring from backup: '\$BACKUP_FILE
+            cp \"\$BACKUP_FILE\" ${{ env.DEPLOYMENT_PATH }}/arctic_shadow_streamer.py
+            sudo systemctl start ${{ env.SERVICE_NAME }}
+            echo 'Rollback completed'
+          else
+            echo 'No backup found for rollback'
+          fi
+        "

@@ -1,0 +1,163 @@
+name: Arctic Shadow Tracker - Health Monitoring
+
+on:
+  schedule:
+    # Run health check every 30 minutes
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+env:
+  DEPLOYMENT_PATH: /opt/arctic-shadow-tracker
+  SERVICE_NAME: arctic-shadow-tracker
+
+jobs:
+  health-check:
+    name: Health Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Setup SSH key
+      uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+        
+    - name: Add VPS to known hosts
+      run: |
+        ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+        
+    - name: Run health check
+      id: health
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          cd ${{ env.DEPLOYMENT_PATH }}
+          python3 health_check.py
+        " > health_result.json
+        
+        # Parse results
+        HEALTH_STATUS=$(cat health_result.json | python3 -c "import sys, json; data=json.load(sys.stdin); print(data['overall_health'])")
+        echo "health_status=$HEALTH_STATUS" >> $GITHUB_OUTPUT
+        
+        cat health_result.json
+        
+    - name: Check service logs if unhealthy
+      if: steps.health.outputs.health_status != 'healthy'
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          echo '=== Service Status ==='
+          systemctl status ${{ env.SERVICE_NAME }} --no-pager || true
+          
+          echo '=== Recent Logs ==='
+          journalctl -u ${{ env.SERVICE_NAME }} --since '1 hour ago' --no-pager || true
+          
+          echo '=== Application Logs ==='
+          tail -n 50 /data/arctic/streaming.log 2>/dev/null || echo 'No application log found'
+          
+          echo '=== System Resources ==='
+          df -h /data/arctic || true
+          free -h || true
+        "
+        
+    - name: Attempt service restart if unhealthy
+      if: steps.health.outputs.health_status == 'unhealthy'
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          echo 'Attempting to restart service...'
+          sudo systemctl restart ${{ env.SERVICE_NAME }}
+          
+          # Wait for restart
+          sleep 30
+          
+          # Check if restart was successful
+          if systemctl is-active --quiet ${{ env.SERVICE_NAME }}; then
+            echo 'Service restart successful'
+          else
+            echo 'Service restart failed'
+            systemctl status ${{ env.SERVICE_NAME }} --no-pager
+          fi
+        "
+        
+    - name: Send alert to Discord/Slack (if configured)
+      if: steps.health.outputs.health_status == 'unhealthy'
+      run: |
+        # This is optional - configure webhook URLs in secrets
+        if [ -n "${{ secrets.DISCORD_WEBHOOK_URL }}" ]; then
+          curl -H "Content-Type: application/json" \
+               -d "{\"content\": \"🚨 Arctic Shadow Tracker is unhealthy! Service may be down. Check GitHub Actions for details.\"}" \
+               ${{ secrets.DISCORD_WEBHOOK_URL }} || true
+        fi
+        
+        if [ -n "${{ secrets.SLACK_WEBHOOK_URL }}" ]; then
+          curl -X POST -H 'Content-type: application/json' \
+               --data '{"text":"🚨 Arctic Shadow Tracker health check failed!"}' \
+               ${{ secrets.SLACK_WEBHOOK_URL }} || true
+        fi
+
+  backup-check:
+    name: Backup Check
+    runs-on: ubuntu-latest
+    # Run daily at 02:00 UTC
+    if: github.event.schedule == '0 2 * * *' || github.event_name == 'workflow_dispatch'
+    
+    steps:
+    - name: Setup SSH key
+      uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+        
+    - name: Add VPS to known hosts
+      run: |
+        ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+        
+    - name: Create daily backup
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          BACKUP_DIR=/data/arctic/backups
+          BACKUP_DATE=\$(date +%Y%m%d)
+          
+          # Create backup directory
+          mkdir -p \$BACKUP_DIR
+          
+          # Backup CSV data
+          tar -czf \$BACKUP_DIR/csv_backup_\$BACKUP_DATE.tar.gz /data/arctic/*.csv 2>/dev/null || echo 'No CSV files to backup'
+          
+          # Backup configuration
+          cp ${{ env.DEPLOYMENT_PATH }}/config.yaml \$BACKUP_DIR/config_\$BACKUP_DATE.yaml 2>/dev/null || echo 'No config to backup'
+          
+          # Backup application
+          cp ${{ env.DEPLOYMENT_PATH }}/arctic_shadow_streamer.py \$BACKUP_DIR/app_\$BACKUP_DATE.py
+          
+          # Clean old backups (keep 7 days)
+          find \$BACKUP_DIR -name '*.tar.gz' -mtime +7 -delete
+          find \$BACKUP_DIR -name '*.yaml' -mtime +7 -delete
+          find \$BACKUP_DIR -name '*.py' -mtime +7 -delete
+          
+          echo 'Backup completed'
+          ls -la \$BACKUP_DIR/
+        "
+        
+    - name: Verify backup integrity
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+          BACKUP_DIR=/data/arctic/backups
+          BACKUP_DATE=\$(date +%Y%m%d)
+          
+          # Check if backup files exist and are not empty
+          if [ -f \$BACKUP_DIR/app_\$BACKUP_DATE.py ] && [ -s \$BACKUP_DIR/app_\$BACKUP_DATE.py ]; then
+            echo '✅ Application backup OK'
+          else
+            echo '❌ Application backup failed'
+            exit 1
+          fi
+          
+          # Verify tar file if it exists
+          if [ -f \$BACKUP_DIR/csv_backup_\$BACKUP_DATE.tar.gz ]; then
+            if tar -tzf \$BACKUP_DIR/csv_backup_\$BACKUP_DATE.tar.gz > /dev/null 2>&1; then
+              echo '✅ CSV backup integrity OK'
+            else
+              echo '❌ CSV backup corrupted'
+              exit 1
+            fi
+          fi
+          
+          echo 'Backup verification completed'
+        "

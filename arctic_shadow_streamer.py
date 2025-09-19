@@ -14,13 +14,14 @@ import pandas as pd
 import folium
 import time
 import logging
+import os
 from datetime import datetime, timedelta
 from pathlib import Path
 from math import radians, cos, sin, asin, sqrt
 
 # Configuration
 DATA_DIR = Path('arctic_intelligence')
-DATA_DIR.mkdir(exist_ok=True)
+DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 # MMSI to Country mapping (International standard)
 MMSI_COUNTRY_MAP = {
@@ -138,12 +139,15 @@ DARK_VESSELS_CSV = DATA_DIR / 'dark_vessels.csv'
 CABLE_ALERTS_CSV = DATA_DIR / 'cable_alerts.csv'
 DAILY_SUMMARY_CSV = DATA_DIR / 'daily_summary.csv'
 
-# Logging
+# Logging setup - ensure directory exists
+log_file = DATA_DIR / 'streaming.log'
+log_file.parent.mkdir(parents=True, exist_ok=True)
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler(DATA_DIR / 'streaming.log'),
+        logging.FileHandler(log_file),
         logging.StreamHandler()
     ]
 )
@@ -234,17 +238,32 @@ def is_buoy_or_platform(vessel):
     return False
 
 def load_config():
-    """Load API credentials from config.yaml"""
+    """Load API credentials from environment variables or config.yaml"""
+    # First, try to get credentials from environment variables (GitHub Actions)
+    client_secret = os.getenv('BARENTSWATCH_CLIENT_SECRET')
+    if client_secret:
+        logger.info("Using BarentsWatch credentials from environment variables")
+        return {
+            'barentswatch': {
+                'client_id': 'henrikformoe@gmail.com:ArcticShadowTrackerAIS',
+                'client_secret': client_secret,
+                'scope': 'ais'
+            }
+        }
+    
+    # Fallback to config.yaml for local development
     try:
         # Try current directory first, then parent directory
         config_paths = ['config.yaml', '../config.yaml']
         for config_path in config_paths:
             try:
                 with open(config_path, 'r') as f:
-                    return yaml.safe_load(f)
+                    config = yaml.safe_load(f)
+                    logger.info("Using BarentsWatch credentials from config.yaml")
+                    return config
             except FileNotFoundError:
                 continue
-        raise FileNotFoundError("config.yaml not found in current or parent directory")
+        raise FileNotFoundError("config.yaml not found and BARENTSWATCH_CLIENT_SECRET not set")
     except Exception as e:
         logger.error(f"Error loading config: {e}")
         return None
@@ -253,6 +272,11 @@ def get_barentswatch_token():
     """Get access token for BarentsWatch API"""
     config = load_config()
     if not config:
+        logger.error("No configuration available for BarentsWatch API")
+        return None
+    
+    if 'barentswatch' not in config:
+        logger.error("BarentsWatch configuration missing from config")
         return None
     
     token_url = "https://id.barentswatch.no/connect/token"
@@ -264,11 +288,20 @@ def get_barentswatch_token():
     }
     
     try:
+        logger.info("Requesting BarentsWatch access token...")
         response = requests.post(token_url, data=data, timeout=30)
         response.raise_for_status()
-        return response.json()['access_token']
+        token = response.json()['access_token']
+        logger.info("Successfully obtained BarentsWatch access token")
+        return token
+    except requests.exceptions.RequestException as e:
+        logger.error(f"BarentsWatch token request failed: {e}")
+        return None
+    except KeyError as e:
+        logger.error(f"Unexpected token response format: {e}")
+        return None
     except Exception as e:
-        logger.error(f"Token request failed: {e}")
+        logger.error(f"Unexpected error getting token: {e}")
         return None
 
 def collect_ais_data():
