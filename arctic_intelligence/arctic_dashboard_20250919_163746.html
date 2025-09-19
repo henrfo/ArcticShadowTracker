@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_74c5815ef1ed5b9228b5df3d2245cd09 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style='position: fixed; top: 10px; right: 10px; background: white; padding: 10px; border: 2px solid blue; border-radius: 5px; z-index: 9999;'>
+    <h4>Arctic Intelligence</h4>
+    <p>🚢 Vessels: 238</p>
+    <p>🌑 Dark: 5</p>
+    <p>⚠️ Alerts: 1</p>
+    <p>🕐 16:37:46</p>
+    </div>
+    
+    
+            <div class="folium-map" id="map_74c5815ef1ed5b9228b5df3d2245cd09" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_74c5815ef1ed5b9228b5df3d2245cd09 = L.map(
+                "map_74c5815ef1ed5b9228b5df3d2245cd09",
+                {
+                    center: [72.0, 25.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 4,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_3395932fecdf3c976f69d27e8ad6ab01 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_3395932fecdf3c976f69d27e8ad6ab01.addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+            var poly_line_6ef9a255a351fe90c64bc9fa95dcfdd2 = L.polyline(
+                [[78.9, 11.9], [71.0, 25.8]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_f5dbea35230f44b9b0bd80aafeb181e4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a7558feae6f5752ce3c45e02083e595a = $(`<div id="html_a7558feae6f5752ce3c45e02083e595a" style="width: 100.0%; height: 100.0%;">🔌 Svalbard Undersea Cable System</div>`)[0];
+                popup_f5dbea35230f44b9b0bd80aafeb181e4.setContent(html_a7558feae6f5752ce3c45e02083e595a);
+            
+        
+
+        poly_line_6ef9a255a351fe90c64bc9fa95dcfdd2.bindPopup(popup_f5dbea35230f44b9b0bd80aafeb181e4)
+        ;
+
+        
+    
+    
+            var poly_line_a1e0bf4eab797cc4c23b1a0dad767164 = L.polyline(
+                [[68.8, 13.6], [69.3, 16.0]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_2a24cd2323b2a29391b13e1303730737 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_635d08f12fe0f42c31bf00acd1e71494 = $(`<div id="html_635d08f12fe0f42c31bf00acd1e71494" style="width: 100.0%; height: 100.0%;">🔌 Lofoten-Vesterålen Cable</div>`)[0];
+                popup_2a24cd2323b2a29391b13e1303730737.setContent(html_635d08f12fe0f42c31bf00acd1e71494);
+            
+        
+
+        poly_line_a1e0bf4eab797cc4c23b1a0dad767164.bindPopup(popup_2a24cd2323b2a29391b13e1303730737)
+        ;
+
+        
+    
+    
+            var poly_line_9c5cec1f4fb2a77f926b0c9b35215db1 = L.polyline(
+                [[70.0, 23.0], [69.0, 18.0]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_98b3e465e536c32b250df465a3d174eb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_25f3048c133321f38c1301236a800ec9 = $(`<div id="html_25f3048c133321f38c1301236a800ec9" style="width: 100.0%; height: 100.0%;">🔌 Norway-UK Cable (Arctic Section)</div>`)[0];
+                popup_98b3e465e536c32b250df465a3d174eb.setContent(html_25f3048c133321f38c1301236a800ec9);
+            
+        
+
+        poly_line_9c5cec1f4fb2a77f926b0c9b35215db1.bindPopup(popup_98b3e465e536c32b250df465a3d174eb)
+        ;
+
+        
+    
+    
+            var circle_marker_65a4b941ee1967166c429462cedd2149 = L.circleMarker(
+                [81.836007, 15.898378],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_d925d8ca2561e2c726351e6f68f2ce61 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d208f7e94bee5ae1e8e9dc248e45def2 = $(`<div id="html_d208f7e94bee5ae1e8e9dc248e45def2" style="width: 100.0%; height: 100.0%;">🚢 KINFISH TENDER 3<br>MMSI: 265064540<br>Speed: 3.3 knots</div>`)[0];
+                popup_d925d8ca2561e2c726351e6f68f2ce61.setContent(html_d208f7e94bee5ae1e8e9dc248e45def2);
+            
+        
+
+        circle_marker_65a4b941ee1967166c429462cedd2149.bindPopup(popup_d925d8ca2561e2c726351e6f68f2ce61)
+        ;
+
+        
+    
+    
+            var circle_marker_1eb560696bc94a0fa7c76e35c852f376 = L.circleMarker(
+                [65.994545, 7.269665],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_1e3c74c4e34b3be5c45c58686a616df4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6e6d56cd3c618c307f9fe7a34293bc00 = $(`<div id="html_6e6d56cd3c618c307f9fe7a34293bc00" style="width: 100.0%; height: 100.0%;">🚢 ANVIL POINT<br>MMSI: 235572000<br>Speed: 16.7 knots</div>`)[0];
+                popup_1e3c74c4e34b3be5c45c58686a616df4.setContent(html_6e6d56cd3c618c307f9fe7a34293bc00);
+            
+        
+
+        circle_marker_1eb560696bc94a0fa7c76e35c852f376.bindPopup(popup_1e3c74c4e34b3be5c45c58686a616df4)
+        ;
+
+        
+    
+    
+            var circle_marker_97d9333f3f71e3de1dfbc1e4d9fa7cbe = L.circleMarker(
+                [68.575085, 14.94774],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_62f8cef4b9e279ff45f338c6d3efa64f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2ee1a96214b27862e472db9de6393bfa = $(`<div id="html_2ee1a96214b27862e472db9de6393bfa" style="width: 100.0%; height: 100.0%;">🚢 NOR STAR<br>MMSI: 630001042<br>Speed: 0 knots</div>`)[0];
+                popup_62f8cef4b9e279ff45f338c6d3efa64f.setContent(html_2ee1a96214b27862e472db9de6393bfa);
+            
+        
+
+        circle_marker_97d9333f3f71e3de1dfbc1e4d9fa7cbe.bindPopup(popup_62f8cef4b9e279ff45f338c6d3efa64f)
+        ;
+
+        
+    
+    
+            var circle_marker_12a8aa18a12ba5ebf9ce5a23c0a98cf1 = L.circleMarker(
+                [66.511348, 10.174457],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_c84f2325abc76a4fa2961b3107bb58f2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6a95a545696fe15f577b65deca9df11b = $(`<div id="html_6a95a545696fe15f577b65deca9df11b" style="width: 100.0%; height: 100.0%;">🚢 KEY WIND<br>MMSI: 319301000<br>Speed: 11.8 knots</div>`)[0];
+                popup_c84f2325abc76a4fa2961b3107bb58f2.setContent(html_6a95a545696fe15f577b65deca9df11b);
+            
+        
+
+        circle_marker_12a8aa18a12ba5ebf9ce5a23c0a98cf1.bindPopup(popup_c84f2325abc76a4fa2961b3107bb58f2)
+        ;
+
+        
+    
+    
+            var circle_marker_9b3b081ab5ff7e82fc8000d0c6b6113c = L.circleMarker(
+                [68.234027, 14.536107],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_71aab800bfc58f1184444567713716f6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3d3887201bd01a65135051755bead266 = $(`<div id="html_3d3887201bd01a65135051755bead266" style="width: 100.0%; height: 100.0%;">🚢 VILKAS<br>MMSI: 277589000<br>Speed: 0.1 knots</div>`)[0];
+                popup_71aab800bfc58f1184444567713716f6.setContent(html_3d3887201bd01a65135051755bead266);
+            
+        
+
+        circle_marker_9b3b081ab5ff7e82fc8000d0c6b6113c.bindPopup(popup_71aab800bfc58f1184444567713716f6)
+        ;
+
+        
+    
+    
+            var circle_marker_ee1e39a936fd3965871cca42cacf6c70 = L.circleMarker(
+                [75.375993, 19.74737],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_246260d82c743565945eda77565ccd86 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3ed09bc62928bf366d123fec5a075e84 = $(`<div id="html_3ed09bc62928bf366d123fec5a075e84" style="width: 100.0%; height: 100.0%;">🚢 LEINEBRIS 34<br>MMSI: 586706041<br>Speed: 3.4 knots</div>`)[0];
+                popup_246260d82c743565945eda77565ccd86.setContent(html_3ed09bc62928bf366d123fec5a075e84);
+            
+        
+
+        circle_marker_ee1e39a936fd3965871cca42cacf6c70.bindPopup(popup_246260d82c743565945eda77565ccd86)
+        ;
+
+        
+    
+    
+            var circle_marker_4c5a243d13e6a3261db2b72e20f260ab = L.circleMarker(
+                [68.216867, 14.94592],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_396e2d5c610db46a38aab510b8345433 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2c07bd7230fe2e6520fb1b3e3340bdce = $(`<div id="html_2c07bd7230fe2e6520fb1b3e3340bdce" style="width: 100.0%; height: 100.0%;">🚢 586706108<br>MMSI: 586706108<br>Speed: 0.3 knots</div>`)[0];
+                popup_396e2d5c610db46a38aab510b8345433.setContent(html_2c07bd7230fe2e6520fb1b3e3340bdce);
+            
+        
+
+        circle_marker_4c5a243d13e6a3261db2b72e20f260ab.bindPopup(popup_396e2d5c610db46a38aab510b8345433)
+        ;
+
+        
+    
+    
+            var circle_marker_4584d127d30f201fe7bec7230862e309 = L.circleMarker(
+                [68.24058, 14.688892],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_1b680984c567ead0a66556d0a85f4c11 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6ebfcd03540531e51284eb566ae3b3a4 = $(`<div id="html_6ebfcd03540531e51284eb566ae3b3a4" style="width: 100.0%; height: 100.0%;">🚢 AH BOY3<br>MMSI: 586706109<br>Speed: 0.1 knots</div>`)[0];
+                popup_1b680984c567ead0a66556d0a85f4c11.setContent(html_6ebfcd03540531e51284eb566ae3b3a4);
+            
+        
+
+        circle_marker_4584d127d30f201fe7bec7230862e309.bindPopup(popup_1b680984c567ead0a66556d0a85f4c11)
+        ;
+
+        
+    
+    
+            var circle_marker_c6edaaa2a2fb167680b4f3c6d2277cf7 = L.circleMarker(
+                [68.230162, 14.647283],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_57c71a61f84b15fda6505370e75e4bbf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b4c526d9e072c5f3ec99e2b52f5626af = $(`<div id="html_b4c526d9e072c5f3ec99e2b52f5626af" style="width: 100.0%; height: 100.0%;">🚢 AH BOY1<br>MMSI: 586706114<br>Speed: 0.4 knots</div>`)[0];
+                popup_57c71a61f84b15fda6505370e75e4bbf.setContent(html_b4c526d9e072c5f3ec99e2b52f5626af);
+            
+        
+
+        circle_marker_c6edaaa2a2fb167680b4f3c6d2277cf7.bindPopup(popup_57c71a61f84b15fda6505370e75e4bbf)
+        ;
+
+        
+    
+    
+            var circle_marker_49e5fa0866917ce68468938c381c0a2f = L.circleMarker(
+                [70.795292, 29.84392],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_6e3301368f8a2159acf7bea60bb012ac = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d741da65d8dd08658accb530d7ed3d77 = $(`<div id="html_d741da65d8dd08658accb530d7ed3d77" style="width: 100.0%; height: 100.0%;">🚢 ALI BOY 1<br>MMSI: 586706177<br>Speed: 2.3 knots</div>`)[0];
+                popup_6e3301368f8a2159acf7bea60bb012ac.setContent(html_d741da65d8dd08658accb530d7ed3d77);
+            
+        
+
+        circle_marker_49e5fa0866917ce68468938c381c0a2f.bindPopup(popup_6e3301368f8a2159acf7bea60bb012ac)
+        ;
+
+        
+    
+    
+            var circle_marker_f70ea703a08236b1bef5dc61d2829656 = L.circleMarker(
+                [75.327268, 35.14061],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_e49fc63eacbe27225e9a626c563a0f22 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bcc5b0254fad09669685ebff2c9b4c83 = $(`<div id="html_bcc5b0254fad09669685ebff2c9b4c83" style="width: 100.0%; height: 100.0%;">🚢 O BUOY 04<br>MMSI: 941005775<br>Speed: 1.4 knots</div>`)[0];
+                popup_e49fc63eacbe27225e9a626c563a0f22.setContent(html_bcc5b0254fad09669685ebff2c9b4c83);
+            
+        
+
+        circle_marker_f70ea703a08236b1bef5dc61d2829656.bindPopup(popup_e49fc63eacbe27225e9a626c563a0f22)
+        ;
+
+        
+    
+    
+            var circle_marker_b278b433b32603ae53e1ed92620a8890 = L.circleMarker(
+                [75.498778, 35.799938],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_e7415b4f65cfdc39381bf92f6d33cef4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a6f450c5aaf1c967416a27445c51da39 = $(`<div id="html_a6f450c5aaf1c967416a27445c51da39" style="width: 100.0%; height: 100.0%;">🚢 O BUOY 03<br>MMSI: 941005785<br>Speed: 8.6 knots</div>`)[0];
+                popup_e7415b4f65cfdc39381bf92f6d33cef4.setContent(html_a6f450c5aaf1c967416a27445c51da39);
+            
+        
+
+        circle_marker_b278b433b32603ae53e1ed92620a8890.bindPopup(popup_e7415b4f65cfdc39381bf92f6d33cef4)
+        ;
+
+        
+    
+    
+            var circle_marker_25ea3481a646d8aaddae21505668996a = L.circleMarker(
+                [70.84839, 29.302265],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_c2cd71560f92491e394189e80d0f9a1d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5da904e10bd2172f12aa442faa30e45d = $(`<div id="html_5da904e10bd2172f12aa442faa30e45d" style="width: 100.0%; height: 100.0%;">🚢 LOFOTFANGST<br>MMSI: 586706383<br>Speed: 2.3 knots</div>`)[0];
+                popup_c2cd71560f92491e394189e80d0f9a1d.setContent(html_5da904e10bd2172f12aa442faa30e45d);
+            
+        
+
+        circle_marker_25ea3481a646d8aaddae21505668996a.bindPopup(popup_c2cd71560f92491e394189e80d0f9a1d)
+        ;
+
+        
+    
+    
+            var circle_marker_a83a85bdd7a5410351baf2e004f74924 = L.circleMarker(
+                [75.479913, 35.441927],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_d413997433f54829e9cbd14c1b093605 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a4b4fd10a51254cc91c366b63e6788d5 = $(`<div id="html_a4b4fd10a51254cc91c366b63e6788d5" style="width: 100.0%; height: 100.0%;">🚢 O BUOY 44<br>MMSI: 941005814<br>Speed: 1.6 knots</div>`)[0];
+                popup_d413997433f54829e9cbd14c1b093605.setContent(html_a4b4fd10a51254cc91c366b63e6788d5);
+            
+        
+
+        circle_marker_a83a85bdd7a5410351baf2e004f74924.bindPopup(popup_d413997433f54829e9cbd14c1b093605)
+        ;
+
+        
+    
+    
+            var circle_marker_d72a04b9f5ae39f525f69d8f6ca8642a = L.circleMarker(
+                [75.48335, 35.725512],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_6e89ac62e624fefd719b468a252bdaee = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_29cc5be8a362bcc1fc9c03c650ab7cc1 = $(`<div id="html_29cc5be8a362bcc1fc9c03c650ab7cc1" style="width: 100.0%; height: 100.0%;">🚢 O BUOY 40<br>MMSI: 941005815<br>Speed: 0.8 knots</div>`)[0];
+                popup_6e89ac62e624fefd719b468a252bdaee.setContent(html_29cc5be8a362bcc1fc9c03c650ab7cc1);
+            
+        
+
+        circle_marker_d72a04b9f5ae39f525f69d8f6ca8642a.bindPopup(popup_6e89ac62e624fefd719b468a252bdaee)
+        ;
+
+        
+    
+    
+            var circle_marker_1d496b4160e528814def31521dd08e95 = L.circleMarker(
+                [75.495853, 35.799677],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_3e5d704e676fa73b65c6435692686d95 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5931f595bb53a489ad503b61789c78fa = $(`<div id="html_5931f595bb53a489ad503b61789c78fa" style="width: 100.0%; height: 100.0%;">🚢 O BUOY 37<br>MMSI: 941005819<br>Speed: 0.8 knots</div>`)[0];
+                popup_3e5d704e676fa73b65c6435692686d95.setContent(html_5931f595bb53a489ad503b61789c78fa);
+            
+        
+
+        circle_marker_1d496b4160e528814def31521dd08e95.bindPopup(popup_3e5d704e676fa73b65c6435692686d95)
+        ;
+
+        
+    
+    
+            var circle_marker_3d5582ea6bd1b6d2180e120e7d6a2996 = L.circleMarker(
+                [75.332367, 35.063147],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_6fc89795b2bae57505bd8828b9995ed3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_11a3166346e7ae1ebc79e68779d150ee = $(`<div id="html_11a3166346e7ae1ebc79e68779d150ee" style="width: 100.0%; height: 100.0%;">🚢 O BUOY 41<br>MMSI: 941005846<br>Speed: 0.1 knots</div>`)[0];
+                popup_6fc89795b2bae57505bd8828b9995ed3.setContent(html_11a3166346e7ae1ebc79e68779d150ee);
+            
+        
+
+        circle_marker_3d5582ea6bd1b6d2180e120e7d6a2996.bindPopup(popup_6fc89795b2bae57505bd8828b9995ed3)
+        ;
+
+        
+    
+    
+            var circle_marker_e4e661cf41a814ccb90510b497f91ee4 = L.circleMarker(
+                [71.666518, 31.68681],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_53a020658ae1e7e4ddfe119ce9957fa5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d97a745dd8610623e2079da7f84f9927 = $(`<div id="html_d97a745dd8610623e2079da7f84f9927" style="width: 100.0%; height: 100.0%;">🚢 AUSTHAVET BUOY<br>MMSI: 586706481<br>Speed: 2.9 knots</div>`)[0];
+                popup_53a020658ae1e7e4ddfe119ce9957fa5.setContent(html_d97a745dd8610623e2079da7f84f9927);
+            
+        
+
+        circle_marker_e4e661cf41a814ccb90510b497f91ee4.bindPopup(popup_53a020658ae1e7e4ddfe119ce9957fa5)
+        ;
+
+        
+    
+    
+            var circle_marker_e126589770199fc664c68224043f99c6 = L.circleMarker(
+                [71.324293, 26.261847],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_5831e66d90ca738a6f8b8c97ffdd80a0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5455822895e3bb5248ea94abd2ae4b27 = $(`<div id="html_5455822895e3bb5248ea94abd2ae4b27" style="width: 100.0%; height: 100.0%;">🚢 ARCTIC AURORA<br>MMSI: 229767000<br>Speed: 11.5 knots</div>`)[0];
+                popup_5831e66d90ca738a6f8b8c97ffdd80a0.setContent(html_5455822895e3bb5248ea94abd2ae4b27);
+            
+        
+
+        circle_marker_e126589770199fc664c68224043f99c6.bindPopup(popup_5831e66d90ca738a6f8b8c97ffdd80a0)
+        ;
+
+        
+    
+    
+            var circle_marker_f62d52efc9a63684da1aa13f5b39e403 = L.circleMarker(
+                [75.017675, 33.578268],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_1e3e535bc6c7746e93d4ea59eb51cf32 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4b0e64038f4ac407ed3331018fb92bf6 = $(`<div id="html_4b0e64038f4ac407ed3331018fb92bf6" style="width: 100.0%; height: 100.0%;">🚢 TRYGVE B BUOY 7<br>MMSI: 586706533<br>Speed: 1.8 knots</div>`)[0];
+                popup_1e3e535bc6c7746e93d4ea59eb51cf32.setContent(html_4b0e64038f4ac407ed3331018fb92bf6);
+            
+        
+
+        circle_marker_f62d52efc9a63684da1aa13f5b39e403.bindPopup(popup_1e3e535bc6c7746e93d4ea59eb51cf32)
+        ;
+
+        
+    
+    
+            var circle_marker_12a9178834846307639ff102b1531361 = L.circleMarker(
+                [75.031948, 33.27653],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_2683181efbba257dafbcede3fd668883 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_09ba07142e273cfbee350d50099d4d2d = $(`<div id="html_09ba07142e273cfbee350d50099d4d2d" style="width: 100.0%; height: 100.0%;">🚢 TRYGVE B BUOY 3<br>MMSI: 586706536<br>Speed: 2.3 knots</div>`)[0];
+                popup_2683181efbba257dafbcede3fd668883.setContent(html_09ba07142e273cfbee350d50099d4d2d);
+            
+        
+
+        circle_marker_12a9178834846307639ff102b1531361.bindPopup(popup_2683181efbba257dafbcede3fd668883)
+        ;
+
+        
+    
+    
+            var circle_marker_1c017e5d82a849746ad8f04c0f13c079 = L.circleMarker(
+                [75.074133, 33.200205],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_d60502ac1dd0c61581dd1114816767af = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_445d276e6ccc9de2ec411dd9a59e6613 = $(`<div id="html_445d276e6ccc9de2ec411dd9a59e6613" style="width: 100.0%; height: 100.0%;">🚢 TRYGVE B BUOY 2<br>MMSI: 586706667<br>Speed: 2.3 knots</div>`)[0];
+                popup_d60502ac1dd0c61581dd1114816767af.setContent(html_445d276e6ccc9de2ec411dd9a59e6613);
+            
+        
+
+        circle_marker_1c017e5d82a849746ad8f04c0f13c079.bindPopup(popup_d60502ac1dd0c61581dd1114816767af)
+        ;
+
+        
+    
+    
+            var circle_marker_e75cf807f4a91f481d6a5a29fd1a8335 = L.circleMarker(
+                [70.377357, 20.215658],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_357b20b61e03dee8ec9003c0206641fe = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_805cfaf4b28dc57a4be297898d9bb263 = $(`<div id="html_805cfaf4b28dc57a4be297898d9bb263" style="width: 100.0%; height: 100.0%;">🚢 LK4<br>MMSI: 586707108<br>Speed: 2.2 knots</div>`)[0];
+                popup_357b20b61e03dee8ec9003c0206641fe.setContent(html_805cfaf4b28dc57a4be297898d9bb263);
+            
+        
+
+        circle_marker_e75cf807f4a91f481d6a5a29fd1a8335.bindPopup(popup_357b20b61e03dee8ec9003c0206641fe)
+        ;
+
+        
+    
+    
+            var circle_marker_6e03e373f9b880219c7b21bff60687af = L.circleMarker(
+                [70.371162, 20.260173],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_b424757b8f26061c8f1d128b0e017a95 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_21e3f75734d0d9b81cf6072a3897d7e3 = $(`<div id="html_21e3f75734d0d9b81cf6072a3897d7e3" style="width: 100.0%; height: 100.0%;">🚢 LK5<br>MMSI: 586707130<br>Speed: 1.3 knots</div>`)[0];
+                popup_b424757b8f26061c8f1d128b0e017a95.setContent(html_21e3f75734d0d9b81cf6072a3897d7e3);
+            
+        
+
+        circle_marker_6e03e373f9b880219c7b21bff60687af.bindPopup(popup_b424757b8f26061c8f1d128b0e017a95)
+        ;
+
+        
+    
+    
+            var circle_marker_823611dfacb86018589e773d7332ca1f = L.circleMarker(
+                [70.3699, 19.609398],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_a69112fd11c6ebd2856942f331c1858d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ba5b8f01f8f347ce0a2481c8d7b4ca28 = $(`<div id="html_ba5b8f01f8f347ce0a2481c8d7b4ca28" style="width: 100.0%; height: 100.0%;">🚢 BUSINKA2<br>MMSI: 586707132<br>Speed: 0.8 knots</div>`)[0];
+                popup_a69112fd11c6ebd2856942f331c1858d.setContent(html_ba5b8f01f8f347ce0a2481c8d7b4ca28);
+            
+        
+
+        circle_marker_823611dfacb86018589e773d7332ca1f.bindPopup(popup_a69112fd11c6ebd2856942f331c1858d)
+        ;
+
+        
+    
+    
+            var circle_marker_da5f4a48a10c9958fe300df2c65c7d77 = L.circleMarker(
+                [70.437007, 19.910862],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_c4fcb8f84732e663cb8036c5cede6d29 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a978dc3029044e02ee442886d388d832 = $(`<div id="html_a978dc3029044e02ee442886d388d832" style="width: 100.0%; height: 100.0%;">🚢 BUSINKA5<br>MMSI: 586707134<br>Speed: 1.9 knots</div>`)[0];
+                popup_c4fcb8f84732e663cb8036c5cede6d29.setContent(html_a978dc3029044e02ee442886d388d832);
+            
+        
+
+        circle_marker_da5f4a48a10c9958fe300df2c65c7d77.bindPopup(popup_c4fcb8f84732e663cb8036c5cede6d29)
+        ;
+
+        
+    
+    
+            var circle_marker_e13946953218888accace1cf14a446d6 = L.circleMarker(
+                [70.38797, 20.270237],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_dc932ba2195a9fcd04db65045cdfa5e3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4ef113ac4199cee7f60b499a4ccf2162 = $(`<div id="html_4ef113ac4199cee7f60b499a4ccf2162" style="width: 100.0%; height: 100.0%;">🚢 LK6<br>MMSI: 586707135<br>Speed: 1.2 knots</div>`)[0];
+                popup_dc932ba2195a9fcd04db65045cdfa5e3.setContent(html_4ef113ac4199cee7f60b499a4ccf2162);
+            
+        
+
+        circle_marker_e13946953218888accace1cf14a446d6.bindPopup(popup_dc932ba2195a9fcd04db65045cdfa5e3)
+        ;
+
+        
+    
+    
+            var circle_marker_50888e95bcfc2cfb0ba6911d599e9ca8 = L.circleMarker(
+                [70.364975, 20.278973],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_d54c488f28ed55448f9eb0db7de2bb00 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_de819d7f1ac2f2dd0d076ad156f7d3ab = $(`<div id="html_de819d7f1ac2f2dd0d076ad156f7d3ab" style="width: 100.0%; height: 100.0%;">🚢 BUOY11<br>MMSI: 586707136<br>Speed: 1.7 knots</div>`)[0];
+                popup_d54c488f28ed55448f9eb0db7de2bb00.setContent(html_de819d7f1ac2f2dd0d076ad156f7d3ab);
+            
+        
+
+        circle_marker_50888e95bcfc2cfb0ba6911d599e9ca8.bindPopup(popup_d54c488f28ed55448f9eb0db7de2bb00)
+        ;
+
+        
+    
+    
+            var circle_marker_a0dd9e41c02eaed0619085a78b284801 = L.circleMarker(
+                [70.420165, 18.82541],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_798f93c5172f1666d1854a8daae30d6a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_548b24cc0645570a26557b6d36a728d7 = $(`<div id="html_548b24cc0645570a26557b6d36a728d7" style="width: 100.0%; height: 100.0%;">🚢 FISHING NET BOUY 3<br>MMSI: 586707137<br>Speed: 1 knots</div>`)[0];
+                popup_798f93c5172f1666d1854a8daae30d6a.setContent(html_548b24cc0645570a26557b6d36a728d7);
+            
+        
+
+        circle_marker_a0dd9e41c02eaed0619085a78b284801.bindPopup(popup_798f93c5172f1666d1854a8daae30d6a)
+        ;
+
+        
+    
+    
+            var circle_marker_7309a99bf8c96ecb1eb6565359adf015 = L.circleMarker(
+                [70.418448, 19.852045],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_fe2661d9ba7f7b51e6488bfa18110a34 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bc82e94a959e4111d8cb63429725c1e0 = $(`<div id="html_bc82e94a959e4111d8cb63429725c1e0" style="width: 100.0%; height: 100.0%;">🚢 BUSINKA1<br>MMSI: 586707139<br>Speed: 1.1 knots</div>`)[0];
+                popup_fe2661d9ba7f7b51e6488bfa18110a34.setContent(html_bc82e94a959e4111d8cb63429725c1e0);
+            
+        
+
+        circle_marker_7309a99bf8c96ecb1eb6565359adf015.bindPopup(popup_fe2661d9ba7f7b51e6488bfa18110a34)
+        ;
+
+        
+    
+    
+            var circle_marker_b47e6835a0658f119ffc1c9bfe2035cb = L.circleMarker(
+                [70.394205, 20.452338],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_e84f4c09651a1526ed331e0a26ca6cf8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_06ff363cd998a97480490a0c70274228 = $(`<div id="html_06ff363cd998a97480490a0c70274228" style="width: 100.0%; height: 100.0%;">🚢 LK3<br>MMSI: 586707140<br>Speed: 1.6 knots</div>`)[0];
+                popup_e84f4c09651a1526ed331e0a26ca6cf8.setContent(html_06ff363cd998a97480490a0c70274228);
+            
+        
+
+        circle_marker_b47e6835a0658f119ffc1c9bfe2035cb.bindPopup(popup_e84f4c09651a1526ed331e0a26ca6cf8)
+        ;
+
+        
+    
+    
+            var circle_marker_dc8ed4441e49c5097c735372e437b32b = L.circleMarker(
+                [70.360167, 20.302817],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_98458d73a292b2c28fd1fcfcc337e617 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ed40d83b7ee616145d3af7d74f6145e4 = $(`<div id="html_ed40d83b7ee616145d3af7d74f6145e4" style="width: 100.0%; height: 100.0%;">🚢 BUOY12<br>MMSI: 586707142<br>Speed: 1.7 knots</div>`)[0];
+                popup_98458d73a292b2c28fd1fcfcc337e617.setContent(html_ed40d83b7ee616145d3af7d74f6145e4);
+            
+        
+
+        circle_marker_dc8ed4441e49c5097c735372e437b32b.bindPopup(popup_98458d73a292b2c28fd1fcfcc337e617)
+        ;
+
+        
+    
+    
+            var circle_marker_b46e9ba8484d9abf1ab361bb770933d7 = L.circleMarker(
+                [70.458168, 20.166837],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_cd65f469504c4e45df1c752e25cf2c3d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_280c5db1467c5fdb30a447d9c6530225 = $(`<div id="html_280c5db1467c5fdb30a447d9c6530225" style="width: 100.0%; height: 100.0%;">🚢 LK2<br>MMSI: 586707148<br>Speed: 1 knots</div>`)[0];
+                popup_cd65f469504c4e45df1c752e25cf2c3d.setContent(html_280c5db1467c5fdb30a447d9c6530225);
+            
+        
+
+        circle_marker_b46e9ba8484d9abf1ab361bb770933d7.bindPopup(popup_cd65f469504c4e45df1c752e25cf2c3d)
+        ;
+
+        
+    
+    
+            var circle_marker_faa25bd3bafcb8abacd08841a63009e9 = L.circleMarker(
+                [70.466115, 19.233632],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_81b19e0ad9db965c5134096c44d2a6f7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_730b74aa963d4daeef35be3563832eff = $(`<div id="html_730b74aa963d4daeef35be3563832eff" style="width: 100.0%; height: 100.0%;">🚢 FISHING NET BOUY 2<br>MMSI: 586707196<br>Speed: 2.3 knots</div>`)[0];
+                popup_81b19e0ad9db965c5134096c44d2a6f7.setContent(html_730b74aa963d4daeef35be3563832eff);
+            
+        
+
+        circle_marker_faa25bd3bafcb8abacd08841a63009e9.bindPopup(popup_81b19e0ad9db965c5134096c44d2a6f7)
+        ;
+
+        
+    
+    
+            var circle_marker_06545375094303e8d249763e6c9cd45b = L.circleMarker(
+                [70.376612, 20.278155],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_3fd77bcf16f6a5e370207787904967e5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1f663584dffdda483eb1928ab7cc7034 = $(`<div id="html_1f663584dffdda483eb1928ab7cc7034" style="width: 100.0%; height: 100.0%;">🚢 LK1<br>MMSI: 586707240<br>Speed: 0.6 knots</div>`)[0];
+                popup_3fd77bcf16f6a5e370207787904967e5.setContent(html_1f663584dffdda483eb1928ab7cc7034);
+            
+        
+
+        circle_marker_06545375094303e8d249763e6c9cd45b.bindPopup(popup_3fd77bcf16f6a5e370207787904967e5)
+        ;
+
+        
+    
+    
+            var circle_marker_3b49ff415232bf50e18957a829ece60c = L.circleMarker(
+                [70.417975, 19.818778],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_9e682921ad493331a16bf30c3fa4a931 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a88f304796ec4d9e6faa7c9d957c344a = $(`<div id="html_a88f304796ec4d9e6faa7c9d957c344a" style="width: 100.0%; height: 100.0%;">🚢 BUSINKA4<br>MMSI: 586707248<br>Speed: 2.2 knots</div>`)[0];
+                popup_9e682921ad493331a16bf30c3fa4a931.setContent(html_a88f304796ec4d9e6faa7c9d957c344a);
+            
+        
+
+        circle_marker_3b49ff415232bf50e18957a829ece60c.bindPopup(popup_9e682921ad493331a16bf30c3fa4a931)
+        ;
+
+        
+    
+    
+            var circle_marker_1cb37f0c99bba4e90aefd4210ef8b4f7 = L.circleMarker(
+                [70.373652, 19.591517],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_afaf36e94d79f95699e45e9bc0506b82 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a757fdbe250715062d965e4a3f71f166 = $(`<div id="html_a757fdbe250715062d965e4a3f71f166" style="width: 100.0%; height: 100.0%;">🚢 BUSINKA3<br>MMSI: 586707249<br>Speed: 1.2 knots</div>`)[0];
+                popup_afaf36e94d79f95699e45e9bc0506b82.setContent(html_a757fdbe250715062d965e4a3f71f166);
+            
+        
+
+        circle_marker_1cb37f0c99bba4e90aefd4210ef8b4f7.bindPopup(popup_afaf36e94d79f95699e45e9bc0506b82)
+        ;
+
+        
+    
+    
+            var circle_marker_47960830b847045af373dce0eb90b46c = L.circleMarker(
+                [75.920285, 14.053403],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_288a51905ac71e93cff971ca4e840a58 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2492d7407ef70fd9be07b7db1249da67 = $(`<div id="html_2492d7407ef70fd9be07b7db1249da67" style="width: 100.0%; height: 100.0%;">🚢 NORVEZHSKOE MORE<br>MMSI: 273291510<br>Speed: 3.8 knots</div>`)[0];
+                popup_288a51905ac71e93cff971ca4e840a58.setContent(html_2492d7407ef70fd9be07b7db1249da67);
+            
+        
+
+        circle_marker_47960830b847045af373dce0eb90b46c.bindPopup(popup_288a51905ac71e93cff971ca4e840a58)
+        ;
+
+        
+    
+    
+            var circle_marker_33ad81fc10ca1ed2aec8ac07593bd831 = L.circleMarker(
+                [71.172063, 27.56834],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_57ddbd2191cf3035f7e39d2472d61646 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6e909a72a24a134286256fe0ca483587 = $(`<div id="html_6e909a72a24a134286256fe0ca483587" style="width: 100.0%; height: 100.0%;">🚢 SELMA BUOY 2<br>MMSI: 586707342<br>Speed: 1.7 knots</div>`)[0];
+                popup_57ddbd2191cf3035f7e39d2472d61646.setContent(html_6e909a72a24a134286256fe0ca483587);
+            
+        
+
+        circle_marker_33ad81fc10ca1ed2aec8ac07593bd831.bindPopup(popup_57ddbd2191cf3035f7e39d2472d61646)
+        ;
+
+        
+    
+    
+            var circle_marker_ca8938ccfbb6c2ab65f3bd7460644f36 = L.circleMarker(
+                [70.80592, 29.860215],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_42ec4a31c823362f434a327f1823bd30 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0434c1c4d99bc4612b61cd46a30839df = $(`<div id="html_0434c1c4d99bc4612b61cd46a30839df" style="width: 100.0%; height: 100.0%;">🚢 ALI BUOY 2<br>MMSI: 586707344<br>Speed: 1 knots</div>`)[0];
+                popup_42ec4a31c823362f434a327f1823bd30.setContent(html_0434c1c4d99bc4612b61cd46a30839df);
+            
+        
+
+        circle_marker_ca8938ccfbb6c2ab65f3bd7460644f36.bindPopup(popup_42ec4a31c823362f434a327f1823bd30)
+        ;
+
+        
+    
+    
+            var circle_marker_716ae2097a24ea1ab940d9c711c8d6b4 = L.circleMarker(
+                [70.943387, 29.332683],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_335f806af750a8fb3bb327086f28d5e5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d92868c954cf3ab08e3defbb1278e40b = $(`<div id="html_d92868c954cf3ab08e3defbb1278e40b" style="width: 100.0%; height: 100.0%;">🚢 BEN HUR BUOY 1<br>MMSI: 586707346<br>Speed: 7.5 knots</div>`)[0];
+                popup_335f806af750a8fb3bb327086f28d5e5.setContent(html_d92868c954cf3ab08e3defbb1278e40b);
+            
+        
+
+        circle_marker_716ae2097a24ea1ab940d9c711c8d6b4.bindPopup(popup_335f806af750a8fb3bb327086f28d5e5)
+        ;
+
+        
+    
+    
+            var circle_marker_eb65f0690180db5fdfe1ad2fe40909bf = L.circleMarker(
+                [68.576072, 14.965532],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_cc3909f2871d3294e5b43e58b35461c5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_be20f50e21fa65a2f014422c89f54871 = $(`<div id="html_be20f50e21fa65a2f014422c89f54871" style="width: 100.0%; height: 100.0%;">🚢 WILSON LEITH<br>MMSI: 314553000<br>Speed: 0.1 knots</div>`)[0];
+                popup_cc3909f2871d3294e5b43e58b35461c5.setContent(html_be20f50e21fa65a2f014422c89f54871);
+            
+        
+
+        circle_marker_eb65f0690180db5fdfe1ad2fe40909bf.bindPopup(popup_cc3909f2871d3294e5b43e58b35461c5)
+        ;
+
+        
+    
+    
+            var circle_marker_4eec235be439858e93467b5767fc4096 = L.circleMarker(
+                [70.647435, 19.87816],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_9e2528bbaf9f153319b5c3011d7a153f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8485a42250f2de022e0e5ddd25f3d83d = $(`<div id="html_8485a42250f2de022e0e5ddd25f3d83d" style="width: 100.0%; height: 100.0%;">🚢 BOOTES<br>MMSI: 273217010<br>Speed: 3 knots</div>`)[0];
+                popup_9e2528bbaf9f153319b5c3011d7a153f.setContent(html_8485a42250f2de022e0e5ddd25f3d83d);
+            
+        
+
+        circle_marker_4eec235be439858e93467b5767fc4096.bindPopup(popup_9e2528bbaf9f153319b5c3011d7a153f)
+        ;
+
+        
+    
+    
+            var circle_marker_23a5f47c85cc23a6d40a1c530efa03ea = L.circleMarker(
+                [65.802192, 12.72443],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_d822c60cff27cb9a87c997765117aafd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f66e5065de4a61e6e3eb861655c9d0c1 = $(`<div id="html_f66e5065de4a61e6e3eb861655c9d0c1" style="width: 100.0%; height: 100.0%;">🚢 NAUTILUS ALDRA MOB<br>MMSI: 982570397<br>Speed: 0 knots</div>`)[0];
+                popup_d822c60cff27cb9a87c997765117aafd.setContent(html_f66e5065de4a61e6e3eb861655c9d0c1);
+            
+        
+
+        circle_marker_23a5f47c85cc23a6d40a1c530efa03ea.bindPopup(popup_d822c60cff27cb9a87c997765117aafd)
+        ;
+
+        
+    
+    
+            var circle_marker_2b7654e0e6bff95c50fb27c256ce4269 = L.circleMarker(
+                [68.64295, 16.581217],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_0f6c6f45fcb5bb8c811d8636ae753dd4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_93384a30e91ac40cb7073b520f763d9b = $(`<div id="html_93384a30e91ac40cb7073b520f763d9b" style="width: 100.0%; height: 100.0%;">🚢 ROV LONG CABLE<br>MMSI: 982570698<br>Speed: 0.9 knots</div>`)[0];
+                popup_0f6c6f45fcb5bb8c811d8636ae753dd4.setContent(html_93384a30e91ac40cb7073b520f763d9b);
+            
+        
+
+        circle_marker_2b7654e0e6bff95c50fb27c256ce4269.bindPopup(popup_0f6c6f45fcb5bb8c811d8636ae753dd4)
+        ;
+
+        
+    
+    
+            var circle_marker_34f79c73abedd04e9cb79577571cbb0d = L.circleMarker(
+                [71.094475, 26.157437],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_4ec6972e9da8f3e420ca68adaf0d82d2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d8d5367afdc8d3e65a9cda3dbf1a09c1 = $(`<div id="html_d8d5367afdc8d3e65a9cda3dbf1a09c1" style="width: 100.0%; height: 100.0%;">🚢 MAYA BUOY 1<br>MMSI: 109080033<br>Speed: 3.8 knots</div>`)[0];
+                popup_4ec6972e9da8f3e420ca68adaf0d82d2.setContent(html_d8d5367afdc8d3e65a9cda3dbf1a09c1);
+            
+        
+
+        circle_marker_34f79c73abedd04e9cb79577571cbb0d.bindPopup(popup_4ec6972e9da8f3e420ca68adaf0d82d2)
+        ;
+
+        
+    
+    
+            var circle_marker_40db6224845b93a10437a2ca903bb8cd = L.circleMarker(
+                [71.535585, 32.845305],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_bbdd687dfdf016785aeab6018b2f0517 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_94091da8bdfd4a0b4b54d1becebe2b1f = $(`<div id="html_94091da8bdfd4a0b4b54d1becebe2b1f" style="width: 100.0%; height: 100.0%;">🚢 KRYSSHOLM 6<br>MMSI: 109080131<br>Speed: 1.5 knots</div>`)[0];
+                popup_bbdd687dfdf016785aeab6018b2f0517.setContent(html_94091da8bdfd4a0b4b54d1becebe2b1f);
+            
+        
+
+        circle_marker_40db6224845b93a10437a2ca903bb8cd.bindPopup(popup_bbdd687dfdf016785aeab6018b2f0517)
+        ;
+
+        
+    
+    
+            var circle_marker_f8bdb5fa1c4de11525eae9d12d2d219c = L.circleMarker(
+                [70.542072, 20.313693],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_ddd921ad13a16331ec6da0b7a3ded806 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_698f51a32918b3d135cdd301eed7dade = $(`<div id="html_698f51a32918b3d135cdd301eed7dade" style="width: 100.0%; height: 100.0%;">🚢 VANNOYVAERING BOUY 1<br>MMSI: 109080133<br>Speed: 1.6 knots</div>`)[0];
+                popup_ddd921ad13a16331ec6da0b7a3ded806.setContent(html_698f51a32918b3d135cdd301eed7dade);
+            
+        
+
+        circle_marker_f8bdb5fa1c4de11525eae9d12d2d219c.bindPopup(popup_ddd921ad13a16331ec6da0b7a3ded806)
+        ;
+
+        
+    
+    
+            var circle_marker_024b10d6720604df8c30269df2c70fb3 = L.circleMarker(
+                [71.671892, 33.030293],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_c344484d900cad01fcff2c856c89a2ce = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0376d160e8a689f76d6adf0819634762 = $(`<div id="html_0376d160e8a689f76d6adf0819634762" style="width: 100.0%; height: 100.0%;">🚢 KRYSSHOLM 4<br>MMSI: 109080134<br>Speed: 1.6 knots</div>`)[0];
+                popup_c344484d900cad01fcff2c856c89a2ce.setContent(html_0376d160e8a689f76d6adf0819634762);
+            
+        
+
+        circle_marker_024b10d6720604df8c30269df2c70fb3.bindPopup(popup_c344484d900cad01fcff2c856c89a2ce)
+        ;
+
+        
+    
+    
+            var circle_marker_a5fff13cc2ed498c20329b164c5228d0 = L.circleMarker(
+                [68.433932, 14.51604],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_1f6cb997881c6ff59b11208240e4142d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_013d383b9454d93c4f0033c8ddc8123f = $(`<div id="html_013d383b9454d93c4f0033c8ddc8123f" style="width: 100.0%; height: 100.0%;">🚢 IVERSEN JR BUOY 3<br>MMSI: 109080160<br>Speed: 8.4 knots</div>`)[0];
+                popup_1f6cb997881c6ff59b11208240e4142d.setContent(html_013d383b9454d93c4f0033c8ddc8123f);
+            
+        
+
+        circle_marker_a5fff13cc2ed498c20329b164c5228d0.bindPopup(popup_1f6cb997881c6ff59b11208240e4142d)
+        ;
+
+        
+    
+    
+            var circle_marker_30bc248f2183390339d04dc8eb0fb87d = L.circleMarker(
+                [71.539728, 32.713867],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_79f5d6f109cdee6fe286def894350a20 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_626dc4e4102c8cb8f67db7b15ace697f = $(`<div id="html_626dc4e4102c8cb8f67db7b15ace697f" style="width: 100.0%; height: 100.0%;">🌑 DARK VESSEL<br>IVAR BOUY 1<br>Dark for: 2.1h</div>`)[0];
+                popup_79f5d6f109cdee6fe286def894350a20.setContent(html_626dc4e4102c8cb8f67db7b15ace697f);
+            
+        
+
+        circle_marker_30bc248f2183390339d04dc8eb0fb87d.bindPopup(popup_79f5d6f109cdee6fe286def894350a20)
+        ;
+
+        
+    
+    
+            var circle_marker_c81ed4c050aa8a03ec942b7cfaaef9e5 = L.circleMarker(
+                [70.652245, 23.578608],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_1b02f88e340e7d175426fea8c3337cc6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0701c88295f419715b3beb5e891873b4 = $(`<div id="html_0701c88295f419715b3beb5e891873b4" style="width: 100.0%; height: 100.0%;">🌑 DARK VESSEL<br>KONGSBORG MOB<br>Dark for: 2.2h</div>`)[0];
+                popup_1b02f88e340e7d175426fea8c3337cc6.setContent(html_0701c88295f419715b3beb5e891873b4);
+            
+        
+
+        circle_marker_c81ed4c050aa8a03ec942b7cfaaef9e5.bindPopup(popup_1b02f88e340e7d175426fea8c3337cc6)
+        ;
+
+        
+    
+    
+            var circle_marker_a694985eea4f534545da64f94933c43b = L.circleMarker(
+                [71.038628, 28.597417],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_101941f390a7064eec673d1df2536c3d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_32b6f3300a06de122db1e21382ce2522 = $(`<div id="html_32b6f3300a06de122db1e21382ce2522" style="width: 100.0%; height: 100.0%;">🌑 DARK VESSEL<br>SAGA BJOERG BU 48<br>Dark for: 2.1h</div>`)[0];
+                popup_101941f390a7064eec673d1df2536c3d.setContent(html_32b6f3300a06de122db1e21382ce2522);
+            
+        
+
+        circle_marker_a694985eea4f534545da64f94933c43b.bindPopup(popup_101941f390a7064eec673d1df2536c3d)
+        ;
+
+        
+    
+    
+            var circle_marker_8b67bde48fef962e685444e6afb2e21c = L.circleMarker(
+                [71.036393, 28.592878],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_6db33384a6daa085e298ef9808b17ba9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_82c89310a634e489162b1d73b8c415db = $(`<div id="html_82c89310a634e489162b1d73b8c415db" style="width: 100.0%; height: 100.0%;">🌑 DARK VESSEL<br>GK BUOY 53<br>Dark for: 2.1h</div>`)[0];
+                popup_6db33384a6daa085e298ef9808b17ba9.setContent(html_82c89310a634e489162b1d73b8c415db);
+            
+        
+
+        circle_marker_8b67bde48fef962e685444e6afb2e21c.bindPopup(popup_6db33384a6daa085e298ef9808b17ba9)
+        ;
+
+        
+    
+    
+            var circle_marker_c83b6a23c9616562a709a1976707125b = L.circleMarker(
+                [70.81341, 29.726408],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_74c5815ef1ed5b9228b5df3d2245cd09);
+        
+    
+        var popup_33c51106146d9383bb0631adcf32cc1c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_be523598d1659bc8b66481b894f0f2fa = $(`<div id="html_be523598d1659bc8b66481b894f0f2fa" style="width: 100.0%; height: 100.0%;">🌑 DARK VESSEL<br>AH SENIOR<br>Dark for: 2.1h</div>`)[0];
+                popup_33c51106146d9383bb0631adcf32cc1c.setContent(html_be523598d1659bc8b66481b894f0f2fa);
+            
+        
+
+        circle_marker_c83b6a23c9616562a709a1976707125b.bindPopup(popup_33c51106146d9383bb0631adcf32cc1c)
+        ;
+
+        
+    
+</script>
+</html>
