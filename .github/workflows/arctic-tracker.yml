@@ -30,11 +30,11 @@ jobs:
       run: |
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config user.name "github-actions[bot]"
-        git pull origin main
         git add arctic_intelligence/
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
           git commit -m "Arctic surveillance update $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git pull --rebase origin main
           git push
         fi
