@@ -1,20 +1,16 @@
 #!/usr/bin/env python3
 """
-Arctic Shadow Tracker - Backward compatibility wrapper
+Arctic Shadow Tracker - Consolidated Single Entry Point
 
-This file maintains backward compatibility while using the new organized structure.
+Monitors Arctic waters for vessel activity, dark vessel detection,
+and submarine cable proximity monitoring.
 """
 
-import sys
-import os
-
-# Add src directory to Python path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
-
-# Import from the new location
-from arctic_tracker.core.arctic_shadow_streamer import main, run_surveillance_cycle
+# Import consolidated functionality
+from arctic_shadow_streamer_consolidated import main, run_surveillance_cycle
 
 if __name__ == "__main__":
+    import sys
     if len(sys.argv) > 1 and sys.argv[1] == "test":
         # Run single test cycle
         print("Running single test cycle...")
