@@ -2,9 +2,7 @@ name: Arctic Shadow Tracker
 
 on:
   schedule:
-    # Run every 30 minutes
     - cron: '*/30 * * * *'
-  # Allow manual runs
   workflow_dispatch:
 
 jobs:
@@ -12,33 +10,25 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
       
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: '3.9'
         
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
+    - run: pip install -r requirements.txt
         
-    - name: Run Arctic Shadow Tracker
+    - name: Run tracker
       env:
         BARENTSWATCH_CLIENT_SECRET: ${{ secrets.BARENTSWATCH_CLIENT_SECRET }}
-      run: |
-        python arctic_shadow_streamer.py test
+      run: python arctic_shadow_streamer.py test
         
-    - name: Commit and push data
+    - name: Commit results
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add arctic_intelligence/
-        git add *.html || true
         if [ -n "$(git status --porcelain)" ]; then
-          git commit -m "🛰️ Arctic surveillance update $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git commit -m "Arctic surveillance update $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push
-        else
-          echo "No changes to commit"
         fi
