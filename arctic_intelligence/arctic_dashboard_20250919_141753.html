@@ -1,0 +1,2617 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_3cb224ab9bab4ae11268b5aea52958f5 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style='position: fixed; top: 10px; right: 10px; background: white; padding: 10px; border: 2px solid blue; border-radius: 5px; z-index: 9999;'>
+    <h4>Arctic Intelligence</h4>
+    <p>🚢 Vessels: 106</p>
+    <p>🌑 Dark: 0</p>
+    <p>⚠️ Alerts: 0</p>
+    <p>🕐 14:17:53</p>
+    </div>
+    
+    
+            <div class="folium-map" id="map_3cb224ab9bab4ae11268b5aea52958f5" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_3cb224ab9bab4ae11268b5aea52958f5 = L.map(
+                "map_3cb224ab9bab4ae11268b5aea52958f5",
+                {
+                    center: [72.0, 25.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 4,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_7085ac77893770aea4c67ba962699c28 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_7085ac77893770aea4c67ba962699c28.addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+            var poly_line_9c57a2fe32744b1f33b1149b7ebc82b9 = L.polyline(
+                [[78.9, 11.9], [71.0, 25.8]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_0926b9b3e93fe82f94ce19d978645b0f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bc76a4e54971e9d91db46ef1407bf8db = $(`<div id="html_bc76a4e54971e9d91db46ef1407bf8db" style="width: 100.0%; height: 100.0%;">🔌 Svalbard Undersea Cable System</div>`)[0];
+                popup_0926b9b3e93fe82f94ce19d978645b0f.setContent(html_bc76a4e54971e9d91db46ef1407bf8db);
+            
+        
+
+        poly_line_9c57a2fe32744b1f33b1149b7ebc82b9.bindPopup(popup_0926b9b3e93fe82f94ce19d978645b0f)
+        ;
+
+        
+    
+    
+            var poly_line_f54d92c95bab11cf840e89ee02cf6293 = L.polyline(
+                [[68.8, 13.6], [69.3, 16.0]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_c487d268b96918bb3b32d9a2694a25ce = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6fa4e131bb08b804d82c27d02e8205c8 = $(`<div id="html_6fa4e131bb08b804d82c27d02e8205c8" style="width: 100.0%; height: 100.0%;">🔌 Lofoten-Vesterålen Cable</div>`)[0];
+                popup_c487d268b96918bb3b32d9a2694a25ce.setContent(html_6fa4e131bb08b804d82c27d02e8205c8);
+            
+        
+
+        poly_line_f54d92c95bab11cf840e89ee02cf6293.bindPopup(popup_c487d268b96918bb3b32d9a2694a25ce)
+        ;
+
+        
+    
+    
+            var poly_line_3cb04e89a9aeb5e5312a599cef48b84a = L.polyline(
+                [[70.0, 23.0], [69.0, 18.0]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_549a31cdb84c142e5e5a494ba1f4206b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dafde7b63fcc343fa9d9f95e8ce8da9e = $(`<div id="html_dafde7b63fcc343fa9d9f95e8ce8da9e" style="width: 100.0%; height: 100.0%;">🔌 Norway-UK Cable (Arctic Section)</div>`)[0];
+                popup_549a31cdb84c142e5e5a494ba1f4206b.setContent(html_dafde7b63fcc343fa9d9f95e8ce8da9e);
+            
+        
+
+        poly_line_3cb04e89a9aeb5e5312a599cef48b84a.bindPopup(popup_549a31cdb84c142e5e5a494ba1f4206b)
+        ;
+
+        
+    
+    
+            var circle_marker_9080d3b34909542aacc1ca4afc93c1c2 = L.circleMarker(
+                [81.836007, 15.898378],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_2548b7fc82d6845f85e8be8431a873c6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e75d43acb3b362cea85f953fc6e05053 = $(`<div id="html_e75d43acb3b362cea85f953fc6e05053" style="width: 100.0%; height: 100.0%;">🌍 KINFISH TENDER 3<br>🌍 Country: Sweden<br>📍 MMSI: 265064540<br>⚡ Speed: 3.3 knots</div>`)[0];
+                popup_2548b7fc82d6845f85e8be8431a873c6.setContent(html_e75d43acb3b362cea85f953fc6e05053);
+            
+        
+
+        circle_marker_9080d3b34909542aacc1ca4afc93c1c2.bindPopup(popup_2548b7fc82d6845f85e8be8431a873c6)
+        ;
+
+        
+    
+    
+            var circle_marker_b3cf6d189eafd680d7370429201efde9 = L.circleMarker(
+                [66.078298, 7.365608],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_8eecc3b0401bd7d13fc0c413d3958b32 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6db201d5a47128885d159d5bc5bc9395 = $(`<div id="html_6db201d5a47128885d159d5bc5bc9395" style="width: 100.0%; height: 100.0%;">🌍 ANVIL POINT<br>🌍 Country: United Kingdom<br>📍 MMSI: 235572000<br>⚡ Speed: 16.6 knots</div>`)[0];
+                popup_8eecc3b0401bd7d13fc0c413d3958b32.setContent(html_6db201d5a47128885d159d5bc5bc9395);
+            
+        
+
+        circle_marker_b3cf6d189eafd680d7370429201efde9.bindPopup(popup_8eecc3b0401bd7d13fc0c413d3958b32)
+        ;
+
+        
+    
+    
+            var circle_marker_0a6146456e0068a986a3f551f4632ae7 = L.circleMarker(
+                [68.575077, 14.947732],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_bc11cef453db2a113a285811becac773 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_938be37d09df38500514e58ff8c3c606 = $(`<div id="html_938be37d09df38500514e58ff8c3c606" style="width: 100.0%; height: 100.0%;">🌍 NOR STAR<br>🌍 Country: Guinea-Bissau<br>📍 MMSI: 630001042<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_bc11cef453db2a113a285811becac773.setContent(html_938be37d09df38500514e58ff8c3c606);
+            
+        
+
+        circle_marker_0a6146456e0068a986a3f551f4632ae7.bindPopup(popup_bc11cef453db2a113a285811becac773)
+        ;
+
+        
+    
+    
+            var circle_marker_ba5cef3b778dd0eaf6c8c19fad8ef55c = L.circleMarker(
+                [66.571762, 10.234982],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_a222dc400ee0cd8c8c9185662b556d94 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b850047f9c950bb7354faa4be2279f2f = $(`<div id="html_b850047f9c950bb7354faa4be2279f2f" style="width: 100.0%; height: 100.0%;">🌍 KEY WIND<br>🌍 Country: Cayman Islands<br>📍 MMSI: 319301000<br>⚡ Speed: 11.9 knots</div>`)[0];
+                popup_a222dc400ee0cd8c8c9185662b556d94.setContent(html_b850047f9c950bb7354faa4be2279f2f);
+            
+        
+
+        circle_marker_ba5cef3b778dd0eaf6c8c19fad8ef55c.bindPopup(popup_a222dc400ee0cd8c8c9185662b556d94)
+        ;
+
+        
+    
+    
+            var circle_marker_dcecc48c85a4713127d22f654e005939 = L.circleMarker(
+                [68.234027, 14.536107],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_3245764a0f20312dcfb5d2ca74f4086e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_286ede2770abb02a2ac1709d3f629851 = $(`<div id="html_286ede2770abb02a2ac1709d3f629851" style="width: 100.0%; height: 100.0%;">🌍 VILKAS<br>🌍 Country: Lithuania<br>📍 MMSI: 277589000<br>⚡ Speed: 0.1 knots</div>`)[0];
+                popup_3245764a0f20312dcfb5d2ca74f4086e.setContent(html_286ede2770abb02a2ac1709d3f629851);
+            
+        
+
+        circle_marker_dcecc48c85a4713127d22f654e005939.bindPopup(popup_3245764a0f20312dcfb5d2ca74f4086e)
+        ;
+
+        
+    
+    
+            var circle_marker_6234e440d8ec69a75419284582b0df5f = L.circleMarker(
+                [71.26503, 26.204053],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_4735fba17a5c7581f5c13de5929eca10 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_faeb8f34cc64e5bd63f06d9ad4a9c0c2 = $(`<div id="html_faeb8f34cc64e5bd63f06d9ad4a9c0c2" style="width: 100.0%; height: 100.0%;">🌍 ARCTIC AURORA<br>🌍 Country: Malta<br>📍 MMSI: 229767000<br>⚡ Speed: 9.9 knots</div>`)[0];
+                popup_4735fba17a5c7581f5c13de5929eca10.setContent(html_faeb8f34cc64e5bd63f06d9ad4a9c0c2);
+            
+        
+
+        circle_marker_6234e440d8ec69a75419284582b0df5f.bindPopup(popup_4735fba17a5c7581f5c13de5929eca10)
+        ;
+
+        
+    
+    
+            var circle_marker_902a24f15174b0fb0833185f24cde7c6 = L.circleMarker(
+                [75.82, 14.07],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_58d58adc8c4a02dee96723a87f81cef9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_211899e89a94a2e5603bc122881da194 = $(`<div id="html_211899e89a94a2e5603bc122881da194" style="width: 100.0%; height: 100.0%;">🇷🇺 NORVEZHSKOE MORE<br>🌍 Country: Russia<br>📍 MMSI: 273291510<br>⚡ Speed: 4 knots</div>`)[0];
+                popup_58d58adc8c4a02dee96723a87f81cef9.setContent(html_211899e89a94a2e5603bc122881da194);
+            
+        
+
+        circle_marker_902a24f15174b0fb0833185f24cde7c6.bindPopup(popup_58d58adc8c4a02dee96723a87f81cef9)
+        ;
+
+        
+    
+    
+            var circle_marker_4d81cdccada0b5f26f23c4ce33a723bd = L.circleMarker(
+                [68.576523, 14.965128],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_1dc39ddbf2b9e4b19caf6c7e6001e2dd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_62779a1bc631d0a26993a503e2751c04 = $(`<div id="html_62779a1bc631d0a26993a503e2751c04" style="width: 100.0%; height: 100.0%;">🌍 WILSON LEITH<br>🌍 Country: Barbados<br>📍 MMSI: 314553000<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_1dc39ddbf2b9e4b19caf6c7e6001e2dd.setContent(html_62779a1bc631d0a26993a503e2751c04);
+            
+        
+
+        circle_marker_4d81cdccada0b5f26f23c4ce33a723bd.bindPopup(popup_1dc39ddbf2b9e4b19caf6c7e6001e2dd)
+        ;
+
+        
+    
+    
+            var circle_marker_0542eeaf4c4f6dd6ea85697640c87c06 = L.circleMarker(
+                [70.637057, 19.833962],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_c19f106835c284d81437b1effafb3c4a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3e674562c5b2c48d5759dd51c8609677 = $(`<div id="html_3e674562c5b2c48d5759dd51c8609677" style="width: 100.0%; height: 100.0%;">🇷🇺 BOOTES<br>🌍 Country: Russia<br>📍 MMSI: 273217010<br>⚡ Speed: 2.4 knots</div>`)[0];
+                popup_c19f106835c284d81437b1effafb3c4a.setContent(html_3e674562c5b2c48d5759dd51c8609677);
+            
+        
+
+        circle_marker_0542eeaf4c4f6dd6ea85697640c87c06.bindPopup(popup_c19f106835c284d81437b1effafb3c4a)
+        ;
+
+        
+    
+    
+            var circle_marker_c71ac6961eae4622aeb008bd031631ca = L.circleMarker(
+                [65.803053, 12.726327],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_6716a8e62a0344a2ecf277548a490e1e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_31a934507383dabf3b3c4ee84920851e = $(`<div id="html_31a934507383dabf3b3c4ee84920851e" style="width: 100.0%; height: 100.0%;">❓ NAUTILUS ALDRA MOB<br>🌍 Country: Unknown<br>📍 MMSI: 982570397<br>⚡ Speed: 0.9 knots</div>`)[0];
+                popup_6716a8e62a0344a2ecf277548a490e1e.setContent(html_31a934507383dabf3b3c4ee84920851e);
+            
+        
+
+        circle_marker_c71ac6961eae4622aeb008bd031631ca.bindPopup(popup_6716a8e62a0344a2ecf277548a490e1e)
+        ;
+
+        
+    
+    
+            var circle_marker_6fb2d1cf6c03f8978b19981605cd1254 = L.circleMarker(
+                [68.64295, 16.581217],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_0305c2f8332332d61642fbf321e04f79 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_50754f57345b8f347077722d67dabaea = $(`<div id="html_50754f57345b8f347077722d67dabaea" style="width: 100.0%; height: 100.0%;">❓ ROV LONG CABLE<br>🌍 Country: Unknown<br>📍 MMSI: 982570698<br>⚡ Speed: 0.9 knots</div>`)[0];
+                popup_0305c2f8332332d61642fbf321e04f79.setContent(html_50754f57345b8f347077722d67dabaea);
+            
+        
+
+        circle_marker_6fb2d1cf6c03f8978b19981605cd1254.bindPopup(popup_0305c2f8332332d61642fbf321e04f79)
+        ;
+
+        
+    
+    
+            var circle_marker_708a01e68f9c894575354054601613a5 = L.circleMarker(
+                [68.724683, 13.066108],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_7b7730e1383895479a28e06e80f0dbe4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_edc7112925de81e1a7b3c013cc312063 = $(`<div id="html_edc7112925de81e1a7b3c013cc312063" style="width: 100.0%; height: 100.0%;">❓ ANGELSEN SR<br>🌍 Country: Unknown<br>📍 MMSI: 109080476<br>⚡ Speed: 3.7 knots</div>`)[0];
+                popup_7b7730e1383895479a28e06e80f0dbe4.setContent(html_edc7112925de81e1a7b3c013cc312063);
+            
+        
+
+        circle_marker_708a01e68f9c894575354054601613a5.bindPopup(popup_7b7730e1383895479a28e06e80f0dbe4)
+        ;
+
+        
+    
+    
+            var circle_marker_8cd02fc1964eed69cba5303a3a662c96 = L.circleMarker(
+                [65.593933, 10.883267],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_358a1e9f3a03b975a05f567ed46a96f3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6affb97e4fc0cbbd63ee62cb0f939cc2 = $(`<div id="html_6affb97e4fc0cbbd63ee62cb0f939cc2" style="width: 100.0%; height: 100.0%;">🌍 SHETLAND<br>🌍 Country: Netherlands<br>📍 MMSI: 244178000<br>⚡ Speed: 10.6 knots</div>`)[0];
+                popup_358a1e9f3a03b975a05f567ed46a96f3.setContent(html_6affb97e4fc0cbbd63ee62cb0f939cc2);
+            
+        
+
+        circle_marker_8cd02fc1964eed69cba5303a3a662c96.bindPopup(popup_358a1e9f3a03b975a05f567ed46a96f3)
+        ;
+
+        
+    
+    
+            var circle_marker_dbb359d6743983666fe64250bd2d89c3 = L.circleMarker(
+                [70.387128, 19.028467],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_80866924fef17ae9640d5fc83245cbdc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_710d46f14c50bfceb620d9b2e69eb680 = $(`<div id="html_710d46f14c50bfceb620d9b2e69eb680" style="width: 100.0%; height: 100.0%;">🌍 NAVAL AUXILIARY<br>🌍 Country: United Kingdom<br>📍 MMSI: 235051012<br>⚡ Speed: 12.8 knots</div>`)[0];
+                popup_80866924fef17ae9640d5fc83245cbdc.setContent(html_710d46f14c50bfceb620d9b2e69eb680);
+            
+        
+
+        circle_marker_dbb359d6743983666fe64250bd2d89c3.bindPopup(popup_80866924fef17ae9640d5fc83245cbdc)
+        ;
+
+        
+    
+    
+            var circle_marker_b126f4b947f0219f2fc6b8eef29d85a7 = L.circleMarker(
+                [66.89333333333333, 5.1866666666666665],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_add6b2b6334377294d09ee26064552a8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_87874808b6243ae50991f89117497059 = $(`<div id="html_87874808b6243ae50991f89117497059" style="width: 100.0%; height: 100.0%;">🌍 ARMADA 78 03<br>🌍 Country: Singapore<br>📍 MMSI: 563175900<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_add6b2b6334377294d09ee26064552a8.setContent(html_87874808b6243ae50991f89117497059);
+            
+        
+
+        circle_marker_b126f4b947f0219f2fc6b8eef29d85a7.bindPopup(popup_add6b2b6334377294d09ee26064552a8)
+        ;
+
+        
+    
+    
+            var circle_marker_1479f14a323bd2ebdee493a1f435fd13 = L.circleMarker(
+                [69.698022, 19.075325],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_9f531082f83910bde7175102b2537f8a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7da6f485015a653b36e31ef47de2cc54 = $(`<div id="html_7da6f485015a653b36e31ef47de2cc54" style="width: 100.0%; height: 100.0%;">🌍 JAN MARIA<br>🌍 Country: Germany<br>📍 MMSI: 218004830<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_9f531082f83910bde7175102b2537f8a.setContent(html_7da6f485015a653b36e31ef47de2cc54);
+            
+        
+
+        circle_marker_1479f14a323bd2ebdee493a1f435fd13.bindPopup(popup_9f531082f83910bde7175102b2537f8a)
+        ;
+
+        
+    
+    
+            var circle_marker_5c3546ec63c7af3eb0aac663ccaf662b = L.circleMarker(
+                [71.06045, 20.031182],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_0c8db6fd27dc4eeda2877ab93d685114 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_19a53572e67bb9d71d64191ee8f63049 = $(`<div id="html_19a53572e67bb9d71d64191ee8f63049" style="width: 100.0%; height: 100.0%;">🇷🇺 ZAKHAR SOROKIN<br>🌍 Country: Russia<br>📍 MMSI: 273522400<br>⚡ Speed: 12.6 knots</div>`)[0];
+                popup_0c8db6fd27dc4eeda2877ab93d685114.setContent(html_19a53572e67bb9d71d64191ee8f63049);
+            
+        
+
+        circle_marker_5c3546ec63c7af3eb0aac663ccaf662b.bindPopup(popup_0c8db6fd27dc4eeda2877ab93d685114)
+        ;
+
+        
+    
+    
+            var circle_marker_eb995a95c4ef2d12a268fa231e8487d3 = L.circleMarker(
+                [72.19333333333334, 24.868333333333332],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_7a198379940841d71f00d7e81970af62 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f4d7c7e41e1098ad77b205cd1cebff64 = $(`<div id="html_f4d7c7e41e1098ad77b205cd1cebff64" style="width: 100.0%; height: 100.0%;">🇷🇺 ALFERAS<br>🌍 Country: Russia<br>📍 MMSI: 273447010<br>⚡ Speed: 9 knots</div>`)[0];
+                popup_7a198379940841d71f00d7e81970af62.setContent(html_f4d7c7e41e1098ad77b205cd1cebff64);
+            
+        
+
+        circle_marker_eb995a95c4ef2d12a268fa231e8487d3.bindPopup(popup_7a198379940841d71f00d7e81970af62)
+        ;
+
+        
+    
+    
+            var circle_marker_5589064dd56fe647af84d4a73590a762 = L.circleMarker(
+                [76.143373, 35.873165],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_df86fb845e48c885918eb7fc58e6128b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5bd4c99799323a9f7c6d0a1299797e8b = $(`<div id="html_5bd4c99799323a9f7c6d0a1299797e8b" style="width: 100.0%; height: 100.0%;">🌍 MERIKE<br>🌍 Country: Estonia<br>📍 MMSI: 276842000<br>⚡ Speed: 2.6 knots</div>`)[0];
+                popup_df86fb845e48c885918eb7fc58e6128b.setContent(html_5bd4c99799323a9f7c6d0a1299797e8b);
+            
+        
+
+        circle_marker_5589064dd56fe647af84d4a73590a762.bindPopup(popup_df86fb845e48c885918eb7fc58e6128b)
+        ;
+
+        
+    
+    
+            var circle_marker_0e93cdfaca0b3a73fdc54e713f9c4c63 = L.circleMarker(
+                [67.56302, 9.351315],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_9d08c2dc009df8eb3cadcc8c93f498e7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_abe1b0cbe94719cea8dbdbd855dbf3e8 = $(`<div id="html_abe1b0cbe94719cea8dbdbd855dbf3e8" style="width: 100.0%; height: 100.0%;">🇷🇺 DMITRY MENDELEEV<br>🌍 Country: Russia<br>📍 MMSI: 273296810<br>⚡ Speed: 11.1 knots</div>`)[0];
+                popup_9d08c2dc009df8eb3cadcc8c93f498e7.setContent(html_abe1b0cbe94719cea8dbdbd855dbf3e8);
+            
+        
+
+        circle_marker_0e93cdfaca0b3a73fdc54e713f9c4c63.bindPopup(popup_9d08c2dc009df8eb3cadcc8c93f498e7)
+        ;
+
+        
+    
+    
+            var circle_marker_b90846422d8e4402df8e08a0112173ce = L.circleMarker(
+                [66.212097, 13.018788],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_3098d5daf1c2ac5bb5bc7d6581175042 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_88cc095300e0d31f6667370164230746 = $(`<div id="html_88cc095300e0d31f6667370164230746" style="width: 100.0%; height: 100.0%;">🌍 WILSON DROGHEDA<br>🌍 Country: Barbados<br>📍 MMSI: 314633000<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_3098d5daf1c2ac5bb5bc7d6581175042.setContent(html_88cc095300e0d31f6667370164230746);
+            
+        
+
+        circle_marker_b90846422d8e4402df8e08a0112173ce.bindPopup(popup_3098d5daf1c2ac5bb5bc7d6581175042)
+        ;
+
+        
+    
+    
+            var circle_marker_0a2ce455eb78511e52a34962cea811b4 = L.circleMarker(
+                [70.896393, 30.779857],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_4f42e59c1d821c9271ee39d573af5fdc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1264765f07c4d69cc2ce40e130a9e872 = $(`<div id="html_1264765f07c4d69cc2ce40e130a9e872" style="width: 100.0%; height: 100.0%;">🇷🇺 ALEKSANDR MIRONENKO<br>🌍 Country: Russia<br>📍 MMSI: 273523300<br>⚡ Speed: 8.5 knots</div>`)[0];
+                popup_4f42e59c1d821c9271ee39d573af5fdc.setContent(html_1264765f07c4d69cc2ce40e130a9e872);
+            
+        
+
+        circle_marker_0a2ce455eb78511e52a34962cea811b4.bindPopup(popup_4f42e59c1d821c9271ee39d573af5fdc)
+        ;
+
+        
+    
+    
+            var circle_marker_fa4c2732650209c9ea02392b80b8f57a = L.circleMarker(
+                [69.687472, 18.735418],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_5288cd91ec894c42832ef7e237885bd2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4038eebb870769313ce8948f9ece022a = $(`<div id="html_4038eebb870769313ce8948f9ece022a" style="width: 100.0%; height: 100.0%;">🌍 M/S ISBJORNEN 2<br>🌍 Country: United Kingdom<br>📍 MMSI: 232866000<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_5288cd91ec894c42832ef7e237885bd2.setContent(html_4038eebb870769313ce8948f9ece022a);
+            
+        
+
+        circle_marker_fa4c2732650209c9ea02392b80b8f57a.bindPopup(popup_5288cd91ec894c42832ef7e237885bd2)
+        ;
+
+        
+    
+    
+            var circle_marker_0a9c7ffb6ace3b18a640bef228173bb5 = L.circleMarker(
+                [70.42333333333333, 16.05],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_1735fa396611a83afe9a5ba3c4ed3e23 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0b657c0a1ddfa497b1f3fcc9c49133ea = $(`<div id="html_0b657c0a1ddfa497b1f3fcc9c49133ea" style="width: 100.0%; height: 100.0%;">🇷🇺 YANTARNYY<br>🌍 Country: Russia<br>📍 MMSI: 273523400<br>⚡ Speed: 12 knots</div>`)[0];
+                popup_1735fa396611a83afe9a5ba3c4ed3e23.setContent(html_0b657c0a1ddfa497b1f3fcc9c49133ea);
+            
+        
+
+        circle_marker_0a9c7ffb6ace3b18a640bef228173bb5.bindPopup(popup_1735fa396611a83afe9a5ba3c4ed3e23)
+        ;
+
+        
+    
+    
+            var circle_marker_dd48782235c67339206a0c3f3e730d61 = L.circleMarker(
+                [67.414217, 8.9143],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_1e2f8b699d77bf57d7a049058c820aa4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5d4a5929b5760a88bd972fda1b429f7a = $(`<div id="html_5d4a5929b5760a88bd972fda1b429f7a" style="width: 100.0%; height: 100.0%;">🌍 ELISABETH J<br>🌍 Country: Cyprus<br>📍 MMSI: 212651000<br>⚡ Speed: 13 knots</div>`)[0];
+                popup_1e2f8b699d77bf57d7a049058c820aa4.setContent(html_5d4a5929b5760a88bd972fda1b429f7a);
+            
+        
+
+        circle_marker_dd48782235c67339206a0c3f3e730d61.bindPopup(popup_1e2f8b699d77bf57d7a049058c820aa4)
+        ;
+
+        
+    
+    
+            var circle_marker_ef21638187d24c0fe2764d88c701ece0 = L.circleMarker(
+                [78.22326, 15.662167],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_bb6b729234a632fbd8adddcb4c998c4f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ca52a1d6dd9f8367d19d4825329d60fa = $(`<div id="html_ca52a1d6dd9f8367d19d4825329d60fa" style="width: 100.0%; height: 100.0%;">❓ MUNIN<br>🌍 Country: Unknown<br>📍 MMSI: 982575641<br>⚡ Speed: 0.1 knots</div>`)[0];
+                popup_bb6b729234a632fbd8adddcb4c998c4f.setContent(html_ca52a1d6dd9f8367d19d4825329d60fa);
+            
+        
+
+        circle_marker_ef21638187d24c0fe2764d88c701ece0.bindPopup(popup_bb6b729234a632fbd8adddcb4c998c4f)
+        ;
+
+        
+    
+    
+            var circle_marker_f3dcb50a26e8167a16ee65ef28049722 = L.circleMarker(
+                [66.327675, 14.143075],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_61033fd29bc799e7a6739df83848216a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0fac19c0924a3f4d4d7d6b45041e257f = $(`<div id="html_0fac19c0924a3f4d4d7d6b45041e257f" style="width: 100.0%; height: 100.0%;">🌍 WILSON DUNDEE<br>🌍 Country: Barbados<br>📍 MMSI: 314635000<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_61033fd29bc799e7a6739df83848216a.setContent(html_0fac19c0924a3f4d4d7d6b45041e257f);
+            
+        
+
+        circle_marker_f3dcb50a26e8167a16ee65ef28049722.bindPopup(popup_61033fd29bc799e7a6739df83848216a)
+        ;
+
+        
+    
+    
+            var circle_marker_7e4dd2b46c855d1f7966838724716029 = L.circleMarker(
+                [70.626977, 23.641682],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_b08d9cdc74bc94d09ea700ba30cf8173 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_da9387408be556676340185df689bf8d = $(`<div id="html_da9387408be556676340185df689bf8d" style="width: 100.0%; height: 100.0%;">🌍 COSL PROSPECTOR<br>🌍 Country: Singapore<br>📍 MMSI: 565369000<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_b08d9cdc74bc94d09ea700ba30cf8173.setContent(html_da9387408be556676340185df689bf8d);
+            
+        
+
+        circle_marker_7e4dd2b46c855d1f7966838724716029.bindPopup(popup_b08d9cdc74bc94d09ea700ba30cf8173)
+        ;
+
+        
+    
+    
+            var circle_marker_5657aee3a85e04a67f2c6082165fa44d = L.circleMarker(
+                [67.581268, 9.130328],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_2fead7cf768e98d67a6a53fa9891e7d5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1c6d54b9092bf4d7a3c7866dcad3de96 = $(`<div id="html_1c6d54b9092bf4d7a3c7866dcad3de96" style="width: 100.0%; height: 100.0%;">🌍 BORIS VILKITSKY<br>🌍 Country: Cyprus<br>📍 MMSI: 212654000<br>⚡ Speed: 18.1 knots</div>`)[0];
+                popup_2fead7cf768e98d67a6a53fa9891e7d5.setContent(html_1c6d54b9092bf4d7a3c7866dcad3de96);
+            
+        
+
+        circle_marker_5657aee3a85e04a67f2c6082165fa44d.bindPopup(popup_2fead7cf768e98d67a6a53fa9891e7d5)
+        ;
+
+        
+    
+    
+            var circle_marker_a927c8f392e54caf0ecf783f131fc7bd = L.circleMarker(
+                [67.033218, 6.45283],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_c858bd9e7567fa391dd6ccab4ddd28e8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e6d81d1cbd97c3ecd536a6d2f1b355ac = $(`<div id="html_e6d81d1cbd97c3ecd536a6d2f1b355ac" style="width: 100.0%; height: 100.0%;">🌍 DINA STAR<br>🌍 Country: Madeira<br>📍 MMSI: 255801980<br>⚡ Speed: 0.5 knots</div>`)[0];
+                popup_c858bd9e7567fa391dd6ccab4ddd28e8.setContent(html_e6d81d1cbd97c3ecd536a6d2f1b355ac);
+            
+        
+
+        circle_marker_a927c8f392e54caf0ecf783f131fc7bd.bindPopup(popup_c858bd9e7567fa391dd6ccab4ddd28e8)
+        ;
+
+        
+    
+    
+            var circle_marker_54a623b37a5802e99fe010771f5a1351 = L.circleMarker(
+                [67.952065, 15.396437],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_cac9eb0ac9e40cadfc135bcb6dc61fec = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6c7ed483fa9a22347bd7ea60117475f0 = $(`<div id="html_6c7ed483fa9a22347bd7ea60117475f0" style="width: 100.0%; height: 100.0%;">❓ RO SUNRISE MOB<br>🌍 Country: Unknown<br>📍 MMSI: 982580054<br>⚡ Speed: 35.5 knots</div>`)[0];
+                popup_cac9eb0ac9e40cadfc135bcb6dc61fec.setContent(html_6c7ed483fa9a22347bd7ea60117475f0);
+            
+        
+
+        circle_marker_54a623b37a5802e99fe010771f5a1351.bindPopup(popup_cac9eb0ac9e40cadfc135bcb6dc61fec)
+        ;
+
+        
+    
+    
+            var circle_marker_6d3fcaaeb8fe774f6af539ffecd1c5b2 = L.circleMarker(
+                [66.479725, 12.993087],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_9964417fb1eac9512647822b91145d6f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_92f7c16b999d9b5b8c9cd38bb2e1f896 = $(`<div id="html_92f7c16b999d9b5b8c9cd38bb2e1f896" style="width: 100.0%; height: 100.0%;">🌍 DANCING BRAVE<br>🌍 Country: Singapore<br>📍 MMSI: 563033300<br>⚡ Speed: 13.5 knots</div>`)[0];
+                popup_9964417fb1eac9512647822b91145d6f.setContent(html_92f7c16b999d9b5b8c9cd38bb2e1f896);
+            
+        
+
+        circle_marker_6d3fcaaeb8fe774f6af539ffecd1c5b2.bindPopup(popup_9964417fb1eac9512647822b91145d6f)
+        ;
+
+        
+    
+    
+            var circle_marker_7d6299784c60eb68546fc7c5e384d4e6 = L.circleMarker(
+                [70.752345, 20.859693],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_d720243b5a50ae9277e120c0855c753a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c99a1ac42f6e34c6dd5f08908ef6ecd5 = $(`<div id="html_c99a1ac42f6e34c6dd5f08908ef6ecd5" style="width: 100.0%; height: 100.0%;">🇷🇺 BORIS SYROMYATNIKOV<br>🌍 Country: Russia<br>📍 MMSI: 273529800<br>⚡ Speed: 4.3 knots</div>`)[0];
+                popup_d720243b5a50ae9277e120c0855c753a.setContent(html_c99a1ac42f6e34c6dd5f08908ef6ecd5);
+            
+        
+
+        circle_marker_7d6299784c60eb68546fc7c5e384d4e6.bindPopup(popup_d720243b5a50ae9277e120c0855c753a)
+        ;
+
+        
+    
+    
+            var circle_marker_ee31cef15a96ae5444710808cae57971 = L.circleMarker(
+                [66.88833333333334, 4.3],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_d28ebe71d7a03155faa535bd3ff7b04b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ccadff621d20f116860367a55d15e8e9 = $(`<div id="html_ccadff621d20f116860367a55d15e8e9" style="width: 100.0%; height: 100.0%;">🇨🇳 FU YUAN YU 8633<br>🌍 Country: China<br>📍 MMSI: 412549626<br>⚡ Speed: 57 knots</div>`)[0];
+                popup_d28ebe71d7a03155faa535bd3ff7b04b.setContent(html_ccadff621d20f116860367a55d15e8e9);
+            
+        
+
+        circle_marker_ee31cef15a96ae5444710808cae57971.bindPopup(popup_d28ebe71d7a03155faa535bd3ff7b04b)
+        ;
+
+        
+    
+    
+            var circle_marker_472ccbbc70d60d621c077d4a999624c2 = L.circleMarker(
+                [68.41000000000001, -3.26],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_793999687915bde2050da2e9114e0088 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_352b07918c89cca52e2f48b56b514215 = $(`<div id="html_352b07918c89cca52e2f48b56b514215" style="width: 100.0%; height: 100.0%;">🇨🇳 FUYUANYU8620<br>🌍 Country: China<br>📍 MMSI: 412549628<br>⚡ Speed: 60 knots</div>`)[0];
+                popup_793999687915bde2050da2e9114e0088.setContent(html_352b07918c89cca52e2f48b56b514215);
+            
+        
+
+        circle_marker_472ccbbc70d60d621c077d4a999624c2.bindPopup(popup_793999687915bde2050da2e9114e0088)
+        ;
+
+        
+    
+    
+            var circle_marker_dd7371b307ee25f434422da8c1712dba = L.circleMarker(
+                [71.27791, 20.606367],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_99600a217d03b6ad0e5e313fe16e26b0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d83c63dc137aaf5349684801aee3f175 = $(`<div id="html_d83c63dc137aaf5349684801aee3f175" style="width: 100.0%; height: 100.0%;">🇷🇺 FRIO FORWIN<br>🌍 Country: Russia<br>📍 MMSI: 273379740<br>⚡ Speed: 9.6 knots</div>`)[0];
+                popup_99600a217d03b6ad0e5e313fe16e26b0.setContent(html_d83c63dc137aaf5349684801aee3f175);
+            
+        
+
+        circle_marker_dd7371b307ee25f434422da8c1712dba.bindPopup(popup_99600a217d03b6ad0e5e313fe16e26b0)
+        ;
+
+        
+    
+    
+            var circle_marker_21f15a9075299cf5eaa571dd3f9154f1 = L.circleMarker(
+                [67.283202, 3.212178],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_9c3820bc03189edd3fc8e771d97e14b0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_98d61558f7388ce72072fe1e2fb5b33a = $(`<div id="html_98d61558f7388ce72072fe1e2fb5b33a" style="width: 100.0%; height: 100.0%;">🌍 MARIA S. MERIAN<br>🌍 Country: Germany<br>📍 MMSI: 211753000<br>⚡ Speed: 4.5 knots</div>`)[0];
+                popup_9c3820bc03189edd3fc8e771d97e14b0.setContent(html_98d61558f7388ce72072fe1e2fb5b33a);
+            
+        
+
+        circle_marker_21f15a9075299cf5eaa571dd3f9154f1.bindPopup(popup_9c3820bc03189edd3fc8e771d97e14b0)
+        ;
+
+        
+    
+    
+            var circle_marker_891cacd8d47c344d0b48c34f5c69f3af = L.circleMarker(
+                [70.6529, 19.134717],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_70da18acfe2b122ae2a46a1bd3356eec = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_755bfcd3207a07b66ad8a1613e850381 = $(`<div id="html_755bfcd3207a07b66ad8a1613e850381" style="width: 100.0%; height: 100.0%;">🇷🇺 KURSHSKAYA KOSA<br>🌍 Country: Russia<br>📍 MMSI: 273532110<br>⚡ Speed: 13 knots</div>`)[0];
+                popup_70da18acfe2b122ae2a46a1bd3356eec.setContent(html_755bfcd3207a07b66ad8a1613e850381);
+            
+        
+
+        circle_marker_891cacd8d47c344d0b48c34f5c69f3af.bindPopup(popup_70da18acfe2b122ae2a46a1bd3356eec)
+        ;
+
+        
+    
+    
+            var circle_marker_b0b871f95b4330e7313cf0157b4b1de9 = L.circleMarker(
+                [70.667955, 23.664985],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_777af02414002b413b5398c4304b1a71 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_89cc359a99a00d18f7e538272b4f6064 = $(`<div id="html_89cc359a99a00d18f7e538272b4f6064" style="width: 100.0%; height: 100.0%;">🌍 FRB SJOBORG<br>🌍 Country: Faroe Islands<br>📍 MMSI: 231065001<br>⚡ Speed: 0.2 knots</div>`)[0];
+                popup_777af02414002b413b5398c4304b1a71.setContent(html_89cc359a99a00d18f7e538272b4f6064);
+            
+        
+
+        circle_marker_b0b871f95b4330e7313cf0157b4b1de9.bindPopup(popup_777af02414002b413b5398c4304b1a71)
+        ;
+
+        
+    
+    
+            var circle_marker_167cdf28f6fcbd4dff8a4f2c6eb09115 = L.circleMarker(
+                [70.67035, 19.720583],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_fa32185bd5c2099d0f4023a89101ee2c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e660c30ab13b7c3f7cbf4302ebfd9074 = $(`<div id="html_e660c30ab13b7c3f7cbf4302ebfd9074" style="width: 100.0%; height: 100.0%;">🌍 VASCO DA GAMA<br>🌍 Country: Madeira<br>📍 MMSI: 255806445<br>⚡ Speed: 11.4 knots</div>`)[0];
+                popup_fa32185bd5c2099d0f4023a89101ee2c.setContent(html_e660c30ab13b7c3f7cbf4302ebfd9074);
+            
+        
+
+        circle_marker_167cdf28f6fcbd4dff8a4f2c6eb09115.bindPopup(popup_fa32185bd5c2099d0f4023a89101ee2c)
+        ;
+
+        
+    
+    
+            var circle_marker_c739c47986aba43dba5c5e6d2509e9cb = L.circleMarker(
+                [67.250218, 15.423013],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_f60e9d3e213279dcae31075873556743 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1f1131f5eea69b27c87e79b1e3b527db = $(`<div id="html_1f1131f5eea69b27c87e79b1e3b527db" style="width: 100.0%; height: 100.0%;">🌍 WILSON FLEX IV<br>🌍 Country: Madeira<br>📍 MMSI: 255806463<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_f60e9d3e213279dcae31075873556743.setContent(html_1f1131f5eea69b27c87e79b1e3b527db);
+            
+        
+
+        circle_marker_c739c47986aba43dba5c5e6d2509e9cb.bindPopup(popup_f60e9d3e213279dcae31075873556743)
+        ;
+
+        
+    
+    
+            var circle_marker_c9b3829391e8440c2e3e3b6bd355d497 = L.circleMarker(
+                [70.73115, 20.64255],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_98c0aefd93dd81b39b188ec8ee606999 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e6098709f5958632c9a6f3cb1b6d8e53 = $(`<div id="html_e6098709f5958632c9a6f3cb1b6d8e53" style="width: 100.0%; height: 100.0%;">🇷🇺 LIRA<br>🌍 Country: Russia<br>📍 MMSI: 273534110<br>⚡ Speed: 4.6 knots</div>`)[0];
+                popup_98c0aefd93dd81b39b188ec8ee606999.setContent(html_e6098709f5958632c9a6f3cb1b6d8e53);
+            
+        
+
+        circle_marker_c9b3829391e8440c2e3e3b6bd355d497.bindPopup(popup_98c0aefd93dd81b39b188ec8ee606999)
+        ;
+
+        
+    
+    
+            var circle_marker_df1ef0bcd2a74244a15c2935d3e9e4e6 = L.circleMarker(
+                [68.795357, 16.54408],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_3bb7b5f80fbf37f24166f4b758321a67 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4d5521b4b75f636b56ce7d146843f673 = $(`<div id="html_4d5521b4b75f636b56ce7d146843f673" style="width: 100.0%; height: 100.0%;">❓ OV SKOMVAER 2<br>🌍 Country: Unknown<br>📍 MMSI: 982586740<br>⚡ Speed: 0.1 knots</div>`)[0];
+                popup_3bb7b5f80fbf37f24166f4b758321a67.setContent(html_4d5521b4b75f636b56ce7d146843f673);
+            
+        
+
+        circle_marker_df1ef0bcd2a74244a15c2935d3e9e4e6.bindPopup(popup_3bb7b5f80fbf37f24166f4b758321a67)
+        ;
+
+        
+    
+    
+            var circle_marker_19d8c472b33d6ac9e7648349318dd2ca = L.circleMarker(
+                [66.079602, 8.06223],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_d72677b1bb8a7a91e14ba281b3e5aaa3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_df45f995cb81b1250f7d8373835b7f8e = $(`<div id="html_df45f995cb81b1250f7d8373835b7f8e" style="width: 100.0%; height: 100.0%;">🌍 SEAPIPER<br>🌍 Country: Cyprus<br>📍 MMSI: 210400000<br>⚡ Speed: 0.3 knots</div>`)[0];
+                popup_d72677b1bb8a7a91e14ba281b3e5aaa3.setContent(html_df45f995cb81b1250f7d8373835b7f8e);
+            
+        
+
+        circle_marker_19d8c472b33d6ac9e7648349318dd2ca.bindPopup(popup_d72677b1bb8a7a91e14ba281b3e5aaa3)
+        ;
+
+        
+    
+    
+            var circle_marker_095a9c6cd8308c49043ab920fca381e9 = L.circleMarker(
+                [66.805597, 13.920215],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_4b953f3db86e40df4931a0b805ece69d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_de14ee804e036432255546a94368257b = $(`<div id="html_de14ee804e036432255546a94368257b" style="width: 100.0%; height: 100.0%;">🌍 ARKLOW FOREST<br>🌍 Country: Ireland<br>📍 MMSI: 250002443<br>⚡ Speed: 3.6 knots</div>`)[0];
+                popup_4b953f3db86e40df4931a0b805ece69d.setContent(html_de14ee804e036432255546a94368257b);
+            
+        
+
+        circle_marker_095a9c6cd8308c49043ab920fca381e9.bindPopup(popup_4b953f3db86e40df4931a0b805ece69d)
+        ;
+
+        
+    
+    
+            var circle_marker_26a629fc5be4019610125fd5808cb991 = L.circleMarker(
+                [68.912715, 15.06572],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_2888b25a07f5bdcdc87c37144cfb8039 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f01b1b19720400f0966a0e71d9bba17d = $(`<div id="html_f01b1b19720400f0966a0e71d9bba17d" style="width: 100.0%; height: 100.0%;">🌍 HAV ATLANTIC<br>🌍 Country: Faroe Islands<br>📍 MMSI: 231522000<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_2888b25a07f5bdcdc87c37144cfb8039.setContent(html_f01b1b19720400f0966a0e71d9bba17d);
+            
+        
+
+        circle_marker_26a629fc5be4019610125fd5808cb991.bindPopup(popup_2888b25a07f5bdcdc87c37144cfb8039)
+        ;
+
+        
+    
+    
+            var circle_marker_9a6563bdee906478801a4df084f36f9e = L.circleMarker(
+                [76.092925, 14.415607],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_37e8c984296c491be16b2e0a6a292614 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6ea7d27405f88560eb98f9f2d3c0492d = $(`<div id="html_6ea7d27405f88560eb98f9f2d3c0492d" style="width: 100.0%; height: 100.0%;">🇷🇺 KARACHAROVO<br>🌍 Country: Russia<br>📍 MMSI: 273537800<br>⚡ Speed: 2.9 knots</div>`)[0];
+                popup_37e8c984296c491be16b2e0a6a292614.setContent(html_6ea7d27405f88560eb98f9f2d3c0492d);
+            
+        
+
+        circle_marker_9a6563bdee906478801a4df084f36f9e.bindPopup(popup_37e8c984296c491be16b2e0a6a292614)
+        ;
+
+        
+    
+    
+            var circle_marker_5a037c317477d756c778233d9d0c3319 = L.circleMarker(
+                [75.68333333333334, 13.946666666666665],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_6062f6cf67679082b04bd9ffb99ee306 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5d21cb3c757875fcffc41231f2f90313 = $(`<div id="html_5d21cb3c757875fcffc41231f2f90313" style="width: 100.0%; height: 100.0%;">🇷🇺 BELOYE MORE<br>🌍 Country: Russia<br>📍 MMSI: 273613930<br>⚡ Speed: 4 knots</div>`)[0];
+                popup_6062f6cf67679082b04bd9ffb99ee306.setContent(html_5d21cb3c757875fcffc41231f2f90313);
+            
+        
+
+        circle_marker_5a037c317477d756c778233d9d0c3319.bindPopup(popup_6062f6cf67679082b04bd9ffb99ee306)
+        ;
+
+        
+    
+    
+            var circle_marker_e70541cc6a586c25d5090c05a1561217 = L.circleMarker(
+                [69.338525, 16.228037],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_250d8314165256510581e7f5b0b6224a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b077c73bd37a1347e5ff88fd446ed01b = $(`<div id="html_b077c73bd37a1347e5ff88fd446ed01b" style="width: 100.0%; height: 100.0%;">❓ RHIB F314<br>🌍 Country: Unknown<br>📍 MMSI: 982590450<br>⚡ Speed: 4.9 knots</div>`)[0];
+                popup_250d8314165256510581e7f5b0b6224a.setContent(html_b077c73bd37a1347e5ff88fd446ed01b);
+            
+        
+
+        circle_marker_e70541cc6a586c25d5090c05a1561217.bindPopup(popup_250d8314165256510581e7f5b0b6224a)
+        ;
+
+        
+    
+    
+            var circle_marker_b8ed377260e118f4ef3e3b9ee2bb835f = L.circleMarker(
+                [78.209518, 14.90539],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_d4746d73547c29a2990b9cd9fcced487 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cbdcc3e08c60da8892e8d4be7cddc55f = $(`<div id="html_cbdcc3e08c60da8892e8d4be7cddc55f" style="width: 100.0%; height: 100.0%;">🌍 MS FARM<br>🌍 Country: Dominica<br>📍 MMSI: 325137500<br>⚡ Speed: 6.5 knots</div>`)[0];
+                popup_d4746d73547c29a2990b9cd9fcced487.setContent(html_cbdcc3e08c60da8892e8d4be7cddc55f);
+            
+        
+
+        circle_marker_b8ed377260e118f4ef3e3b9ee2bb835f.bindPopup(popup_d4746d73547c29a2990b9cd9fcced487)
+        ;
+
+        
+    
+    
+            var circle_marker_e6243690838f8b17ed3b83be09c749d7 = L.circleMarker(
+                [65.363622, 9.857407],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_7ce6e893c7577f5daaacbab70732cb64 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8eb0480ac763b6c59c39f0da1487eeaf = $(`<div id="html_8eb0480ac763b6c59c39f0da1487eeaf" style="width: 100.0%; height: 100.0%;">🌍 ZCYR9<br>🌍 Country: Cayman Islands<br>📍 MMSI: 319027800<br>⚡ Speed: 12.1 knots</div>`)[0];
+                popup_7ce6e893c7577f5daaacbab70732cb64.setContent(html_8eb0480ac763b6c59c39f0da1487eeaf);
+            
+        
+
+        circle_marker_e6243690838f8b17ed3b83be09c749d7.bindPopup(popup_7ce6e893c7577f5daaacbab70732cb64)
+        ;
+
+        
+    
+    
+            var circle_marker_f0a815e8f7987a7b6f794ff1fc2e12a9 = L.circleMarker(
+                [78.52622, 16.020175],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_c2cb20bdb4f9100702eb226ad5f1ec5e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0a82ca2274ff5752f4568a91fd6b991e = $(`<div id="html_0a82ca2274ff5752f4568a91fd6b991e" style="width: 100.0%; height: 100.0%;">🌍 STOCKHOLM<br>🌍 Country: Sweden<br>📍 MMSI: 265472000<br>⚡ Speed: 0.1 knots</div>`)[0];
+                popup_c2cb20bdb4f9100702eb226ad5f1ec5e.setContent(html_0a82ca2274ff5752f4568a91fd6b991e);
+            
+        
+
+        circle_marker_f0a815e8f7987a7b6f794ff1fc2e12a9.bindPopup(popup_c2cb20bdb4f9100702eb226ad5f1ec5e)
+        ;
+
+        
+    
+    
+            var circle_marker_d74edcef6203d95aa0db7f33d0633768 = L.circleMarker(
+                [74.76166666666667, 15.83],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_2f3af473715ec92e8841c5208a1361e7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a67d06c44d5a2b24f2dc359dab317d52 = $(`<div id="html_a67d06c44d5a2b24f2dc359dab317d52" style="width: 100.0%; height: 100.0%;">🇷🇺 VASILIY GOLOVNIN<br>🌍 Country: Russia<br>📍 MMSI: 273845800<br>⚡ Speed: 3 knots</div>`)[0];
+                popup_2f3af473715ec92e8841c5208a1361e7.setContent(html_a67d06c44d5a2b24f2dc359dab317d52);
+            
+        
+
+        circle_marker_d74edcef6203d95aa0db7f33d0633768.bindPopup(popup_2f3af473715ec92e8841c5208a1361e7)
+        ;
+
+        
+    
+    
+            var circle_marker_701be620e6f44b2dd670f77814c3f1f5 = L.circleMarker(
+                [70.635312, 23.665303],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_49ceb0b9408b6f968c1d2bd32024b17c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_86f749a1be216b7db6c9918fecc56306 = $(`<div id="html_86f749a1be216b7db6c9918fecc56306" style="width: 100.0%; height: 100.0%;">🌍 KONGSBORG<br>🌍 Country: Faroe Islands<br>📍 MMSI: 231605000<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_49ceb0b9408b6f968c1d2bd32024b17c.setContent(html_86f749a1be216b7db6c9918fecc56306);
+            
+        
+
+        circle_marker_701be620e6f44b2dd670f77814c3f1f5.bindPopup(popup_49ceb0b9408b6f968c1d2bd32024b17c)
+        ;
+
+        
+    
+    
+            var circle_marker_526470489591c52591383eb7ebfbf571 = L.circleMarker(
+                [81.455, 31.970000000000002],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_5c569ae730730ffbcd107afa2de6fa8d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1934748e9f01349715ee342d0c5ebe08 = $(`<div id="html_1934748e9f01349715ee342d0c5ebe08" style="width: 100.0%; height: 100.0%;">🌍 TAURUS<br>🌍 Country: Lithuania<br>📍 MMSI: 277544000<br>⚡ Speed: 2 knots</div>`)[0];
+                popup_5c569ae730730ffbcd107afa2de6fa8d.setContent(html_1934748e9f01349715ee342d0c5ebe08);
+            
+        
+
+        circle_marker_526470489591c52591383eb7ebfbf571.bindPopup(popup_5c569ae730730ffbcd107afa2de6fa8d)
+        ;
+
+        
+    
+    
+            var circle_marker_17b5e70a06ec0a96661dce27e7feba7a = L.circleMarker(
+                [69.543393, 19.039213],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_ad24f3a7efa70bdfb327b9fb2c134e63 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_69d7f4e0f44470b821e297d905295fb2 = $(`<div id="html_69d7f4e0f44470b821e297d905295fb2" style="width: 100.0%; height: 100.0%;">🌍 HEBO-LIFT 10<br>🌍 Country: Netherlands<br>📍 MMSI: 246920000<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_ad24f3a7efa70bdfb327b9fb2c134e63.setContent(html_69d7f4e0f44470b821e297d905295fb2);
+            
+        
+
+        circle_marker_17b5e70a06ec0a96661dce27e7feba7a.bindPopup(popup_ad24f3a7efa70bdfb327b9fb2c134e63)
+        ;
+
+        
+    
+    
+            var circle_marker_dfe9a6a823a5189102eaacb70e3e4ce7 = L.circleMarker(
+                [70.673047, 20.048545],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_6a827ccf5ecc94a2da75ca0b7e26406a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0ab17511955edc9a1818b6bc0889f26d = $(`<div id="html_0ab17511955edc9a1818b6bc0889f26d" style="width: 100.0%; height: 100.0%;">🇷🇺 ESTER<br>🌍 Country: Russia<br>📍 MMSI: 273397450<br>⚡ Speed: 7.2 knots</div>`)[0];
+                popup_6a827ccf5ecc94a2da75ca0b7e26406a.setContent(html_0ab17511955edc9a1818b6bc0889f26d);
+            
+        
+
+        circle_marker_dfe9a6a823a5189102eaacb70e3e4ce7.bindPopup(popup_6a827ccf5ecc94a2da75ca0b7e26406a)
+        ;
+
+        
+    
+    
+            var circle_marker_bc13c8e877ef2e3a2fc9831620682bbf = L.circleMarker(
+                [71.646835, 26.086995],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_05fee3a5b840a815bc2c53aa62f5ec4f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2af4d606a475388fe058d7e57062c0f7 = $(`<div id="html_2af4d606a475388fe058d7e57062c0f7" style="width: 100.0%; height: 100.0%;">🌍 CELINA<br>🌍 Country: Antigua and Barbuda<br>📍 MMSI: 304099000<br>⚡ Speed: 10.9 knots</div>`)[0];
+                popup_05fee3a5b840a815bc2c53aa62f5ec4f.setContent(html_2af4d606a475388fe058d7e57062c0f7);
+            
+        
+
+        circle_marker_bc13c8e877ef2e3a2fc9831620682bbf.bindPopup(popup_05fee3a5b840a815bc2c53aa62f5ec4f)
+        ;
+
+        
+    
+    
+            var circle_marker_ebb03d55959ab09951ae5940ab821336 = L.circleMarker(
+                [65.02006, 7.91885],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_2d960c3499a488194c1445822bd6a9da = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ed902180920bbfe23a906ddd88a04516 = $(`<div id="html_ed902180920bbfe23a906ddd88a04516" style="width: 100.0%; height: 100.0%;">🌍 LOWLANDS CONCORD<br>🌍 Country: Marshall Islands<br>📍 MMSI: 538010958<br>⚡ Speed: 13.7 knots</div>`)[0];
+                popup_2d960c3499a488194c1445822bd6a9da.setContent(html_ed902180920bbfe23a906ddd88a04516);
+            
+        
+
+        circle_marker_ebb03d55959ab09951ae5940ab821336.bindPopup(popup_2d960c3499a488194c1445822bd6a9da)
+        ;
+
+        
+    
+    
+            var circle_marker_12d8a88d458a0fce54afe62b2c93dac2 = L.circleMarker(
+                [69.158762, 17.884748],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_1f84fa4fbb57dc8b8e7974e1f09aa93e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3883f495302ccab5f954a65c8a34e89f = $(`<div id="html_3883f495302ccab5f954a65c8a34e89f" style="width: 100.0%; height: 100.0%;">🌍 HAV SKANDIC<br>🌍 Country: Faroe Islands<br>📍 MMSI: 231837000<br>⚡ Speed: 10.2 knots</div>`)[0];
+                popup_1f84fa4fbb57dc8b8e7974e1f09aa93e.setContent(html_3883f495302ccab5f954a65c8a34e89f);
+            
+        
+
+        circle_marker_12d8a88d458a0fce54afe62b2c93dac2.bindPopup(popup_1f84fa4fbb57dc8b8e7974e1f09aa93e)
+        ;
+
+        
+    
+    
+            var circle_marker_594132e0648878d50e0d989a713adfa4 = L.circleMarker(
+                [65.82318, 7.715627],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_c61b51fa89097a01e3b1c5acfa4f4420 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8257f351173bb8a7ab7b783a06a7b083 = $(`<div id="html_8257f351173bb8a7ab7b783a06a7b083" style="width: 100.0%; height: 100.0%;">🌍 SCARABEO 8<br>🌍 Country: Bahamas<br>📍 MMSI: 308928000<br>⚡ Speed: 0.1 knots</div>`)[0];
+                popup_c61b51fa89097a01e3b1c5acfa4f4420.setContent(html_8257f351173bb8a7ab7b783a06a7b083);
+            
+        
+
+        circle_marker_594132e0648878d50e0d989a713adfa4.bindPopup(popup_c61b51fa89097a01e3b1c5acfa4f4420)
+        ;
+
+        
+    
+    
+            var circle_marker_285b60af40175b33f517ac6b382995ef = L.circleMarker(
+                [78.55666666666666, 32.10666666666667],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_91ad1d1f4d6678aee27dd69988ae5584 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c7d6072e92326401ea2f2c6dfee9444c = $(`<div id="html_c7d6072e92326401ea2f2c6dfee9444c" style="width: 100.0%; height: 100.0%;">🇨🇳 HANYI36<br>🌍 Country: China<br>📍 MMSI: 412420561<br>⚡ Speed: 36 knots</div>`)[0];
+                popup_91ad1d1f4d6678aee27dd69988ae5584.setContent(html_c7d6072e92326401ea2f2c6dfee9444c);
+            
+        
+
+        circle_marker_285b60af40175b33f517ac6b382995ef.bindPopup(popup_91ad1d1f4d6678aee27dd69988ae5584)
+        ;
+
+        
+    
+    
+            var circle_marker_62d5f56455118022839d250de2fe19ae = L.circleMarker(
+                [75.35644, 21.503317],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_86db95c96ee411a109ffc7af34c3a975 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_101e1ba1374c14a8beca02cbc753610f = $(`<div id="html_101e1ba1374c14a8beca02cbc753610f" style="width: 100.0%; height: 100.0%;">🇷🇺 KORD BARENTS<br>🌍 Country: Russia<br>📍 MMSI: 273250820<br>⚡ Speed: 8 knots</div>`)[0];
+                popup_86db95c96ee411a109ffc7af34c3a975.setContent(html_101e1ba1374c14a8beca02cbc753610f);
+            
+        
+
+        circle_marker_62d5f56455118022839d250de2fe19ae.bindPopup(popup_86db95c96ee411a109ffc7af34c3a975)
+        ;
+
+        
+    
+    
+            var circle_marker_1a9076c07ace13b52bdddfbae6ebda9b = L.circleMarker(
+                [76.98, -1.24],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_3f8b079cbfa30b812ce3dc82425979ef = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_41b7747e3c299b23c17a57d922bf2822 = $(`<div id="html_41b7747e3c299b23c17a57d922bf2822" style="width: 100.0%; height: 100.0%;">🇨🇳 DONGYU1527<br>🌍 Country: China<br>📍 MMSI: 412421098<br>⚡ Speed: 17 knots</div>`)[0];
+                popup_3f8b079cbfa30b812ce3dc82425979ef.setContent(html_41b7747e3c299b23c17a57d922bf2822);
+            
+        
+
+        circle_marker_1a9076c07ace13b52bdddfbae6ebda9b.bindPopup(popup_3f8b079cbfa30b812ce3dc82425979ef)
+        ;
+
+        
+    
+    
+            var circle_marker_2f69cdb5933bab829a083f602266c5d7 = L.circleMarker(
+                [70.90333333333334, -0.9733333333333333],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_f993fdb1a7e394455eb07560748d0952 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_88589e9907d5731e2cb934cf11a6a048 = $(`<div id="html_88589e9907d5731e2cb934cf11a6a048" style="width: 100.0%; height: 100.0%;">🇨🇳 XIN SHI JI 66<br>🌍 Country: China<br>📍 MMSI: 412421136<br>⚡ Speed: 32 knots</div>`)[0];
+                popup_f993fdb1a7e394455eb07560748d0952.setContent(html_88589e9907d5731e2cb934cf11a6a048);
+            
+        
+
+        circle_marker_2f69cdb5933bab829a083f602266c5d7.bindPopup(popup_f993fdb1a7e394455eb07560748d0952)
+        ;
+
+        
+    
+    
+            var circle_marker_7ccda8481282c0c71dc2aa0cdd7255c6 = L.circleMarker(
+                [75.675658, 14.047728],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_efd60e4ef79741d039d8230eb2ec0718 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f12b18105ec804c5ab292792a3998f76 = $(`<div id="html_f12b18105ec804c5ab292792a3998f76" style="width: 100.0%; height: 100.0%;">🇷🇺 KHOLMOGORY<br>🌍 Country: Russia<br>📍 MMSI: 273326830<br>⚡ Speed: 2.8 knots</div>`)[0];
+                popup_efd60e4ef79741d039d8230eb2ec0718.setContent(html_f12b18105ec804c5ab292792a3998f76);
+            
+        
+
+        circle_marker_7ccda8481282c0c71dc2aa0cdd7255c6.bindPopup(popup_efd60e4ef79741d039d8230eb2ec0718)
+        ;
+
+        
+    
+    
+            var circle_marker_bf2d71ff6182b8a378d66124d1cc25c2 = L.circleMarker(
+                [66.996667, 7.480883],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_c629efcb2aec50d081cf6e8a41e75419 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_33d2b6a689faa74b650fd4f0d17513f7 = $(`<div id="html_33d2b6a689faa74b650fd4f0d17513f7" style="width: 100.0%; height: 100.0%;">🌍 CENTURION<br>🌍 Country: Sierra Leone<br>📍 MMSI: 667001255<br>⚡ Speed: 11.9 knots</div>`)[0];
+                popup_c629efcb2aec50d081cf6e8a41e75419.setContent(html_33d2b6a689faa74b650fd4f0d17513f7);
+            
+        
+
+        circle_marker_bf2d71ff6182b8a378d66124d1cc25c2.bindPopup(popup_c629efcb2aec50d081cf6e8a41e75419)
+        ;
+
+        
+    
+    
+            var circle_marker_521116bb83f8b110a446e861fa2ba4ce = L.circleMarker(
+                [71.739333, 26.0585],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_c5fc839dd2523d75febc66a44f1ac378 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ccfb7ef3194be81d228ae3ccd03ccb94 = $(`<div id="html_ccfb7ef3194be81d228ae3ccd03ccb94" style="width: 100.0%; height: 100.0%;">🇷🇺 ANTARKTIKA<br>🌍 Country: Russia<br>📍 MMSI: 273251530<br>⚡ Speed: 8.3 knots</div>`)[0];
+                popup_c5fc839dd2523d75febc66a44f1ac378.setContent(html_ccfb7ef3194be81d228ae3ccd03ccb94);
+            
+        
+
+        circle_marker_521116bb83f8b110a446e861fa2ba4ce.bindPopup(popup_c5fc839dd2523d75febc66a44f1ac378)
+        ;
+
+        
+    
+    
+            var circle_marker_cce120332d9324866e5991166b237484 = L.circleMarker(
+                [71.354137, 22.395095],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_39e213aba7fe77b07557dafde137ce81 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_479b360274e243f007c10305474cd73b = $(`<div id="html_479b360274e243f007c10305474cd73b" style="width: 100.0%; height: 100.0%;">🌍 ESVAGT AURORA<br>🌍 Country: Denmark<br>📍 MMSI: 219017214<br>⚡ Speed: 0.5 knots</div>`)[0];
+                popup_39e213aba7fe77b07557dafde137ce81.setContent(html_479b360274e243f007c10305474cd73b);
+            
+        
+
+        circle_marker_cce120332d9324866e5991166b237484.bindPopup(popup_39e213aba7fe77b07557dafde137ce81)
+        ;
+
+        
+    
+    
+            var circle_marker_c855083216aeabb1f01584aeb362d549 = L.circleMarker(
+                [81.82594, 15.885555],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_fc32331de916740b3d0c1bbc2b41ce67 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d3cb150693e5a43fd325940c241079ed = $(`<div id="html_d3cb150693e5a43fd325940c241079ed" style="width: 100.0%; height: 100.0%;">🌍 KINFISH TENDER 2<br>🌍 Country: Sweden<br>📍 MMSI: 265030590<br>⚡ Speed: 0.5 knots</div>`)[0];
+                popup_fc32331de916740b3d0c1bbc2b41ce67.setContent(html_d3cb150693e5a43fd325940c241079ed);
+            
+        
+
+        circle_marker_c855083216aeabb1f01584aeb362d549.bindPopup(popup_fc32331de916740b3d0c1bbc2b41ce67)
+        ;
+
+        
+    
+    
+            var circle_marker_145bdc0e1d66ce6e065f40a55770a5b6 = L.circleMarker(
+                [68.69973, 15.420343],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_29dd37fc296c592ef6b34cb4814a2151 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7656e77d1c1116a25b198da5c39a0827 = $(`<div id="html_7656e77d1c1116a25b198da5c39a0827" style="width: 100.0%; height: 100.0%;">🌍 AIDABELLA<br>🌍 Country: Italy<br>📍 MMSI: 247229700<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_29dd37fc296c592ef6b34cb4814a2151.setContent(html_7656e77d1c1116a25b198da5c39a0827);
+            
+        
+
+        circle_marker_145bdc0e1d66ce6e065f40a55770a5b6.bindPopup(popup_29dd37fc296c592ef6b34cb4814a2151)
+        ;
+
+        
+    
+    
+            var circle_marker_0398476c5c60901efb39ed872e92860d = L.circleMarker(
+                [72.33666666666666, 30.345000000000002],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_977682c7ce8a82cf87a6b883eaaa654f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_22a2eb1ff1192242eb6c6b9770cd2638 = $(`<div id="html_22a2eb1ff1192242eb6c6b9770cd2638" style="width: 100.0%; height: 100.0%;">🇷🇺 KAPITAN TARAN<br>🌍 Country: Russia<br>📍 MMSI: 273254860<br>⚡ Speed: 11 knots</div>`)[0];
+                popup_977682c7ce8a82cf87a6b883eaaa654f.setContent(html_22a2eb1ff1192242eb6c6b9770cd2638);
+            
+        
+
+        circle_marker_0398476c5c60901efb39ed872e92860d.bindPopup(popup_977682c7ce8a82cf87a6b883eaaa654f)
+        ;
+
+        
+    
+    
+            var circle_marker_8e37a3c30f53ba42f98dab411ddb1e6e = L.circleMarker(
+                [70.527803, 18.934083],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_783c7993d2b8201d5d7615d572059f99 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0f2c0e5d8ee5bf4d45cc60dc7e3927c3 = $(`<div id="html_0f2c0e5d8ee5bf4d45cc60dc7e3927c3" style="width: 100.0%; height: 100.0%;">🇷🇺 MECHANIC STEPANOV<br>🌍 Country: Russia<br>📍 MMSI: 273254880<br>⚡ Speed: 11.5 knots</div>`)[0];
+                popup_783c7993d2b8201d5d7615d572059f99.setContent(html_0f2c0e5d8ee5bf4d45cc60dc7e3927c3);
+            
+        
+
+        circle_marker_8e37a3c30f53ba42f98dab411ddb1e6e.bindPopup(popup_783c7993d2b8201d5d7615d572059f99)
+        ;
+
+        
+    
+    
+            var circle_marker_56d13d30041c9b7085e9c45385dffb05 = L.circleMarker(
+                [68.266387, 15.847188],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_7bd65c245e2f4e3dbd520f2b58121ec2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_65b5bdcb5a2dd32d55d945cd47dd9c7e = $(`<div id="html_65b5bdcb5a2dd32d55d945cd47dd9c7e" style="width: 100.0%; height: 100.0%;">🌍 GRAND EXPLORER<br>🌍 Country: Panama<br>📍 MMSI: 352005711<br>⚡ Speed: 8.1 knots</div>`)[0];
+                popup_7bd65c245e2f4e3dbd520f2b58121ec2.setContent(html_65b5bdcb5a2dd32d55d945cd47dd9c7e);
+            
+        
+
+        circle_marker_56d13d30041c9b7085e9c45385dffb05.bindPopup(popup_7bd65c245e2f4e3dbd520f2b58121ec2)
+        ;
+
+        
+    
+    
+            var circle_marker_308d965e236b1de60548d32bef1b46b2 = L.circleMarker(
+                [81.74, 12.453333333333335],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_6e7abd831a9a4a00f3f9b3a10ebdde64 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_24fc125ab11b109ef86c7323336e7867 = $(`<div id="html_24fc125ab11b109ef86c7323336e7867" style="width: 100.0%; height: 100.0%;">🇨🇳 RUN HAI XIANG YANG<br>🌍 Country: China<br>📍 MMSI: 413559690<br>⚡ Speed: 35 knots</div>`)[0];
+                popup_6e7abd831a9a4a00f3f9b3a10ebdde64.setContent(html_24fc125ab11b109ef86c7323336e7867);
+            
+        
+
+        circle_marker_308d965e236b1de60548d32bef1b46b2.bindPopup(popup_6e7abd831a9a4a00f3f9b3a10ebdde64)
+        ;
+
+        
+    
+    
+            var circle_marker_52425e183983ea873a55d97ad6a36ab3 = L.circleMarker(
+                [69.678365, 19.001343],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_7d1b8088323346ad8ff368d09006009f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0c6f16070ff019202702c039742c9217 = $(`<div id="html_0c6f16070ff019202702c039742c9217" style="width: 100.0%; height: 100.0%;">🌍 CSB 44<br>🌍 Country: United Kingdom<br>📍 MMSI: 235015732<br>⚡ Speed: 2.2 knots</div>`)[0];
+                popup_7d1b8088323346ad8ff368d09006009f.setContent(html_0c6f16070ff019202702c039742c9217);
+            
+        
+
+        circle_marker_52425e183983ea873a55d97ad6a36ab3.bindPopup(popup_7d1b8088323346ad8ff368d09006009f)
+        ;
+
+        
+    
+    
+            var circle_marker_500e85c28351656ac2285970002df98d = L.circleMarker(
+                [72.52683, 9.885672],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_edd61cede4dc052506e16418a5dde115 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ee25a2685f4ec9f2d2c2e5578f747bef = $(`<div id="html_ee25a2685f4ec9f2d2c2e5578f747bef" style="width: 100.0%; height: 100.0%;">🌍 MARK<br>🌍 Country: Germany<br>📍 MMSI: 218799000<br>⚡ Speed: 10.7 knots</div>`)[0];
+                popup_edd61cede4dc052506e16418a5dde115.setContent(html_ee25a2685f4ec9f2d2c2e5578f747bef);
+            
+        
+
+        circle_marker_500e85c28351656ac2285970002df98d.bindPopup(popup_edd61cede4dc052506e16418a5dde115)
+        ;
+
+        
+    
+    
+            var circle_marker_014a5666984845a1704334f5616fe08f = L.circleMarker(
+                [70.681582, 23.588033],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_553e9ddda39273c5d2898ff60484dbc2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2d36b42875e4c6329c002875c792a345 = $(`<div id="html_2d36b42875e4c6329c002875c792a345" style="width: 100.0%; height: 100.0%;">🌍 STOC NIKE<br>🌍 Country: Malta<br>📍 MMSI: 249803000<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_553e9ddda39273c5d2898ff60484dbc2.setContent(html_2d36b42875e4c6329c002875c792a345);
+            
+        
+
+        circle_marker_014a5666984845a1704334f5616fe08f.bindPopup(popup_553e9ddda39273c5d2898ff60484dbc2)
+        ;
+
+        
+    
+    
+            var circle_marker_b137f4518f5b78d6145202144a7ab067 = L.circleMarker(
+                [78.124242, 14.966642],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_75812ea70bff914c361186f28f2a184e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_971ea6373781f9149b3442d983fd03af = $(`<div id="html_971ea6373781f9149b3442d983fd03af" style="width: 100.0%; height: 100.0%;">🌍 SJOVEIEN<br>🌍 Country: Panama<br>📍 MMSI: 352842000<br>⚡ Speed: 8.8 knots</div>`)[0];
+                popup_75812ea70bff914c361186f28f2a184e.setContent(html_971ea6373781f9149b3442d983fd03af);
+            
+        
+
+        circle_marker_b137f4518f5b78d6145202144a7ab067.bindPopup(popup_75812ea70bff914c361186f28f2a184e)
+        ;
+
+        
+    
+    
+            var circle_marker_59fa3fbfba3e3a4c5cf264cf089bdb29 = L.circleMarker(
+                [67.19786, 13.916103],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_e63c7d998c38d8c7526afa3beb135d80 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_963124e90860d5b23bc2c4b9b09b634a = $(`<div id="html_963124e90860d5b23bc2c4b9b09b634a" style="width: 100.0%; height: 100.0%;">🌍 KEY SOUTH<br>🌍 Country: Malta<br>📍 MMSI: 248221000<br>⚡ Speed: 11.8 knots</div>`)[0];
+                popup_e63c7d998c38d8c7526afa3beb135d80.setContent(html_963124e90860d5b23bc2c4b9b09b634a);
+            
+        
+
+        circle_marker_59fa3fbfba3e3a4c5cf264cf089bdb29.bindPopup(popup_e63c7d998c38d8c7526afa3beb135d80)
+        ;
+
+        
+    
+    
+            var circle_marker_a0f19be12e4f95280dc81a35a5626a6f = L.circleMarker(
+                [72.505327, 20.221582],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_6eb59d961ff01da5a59692e3fd0b9a73 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_41340187bd08085b5fff31795aa3c326 = $(`<div id="html_41340187bd08085b5fff31795aa3c326" style="width: 100.0%; height: 100.0%;">🌍 ESVAGT DC 11<br>🌍 Country: Denmark<br>📍 MMSI: 219029885<br>⚡ Speed: 4 knots</div>`)[0];
+                popup_6eb59d961ff01da5a59692e3fd0b9a73.setContent(html_41340187bd08085b5fff31795aa3c326);
+            
+        
+
+        circle_marker_a0f19be12e4f95280dc81a35a5626a6f.bindPopup(popup_6eb59d961ff01da5a59692e3fd0b9a73)
+        ;
+
+        
+    
+    
+            var circle_marker_c0a88d503045796d00adeb4fa15e668f = L.circleMarker(
+                [68.572372, 14.972627],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_281f31a170891f6eea4876aa3ed53aac = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_17faab02831660dccbc616c3f568fc16 = $(`<div id="html_17faab02831660dccbc616c3f568fc16" style="width: 100.0%; height: 100.0%;">🌍 NCL VESTLAND<br>🌍 Country: Madeira<br>📍 MMSI: 255915684<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_281f31a170891f6eea4876aa3ed53aac.setContent(html_17faab02831660dccbc616c3f568fc16);
+            
+        
+
+        circle_marker_c0a88d503045796d00adeb4fa15e668f.bindPopup(popup_281f31a170891f6eea4876aa3ed53aac)
+        ;
+
+        
+    
+    
+            var circle_marker_d3d302f53f464329127b5458dd23b664 = L.circleMarker(
+                [65.347077, 8.029597],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_55b898270e5773c88b7e66735e6030be = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c93c2ece1e1c7e57e03137fab3d97167 = $(`<div id="html_c93c2ece1e1c7e57e03137fab3d97167" style="width: 100.0%; height: 100.0%;">🌍 CAPE AMANDA<br>🌍 Country: Panama<br>📍 MMSI: 370572000<br>⚡ Speed: 9.2 knots</div>`)[0];
+                popup_55b898270e5773c88b7e66735e6030be.setContent(html_c93c2ece1e1c7e57e03137fab3d97167);
+            
+        
+
+        circle_marker_d3d302f53f464329127b5458dd23b664.bindPopup(popup_55b898270e5773c88b7e66735e6030be)
+        ;
+
+        
+    
+    
+            var circle_marker_ccf3ca78197ba5e22d8d3a0df280d18a = L.circleMarker(
+                [68.111883, 13.594457],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_bb372fd948cfa3efb1bd18c1c9df8e9d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cf100726cdc50e8de644e4ca066b9404 = $(`<div id="html_cf100726cdc50e8de644e4ca066b9404" style="width: 100.0%; height: 100.0%;">❓ AIDABELLA TB 13<br>🌍 Country: Unknown<br>📍 MMSI: 982470189<br>⚡ Speed: 0.1 knots</div>`)[0];
+                popup_bb372fd948cfa3efb1bd18c1c9df8e9d.setContent(html_cf100726cdc50e8de644e4ca066b9404);
+            
+        
+
+        circle_marker_ccf3ca78197ba5e22d8d3a0df280d18a.bindPopup(popup_bb372fd948cfa3efb1bd18c1c9df8e9d)
+        ;
+
+        
+    
+    
+            var circle_marker_9901ab67ce575f683bacef52a261a822 = L.circleMarker(
+                [68.12112, 13.577943],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_039551a1c26e03be7890ee2224635a38 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6bde8891d9aa826cd2b4bb54a4583a52 = $(`<div id="html_6bde8891d9aa826cd2b4bb54a4583a52" style="width: 100.0%; height: 100.0%;">❓ AIDABELLA TB15<br>🌍 Country: Unknown<br>📍 MMSI: 982470191<br>⚡ Speed: 8.2 knots</div>`)[0];
+                popup_039551a1c26e03be7890ee2224635a38.setContent(html_6bde8891d9aa826cd2b4bb54a4583a52);
+            
+        
+
+        circle_marker_9901ab67ce575f683bacef52a261a822.bindPopup(popup_039551a1c26e03be7890ee2224635a38)
+        ;
+
+        
+    
+    
+            var circle_marker_21f531b498fc32289d80253fa0879da5 = L.circleMarker(
+                [68.113123, 13.594153],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_bd38b11ef4e48ed7145bff306e766354 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6b0084402c75f47ee6bc3cdbae319f38 = $(`<div id="html_6b0084402c75f47ee6bc3cdbae319f38" style="width: 100.0%; height: 100.0%;">❓ AIDABELLA TB 16<br>🌍 Country: Unknown<br>📍 MMSI: 982470192<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_bd38b11ef4e48ed7145bff306e766354.setContent(html_6b0084402c75f47ee6bc3cdbae319f38);
+            
+        
+
+        circle_marker_21f531b498fc32289d80253fa0879da5.bindPopup(popup_bd38b11ef4e48ed7145bff306e766354)
+        ;
+
+        
+    
+    
+            var circle_marker_fb548705788e14ee7e154cc7326ef7ac = L.circleMarker(
+                [68.111603, 13.596818],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_61d4603f04da9670823765372faf6035 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_813af05ed8b70165f5ad3086efedf88c = $(`<div id="html_813af05ed8b70165f5ad3086efedf88c" style="width: 100.0%; height: 100.0%;">❓ AIDABELLA TB 18<br>🌍 Country: Unknown<br>📍 MMSI: 982470194<br>⚡ Speed: 3 knots</div>`)[0];
+                popup_61d4603f04da9670823765372faf6035.setContent(html_813af05ed8b70165f5ad3086efedf88c);
+            
+        
+
+        circle_marker_fb548705788e14ee7e154cc7326ef7ac.bindPopup(popup_61d4603f04da9670823765372faf6035)
+        ;
+
+        
+    
+    
+            var circle_marker_495784b3dc7f1953053e9daab55bcb0d = L.circleMarker(
+                [66.689398, 10.67398],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_3416485f14b17c907cbfaa5d1297d2a5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_784dba919791e6673ba273a52ecb49c4 = $(`<div id="html_784dba919791e6673ba273a52ecb49c4" style="width: 100.0%; height: 100.0%;">🌍 NACC ANTIGUA<br>🌍 Country: Panama<br>📍 MMSI: 370424000<br>⚡ Speed: 6.5 knots</div>`)[0];
+                popup_3416485f14b17c907cbfaa5d1297d2a5.setContent(html_784dba919791e6673ba273a52ecb49c4);
+            
+        
+
+        circle_marker_495784b3dc7f1953053e9daab55bcb0d.bindPopup(popup_3416485f14b17c907cbfaa5d1297d2a5)
+        ;
+
+        
+    
+    
+            var circle_marker_9565577dec888fb05582e14079267357 = L.circleMarker(
+                [71.532263, 28.570973],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_e4716e30159d8f2d1ece4f11dec6d427 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c7c13de9aee8a26bea7db0fac3a3e100 = $(`<div id="html_c7c13de9aee8a26bea7db0fac3a3e100" style="width: 100.0%; height: 100.0%;">🌍 ELARA<br>🌍 Country: Liberia<br>📍 MMSI: 636018554<br>⚡ Speed: 10.8 knots</div>`)[0];
+                popup_e4716e30159d8f2d1ece4f11dec6d427.setContent(html_c7c13de9aee8a26bea7db0fac3a3e100);
+            
+        
+
+        circle_marker_9565577dec888fb05582e14079267357.bindPopup(popup_e4716e30159d8f2d1ece4f11dec6d427)
+        ;
+
+        
+    
+    
+            var circle_marker_c93bfd4f026979750ae33aea3a489d61 = L.circleMarker(
+                [69.601542, 18.914433],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_accff09c58be9b2598859c62bdac1363 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6c42b75dc21a94588fe047eb80d71077 = $(`<div id="html_6c42b75dc21a94588fe047eb80d71077" style="width: 100.0%; height: 100.0%;">🌍 WATERLAND<br>🌍 Country: Netherlands<br>📍 MMSI: 244533000<br>⚡ Speed: 8.3 knots</div>`)[0];
+                popup_accff09c58be9b2598859c62bdac1363.setContent(html_6c42b75dc21a94588fe047eb80d71077);
+            
+        
+
+        circle_marker_c93bfd4f026979750ae33aea3a489d61.bindPopup(popup_accff09c58be9b2598859c62bdac1363)
+        ;
+
+        
+    
+    
+            var circle_marker_e2f18dff599b6d8ef4561f2f4e468553 = L.circleMarker(
+                [70.677955, 23.406967],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_c285850222ef11c619b689ac13863820 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ac60d75cceac506d997363dabbd53e78 = $(`<div id="html_ac60d75cceac506d997363dabbd53e78" style="width: 100.0%; height: 100.0%;">🌍 ARCTIC DISCOVERER<br>🌍 Country: Bahamas<br>📍 MMSI: 309481000<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_c285850222ef11c619b689ac13863820.setContent(html_ac60d75cceac506d997363dabbd53e78);
+            
+        
+
+        circle_marker_e2f18dff599b6d8ef4561f2f4e468553.bindPopup(popup_c285850222ef11c619b689ac13863820)
+        ;
+
+        
+    
+    
+            var circle_marker_6675d43ad6711a19e64803d774de11fe = L.circleMarker(
+                [66.100223, 12.701887],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_993318150715737a550bf12b9f701f05 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_78b45ed9f9ed6594c9b7f7d45cde0d35 = $(`<div id="html_78b45ed9f9ed6594c9b7f7d45cde0d35" style="width: 100.0%; height: 100.0%;">🌍 GEORG STAGE<br>🌍 Country: Denmark<br>📍 MMSI: 219417000<br>⚡ Speed: 7.8 knots</div>`)[0];
+                popup_993318150715737a550bf12b9f701f05.setContent(html_78b45ed9f9ed6594c9b7f7d45cde0d35);
+            
+        
+
+        circle_marker_6675d43ad6711a19e64803d774de11fe.bindPopup(popup_993318150715737a550bf12b9f701f05)
+        ;
+
+        
+    
+    
+            var circle_marker_f954db684ec45927f09a05c1b7c78bce = L.circleMarker(
+                [71.544732, 28.424003],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_216e77a9ebc4d47566f743c1b18f7ded = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1043843d263e5105ad32efe46632f028 = $(`<div id="html_1043843d263e5105ad32efe46632f028" style="width: 100.0%; height: 100.0%;">🌍 ST.SOFIA<br>🌍 Country: Liberia<br>📍 MMSI: 636023140<br>⚡ Speed: 10.8 knots</div>`)[0];
+                popup_216e77a9ebc4d47566f743c1b18f7ded.setContent(html_1043843d263e5105ad32efe46632f028);
+            
+        
+
+        circle_marker_f954db684ec45927f09a05c1b7c78bce.bindPopup(popup_216e77a9ebc4d47566f743c1b18f7ded)
+        ;
+
+        
+    
+    
+            var circle_marker_d91d2cb2343ee2b31794a7dff6994998 = L.circleMarker(
+                [73.662445, 34.801058],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_d6ae181f7f58a80e03f7e92cd3969588 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2fd9590732b4495b6034feefb36bec32 = $(`<div id="html_2fd9590732b4495b6034feefb36bec32" style="width: 100.0%; height: 100.0%;">🌍 MAKALU<br>🌍 Country: Gambia<br>📍 MMSI: 629009658<br>⚡ Speed: 10.7 knots</div>`)[0];
+                popup_d6ae181f7f58a80e03f7e92cd3969588.setContent(html_2fd9590732b4495b6034feefb36bec32);
+            
+        
+
+        circle_marker_d91d2cb2343ee2b31794a7dff6994998.bindPopup(popup_d6ae181f7f58a80e03f7e92cd3969588)
+        ;
+
+        
+    
+    
+            var circle_marker_38f3d7a358a03e0a424f4ede4de34f08 = L.circleMarker(
+                [67.295313, 14.38918],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_77b0c300d85330e794ab46fd1998e268 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d61779a12bc0328450640b8189a82d86 = $(`<div id="html_d61779a12bc0328450640b8189a82d86" style="width: 100.0%; height: 100.0%;">🌍 FUGRO DISCOVERY<br>🌍 Country: Panama<br>📍 MMSI: 372698000<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_77b0c300d85330e794ab46fd1998e268.setContent(html_d61779a12bc0328450640b8189a82d86);
+            
+        
+
+        circle_marker_38f3d7a358a03e0a424f4ede4de34f08.bindPopup(popup_77b0c300d85330e794ab46fd1998e268)
+        ;
+
+        
+    
+    
+            var circle_marker_eb5022316f82f2fbe5473227b70eb3c8 = L.circleMarker(
+                [68.71578, 15.42689],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_69597c49faefeb84b5e8f5c197cf986e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_56d20fb3ae2b1f2e64a8740cf086eed8 = $(`<div id="html_56d20fb3ae2b1f2e64a8740cf086eed8" style="width: 100.0%; height: 100.0%;">🌍 AGOT<br>🌍 Country: Estonia<br>📍 MMSI: 276826000<br>⚡ Speed: 6.1 knots</div>`)[0];
+                popup_69597c49faefeb84b5e8f5c197cf986e.setContent(html_56d20fb3ae2b1f2e64a8740cf086eed8);
+            
+        
+
+        circle_marker_eb5022316f82f2fbe5473227b70eb3c8.bindPopup(popup_69597c49faefeb84b5e8f5c197cf986e)
+        ;
+
+        
+    
+    
+            var circle_marker_dc47cace63477b96d33c181a93cc2e74 = L.circleMarker(
+                [72.66666666666667, 35.291666666666664],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_d80a3f8cd4f04e6923d631cf521a036a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_02e3474d12a5d4ed73511d2f9b40dd99 = $(`<div id="html_02e3474d12a5d4ed73511d2f9b40dd99" style="width: 100.0%; height: 100.0%;">🇷🇺 LUGA<br>🌍 Country: Russia<br>📍 MMSI: 273432870<br>⚡ Speed: 8 knots</div>`)[0];
+                popup_d80a3f8cd4f04e6923d631cf521a036a.setContent(html_02e3474d12a5d4ed73511d2f9b40dd99);
+            
+        
+
+        circle_marker_dc47cace63477b96d33c181a93cc2e74.bindPopup(popup_d80a3f8cd4f04e6923d631cf521a036a)
+        ;
+
+        
+    
+    
+            var circle_marker_acf15824b3ad970ffce6454ae33d7225 = L.circleMarker(
+                [67.271235, 14.357075],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_7fcfcebee42b083ecc06c73bb74a1a17 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5f336cf02879935ea8a32fe95c906a69 = $(`<div id="html_5f336cf02879935ea8a32fe95c906a69" style="width: 100.0%; height: 100.0%;">❓ NOR-011<br>🌍 Country: Unknown<br>📍 MMSI: 111257010<br>⚡ Speed: 6 knots</div>`)[0];
+                popup_7fcfcebee42b083ecc06c73bb74a1a17.setContent(html_5f336cf02879935ea8a32fe95c906a69);
+            
+        
+
+        circle_marker_acf15824b3ad970ffce6454ae33d7225.bindPopup(popup_7fcfcebee42b083ecc06c73bb74a1a17)
+        ;
+
+        
+    
+    
+            var circle_marker_59bae344fdbd9d1768d54d1655067010 = L.circleMarker(
+                [69.838955, 18.446128],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_72e7d61bbba5696a806a4dab360eb8fc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_63c619617cb48505eed3512431db43e5 = $(`<div id="html_63c619617cb48505eed3512431db43e5" style="width: 100.0%; height: 100.0%;">❓ SAR AC  RESCUE 7<br>🌍 Country: Unknown<br>📍 MMSI: 111257511<br>⚡ Speed: 6 knots</div>`)[0];
+                popup_72e7d61bbba5696a806a4dab360eb8fc.setContent(html_63c619617cb48505eed3512431db43e5);
+            
+        
+
+        circle_marker_59bae344fdbd9d1768d54d1655067010.bindPopup(popup_72e7d61bbba5696a806a4dab360eb8fc)
+        ;
+
+        
+    
+    
+            var circle_marker_75eefdf94ae20a2273451555881faa2c = L.circleMarker(
+                [69.683183, 18.91261],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_65ff607fa270bb7158c5b343ce0c1ac9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c2857da085f1580c162a30f1b6e4734a = $(`<div id="html_c2857da085f1580c162a30f1b6e4734a" style="width: 100.0%; height: 100.0%;">❓ SAR AC RESCUE 7<br>🌍 Country: Unknown<br>📍 MMSI: 111257512<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_65ff607fa270bb7158c5b343ce0c1ac9.setContent(html_c2857da085f1580c162a30f1b6e4734a);
+            
+        
+
+        circle_marker_75eefdf94ae20a2273451555881faa2c.bindPopup(popup_65ff607fa270bb7158c5b343ce0c1ac9)
+        ;
+
+        
+    
+    
+            var circle_marker_fe9d4af821b4c2c78d68fe0a071d966e = L.circleMarker(
+                [82.7061, 23.39512],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_47e44ef65bf60fad69089082377f63cb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_df661c4257e1b5389c1bfae6b1f82c9c = $(`<div id="html_df661c4257e1b5389c1bfae6b1f82c9c" style="width: 100.0%; height: 100.0%;">🌍 VIRGO<br>🌍 Country: Sweden<br>📍 MMSI: 265289000<br>⚡ Speed: 0.8 knots</div>`)[0];
+                popup_47e44ef65bf60fad69089082377f63cb.setContent(html_df661c4257e1b5389c1bfae6b1f82c9c);
+            
+        
+
+        circle_marker_fe9d4af821b4c2c78d68fe0a071d966e.bindPopup(popup_47e44ef65bf60fad69089082377f63cb)
+        ;
+
+        
+    
+    
+            var circle_marker_127b779a9c51a477a77eccedbe659529 = L.circleMarker(
+                [71.251218, 17.383223],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_f3a8d0c7e0a886702cfc83f4483b8581 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b5a153a1a6f525fd60981c9b374df132 = $(`<div id="html_b5a153a1a6f525fd60981c9b374df132" style="width: 100.0%; height: 100.0%;">🇷🇺 KAPITAN SULIMOV<br>🌍 Country: Russia<br>📍 MMSI: 273435580<br>⚡ Speed: 9.1 knots</div>`)[0];
+                popup_f3a8d0c7e0a886702cfc83f4483b8581.setContent(html_b5a153a1a6f525fd60981c9b374df132);
+            
+        
+
+        circle_marker_127b779a9c51a477a77eccedbe659529.bindPopup(popup_f3a8d0c7e0a886702cfc83f4483b8581)
+        ;
+
+        
+    
+    
+            var circle_marker_508fc68d7d25db7ab6e52cd7d839dfbc = L.circleMarker(
+                [70.662483, 17.953097],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_245b0253aeac181280a553ac1d6eb956 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_43f3712ba12d9b3b6211c5cc8cf3bd14 = $(`<div id="html_43f3712ba12d9b3b6211c5cc8cf3bd14" style="width: 100.0%; height: 100.0%;">🌍 YAKOV GAKKEL<br>🌍 Country: Bahamas<br>📍 MMSI: 311000634<br>⚡ Speed: 18.7 knots</div>`)[0];
+                popup_245b0253aeac181280a553ac1d6eb956.setContent(html_43f3712ba12d9b3b6211c5cc8cf3bd14);
+            
+        
+
+        circle_marker_508fc68d7d25db7ab6e52cd7d839dfbc.bindPopup(popup_245b0253aeac181280a553ac1d6eb956)
+        ;
+
+        
+    
+    
+            var circle_marker_d7296d44bb3fb19d86ff5d317605e085 = L.circleMarker(
+                [70.625462, 29.701303],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_b94a3f3931c97beacfa16280d25954a6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_80d8da3852e7fc082159aa5e4b6dcb8b = $(`<div id="html_80d8da3852e7fc082159aa5e4b6dcb8b" style="width: 100.0%; height: 100.0%;">🇷🇺 LLV AZURIT<br>🌍 Country: Russia<br>📍 MMSI: 273436830<br>⚡ Speed: 0 knots</div>`)[0];
+                popup_b94a3f3931c97beacfa16280d25954a6.setContent(html_80d8da3852e7fc082159aa5e4b6dcb8b);
+            
+        
+
+        circle_marker_d7296d44bb3fb19d86ff5d317605e085.bindPopup(popup_b94a3f3931c97beacfa16280d25954a6)
+        ;
+
+        
+    
+    
+            var circle_marker_7b220308d57d06f96bb509f9056e61fa = L.circleMarker(
+                [65.784115, 7.307617],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_02c80b41d998f56d0334f6703d2a9438 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e74663015f17cb51943af73704485751 = $(`<div id="html_e74663015f17cb51943af73704485751" style="width: 100.0%; height: 100.0%;">🌍 AURORA SPIRIT<br>🌍 Country: Bahamas<br>📍 MMSI: 311001583<br>⚡ Speed: 7.7 knots</div>`)[0];
+                popup_02c80b41d998f56d0334f6703d2a9438.setContent(html_e74663015f17cb51943af73704485751);
+            
+        
+
+        circle_marker_7b220308d57d06f96bb509f9056e61fa.bindPopup(popup_02c80b41d998f56d0334f6703d2a9438)
+        ;
+
+        
+    
+    
+            var circle_marker_8d34e45e525b6367401bf426f6b29a87 = L.circleMarker(
+                [72.281812, 20.008292],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_3cb224ab9bab4ae11268b5aea52958f5);
+        
+    
+        var popup_6a6671781777862416ed6260f56e1204 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a06b8492b40e75b99dd96d71da335e77 = $(`<div id="html_a06b8492b40e75b99dd96d71da335e77" style="width: 100.0%; height: 100.0%;">🌍 RAINBOW SPIRIT<br>🌍 Country: Bahamas<br>📍 MMSI: 311001591<br>⚡ Speed: 0.9 knots</div>`)[0];
+                popup_6a6671781777862416ed6260f56e1204.setContent(html_a06b8492b40e75b99dd96d71da335e77);
+            
+        
+
+        circle_marker_8d34e45e525b6367401bf426f6b29a87.bindPopup(popup_6a6671781777862416ed6260f56e1204)
+        ;
+
+        
+    
+</script>
+</html>
