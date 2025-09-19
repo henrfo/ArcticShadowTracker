@@ -192,7 +192,17 @@ def is_buoy_or_platform(vessel):
     if speed is None:
         speed = 0
     
-    # Check name patterns
+    # PRIMARY FILTER: Most buoys have vessel type 0 (undefined)
+    # But we need to be careful not to filter real ships with type 0
+    if vessel_type == 0:
+        # If type 0 AND any buoy indicators, definitely filter
+        if (speed < 3.0 or  # Low speed
+            any(pattern in name for pattern in BUOY_NAME_PATTERNS) or
+            len(name) <= 5 or  # Short names often buoys
+            any(char.isdigit() for char in name)):  # Contains numbers
+            return True
+    
+    # Check explicit buoy name patterns
     if any(pattern in name for pattern in BUOY_NAME_PATTERNS):
         return True
     
@@ -205,13 +215,8 @@ def is_buoy_or_platform(vessel):
     if re.match(r'^[A-Z]{1,3}\s*\d{1,3}$', name) and speed < 2.0:
         return True
     
-    # Check vessel type 0 (undefined) with low speed - often buoys
-    if vessel_type == 0 and speed < 1.0:
-        return True
-    
-    # Check for extremely stationary objects
+    # Check for extremely stationary objects with suspicious names
     if speed < 0.1:
-        # Additional checks for stationary objects
         if ('UNKNOWN' in name or len(name) <= 3 or 
             name.count(' ') == 0 and len(name) < 8):
             return True
@@ -515,18 +520,35 @@ def create_interactive_map(vessels, dark_vessels, cable_alerts):
                 popup=f"🔌 {cable['name']}"
             ).add_to(m)
     
-    # Add current vessels
-    for vessel in vessels[:50]:  # Show first 50
+    # Add current vessels with country-based coloring
+    for vessel in vessels:  # Show all filtered vessels
         country = vessel.get('country', 'Unknown')
-        flag_emoji = '🏳️' if country == 'Unknown' else '🚢'
+        
+        # Color-code by country/region
+        if country == 'Russia':
+            color = 'red'
+            fillColor = 'darkred'
+            flag_emoji = '🇷🇺'
+        elif country == 'China':
+            color = 'orange'
+            fillColor = 'orange'
+            flag_emoji = '🇨🇳'
+        elif country in ['Unknown']:
+            color = 'gray'
+            fillColor = 'lightgray'
+            flag_emoji = '❓'
+        else:
+            color = 'blue'
+            fillColor = 'lightblue'
+            flag_emoji = '🌍'
         
         folium.CircleMarker(
             location=[vessel['latitude'], vessel['longitude']],
-            radius=5,
-            color='blue',
-            fillColor='lightblue',
-            fillOpacity=0.7,
-            popup=f"{flag_emoji} {vessel['name']}<br>🌍 Country: {country}<br>MMSI: {vessel['mmsi']}<br>Speed: {vessel['speed']} knots"
+            radius=6,
+            color=color,
+            fillColor=fillColor,
+            fillOpacity=0.8,
+            popup=f"{flag_emoji} {vessel['name']}<br>🌍 Country: {country}<br>📍 MMSI: {vessel['mmsi']}<br>⚡ Speed: {vessel['speed']} knots"
         ).add_to(m)
     
     # Add dark vessels
