@@ -1,321 +1,45 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
-
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# PyInstaller
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-.python-version
-
-# pipenv
-Pipfile.lock
-
-# PEP 582
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-arcticshadowtracker_env/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# Data files
-*.csv
-*.tiff
-*.tif
-*.geotiff
-*.h5
-*.hdf5
-*.nc
-*.netcdf
-
-# Satellite imagery
-data/satellite/*.tif
-data/satellite/*.tiff
-data/satellite/*.jp2
-data/satellite/*.png
-data/satellite/*.jpg
-
-# AIS data files
-data/ais/*.csv
-data/ais/*.json
-data/ais/*.xml
-
-# Cable data
-data/cables/*.csv
-data/cables/*.json
-data/cables/*.geojson
-
-# Model files
-models/*.h5
-models/*.pkl
-models/*.joblib
-models/*.pt
-models/*.pth
-
-# Output files
-outputs/
-output/
-reports/
-*.log
-
-# API keys and secrets
-.env
-config.ini
-secrets.json
-api_keys.txt
-
-# OS files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# Temporary files
-tmp/
-temp/
-*.tmp
-*.temp
-
-# Additional data science file types
-*.tsv
-*.xlsx
-*.xls
-*.parquet
-*.feather
-*.pickle
-*.grib
-*.grib2
-*.zarr
-
-# Geospatial data formats
-*.shp
-*.shx
-*.dbf
-*.prj
-*.cpg
-*.sbn
-*.sbx
-*.kml
-*.kmz
-*.gpx
-*.gml
-
-# Additional ML model formats
-*.ckpt
-*.pb
-*.onnx
-*.tflite
-*.mlmodel
-*.caffemodel
-*.weights
-*.bin
-*.safetensors
-checkpoints/
-saved_models/
-weights/
-
-# Additional output directories
-results/
-plots/
-figures/
-visualizations/
-exports/
-*.out
-*.err
-
-# Database files
-*.db
-*.sqlite
-*.sqlite3
-*.db-journal
-
-# Additional cache
-cache/
-.cache/
-
-# Additional secrets
-.env.*
-credentials.json
-*.key
-*.pem
-*.p12
-*.pfx
-auth.json
-service_account.json
-
-# Package managers
-node_modules/
-.npm
-.yarn/
-package-lock.json
-yarn.lock
-
-# Large files
-*.zip
-*.tar
-*.tar.gz
-*.rar
-*.7z
-*.iso
-
-# Documentation builds
-docs/_build/
-site/
-_site/
-# API Keys and Credentials
+# Configuration files with secrets
 config.yaml
-.env
-credentials.json
-*.key
 *.secret
 
-# Virtual Environments
+# Environment files
 arcticshadowtracker_env/
 
-# Satellite Images and Downloads
-arctic_downloads/
-*.jpg
-*.jpeg
-*.png
-*.tif
-*.tiff
-*.jp2
-*.zip
+# Data files
+arctic_intelligence/
+data/
+*.json
+*.csv
 
-# SentinelHub config
-.config/sentinelhub/
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
 
-# Virtual Environment (comprehensive)
-arcticshadowtracker_env/
-venv/
-env/
-.venv/
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
-# All data and downloads
-arctic_downloads/
-data/
-downloads/
-images/
-*.jpg
-*.jpeg
-*.png
-*.tif
-*.tiff
-*.jp2
-*.zip
-*.nc
-*.h5
-*.hdf
-
-# API Keys and Config
-config.yaml
+.Python
+env/
+venv/
 .env
-*.key
-*.secret
-credentials.*
+.venv
 
-# System and IDE files
-.DS_Store
+# IDE
 .vscode/
 .idea/
 *.swp
-*.log
+*.swo
 
-# SentinelHub
-.config/sentinelhub/
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Output files
+*.png
+*.pdf
+*.html
