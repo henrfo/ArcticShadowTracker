@@ -27,11 +27,14 @@ jobs:
       run: python arctic_shadow_streamer.py test
         
     - name: Commit results
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
+        git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
         git add arctic_intelligence/
         if [ -n "$(git status --porcelain)" ]; then
           git commit -m "Arctic surveillance update $(date -u '+%Y-%m-%d %H:%M UTC')"
-          git push
+          git push origin HEAD:main
         fi
