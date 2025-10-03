@@ -39,12 +39,30 @@ def generate_focused_map(vessel_tracks):
     # Count vessels by risk
     risk_counts = {'high': 0, 'medium': 0, 'low': 0}
 
-    # Add each vessel
-    for mmsi, track_data in vessel_tracks.items():
-        risk_level = track_data['risk_level']
-        risk_counts[risk_level] += 1
+    # Separate vessels by priority for z-order (render low priority first, then high)
+    low_priority_vessels = []
+    high_priority_vessels = []
 
-        # Add vessel marker and tracks
+    for mmsi, track_data in vessel_tracks.items():
+        priority_level = track_data['priority_level']
+        risk_counts[priority_level] += 1
+
+        # Check if it's a regular Norwegian vessel (gray, not military)
+        ship_type = track_data['ship_type'].lower()
+        is_norwegian_civilian = (track_data['country'] == 'Norway' and
+                                 'military' not in ship_type and
+                                 'law enforcement' not in ship_type)
+
+        if is_norwegian_civilian:
+            low_priority_vessels.append((mmsi, track_data))
+        else:
+            high_priority_vessels.append((mmsi, track_data))
+
+    # Add vessels in z-order: Norwegian civilians first (bottom), then others (top)
+    for mmsi, track_data in low_priority_vessels:
+        add_vessel_to_map(m, mmsi, track_data)
+
+    for mmsi, track_data in high_priority_vessels:
         add_vessel_to_map(m, mmsi, track_data)
 
     # Add legend and focus mode controls
@@ -62,7 +80,7 @@ def add_vessel_to_map(map_obj, mmsi, track_data):
         mmsi: Vessel MMSI
         track_data: Vessel track data with tiers
     """
-    risk_level = track_data['risk_level']
+    priority_level = track_data['priority_level']
     tiers = track_data['tiers']
 
     # Get current position (most recent point across all tiers)
@@ -70,19 +88,25 @@ def add_vessel_to_map(map_obj, mmsi, track_data):
     if not current_pos:
         return  # No position data
 
-    # Color scheme by risk
-    colors = {
-        'high': '#d32f2f',      # Red
-        'medium': '#ffa726',    # Orange
-        'low': '#9e9e9e'        # Gray
-    }
-    color = colors[risk_level]
+    # Color scheme by priority and country
+    if track_data['country'] == 'Russia':
+        color = '#d32f2f'      # Red
+    elif track_data['country'] == 'China':
+        color = '#ff9800'      # Orange
+    elif track_data['country'] == 'Norway':
+        # Check if Norwegian military or law enforcement
+        ship_type = track_data['ship_type'].lower()
+        if 'military' in ship_type or 'law enforcement' in ship_type:
+            color = '#000000'  # Black for Norwegian military/law enforcement
+        else:
+            color = '#888888'  # Gray for other Norwegian vessels
+    elif priority_level == 'low':
+        color = '#9e9e9e'      # Gray
+    else:
+        color = '#ffa726'      # Medium orange
 
     # Add track lines (tier-dependent visibility)
-    add_track_lines(map_obj, mmsi, tiers, risk_level, color)
-
-    # Add event markers (strategic tier only)
-    add_event_markers(map_obj, mmsi, tiers.get('strategic', []), color)
+    add_track_lines(map_obj, mmsi, tiers, priority_level, color)
 
     # Add vessel marker (current position)
     add_vessel_marker(map_obj, mmsi, track_data, current_pos, color)
@@ -102,7 +126,7 @@ def get_current_position(tiers):
     all_positions.sort(key=lambda p: p['timestamp'], reverse=True)
     return all_positions[0]
 
-def add_track_lines(map_obj, mmsi, tiers, risk_level, color):
+def add_track_lines(map_obj, mmsi, tiers, priority_level, color):
     """
     Add tiered track lines to map
 
@@ -114,7 +138,7 @@ def add_track_lines(map_obj, mmsi, tiers, risk_level, color):
     realtime = tiers.get('realtime', [])
     if realtime and len(realtime) > 1:
         coords = [[p['lat'], p['lon']] for p in realtime]
-        visible = risk_level == 'high'
+        visible = priority_level == 'high'
 
         folium.PolyLine(
             coords,
@@ -122,14 +146,14 @@ def add_track_lines(map_obj, mmsi, tiers, risk_level, color):
             weight=4,
             opacity=0.9 if visible else 0,
             popup=f"Real-time track ({len(coords)} points)",
-            className=f"vessel-{mmsi} tier-realtime" + (" high-risk" if risk_level == 'high' else "")
+            className=f"vessel-{mmsi} tier-realtime" + (" high-priority" if priority_level == 'high' else "")
         ).add_to(map_obj)
 
     # Tier 2 (Tactical): Dashed medium line (high-risk only by default)
     tactical = tiers.get('tactical', [])
     if tactical and len(tactical) > 1:
         coords = [[p['lat'], p['lon']] for p in tactical]
-        visible = risk_level == 'high'
+        visible = priority_level == 'high'
 
         folium.PolyLine(
             coords,
@@ -138,7 +162,7 @@ def add_track_lines(map_obj, mmsi, tiers, risk_level, color):
             opacity=0.7 if visible else 0,
             dash_array='10, 5',
             popup=f"Tactical track ({len(coords)} points)",
-            className=f"vessel-{mmsi} tier-tactical" + (" high-risk" if risk_level == 'high' else "")
+            className=f"vessel-{mmsi} tier-tactical" + (" high-priority" if priority_level == 'high' else "")
         ).add_to(map_obj)
 
     # Tier 3 (Strategic): Dotted thin line (always visible for all vessels)
@@ -156,51 +180,27 @@ def add_track_lines(map_obj, mmsi, tiers, risk_level, color):
             className=f"vessel-{mmsi} tier-strategic"
         ).add_to(map_obj)
 
-def add_event_markers(map_obj, mmsi, strategic_positions, color):
-    """Add event markers for strategic tier positions"""
-    for pos in strategic_positions:
-        if 'event' in pos:
-            icon_map = {
-                'stop': 'pause',
-                'resume': 'play',
-                'course_change': 'arrow-turn-right',
-                'speed_change': 'gauge-high',
-                'day_start': 'circle',
-                'day_end': 'circle'
-            }
-
-            icon = icon_map.get(pos['event'], 'info')
-
-            # Only show prominent events (skip day bookends)
-            if pos['event'] in ['stop', 'resume', 'course_change', 'speed_change']:
-                event_label = pos['event'].replace('_', ' ').title()
-                delta_info = f" ({pos.get('delta', '')})" if 'delta' in pos else ""
-
-                folium.Marker(
-                    location=[pos['lat'], pos['lon']],
-                    icon=folium.Icon(color='lightgray', icon=icon, prefix='fa'),
-                    popup=f"{event_label}{delta_info}",
-                    className=f"vessel-{mmsi} event-marker"
-                ).add_to(map_obj)
-
 def add_vessel_marker(map_obj, mmsi, track_data, current_pos, color):
     """Add current position marker for vessel"""
-    risk_icons = {
-        'high': 'ship',
-        'medium': 'ship',
-        'low': 'ship'
+
+    # Country flag emojis
+    country_flags = {
+        'Russia': '🇷🇺',
+        'China': '🇨🇳',
+        'Norway': '🇳🇴'
     }
+    flag = country_flags.get(track_data['country'], '🏴')
 
     popup_html = f"""
     <div style="min-width: 200px;">
-        <h4>{track_data['name']}</h4>
+        <h4>{flag} {track_data['name']}</h4>
         <table>
             <tr><td><b>MMSI:</b></td><td>{mmsi}</td></tr>
             <tr><td><b>Country:</b></td><td>{track_data['country']}</td></tr>
             <tr><td><b>Type:</b></td><td>{track_data['ship_type']}</td></tr>
             <tr><td><b>Speed:</b></td><td>{current_pos['speed']:.1f} kts</td></tr>
             <tr><td><b>Course:</b></td><td>{current_pos['course']:.0f}°</td></tr>
-            <tr><td><b>Risk:</b></td><td>{track_data['risk_level'].upper()}</td></tr>
+            <tr><td><b>Priority:</b></td><td>{track_data['priority_level'].upper()}</td></tr>
         </table>
         <p style="font-size: 10px; color: gray;">
             Click to focus on this vessel
@@ -208,15 +208,37 @@ def add_vessel_marker(map_obj, mmsi, track_data, current_pos, color):
     </div>
     """
 
-    folium.Marker(
+    # Set opacity and size based on country and ship type
+    # Norwegian military/law enforcement: full size with normal opacity
+    # Other Norwegian: smaller with lower opacity
+    ship_type = track_data['ship_type'].lower()
+    is_norwegian_military = (track_data['country'] == 'Norway' and
+                             ('military' in ship_type or 'law enforcement' in ship_type))
+
+    if is_norwegian_military:
+        fill_opacity = 0.7
+        line_opacity = 0.9
+        marker_radius = 8
+    elif track_data['country'] == 'Norway':
+        fill_opacity = 0.3
+        line_opacity = 0.4
+        marker_radius = 5
+    else:
+        fill_opacity = 0.7
+        line_opacity = 0.9
+        marker_radius = 8
+
+    folium.CircleMarker(
         location=[current_pos['lat'], current_pos['lon']],
-        icon=folium.Icon(
-            color='red' if track_data['risk_level'] == 'high' else 'orange' if track_data['risk_level'] == 'medium' else 'gray',
-            icon=risk_icons[track_data['risk_level']],
-            prefix='fa'
-        ),
+        radius=marker_radius,
+        color=color,
+        fill=True,
+        fillColor=color,
+        fillOpacity=fill_opacity,
+        weight=2,
+        opacity=line_opacity,
         popup=folium.Popup(popup_html, max_width=300),
-        tooltip=track_data['name'],
+        tooltip=f"{flag} {track_data['name']}",
         className=f"vessel-marker"
     ).add_to(map_obj).add_child(folium.Element(f'<script>this.options.vesselMmsi = "{mmsi}";</script>'))
 
@@ -227,10 +249,6 @@ def add_legend(map_obj, risk_counts, total_vessels):
                 background-color: white; padding: 15px; border: 2px solid #333;
                 border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
         <h4 style="margin: 0 0 10px 0;">Arctic Intelligence</h4>
-        <p style="margin: 5px 0;"><span style="color: #d32f2f;">●</span> High Risk: {risk_counts['high']} (Russia/China)</p>
-        <p style="margin: 5px 0;"><span style="color: #ffa726;">●</span> Medium Risk: {risk_counts['medium']}</p>
-        <p style="margin: 5px 0;"><span style="color: #9e9e9e;">●</span> Low Risk: {risk_counts['low']} (Norwegian)</p>
-        <hr style="margin: 10px 0;">
         <p style="margin: 5px 0; font-size: 12px;"><b>Total Vessels:</b> {total_vessels}</p>
         <p style="margin: 5px 0; font-size: 11px; color: #666;">
             Last update: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}

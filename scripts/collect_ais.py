@@ -112,8 +112,8 @@ def fetch_ais_data(token):
         mmsi_prefix = mmsi[:3]
         country = MMSI_COUNTRY_MAP.get(mmsi_prefix, 'Unknown')
 
-        # Russia/China filter
-        if country in ['Russia', 'China']:
+        # Russia/China/Norway filter
+        if country in ['Russia', 'China', 'Norway']:
             target_vessels.append({
                 'timestamp': timestamp,
                 'mmsi': mmsi,
@@ -127,9 +127,10 @@ def fetch_ais_data(token):
                 'ship_type_code': v.get('shipType', 0)
             })
 
-    print(f"  Found {len(target_vessels)} Russian/Chinese vessels in Arctic")
+    print(f"  Found {len(target_vessels)} vessels in Arctic (Russia/China/Norway)")
     print(f"    - Russian: {sum(1 for v in target_vessels if v['country'] == 'Russia')}")
     print(f"    - Chinese: {sum(1 for v in target_vessels if v['country'] == 'China')}")
+    print(f"    - Norwegian: {sum(1 for v in target_vessels if v['country'] == 'Norway')}")
 
     return target_vessels, timestamp
 
@@ -143,7 +144,8 @@ def save_snapshot(vessels, timestamp):
         'vessel_count': len(vessels),
         'by_country': {
             'Russia': sum(1 for v in vessels if v['country'] == 'Russia'),
-            'China': sum(1 for v in vessels if v['country'] == 'China')
+            'China': sum(1 for v in vessels if v['country'] == 'China'),
+            'Norway': sum(1 for v in vessels if v['country'] == 'Norway')
         },
         'vessels': vessels
     }

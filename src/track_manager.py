@@ -57,7 +57,7 @@ def process_vessel_tracks(snapshots: List[Dict]) -> Dict:
             'name': data['name'],
             'country': data['country'],
             'ship_type': data['ship_type'],
-            'risk_level': classify_risk(data['country']),
+            'priority_level': classify_priority(data['country']),
             'tiers': tiers
         }
 
@@ -82,9 +82,9 @@ def build_three_tiers(positions: List[Dict]) -> Dict:
     tier2_candidates = [p for p in positions if 2 < age_hours(p['timestamp'], now) <= 48]
     tier2 = sample_to_interval(tier2_candidates, minutes=30)
 
-    # Tier 3: 2-7 days (events only)
+    # Tier 3: 2-7 days (daily samples)
     tier3_candidates = [p for p in positions if 48 < age_hours(p['timestamp'], now) <= 168]  # 7 days
-    tier3 = extract_strategic_events(tier3_candidates)
+    tier3 = extract_strategic_tier(tier3_candidates)
 
     return {
         'realtime': tier1,
@@ -124,127 +124,42 @@ def sample_to_interval(positions: List[Dict], minutes: int) -> List[Dict]:
 
     return sampled
 
-def extract_strategic_events(positions: List[Dict]) -> List[Dict]:
+def extract_strategic_tier(positions: List[Dict]) -> List[Dict]:
     """
-    Extract only significant events from position history
+    Simple daily sampling for strategic tier (2-7 days)
+    Returns last position of each day
 
-    Events:
-    - Course change >45 degrees
-    - Speed change >5 knots
-    - Stop (speed <1 knot after moving)
-    - Resume (speed >=1 knot after stop)
-    - Daily bookends (first and last position of each day)
+    Note: Event detection (course changes, speed changes, stops)
+    will be handled by separate risk_detection module in the future.
 
     Args:
-        positions: List of position dicts
+        positions: List of position dicts (chronologically sorted)
 
     Returns:
-        List of event positions with 'event' field
+        List of daily sampled positions (no event classification)
     """
     if not positions:
         return []
 
-    events = []
-
-    # Detect event-based positions
-    for i in range(1, len(positions)):
-        prev = positions[i - 1]
-        curr = positions[i]
-
-        # Course change >45 degrees
-        course_delta = abs(curr['course'] - prev['course'])
-        if course_delta > 45 and course_delta < 315:  # Avoid 360-wrap false positives
-            events.append({
-                **curr,
-                'event': 'course_change',
-                'delta': round(course_delta, 1)
-            })
-
-        # Speed change >5 knots
-        speed_delta = abs(curr['speed'] - prev['speed'])
-        if speed_delta > 5:
-            events.append({
-                **curr,
-                'event': 'speed_change',
-                'delta': round(speed_delta, 1)
-            })
-
-        # Stop (vessel slowing to <1 knot)
-        if curr['speed'] < 1 and prev['speed'] >= 1:
-            events.append({
-                **curr,
-                'event': 'stop'
-            })
-
-        # Resume (vessel accelerating from <1 knot)
-        if curr['speed'] >= 1 and prev['speed'] < 1:
-            events.append({
-                **curr,
-                'event': 'resume'
-            })
-
-    # Add daily bookends (first and last position of each day)
-    daily_bookends = get_daily_bookends(positions)
-    events.extend(daily_bookends)
-
-    # Remove duplicates and sort by timestamp
-    seen_timestamps = set()
-    unique_events = []
-
-    for event in sorted(events, key=lambda e: e['timestamp']):
-        if event['timestamp'] not in seen_timestamps:
-            unique_events.append(event)
-            seen_timestamps.add(event['timestamp'])
-
-    return unique_events
-
-def get_daily_bookends(positions: List[Dict]) -> List[Dict]:
-    """
-    Get first and last position of each day
-
-    Args:
-        positions: List of position dicts
-
-    Returns:
-        List of bookend positions with 'event' field
-    """
-    if not positions:
-        return []
-
-    bookends = []
     positions_by_date = {}
 
-    # Group positions by date
+    # Group positions by date, keep last position of each day
     for pos in positions:
         date_str = datetime.fromisoformat(pos['timestamp'].replace('Z', '')).strftime('%Y-%m-%d')
+        positions_by_date[date_str] = pos  # Overwrites with latest position for that day
 
-        if date_str not in positions_by_date:
-            positions_by_date[date_str] = []
+    # Return in chronological order
+    return sorted(positions_by_date.values(), key=lambda p: p['timestamp'])
 
-        positions_by_date[date_str].append(pos)
-
-    # Get first and last of each day
-    for date_str, day_positions in positions_by_date.items():
-        if len(day_positions) > 0:
-            first = day_positions[0]
-            last = day_positions[-1]
-
-            bookends.append({**first, 'event': 'day_start'})
-
-            if first['timestamp'] != last['timestamp']:
-                bookends.append({**last, 'event': 'day_end'})
-
-    return bookends
-
-def classify_risk(country: str) -> str:
+def classify_priority(country: str) -> str:
     """
-    Classify vessel risk level based on country
+    Classify vessel priority level based on country
 
     Args:
         country: Vessel country from MMSI
 
     Returns:
-        Risk level: 'high', 'medium', or 'low'
+        Priority level: 'high', 'medium', or 'low'
     """
     if country in ['Russia', 'China']:
         return 'high'

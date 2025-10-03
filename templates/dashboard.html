@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arctic Shadow Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #001a2e 0%, #000814 100%);
+            color: #ffffff;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            grid-template-rows: 60px 1fr;
+            height: 100vh;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            background: rgba(5, 15, 30, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .refresh-btn {
+            background: rgba(15, 35, 65, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .refresh-btn:hover {
+            background: rgba(20, 45, 80, 0.8);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .status {
+            font-size: 12px;
+            color: #ffffff;
+        }
+
+        .sidebar {
+            background: rgba(5, 15, 30, 0.75);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .stat-card {
+            background: rgba(10, 20, 40, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-card h3 {
+            font-size: 12px;
+            color: #bbbbbb;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #aaaaaa;
+            margin-top: 5px;
+        }
+
+        .breakdown {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            font-size: 13px;
+        }
+
+        .breakdown-item .country {
+            color: #dddddd;
+        }
+
+        .breakdown-item .count {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .priority-high {
+            color: #ff6666;
+        }
+
+        .map-container {
+            background: rgba(5, 10, 20, 0.95);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #map-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            color: #4fc3f7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Arctic Shadow Tracker</h1>
+            <div class="controls">
+                <span class="status" id="last-update">
+                    {% if stats.last_update %}
+                        Last update: {{ stats.last_update }}
+                    {% else %}
+                        No data
+                    {% endif %}
+                </span>
+                <button class="refresh-btn" onclick="refreshData()">Refresh</button>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="stat-card">
+                <h3>Total Vessels</h3>
+                <div class="stat-value" id="total-vessels">{{ stats.total }}</div>
+                <div class="stat-label">Tracked in Arctic</div>
+            </div>
+
+            <div class="stat-card">
+                <h3>By Country</h3>
+                <div class="breakdown">
+                    <div class="breakdown-item">
+                        <span class="country"><span style="color: #d32f2f;">●</span> Russia</span>
+                        <span class="count priority-high" id="russian-count">{{ stats.russian }}</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="country"><span style="color: #ff9800;">●</span> China</span>
+                        <span class="count priority-high" id="chinese-count">{{ stats.chinese }}</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="country"><span style="color: #888888;">●</span> Norway</span>
+                        <span class="count" id="norwegian-count">{{ stats.norwegian }}</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="country"><span style="color: #000000;">●</span> Norwegian Military/Law</span>
+                        <span class="count" id="norwegian-military-count">{{ stats.norwegian_military }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <h3>Data Tiers</h3>
+                <div class="breakdown">
+                    <div class="breakdown-item">
+                        <span class="country">Real-time</span>
+                        <span class="count">0-2 hrs</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="country">Tactical</span>
+                        <span class="count">2-48 hrs</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="country">Strategic</span>
+                        <span class="count">2-7 days</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-container">
+            <div class="loading" id="loading">Loading map...</div>
+            <iframe id="map-frame" src="/api/map"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Hide loading indicator when map loads
+        document.getElementById('map-frame').addEventListener('load', function() {
+            document.getElementById('loading').style.display = 'none';
+        });
+
+        // Refresh data function
+        function refreshData() {
+            fetch('/api/vessels')
+                .then(response => response.json())
+                .then(data => {
+                    // Update stats
+                    document.getElementById('total-vessels').textContent = data.stats.total;
+                    document.getElementById('russian-count').textContent = data.stats.russian;
+                    document.getElementById('chinese-count').textContent = data.stats.chinese;
+                    document.getElementById('norwegian-count').textContent = data.stats.norwegian;
+                    document.getElementById('norwegian-military-count').textContent = data.stats.norwegian_military;
+
+                    if (data.stats.last_update) {
+                        document.getElementById('last-update').textContent =
+                            'Last update: ' + data.stats.last_update;
+                    }
+
+                    // Reload map
+                    document.getElementById('map-frame').src = '/api/map?' + Date.now();
+                });
+        }
+
+        // Auto-refresh every 30 seconds
+        setInterval(refreshData, 30000);
+    </script>
+</body>
+</html>
