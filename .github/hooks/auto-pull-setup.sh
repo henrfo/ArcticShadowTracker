@@ -20,7 +20,7 @@ REMOTE=$(git rev-parse origin/main)
 
 if [ "$LOCAL" != "$REMOTE" ]; then
     echo "Remote has updates. Pulling changes..."
-    git pull origin main --no-edit --quiet
+    git pull origin main --no-edit --no-rebase --quiet
 
     if [ $? -eq 0 ]; then
         echo "✓ Successfully synced with remote AIS data"

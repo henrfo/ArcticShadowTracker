@@ -24,7 +24,7 @@ def check_and_pull():
         if local != remote:
             print(f"[{datetime.now().strftime('%H:%M:%S')}] Remote has updates. Pulling changes...")
 
-            result = subprocess.run(['git', 'pull', 'origin', 'main', '--no-edit'],
+            result = subprocess.run(['git', 'pull', 'origin', 'main', '--no-edit', '--no-rebase'],
                                   capture_output=True, text=True)
 
             if result.returncode == 0:
