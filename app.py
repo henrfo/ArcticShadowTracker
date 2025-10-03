@@ -25,63 +25,59 @@ SNAPSHOTS_DIR = DATA_DIR / 'snapshots'
 OUTPUTS_DIR = BASE_DIR / 'outputs'
 
 def load_vessel_data():
-    """Load and process vessel track data from snapshots"""
-    snapshot_files = sorted(SNAPSHOTS_DIR.glob('*.json'))
+    """Load pre-processed vessel track data from vessel_tracks.json
 
-    if not snapshot_files:
+    This file is updated by GitHub Actions every 30 minutes and contains
+    fully processed three-tier tracks with shadow fleet classification.
+    """
+    tracks_file = DATA_DIR / 'vessel_tracks.json'
+
+    if not tracks_file.exists():
         return {
             'vessels': {},
             'stats': {
                 'total': 0,
                 'russian': 0,
                 'chinese': 0,
+                'norwegian': 0,
+                'norwegian_military': 0,
+                'shadow_fleet': 0,
+                'suspected_shadow': 0,
+                'other': 0,
                 'last_update': None
             }
         }
 
-    # Load all snapshots
-    all_snapshots = []
-    for snapshot_file in snapshot_files:
-        with open(snapshot_file, 'r') as f:
-            snapshot_data = json.load(f)
-            all_snapshots.append(snapshot_data)
+    # Load pre-processed vessel tracks (GitHub Actions already ran process_vessel_tracks)
+    with open(tracks_file, 'r') as f:
+        data = json.load(f)
 
-    # Process three-tier tracks
-    vessel_tracks = process_vessel_tracks(all_snapshots)
+    vessel_tracks = data.get('vessels', {})
+    last_update = data.get('last_updated')
 
-    # Calculate stats
+    # Calculate stats (same logic as before)
     russian_count = sum(1 for v in vessel_tracks.values() if v['country'] == 'Russia')
     chinese_count = sum(1 for v in vessel_tracks.values() if v['country'] == 'China')
 
-    # Count Norwegian military/law enforcement
     norwegian_military_count = sum(1 for v in vessel_tracks.values()
                                    if v['country'] == 'Norway' and
                                    ('military' in v['ship_type'].lower() or
                                     'law enforcement' in v['ship_type'].lower()))
 
-    # Count Norwegian civilians (excluding military/law enforcement to avoid double counting)
     norwegian_count = sum(1 for v in vessel_tracks.values()
                          if v['country'] == 'Norway' and
                          'military' not in v['ship_type'].lower() and
                          'law enforcement' not in v['ship_type'].lower())
 
-    # Count confirmed shadow fleet (from curated list)
     shadow_fleet_count = sum(1 for v in vessel_tracks.values() if v.get('is_shadow_fleet', False))
 
-    # Count suspected shadow fleet (flag-based, excluding confirmed)
     suspected_shadow_count = sum(1 for v in vessel_tracks.values()
                                 if v.get('is_suspected_shadow', False))
 
-    # Count "Other" countries (not Russia, China, Norway, or shadow fleet)
     other_count = sum(1 for v in vessel_tracks.values()
                      if v['country'] not in ['Russia', 'China', 'Norway']
                      and not v.get('is_shadow_fleet', False)
                      and not v.get('is_suspected_shadow', False))
-
-    # Get last update time
-    last_update = None
-    if all_snapshots:
-        last_update = all_snapshots[-1]['timestamp']
 
     return {
         'vessels': vessel_tracks,

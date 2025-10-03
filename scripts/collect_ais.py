@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Arctic AIS Collector - GitHub Actions Compatible
-Collects Russian/Chinese vessel data every 30 minutes
+Collects Arctic vessel data every 30 minutes for shadow fleet detection
 Implements three-tier historical tracking
 """
 
@@ -83,7 +83,7 @@ def get_barentswatch_token(client_id, client_secret):
         raise Exception(f"Failed to get token: {response.text}")
 
 def fetch_ais_data(token):
-    """Fetch AIS data from BarentsWatch and filter for Arctic Russian/Chinese vessels"""
+    """Fetch AIS data from BarentsWatch and filter for Arctic vessels"""
     print("Fetching AIS data from BarentsWatch...")
 
     headers = {'Authorization': f'Bearer {token}', 'Accept': 'application/json'}
@@ -95,7 +95,7 @@ def fetch_ais_data(token):
     all_vessels = response.json()
     print(f"  Total vessels received: {len(all_vessels)}")
 
-    # Filter for Arctic Russian/Chinese vessels
+    # Filter for Arctic vessels (all countries)
     target_vessels = []
     timestamp = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
 
@@ -112,25 +112,30 @@ def fetch_ais_data(token):
         mmsi_prefix = mmsi[:3]
         country = MMSI_COUNTRY_MAP.get(mmsi_prefix, 'Unknown')
 
-        # Russia/China/Norway filter
-        if country in ['Russia', 'China', 'Norway']:
-            target_vessels.append({
-                'timestamp': timestamp,
-                'mmsi': mmsi,
-                'name': v.get('name', 'Unknown'),
-                'country': country,
-                'latitude': lat,
-                'longitude': lon,
-                'speed': v.get('speedOverGround') or 0,
-                'course': v.get('courseOverGround') or 0,
-                'ship_type': get_ship_type(v.get('shipType', 0)),
-                'ship_type_code': v.get('shipType', 0)
-            })
+        # Collect ALL Arctic vessels (no country filter)
+        target_vessels.append({
+            'timestamp': timestamp,
+            'mmsi': mmsi,
+            'name': v.get('name', 'Unknown'),
+            'country': country,
+            'latitude': lat,
+            'longitude': lon,
+            'speed': v.get('speedOverGround') or 0,
+            'course': v.get('courseOverGround') or 0,
+            'ship_type': get_ship_type(v.get('shipType', 0)),
+            'ship_type_code': v.get('shipType', 0)
+        })
 
-    print(f"  Found {len(target_vessels)} vessels in Arctic (Russia/China/Norway)")
-    print(f"    - Russian: {sum(1 for v in target_vessels if v['country'] == 'Russia')}")
-    print(f"    - Chinese: {sum(1 for v in target_vessels if v['country'] == 'China')}")
-    print(f"    - Norwegian: {sum(1 for v in target_vessels if v['country'] == 'Norway')}")
+    russian_count = sum(1 for v in target_vessels if v['country'] == 'Russia')
+    chinese_count = sum(1 for v in target_vessels if v['country'] == 'China')
+    norwegian_count = sum(1 for v in target_vessels if v['country'] == 'Norway')
+    other_count = len(target_vessels) - russian_count - chinese_count - norwegian_count
+
+    print(f"  Found {len(target_vessels)} vessels in Arctic")
+    print(f"    - Russian: {russian_count}")
+    print(f"    - Chinese: {chinese_count}")
+    print(f"    - Norwegian: {norwegian_count}")
+    print(f"    - Other: {other_count}")
 
     return target_vessels, timestamp
 
@@ -139,14 +144,16 @@ def save_snapshot(vessels, timestamp):
     timestamp_str = datetime.fromisoformat(timestamp.replace('Z', '')).strftime('%Y%m%d_%H%M')
     snapshot_file = SNAPSHOTS_DIR / f"{timestamp_str}.json"
 
+    # Count vessels by country
+    country_counts = {}
+    for v in vessels:
+        country = v['country']
+        country_counts[country] = country_counts.get(country, 0) + 1
+
     snapshot = {
         'timestamp': timestamp,
         'vessel_count': len(vessels),
-        'by_country': {
-            'Russia': sum(1 for v in vessels if v['country'] == 'Russia'),
-            'China': sum(1 for v in vessels if v['country'] == 'China'),
-            'Norway': sum(1 for v in vessels if v['country'] == 'Norway')
-        },
+        'by_country': country_counts,
         'vessels': vessels
     }
 
