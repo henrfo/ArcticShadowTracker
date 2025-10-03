@@ -83,7 +83,7 @@ def build_three_tiers(positions: List[Dict]) -> Dict:
     tier2_candidates = [p for p in positions if 2 < age_hours(p['timestamp'], now) <= 48]
     tier2 = sample_to_interval(tier2_candidates, minutes=30)
 
-    # Prepend last tier1 point to tier2 for continuity
+    # Prepend last tier1 point to tier2 for continuity (NO sorting - keeps bridge at start)
     if tier1 and tier2:
         tier2 = [tier1[-1]] + tier2
 
@@ -92,7 +92,7 @@ def build_three_tiers(positions: List[Dict]) -> Dict:
     tier3_candidates = [p for p in positions if 48 < age_hours(p['timestamp'], now) <= 168]  # 7 days
     tier3 = extract_strategic_tier(tier3_candidates)
 
-    # Prepend last tier2 point to tier3 for continuity
+    # Prepend last tier2 point to tier3 for continuity (NO sorting - keeps bridge at start)
     if tier2 and tier3:
         tier3 = [tier2[-1]] + tier3
     elif tier1 and tier3 and not tier2:

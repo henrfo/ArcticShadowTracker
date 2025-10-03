@@ -140,54 +140,58 @@ def add_track_lines(map_obj, mmsi, tiers, priority_level, color):
     strategic = tiers.get('strategic', [])
     visible = priority_level == 'high'
 
-    # Tier 1 (Realtime): Solid thick line (high-risk only by default)
-    # Extend slightly into tier 2 for visual overlap
-    if realtime and len(realtime) > 1:
-        coords = [[p['lat'], p['lon']] for p in realtime]
-        # Add first tactical point to tier1 line for seamless visual connection
-        if tactical and len(tactical) > 0 and visible:
-            coords.append([tactical[0]['lat'], tactical[0]['lon']])
+    # Draw one continuous track sorted chronologically
+    # Merge all tiers and render as single connected path
+    all_positions = []
 
-        folium.PolyLine(
-            coords,
-            color=color,
-            weight=4,
-            opacity=0.9 if visible else 0,
-            popup=f"Real-time track ({len(coords)} points)",
-            className=f"vessel-{mmsi} tier-realtime" + (" high-priority" if priority_level == 'high' else "")
-        ).add_to(map_obj)
+    if strategic:
+        all_positions.extend([(p, 'strategic') for p in strategic])
+    if tactical:
+        all_positions.extend([(p, 'tactical') for p in tactical])
+    if realtime:
+        all_positions.extend([(p, 'realtime') for p in realtime])
 
-    # Tier 2 (Tactical): Dashed medium line (high-risk only by default)
-    # Already starts with last tier1 point from track_manager
-    if tactical and len(tactical) > 1:
-        coords = [[p['lat'], p['lon']] for p in tactical]
-        # Add first strategic point for seamless connection to tier 3
-        if strategic and len(strategic) > 0 and visible:
-            coords.append([strategic[0]['lat'], strategic[0]['lon']])
+    # Sort chronologically
+    all_positions.sort(key=lambda x: x[0]['timestamp'])
 
-        folium.PolyLine(
-            coords,
-            color=color,
-            weight=3,
-            opacity=0.7 if visible else 0,
-            dash_array='10, 5',
-            popup=f"Tactical track ({len(coords)} points)",
-            className=f"vessel-{mmsi} tier-tactical" + (" high-priority" if priority_level == 'high' else "")
-        ).add_to(map_obj)
+    if len(all_positions) < 2:
+        return
 
-    # Tier 3 (Strategic): Dotted thin line (always visible for all vessels)
-    # Already starts with last tier2 point from track_manager
-    if strategic and len(strategic) > 1:
-        coords = [[p['lat'], p['lon']] for p in strategic]
-        folium.PolyLine(
-            coords,
-            color=color,
-            weight=2,
-            opacity=0.5,
-            dash_array='3, 10',
-            popup=f"Strategic track ({len(coords)} points)",
-            className=f"vessel-{mmsi} tier-strategic"
-        ).add_to(map_obj)
+    # Build continuous track with style changes at tier boundaries
+    i = 0
+    while i < len(all_positions):
+        tier_type = all_positions[i][1]
+        segment = [all_positions[i][0]]
+
+        # Collect all consecutive points of same tier
+        j = i + 1
+        while j < len(all_positions) and all_positions[j][1] == tier_type:
+            segment.append(all_positions[j][0])
+            j += 1
+
+        # If next segment exists, include its first point for continuity
+        if j < len(all_positions):
+            segment.append(all_positions[j][0])
+
+        # Draw segment with appropriate style
+        if len(segment) > 1:
+            coords = [[p['lat'], p['lon']] for p in segment]
+            weight, opacity, dash = {
+                'strategic': (2, 0.5, '3, 10'),
+                'tactical': (3, 0.7 if visible else 0, '10, 5'),
+                'realtime': (4, 0.9 if visible else 0, None)
+            }[tier_type]
+
+            folium.PolyLine(
+                coords,
+                color=color,
+                weight=weight,
+                opacity=opacity,
+                dash_array=dash,
+                className=f"vessel-{mmsi} tier-{tier_type}"
+            ).add_to(map_obj)
+
+        i = j
 
 def add_vessel_marker(map_obj, mmsi, track_data, current_pos, color):
     """Add current position marker for vessel"""
