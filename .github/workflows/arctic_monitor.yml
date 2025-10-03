@@ -47,6 +47,7 @@ jobs:
           git config --local user.name "Arctic Monitor Bot"
           git config --local user.email "arctic-bot@github-actions"
           git add outputs/
+          git add data/vessel_tracks.json
 
           # Only commit if there are changes
           if git diff --staged --quiet; then

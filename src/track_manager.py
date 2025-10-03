@@ -65,7 +65,7 @@ def process_vessel_tracks(snapshots: List[Dict]) -> Dict:
 
 def build_three_tiers(positions: List[Dict]) -> Dict:
     """
-    Split positions into three tiers based on age
+    Split positions into three tiers based on age with continuity at boundaries
 
     Args:
         positions: Chronologically sorted list of position dicts
@@ -79,12 +79,25 @@ def build_three_tiers(positions: List[Dict]) -> Dict:
     tier1 = [p for p in positions if age_hours(p['timestamp'], now) <= 2]
 
     # Tier 2: 2-48 hours (sample to 30-min intervals)
+    # Include last tier1 point as first point for continuity
     tier2_candidates = [p for p in positions if 2 < age_hours(p['timestamp'], now) <= 48]
     tier2 = sample_to_interval(tier2_candidates, minutes=30)
 
+    # Prepend last tier1 point to tier2 for continuity
+    if tier1 and tier2:
+        tier2 = [tier1[-1]] + tier2
+
     # Tier 3: 2-7 days (daily samples)
+    # Include last tier2 point as first point for continuity
     tier3_candidates = [p for p in positions if 48 < age_hours(p['timestamp'], now) <= 168]  # 7 days
     tier3 = extract_strategic_tier(tier3_candidates)
+
+    # Prepend last tier2 point to tier3 for continuity
+    if tier2 and tier3:
+        tier3 = [tier2[-1]] + tier3
+    elif tier1 and tier3 and not tier2:
+        # If no tier2, connect tier1 directly to tier3
+        tier3 = [tier1[-1]] + tier3
 
     return {
         'realtime': tier1,

@@ -135,11 +135,18 @@ def add_track_lines(map_obj, mmsi, tiers, priority_level, color):
     - High-risk (Russia/China/Norwegian military): Tier 1 + Tier 2 + Tier 3
     - Low-risk (Norwegian civilian): Tier 3 only
     """
-    # Tier 1 (Realtime): Solid thick line (high-risk only by default)
     realtime = tiers.get('realtime', [])
+    tactical = tiers.get('tactical', [])
+    strategic = tiers.get('strategic', [])
+    visible = priority_level == 'high'
+
+    # Tier 1 (Realtime): Solid thick line (high-risk only by default)
+    # Extend slightly into tier 2 for visual overlap
     if realtime and len(realtime) > 1:
         coords = [[p['lat'], p['lon']] for p in realtime]
-        visible = priority_level == 'high'
+        # Add first tactical point to tier1 line for seamless visual connection
+        if tactical and len(tactical) > 0 and visible:
+            coords.append([tactical[0]['lat'], tactical[0]['lon']])
 
         folium.PolyLine(
             coords,
@@ -151,10 +158,12 @@ def add_track_lines(map_obj, mmsi, tiers, priority_level, color):
         ).add_to(map_obj)
 
     # Tier 2 (Tactical): Dashed medium line (high-risk only by default)
-    tactical = tiers.get('tactical', [])
+    # Already starts with last tier1 point from track_manager
     if tactical and len(tactical) > 1:
         coords = [[p['lat'], p['lon']] for p in tactical]
-        visible = priority_level == 'high'
+        # Add first strategic point for seamless connection to tier 3
+        if strategic and len(strategic) > 0 and visible:
+            coords.append([strategic[0]['lat'], strategic[0]['lon']])
 
         folium.PolyLine(
             coords,
@@ -167,10 +176,9 @@ def add_track_lines(map_obj, mmsi, tiers, priority_level, color):
         ).add_to(map_obj)
 
     # Tier 3 (Strategic): Dotted thin line (always visible for all vessels)
-    strategic = tiers.get('strategic', [])
+    # Already starts with last tier2 point from track_manager
     if strategic and len(strategic) > 1:
         coords = [[p['lat'], p['lon']] for p in strategic]
-
         folium.PolyLine(
             coords,
             color=color,

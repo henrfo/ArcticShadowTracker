@@ -5,11 +5,10 @@ config.yaml
 # Environment files
 arcticshadowtracker_env/
 
-# Data files (allow arctic_intelligence for GitHub Actions data persistence)
-data/
-*.json
-# *.csv - Allow CSV files for data tracking
-# arctic_intelligence/ - Allow this directory for GitHub Actions
+# Data files - Block snapshots but allow vessel_tracks.json for persistence
+data/snapshots/
+# Allow vessel_tracks.json for three-tier historical tracking
+!data/vessel_tracks.json
 
 # Jupyter notebook checkpoints
 .ipynb_checkpoints/
