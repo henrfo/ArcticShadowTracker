@@ -21,16 +21,16 @@ jobs:
         
     - run: pip install -r requirements.txt
         
-    - name: Run tracker
+    - name: Collect AIS data
       env:
         BARENTSWATCH_CLIENT_SECRET: ${{ secrets.BARENTSWATCH_CLIENT_SECRET }}
-      run: python arctic_shadow_streamer.py test
+      run: python scripts/collect_ais.py
         
     - name: Commit and push
       run: |
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config user.name "github-actions[bot]"
-        git add arctic_intelligence/
+        git add data/snapshots/
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
