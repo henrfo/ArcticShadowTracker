@@ -57,7 +57,7 @@ def process_vessel_tracks(snapshots: List[Dict]) -> Dict:
             'name': data['name'],
             'country': data['country'],
             'ship_type': data['ship_type'],
-            'priority_level': classify_priority(data['country']),
+            'priority_level': classify_priority(data['country'], data['ship_type']),
             'tiers': tiers
         }
 
@@ -151,12 +151,13 @@ def extract_strategic_tier(positions: List[Dict]) -> List[Dict]:
     # Return in chronological order
     return sorted(positions_by_date.values(), key=lambda p: p['timestamp'])
 
-def classify_priority(country: str) -> str:
+def classify_priority(country: str, ship_type: str = '') -> str:
     """
-    Classify vessel priority level based on country
+    Classify vessel priority level based on country and ship type
 
     Args:
         country: Vessel country from MMSI
+        ship_type: Type of vessel (e.g., 'Military', 'Law Enforcement')
 
     Returns:
         Priority level: 'high', 'medium', or 'low'
@@ -164,6 +165,11 @@ def classify_priority(country: str) -> str:
     if country in ['Russia', 'China']:
         return 'high'
     elif country == 'Norway':
-        return 'low'
+        # Norwegian military/law enforcement = high priority (same as Russia/China)
+        ship_type_lower = ship_type.lower()
+        if 'military' in ship_type_lower or 'law enforcement' in ship_type_lower:
+            return 'high'
+        else:
+            return 'low'  # Civilian Norwegian vessels
     else:
         return 'medium'

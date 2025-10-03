@@ -105,6 +105,8 @@ def api_map():
     return map_obj._repr_html_()
 
 if __name__ == '__main__':
+    import os
+    port = int(os.environ.get('PORT', 5001))
     print("Starting Arctic Shadow Tracker Dashboard...")
-    print("Dashboard will be available at: http://localhost:5001")
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    print(f"Dashboard will be available at: http://localhost:{port}")
+    app.run(debug=False, host='0.0.0.0', port=port)

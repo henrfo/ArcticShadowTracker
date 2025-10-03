@@ -8,6 +8,7 @@ import json
 import sys
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo
 from pydantic import BaseModel
 from pydantic_ai import Agent
 
@@ -257,7 +258,7 @@ def save_report(report: WeeklyReport):
         markdown += f"- {obs}\n"
 
     markdown += f"\n## Trends\n{report.trends}\n"
-    markdown += f"\n---\n*Generated on {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')} using Pydantic AI + Ollama*\n"
+    markdown += f"\n---\n*Generated on {datetime.now(ZoneInfo('Europe/Oslo')).strftime('%Y-%m-%d %H:%M %Z')} using Pydantic AI + Ollama*\n"
 
     with open(report_file, 'w') as f:
         f.write(markdown)

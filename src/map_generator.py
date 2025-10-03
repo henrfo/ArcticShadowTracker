@@ -7,7 +7,8 @@ Creates interactive Folium maps with tier-based track visualization:
 """
 
 import folium
-from datetime import datetime, timezone
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 def generate_focused_map(vessel_tracks):
     """
@@ -131,8 +132,8 @@ def add_track_lines(map_obj, mmsi, tiers, priority_level, color):
     Add tiered track lines to map
 
     Track visibility by default:
-    - High-risk: Tier 1 + Tier 2 + Tier 3
-    - Medium/low-risk: Tier 3 only
+    - High-risk (Russia/China/Norwegian military): Tier 1 + Tier 2 + Tier 3
+    - Low-risk (Norwegian civilian): Tier 3 only
     """
     # Tier 1 (Realtime): Solid thick line (high-risk only by default)
     realtime = tiers.get('realtime', [])
@@ -251,7 +252,7 @@ def add_legend(map_obj, risk_counts, total_vessels):
         <h4 style="margin: 0 0 10px 0;">Arctic Intelligence</h4>
         <p style="margin: 5px 0; font-size: 12px;"><b>Total Vessels:</b> {total_vessels}</p>
         <p style="margin: 5px 0; font-size: 11px; color: #666;">
-            Last update: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}
+            Last update: {datetime.now(ZoneInfo('Europe/Oslo')).strftime('%Y-%m-%d %H:%M %Z')}
         </p>
         <hr style="margin: 10px 0;">
         <p style="margin: 5px 0; font-size: 10px; color: #999;">
