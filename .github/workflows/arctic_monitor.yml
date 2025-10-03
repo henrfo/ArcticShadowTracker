@@ -1,0 +1,65 @@
+name: Arctic AIS Monitor
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # Every 30 minutes
+  workflow_dispatch:         # Manual trigger for testing
+  push:
+    branches: [main]         # Also run on push to main (for testing)
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # Allow pushing changes back to repo
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for tracking
+
+      - name: Setup Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Collect AIS data
+        env:
+          BARENTSWATCH_CLIENT_SECRET: ${{ secrets.BARENTSWATCH_CLIENT_SECRET }}
+        run: |
+          python scripts/collect_ais.py
+
+      - name: Cleanup old snapshots
+        run: |
+          echo "Cleaning up snapshots older than 7 days..."
+          find data/snapshots -name "*.json" -type f -mtime +7 -delete || true
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.name "Arctic Monitor Bot"
+          git config --local user.email "arctic-bot@github-actions"
+          git add data/ outputs/
+
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "AIS update $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git push
+          fi
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./outputs
+          publish_branch: gh-pages
+          force_orphan: true  # Keep gh-pages branch clean

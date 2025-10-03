@@ -1,0 +1,2535 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_7a845d57bd926f80667d702eaae0702c {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style="position: fixed; top: 10px; right: 10px; z-index: 9999;
+                background-color: white; padding: 15px; border: 2px solid #333;
+                border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
+        <h4 style="margin: 0 0 10px 0;">Arctic Intelligence</h4>
+        <p style="margin: 5px 0;"><span style="color: #d32f2f;">●</span> High Risk: 32 (Russia/China)</p>
+        <p style="margin: 5px 0;"><span style="color: #ffa726;">●</span> Medium Risk: 0</p>
+        <p style="margin: 5px 0;"><span style="color: #9e9e9e;">●</span> Low Risk: 0 (Norwegian)</p>
+        <hr style="margin: 10px 0;">
+        <p style="margin: 5px 0; font-size: 12px;"><b>Total Vessels:</b> 32</p>
+        <p style="margin: 5px 0; font-size: 11px; color: #666;">
+            Last update: 2025-10-03 11:33 UTC
+        </p>
+        <hr style="margin: 10px 0;">
+        <p style="margin: 5px 0; font-size: 10px; color: #999;">
+            <b>Track Lines:</b><br>
+            ━━━ Real-time (0-2hr)<br>
+            ╌╌╌ Tactical (2-48hr)<br>
+            ··· Strategic (2-7d)
+        </p>
+        <p style="margin: 10px 0 5px 0; font-size: 10px; color: #999;">
+            💡 Click vessel to focus
+        </p>
+    </div>
+    
+    
+    <script>
+    // Focus mode: Click vessel to highlight and show all tiers
+    let focusedVessel = null;
+
+    // Wait for map to load
+    setTimeout(function() {
+        // Add click handlers to all vessel markers
+        document.querySelectorAll('.leaflet-marker-icon').forEach(function(marker) {
+            marker.addEventListener('click', function(e) {
+                // Get MMSI from marker (injected in add_vessel_marker)
+                const vesselMmsi = this.vesselMmsi || null;
+
+                if (!vesselMmsi) return;
+
+                if (focusedVessel === vesselMmsi) {
+                    // Unfocus if clicking same vessel
+                    unfocusAll();
+                } else {
+                    // Focus on new vessel
+                    focusVessel(vesselMmsi);
+                }
+
+                e.stopPropagation();
+            });
+        });
+
+        // Double-click map to unfocus all
+        document.querySelector('.leaflet-container').addEventListener('dblclick', function(e) {
+            if (focusedVessel) {
+                unfocusAll();
+                e.preventDefault();
+            }
+        });
+    }, 1000);
+
+    function focusVessel(mmsi) {
+        console.log('Focusing vessel:', mmsi);
+
+        // Unfocus previous vessel
+        if (focusedVessel) {
+            unfocusAll();
+        }
+
+        focusedVessel = mmsi;
+
+        // Fade all other vessels
+        document.querySelectorAll('.leaflet-interactive').forEach(function(el) {
+            const className = el.getAttribute('class') || '';
+
+            if (!className.includes('vessel-' + mmsi)) {
+                // Not the focused vessel - fade it
+                el.style.opacity = '0.15';
+                el.style.strokeOpacity = '0.15';
+                el.style.fillOpacity = '0.15';
+            } else {
+                // Focused vessel - highlight it
+                el.style.opacity = '1.0';
+                el.style.strokeOpacity = '1.0';
+                el.style.fillOpacity = '1.0';
+                el.style.strokeWidth = '4';
+                el.style.zIndex = '1000';
+            }
+        });
+    }
+
+    function unfocusAll() {
+        console.log('Unfocusing all vessels');
+
+        focusedVessel = null;
+
+        // Restore all elements to default opacity
+        document.querySelectorAll('.leaflet-interactive').forEach(function(el) {
+            el.style.opacity = '';
+            el.style.strokeOpacity = '';
+            el.style.fillOpacity = '';
+            el.style.strokeWidth = '';
+            el.style.zIndex = '';
+        });
+    }
+    </script>
+    
+    
+            <div class="folium-map" id="map_7a845d57bd926f80667d702eaae0702c" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_7a845d57bd926f80667d702eaae0702c = L.map(
+                "map_7a845d57bd926f80667d702eaae0702c",
+                {
+                    center: [75.0, 20.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_421abefeb3319de177880a6b52545ffa = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_421abefeb3319de177880a6b52545ffa.addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var rectangle_2ac29fd973aca6a6761c34041a8a8faf = L.rectangle(
+                [[65.0, 0.0], [82.0, 40.0]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.3, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_a5ec72bfa496746f67782b1955fe6f27 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bbf890c4b62b9767d86b3d82b37c8e4a = $(`<div id="html_bbf890c4b62b9767d86b3d82b37c8e4a" style="width: 100.0%; height: 100.0%;">Arctic Coverage Area: 65-82°N, 0-40°E</div>`)[0];
+                popup_a5ec72bfa496746f67782b1955fe6f27.setContent(html_bbf890c4b62b9767d86b3d82b37c8e4a);
+            
+        
+
+        rectangle_2ac29fd973aca6a6761c34041a8a8faf.bindPopup(popup_a5ec72bfa496746f67782b1955fe6f27)
+        ;
+
+        
+    
+    
+            var poly_line_3805729e12fe2f0a4b5a8ce1390555d6 = L.polyline(
+                [[70.95, 32.08166666666667], [70.95, 32.08166666666667], [70.95, 32.08166666666667]],
+                {"bubblingMouseEvents": true, "className": "vessel-273437390 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_0ddeac2d7d2ffd315131b2d2faffb645 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_38e3dda54f3b0be71de1860cef98f73f = $(`<div id="html_38e3dda54f3b0be71de1860cef98f73f" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_0ddeac2d7d2ffd315131b2d2faffb645.setContent(html_38e3dda54f3b0be71de1860cef98f73f);
+            
+        
+
+        poly_line_3805729e12fe2f0a4b5a8ce1390555d6.bindPopup(popup_0ddeac2d7d2ffd315131b2d2faffb645)
+        ;
+
+        
+    
+    
+            var marker_c7556e936b62dbfdce7a88ff08194208 = L.marker(
+                [70.95, 32.08166666666667],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_024c6f3a166bd56897d1d1262a1f3744 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5783c4c7f474687372ab6f04b6392012 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_560f722c1b4da06b98d3798bc4417f2f = $(`<div id="html_560f722c1b4da06b98d3798bc4417f2f" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>ALLIKSAARE</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273437390</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>0.0 kts</td></tr>             <tr><td><b>Course:</b></td><td>0°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_5783c4c7f474687372ab6f04b6392012.setContent(html_560f722c1b4da06b98d3798bc4417f2f);
+            
+        
+
+        marker_c7556e936b62dbfdce7a88ff08194208.bindPopup(popup_5783c4c7f474687372ab6f04b6392012)
+        ;
+
+        
+    
+    
+            marker_c7556e936b62dbfdce7a88ff08194208.bindTooltip(
+                `<div>
+                     ALLIKSAARE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c7556e936b62dbfdce7a88ff08194208.setIcon(icon_024c6f3a166bd56897d1d1262a1f3744);
+            
+    
+            var poly_line_f86aaba38d3dd8a05f5d98c4d9004a99 = L.polyline(
+                [[74.662732, 21.041423], [74.667608, 21.04872], [74.66796, 21.049243]],
+                {"bubblingMouseEvents": true, "className": "vessel-273213010 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_e807080d7f29f4e9ee30b30fa96fcb68 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_98818fc20c1b7b5ee7fe51ec21d6a3e3 = $(`<div id="html_98818fc20c1b7b5ee7fe51ec21d6a3e3" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_e807080d7f29f4e9ee30b30fa96fcb68.setContent(html_98818fc20c1b7b5ee7fe51ec21d6a3e3);
+            
+        
+
+        poly_line_f86aaba38d3dd8a05f5d98c4d9004a99.bindPopup(popup_e807080d7f29f4e9ee30b30fa96fcb68)
+        ;
+
+        
+    
+    
+            var marker_afcdc46757be611ec1a30c7c6842915b = L.marker(
+                [74.66796, 21.049243],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_0a4b97352b976da0536f6ecd14c5404b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_761959c367359220832690248667a63d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e5e7b56a5ccf8bdfc798dd7904218bd4 = $(`<div id="html_e5e7b56a5ccf8bdfc798dd7904218bd4" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>OBELIAI</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273213010</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Other, no additional info</td></tr>             <tr><td><b>Speed:</b></td><td>4.0 kts</td></tr>             <tr><td><b>Course:</b></td><td>21°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_761959c367359220832690248667a63d.setContent(html_e5e7b56a5ccf8bdfc798dd7904218bd4);
+            
+        
+
+        marker_afcdc46757be611ec1a30c7c6842915b.bindPopup(popup_761959c367359220832690248667a63d)
+        ;
+
+        
+    
+    
+            marker_afcdc46757be611ec1a30c7c6842915b.bindTooltip(
+                `<div>
+                     OBELIAI
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_afcdc46757be611ec1a30c7c6842915b.setIcon(icon_0a4b97352b976da0536f6ecd14c5404b);
+            
+    
+            var poly_line_445301c3388e4748431d79cae670c8d0 = L.polyline(
+                [[73.985, 15.791666666666666], [73.985, 15.791666666666666], [73.985, 15.791666666666666]],
+                {"bubblingMouseEvents": true, "className": "vessel-273213180 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_5a59a4e473246962e60d1de4048c426b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_39bf36c0eee29bbdc8c908cc726651c5 = $(`<div id="html_39bf36c0eee29bbdc8c908cc726651c5" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_5a59a4e473246962e60d1de4048c426b.setContent(html_39bf36c0eee29bbdc8c908cc726651c5);
+            
+        
+
+        poly_line_445301c3388e4748431d79cae670c8d0.bindPopup(popup_5a59a4e473246962e60d1de4048c426b)
+        ;
+
+        
+    
+    
+            var marker_52aa793e9a4641cfc915d34a7b3ce8ca = L.marker(
+                [73.985, 15.791666666666666],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_f86a49e9d9a90147ca74c04b7d853387 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e75b435df418d344f488e927bdc115e9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_52b13db20bde4e87749363aa6dc7d4ef = $(`<div id="html_52b13db20bde4e87749363aa6dc7d4ef" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>VALENTIN MANTUROV</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273213180</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>4.0 kts</td></tr>             <tr><td><b>Course:</b></td><td>8°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_e75b435df418d344f488e927bdc115e9.setContent(html_52b13db20bde4e87749363aa6dc7d4ef);
+            
+        
+
+        marker_52aa793e9a4641cfc915d34a7b3ce8ca.bindPopup(popup_e75b435df418d344f488e927bdc115e9)
+        ;
+
+        
+    
+    
+            marker_52aa793e9a4641cfc915d34a7b3ce8ca.bindTooltip(
+                `<div>
+                     VALENTIN MANTUROV
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_52aa793e9a4641cfc915d34a7b3ce8ca.setIcon(icon_f86a49e9d9a90147ca74c04b7d853387);
+            
+    
+            var poly_line_78a807097d327da17926ad2c36b8a6c9 = L.polyline(
+                [[73.686958, 32.022782], [73.686958, 32.022782], [73.686958, 32.022782]],
+                {"bubblingMouseEvents": true, "className": "vessel-273516500 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_728093a2fff62de10b6fc787a6cd195e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f52c79237d63826f94f16e8c937506d0 = $(`<div id="html_f52c79237d63826f94f16e8c937506d0" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_728093a2fff62de10b6fc787a6cd195e.setContent(html_f52c79237d63826f94f16e8c937506d0);
+            
+        
+
+        poly_line_78a807097d327da17926ad2c36b8a6c9.bindPopup(popup_728093a2fff62de10b6fc787a6cd195e)
+        ;
+
+        
+    
+    
+            var marker_db4d02c8c87adad7e84e3d5e3d8cf274 = L.marker(
+                [73.686958, 32.022782],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_ed6692762ed631977b911b3f79ba9673 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dd71927d6bcc2ae5ae3b7fae3a9a1a5d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f87a91778e33b804bc0425a19e4c0c32 = $(`<div id="html_f87a91778e33b804bc0425a19e4c0c32" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>VOYKOVO</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273516500</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>1.3 kts</td></tr>             <tr><td><b>Course:</b></td><td>202°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_dd71927d6bcc2ae5ae3b7fae3a9a1a5d.setContent(html_f87a91778e33b804bc0425a19e4c0c32);
+            
+        
+
+        marker_db4d02c8c87adad7e84e3d5e3d8cf274.bindPopup(popup_dd71927d6bcc2ae5ae3b7fae3a9a1a5d)
+        ;
+
+        
+    
+    
+            marker_db4d02c8c87adad7e84e3d5e3d8cf274.bindTooltip(
+                `<div>
+                     VOYKOVO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_db4d02c8c87adad7e84e3d5e3d8cf274.setIcon(icon_ed6692762ed631977b911b3f79ba9673);
+            
+    
+            var poly_line_d332937dc8b9a1e30ca530ba85447a0f = L.polyline(
+                [[74.227233, 16.276763], [74.227233, 16.276763], [74.227233, 16.276763]],
+                {"bubblingMouseEvents": true, "className": "vessel-273291510 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_eb00e1a9b085eec7623aae938da552a8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_432b4ae17b9672494a889619f6b9cc78 = $(`<div id="html_432b4ae17b9672494a889619f6b9cc78" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_eb00e1a9b085eec7623aae938da552a8.setContent(html_432b4ae17b9672494a889619f6b9cc78);
+            
+        
+
+        poly_line_d332937dc8b9a1e30ca530ba85447a0f.bindPopup(popup_eb00e1a9b085eec7623aae938da552a8)
+        ;
+
+        
+    
+    
+            var marker_e9ca48763345961c26d258f84e76accb = L.marker(
+                [74.227233, 16.276763],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_53c13948a00573e636bedd17b1ac5c3c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_742359152e5033a4ee9b6ce063b1439c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_bd6afe22216018d7443302ef6e7147c3 = $(`<div id="html_bd6afe22216018d7443302ef6e7147c3" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>NORVEZHSKOE MORE</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273291510</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>2.6 kts</td></tr>             <tr><td><b>Course:</b></td><td>160°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_742359152e5033a4ee9b6ce063b1439c.setContent(html_bd6afe22216018d7443302ef6e7147c3);
+            
+        
+
+        marker_e9ca48763345961c26d258f84e76accb.bindPopup(popup_742359152e5033a4ee9b6ce063b1439c)
+        ;
+
+        
+    
+    
+            marker_e9ca48763345961c26d258f84e76accb.bindTooltip(
+                `<div>
+                     NORVEZHSKOE MORE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e9ca48763345961c26d258f84e76accb.setIcon(icon_53c13948a00573e636bedd17b1ac5c3c);
+            
+    
+            var poly_line_6f24cde25652ca946b668323f127f10a = L.polyline(
+                [[74.486573, 19.26657], [74.486648, 19.26667], [74.486655, 19.266705]],
+                {"bubblingMouseEvents": true, "className": "vessel-273217010 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_70eb7640a7d9ff59560e694e89490b65 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a6d59de63ced3e578d19acacc7a8b123 = $(`<div id="html_a6d59de63ced3e578d19acacc7a8b123" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_70eb7640a7d9ff59560e694e89490b65.setContent(html_a6d59de63ced3e578d19acacc7a8b123);
+            
+        
+
+        poly_line_6f24cde25652ca946b668323f127f10a.bindPopup(popup_70eb7640a7d9ff59560e694e89490b65)
+        ;
+
+        
+    
+    
+            var marker_ae1c0f0ec06a3044f427dce1cde2e106 = L.marker(
+                [74.486655, 19.266705],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_37ce8e0124afc56a7317666dd0e3fef3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_34e4baccb27ba2132615525279d6d1d6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_119f64430d521a31f8179b846c732d3f = $(`<div id="html_119f64430d521a31f8179b846c732d3f" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>BOOTES</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273217010</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>0.0 kts</td></tr>             <tr><td><b>Course:</b></td><td>30°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_34e4baccb27ba2132615525279d6d1d6.setContent(html_119f64430d521a31f8179b846c732d3f);
+            
+        
+
+        marker_ae1c0f0ec06a3044f427dce1cde2e106.bindPopup(popup_34e4baccb27ba2132615525279d6d1d6)
+        ;
+
+        
+    
+    
+            marker_ae1c0f0ec06a3044f427dce1cde2e106.bindTooltip(
+                `<div>
+                     BOOTES
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ae1c0f0ec06a3044f427dce1cde2e106.setIcon(icon_37ce8e0124afc56a7317666dd0e3fef3);
+            
+    
+            var poly_line_51a8fe27a8b952d769c6bb0faa11d2a6 = L.polyline(
+                [[73.320872, 15.069228], [73.320872, 15.069228], [73.320872, 15.069228]],
+                {"bubblingMouseEvents": true, "className": "vessel-273897000 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_1044a27cfe80d05d6d8cc1b80ca52519 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_05963a742ad38375bd27e2d608047ac5 = $(`<div id="html_05963a742ad38375bd27e2d608047ac5" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_1044a27cfe80d05d6d8cc1b80ca52519.setContent(html_05963a742ad38375bd27e2d608047ac5);
+            
+        
+
+        poly_line_51a8fe27a8b952d769c6bb0faa11d2a6.bindPopup(popup_1044a27cfe80d05d6d8cc1b80ca52519)
+        ;
+
+        
+    
+    
+            var marker_6957e82951cad616f9d3399093fb4042 = L.marker(
+                [73.320872, 15.069228],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_9559687ff3662a3b9a848af5921b4010 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d45c8f9e5d9e9c10659f32721660ceaa = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_73c005f9522510c6e223b226d85b8f12 = $(`<div id="html_73c005f9522510c6e223b226d85b8f12" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>MYS SLEPIKOVSKOGO</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273897000</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>7.7 kts</td></tr>             <tr><td><b>Course:</b></td><td>286°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_d45c8f9e5d9e9c10659f32721660ceaa.setContent(html_73c005f9522510c6e223b226d85b8f12);
+            
+        
+
+        marker_6957e82951cad616f9d3399093fb4042.bindPopup(popup_d45c8f9e5d9e9c10659f32721660ceaa)
+        ;
+
+        
+    
+    
+            marker_6957e82951cad616f9d3399093fb4042.bindTooltip(
+                `<div>
+                     MYS SLEPIKOVSKOGO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6957e82951cad616f9d3399093fb4042.setIcon(icon_9559687ff3662a3b9a848af5921b4010);
+            
+    
+            var poly_line_c3cc4b516c360d725723bd868ff0be19 = L.polyline(
+                [[78.885, 33.86666666666667], [78.885, 33.86666666666667], [78.885, 33.86666666666667]],
+                {"bubblingMouseEvents": true, "className": "vessel-412464117 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_f3296522c3b42bb5de74a9c1e69dcc0e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_03ca6ce19380c97cd8ef6870d15e3467 = $(`<div id="html_03ca6ce19380c97cd8ef6870d15e3467" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_f3296522c3b42bb5de74a9c1e69dcc0e.setContent(html_03ca6ce19380c97cd8ef6870d15e3467);
+            
+        
+
+        poly_line_c3cc4b516c360d725723bd868ff0be19.bindPopup(popup_f3296522c3b42bb5de74a9c1e69dcc0e)
+        ;
+
+        
+    
+    
+            var marker_327c0c2456ca18179701c3737d2d7410 = L.marker(
+                [78.885, 33.86666666666667],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_2218cb22b3c2acb1ab4ff4502aa22424 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fa2534bc77e1def4c228dc9299d09c1c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5900ad028c670133de545408b1fcf487 = $(`<div id="html_5900ad028c670133de545408b1fcf487" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>HUA NAN YU 703</h4>         <table>             <tr><td><b>MMSI:</b></td><td>412464117</td></tr>             <tr><td><b>Country:</b></td><td>China</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>22.0 kts</td></tr>             <tr><td><b>Course:</b></td><td>128°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_fa2534bc77e1def4c228dc9299d09c1c.setContent(html_5900ad028c670133de545408b1fcf487);
+            
+        
+
+        marker_327c0c2456ca18179701c3737d2d7410.bindPopup(popup_fa2534bc77e1def4c228dc9299d09c1c)
+        ;
+
+        
+    
+    
+            marker_327c0c2456ca18179701c3737d2d7410.bindTooltip(
+                `<div>
+                     HUA NAN YU 703
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_327c0c2456ca18179701c3737d2d7410.setIcon(icon_2218cb22b3c2acb1ab4ff4502aa22424);
+            
+    
+            var poly_line_d77c8cc151baee5ec3cb47ca289a705c = L.polyline(
+                [[70.631565, 19.116883], [70.627398, 19.105817], [70.627117, 19.105083]],
+                {"bubblingMouseEvents": true, "className": "vessel-273522400 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_164879f4b3ff4598cdb1e23b6ced7e36 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2c584ed1138bfd387e5f672683ca982c = $(`<div id="html_2c584ed1138bfd387e5f672683ca982c" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_164879f4b3ff4598cdb1e23b6ced7e36.setContent(html_2c584ed1138bfd387e5f672683ca982c);
+            
+        
+
+        poly_line_d77c8cc151baee5ec3cb47ca289a705c.bindPopup(popup_164879f4b3ff4598cdb1e23b6ced7e36)
+        ;
+
+        
+    
+    
+            var marker_855c0ba39b9f5ae68a71bc45ffc97a6f = L.marker(
+                [70.627117, 19.105083],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_84b71f5e1a2b520de9484671986f9d1a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_158fa59c2f6478782845a812e856fef4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_88d7395d4e3b4fd72566a6cddd5df541 = $(`<div id="html_88d7395d4e3b4fd72566a6cddd5df541" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>ZAKHAR SOROKIN</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273522400</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>4.2 kts</td></tr>             <tr><td><b>Course:</b></td><td>221°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_158fa59c2f6478782845a812e856fef4.setContent(html_88d7395d4e3b4fd72566a6cddd5df541);
+            
+        
+
+        marker_855c0ba39b9f5ae68a71bc45ffc97a6f.bindPopup(popup_158fa59c2f6478782845a812e856fef4)
+        ;
+
+        
+    
+    
+            marker_855c0ba39b9f5ae68a71bc45ffc97a6f.bindTooltip(
+                `<div>
+                     ZAKHAR SOROKIN
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_855c0ba39b9f5ae68a71bc45ffc97a6f.setIcon(icon_84b71f5e1a2b520de9484671986f9d1a);
+            
+    
+            var poly_line_139bd87a85ecb385f14f8a698f87b0cc = L.polyline(
+                [[74.804192, 18.280545], [74.80618, 18.296387], [74.806387, 18.29811]],
+                {"bubblingMouseEvents": true, "className": "vessel-273447010 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_e4af3c150e89febbcfe855b4ebe597a4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f647894ece0d03351c752e17598a8ee1 = $(`<div id="html_f647894ece0d03351c752e17598a8ee1" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_e4af3c150e89febbcfe855b4ebe597a4.setContent(html_f647894ece0d03351c752e17598a8ee1);
+            
+        
+
+        poly_line_139bd87a85ecb385f14f8a698f87b0cc.bindPopup(popup_e4af3c150e89febbcfe855b4ebe597a4)
+        ;
+
+        
+    
+    
+            var marker_4a2235c1b248a6b324b45dcc79135d26 = L.marker(
+                [74.806387, 18.29811],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_2fb236955b516d2721f0cfd3be10f521 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_52528e775bc6d2c976ef99e70bb9aaa5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d2c6c2657c1048f57042803ccba31e86 = $(`<div id="html_d2c6c2657c1048f57042803ccba31e86" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>ALFERAS</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273447010</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>3.6 kts</td></tr>             <tr><td><b>Course:</b></td><td>73°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_52528e775bc6d2c976ef99e70bb9aaa5.setContent(html_d2c6c2657c1048f57042803ccba31e86);
+            
+        
+
+        marker_4a2235c1b248a6b324b45dcc79135d26.bindPopup(popup_52528e775bc6d2c976ef99e70bb9aaa5)
+        ;
+
+        
+    
+    
+            marker_4a2235c1b248a6b324b45dcc79135d26.bindTooltip(
+                `<div>
+                     ALFERAS
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4a2235c1b248a6b324b45dcc79135d26.setIcon(icon_2fb236955b516d2721f0cfd3be10f521);
+            
+    
+            var poly_line_939e141930ebd2493c0b63d02eaa30c5 = L.polyline(
+                [[72.14666666666668, 27.21333333333333], [72.14666666666668, 27.21333333333333], [72.14666666666668, 27.21333333333333]],
+                {"bubblingMouseEvents": true, "className": "vessel-414957000 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_ca65cc5ed5cd614ad17f5796e3cbafa2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e502c76c28c487360207a9538e329aed = $(`<div id="html_e502c76c28c487360207a9538e329aed" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_ca65cc5ed5cd614ad17f5796e3cbafa2.setContent(html_e502c76c28c487360207a9538e329aed);
+            
+        
+
+        poly_line_939e141930ebd2493c0b63d02eaa30c5.bindPopup(popup_ca65cc5ed5cd614ad17f5796e3cbafa2)
+        ;
+
+        
+    
+    
+            var marker_441d399ec682d03c806628160ff8a813 = L.marker(
+                [72.14666666666668, 27.21333333333333],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_a43058cd5d7914b0aecb4c353b2c8aba = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_de67cb662a10c7f25244517ada38dfb6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_189b38d9dea3bdb8a92da9c0ee4422f0 = $(`<div id="html_189b38d9dea3bdb8a92da9c0ee4422f0" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>GUOJIANENGYUAN603</h4>         <table>             <tr><td><b>MMSI:</b></td><td>414957000</td></tr>             <tr><td><b>Country:</b></td><td>China</td></tr>             <tr><td><b>Type:</b></td><td>Cargo</td></tr>             <tr><td><b>Speed:</b></td><td>54.0 kts</td></tr>             <tr><td><b>Course:</b></td><td>352°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_de67cb662a10c7f25244517ada38dfb6.setContent(html_189b38d9dea3bdb8a92da9c0ee4422f0);
+            
+        
+
+        marker_441d399ec682d03c806628160ff8a813.bindPopup(popup_de67cb662a10c7f25244517ada38dfb6)
+        ;
+
+        
+    
+    
+            marker_441d399ec682d03c806628160ff8a813.bindTooltip(
+                `<div>
+                     GUOJIANENGYUAN603
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_441d399ec682d03c806628160ff8a813.setIcon(icon_a43058cd5d7914b0aecb4c353b2c8aba);
+            
+    
+            var poly_line_046f98f4fa976a28d88e555cb8d09582 = L.polyline(
+                [[70.625597, 19.287682], [70.625288, 19.27003], [70.62522, 19.269227]],
+                {"bubblingMouseEvents": true, "className": "vessel-273298600 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_8fc1e17c0a6745633bac485dc47d521e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_54c5e596dec1b7599c2e710efe18de14 = $(`<div id="html_54c5e596dec1b7599c2e710efe18de14" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_8fc1e17c0a6745633bac485dc47d521e.setContent(html_54c5e596dec1b7599c2e710efe18de14);
+            
+        
+
+        poly_line_046f98f4fa976a28d88e555cb8d09582.bindPopup(popup_8fc1e17c0a6745633bac485dc47d521e)
+        ;
+
+        
+    
+    
+            var marker_b77a7bf6968692293a54ef0e75729654 = L.marker(
+                [70.62522, 19.269227],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_90b59510422e03be414ebd4494028f25 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2f5837c15414cb33cbc6724cbb49ea3f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_69fa126b6675c6c48cc928b64de8a302 = $(`<div id="html_69fa126b6675c6c48cc928b64de8a302" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>ARCTICA</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273298600</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>4.5 kts</td></tr>             <tr><td><b>Course:</b></td><td>254°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_2f5837c15414cb33cbc6724cbb49ea3f.setContent(html_69fa126b6675c6c48cc928b64de8a302);
+            
+        
+
+        marker_b77a7bf6968692293a54ef0e75729654.bindPopup(popup_2f5837c15414cb33cbc6724cbb49ea3f)
+        ;
+
+        
+    
+    
+            marker_b77a7bf6968692293a54ef0e75729654.bindTooltip(
+                `<div>
+                     ARCTICA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b77a7bf6968692293a54ef0e75729654.setIcon(icon_90b59510422e03be414ebd4494028f25);
+            
+    
+            var poly_line_8019caeeba69e69ba2b9309671c2905b = L.polyline(
+                [[74.486228, 19.26716], [74.486317, 19.26727], [74.486317, 19.26727]],
+                {"bubblingMouseEvents": true, "className": "vessel-273148810 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_a480b194651b6bf53ed3ed47ccf1536a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_704fe97374f9ed5379227dd88b83744d = $(`<div id="html_704fe97374f9ed5379227dd88b83744d" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_a480b194651b6bf53ed3ed47ccf1536a.setContent(html_704fe97374f9ed5379227dd88b83744d);
+            
+        
+
+        poly_line_8019caeeba69e69ba2b9309671c2905b.bindPopup(popup_a480b194651b6bf53ed3ed47ccf1536a)
+        ;
+
+        
+    
+    
+            var marker_15e6a67437479a85ce420efaffbce76a = L.marker(
+                [74.486317, 19.26727],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_228cfd4cb1e10e98f5ee43ada9a78967 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dfa221d17f28025e4c813ef72da78e0d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c4bbdfec5f25702ba014cac2a7f4e58f = $(`<div id="html_c4bbdfec5f25702ba014cac2a7f4e58f" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>BELOMORYE</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273148810</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Cargo</td></tr>             <tr><td><b>Speed:</b></td><td>0.1 kts</td></tr>             <tr><td><b>Course:</b></td><td>288°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_dfa221d17f28025e4c813ef72da78e0d.setContent(html_c4bbdfec5f25702ba014cac2a7f4e58f);
+            
+        
+
+        marker_15e6a67437479a85ce420efaffbce76a.bindPopup(popup_dfa221d17f28025e4c813ef72da78e0d)
+        ;
+
+        
+    
+    
+            marker_15e6a67437479a85ce420efaffbce76a.bindTooltip(
+                `<div>
+                     BELOMORYE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_15e6a67437479a85ce420efaffbce76a.setIcon(icon_228cfd4cb1e10e98f5ee43ada9a78967);
+            
+    
+            var poly_line_6156309b00f668bc1949e50eaeb85a9d = L.polyline(
+                [[70.735512, 20.264342], [70.737368, 20.247805], [70.737442, 20.24726]],
+                {"bubblingMouseEvents": true, "className": "vessel-273529800 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_6a8d3338b89d36477b355c0137b0da4f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2efdd99e8209ec6e3820974c531a9dd5 = $(`<div id="html_2efdd99e8209ec6e3820974c531a9dd5" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_6a8d3338b89d36477b355c0137b0da4f.setContent(html_2efdd99e8209ec6e3820974c531a9dd5);
+            
+        
+
+        poly_line_6156309b00f668bc1949e50eaeb85a9d.bindPopup(popup_6a8d3338b89d36477b355c0137b0da4f)
+        ;
+
+        
+    
+    
+            var marker_fa057e4d6b92bd7a7f4647e2f44cf63c = L.marker(
+                [70.737442, 20.24726],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_8dc23919bde9889bbda0534b906ad474 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_30ba3da538864ba7f2c13453670b189e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_02decbbcd7abbc00c5a344117925a5b1 = $(`<div id="html_02decbbcd7abbc00c5a344117925a5b1" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>BORIS SYROMYATNIKOV</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273529800</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>4.5 kts</td></tr>             <tr><td><b>Course:</b></td><td>300°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_30ba3da538864ba7f2c13453670b189e.setContent(html_02decbbcd7abbc00c5a344117925a5b1);
+            
+        
+
+        marker_fa057e4d6b92bd7a7f4647e2f44cf63c.bindPopup(popup_30ba3da538864ba7f2c13453670b189e)
+        ;
+
+        
+    
+    
+            marker_fa057e4d6b92bd7a7f4647e2f44cf63c.bindTooltip(
+                `<div>
+                     BORIS SYROMYATNIKOV
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fa057e4d6b92bd7a7f4647e2f44cf63c.setIcon(icon_8dc23919bde9889bbda0534b906ad474);
+            
+    
+            var poly_line_ef53eaae1b0f95475fff65e1321dbe38 = L.polyline(
+                [[77.35166666666667, 31.68], [77.35166666666667, 31.68], [77.35166666666667, 31.68]],
+                {"bubblingMouseEvents": true, "className": "vessel-412549265 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_e230f3a23505012fca18951ed341e1cd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d10ff8ea22cf09653aae96c9ec901956 = $(`<div id="html_d10ff8ea22cf09653aae96c9ec901956" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_e230f3a23505012fca18951ed341e1cd.setContent(html_d10ff8ea22cf09653aae96c9ec901956);
+            
+        
+
+        poly_line_ef53eaae1b0f95475fff65e1321dbe38.bindPopup(popup_e230f3a23505012fca18951ed341e1cd)
+        ;
+
+        
+    
+    
+            var marker_2a1e67a21b50c4fdee3c5d26a1f688e4 = L.marker(
+                [77.35166666666667, 31.68],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_e03a980770438be4efd8caa54f1338ff = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_049701accd03b7f7c8e1e569d74c116b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f1fcb6b743f4e15f258490396bd29420 = $(`<div id="html_f1fcb6b743f4e15f258490396bd29420" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>ZHONG SHUI 787</h4>         <table>             <tr><td><b>MMSI:</b></td><td>412549265</td></tr>             <tr><td><b>Country:</b></td><td>China</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>11.0 kts</td></tr>             <tr><td><b>Course:</b></td><td>235°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_049701accd03b7f7c8e1e569d74c116b.setContent(html_f1fcb6b743f4e15f258490396bd29420);
+            
+        
+
+        marker_2a1e67a21b50c4fdee3c5d26a1f688e4.bindPopup(popup_049701accd03b7f7c8e1e569d74c116b)
+        ;
+
+        
+    
+    
+            marker_2a1e67a21b50c4fdee3c5d26a1f688e4.bindTooltip(
+                `<div>
+                     ZHONG SHUI 787
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2a1e67a21b50c4fdee3c5d26a1f688e4.setIcon(icon_e03a980770438be4efd8caa54f1338ff);
+            
+    
+            var poly_line_10d92fa2e773d9a204a3846bade412b0 = L.polyline(
+                [[70.60465, 19.022017], [70.603617, 19.00565], [70.603567, 19.005067]],
+                {"bubblingMouseEvents": true, "className": "vessel-273532110 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_b5d5f0ca9dd4845ecc75b37e5f211a5c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_58819ff8662ea209aff7cb63b3967f81 = $(`<div id="html_58819ff8662ea209aff7cb63b3967f81" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_b5d5f0ca9dd4845ecc75b37e5f211a5c.setContent(html_58819ff8662ea209aff7cb63b3967f81);
+            
+        
+
+        poly_line_10d92fa2e773d9a204a3846bade412b0.bindPopup(popup_b5d5f0ca9dd4845ecc75b37e5f211a5c)
+        ;
+
+        
+    
+    
+            var marker_700567900493d70f4d8e14f4e9820e64 = L.marker(
+                [70.603567, 19.005067],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_542cb8a716e2c7f7efa07600576de543 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1a2245e38479e259e33259c336518589 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_56f167abd52fe46f3d3a7cd607cc09ad = $(`<div id="html_56f167abd52fe46f3d3a7cd607cc09ad" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>KURSHSKAYA KOSA</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273532110</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>3.8 kts</td></tr>             <tr><td><b>Course:</b></td><td>251°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_1a2245e38479e259e33259c336518589.setContent(html_56f167abd52fe46f3d3a7cd607cc09ad);
+            
+        
+
+        marker_700567900493d70f4d8e14f4e9820e64.bindPopup(popup_1a2245e38479e259e33259c336518589)
+        ;
+
+        
+    
+    
+            marker_700567900493d70f4d8e14f4e9820e64.bindTooltip(
+                `<div>
+                     KURSHSKAYA KOSA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_700567900493d70f4d8e14f4e9820e64.setIcon(icon_542cb8a716e2c7f7efa07600576de543);
+            
+    
+            var poly_line_5233f1313549b3ac5b8cd706ef62aac3 = L.polyline(
+                [[78.654693, 16.381778], [78.654685, 16.381888], [78.654685, 16.381888]],
+                {"bubblingMouseEvents": true, "className": "vessel-273458500 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_b5cb189ebe9c27e93a793bfde6c53815 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_57674a0ca90fb7dbb49f3d804c11e497 = $(`<div id="html_57674a0ca90fb7dbb49f3d804c11e497" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_b5cb189ebe9c27e93a793bfde6c53815.setContent(html_57674a0ca90fb7dbb49f3d804c11e497);
+            
+        
+
+        poly_line_5233f1313549b3ac5b8cd706ef62aac3.bindPopup(popup_b5cb189ebe9c27e93a793bfde6c53815)
+        ;
+
+        
+    
+    
+            var marker_328b9294e3fddc1050a1675243805374 = L.marker(
+                [78.654685, 16.381888],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_86419c51c5bfd313d8a5891435fce3f0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5ad8cfb8e38ac3dda755a937dbe073a9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_41faafab3c10063a94f86ea1dfdf75aa = $(`<div id="html_41faafab3c10063a94f86ea1dfdf75aa" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>PROFESSOR MOLCHANOV</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273458500</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Passenger, no additional info</td></tr>             <tr><td><b>Speed:</b></td><td>0.0 kts</td></tr>             <tr><td><b>Course:</b></td><td>108°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_5ad8cfb8e38ac3dda755a937dbe073a9.setContent(html_41faafab3c10063a94f86ea1dfdf75aa);
+            
+        
+
+        marker_328b9294e3fddc1050a1675243805374.bindPopup(popup_5ad8cfb8e38ac3dda755a937dbe073a9)
+        ;
+
+        
+    
+    
+            marker_328b9294e3fddc1050a1675243805374.bindTooltip(
+                `<div>
+                     PROFESSOR MOLCHANOV
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_328b9294e3fddc1050a1675243805374.setIcon(icon_86419c51c5bfd313d8a5891435fce3f0);
+            
+    
+            var poly_line_2c358352ca34ec6a8288e68214363c9c = L.polyline(
+                [[70.618583, 19.496417], [70.618533, 19.4795], [70.618533, 19.4788]],
+                {"bubblingMouseEvents": true, "className": "vessel-273534110 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_b25ee8b37c013caf8fffe34e124abfff = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9a9b1594ab3d724306e46cdc7fb910a7 = $(`<div id="html_9a9b1594ab3d724306e46cdc7fb910a7" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_b25ee8b37c013caf8fffe34e124abfff.setContent(html_9a9b1594ab3d724306e46cdc7fb910a7);
+            
+        
+
+        poly_line_2c358352ca34ec6a8288e68214363c9c.bindPopup(popup_b25ee8b37c013caf8fffe34e124abfff)
+        ;
+
+        
+    
+    
+            var marker_86bc5b61c8f4b8fd60b07782e1e9cdc7 = L.marker(
+                [70.618533, 19.4788],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_decf708044e2cd13f452f369831e175c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_866bae4e92e33ed0e891fd2227cd39ae = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4feb29e10c1ccf6aee51c9d51dd1618a = $(`<div id="html_4feb29e10c1ccf6aee51c9d51dd1618a" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>LIRA</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273534110</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>4.2 kts</td></tr>             <tr><td><b>Course:</b></td><td>268°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_866bae4e92e33ed0e891fd2227cd39ae.setContent(html_4feb29e10c1ccf6aee51c9d51dd1618a);
+            
+        
+
+        marker_86bc5b61c8f4b8fd60b07782e1e9cdc7.bindPopup(popup_866bae4e92e33ed0e891fd2227cd39ae)
+        ;
+
+        
+    
+    
+            marker_86bc5b61c8f4b8fd60b07782e1e9cdc7.bindTooltip(
+                `<div>
+                     LIRA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_86bc5b61c8f4b8fd60b07782e1e9cdc7.setIcon(icon_decf708044e2cd13f452f369831e175c);
+            
+    
+            var poly_line_6c261d2cf01b80f5edbc6a1ce70c52ab = L.polyline(
+                [[68.340098, 12.69177], [68.33301, 12.67565], [68.332572, 12.674643]],
+                {"bubblingMouseEvents": true, "className": "vessel-273384030 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_05fac72fe576beb5e44e2e564dd34ee5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3151e52ac99b90e8415b3625f7477d12 = $(`<div id="html_3151e52ac99b90e8415b3625f7477d12" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_05fac72fe576beb5e44e2e564dd34ee5.setContent(html_3151e52ac99b90e8415b3625f7477d12);
+            
+        
+
+        poly_line_6c261d2cf01b80f5edbc6a1ce70c52ab.bindPopup(popup_05fac72fe576beb5e44e2e564dd34ee5)
+        ;
+
+        
+    
+    
+            var marker_2f8dfccd611ca912170244d335fb9657 = L.marker(
+                [68.332572, 12.674643],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_73e8b18c89773294b4a5c916d332b985 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d88273287db1df1422f1b7d0e40533a1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_dfdc728df3a314c887df623d146065fd = $(`<div id="html_dfdc728df3a314c887df623d146065fd" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>KAPITAN YAKOVLEV</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273384030</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Cargo</td></tr>             <tr><td><b>Speed:</b></td><td>6.9 kts</td></tr>             <tr><td><b>Course:</b></td><td>221°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_d88273287db1df1422f1b7d0e40533a1.setContent(html_dfdc728df3a314c887df623d146065fd);
+            
+        
+
+        marker_2f8dfccd611ca912170244d335fb9657.bindPopup(popup_d88273287db1df1422f1b7d0e40533a1)
+        ;
+
+        
+    
+    
+            marker_2f8dfccd611ca912170244d335fb9657.bindTooltip(
+                `<div>
+                     KAPITAN YAKOVLEV
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2f8dfccd611ca912170244d335fb9657.setIcon(icon_73e8b18c89773294b4a5c916d332b985);
+            
+    
+            var poly_line_aee8996f6e8e7e788f070f2c5d2db59a = L.polyline(
+                [[77.073187, 28.786377], [77.073187, 28.786377], [77.073187, 28.786377]],
+                {"bubblingMouseEvents": true, "className": "vessel-273537800 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_36340d234d47b3b9723269fa1dbee3d1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_73592b339b4cbd7fd229fd21919c0307 = $(`<div id="html_73592b339b4cbd7fd229fd21919c0307" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_36340d234d47b3b9723269fa1dbee3d1.setContent(html_73592b339b4cbd7fd229fd21919c0307);
+            
+        
+
+        poly_line_aee8996f6e8e7e788f070f2c5d2db59a.bindPopup(popup_36340d234d47b3b9723269fa1dbee3d1)
+        ;
+
+        
+    
+    
+            var marker_f1b6a19e6b44129b57dcb2268f411477 = L.marker(
+                [77.073187, 28.786377],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_cf1474ea67307fc278cb8e0321052855 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3d2dda456845602402b823a883368d13 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b7774d06b6adcac2f7e96fe5450c1161 = $(`<div id="html_b7774d06b6adcac2f7e96fe5450c1161" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>KARACHAROVO</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273537800</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>3.5 kts</td></tr>             <tr><td><b>Course:</b></td><td>191°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_3d2dda456845602402b823a883368d13.setContent(html_b7774d06b6adcac2f7e96fe5450c1161);
+            
+        
+
+        marker_f1b6a19e6b44129b57dcb2268f411477.bindPopup(popup_3d2dda456845602402b823a883368d13)
+        ;
+
+        
+    
+    
+            marker_f1b6a19e6b44129b57dcb2268f411477.bindTooltip(
+                `<div>
+                     KARACHAROVO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f1b6a19e6b44129b57dcb2268f411477.setIcon(icon_cf1474ea67307fc278cb8e0321052855);
+            
+    
+            var poly_line_80093e8ff237cefbd14f5f064dd95bf0 = L.polyline(
+                [[74.22833333333332, 16.198333333333334], [74.22833333333332, 16.198333333333334], [74.22833333333332, 16.198333333333334]],
+                {"bubblingMouseEvents": true, "className": "vessel-273613930 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_187d235a69816dafa33ddeeac7a240a7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a3f494858e899ad16d17a84aec35bee7 = $(`<div id="html_a3f494858e899ad16d17a84aec35bee7" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_187d235a69816dafa33ddeeac7a240a7.setContent(html_a3f494858e899ad16d17a84aec35bee7);
+            
+        
+
+        poly_line_80093e8ff237cefbd14f5f064dd95bf0.bindPopup(popup_187d235a69816dafa33ddeeac7a240a7)
+        ;
+
+        
+    
+    
+            var marker_28e738c6d5b7d46f50fb3762f3274536 = L.marker(
+                [74.22833333333332, 16.198333333333334],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_2d63aeb01767448661a6131e45cd1e7f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8d6a6f87dc35b23a79e9b8df318984ed = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a51b9542aafa9ca03944f7c4ff1bc6a7 = $(`<div id="html_a51b9542aafa9ca03944f7c4ff1bc6a7" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>BELOYE MORE</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273613930</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>4.0 kts</td></tr>             <tr><td><b>Course:</b></td><td>96°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_8d6a6f87dc35b23a79e9b8df318984ed.setContent(html_a51b9542aafa9ca03944f7c4ff1bc6a7);
+            
+        
+
+        marker_28e738c6d5b7d46f50fb3762f3274536.bindPopup(popup_8d6a6f87dc35b23a79e9b8df318984ed)
+        ;
+
+        
+    
+    
+            marker_28e738c6d5b7d46f50fb3762f3274536.bindTooltip(
+                `<div>
+                     BELOYE MORE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_28e738c6d5b7d46f50fb3762f3274536.setIcon(icon_2d63aeb01767448661a6131e45cd1e7f);
+            
+    
+            var poly_line_95b733dcf2ee0de6f2c6b46607090b17 = L.polyline(
+                [[74.66666666666667, 25.134999999999998], [74.66666666666667, 25.134999999999998], [74.66666666666667, 25.134999999999998]],
+                {"bubblingMouseEvents": true, "className": "vessel-273845800 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_f74cabe525be318ada507a08188ff18a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d1d3821649a15bb7626fe16767465014 = $(`<div id="html_d1d3821649a15bb7626fe16767465014" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_f74cabe525be318ada507a08188ff18a.setContent(html_d1d3821649a15bb7626fe16767465014);
+            
+        
+
+        poly_line_95b733dcf2ee0de6f2c6b46607090b17.bindPopup(popup_f74cabe525be318ada507a08188ff18a)
+        ;
+
+        
+    
+    
+            var marker_da7f300233c243d4d6347353d14b2604 = L.marker(
+                [74.66666666666667, 25.134999999999998],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_364f5c08aa4c74dbb28fabd6909a7f58 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9d65cb8ac01b64092153667f3b6dca27 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1db2daab62fb4fb6924b640669186806 = $(`<div id="html_1db2daab62fb4fb6924b640669186806" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>VASILIY GOLOVNIN</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273845800</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>3.0 kts</td></tr>             <tr><td><b>Course:</b></td><td>221°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_9d65cb8ac01b64092153667f3b6dca27.setContent(html_1db2daab62fb4fb6924b640669186806);
+            
+        
+
+        marker_da7f300233c243d4d6347353d14b2604.bindPopup(popup_9d65cb8ac01b64092153667f3b6dca27)
+        ;
+
+        
+    
+    
+            marker_da7f300233c243d4d6347353d14b2604.bindTooltip(
+                `<div>
+                     VASILIY GOLOVNIN
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_da7f300233c243d4d6347353d14b2604.setIcon(icon_364f5c08aa4c74dbb28fabd6909a7f58);
+            
+    
+            var poly_line_4f925dc02dad0be1c18a5cf3b7fcc0f3 = L.polyline(
+                [[70.651877, 18.834657], [70.658165, 18.836017], [70.658642, 18.836142]],
+                {"bubblingMouseEvents": true, "className": "vessel-273397450 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_b84efbe30dcb977ce65d84d0f2690a91 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0e366c7d4cfb190ae878f2d0b4c8450b = $(`<div id="html_0e366c7d4cfb190ae878f2d0b4c8450b" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_b84efbe30dcb977ce65d84d0f2690a91.setContent(html_0e366c7d4cfb190ae878f2d0b4c8450b);
+            
+        
+
+        poly_line_4f925dc02dad0be1c18a5cf3b7fcc0f3.bindPopup(popup_b84efbe30dcb977ce65d84d0f2690a91)
+        ;
+
+        
+    
+    
+            var marker_75c9498e64886899660753f86e88ba9d = L.marker(
+                [70.658642, 18.836142],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_d002420e374ca56bfb8abff3d01312cf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5c5d744e2d60ea5ac19de87d49f8b3df = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6f034d3396ae53ad7a6e2b7db470af9a = $(`<div id="html_6f034d3396ae53ad7a6e2b7db470af9a" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>ESTER</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273397450</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>4.8 kts</td></tr>             <tr><td><b>Course:</b></td><td>359°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_5c5d744e2d60ea5ac19de87d49f8b3df.setContent(html_6f034d3396ae53ad7a6e2b7db470af9a);
+            
+        
+
+        marker_75c9498e64886899660753f86e88ba9d.bindPopup(popup_5c5d744e2d60ea5ac19de87d49f8b3df)
+        ;
+
+        
+    
+    
+            marker_75c9498e64886899660753f86e88ba9d.bindTooltip(
+                `<div>
+                     ESTER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_75c9498e64886899660753f86e88ba9d.setIcon(icon_d002420e374ca56bfb8abff3d01312cf);
+            
+    
+            var poly_line_26ca161a2aae420ae48193fc3e502cd2 = L.polyline(
+                [[70.640198, 19.416588], [70.641547, 19.401545], [70.641628, 19.40081]],
+                {"bubblingMouseEvents": true, "className": "vessel-273398460 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_33b1615d03cf2f805d9a9b880e0cf7c8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9188d3c4a8747192e1e5f7a2693076ba = $(`<div id="html_9188d3c4a8747192e1e5f7a2693076ba" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_33b1615d03cf2f805d9a9b880e0cf7c8.setContent(html_9188d3c4a8747192e1e5f7a2693076ba);
+            
+        
+
+        poly_line_26ca161a2aae420ae48193fc3e502cd2.bindPopup(popup_33b1615d03cf2f805d9a9b880e0cf7c8)
+        ;
+
+        
+    
+    
+            var marker_d5d68d950ffa8c6b584c6489a4095790 = L.marker(
+                [70.641628, 19.40081],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_6028ee549db8ab54fce1343e7a6f3272 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5eedfb9412e158d03f80b76e56648d29 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c9d73334ee6adb25498f9f56966b755c = $(`<div id="html_c9d73334ee6adb25498f9f56966b755c" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>KAPITAN DEMIDENKO</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273398460</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>2.8 kts</td></tr>             <tr><td><b>Course:</b></td><td>294°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_5eedfb9412e158d03f80b76e56648d29.setContent(html_c9d73334ee6adb25498f9f56966b755c);
+            
+        
+
+        marker_d5d68d950ffa8c6b584c6489a4095790.bindPopup(popup_5eedfb9412e158d03f80b76e56648d29)
+        ;
+
+        
+    
+    
+            marker_d5d68d950ffa8c6b584c6489a4095790.bindTooltip(
+                `<div>
+                     KAPITAN DEMIDENKO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d5d68d950ffa8c6b584c6489a4095790.setIcon(icon_6028ee549db8ab54fce1343e7a6f3272);
+            
+    
+            var poly_line_a12e341b9f7e1ff2738012c9541a15e3 = L.polyline(
+                [[74.601357, 21.054157], [74.607035, 21.05353], [74.607535, 21.052978]],
+                {"bubblingMouseEvents": true, "className": "vessel-273254860 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_79e6e4082147dfd5651c9c4aff2c197f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e650275efcab2a1237a1a45f353f5f99 = $(`<div id="html_e650275efcab2a1237a1a45f353f5f99" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_79e6e4082147dfd5651c9c4aff2c197f.setContent(html_e650275efcab2a1237a1a45f353f5f99);
+            
+        
+
+        poly_line_a12e341b9f7e1ff2738012c9541a15e3.bindPopup(popup_79e6e4082147dfd5651c9c4aff2c197f)
+        ;
+
+        
+    
+    
+            var marker_3667b9a3b85db10e012c711072578714 = L.marker(
+                [74.607535, 21.052978],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_a0894a21ac285b931b7728797827f0b5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_062887d1789805638384adc8150d3acd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b2236b97ddc5847ba8117c39539f8cd2 = $(`<div id="html_b2236b97ddc5847ba8117c39539f8cd2" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>KAPITAN TARAN</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273254860</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>3.5 kts</td></tr>             <tr><td><b>Course:</b></td><td>338°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_062887d1789805638384adc8150d3acd.setContent(html_b2236b97ddc5847ba8117c39539f8cd2);
+            
+        
+
+        marker_3667b9a3b85db10e012c711072578714.bindPopup(popup_062887d1789805638384adc8150d3acd)
+        ;
+
+        
+    
+    
+            marker_3667b9a3b85db10e012c711072578714.bindTooltip(
+                `<div>
+                     KAPITAN TARAN
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3667b9a3b85db10e012c711072578714.setIcon(icon_a0894a21ac285b931b7728797827f0b5);
+            
+    
+            var poly_line_5c1b9c5c233b2b40ae1e261fba020ce1 = L.polyline(
+                [[65.63333333333334, 6.3100000000000005], [65.63333333333334, 6.3100000000000005], [65.63333333333334, 6.3100000000000005]],
+                {"bubblingMouseEvents": true, "className": "vessel-273257120 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_af062be8eb7130aa8b5335b20e409487 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_87a14336be2ccdadead1639c5ceba53c = $(`<div id="html_87a14336be2ccdadead1639c5ceba53c" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_af062be8eb7130aa8b5335b20e409487.setContent(html_87a14336be2ccdadead1639c5ceba53c);
+            
+        
+
+        poly_line_5c1b9c5c233b2b40ae1e261fba020ce1.bindPopup(popup_af062be8eb7130aa8b5335b20e409487)
+        ;
+
+        
+    
+    
+            var marker_707639b6e394c1449a14a0284b2e73c5 = L.marker(
+                [65.63333333333334, 6.3100000000000005],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_9b81c2369317474bf3ca3d28038b0244 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d8ee34cb2ac7b41d298c03ff7a452135 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_171933e32f3d3e62172c0cc1a62e9784 = $(`<div id="html_171933e32f3d3e62172c0cc1a62e9784" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>MELITO CARRIER</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273257120</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Tanker</td></tr>             <tr><td><b>Speed:</b></td><td>9.0 kts</td></tr>             <tr><td><b>Course:</b></td><td>202°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_d8ee34cb2ac7b41d298c03ff7a452135.setContent(html_171933e32f3d3e62172c0cc1a62e9784);
+            
+        
+
+        marker_707639b6e394c1449a14a0284b2e73c5.bindPopup(popup_d8ee34cb2ac7b41d298c03ff7a452135)
+        ;
+
+        
+    
+    
+            marker_707639b6e394c1449a14a0284b2e73c5.bindTooltip(
+                `<div>
+                     MELITO CARRIER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_707639b6e394c1449a14a0284b2e73c5.setIcon(icon_9b81c2369317474bf3ca3d28038b0244);
+            
+    
+            var poly_line_a1481333822483efb3052a6f32378001 = L.polyline(
+                [[70.641467, 19.23852], [70.64104, 19.220808], [70.641013, 19.220217]],
+                {"bubblingMouseEvents": true, "className": "vessel-273332560 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_cb8a42dfb27d198cf995d15a30e92ca5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cf6bf776fafa59b4d090d89b595d0cb1 = $(`<div id="html_cf6bf776fafa59b4d090d89b595d0cb1" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_cb8a42dfb27d198cf995d15a30e92ca5.setContent(html_cf6bf776fafa59b4d090d89b595d0cb1);
+            
+        
+
+        poly_line_a1481333822483efb3052a6f32378001.bindPopup(popup_cb8a42dfb27d198cf995d15a30e92ca5)
+        ;
+
+        
+    
+    
+            var marker_c0ca581e11821d73fdad7041127aa23b = L.marker(
+                [70.641013, 19.220217],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_2efcebe511b362d651b1794b52c3916c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0d8f49c26e21a634e62fad6339413c4c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a9e9bbc046d8bce591a400a97e878172 = $(`<div id="html_a9e9bbc046d8bce591a400a97e878172" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>KAPITAN NAZIN</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273332560</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>4.2 kts</td></tr>             <tr><td><b>Course:</b></td><td>262°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_0d8f49c26e21a634e62fad6339413c4c.setContent(html_a9e9bbc046d8bce591a400a97e878172);
+            
+        
+
+        marker_c0ca581e11821d73fdad7041127aa23b.bindPopup(popup_0d8f49c26e21a634e62fad6339413c4c)
+        ;
+
+        
+    
+    
+            marker_c0ca581e11821d73fdad7041127aa23b.bindTooltip(
+                `<div>
+                     KAPITAN NAZIN
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c0ca581e11821d73fdad7041127aa23b.setIcon(icon_2efcebe511b362d651b1794b52c3916c);
+            
+    
+            var poly_line_779054415f6dcde2fcfd36ccd7e2ab0e = L.polyline(
+                [[72.875, 34.11833333333333], [72.875, 34.11833333333333], [72.875, 34.11833333333333]],
+                {"bubblingMouseEvents": true, "className": "vessel-273258030 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_7ca1f19c22e13699c19cf4583b35f4bb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b8c937c5d87647fbcf05e0b80e5eddad = $(`<div id="html_b8c937c5d87647fbcf05e0b80e5eddad" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_7ca1f19c22e13699c19cf4583b35f4bb.setContent(html_b8c937c5d87647fbcf05e0b80e5eddad);
+            
+        
+
+        poly_line_779054415f6dcde2fcfd36ccd7e2ab0e.bindPopup(popup_7ca1f19c22e13699c19cf4583b35f4bb)
+        ;
+
+        
+    
+    
+            var marker_0ca96912f92db66408309d361717595e = L.marker(
+                [72.875, 34.11833333333333],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_e1ac9441a45994bf61a0727bfd0d02cf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e86365d45efdc06502f093aa21909382 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7800a86e3cb9365e20a0be5327f6ea28 = $(`<div id="html_7800a86e3cb9365e20a0be5327f6ea28" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>NEVSKIY PROSPECT</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273258030</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Tanker, no additional info</td></tr>             <tr><td><b>Speed:</b></td><td>7.0 kts</td></tr>             <tr><td><b>Course:</b></td><td>123°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_e86365d45efdc06502f093aa21909382.setContent(html_7800a86e3cb9365e20a0be5327f6ea28);
+            
+        
+
+        marker_0ca96912f92db66408309d361717595e.bindPopup(popup_e86365d45efdc06502f093aa21909382)
+        ;
+
+        
+    
+    
+            marker_0ca96912f92db66408309d361717595e.bindTooltip(
+                `<div>
+                     NEVSKIY PROSPECT
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0ca96912f92db66408309d361717595e.setIcon(icon_e1ac9441a45994bf61a0727bfd0d02cf);
+            
+    
+            var poly_line_2b9b82636d21c37e0181e70312160842 = L.polyline(
+                [[70.23434, 16.542237], [70.245325, 16.576347], [70.246038, 16.578558]],
+                {"bubblingMouseEvents": true, "className": "vessel-273414540 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_c988b17928f5b17b6cefe47bdf98ae34 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c96332b3c12ccd084cefd3888925a1a3 = $(`<div id="html_c96332b3c12ccd084cefd3888925a1a3" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_c988b17928f5b17b6cefe47bdf98ae34.setContent(html_c96332b3c12ccd084cefd3888925a1a3);
+            
+        
+
+        poly_line_2b9b82636d21c37e0181e70312160842.bindPopup(popup_c988b17928f5b17b6cefe47bdf98ae34)
+        ;
+
+        
+    
+    
+            var marker_274188b1b54f5e9bb2b9474e14685053 = L.marker(
+                [70.246038, 16.578558],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_a75b7a7a99334237987e411164efd70e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7bd67b44da0ee06bd74fc0da409b6adf = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4c177036042234b4b78cab0845bf7ba0 = $(`<div id="html_4c177036042234b4b78cab0845bf7ba0" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>MILENA</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273414540</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Cargo</td></tr>             <tr><td><b>Speed:</b></td><td>11.8 kts</td></tr>             <tr><td><b>Course:</b></td><td>46°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_7bd67b44da0ee06bd74fc0da409b6adf.setContent(html_4c177036042234b4b78cab0845bf7ba0);
+            
+        
+
+        marker_274188b1b54f5e9bb2b9474e14685053.bindPopup(popup_7bd67b44da0ee06bd74fc0da409b6adf)
+        ;
+
+        
+    
+    
+            marker_274188b1b54f5e9bb2b9474e14685053.bindTooltip(
+                `<div>
+                     MILENA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_274188b1b54f5e9bb2b9474e14685053.setIcon(icon_a75b7a7a99334237987e411164efd70e);
+            
+    
+            var poly_line_52678066eea3d4b60e9a7174d64ae59f = L.polyline(
+                [[72.56166666666667, 24.553333333333335], [72.56166666666667, 24.553333333333335], [72.56166666666667, 24.553333333333335]],
+                {"bubblingMouseEvents": true, "className": "vessel-273428880 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_debda09bf1ba08166f7059fa07d6b7af = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_196e7c210d2e0ff68268e90ac938c054 = $(`<div id="html_196e7c210d2e0ff68268e90ac938c054" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_debda09bf1ba08166f7059fa07d6b7af.setContent(html_196e7c210d2e0ff68268e90ac938c054);
+            
+        
+
+        poly_line_52678066eea3d4b60e9a7174d64ae59f.bindPopup(popup_debda09bf1ba08166f7059fa07d6b7af)
+        ;
+
+        
+    
+    
+            var marker_461e3dc9cc0885c473d055114e2fd065 = L.marker(
+                [72.56166666666667, 24.553333333333335],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_63a1644bc228b2463dd8254cd73bb063 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_aa0095c10755de4caf5ea1afc1175a3a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b5a9211872b85db8dd7308e770386d67 = $(`<div id="html_b5a9211872b85db8dd7308e770386d67" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>SPITCBERGEN</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273428880</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>0.0 kts</td></tr>             <tr><td><b>Course:</b></td><td>0°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_aa0095c10755de4caf5ea1afc1175a3a.setContent(html_b5a9211872b85db8dd7308e770386d67);
+            
+        
+
+        marker_461e3dc9cc0885c473d055114e2fd065.bindPopup(popup_aa0095c10755de4caf5ea1afc1175a3a)
+        ;
+
+        
+    
+    
+            marker_461e3dc9cc0885c473d055114e2fd065.bindTooltip(
+                `<div>
+                     SPITCBERGEN
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_461e3dc9cc0885c473d055114e2fd065.setIcon(icon_63a1644bc228b2463dd8254cd73bb063);
+            
+    
+            var poly_line_daaf9c09a721d675983857525fe7b7b1 = L.polyline(
+                [[71.41166666666666, 11.651666666666667], [71.41166666666666, 11.651666666666667], [71.41166666666666, 11.651666666666667]],
+                {"bubblingMouseEvents": true, "className": "vessel-273432030 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_96491546877d0ec31c11017b1f77918f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c0de2f8600134448b1bb4804aaa9f78d = $(`<div id="html_c0de2f8600134448b1bb4804aaa9f78d" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_96491546877d0ec31c11017b1f77918f.setContent(html_c0de2f8600134448b1bb4804aaa9f78d);
+            
+        
+
+        poly_line_daaf9c09a721d675983857525fe7b7b1.bindPopup(popup_96491546877d0ec31c11017b1f77918f)
+        ;
+
+        
+    
+    
+            var marker_e5ba5129387c70ce23e91ad38e36f445 = L.marker(
+                [71.41166666666666, 11.651666666666667],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_51ca3bd98b8dcdc38e02a191943e0070 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_eca4d08ef91df78f1a1485ea55ec5531 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_632f07f7acd9902936b1e20aa4e051e6 = $(`<div id="html_632f07f7acd9902936b1e20aa4e051e6" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>ARCTIC SPIRIT</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273432030</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Cargo</td></tr>             <tr><td><b>Speed:</b></td><td>12.0 kts</td></tr>             <tr><td><b>Course:</b></td><td>34°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_eca4d08ef91df78f1a1485ea55ec5531.setContent(html_632f07f7acd9902936b1e20aa4e051e6);
+            
+        
+
+        marker_e5ba5129387c70ce23e91ad38e36f445.bindPopup(popup_eca4d08ef91df78f1a1485ea55ec5531)
+        ;
+
+        
+    
+    
+            marker_e5ba5129387c70ce23e91ad38e36f445.bindTooltip(
+                `<div>
+                     ARCTIC SPIRIT
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e5ba5129387c70ce23e91ad38e36f445.setIcon(icon_51ca3bd98b8dcdc38e02a191943e0070);
+            
+    
+            var poly_line_3b4f766589b3ca8dff33927a168032f1 = L.polyline(
+                [[70.625487, 29.701295], [70.625508, 29.701347], [70.625512, 29.701287]],
+                {"bubblingMouseEvents": true, "className": "vessel-273436830 tier-realtime high-risk", "color": "#d32f2f", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d32f2f", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+        var popup_7cd492e0e5c61a850f5d611d9eb7985c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9f618a5deb4cc8cd2a4b04b64ae12164 = $(`<div id="html_9f618a5deb4cc8cd2a4b04b64ae12164" style="width: 100.0%; height: 100.0%;">Real-time track (3 points)</div>`)[0];
+                popup_7cd492e0e5c61a850f5d611d9eb7985c.setContent(html_9f618a5deb4cc8cd2a4b04b64ae12164);
+            
+        
+
+        poly_line_3b4f766589b3ca8dff33927a168032f1.bindPopup(popup_7cd492e0e5c61a850f5d611d9eb7985c)
+        ;
+
+        
+    
+    
+            var marker_01198a6aa1f095d44c4c983f2b8ec6a4 = L.marker(
+                [70.625512, 29.701287],
+                {
+  "className": "vessel-marker",
+}
+            ).addTo(map_7a845d57bd926f80667d702eaae0702c);
+        
+    
+            var icon_3eb9bf65dfa9845f43974033f65ba681 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5a778bcaa526d50ccec0decb3fe9f1ca = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_110965a0aa86c313889945a72e7d32a0 = $(`<div id="html_110965a0aa86c313889945a72e7d32a0" style="width: 100.0%; height: 100.0%;">     <div style="min-width: 200px;">         <h4>LLV AZURIT</h4>         <table>             <tr><td><b>MMSI:</b></td><td>273436830</td></tr>             <tr><td><b>Country:</b></td><td>Russia</td></tr>             <tr><td><b>Type:</b></td><td>Fishing</td></tr>             <tr><td><b>Speed:</b></td><td>0.0 kts</td></tr>             <tr><td><b>Course:</b></td><td>330°</td></tr>             <tr><td><b>Risk:</b></td><td>HIGH</td></tr>         </table>         <p style="font-size: 10px; color: gray;">             Click to focus on this vessel         </p>     </div>     </div>`)[0];
+                popup_5a778bcaa526d50ccec0decb3fe9f1ca.setContent(html_110965a0aa86c313889945a72e7d32a0);
+            
+        
+
+        marker_01198a6aa1f095d44c4c983f2b8ec6a4.bindPopup(popup_5a778bcaa526d50ccec0decb3fe9f1ca)
+        ;
+
+        
+    
+    
+            marker_01198a6aa1f095d44c4c983f2b8ec6a4.bindTooltip(
+                `<div>
+                     LLV AZURIT
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_01198a6aa1f095d44c4c983f2b8ec6a4.setIcon(icon_3eb9bf65dfa9845f43974033f65ba681);
+            
+</script>
+</html>
