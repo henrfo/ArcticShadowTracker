@@ -46,7 +46,7 @@ jobs:
         run: |
           git config --local user.name "Arctic Monitor Bot"
           git config --local user.email "arctic-bot@github-actions"
-          git add data/ outputs/
+          git add outputs/
 
           # Only commit if there are changes
           if git diff --staged --quiet; then
