@@ -188,17 +188,29 @@
                         <span class="country"><span style="color: #d32f2f;">●</span> Russia</span>
                         <span class="count priority-high" id="russian-count">{{ stats.russian }}</span>
                     </div>
+                    <div class="breakdown-item" style="padding-left: 15px;">
+                        <span class="country"><span style="color: #c62828;">●</span> Shadow Fleet</span>
+                        <span class="count priority-high" id="shadow-fleet-count">{{ stats.shadow_fleet }}</span>
+                    </div>
+                    <div class="breakdown-item" style="padding-left: 15px;">
+                        <span class="country"><span style="color: #ff5722;">●</span> Suspected Shadow Fleet</span>
+                        <span class="count" id="suspected-shadow-count">{{ stats.suspected_shadow }}</span>
+                    </div>
                     <div class="breakdown-item">
                         <span class="country"><span style="color: #ff9800;">●</span> China</span>
                         <span class="count priority-high" id="chinese-count">{{ stats.chinese }}</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="country"><span style="color: #2E7D32;">●</span> Norwegian Military/Law</span>
+                        <span class="count" id="norwegian-military-count">{{ stats.norwegian_military }}</span>
                     </div>
                     <div class="breakdown-item">
                         <span class="country"><span style="color: #888888;">●</span> Norway</span>
                         <span class="count" id="norwegian-count">{{ stats.norwegian }}</span>
                     </div>
                     <div class="breakdown-item">
-                        <span class="country"><span style="color: #000000;">●</span> Norwegian Military/Law</span>
-                        <span class="count" id="norwegian-military-count">{{ stats.norwegian_military }}</span>
+                        <span class="country"><span style="color: #2196F3;">●</span> Other</span>
+                        <span class="count" id="other-count">{{ stats.other }}</span>
                     </div>
                 </div>
             </div>
@@ -207,16 +219,20 @@
                 <h3>Data Tiers</h3>
                 <div class="breakdown">
                     <div class="breakdown-item">
-                        <span class="country">Real-time</span>
+                        <span class="country">Real-time (All points)</span>
                         <span class="count">0-2 hrs</span>
                     </div>
                     <div class="breakdown-item">
-                        <span class="country">Tactical</span>
+                        <span class="country">Tactical (1pt/30min)</span>
                         <span class="count">2-48 hrs</span>
                     </div>
                     <div class="breakdown-item">
-                        <span class="country">Strategic</span>
+                        <span class="country">Strategic (1pt/day)</span>
                         <span class="count">2-7 days</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="country"><span style="color: #9C27B0;">●</span> Submarine Cables</span>
+                        <span class="count">39 cables</span>
                     </div>
                 </div>
             </div>
@@ -242,9 +258,12 @@
                     // Update stats
                     document.getElementById('total-vessels').textContent = data.stats.total;
                     document.getElementById('russian-count').textContent = data.stats.russian;
+                    document.getElementById('shadow-fleet-count').textContent = data.stats.shadow_fleet;
+                    document.getElementById('suspected-shadow-count').textContent = data.stats.suspected_shadow;
                     document.getElementById('chinese-count').textContent = data.stats.chinese;
                     document.getElementById('norwegian-count').textContent = data.stats.norwegian;
                     document.getElementById('norwegian-military-count').textContent = data.stats.norwegian_military;
+                    document.getElementById('other-count').textContent = data.stats.other;
 
                     if (data.stats.last_update) {
                         document.getElementById('last-update').textContent =
@@ -256,8 +275,8 @@
                 });
         }
 
-        // Auto-refresh every 30 seconds
-        setInterval(refreshData, 30000);
+        // Auto-refresh every 5 minutes
+        setInterval(refreshData, 300000);
     </script>
 </body>
 </html>

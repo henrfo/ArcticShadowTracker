@@ -7,8 +7,40 @@ Creates interactive Folium maps with tier-based track visualization:
 """
 
 import folium
+import json
 from datetime import datetime
 from zoneinfo import ZoneInfo
+from pathlib import Path
+
+def load_submarine_cables():
+    """
+    Load submarine cable GeoJSON and filter for Norwegian/Svalbard region
+
+    Returns:
+        GeoJSON FeatureCollection with cables in Norwegian sector (lon: 0-35, lat: 58-81)
+    """
+    try:
+        cable_file = Path(__file__).parent / 'cable-geo.json'
+        with open(cable_file) as f:
+            data = json.load(f)
+
+        # Filter cables in Norwegian sector and Svalbard (lon: 0-35, lat: 58-81)
+        norwegian_cables = []
+        for feature in data['features']:
+            coords = feature['geometry']['coordinates']
+            # Check if any segment is in Norwegian region
+            for line in coords:
+                if any(0 <= point[0] <= 35 and 58 <= point[1] <= 81 for point in line):
+                    norwegian_cables.append(feature)
+                    break
+
+        return {
+            'type': 'FeatureCollection',
+            'features': norwegian_cables
+        }
+    except Exception as e:
+        print(f"Warning: Could not load submarine cables: {e}")
+        return {'type': 'FeatureCollection', 'features': []}
 
 def generate_focused_map(vessel_tracks):
     """
@@ -37,12 +69,47 @@ def generate_focused_map(vessel_tracks):
         popup='Arctic Coverage Area: 65-82°N, 0-40°E'
     ).add_to(m)
 
+    # Create feature groups for toggleable layers
+    russia_layer = folium.FeatureGroup(name='Russia', show=True)
+    shadow_fleet_layer = folium.FeatureGroup(name='Shadow Fleet', show=True)
+    suspected_shadow_layer = folium.FeatureGroup(name='Suspected Shadow Fleet', show=True)
+    china_layer = folium.FeatureGroup(name='China', show=True)
+    norwegian_military_layer = folium.FeatureGroup(name='Norwegian Military/Law', show=True)
+    norway_layer = folium.FeatureGroup(name='Norway (Civilian)', show=True)
+    other_layer = folium.FeatureGroup(name='Other Countries', show=True)
+
+    # Add submarine cables layer
+    cables_layer = folium.FeatureGroup(name='Submarine Cables', show=True)
+    cables_geojson = load_submarine_cables()
+    if cables_geojson['features']:
+        folium.GeoJson(
+            cables_geojson,
+            style_function=lambda feature: {
+                'color': '#9C27B0',  # Purple for all submarine cables
+                'weight': 2,
+                'opacity': 0.7,
+                'dashArray': '5, 5',  # Dashed line for cables
+                'fillOpacity': 0
+            },
+            tooltip=folium.GeoJsonTooltip(
+                fields=['name', 'id'],
+                aliases=['Cable:', 'ID:'],
+                localize=True
+            ),
+            smooth_factor=0  # Preserve exact coordinates
+        ).add_to(cables_layer)
+    cables_layer.add_to(m)
+
     # Count vessels by risk
     risk_counts = {'high': 0, 'medium': 0, 'low': 0}
 
     # Separate vessels by priority for z-order (render low priority first, then high)
-    low_priority_vessels = []
-    high_priority_vessels = []
+    # Z-order (bottom to top): Other -> Norway civilians -> Suspected Shadow -> Norwegian Military -> China -> Confirmed Shadow -> Russia
+    other_vessels = []
+    norwegian_civilian_vessels = []
+    suspected_shadow_vessels = []
+    confirmed_shadow_vessels = []
+    high_priority_vessels = []  # Russia, China, Norwegian Military
 
     for mmsi, track_data in vessel_tracks.items():
         priority_level = track_data['priority_level']
@@ -54,21 +121,63 @@ def generate_focused_map(vessel_tracks):
                                  'military' not in ship_type and
                                  'law enforcement' not in ship_type)
 
-        if is_norwegian_civilian:
-            low_priority_vessels.append((mmsi, track_data))
-        else:
+        # Categorize for z-order
+        if track_data.get('is_shadow_fleet', False):
+            # Confirmed shadow fleet (top priority)
+            confirmed_shadow_vessels.append((mmsi, track_data))
+        elif track_data.get('is_suspected_shadow', False):
+            # Suspected shadow fleet (medium priority)
+            suspected_shadow_vessels.append((mmsi, track_data))
+        elif priority_level == 'high':
+            # Russia, China, Norwegian Military
             high_priority_vessels.append((mmsi, track_data))
+        elif is_norwegian_civilian:
+            # Norwegian civilians
+            norwegian_civilian_vessels.append((mmsi, track_data))
+        else:
+            # Other countries (foreign vessels)
+            other_vessels.append((mmsi, track_data))
 
-    # Add vessels in z-order: Norwegian civilians first (bottom), then others (top)
-    for mmsi, track_data in low_priority_vessels:
-        add_vessel_to_map(m, mmsi, track_data)
+    # Add vessels in z-order (bottom to top)
+    # Assign each vessel to its appropriate layer
+    for mmsi, track_data in other_vessels:
+        add_vessel_to_map(other_layer, mmsi, track_data)
+
+    for mmsi, track_data in norwegian_civilian_vessels:
+        add_vessel_to_map(norway_layer, mmsi, track_data)
+
+    for mmsi, track_data in suspected_shadow_vessels:
+        add_vessel_to_map(suspected_shadow_layer, mmsi, track_data)
 
     for mmsi, track_data in high_priority_vessels:
-        add_vessel_to_map(m, mmsi, track_data)
+        # Determine which high-priority layer (Russia, China, Norwegian Military)
+        if track_data['country'] == 'Russia':
+            target_layer = russia_layer
+        elif track_data['country'] == 'China':
+            target_layer = china_layer
+        else:  # Norwegian military/law
+            target_layer = norwegian_military_layer
+        add_vessel_to_map(target_layer, mmsi, track_data)
 
-    # Add legend and focus mode controls
-    add_legend(m, risk_counts, len(vessel_tracks))
+    for mmsi, track_data in confirmed_shadow_vessels:
+        add_vessel_to_map(shadow_fleet_layer, mmsi, track_data)
+
+    # Add all layers to map
+    # Order matches "By Country" sidebar: Russia, Shadow Fleet, Suspected Shadow Fleet, China, Norwegian Military/Law, Norway, Other
+    # Layers added in this order for LayerControl display
+    other_layer.add_to(m)
+    norway_layer.add_to(m)
+    norwegian_military_layer.add_to(m)
+    china_layer.add_to(m)
+    suspected_shadow_layer.add_to(m)
+    shadow_fleet_layer.add_to(m)
+    russia_layer.add_to(m)
+
+    # Add focus mode controls
     add_focus_mode_script(m)
+
+    # Add layer control to toggle all categories
+    folium.LayerControl(position='topright', collapsed=False).add_to(m)
 
     return m
 
@@ -90,7 +199,11 @@ def add_vessel_to_map(map_obj, mmsi, track_data):
         return  # No position data
 
     # Color scheme by priority and country
-    if track_data['country'] == 'Russia':
+    if track_data.get('is_shadow_fleet', False):
+        color = '#c62828'      # Dark red for confirmed shadow fleet
+    elif track_data.get('is_suspected_shadow', False):
+        color = '#ff5722'      # Orange-red for suspected shadow fleet
+    elif track_data['country'] == 'Russia':
         color = '#d32f2f'      # Red
     elif track_data['country'] == 'China':
         color = '#ff9800'      # Orange
@@ -98,16 +211,22 @@ def add_vessel_to_map(map_obj, mmsi, track_data):
         # Check if Norwegian military or law enforcement
         ship_type = track_data['ship_type'].lower()
         if 'military' in ship_type or 'law enforcement' in ship_type:
-            color = '#000000'  # Black for Norwegian military/law enforcement
+            color = '#2E7D32'  # Dark green for Norwegian military/law enforcement
         else:
             color = '#888888'  # Gray for other Norwegian vessels
     elif priority_level == 'low':
         color = '#9e9e9e'      # Gray
     else:
-        color = '#ffa726'      # Medium orange
+        color = '#2196F3'      # Blue for "Other" countries
+
+    # Check if Norwegian civilian (no tracks for these)
+    ship_type = track_data['ship_type'].lower()
+    is_norwegian_civilian = (track_data['country'] == 'Norway' and
+                            'military' not in ship_type and
+                            'law enforcement' not in ship_type)
 
     # Add track lines (tier-dependent visibility)
-    add_track_lines(map_obj, mmsi, tiers, priority_level, color)
+    add_track_lines(map_obj, mmsi, tiers, priority_level, color, is_norwegian_civilian)
 
     # Add vessel marker (current position)
     add_vessel_marker(map_obj, mmsi, track_data, current_pos, color)
@@ -127,14 +246,19 @@ def get_current_position(tiers):
     all_positions.sort(key=lambda p: p['timestamp'], reverse=True)
     return all_positions[0]
 
-def add_track_lines(map_obj, mmsi, tiers, priority_level, color):
+def add_track_lines(map_obj, mmsi, tiers, priority_level, color, is_norwegian_civilian=False):
     """
     Add tiered track lines to map
 
     Track visibility by default:
-    - High-risk (Russia/China/Norwegian military): Tier 1 + Tier 2 + Tier 3
-    - Low-risk (Norwegian civilian): Tier 3 only
+    - High-risk (Russia/China/Norwegian military/Shadow fleet): Tier 1 + Tier 2 + Tier 3
+    - Low-risk (Norwegian civilian): NO TRACKS
+    - Medium-risk (Other countries): Tier 3 only
     """
+    # Skip tracks entirely for Norwegian civilian vessels
+    if is_norwegian_civilian:
+        return
+
     realtime = tiers.get('realtime', [])
     tactical = tiers.get('tactical', [])
     strategic = tiers.get('strategic', [])
@@ -142,12 +266,19 @@ def add_track_lines(map_obj, mmsi, tiers, priority_level, color):
 
     # Draw one continuous track sorted chronologically
     # Merge all tiers and render as single connected path
+    # Skip bridge duplicates: tactical[0] = realtime[-1], strategic[0] = tactical[-1]
     all_positions = []
 
     if strategic:
-        all_positions.extend([(p, 'strategic') for p in strategic])
+        # Skip strategic[0] if it's a bridge duplicate from tactical
+        strat_start = 1 if (tactical and len(strategic) > 0) else 0
+        all_positions.extend([(p, 'strategic') for p in strategic[strat_start:]])
+
     if tactical:
-        all_positions.extend([(p, 'tactical') for p in tactical])
+        # Skip tactical[0] if it's a bridge duplicate from realtime
+        tac_start = 1 if (realtime and len(tactical) > 0) else 0
+        all_positions.extend([(p, 'tactical') for p in tactical[tac_start:]])
+
     if realtime:
         all_positions.extend([(p, 'realtime') for p in realtime])
 
@@ -178,8 +309,8 @@ def add_track_lines(map_obj, mmsi, tiers, priority_level, color):
             coords = [[p['lat'], p['lon']] for p in segment]
             weight, opacity, dash = {
                 'strategic': (2, 0.5, '3, 10'),
-                'tactical': (3, 0.7 if visible else 0, '10, 5'),
-                'realtime': (4, 0.9 if visible else 0, None)
+                'tactical': (3, 0.7, '10, 5'),
+                'realtime': (4, 0.9, None)
             }[tier_type]
 
             folium.PolyLine(
@@ -188,6 +319,7 @@ def add_track_lines(map_obj, mmsi, tiers, priority_level, color):
                 weight=weight,
                 opacity=opacity,
                 dash_array=dash,
+                smooth_factor=0,  # Disable smoothing to preserve exact connection points
                 className=f"vessel-{mmsi} tier-{tier_type}"
             ).add_to(map_obj)
 
@@ -221,25 +353,34 @@ def add_vessel_marker(map_obj, mmsi, track_data, current_pos, color):
     </div>
     """
 
-    # Set opacity and size based on country and ship type
-    # Norwegian military/law enforcement: full size with normal opacity
-    # Other Norwegian: smaller with lower opacity
-    ship_type = track_data['ship_type'].lower()
-    is_norwegian_military = (track_data['country'] == 'Norway' and
-                             ('military' in ship_type or 'law enforcement' in ship_type))
+    # Set opacity and size based on priority level
+    # Confirmed shadow fleet: highest opacity (same as Russia/China)
+    # Suspected shadow fleet: medium opacity
+    # High priority (Russia/China/Norwegian Military): full opacity, larger markers
+    # Norwegian civilians: low opacity, smaller markers
+    # Other countries: low opacity, smaller markers
+    priority_level = track_data['priority_level']
 
-    if is_norwegian_military:
-        fill_opacity = 0.7
-        line_opacity = 0.9
+    if priority_level == 'high' or track_data.get('is_shadow_fleet', False):
+        # Russia, China, Confirmed Shadow Fleet, Norwegian Military
+        fill_opacity = 0.8
+        line_opacity = 0.95
         marker_radius = 8
+    elif track_data.get('is_suspected_shadow', False):
+        # Suspected shadow fleet (medium priority)
+        fill_opacity = 0.6
+        line_opacity = 0.75
+        marker_radius = 6
     elif track_data['country'] == 'Norway':
+        # Norwegian civilians
+        fill_opacity = 0.25
+        line_opacity = 0.35
+        marker_radius = 5
+    else:
+        # Other countries (foreign vessels)
         fill_opacity = 0.3
         line_opacity = 0.4
         marker_radius = 5
-    else:
-        fill_opacity = 0.7
-        line_opacity = 0.9
-        marker_radius = 8
 
     folium.CircleMarker(
         location=[current_pos['lat'], current_pos['lon']],
@@ -256,23 +397,35 @@ def add_vessel_marker(map_obj, mmsi, track_data, current_pos, color):
     ).add_to(map_obj).add_child(folium.Element(f'<script>this.options.vesselMmsi = "{mmsi}";</script>'))
 
 def add_legend(map_obj, risk_counts, total_vessels):
-    """Add legend and statistics to map"""
+    """Add legend and statistics to map (left sidebar, scrollable)"""
     legend_html = f"""
-    <div style="position: fixed; top: 10px; right: 10px; z-index: 9999;
-                background-color: white; padding: 15px; border: 2px solid #333;
-                border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
+    <div style="position: fixed;
+                top: 10px;
+                left: 10px;
+                bottom: 10px;
+                width: 250px;
+                z-index: 9999;
+                background-color: white;
+                padding: 15px;
+                border: 2px solid #333;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.3);
+                overflow-y: auto;
+                overflow-x: hidden;">
         <h4 style="margin: 0 0 10px 0;">Arctic Intelligence</h4>
         <p style="margin: 5px 0; font-size: 12px;"><b>Total Vessels:</b> {total_vessels}</p>
         <p style="margin: 5px 0; font-size: 11px; color: #666;">
             Last update: {datetime.now(ZoneInfo('Europe/Oslo')).strftime('%Y-%m-%d %H:%M %Z')}
         </p>
         <hr style="margin: 10px 0;">
-        <p style="margin: 5px 0; font-size: 10px; color: #999;">
-            <b>Track Lines:</b><br>
-            ━━━ Real-time (0-2hr)<br>
-            ╌╌╌ Tactical (2-48hr)<br>
-            ··· Strategic (2-7d)
+        <h5 style="margin: 10px 0 5px 0; font-size: 13px;">Data Tiers</h5>
+        <p style="margin: 3px 0; font-size: 11px; line-height: 1.6;">
+            <span style="color: #333; font-weight: bold;">━━━</span> Realtime (0-2hr)<br>
+            <span style="color: #333; font-weight: bold;">╌╌╌</span> Tactical (2-48hr)<br>
+            <span style="color: #333; font-weight: bold;">···</span> Strategic (2-7d)<br>
+            <span style="color: #9C27B0; font-weight: bold;">━ ━</span> Submarine Cables
         </p>
+        <hr style="margin: 10px 0;">
         <p style="margin: 10px 0 5px 0; font-size: 10px; color: #999;">
             💡 Click vessel to focus
         </p>

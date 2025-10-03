@@ -52,13 +52,31 @@ def load_vessel_data():
     # Calculate stats
     russian_count = sum(1 for v in vessel_tracks.values() if v['country'] == 'Russia')
     chinese_count = sum(1 for v in vessel_tracks.values() if v['country'] == 'China')
-    norwegian_count = sum(1 for v in vessel_tracks.values() if v['country'] == 'Norway')
 
     # Count Norwegian military/law enforcement
     norwegian_military_count = sum(1 for v in vessel_tracks.values()
                                    if v['country'] == 'Norway' and
                                    ('military' in v['ship_type'].lower() or
                                     'law enforcement' in v['ship_type'].lower()))
+
+    # Count Norwegian civilians (excluding military/law enforcement to avoid double counting)
+    norwegian_count = sum(1 for v in vessel_tracks.values()
+                         if v['country'] == 'Norway' and
+                         'military' not in v['ship_type'].lower() and
+                         'law enforcement' not in v['ship_type'].lower())
+
+    # Count confirmed shadow fleet (from curated list)
+    shadow_fleet_count = sum(1 for v in vessel_tracks.values() if v.get('is_shadow_fleet', False))
+
+    # Count suspected shadow fleet (flag-based, excluding confirmed)
+    suspected_shadow_count = sum(1 for v in vessel_tracks.values()
+                                if v.get('is_suspected_shadow', False))
+
+    # Count "Other" countries (not Russia, China, Norway, or shadow fleet)
+    other_count = sum(1 for v in vessel_tracks.values()
+                     if v['country'] not in ['Russia', 'China', 'Norway']
+                     and not v.get('is_shadow_fleet', False)
+                     and not v.get('is_suspected_shadow', False))
 
     # Get last update time
     last_update = None
@@ -73,6 +91,9 @@ def load_vessel_data():
             'chinese': chinese_count,
             'norwegian': norwegian_count,
             'norwegian_military': norwegian_military_count,
+            'shadow_fleet': shadow_fleet_count,
+            'suspected_shadow': suspected_shadow_count,
+            'other': other_count,
             'last_update': last_update
         }
     }

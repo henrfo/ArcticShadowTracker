@@ -1,0 +1,41 @@
+name: Shadow Fleet Update
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday at midnight UTC
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update-shadow-fleet:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: pip install pdfplumber requests beautifulsoup4
+
+    - name: Run shadow fleet crawler
+      run: |
+        python src/shadow_fleet_crawler.py
+
+    - name: Commit and push changes
+      run: |
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config user.name "github-actions[bot]"
+        git add src/shadow_fleet.json
+        git add src/.mmsi_cache/
+        if git diff --staged --quiet; then
+          echo "No changes to shadow fleet data"
+        else
+          git commit -m "Shadow fleet update $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git pull --merge origin main
+          git push
+        fi

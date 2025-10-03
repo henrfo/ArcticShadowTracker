@@ -8,6 +8,38 @@ Processes AIS snapshots into tiered historical tracking:
 
 from datetime import datetime, timedelta, timezone
 from typing import List, Dict
+from pathlib import Path
+import json
+
+# Shadow fleet flags of concern (convenience flags commonly used by shadow fleet)
+SHADOW_FLEET_FLAGS = {
+    # Primary flags (most common shadow fleet)
+    'Gabon', 'Cameroon', 'Palau', 'Panama', 'Liberia',
+    'Marshall Islands', 'Barbados', 'Saint Kitts and Nevis', 'Tanzania',
+
+    # Secondary flags
+    'Benin', 'Comoros', 'Equatorial Guinea', 'Saint Vincent and the Grenadines',
+    'Cook Islands', 'Sierra Leone', 'Swaziland', 'Togo', 'Moldova',
+
+    # Also documented
+    'Belize', 'Honduras', 'Bolivia', 'Mongolia', 'Cambodia',
+    'Sao Tome and Principe', 'Vanuatu', 'Antigua and Barbuda',
+    'Dominica', 'Myanmar', 'Iran', 'Venezuela'
+}
+
+def load_shadow_fleet():
+    """Load shadow fleet MMSI/name lists from config file"""
+    try:
+        shadow_file = Path(__file__).parent / 'shadow_fleet.json'
+        with open(shadow_file, 'r') as f:
+            data = json.load(f)
+            return {
+                'mmsi': set(data.get('shadow_fleet_mmsi', [])),
+                'names': set(n.lower() for n in data.get('shadow_fleet_names', []))
+            }
+    except Exception as e:
+        print(f"Warning: Could not load shadow fleet config: {e}")
+        return {'mmsi': set(), 'names': set()}
 
 def process_vessel_tracks(snapshots: List[Dict]) -> Dict:
     """
@@ -19,6 +51,9 @@ def process_vessel_tracks(snapshots: List[Dict]) -> Dict:
     Returns:
         Dict of vessel tracks keyed by MMSI
     """
+    # Load shadow fleet config
+    shadow_fleet = load_shadow_fleet()
+
     # 1. Flatten all snapshots into per-vessel position lists
     vessel_positions = {}
 
@@ -53,11 +88,22 @@ def process_vessel_tracks(snapshots: List[Dict]) -> Dict:
 
         tiers = build_three_tiers(positions)
 
+        # Check if vessel is in confirmed shadow fleet list (our curated list)
+        is_shadow_confirmed = (mmsi in shadow_fleet['mmsi'] or
+                              data['name'].lower() in shadow_fleet['names'])
+
+        # Check if vessel flies shadow fleet flag (flag-based suspicion)
+        is_shadow_suspected = (data['country'] in SHADOW_FLEET_FLAGS and
+                              not is_shadow_confirmed)  # Don't double-count
+
         vessel_tracks[mmsi] = {
             'name': data['name'],
             'country': data['country'],
             'ship_type': data['ship_type'],
-            'priority_level': classify_priority(data['country'], data['ship_type']),
+            'is_shadow_fleet': is_shadow_confirmed,        # Confirmed from curated list
+            'is_suspected_shadow': is_shadow_suspected,    # Flag-based suspicion
+            'priority_level': classify_priority(data['country'], data['ship_type'],
+                                               is_shadow_confirmed, is_shadow_suspected),
             'tiers': tiers
         }
 
@@ -164,25 +210,40 @@ def extract_strategic_tier(positions: List[Dict]) -> List[Dict]:
     # Return in chronological order
     return sorted(positions_by_date.values(), key=lambda p: p['timestamp'])
 
-def classify_priority(country: str, ship_type: str = '') -> str:
+def classify_priority(country: str, ship_type: str = '',
+                     is_shadow_confirmed: bool = False,
+                     is_shadow_suspected: bool = False) -> str:
     """
-    Classify vessel priority level based on country and ship type
+    Classify vessel priority level based on country, ship type, and shadow fleet status
 
     Args:
         country: Vessel country from MMSI
         ship_type: Type of vessel (e.g., 'Military', 'Law Enforcement')
+        is_shadow_confirmed: Whether vessel is in confirmed shadow fleet list
+        is_shadow_suspected: Whether vessel flies shadow fleet flag
 
     Returns:
         Priority level: 'high', 'medium', or 'low'
     """
+    # Confirmed shadow fleet vessels = highest priority
+    if is_shadow_confirmed:
+        return 'high'
+
+    # Russian/Chinese vessels = high priority
     if country in ['Russia', 'China']:
         return 'high'
-    elif country == 'Norway':
-        # Norwegian military/law enforcement = high priority (same as Russia/China)
+
+    # Suspected shadow fleet (by flag) = medium priority
+    if is_shadow_suspected:
+        return 'medium'
+
+    # Norwegian military/law enforcement = high priority
+    if country == 'Norway':
         ship_type_lower = ship_type.lower()
         if 'military' in ship_type_lower or 'law enforcement' in ship_type_lower:
             return 'high'
         else:
             return 'low'  # Civilian Norwegian vessels
-    else:
-        return 'medium'
+
+    # All others = medium priority
+    return 'medium'
