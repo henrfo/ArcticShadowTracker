@@ -97,7 +97,7 @@ def fetch_ais_data(token):
 
     # Filter for Arctic vessels (all countries)
     target_vessels = []
-    timestamp = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
+    collection_time = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
 
     for v in all_vessels:
         lat = v.get('latitude', 0)
@@ -112,9 +112,22 @@ def fetch_ais_data(token):
         mmsi_prefix = mmsi[:3]
         country = MMSI_COUNTRY_MAP.get(mmsi_prefix, 'Unknown')
 
+        # Use vessel's individual AIS transmission time (msgtime from BarentsWatch API)
+        # Format: "2023-04-21T01:40:34.8259595+00:00" -> convert to ISO with Z
+        vessel_msgtime = v.get('msgtime')
+        if vessel_msgtime:
+            # Parse and convert to UTC with Z suffix
+            try:
+                dt = datetime.fromisoformat(vessel_msgtime.replace('+00:00', ''))
+                vessel_timestamp = dt.replace(tzinfo=timezone.utc).isoformat().replace('+00:00', 'Z')
+            except (ValueError, AttributeError):
+                vessel_timestamp = collection_time  # Fallback to collection time
+        else:
+            vessel_timestamp = collection_time  # Fallback if msgtime missing
+
         # Collect ALL Arctic vessels (no country filter)
         target_vessels.append({
-            'timestamp': timestamp,
+            'timestamp': vessel_timestamp,  # Individual vessel AIS transmission time
             'mmsi': mmsi,
             'name': v.get('name', 'Unknown'),
             'country': country,
@@ -137,7 +150,7 @@ def fetch_ais_data(token):
     print(f"    - Norwegian: {norwegian_count}")
     print(f"    - Other: {other_count}")
 
-    return target_vessels, timestamp
+    return target_vessels, collection_time
 
 def save_snapshot(vessels, timestamp):
     """Save current snapshot to data/snapshots/"""

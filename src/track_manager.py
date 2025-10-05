@@ -71,8 +71,12 @@ def process_vessel_tracks(snapshots: List[Dict]) -> Dict:
                     'positions': []
                 }
 
+            # Use vessel's individual AIS transmission time (msgtime), not snapshot collection time
+            # Fallback to snapshot time only if vessel timestamp is missing
+            vessel_timestamp = vessel.get('timestamp', snapshot_time)
+
             vessel_positions[mmsi]['positions'].append({
-                'timestamp': snapshot_time,
+                'timestamp': vessel_timestamp,  # Individual vessel AIS transmission time
                 'lat': vessel['latitude'],
                 'lon': vessel['longitude'],
                 'speed': vessel['speed'],
