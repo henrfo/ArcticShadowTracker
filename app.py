@@ -8,6 +8,7 @@ from flask import Flask, render_template, jsonify
 from pathlib import Path
 import json
 import sys
+import requests
 from datetime import datetime, timezone
 
 # Add src to path
@@ -24,33 +25,51 @@ DATA_DIR = BASE_DIR / 'data'
 SNAPSHOTS_DIR = DATA_DIR / 'snapshots'
 OUTPUTS_DIR = BASE_DIR / 'outputs'
 
+# GitHub Pages URL for vessel data (updated every 5 minutes by GitHub Actions)
+GITHUB_PAGES_DATA_URL = "https://henrfo.github.io/ArcticShadowTracker/vessel_tracks.json"
+
 def load_vessel_data():
-    """Load pre-processed vessel track data from vessel_tracks.json
+    """Load pre-processed vessel track data from GitHub Pages or local file
 
-    This file is updated by GitHub Actions every 30 minutes and contains
+    This file is updated by GitHub Actions every 5 minutes and contains
     fully processed three-tier tracks with shadow fleet classification.
+
+    Priority:
+    1. Try GitHub Pages (for cloud deployment)
+    2. Fallback to local file (for development)
     """
-    tracks_file = DATA_DIR / 'vessel_tracks.json'
 
-    if not tracks_file.exists():
-        return {
-            'vessels': {},
-            'stats': {
-                'total': 0,
-                'russian': 0,
-                'chinese': 0,
-                'norwegian': 0,
-                'norwegian_military': 0,
-                'shadow_fleet': 0,
-                'suspected_shadow': 0,
-                'other': 0,
-                'last_update': None
+    # Try fetching from GitHub Pages first (cloud deployment)
+    try:
+        print(f"Fetching vessel data from GitHub Pages...")
+        response = requests.get(GITHUB_PAGES_DATA_URL, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        print(f"Successfully fetched data from GitHub Pages")
+    except Exception as e:
+        # Fallback to local file (development mode)
+        print(f"GitHub Pages fetch failed: {e}, using local file")
+        tracks_file = DATA_DIR / 'vessel_tracks.json'
+
+        if not tracks_file.exists():
+            return {
+                'vessels': {},
+                'stats': {
+                    'total': 0,
+                    'russian': 0,
+                    'chinese': 0,
+                    'norwegian': 0,
+                    'norwegian_military': 0,
+                    'shadow_fleet': 0,
+                    'suspected_shadow': 0,
+                    'buoy': 0,
+                    'other': 0,
+                    'last_update': 'No data'
+                }
             }
-        }
 
-    # Load pre-processed vessel tracks (GitHub Actions already ran process_vessel_tracks)
-    with open(tracks_file, 'r') as f:
-        data = json.load(f)
+        with open(tracks_file, 'r') as f:
+            data = json.load(f)
 
     vessel_tracks = data.get('vessels', {})
     last_update = data.get('last_updated')
@@ -82,6 +101,30 @@ def load_vessel_data():
                      and not v.get('is_suspected_shadow', False)
                      and not v.get('is_buoy', False))
 
+    # Format timestamp as "Xh Ym ago" instead of raw ISO format
+    if last_update:
+        try:
+            # Parse ISO timestamp
+            dt = datetime.fromisoformat(last_update.replace('Z', '+00:00'))
+
+            # Calculate time ago
+            now = datetime.now(timezone.utc)
+            time_diff = now - dt.replace(tzinfo=timezone.utc)
+            hours_ago = int(time_diff.total_seconds() / 3600)
+            mins_ago = int((time_diff.total_seconds() % 3600) / 60)
+
+            if hours_ago > 24:
+                days_ago = hours_ago // 24
+                formatted_update = f"{days_ago}d {hours_ago % 24}h ago"
+            elif hours_ago > 0:
+                formatted_update = f"{hours_ago}h {mins_ago}m ago"
+            else:
+                formatted_update = f"{mins_ago}m ago"
+        except Exception:
+            formatted_update = "Unknown"
+    else:
+        formatted_update = "No data"
+
     return {
         'vessels': vessel_tracks,
         'stats': {
@@ -94,7 +137,7 @@ def load_vessel_data():
             'suspected_shadow': suspected_shadow_count,
             'buoy': buoy_count,
             'other': other_count,
-            'last_update': last_update
+            'last_update': formatted_update  # Now shows "4h 23m ago" instead of ISO timestamp
         }
     }
 

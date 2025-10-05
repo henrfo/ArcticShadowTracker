@@ -2,7 +2,7 @@ name: Arctic AIS Monitor
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # Every 30 minutes
+    - cron: '*/5 * * * *'   # Every 5 minutes
   workflow_dispatch:         # Manual trigger for testing
   push:
     branches: [main]         # Also run on push to main (for testing)
@@ -36,6 +36,10 @@ jobs:
           BARENTSWATCH_CLIENT_SECRET: ${{ secrets.BARENTSWATCH_CLIENT_SECRET }}
         run: |
           python scripts/collect_ais.py
+
+      - name: Copy vessel_tracks.json to outputs for GitHub Pages
+        run: |
+          cp data/vessel_tracks.json outputs/vessel_tracks.json
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

@@ -321,9 +321,9 @@ def add_track_lines(map_obj, mmsi, tiers, priority_level, color, skip_tracks=Fal
         if len(segment) > 1:
             coords = [[p['lat'], p['lon']] for p in segment]
             weight, opacity, dash = {
-                'strategic': (2, 0.5, '3, 10'),
-                'tactical': (3, 0.7, '10, 5'),
-                'realtime': (4, 0.9, None)
+                'strategic': (2, 0.3, '3, 10'),
+                'tactical': (3, 0.5, '10, 5'),
+                'realtime': (4, 0.7, None)
             }[tier_type]
 
             folium.PolyLine(
@@ -427,8 +427,35 @@ def add_vessel_marker(map_obj, mmsi, track_data, current_pos, color):
         className=f"vessel-marker vessel-{mmsi}"
     ).add_to(map_obj)
 
-def add_legend(map_obj, risk_counts, total_vessels):
+def add_legend(map_obj, risk_counts, total_vessels, last_update=None):
     """Add legend and statistics to map (left sidebar, scrollable)"""
+
+    # Format data collection timestamp
+    if last_update:
+        from datetime import datetime, timezone
+        try:
+            # Parse ISO timestamp
+            dt = datetime.fromisoformat(last_update.replace('Z', '+00:00'))
+            local_dt = dt.astimezone(ZoneInfo('Europe/Oslo'))
+            update_text = local_dt.strftime('%Y-%m-%d %H:%M %Z')
+
+            # Calculate time ago
+            now = datetime.now(timezone.utc)
+            time_diff = now - dt.replace(tzinfo=timezone.utc)
+            hours_ago = int(time_diff.total_seconds() / 3600)
+            mins_ago = int((time_diff.total_seconds() % 3600) / 60)
+
+            if hours_ago > 0:
+                time_ago = f"({hours_ago}h {mins_ago}m ago)"
+            else:
+                time_ago = f"({mins_ago}m ago)"
+        except Exception:
+            update_text = "Unknown"
+            time_ago = ""
+    else:
+        update_text = datetime.now(ZoneInfo('Europe/Oslo')).strftime('%Y-%m-%d %H:%M %Z')
+        time_ago = "(just generated)"
+
     legend_html = f"""
     <div style="position: fixed;
                 top: 10px;
@@ -446,7 +473,8 @@ def add_legend(map_obj, risk_counts, total_vessels):
         <h4 style="margin: 0 0 10px 0;">Arctic Intelligence</h4>
         <p style="margin: 5px 0; font-size: 12px;"><b>Total Vessels:</b> {total_vessels}</p>
         <p style="margin: 5px 0; font-size: 11px; color: #666;">
-            Last update: {datetime.now(ZoneInfo('Europe/Oslo')).strftime('%Y-%m-%d %H:%M %Z')}
+            Data: {update_text}<br>
+            <span style="font-size: 10px; color: #999;">{time_ago}</span>
         </p>
         <hr style="margin: 10px 0;">
         <h5 style="margin: 10px 0 5px 0; font-size: 13px;">Data Tiers</h5>
