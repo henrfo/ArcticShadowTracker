@@ -659,6 +659,12 @@ def add_focus_mode_script(map_obj, vessel_tracks):
 
         // Fade all other vessels and collect focused tracks
         document.querySelectorAll('.leaflet-interactive').forEach(function(el) {
+            // Skip elements that are hidden by layer control
+            const computedStyle = window.getComputedStyle(el);
+            if (computedStyle.display === 'none') {
+                return; // Skip hidden elements
+            }
+
             const className = el.getAttribute('class') || '';
 
             if (!className.includes('vessel-' + mmsi)) {
@@ -667,10 +673,10 @@ def add_focus_mode_script(map_obj, vessel_tracks):
                 el.style.strokeOpacity = '0.4';
                 el.style.fillOpacity = '0.4';
             } else {
-                // Focused vessel - highlight it
-                el.style.opacity = '1.0';
-                el.style.strokeOpacity = '1.0';
-                el.style.fillOpacity = '1.0';
+                // Focused vessel - highlight it with !important to override layer styles
+                el.style.setProperty('opacity', '1.0', 'important');
+                el.style.setProperty('stroke-opacity', '1.0', 'important');
+                el.style.setProperty('fill-opacity', '1.0', 'important');
 
                 // For track lines (path elements), make them bolder
                 if (el.tagName.toLowerCase() === 'path') {
