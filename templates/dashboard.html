@@ -256,9 +256,26 @@
 
         // Refresh data function
         function refreshData() {
+            const refreshBtn = document.querySelector('.refresh-btn');
+            const originalText = refreshBtn.textContent;
+
+            // Show loading state
+            refreshBtn.textContent = 'Refreshing...';
+            refreshBtn.disabled = true;
+
+            console.log('Fetching vessel data from /api/vessels');
+
             fetch('/api/vessels')
-                .then(response => response.json())
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
+                    console.log('Successfully fetched data:', data);
+
                     // Update stats
                     document.getElementById('total-vessels').textContent = data.stats.total;
                     document.getElementById('russian-count').textContent = data.stats.russian;
@@ -276,7 +293,32 @@
                     }
 
                     // Reload map
+                    console.log('Reloading map...');
                     document.getElementById('map-frame').src = '/api/map?' + Date.now();
+
+                    // Show success feedback
+                    refreshBtn.textContent = '✓ Refreshed';
+                    setTimeout(() => {
+                        refreshBtn.textContent = originalText;
+                        refreshBtn.disabled = false;
+                    }, 2000);
+                })
+                .catch(error => {
+                    console.error('Error refreshing data:', error);
+
+                    // Show error feedback
+                    refreshBtn.textContent = '✗ Error';
+                    refreshBtn.style.borderColor = '#ff6666';
+
+                    setTimeout(() => {
+                        refreshBtn.textContent = originalText;
+                        refreshBtn.disabled = false;
+                        refreshBtn.style.borderColor = '';
+                    }, 3000);
+
+                    // Update status to show error
+                    document.getElementById('last-update').textContent =
+                        'Refresh failed - ' + error.message;
                 });
         }
 

@@ -4,12 +4,13 @@ Arctic Shadow Tracker - Real-Time Dashboard
 Simple Flask server with auto-refreshing vessel map
 """
 
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, make_response
 from pathlib import Path
 import json
 import sys
 import requests
 from datetime import datetime, timezone
+from functools import wraps
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent))
@@ -27,6 +28,21 @@ OUTPUTS_DIR = BASE_DIR / 'outputs'
 
 # GitHub Pages URL for vessel data (updated every 5 minutes by GitHub Actions)
 GITHUB_PAGES_DATA_URL = "https://henrfo.github.io/ArcticShadowTracker/vessel_tracks.json"
+
+def add_cors_headers(response):
+    """Add CORS headers to response"""
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    return response
+
+def cors_enabled(f):
+    """Decorator to add CORS headers to routes"""
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        response = make_response(f(*args, **kwargs))
+        return add_cors_headers(response)
+    return decorated_function
 
 def load_vessel_data():
     """Load pre-processed vessel track data from GitHub Pages or local file
@@ -149,12 +165,14 @@ def dashboard():
                          stats=data['stats'])
 
 @app.route('/api/vessels')
+@cors_enabled
 def api_vessels():
     """API endpoint for vessel data"""
     data = load_vessel_data()
     return jsonify(data)
 
 @app.route('/api/map')
+@cors_enabled
 def api_map():
     """Generate and return map HTML"""
     data = load_vessel_data()
