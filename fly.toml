@@ -1,49 +1,22 @@
-# Fly.io deployment configuration for Arctic Shadow Tracker
+# fly.toml app configuration file generated for arcticshadowtracker on 2025-10-05T16:46:21+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-app = "arctic-shadow-tracker"
-primary_region = "arn"  # Stockholm (closest to Norway)
+app = 'arcticshadowtracker'
+primary_region = 'arn'
 
 [build]
-  builder = "paketobuildpacks/builder:base"
-
-[env]
-  PORT = "5001"
 
 [http_service]
-  internal_port = 5001
+  internal_port = 8080
   force_https = true
-  auto_stop_machines = false  # Keep running 24/7
+  auto_stop_machines = false
   auto_start_machines = true
   min_machines_running = 1
-
-[[services]]
-  http_checks = []
-  internal_port = 5001
-  processes = ["app"]
-  protocol = "tcp"
-  script_checks = []
-
-  [services.concurrency]
-    hard_limit = 25
-    soft_limit = 20
-    type = "connections"
-
-  [[services.ports]]
-    force_https = true
-    handlers = ["http"]
-    port = 80
-
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
-
-  [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
-    restart_limit = 0
-    timeout = "2s"
+  processes = ['app']
 
 [[vm]]
-  cpu_kind = "shared"
+  memory = '1gb'
+  cpu_kind = 'shared'
   cpus = 1
-  memory_mb = 256

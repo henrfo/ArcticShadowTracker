@@ -168,6 +168,11 @@ def api_map():
     # Return map HTML
     return map_obj._repr_html_()
 
+@app.route('/health')
+def health():
+    """Health check endpoint for Fly.io"""
+    return jsonify({'status': 'healthy', 'service': 'Arctic Shadow Tracker'}), 200
+
 if __name__ == '__main__':
     import os
     port = int(os.environ.get('PORT', 5001))
