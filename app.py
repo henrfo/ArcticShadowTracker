@@ -74,10 +74,13 @@ def load_vessel_data():
     suspected_shadow_count = sum(1 for v in vessel_tracks.values()
                                 if v.get('is_suspected_shadow', False))
 
+    buoy_count = sum(1 for v in vessel_tracks.values() if v.get('is_buoy', False))
+
     other_count = sum(1 for v in vessel_tracks.values()
                      if v['country'] not in ['Russia', 'China', 'Norway']
                      and not v.get('is_shadow_fleet', False)
-                     and not v.get('is_suspected_shadow', False))
+                     and not v.get('is_suspected_shadow', False)
+                     and not v.get('is_buoy', False))
 
     return {
         'vessels': vessel_tracks,
@@ -89,6 +92,7 @@ def load_vessel_data():
             'norwegian_military': norwegian_military_count,
             'shadow_fleet': shadow_fleet_count,
             'suspected_shadow': suspected_shadow_count,
+            'buoy': buoy_count,
             'other': other_count,
             'last_update': last_update
         }

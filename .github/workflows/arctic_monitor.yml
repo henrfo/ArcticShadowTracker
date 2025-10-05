@@ -37,27 +37,6 @@ jobs:
         run: |
           python scripts/collect_ais.py
 
-      - name: Cleanup old snapshots
-        run: |
-          echo "Cleaning up snapshots older than 7 days..."
-          find data/snapshots -name "*.json" -type f -mtime +7 -delete || true
-
-      - name: Commit and push changes
-        run: |
-          git config --local user.name "Arctic Monitor Bot"
-          git config --local user.email "arctic-bot@github-actions"
-          git add data/snapshots/
-          git add data/vessel_tracks.json
-          git add outputs/
-
-          # Only commit if there are changes
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "AIS update $(date -u +'%Y-%m-%d %H:%M UTC')"
-            git push
-          fi
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

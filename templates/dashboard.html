@@ -185,32 +185,36 @@
                 <h3>By Country</h3>
                 <div class="breakdown">
                     <div class="breakdown-item">
-                        <span class="country"><span style="color: #d32f2f;">●</span> Russia</span>
+                        <span class="country"><span style="color: #d32f2f; font-size: 16px;">●</span> Russia</span>
                         <span class="count priority-high" id="russian-count">{{ stats.russian }}</span>
                     </div>
                     <div class="breakdown-item" style="padding-left: 15px;">
-                        <span class="country"><span style="color: #c62828;">●</span> Shadow Fleet</span>
+                        <span class="country"><span style="color: #c62828; font-size: 16px;">●</span> Shadow Fleet</span>
                         <span class="count priority-high" id="shadow-fleet-count">{{ stats.shadow_fleet }}</span>
                     </div>
                     <div class="breakdown-item" style="padding-left: 15px;">
-                        <span class="country"><span style="color: #ff5722;">●</span> Suspected Shadow Fleet</span>
+                        <span class="country"><span style="color: #ff5722; font-size: 16px;">●</span> Suspected Shadow Fleet</span>
                         <span class="count" id="suspected-shadow-count">{{ stats.suspected_shadow }}</span>
                     </div>
                     <div class="breakdown-item">
-                        <span class="country"><span style="color: #ff9800;">●</span> China</span>
+                        <span class="country"><span style="color: #ff9800; font-size: 16px;">●</span> China</span>
                         <span class="count priority-high" id="chinese-count">{{ stats.chinese }}</span>
                     </div>
                     <div class="breakdown-item">
-                        <span class="country"><span style="color: #2E7D32;">●</span> Norwegian Military/Law</span>
+                        <span class="country"><span style="color: #2196F3; font-size: 16px;">●</span> Other</span>
+                        <span class="count" id="other-count">{{ stats.other }}</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="country"><span style="color: #2E7D32; font-size: 16px;">●</span> Norwegian Military/Law</span>
                         <span class="count" id="norwegian-military-count">{{ stats.norwegian_military }}</span>
                     </div>
                     <div class="breakdown-item">
-                        <span class="country"><span style="color: #888888;">●</span> Norway</span>
+                        <span class="country"><span style="color: #888888; font-size: 16px;">●</span> Norway</span>
                         <span class="count" id="norwegian-count">{{ stats.norwegian }}</span>
                     </div>
                     <div class="breakdown-item">
-                        <span class="country"><span style="color: #2196F3;">●</span> Other</span>
-                        <span class="count" id="other-count">{{ stats.other }}</span>
+                        <span class="country"><span style="color: #616161; font-size: 16px;">●</span> Buoy</span>
+                        <span class="count" id="buoy-count">{{ stats.buoy }}</span>
                     </div>
                 </div>
             </div>
@@ -231,7 +235,7 @@
                         <span class="count">2-7 days</span>
                     </div>
                     <div class="breakdown-item">
-                        <span class="country"><span style="color: #9C27B0;">●</span> Submarine Cables</span>
+                        <span class="country"><span style="color: #9C27B0; font-size: 16px;">●</span> Submarine Cables</span>
                         <span class="count">39 cables</span>
                     </div>
                 </div>
@@ -264,6 +268,7 @@
                     document.getElementById('norwegian-count').textContent = data.stats.norwegian;
                     document.getElementById('norwegian-military-count').textContent = data.stats.norwegian_military;
                     document.getElementById('other-count').textContent = data.stats.other;
+                    document.getElementById('buoy-count').textContent = data.stats.buoy;
 
                     if (data.stats.last_update) {
                         document.getElementById('last-update').textContent =

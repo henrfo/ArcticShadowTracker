@@ -19,7 +19,7 @@ SHADOW_FLEET_FLAGS = {
 
     # Secondary flags
     'Benin', 'Comoros', 'Equatorial Guinea', 'Saint Vincent and the Grenadines',
-    'Cook Islands', 'Sierra Leone', 'Swaziland', 'Togo', 'Moldova',
+    'Cook Islands', 'Sierra Leone', 'Swaziland', 'Togo', 'Moldova', 'Malta',
 
     # Also documented
     'Belize', 'Honduras', 'Bolivia', 'Mongolia', 'Cambodia',
@@ -96,14 +96,19 @@ def process_vessel_tracks(snapshots: List[Dict]) -> Dict:
         is_shadow_suspected = (data['country'] in SHADOW_FLEET_FLAGS and
                               not is_shadow_confirmed)  # Don't double-count
 
+        # Check if vessel is a buoy (based on name - includes common misspelling "BOUY")
+        vessel_name_upper = data['name'].upper()
+        is_buoy = 'BUOY' in vessel_name_upper or 'BOUY' in vessel_name_upper
+
         vessel_tracks[mmsi] = {
             'name': data['name'],
             'country': data['country'],
             'ship_type': data['ship_type'],
             'is_shadow_fleet': is_shadow_confirmed,        # Confirmed from curated list
             'is_suspected_shadow': is_shadow_suspected,    # Flag-based suspicion
+            'is_buoy': is_buoy,                            # Buoy detection
             'priority_level': classify_priority(data['country'], data['ship_type'],
-                                               is_shadow_confirmed, is_shadow_suspected),
+                                               is_shadow_confirmed, is_shadow_suspected, is_buoy),
             'tiers': tiers
         }
 
@@ -212,7 +217,8 @@ def extract_strategic_tier(positions: List[Dict]) -> List[Dict]:
 
 def classify_priority(country: str, ship_type: str = '',
                      is_shadow_confirmed: bool = False,
-                     is_shadow_suspected: bool = False) -> str:
+                     is_shadow_suspected: bool = False,
+                     is_buoy: bool = False) -> str:
     """
     Classify vessel priority level based on country, ship type, and shadow fleet status
 
@@ -221,10 +227,15 @@ def classify_priority(country: str, ship_type: str = '',
         ship_type: Type of vessel (e.g., 'Military', 'Law Enforcement')
         is_shadow_confirmed: Whether vessel is in confirmed shadow fleet list
         is_shadow_suspected: Whether vessel flies shadow fleet flag
+        is_buoy: Whether vessel is a buoy
 
     Returns:
         Priority level: 'high', 'medium', or 'low'
     """
+    # Buoys = lowest priority
+    if is_buoy:
+        return 'low'
+
     # Confirmed shadow fleet vessels = highest priority
     if is_shadow_confirmed:
         return 'high'

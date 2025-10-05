@@ -75,8 +75,9 @@ def generate_focused_map(vessel_tracks):
     suspected_shadow_layer = folium.FeatureGroup(name='Suspected Shadow Fleet', show=True)
     china_layer = folium.FeatureGroup(name='China', show=True)
     norwegian_military_layer = folium.FeatureGroup(name='Norwegian Military/Law', show=True)
-    norway_layer = folium.FeatureGroup(name='Norway (Civilian)', show=True)
-    other_layer = folium.FeatureGroup(name='Other Countries', show=True)
+    norway_layer = folium.FeatureGroup(name='Norway (Civilian)', show=False)
+    other_layer = folium.FeatureGroup(name='Other Countries', show=False)
+    buoy_layer = folium.FeatureGroup(name='Buoys', show=False)
 
     # Add submarine cables layer
     cables_layer = folium.FeatureGroup(name='Submarine Cables', show=True)
@@ -104,7 +105,8 @@ def generate_focused_map(vessel_tracks):
     risk_counts = {'high': 0, 'medium': 0, 'low': 0}
 
     # Separate vessels by priority for z-order (render low priority first, then high)
-    # Z-order (bottom to top): Other -> Norway civilians -> Suspected Shadow -> Norwegian Military -> China -> Confirmed Shadow -> Russia
+    # Z-order (bottom to top): Buoys -> Other -> Norway civilians -> Suspected Shadow -> Norwegian Military -> China -> Confirmed Shadow -> Russia
+    buoy_vessels = []
     other_vessels = []
     norwegian_civilian_vessels = []
     suspected_shadow_vessels = []
@@ -122,7 +124,10 @@ def generate_focused_map(vessel_tracks):
                                  'law enforcement' not in ship_type)
 
         # Categorize for z-order
-        if track_data.get('is_shadow_fleet', False):
+        if track_data.get('is_buoy', False):
+            # Buoys (lowest priority)
+            buoy_vessels.append((mmsi, track_data))
+        elif track_data.get('is_shadow_fleet', False):
             # Confirmed shadow fleet (top priority)
             confirmed_shadow_vessels.append((mmsi, track_data))
         elif track_data.get('is_suspected_shadow', False):
@@ -140,6 +145,9 @@ def generate_focused_map(vessel_tracks):
 
     # Add vessels in z-order (bottom to top)
     # Assign each vessel to its appropriate layer
+    for mmsi, track_data in buoy_vessels:
+        add_vessel_to_map(buoy_layer, mmsi, track_data)
+
     for mmsi, track_data in other_vessels:
         add_vessel_to_map(other_layer, mmsi, track_data)
 
@@ -163,18 +171,19 @@ def generate_focused_map(vessel_tracks):
         add_vessel_to_map(shadow_fleet_layer, mmsi, track_data)
 
     # Add all layers to map
-    # Order matches "By Country" sidebar: Russia, Shadow Fleet, Suspected Shadow Fleet, China, Norwegian Military/Law, Norway, Other
+    # Order matches "By Country" sidebar: Russia, Shadow Fleet, Suspected Shadow Fleet, China, Other, Norwegian Military/Law, Norway, Buoy
     # Layers added in this order for LayerControl display
-    other_layer.add_to(m)
+    buoy_layer.add_to(m)
     norway_layer.add_to(m)
     norwegian_military_layer.add_to(m)
+    other_layer.add_to(m)
     china_layer.add_to(m)
     suspected_shadow_layer.add_to(m)
     shadow_fleet_layer.add_to(m)
     russia_layer.add_to(m)
 
     # Add focus mode controls
-    add_focus_mode_script(m)
+    add_focus_mode_script(m, vessel_tracks)
 
     # Add layer control to toggle all categories
     folium.LayerControl(position='topright', collapsed=False).add_to(m)
@@ -199,7 +208,9 @@ def add_vessel_to_map(map_obj, mmsi, track_data):
         return  # No position data
 
     # Color scheme by priority and country
-    if track_data.get('is_shadow_fleet', False):
+    if track_data.get('is_buoy', False):
+        color = '#616161'      # Dark grey for buoys
+    elif track_data.get('is_shadow_fleet', False):
         color = '#c62828'      # Dark red for confirmed shadow fleet
     elif track_data.get('is_suspected_shadow', False):
         color = '#ff5722'      # Orange-red for suspected shadow fleet
@@ -219,14 +230,16 @@ def add_vessel_to_map(map_obj, mmsi, track_data):
     else:
         color = '#2196F3'      # Blue for "Other" countries
 
-    # Check if Norwegian civilian (no tracks for these)
+    # Check if Norwegian civilian or buoy (no tracks for these)
     ship_type = track_data['ship_type'].lower()
     is_norwegian_civilian = (track_data['country'] == 'Norway' and
                             'military' not in ship_type and
                             'law enforcement' not in ship_type)
+    is_buoy = track_data.get('is_buoy', False)
+    skip_tracks = is_norwegian_civilian or is_buoy
 
     # Add track lines (tier-dependent visibility)
-    add_track_lines(map_obj, mmsi, tiers, priority_level, color, is_norwegian_civilian)
+    add_track_lines(map_obj, mmsi, tiers, priority_level, color, skip_tracks)
 
     # Add vessel marker (current position)
     add_vessel_marker(map_obj, mmsi, track_data, current_pos, color)
@@ -246,17 +259,17 @@ def get_current_position(tiers):
     all_positions.sort(key=lambda p: p['timestamp'], reverse=True)
     return all_positions[0]
 
-def add_track_lines(map_obj, mmsi, tiers, priority_level, color, is_norwegian_civilian=False):
+def add_track_lines(map_obj, mmsi, tiers, priority_level, color, skip_tracks=False):
     """
     Add tiered track lines to map
 
     Track visibility by default:
     - High-risk (Russia/China/Norwegian military/Shadow fleet): Tier 1 + Tier 2 + Tier 3
-    - Low-risk (Norwegian civilian): NO TRACKS
+    - Low-risk (Norwegian civilian, Buoys): NO TRACKS
     - Medium-risk (Other countries): Tier 3 only
     """
-    # Skip tracks entirely for Norwegian civilian vessels
-    if is_norwegian_civilian:
+    # Skip tracks entirely for Norwegian civilian vessels and buoys
+    if skip_tracks:
         return
 
     realtime = tiers.get('realtime', [])
@@ -336,6 +349,23 @@ def add_vessel_marker(map_obj, mmsi, track_data, current_pos, color):
     }
     flag = country_flags.get(track_data['country'], '🏴')
 
+    # Calculate time since last AIS signal
+    from datetime import datetime, timezone
+    now = datetime.now(timezone.utc)
+    signal_time = datetime.fromisoformat(current_pos['timestamp'].replace('Z', '')).replace(tzinfo=timezone.utc)
+    time_diff = now - signal_time
+
+    # Format as human-readable time ago
+    total_seconds = time_diff.total_seconds()
+    if total_seconds < 60:
+        last_signal = f"{int(total_seconds)} sec ago"
+    elif total_seconds < 3600:
+        last_signal = f"{int(total_seconds / 60)} min ago"
+    elif total_seconds < 86400:
+        last_signal = f"{int(total_seconds / 3600)} hr ago"
+    else:
+        last_signal = f"{int(total_seconds / 86400)} days ago"
+
     popup_html = f"""
     <div style="min-width: 200px;">
         <h4>{flag} {track_data['name']}</h4>
@@ -345,6 +375,7 @@ def add_vessel_marker(map_obj, mmsi, track_data, current_pos, color):
             <tr><td><b>Type:</b></td><td>{track_data['ship_type']}</td></tr>
             <tr><td><b>Speed:</b></td><td>{current_pos['speed']:.1f} kts</td></tr>
             <tr><td><b>Course:</b></td><td>{current_pos['course']:.0f}°</td></tr>
+            <tr><td><b>Last Signal:</b></td><td>{last_signal}</td></tr>
             <tr><td><b>Priority:</b></td><td>{track_data['priority_level'].upper()}</td></tr>
         </table>
         <p style="font-size: 10px; color: gray;">
@@ -393,8 +424,8 @@ def add_vessel_marker(map_obj, mmsi, track_data, current_pos, color):
         opacity=line_opacity,
         popup=folium.Popup(popup_html, max_width=300),
         tooltip=f"{flag} {track_data['name']}",
-        className=f"vessel-marker"
-    ).add_to(map_obj).add_child(folium.Element(f'<script>this.options.vesselMmsi = "{mmsi}";</script>'))
+        className=f"vessel-marker vessel-{mmsi}"
+    ).add_to(map_obj)
 
 def add_legend(map_obj, risk_counts, total_vessels):
     """Add legend and statistics to map (left sidebar, scrollable)"""
@@ -434,20 +465,87 @@ def add_legend(map_obj, risk_counts, total_vessels):
 
     map_obj.get_root().html.add_child(folium.Element(legend_html))
 
-def add_focus_mode_script(map_obj):
+def add_focus_mode_script(map_obj, vessel_tracks):
     """Add JavaScript for vessel focus mode"""
+
+    # Build vessel data map for JavaScript
+    import json
+    vessel_data_map = {}
+
+    for mmsi, track_data in vessel_tracks.items():
+        tiers = track_data['tiers']
+        current_pos = get_current_position(tiers)
+
+        if not current_pos:
+            continue
+
+        # Calculate time since last AIS signal
+        from datetime import datetime, timezone
+        now = datetime.now(timezone.utc)
+        signal_time = datetime.fromisoformat(current_pos['timestamp'].replace('Z', '')).replace(tzinfo=timezone.utc)
+        time_diff = now - signal_time
+
+        total_seconds = time_diff.total_seconds()
+        if total_seconds < 60:
+            last_signal = f"{int(total_seconds)} sec ago"
+        elif total_seconds < 3600:
+            last_signal = f"{int(total_seconds / 60)} min ago"
+        elif total_seconds < 86400:
+            last_signal = f"{int(total_seconds / 3600)} hr ago"
+        else:
+            last_signal = f"{int(total_seconds / 86400)} days ago"
+
+        # Get flag emoji
+        country_flags = {'Russia': '🇷🇺', 'China': '🇨🇳', 'Norway': '🇳🇴'}
+        flag = country_flags.get(track_data['country'], '🏴')
+
+        vessel_data_map[mmsi] = {
+            'name': f"{flag} {track_data['name']}",
+            'mmsi': mmsi,
+            'country': track_data['country'],
+            'type': track_data['ship_type'],
+            'speed': f"{current_pos['speed']:.1f} kts",
+            'course': f"{current_pos['course']:.0f}°",
+            'lastSignal': last_signal,
+            'priority': track_data['priority_level'].upper()
+        }
+
+    vessel_data_json = json.dumps(vessel_data_map)
+
     focus_script = """
+    <!-- Vessel Info Panel (center-left, initially hidden) -->
+    <div id="vessel-info-panel" style="display: none; position: fixed; top: 50%; left: 10px; transform: translateY(-50%); width: 250px; z-index: 10000; background-color: white; padding: 15px; border: 2px solid #333; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
+        <h4 id="vessel-info-name" style="margin: 0 0 10px 0;"></h4>
+        <table style="width: 100%; font-size: 12px;">
+            <tr><td><b>MMSI:</b></td><td id="vessel-info-mmsi"></td></tr>
+            <tr><td><b>Country:</b></td><td id="vessel-info-country"></td></tr>
+            <tr><td><b>Type:</b></td><td id="vessel-info-type"></td></tr>
+            <tr><td><b>Speed:</b></td><td id="vessel-info-speed"></td></tr>
+            <tr><td><b>Course:</b></td><td id="vessel-info-course"></td></tr>
+            <tr><td><b>Last Signal:</b></td><td id="vessel-info-signal"></td></tr>
+            <tr><td><b>Priority:</b></td><td id="vessel-info-priority"></td></tr>
+        </table>
+        <p style="font-size: 10px; color: gray; margin-top: 10px;">
+            Click map or vessel to close
+        </p>
+    </div>
+
     <script>
+    // Vessel data map (generated from Python)
+    const vesselDataMap = """ + vessel_data_json + """;
+
     // Focus mode: Click vessel to highlight and show all tiers
     let focusedVessel = null;
 
     // Wait for map to load
     setTimeout(function() {
-        // Add click handlers to all vessel markers
-        document.querySelectorAll('.leaflet-marker-icon').forEach(function(marker) {
+        // Add click handlers to all vessel markers (CircleMarkers render as .vessel-marker)
+        document.querySelectorAll('.vessel-marker').forEach(function(marker) {
             marker.addEventListener('click', function(e) {
-                // Get MMSI from marker (injected in add_vessel_marker)
-                const vesselMmsi = this.vesselMmsi || null;
+                // Extract MMSI from className (e.g., "vessel-marker vessel-258123000")
+                const classes = (this.getAttribute('class') || '').split(' ');
+                const vesselClass = classes.find(c => c.startsWith('vessel-') && c !== 'vessel-marker');
+                const vesselMmsi = vesselClass ? vesselClass.replace('vessel-', '') : null;
 
                 if (!vesselMmsi) return;
 
@@ -463,11 +561,40 @@ def add_focus_mode_script(map_obj):
             });
         });
 
-        // Double-click map to unfocus all
-        document.querySelector('.leaflet-container').addEventListener('dblclick', function(e) {
-            if (focusedVessel) {
+        // Add click handlers to track polylines (paths with vessel-{mmsi} className)
+        document.querySelectorAll('path[class*="vessel-"]').forEach(function(track) {
+            const className = track.getAttribute('class') || '';
+
+            // Skip if it's a marker (already handled above)
+            if (className.includes('vessel-marker')) return;
+
+            // Extract MMSI from vessel-{mmsi} class (e.g., "vessel-258123000 tier-tactical")
+            const classes = className.split(' ');
+            const vesselClass = classes.find(c => /^vessel-\d+$/.test(c));
+            if (!vesselClass) return;
+
+            track.addEventListener('click', function(e) {
+                const vesselMmsi = vesselClass.replace('vessel-', '');
+
+                if (focusedVessel === vesselMmsi) {
+                    // Unfocus if clicking same vessel's track
+                    unfocusAll();
+                } else {
+                    // Focus on vessel
+                    focusVessel(vesselMmsi);
+                }
+
+                e.stopPropagation();
+            });
+        });
+
+        // Click map to unfocus all
+        document.querySelector('.leaflet-container').addEventListener('click', function(e) {
+            // Only unfocus if clicking on the map itself (not a marker or track)
+            const isVesselElement = e.target.classList.contains('vessel-marker') ||
+                                   (e.target.getAttribute('class') || '').includes('vessel-');
+            if (focusedVessel && !isVesselElement) {
                 unfocusAll();
-                e.preventDefault();
             }
         });
     }, 1000);
@@ -482,22 +609,68 @@ def add_focus_mode_script(map_obj):
 
         focusedVessel = mmsi;
 
-        // Fade all other vessels
+        // Get vessel data from vessel data map
+        const vData = vesselDataMap[mmsi];
+        if (vData) {
+            // Populate info panel
+            document.getElementById('vessel-info-name').textContent = vData.name;
+            document.getElementById('vessel-info-mmsi').textContent = vData.mmsi;
+            document.getElementById('vessel-info-country').textContent = vData.country;
+            document.getElementById('vessel-info-type').textContent = vData.type;
+            document.getElementById('vessel-info-speed').textContent = vData.speed;
+            document.getElementById('vessel-info-course').textContent = vData.course;
+            document.getElementById('vessel-info-signal').textContent = vData.lastSignal;
+            document.getElementById('vessel-info-priority').textContent = vData.priority;
+
+            // Show info panel
+            document.getElementById('vessel-info-panel').style.display = 'block';
+        }
+
+        // Collect focused vessel's track lines for reordering
+        const focusedTracks = [];
+
+        // Fade all other vessels and collect focused tracks
         document.querySelectorAll('.leaflet-interactive').forEach(function(el) {
             const className = el.getAttribute('class') || '';
 
             if (!className.includes('vessel-' + mmsi)) {
-                // Not the focused vessel - fade it
-                el.style.opacity = '0.15';
-                el.style.strokeOpacity = '0.15';
-                el.style.fillOpacity = '0.15';
+                // Not the focused vessel - fade it (but keep visible)
+                el.style.opacity = '0.4';
+                el.style.strokeOpacity = '0.4';
+                el.style.fillOpacity = '0.4';
             } else {
                 // Focused vessel - highlight it
                 el.style.opacity = '1.0';
                 el.style.strokeOpacity = '1.0';
                 el.style.fillOpacity = '1.0';
-                el.style.strokeWidth = '4';
-                el.style.zIndex = '1000';
+
+                // For track lines (path elements), make them bolder
+                if (el.tagName.toLowerCase() === 'path') {
+                    // Store original weight if not already stored
+                    if (!el.getAttribute('data-original-stroke-width')) {
+                        const currentWeight = el.getAttribute('stroke-width') || '3';
+                        el.setAttribute('data-original-stroke-width', currentWeight);
+                    }
+
+                    // Make track bolder (increase by 2)
+                    const originalWeight = parseFloat(el.getAttribute('data-original-stroke-width') || '3');
+                    el.setAttribute('stroke-width', (originalWeight + 2).toString());
+
+                    // Collect for DOM reordering
+                    focusedTracks.push(el);
+                } else {
+                    // For marker (circle), increase size
+                    el.style.strokeWidth = '4';
+                    el.style.zIndex = '1000';
+                }
+            }
+        });
+
+        // Bring focused vessel's tracks to front by re-appending them
+        // This moves them to the end of the SVG container, rendering on top
+        focusedTracks.forEach(function(track) {
+            if (track.parentNode) {
+                track.parentNode.appendChild(track);
             }
         });
     }
@@ -507,13 +680,24 @@ def add_focus_mode_script(map_obj):
 
         focusedVessel = null;
 
-        // Restore all elements to default opacity
+        // Hide info panel
+        document.getElementById('vessel-info-panel').style.display = 'none';
+
+        // Restore all elements to default opacity and weights
         document.querySelectorAll('.leaflet-interactive').forEach(function(el) {
             el.style.opacity = '';
             el.style.strokeOpacity = '';
             el.style.fillOpacity = '';
             el.style.strokeWidth = '';
             el.style.zIndex = '';
+
+            // Restore original track line weight
+            if (el.tagName.toLowerCase() === 'path') {
+                const originalWeight = el.getAttribute('data-original-stroke-width');
+                if (originalWeight) {
+                    el.setAttribute('stroke-width', originalWeight);
+                }
+            }
         });
     }
     </script>
