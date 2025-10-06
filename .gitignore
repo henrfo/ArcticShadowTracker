@@ -6,9 +6,11 @@ config.yaml
 # Environment files
 arcticshadowtracker_env/
 
-# Data files - commit snapshots for historical tracking
-# Allow vessel_tracks.json for three-tier historical tracking
-!data/vessel_tracks.json
+# Data files - deployed to gh-pages by Actions, not stored in main branch
+data/snapshots/
+data/vessel_tracks.json
+outputs/index.html
+outputs/vessel_tracks.json
 
 # Shadow fleet MMSI cache (optional - include if you want to track conversions)
 # src/.mmsi_cache/
