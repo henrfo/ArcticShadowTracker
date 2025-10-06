@@ -31,15 +31,42 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Fetch previous snapshots from gh-pages
+        run: |
+          # Fetch gh-pages branch (last 50 commits to get recent snapshots)
+          git fetch origin gh-pages --depth=50 2>/dev/null || echo "No gh-pages branch yet (first run)"
+
+          # Restore snapshots if gh-pages exists
+          if git rev-parse origin/gh-pages >/dev/null 2>&1; then
+            echo "Restoring snapshots from gh-pages..."
+            git checkout origin/gh-pages -- data/snapshots/ 2>/dev/null || echo "No snapshots directory yet"
+
+            # Count restored snapshots
+            SNAPSHOT_COUNT=$(ls -1 data/snapshots/*.json 2>/dev/null | wc -l | tr -d ' ')
+            echo "Restored $SNAPSHOT_COUNT snapshot files from gh-pages"
+          else
+            echo "First run - no previous snapshots available"
+            mkdir -p data/snapshots
+          fi
+
       - name: Collect AIS data
         env:
           BARENTSWATCH_CLIENT_SECRET: ${{ secrets.BARENTSWATCH_CLIENT_SECRET }}
         run: |
           python scripts/collect_ais.py
 
-      - name: Copy vessel_tracks.json to outputs for GitHub Pages
+      - name: Copy data to outputs for GitHub Pages
         run: |
+          # Copy vessel tracks
           cp data/vessel_tracks.json outputs/vessel_tracks.json
+
+          # Copy snapshots for persistence
+          mkdir -p outputs/data/snapshots
+          cp data/snapshots/*.json outputs/data/snapshots/ 2>/dev/null || echo "No snapshots to copy (first run)"
+
+          # Count what we're deploying
+          SNAPSHOT_COUNT=$(ls -1 outputs/data/snapshots/*.json 2>/dev/null | wc -l | tr -d ' ')
+          echo "Deploying $SNAPSHOT_COUNT snapshots to gh-pages"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -47,6 +74,7 @@ jobs:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: ./outputs
           publish_branch: gh-pages
-          force_orphan: true  # Keep gh-pages branch clean
+          force_orphan: false  # Preserve gh-pages history for snapshot persistence
+          keep_files: false    # Replace outputs on each deploy, but keep git history
           user_name: 'github-actions[bot]'
           user_email: '41898282+github-actions[bot]@users.noreply.github.com'
