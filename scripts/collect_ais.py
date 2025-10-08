@@ -116,7 +116,7 @@ def fetch_ais_data(token):
         target_vessels.append({
             'timestamp': vessel_timestamp,  # Individual vessel AIS transmission time
             'mmsi': mmsi,
-            'name': v.get('name', 'Unknown'),
+            'name': v.get('name') or 'Unknown',  # Handle None values from API
             'country': country,
             'latitude': lat,
             'longitude': lon,

@@ -93,19 +93,20 @@ def process_vessel_tracks(snapshots: List[Dict]) -> Dict:
         tiers = build_three_tiers(positions)
 
         # Check if vessel is in confirmed shadow fleet list (our curated list)
+        vessel_name = data['name'] or 'Unknown'  # Ensure name is never None
         is_shadow_confirmed = (mmsi in shadow_fleet['mmsi'] or
-                              (data['name'] and data['name'].lower() in shadow_fleet['names']))
+                              vessel_name.lower() in shadow_fleet['names'])
 
         # Check if vessel flies shadow fleet flag (flag-based suspicion)
         is_shadow_suspected = (data['country'] in SHADOW_FLEET_FLAGS and
                               not is_shadow_confirmed)  # Don't double-count
 
         # Check if vessel is a buoy (based on name - includes common misspelling "BOUY")
-        vessel_name_upper = (data['name'] or '').upper()
+        vessel_name_upper = vessel_name.upper()
         is_buoy = 'BUOY' in vessel_name_upper or 'BOUY' in vessel_name_upper
 
         vessel_tracks[mmsi] = {
-            'name': data['name'],
+            'name': vessel_name,
             'country': data['country'],
             'ship_type': data['ship_type'],
             'is_shadow_fleet': is_shadow_confirmed,        # Confirmed from curated list
