@@ -11,6 +11,7 @@ import json
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from pathlib import Path
+from airport_loader import load_norwegian_airports
 
 def load_submarine_cables():
     """
@@ -52,21 +53,21 @@ def generate_focused_map(vessel_tracks):
     Returns:
         folium.Map object
     """
-    # Center on Arctic region
+    # Center on Norway (mid-country)
     m = folium.Map(
-        location=[75, 20],
+        location=[68, 15],
         zoom_start=5,
         tiles='OpenStreetMap'
     )
 
-    # Add Arctic coverage area
+    # Add Norway coverage area
     folium.Rectangle(
-        bounds=[[65, 0], [82, 40]],
+        bounds=[[57, 4], [82, 32]],
         color='blue',
         fill=False,
         weight=2,
         opacity=0.3,
-        popup='Arctic Coverage Area: 65-82°N, 0-40°E'
+        popup='Norway Coverage Area: 57-82°N, 4-32°E'
     ).add_to(m)
 
     # Create feature groups for toggleable layers
@@ -100,6 +101,45 @@ def generate_focused_map(vessel_tracks):
             smooth_factor=0  # Preserve exact coordinates
         ).add_to(cables_layer)
     cables_layer.add_to(m)
+
+    # Add airports layer
+    airports_layer = folium.FeatureGroup(name='Airports & Heliports', show=False)
+    airports = load_norwegian_airports()
+    for airport in airports:
+        # Determine icon based on airport type
+        airport_type = airport['type']
+        if airport_type == 'large_airport':
+            icon_html = '<div style="font-size: 20px;">✈️</div>'
+            icon_size = (20, 20)
+        elif airport_type == 'medium_airport':
+            icon_html = '<div style="font-size: 16px;">🛩️</div>'
+            icon_size = (16, 16)
+        elif airport_type == 'small_airport':
+            icon_html = '<div style="font-size: 12px;">🛫</div>'
+            icon_size = (12, 12)
+        elif airport_type == 'heliport':
+            icon_html = '<div style="font-size: 12px;">🚁</div>'
+            icon_size = (12, 12)
+        else:
+            icon_html = '<div style="font-size: 10px;">🛬</div>'
+            icon_size = (10, 10)
+
+        # Create tooltip text
+        tooltip_text = f"{airport['name']}"
+        if airport['icao_code']:
+            tooltip_text += f" ({airport['icao_code']})"
+        tooltip_text += f"<br>Type: {airport_type.replace('_', ' ').title()}"
+        if airport['municipality']:
+            tooltip_text += f"<br>Location: {airport['municipality']}"
+
+        # Add marker
+        folium.Marker(
+            location=[airport['latitude'], airport['longitude']],
+            icon=folium.DivIcon(html=icon_html, icon_size=icon_size),
+            tooltip=tooltip_text
+        ).add_to(airports_layer)
+
+    airports_layer.add_to(m)
 
     # Count vessels by risk
     risk_counts = {'high': 0, 'medium': 0, 'low': 0}
