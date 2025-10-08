@@ -11,7 +11,7 @@ import json
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from pathlib import Path
-from airport_loader import load_norwegian_airports
+from .airport_loader import load_norwegian_airports
 
 def load_submarine_cables():
     """
