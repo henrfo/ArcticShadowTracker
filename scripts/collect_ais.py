@@ -22,12 +22,12 @@ from src.ais_ship_types import get_ship_type
 from src.track_manager import process_vessel_tracks
 from src.map_generator import generate_focused_map
 
-# Arctic region coverage
+# Norway coverage (full country + Svalbard)
 ARCTIC_REGION = {
-    'lat_min': 65.0,   # Above Lofoten
+    'lat_min': 57.0,   # Southern Norway coast
     'lat_max': 82.0,   # All of Svalbard
-    'lon_min': 0.0,    # Western Norway
-    'lon_max': 40.0    # Past Kola Peninsula
+    'lon_min': 4.0,    # Western Norway coast
+    'lon_max': 32.0    # Eastern Norway/Russian border
 }
 
 # Data directories
