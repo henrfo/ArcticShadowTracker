@@ -159,8 +159,7 @@ def generate_focused_map(vessel_tracks):
                 'opacity': 0.5,
                 'fillOpacity': 0,
                 'dashArray': '5, 5'      # Dashed line
-            },
-            tooltip=f"AIS Coverage: {coverage_boundary['properties']['bounds']}<br>Vessels: {coverage_boundary['properties']['vessels']}"
+            }
         ).add_to(coverage_layer)
         coverage_layer.add_to(m)
 
