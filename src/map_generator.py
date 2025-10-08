@@ -43,33 +43,24 @@ def load_submarine_cables():
         print(f"Warning: Could not load submarine cables: {e}")
         return {'type': 'FeatureCollection', 'features': []}
 
-def load_norway_eez():
+def load_maritime_borders():
     """
-    Load Norwegian EEZ (Exclusive Economic Zone) boundaries
+    Load official Norwegian maritime borders from Kartverket
 
     Returns:
-        GeoJSON FeatureCollection with Norwegian and Svalbard EEZ polygons
+        GeoJSON FeatureCollection with Norwegian maritime boundaries
+        (coastline, territorial waters, EEZ, etc.)
     """
     try:
-        base_dir = Path(__file__).parent / 'marine_border'
+        borders_file = Path(__file__).parent / 'marine_border' / 'norway_maritime_borders.json'
 
-        # Load main Norwegian EEZ
-        with open(base_dir / 'norway_eez.json') as f:
-            norway_data = json.load(f)
+        with open(borders_file) as f:
+            data = json.load(f)
 
-        # Load Svalbard EEZ
-        with open(base_dir / 'svalbard_eez.json') as f:
-            svalbard_data = json.load(f)
+        return data
 
-        # Combine into single FeatureCollection
-        all_features = norway_data['features'] + svalbard_data['features']
-
-        return {
-            'type': 'FeatureCollection',
-            'features': all_features
-        }
     except Exception as e:
-        print(f"Warning: Could not load Norway EEZ: {e}")
+        print(f"Warning: Could not load maritime borders: {e}")
         return {'type': 'FeatureCollection', 'features': []}
 
 def calculate_coverage_boundary(vessel_tracks):
@@ -147,21 +138,22 @@ def generate_focused_map(vessel_tracks):
         tiles='OpenStreetMap'
     )
 
-    # Add dynamic coverage boundary (based on actual vessel positions)
-    coverage_boundary = calculate_coverage_boundary(vessel_tracks)
-    if coverage_boundary:
-        coverage_layer = folium.FeatureGroup(name='AIS Coverage Area', show=True)
+    # Add official Norwegian maritime borders (from Kartverket)
+    maritime_borders = load_maritime_borders()
+    if maritime_borders['features']:
+        borders_layer = folium.FeatureGroup(name='Norwegian Maritime Borders', show=True)
         folium.GeoJson(
-            coverage_boundary,
+            maritime_borders,
             style_function=lambda feature: {
                 'color': '#2196F3',      # Blue
                 'weight': 2,
                 'opacity': 0.5,
                 'fillOpacity': 0,
                 'dashArray': '5, 5'      # Dashed line
-            }
-        ).add_to(coverage_layer)
-        coverage_layer.add_to(m)
+            },
+            tooltip='Norwegian Maritime Borders (Official - Kartverket)'
+        ).add_to(borders_layer)
+        borders_layer.add_to(m)
 
     # Create feature groups for toggleable layers
     russia_layer = folium.FeatureGroup(name='Russia', show=True)
