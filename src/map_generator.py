@@ -43,24 +43,34 @@ def load_submarine_cables():
         print(f"Warning: Could not load submarine cables: {e}")
         return {'type': 'FeatureCollection', 'features': []}
 
-def load_maritime_borders():
-    """
-    Load official Norwegian maritime borders from Kartverket
-
-    Returns:
-        GeoJSON FeatureCollection with Norwegian maritime boundaries
-        (coastline, territorial waters, EEZ, etc.)
-    """
+def load_200nm_boundary():
+    """Load 200 nautical mile boundary (most visible)"""
     try:
-        borders_file = Path(__file__).parent / 'marine_border' / 'norway_maritime_borders.json'
-
-        with open(borders_file) as f:
-            data = json.load(f)
-
-        return data
-
+        file_path = Path(__file__).parent / 'marine_border' / 'norway_200nm_boundary.json'
+        with open(file_path) as f:
+            return json.load(f)
     except Exception as e:
-        print(f"Warning: Could not load maritime borders: {e}")
+        print(f"Warning: Could not load 200nm boundary: {e}")
+        return {'type': 'FeatureCollection', 'features': []}
+
+def load_eez_zone():
+    """Load Norwegian Economic Zone (semi-transparent)"""
+    try:
+        file_path = Path(__file__).parent / 'marine_border' / 'norway_eez.json'
+        with open(file_path) as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"Warning: Could not load EEZ zone: {e}")
+        return {'type': 'FeatureCollection', 'features': []}
+
+def load_territorial_waters():
+    """Load territorial waters (most transparent)"""
+    try:
+        file_path = Path(__file__).parent / 'marine_border' / 'norway_territorial_waters.json'
+        with open(file_path) as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"Warning: Could not load territorial waters: {e}")
         return {'type': 'FeatureCollection', 'features': []}
 
 def calculate_coverage_boundary(vessel_tracks):
@@ -138,22 +148,53 @@ def generate_focused_map(vessel_tracks):
         tiles='OpenStreetMap'
     )
 
-    # Add official Norwegian maritime borders (from Kartverket)
-    maritime_borders = load_maritime_borders()
-    if maritime_borders['features']:
-        borders_layer = folium.FeatureGroup(name='Norwegian Maritime Borders', show=True)
+    # Add Norwegian maritime zones (3 layers with different visibility)
+    # Layer 1: Territorial Waters (12nm) - Most transparent, hidden by default
+    territorial_waters = load_territorial_waters()
+    if territorial_waters['features']:
+        territorial_layer = folium.FeatureGroup(name='Territorial Waters (12nm)', show=False)
         folium.GeoJson(
-            maritime_borders,
+            territorial_waters,
+            style_function=lambda feature: {
+                'color': '#64B5F6',      # Light blue
+                'weight': 1,
+                'opacity': 0.2,
+                'fillOpacity': 0,
+                'dashArray': '2, 4'      # Fine dashed line
+            }
+        ).add_to(territorial_layer)
+        territorial_layer.add_to(m)
+
+    # Layer 2: Norwegian Economic Zone (EEZ) - Semi-transparent
+    eez_zone = load_eez_zone()
+    if eez_zone['features']:
+        eez_layer = folium.FeatureGroup(name='Norwegian EEZ', show=True)
+        folium.GeoJson(
+            eez_zone,
             style_function=lambda feature: {
                 'color': '#2196F3',      # Blue
                 'weight': 2,
-                'opacity': 0.5,
+                'opacity': 0.3,
                 'fillOpacity': 0,
                 'dashArray': '5, 5'      # Dashed line
-            },
-            tooltip='Norwegian Maritime Borders (Official - Kartverket)'
-        ).add_to(borders_layer)
-        borders_layer.add_to(m)
+            }
+        ).add_to(eez_layer)
+        eez_layer.add_to(m)
+
+    # Layer 3: 200 Nautical Mile Boundary - Most visible (primary border)
+    boundary_200nm = load_200nm_boundary()
+    if boundary_200nm['features']:
+        boundary_layer = folium.FeatureGroup(name='200nm Boundary', show=True)
+        folium.GeoJson(
+            boundary_200nm,
+            style_function=lambda feature: {
+                'color': '#1976D2',      # Dark blue
+                'weight': 3,
+                'opacity': 0.8,
+                'fillOpacity': 0
+            }
+        ).add_to(boundary_layer)
+        boundary_layer.add_to(m)
 
     # Create feature groups for toggleable layers
     russia_layer = folium.FeatureGroup(name='Russia', show=True)
