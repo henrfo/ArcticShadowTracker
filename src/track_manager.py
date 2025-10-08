@@ -65,7 +65,7 @@ def process_vessel_tracks(snapshots: List[Dict]) -> Dict:
 
             if mmsi not in vessel_positions:
                 vessel_positions[mmsi] = {
-                    'name': vessel['name'],
+                    'name': vessel['name'] or 'Unknown',
                     'country': vessel['country'],
                     'ship_type': vessel['ship_type'],
                     'positions': []
@@ -94,14 +94,14 @@ def process_vessel_tracks(snapshots: List[Dict]) -> Dict:
 
         # Check if vessel is in confirmed shadow fleet list (our curated list)
         is_shadow_confirmed = (mmsi in shadow_fleet['mmsi'] or
-                              data['name'].lower() in shadow_fleet['names'])
+                              (data['name'] and data['name'].lower() in shadow_fleet['names']))
 
         # Check if vessel flies shadow fleet flag (flag-based suspicion)
         is_shadow_suspected = (data['country'] in SHADOW_FLEET_FLAGS and
                               not is_shadow_confirmed)  # Don't double-count
 
         # Check if vessel is a buoy (based on name - includes common misspelling "BOUY")
-        vessel_name_upper = data['name'].upper()
+        vessel_name_upper = (data['name'] or '').upper()
         is_buoy = 'BUOY' in vessel_name_upper or 'BOUY' in vessel_name_upper
 
         vessel_tracks[mmsi] = {
