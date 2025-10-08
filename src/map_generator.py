@@ -43,6 +43,93 @@ def load_submarine_cables():
         print(f"Warning: Could not load submarine cables: {e}")
         return {'type': 'FeatureCollection', 'features': []}
 
+def load_norway_eez():
+    """
+    Load Norwegian EEZ (Exclusive Economic Zone) boundaries
+
+    Returns:
+        GeoJSON FeatureCollection with Norwegian and Svalbard EEZ polygons
+    """
+    try:
+        base_dir = Path(__file__).parent / 'marine_border'
+
+        # Load main Norwegian EEZ
+        with open(base_dir / 'norway_eez.json') as f:
+            norway_data = json.load(f)
+
+        # Load Svalbard EEZ
+        with open(base_dir / 'svalbard_eez.json') as f:
+            svalbard_data = json.load(f)
+
+        # Combine into single FeatureCollection
+        all_features = norway_data['features'] + svalbard_data['features']
+
+        return {
+            'type': 'FeatureCollection',
+            'features': all_features
+        }
+    except Exception as e:
+        print(f"Warning: Could not load Norway EEZ: {e}")
+        return {'type': 'FeatureCollection', 'features': []}
+
+def calculate_coverage_boundary(vessel_tracks):
+    """
+    Calculate dynamic coverage area from actual vessel positions
+
+    Args:
+        vessel_tracks: Dict of vessel track data
+
+    Returns:
+        GeoJSON Feature with polygon showing actual data coverage
+    """
+    lats, lons = [], []
+
+    for track in vessel_tracks.values():
+        # Get current position from most recent tier
+        tiers = track.get('tiers', {})
+        pos = None
+
+        if tiers.get('realtime'):
+            pos = tiers['realtime'][-1]
+        elif tiers.get('tactical'):
+            pos = tiers['tactical'][-1]
+        elif tiers.get('strategic'):
+            pos = tiers['strategic'][-1]
+
+        if pos:
+            lats.append(pos['lat'])
+            lons.append(pos['lon'])
+
+    if not lats:
+        return None
+
+    # Add 2-degree buffer
+    buffer = 2.0
+    min_lat, max_lat = min(lats) - buffer, max(lats) + buffer
+    min_lon, max_lon = min(lons) - buffer, max(lons) + buffer
+
+    # Create polygon (GeoJSON format: [lon, lat])
+    bounds = [
+        [min_lon, min_lat],  # SW corner
+        [max_lon, min_lat],  # SE corner
+        [max_lon, max_lat],  # NE corner
+        [min_lon, max_lat],  # NW corner
+        [min_lon, min_lat]   # Close polygon
+    ]
+
+    return {
+        'type': 'Feature',
+        'geometry': {
+            'type': 'Polygon',
+            'coordinates': [bounds]
+        },
+        'properties': {
+            'name': 'AIS Data Coverage',
+            'bounds': f'{min_lat:.1f}-{max_lat:.1f}°N, {min_lon:.1f}-{max_lon:.1f}°E',
+            'vessels': len(lats)
+        }
+    }
+
 def generate_focused_map(vessel_tracks):
     """
     Generate interactive map with focus mode
@@ -60,15 +147,22 @@ def generate_focused_map(vessel_tracks):
         tiles='OpenStreetMap'
     )
 
-    # Add Norway coverage area
-    folium.Rectangle(
-        bounds=[[57, 4], [82, 32]],
-        color='blue',
-        fill=False,
-        weight=2,
-        opacity=0.3,
-        popup='Norway Coverage Area: 57-82°N, 4-32°E'
-    ).add_to(m)
+    # Add dynamic coverage boundary (based on actual vessel positions)
+    coverage_boundary = calculate_coverage_boundary(vessel_tracks)
+    if coverage_boundary:
+        coverage_layer = folium.FeatureGroup(name='AIS Coverage Area', show=True)
+        folium.GeoJson(
+            coverage_boundary,
+            style_function=lambda feature: {
+                'color': '#2196F3',      # Blue
+                'weight': 2,
+                'opacity': 0.5,
+                'fillOpacity': 0,
+                'dashArray': '5, 5'      # Dashed line
+            },
+            tooltip=f"AIS Coverage: {coverage_boundary['properties']['bounds']}<br>Vessels: {coverage_boundary['properties']['vessels']}"
+        ).add_to(coverage_layer)
+        coverage_layer.add_to(m)
 
     # Create feature groups for toggleable layers
     russia_layer = folium.FeatureGroup(name='Russia', show=True)
@@ -109,20 +203,20 @@ def generate_focused_map(vessel_tracks):
         # Determine icon based on airport type
         airport_type = airport['type']
         if airport_type == 'large_airport':
-            icon_html = '<div style="font-size: 20px;">✈️</div>'
-            icon_size = (20, 20)
+            icon_html = '<div style="font-size: 30px;">✈️</div>'
+            icon_size = (30, 30)
         elif airport_type == 'medium_airport':
-            icon_html = '<div style="font-size: 16px;">🛩️</div>'
-            icon_size = (16, 16)
+            icon_html = '<div style="font-size: 24px;">🛩️</div>'
+            icon_size = (24, 24)
         elif airport_type == 'small_airport':
-            icon_html = '<div style="font-size: 12px;">🛫</div>'
-            icon_size = (12, 12)
+            icon_html = '<div style="font-size: 18px;">🛫</div>'
+            icon_size = (18, 18)
         elif airport_type == 'heliport':
-            icon_html = '<div style="font-size: 12px;">🚁</div>'
-            icon_size = (12, 12)
+            icon_html = '<div style="font-size: 18px;">🚁</div>'
+            icon_size = (18, 18)
         else:
-            icon_html = '<div style="font-size: 10px;">🛬</div>'
-            icon_size = (10, 10)
+            icon_html = '<div style="font-size: 15px;">🛬</div>'
+            icon_size = (15, 15)
 
         # Create tooltip text
         tooltip_text = f"{airport['name']}"

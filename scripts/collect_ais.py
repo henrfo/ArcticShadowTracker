@@ -22,14 +22,6 @@ from src.ais_ship_types import get_ship_type
 from src.track_manager import process_vessel_tracks
 from src.map_generator import generate_focused_map
 
-# Norway coverage (full country + Svalbard)
-ARCTIC_REGION = {
-    'lat_min': 57.0,   # Southern Norway coast
-    'lat_max': 82.0,   # All of Svalbard
-    'lon_min': 4.0,    # Western Norway coast
-    'lon_max': 32.0    # Eastern Norway/Russian border
-}
-
 # Data directories
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / 'data'
@@ -83,7 +75,7 @@ def get_barentswatch_token(client_id, client_secret):
         raise Exception(f"Failed to get token: {response.text}")
 
 def fetch_ais_data(token):
-    """Fetch AIS data from BarentsWatch and filter for Arctic vessels"""
+    """Fetch ALL AIS data from BarentsWatch (no geographic filtering)"""
     print("Fetching AIS data from BarentsWatch...")
 
     headers = {'Authorization': f'Bearer {token}', 'Accept': 'application/json'}
@@ -95,18 +87,13 @@ def fetch_ais_data(token):
     all_vessels = response.json()
     print(f"  Total vessels received: {len(all_vessels)}")
 
-    # Filter for Arctic vessels (all countries)
+    # Process all vessels (no geographic filtering)
     target_vessels = []
     collection_time = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
 
     for v in all_vessels:
         lat = v.get('latitude', 0)
         lon = v.get('longitude', 0)
-
-        # Arctic region filter
-        if not (ARCTIC_REGION['lat_min'] <= lat <= ARCTIC_REGION['lat_max'] and
-                ARCTIC_REGION['lon_min'] <= lon <= ARCTIC_REGION['lon_max']):
-            continue
 
         mmsi = str(v.get('mmsi', ''))
         mmsi_prefix = mmsi[:3]
@@ -144,7 +131,7 @@ def fetch_ais_data(token):
     norwegian_count = sum(1 for v in target_vessels if v['country'] == 'Norway')
     other_count = len(target_vessels) - russian_count - chinese_count - norwegian_count
 
-    print(f"  Found {len(target_vessels)} vessels in Arctic")
+    print(f"  Found {len(target_vessels)} vessels total")
     print(f"    - Russian: {russian_count}")
     print(f"    - Chinese: {chinese_count}")
     print(f"    - Norwegian: {norwegian_count}")
