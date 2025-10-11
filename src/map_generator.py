@@ -388,16 +388,22 @@ def generate_focused_map(vessel_tracks):
             const mmsi = event.data.mmsi;
             console.log('Received clickVessel message for MMSI:', mmsi);
 
-            // Find vessel marker by className
-            const markerClass = 'vessel-marker vessel-' + mmsi;
-            const markers = document.querySelectorAll('.' + markerClass.replace(' ', '.'));
-
-            if (markers.length > 0) {
-                console.log('Found vessel marker, triggering click');
-                // Trigger click on the marker
-                markers[0].click();
+            // Call focusVessel function directly (defined in focus mode script)
+            // This properly triggers focus mode: highlights vessel, shows tracks, displays info panel
+            if (typeof focusVessel === 'function') {
+                console.log('Calling focusVessel() for MMSI:', mmsi);
+                focusVessel(mmsi);
             } else {
-                console.warn('Vessel marker not found for MMSI:', mmsi);
+                console.error('focusVessel function not found - focus mode script may not be loaded yet');
+                // Fallback: try again after a short delay
+                setTimeout(function() {
+                    if (typeof focusVessel === 'function') {
+                        console.log('Retry: Calling focusVessel() for MMSI:', mmsi);
+                        focusVessel(mmsi);
+                    } else {
+                        console.error('focusVessel still not available after retry');
+                    }
+                }, 500);
             }
         }
     });
