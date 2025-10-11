@@ -1,5 +1,9 @@
 name: Arctic AIS Monitor
 
+concurrency:
+  group: gh-pages-deployment
+  cancel-in-progress: false  # Queue deployments to prevent conflicts
+
 on:
   schedule:
     - cron: '*/5 * * * *'   # Every 5 minutes
