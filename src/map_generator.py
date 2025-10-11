@@ -798,68 +798,7 @@ def add_focus_mode_script(map_obj, vessel_tracks):
     // Focus mode: Click vessel to highlight and show all tiers
     let focusedVessel = null;
 
-    // Wait for map to load
-    setTimeout(function() {
-        // Add click handlers to all vessel markers (CircleMarkers render as .vessel-marker)
-        document.querySelectorAll('.vessel-marker').forEach(function(marker) {
-            marker.addEventListener('click', function(e) {
-                // Extract MMSI from className (e.g., "vessel-marker vessel-258123000")
-                const classes = (this.getAttribute('class') || '').split(' ');
-                const vesselClass = classes.find(c => c.startsWith('vessel-') && c !== 'vessel-marker');
-                const vesselMmsi = vesselClass ? vesselClass.replace('vessel-', '') : null;
-
-                if (!vesselMmsi) return;
-
-                if (focusedVessel === vesselMmsi) {
-                    // Unfocus if clicking same vessel
-                    unfocusAll();
-                } else {
-                    // Focus on new vessel
-                    focusVessel(vesselMmsi);
-                }
-
-                e.stopPropagation();
-            });
-        });
-
-        // Add click handlers to track polylines (paths with vessel-{mmsi} className)
-        document.querySelectorAll('path[class*="vessel-"]').forEach(function(track) {
-            const className = track.getAttribute('class') || '';
-
-            // Skip if it's a marker (already handled above)
-            if (className.includes('vessel-marker')) return;
-
-            // Extract MMSI from vessel-{mmsi} class (e.g., "vessel-258123000 tier-tactical")
-            const classes = className.split(' ');
-            const vesselClass = classes.find(c => /^vessel-\d+$/.test(c));
-            if (!vesselClass) return;
-
-            track.addEventListener('click', function(e) {
-                const vesselMmsi = vesselClass.replace('vessel-', '');
-
-                if (focusedVessel === vesselMmsi) {
-                    // Unfocus if clicking same vessel's track
-                    unfocusAll();
-                } else {
-                    // Focus on vessel
-                    focusVessel(vesselMmsi);
-                }
-
-                e.stopPropagation();
-            });
-        });
-
-        // Click map to unfocus all
-        document.querySelector('.leaflet-container').addEventListener('click', function(e) {
-            // Only unfocus if clicking on the map itself (not a marker or track)
-            const isVesselElement = e.target.classList.contains('vessel-marker') ||
-                                   (e.target.getAttribute('class') || '').includes('vessel-');
-            if (focusedVessel && !isVesselElement) {
-                unfocusAll();
-            }
-        });
-    }, 1000);
-
+    // Define focus/unfocus functions in global scope (so postMessage can access them)
     function focusVessel(mmsi) {
         console.log('Focusing vessel:', mmsi);
 
@@ -967,6 +906,68 @@ def add_focus_mode_script(map_obj, vessel_tracks):
             }
         });
     }
+
+    // Wait for map to load
+    setTimeout(function() {
+        // Add click handlers to all vessel markers (CircleMarkers render as .vessel-marker)
+        document.querySelectorAll('.vessel-marker').forEach(function(marker) {
+            marker.addEventListener('click', function(e) {
+                // Extract MMSI from className (e.g., "vessel-marker vessel-258123000")
+                const classes = (this.getAttribute('class') || '').split(' ');
+                const vesselClass = classes.find(c => c.startsWith('vessel-') && c !== 'vessel-marker');
+                const vesselMmsi = vesselClass ? vesselClass.replace('vessel-', '') : null;
+
+                if (!vesselMmsi) return;
+
+                if (focusedVessel === vesselMmsi) {
+                    // Unfocus if clicking same vessel
+                    unfocusAll();
+                } else {
+                    // Focus on new vessel
+                    focusVessel(vesselMmsi);
+                }
+
+                e.stopPropagation();
+            });
+        });
+
+        // Add click handlers to track polylines (paths with vessel-{mmsi} className)
+        document.querySelectorAll('path[class*="vessel-"]').forEach(function(track) {
+            const className = track.getAttribute('class') || '';
+
+            // Skip if it's a marker (already handled above)
+            if (className.includes('vessel-marker')) return;
+
+            // Extract MMSI from vessel-{mmsi} class (e.g., "vessel-258123000 tier-tactical")
+            const classes = className.split(' ');
+            const vesselClass = classes.find(c => /^vessel-\d+$/.test(c));
+            if (!vesselClass) return;
+
+            track.addEventListener('click', function(e) {
+                const vesselMmsi = vesselClass.replace('vessel-', '');
+
+                if (focusedVessel === vesselMmsi) {
+                    // Unfocus if clicking same vessel's track
+                    unfocusAll();
+                } else {
+                    // Focus on vessel
+                    focusVessel(vesselMmsi);
+                }
+
+                e.stopPropagation();
+            });
+        });
+
+        // Click map to unfocus all
+        document.querySelector('.leaflet-container').addEventListener('click', function(e) {
+            // Only unfocus if clicking on the map itself (not a marker or track)
+            const isVesselElement = e.target.classList.contains('vessel-marker') ||
+                                   (e.target.getAttribute('class') || '').includes('vessel-');
+            if (focusedVessel && !isVesselElement) {
+                unfocusAll();
+            }
+        });
+    }, 1000);
     </script>
     """
 

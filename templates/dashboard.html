@@ -442,31 +442,6 @@
             background: #4fc3f7;
             border-color: #4fc3f7;
         }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            padding: 6px 10px;
-            background: rgba(10, 20, 40, 0.5);
-            border-radius: 4px;
-        }
-
-        .stat-item .label {
-            color: #bbbbbb;
-        }
-
-        .stat-item .value {
-            color: #ffffff;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
@@ -675,29 +650,6 @@
                     </div>
                     <div class="sort-option" data-sort="severity" onclick="setSort('severity')">
                         By Severity
-                    </div>
-                </div>
-
-                <!-- Stats -->
-                <div class="filter-section">
-                    <h3>Statistics</h3>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="label">Critical</span>
-                            <span class="value" id="stat-critical">0</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="label">High</span>
-                            <span class="value" id="stat-high">0</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="label">Medium</span>
-                            <span class="value" id="stat-medium">0</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="label">Low</span>
-                            <span class="value" id="stat-low">0</span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -954,12 +906,6 @@
             document.getElementById('count-impossible_speed').textContent = counts.type.impossible_speed;
             document.getElementById('count-loitering').textContent = counts.type.loitering;
             document.getElementById('count-rendezvous').textContent = counts.type.rendezvous;
-
-            // Update stats
-            document.getElementById('stat-critical').textContent = counts.severity.critical;
-            document.getElementById('stat-high').textContent = counts.severity.high;
-            document.getElementById('stat-medium').textContent = counts.severity.medium;
-            document.getElementById('stat-low').textContent = counts.severity.low;
         }
 
         function applyFilters() {
