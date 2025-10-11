@@ -73,6 +73,31 @@ def load_territorial_waters():
         print(f"Warning: Could not load territorial waters: {e}")
         return {'type': 'FeatureCollection', 'features': []}
 
+def calculate_opacity_multiplier(hours_since_signal):
+    """
+    Calculate opacity multiplier based on time since last AIS signal
+
+    Rules:
+    - 0-24 hours: Full opacity (1.0)
+    - 24-168 hours: Linear fade from 100% to 10%
+    - 168+ hours: Minimal opacity (will be removed by retention policy)
+
+    Args:
+        hours_since_signal: Hours since vessel's last AIS transmission
+
+    Returns:
+        Opacity multiplier (0.1 to 1.0)
+    """
+    if hours_since_signal <= 24:
+        return 1.0  # Full opacity for recent signals
+    elif hours_since_signal >= 168:
+        return 0.1  # Almost invisible (vessel will be removed anyway)
+    else:
+        # Linear fade from 100% at 24h to 10% at 168h
+        # Formula: 1.0 - ((hours - 24) / 144) * 0.9
+        fade_progress = (hours_since_signal - 24) / 144  # 0.0 to 1.0
+        return max(0.1, 1.0 - (fade_progress * 0.9))
+
 def calculate_coverage_boundary(vessel_tracks):
     """
     Calculate dynamic coverage area from actual vessel positions
@@ -521,6 +546,9 @@ def add_vessel_marker(map_obj, mmsi, track_data, current_pos, color):
     signal_time = datetime.fromisoformat(current_pos['timestamp'].replace('Z', '')).replace(tzinfo=timezone.utc)
     time_diff = now - signal_time
 
+    # Calculate hours since last signal for fade-out
+    hours_since_signal = time_diff.total_seconds() / 3600
+
     # Format as human-readable time ago
     total_seconds = time_diff.total_seconds()
     if total_seconds < 60:
@@ -560,24 +588,29 @@ def add_vessel_marker(map_obj, mmsi, track_data, current_pos, color):
 
     if priority_level == 'high' or track_data.get('is_shadow_fleet', False):
         # Russia, China, Confirmed Shadow Fleet, Norwegian Military
-        fill_opacity = 0.8
-        line_opacity = 0.95
+        base_fill_opacity = 0.8
+        base_line_opacity = 0.95
         marker_radius = 8
     elif track_data.get('is_suspected_shadow', False):
         # Suspected shadow fleet (medium priority)
-        fill_opacity = 0.6
-        line_opacity = 0.75
+        base_fill_opacity = 0.6
+        base_line_opacity = 0.75
         marker_radius = 6
     elif track_data['country'] == 'Norway':
         # Norwegian civilians
-        fill_opacity = 0.25
-        line_opacity = 0.35
+        base_fill_opacity = 0.25
+        base_line_opacity = 0.35
         marker_radius = 5
     else:
         # Other countries (foreign vessels)
-        fill_opacity = 0.3
-        line_opacity = 0.4
+        base_fill_opacity = 0.3
+        base_line_opacity = 0.4
         marker_radius = 5
+
+    # Apply time-based fade-out (0-24h = full opacity, 24-168h = fade to 10%)
+    fade_multiplier = calculate_opacity_multiplier(hours_since_signal)
+    fill_opacity = base_fill_opacity * fade_multiplier
+    line_opacity = base_line_opacity * fade_multiplier
 
     folium.CircleMarker(
         location=[current_pos['lat'], current_pos['lon']],
