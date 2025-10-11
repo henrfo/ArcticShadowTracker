@@ -184,8 +184,12 @@ def api_map():
     # Generate map using existing map_generator
     map_obj = generate_focused_map(data['vessels'])
 
-    # Return map HTML
-    return map_obj._repr_html_()
+    # Return map HTML with cache-busting headers
+    response = make_response(map_obj._repr_html_())
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
 
 @app.route('/api/anomalies')
 @cors_enabled
