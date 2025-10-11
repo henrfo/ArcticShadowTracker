@@ -22,7 +22,7 @@
         .container {
             display: grid;
             grid-template-columns: 280px 1fr;
-            grid-template-rows: 60px 1fr;
+            grid-template-rows: 60px 1fr 250px;
             height: 100vh;
         }
 
@@ -156,6 +156,156 @@
             font-size: 18px;
             color: #4fc3f7;
         }
+
+        .newsfeed-container {
+            grid-column: 2 / -1;
+            background: rgba(5, 15, 30, 0.75);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .newsfeed-header {
+            background: rgba(10, 20, 40, 0.7);
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .newsfeed-header h2 {
+            font-size: 16px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        .newsfeed-count {
+            font-size: 12px;
+            color: #aaaaaa;
+        }
+
+        .newsfeed-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 20px;
+        }
+
+        .newsfeed-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .newsfeed-content::-webkit-scrollbar-track {
+            background: rgba(10, 20, 40, 0.5);
+        }
+
+        .newsfeed-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        .newsfeed-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .anomaly-item {
+            background: rgba(10, 20, 40, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .anomaly-item:hover {
+            background: rgba(15, 25, 45, 0.9);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateX(5px);
+        }
+
+        .anomaly-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .anomaly-type {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .severity-badge {
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .severity-critical {
+            background: rgba(211, 47, 47, 0.3);
+            border: 1px solid #d32f2f;
+            color: #ff6666;
+        }
+
+        .severity-high {
+            background: rgba(255, 152, 0, 0.3);
+            border: 1px solid #ff9800;
+            color: #ffb74d;
+        }
+
+        .severity-medium {
+            background: rgba(255, 193, 7, 0.3);
+            border: 1px solid #ffc107;
+            color: #ffd54f;
+        }
+
+        .severity-low {
+            background: rgba(33, 150, 243, 0.3);
+            border: 1px solid #2196F3;
+            color: #64b5f6;
+        }
+
+        .anomaly-type-label {
+            font-size: 12px;
+            color: #bbbbbb;
+            text-transform: capitalize;
+        }
+
+        .anomaly-time {
+            font-size: 11px;
+            color: #888888;
+        }
+
+        .anomaly-body {
+            font-size: 13px;
+            color: #dddddd;
+            line-height: 1.4;
+        }
+
+        .anomaly-vessel {
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .anomaly-country {
+            color: #ff9800;
+            font-size: 11px;
+        }
+
+        .newsfeed-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666666;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -272,6 +422,16 @@
             <div class="loading" id="loading">Loading map...</div>
             <iframe id="map-frame" src="/api/map"></iframe>
         </div>
+
+        <div class="newsfeed-container">
+            <div class="newsfeed-header">
+                <h2>🚨 Anomaly Detections</h2>
+                <span class="newsfeed-count" id="anomaly-count">Loading...</span>
+            </div>
+            <div class="newsfeed-content" id="newsfeed-content">
+                <div class="newsfeed-empty">Loading anomaly detections...</div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -350,6 +510,116 @@
 
         // Auto-refresh every 5 minutes
         setInterval(refreshData, 300000);
+
+        // Fetch and display anomalies
+        function loadAnomalies() {
+            console.log('Fetching anomaly data from /api/anomalies');
+
+            fetch('/api/anomalies')
+                .then(response => {
+                    console.log('Anomaly response status:', response.status);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Successfully fetched anomalies:', data);
+                    displayAnomalies(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching anomalies:', error);
+                    document.getElementById('newsfeed-content').innerHTML =
+                        '<div class="newsfeed-empty">Failed to load anomaly detections</div>';
+                    document.getElementById('anomaly-count').textContent = 'Error';
+                });
+        }
+
+        function displayAnomalies(data) {
+            const content = document.getElementById('newsfeed-content');
+            const countElement = document.getElementById('anomaly-count');
+
+            if (!data.anomalies || data.anomalies.length === 0) {
+                content.innerHTML = '<div class="newsfeed-empty">No anomalies detected</div>';
+                countElement.textContent = '0 detections';
+                return;
+            }
+
+            // Update count
+            countElement.textContent = `${data.total} detection${data.total !== 1 ? 's' : ''}`;
+
+            // Build HTML for anomalies
+            let html = '';
+            data.anomalies.forEach(anomaly => {
+                const description = formatAnomalyDescription(anomaly);
+
+                html += `
+                    <div class="anomaly-item">
+                        <div class="anomaly-header">
+                            <div class="anomaly-type">
+                                <span class="severity-badge severity-${anomaly.severity}">${anomaly.severity}</span>
+                                <span class="anomaly-type-label">${formatAnomalyType(anomaly.anomaly_type)}</span>
+                            </div>
+                            <span class="anomaly-time">${anomaly.formatted_time || 'Unknown'}</span>
+                        </div>
+                        <div class="anomaly-body">
+                            <span class="anomaly-vessel">${anomaly.vessel_name || 'Unknown'}</span>
+                            <span class="anomaly-country">(${anomaly.country || 'Unknown'})</span>
+                            <div>${description}</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            content.innerHTML = html;
+        }
+
+        function formatAnomalyType(type) {
+            const types = {
+                'transmission_gap': 'AIS Gap',
+                'impossible_speed': 'Impossible Speed',
+                'loitering': 'Loitering',
+                'rendezvous': 'Rendezvous'
+            };
+            return types[type] || type.replace(/_/g, ' ');
+        }
+
+        function formatAnomalyDescription(anomaly) {
+            const details = anomaly.details || {};
+
+            switch (anomaly.anomaly_type) {
+                case 'transmission_gap':
+                    return `AIS signal lost for ${Math.round(details.gap_duration_minutes || 0)} minutes${details.near_border ? ' near Norwegian border' : ''}`;
+
+                case 'impossible_speed':
+                    return `Traveled at ${Math.round(details.calculated_speed_knots || 0)} knots (max ${details.max_allowed_knots || 0} for ${details.vessel_type || 'vessel type'})`;
+
+                case 'loitering':
+                    return `Stayed within ${details.radius_km || 0}km for ${Math.round(details.duration_hours || 0)} hours at ${details.center_position ? formatCoords(details.center_position.lat, details.center_position.lon) : 'unknown location'}`;
+
+                case 'rendezvous':
+                    return `Met with ${details.vessel2 ? details.vessel2.name : 'unknown vessel'} within ${details.distance_km || 0}km`;
+
+                default:
+                    return 'Suspicious activity detected';
+            }
+        }
+
+        function formatCoords(lat, lon) {
+            const latDir = lat >= 0 ? 'N' : 'S';
+            const lonDir = lon >= 0 ? 'E' : 'W';
+            return `${Math.abs(lat).toFixed(2)}°${latDir}, ${Math.abs(lon).toFixed(2)}°${lonDir}`;
+        }
+
+        // Load anomalies on page load
+        loadAnomalies();
+
+        // Refresh anomalies when vessel data refreshes
+        const originalRefreshData = refreshData;
+        refreshData = function() {
+            originalRefreshData();
+            loadAnomalies();
+        };
     </script>
 </body>
 </html>

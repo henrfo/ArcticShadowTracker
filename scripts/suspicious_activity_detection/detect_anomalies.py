@@ -607,6 +607,15 @@ def analyze_anomalies(days_back=7):
 
     return results
 
+def save_results_to_json(results):
+    """Save anomaly detection results to single rolling JSON file"""
+    json_file = ANOMALIES_DIR / 'anomalies.json'
+
+    with open(json_file, 'w') as f:
+        json.dump(results, f, indent=2)
+
+    return json_file
+
 def save_results_to_csv(results):
     """
     Save anomaly detection results to rolling CSV file with 14-day retention
@@ -669,7 +678,10 @@ def main():
     # Run analysis
     results = analyze_anomalies(days_back=7)
 
-    # Save results to rolling CSV
+    # Save results to JSON (for API/web dashboard)
+    json_file = save_results_to_json(results)
+
+    # Save results to rolling CSV (for analysis/debugging)
     csv_file, new_count, pruned_count = save_results_to_csv(results)
 
     # Print summary
@@ -679,7 +691,8 @@ def main():
           f"{results['severity_breakdown']['medium']} medium, "
           f"{results['severity_breakdown']['low']} low")
 
-    print(f"\nSaved to: {csv_file}")
+    print(f"\nSaved JSON to: {json_file}")
+    print(f"Saved CSV to: {csv_file}")
     print(f"  Added {new_count} new anomalies")
     print(f"  Pruned {pruned_count} old records (>14 days)")
     print(f"Analysis completed in {time.time() - start_time:.1f} seconds")

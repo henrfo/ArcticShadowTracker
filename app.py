@@ -26,8 +26,9 @@ DATA_DIR = BASE_DIR / 'data'
 SNAPSHOTS_DIR = DATA_DIR / 'snapshots'
 OUTPUTS_DIR = BASE_DIR / 'outputs'
 
-# GitHub Pages URL for vessel data (updated every 5 minutes by GitHub Actions)
-GITHUB_PAGES_DATA_URL = "https://henrfo.github.io/ArcticShadowTracker/vessel_tracks.json"
+# GitHub Pages URLs for data (updated every 5 minutes by GitHub Actions)
+GITHUB_PAGES_VESSELS_URL = "https://henrfo.github.io/ArcticShadowTracker/vessel_tracks.json"
+GITHUB_PAGES_ANOMALIES_URL = "https://henrfo.github.io/ArcticShadowTracker/data/anomalies/anomalies.json"
 
 def add_cors_headers(response):
     """Add CORS headers to response"""
@@ -58,7 +59,7 @@ def load_vessel_data():
     # Try fetching from GitHub Pages first (cloud deployment)
     try:
         print(f"Fetching vessel data from GitHub Pages...")
-        response = requests.get(GITHUB_PAGES_DATA_URL, timeout=10)
+        response = requests.get(GITHUB_PAGES_VESSELS_URL, timeout=10)
         response.raise_for_status()
         data = response.json()
         print(f"Successfully fetched data from GitHub Pages")
@@ -185,6 +186,53 @@ def api_map():
 
     # Return map HTML
     return map_obj._repr_html_()
+
+@app.route('/api/anomalies')
+@cors_enabled
+def api_anomalies():
+    """API endpoint for recent anomaly detections from GitHub Pages"""
+
+    # Try fetching from GitHub Pages first (cloud deployment)
+    try:
+        print(f"Fetching anomaly data from GitHub Pages...")
+        response = requests.get(GITHUB_PAGES_ANOMALIES_URL, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        print(f"Successfully fetched anomaly data from GitHub Pages")
+    except Exception as e:
+        # Fallback to local file (development mode)
+        print(f"GitHub Pages fetch failed: {e}, using local file")
+        anomalies_file = DATA_DIR / 'anomalies' / 'anomalies.json'
+
+        if not anomalies_file.exists():
+            return jsonify({'anomalies': [], 'total': 0})
+
+        with open(anomalies_file, 'r') as f:
+            data = json.load(f)
+
+    # Extract anomalies from the results structure
+    all_anomalies = data.get('anomalies', [])
+
+    # Sort by detected_at timestamp (newest first)
+    all_anomalies.sort(key=lambda x: x.get('detected_at', ''), reverse=True)
+
+    # Limit to most recent 100 to reduce memory
+    all_anomalies = all_anomalies[:100]
+
+    # Format timestamps for display (as absolute date/time)
+    for anomaly in all_anomalies:
+        if 'detected_at' in anomaly:
+            try:
+                dt = datetime.fromisoformat(anomaly['detected_at'].replace('Z', '+00:00'))
+                # Format as "Oct 11, 19:30"
+                anomaly['formatted_time'] = dt.strftime('%b %d, %H:%M')
+            except Exception:
+                anomaly['formatted_time'] = "Unknown"
+
+    return jsonify({
+        'anomalies': all_anomalies,
+        'total': len(all_anomalies)
+    })
 
 @app.route('/health')
 def health():
