@@ -166,7 +166,7 @@
             display: grid;
             grid-template-columns: 1fr 350px;
             grid-template-rows: auto 1fr;
-            min-height: 300px;
+            min-height: 200px;
             max-height: 600px;
             overflow: hidden;
         }
@@ -854,15 +854,21 @@
 
         // Focus vessel on map when clicking anomaly
         function focusVesselOnMap(mmsi) {
-            console.log('Focusing vessel on map:', mmsi);
+            console.log('=== DASHBOARD: Anomaly clicked ===');
+            console.log('MMSI:', mmsi, 'Type:', typeof mmsi);
 
             const iframe = document.getElementById('map-frame');
+            console.log('Iframe element:', iframe ? 'Found' : 'NOT FOUND');
+            console.log('Iframe contentWindow:', iframe && iframe.contentWindow ? 'Available' : 'NOT AVAILABLE');
+
             if (iframe && iframe.contentWindow) {
-                // Send message to iframe to trigger vessel click
-                iframe.contentWindow.postMessage({
+                const message = {
                     type: 'clickVessel',
                     mmsi: mmsi
-                }, '*');
+                };
+                console.log('Sending postMessage:', JSON.stringify(message));
+                iframe.contentWindow.postMessage(message, '*');
+                console.log('PostMessage sent successfully');
             } else {
                 console.error('Map iframe not found or not loaded');
             }

@@ -384,29 +384,44 @@ def generate_focused_map(vessel_tracks):
     <script>
     // Listen for messages from parent window (dashboard)
     window.addEventListener('message', function(event) {
+        console.log('=== MAP IFRAME: PostMessage received ===');
+        console.log('Event origin:', event.origin);
+        console.log('Event data:', JSON.stringify(event.data));
+
         if (event.data && event.data.type === 'clickVessel') {
             const mmsi = event.data.mmsi;
-            console.log('Received clickVessel message for MMSI:', mmsi);
+            console.log('Message type: clickVessel');
+            console.log('MMSI:', mmsi, 'Type:', typeof mmsi);
 
             // Call focusVessel function directly (defined in focus mode script)
             // This properly triggers focus mode: highlights vessel, shows tracks, displays info panel
+            console.log('Checking if focusVessel function exists...');
+            console.log('typeof focusVessel:', typeof focusVessel);
+
             if (typeof focusVessel === 'function') {
-                console.log('Calling focusVessel() for MMSI:', mmsi);
+                console.log('✓ focusVessel found! Calling it now...');
                 focusVessel(mmsi);
             } else {
-                console.error('focusVessel function not found - focus mode script may not be loaded yet');
+                console.error('✗ focusVessel function not found - focus mode script may not be loaded yet');
+                console.log('Available functions:', Object.keys(window).filter(k => typeof window[k] === 'function'));
+
                 // Fallback: try again after a short delay
                 setTimeout(function() {
+                    console.log('Retry: Checking focusVessel after 500ms...');
                     if (typeof focusVessel === 'function') {
-                        console.log('Retry: Calling focusVessel() for MMSI:', mmsi);
+                        console.log('✓ focusVessel found on retry! Calling it now...');
                         focusVessel(mmsi);
                     } else {
-                        console.error('focusVessel still not available after retry');
+                        console.error('✗ focusVessel still not available after retry');
                     }
                 }, 500);
             }
+        } else {
+            console.log('Message ignored (not clickVessel type)');
         }
     });
+
+    console.log('=== MAP IFRAME: PostMessage listener registered ===');
     </script>
     """
 
@@ -800,18 +815,28 @@ def add_focus_mode_script(map_obj, vessel_tracks):
 
     // Define focus/unfocus functions in global scope (so postMessage can access them)
     function focusVessel(mmsi) {
-        console.log('Focusing vessel:', mmsi);
+        console.log('=== FOCUS VESSEL CALLED ===');
+        console.log('MMSI:', mmsi, 'Type:', typeof mmsi);
 
         // Unfocus previous vessel
         if (focusedVessel) {
+            console.log('Unfocusing previous vessel:', focusedVessel);
             unfocusAll();
         }
 
         focusedVessel = mmsi;
+        console.log('Set focusedVessel to:', focusedVessel);
 
         // Get vessel data from vessel data map
+        console.log('Looking up vessel data in vesselDataMap...');
+        console.log('vesselDataMap keys sample:', Object.keys(vesselDataMap).slice(0, 5));
+        console.log('Looking for key:', mmsi);
+
         const vData = vesselDataMap[mmsi];
+        console.log('Vessel data lookup result:', vData ? 'FOUND' : 'NOT FOUND');
+
         if (vData) {
+            console.log('Vessel data:', vData);
             // Populate info panel
             document.getElementById('vessel-info-name').textContent = vData.name;
             document.getElementById('vessel-info-mmsi').textContent = vData.mmsi;
@@ -824,10 +849,20 @@ def add_focus_mode_script(map_obj, vessel_tracks):
 
             // Show info panel
             document.getElementById('vessel-info-panel').style.display = 'block';
+            console.log('Info panel displayed');
+        } else {
+            console.warn('⚠️ Vessel data not found for MMSI:', mmsi);
+            console.log('Available MMSI keys:', Object.keys(vesselDataMap));
         }
 
         // Collect focused vessel's track lines for reordering
         const focusedTracks = [];
+
+        console.log('Searching for DOM elements with class: vessel-' + mmsi);
+        const allInteractive = document.querySelectorAll('.leaflet-interactive');
+        console.log('Total .leaflet-interactive elements:', allInteractive.length);
+
+        let matchedCount = 0;
 
         // Fade all other vessels and collect focused tracks
         document.querySelectorAll('.leaflet-interactive').forEach(function(el) {
@@ -846,6 +881,9 @@ def add_focus_mode_script(map_obj, vessel_tracks):
                 el.style.fillOpacity = '0.4';
             } else {
                 // Focused vessel - highlight it with !important to override layer styles
+                matchedCount++;
+                console.log('✓ Matched element ' + matchedCount + ':', el.tagName, 'className:', className);
+
                 el.style.setProperty('opacity', '1.0', 'important');
                 el.style.setProperty('stroke-opacity', '1.0', 'important');
                 el.style.setProperty('fill-opacity', '1.0', 'important');
@@ -879,6 +917,11 @@ def add_focus_mode_script(map_obj, vessel_tracks):
                 track.parentNode.appendChild(track);
             }
         });
+
+        console.log('=== FOCUS VESSEL COMPLETE ===');
+        console.log('Total matched elements:', matchedCount);
+        console.log('Vessel data found:', vData ? 'YES' : 'NO');
+        console.log('=============================');
     }
 
     function unfocusAll() {
