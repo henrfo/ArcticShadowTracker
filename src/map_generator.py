@@ -379,6 +379,34 @@ def generate_focused_map(vessel_tracks):
     # Add layer control to toggle all categories
     folium.LayerControl(position='topright', collapsed=False).add_to(m)
 
+    # Add JavaScript for cross-iframe communication (clicking anomalies)
+    vessel_click_js = """
+    <script>
+    // Listen for messages from parent window (dashboard)
+    window.addEventListener('message', function(event) {
+        if (event.data && event.data.type === 'clickVessel') {
+            const mmsi = event.data.mmsi;
+            console.log('Received clickVessel message for MMSI:', mmsi);
+
+            // Find vessel marker by className
+            const markerClass = 'vessel-marker vessel-' + mmsi;
+            const markers = document.querySelectorAll('.' + markerClass.replace(' ', '.'));
+
+            if (markers.length > 0) {
+                console.log('Found vessel marker, triggering click');
+                // Trigger click on the marker
+                markers[0].click();
+            } else {
+                console.warn('Vessel marker not found for MMSI:', mmsi);
+            }
+        }
+    });
+    </script>
+    """
+
+    # Inject JavaScript into map HTML
+    m.get_root().html.add_child(folium.Element(vessel_click_js))
+
     return m
 
 def add_vessel_to_map(map_obj, mmsi, track_data):

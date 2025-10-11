@@ -219,6 +219,7 @@
             padding: 12px 15px;
             margin-bottom: 10px;
             transition: all 0.3s;
+            cursor: pointer;
         }
 
         .anomaly-item:hover {
@@ -554,7 +555,7 @@
                 const description = formatAnomalyDescription(anomaly);
 
                 html += `
-                    <div class="anomaly-item">
+                    <div class="anomaly-item" data-mmsi="${anomaly.mmsi}" onclick="focusVesselOnMap('${anomaly.mmsi}')">
                         <div class="anomaly-header">
                             <div class="anomaly-type">
                                 <span class="severity-badge severity-${anomaly.severity}">${anomaly.severity}</span>
@@ -620,6 +621,22 @@
             originalRefreshData();
             loadAnomalies();
         };
+
+        // Focus vessel on map when clicking anomaly
+        function focusVesselOnMap(mmsi) {
+            console.log('Focusing vessel on map:', mmsi);
+
+            const iframe = document.getElementById('map-frame');
+            if (iframe && iframe.contentWindow) {
+                // Send message to iframe to trigger vessel click
+                iframe.contentWindow.postMessage({
+                    type: 'clickVessel',
+                    mmsi: mmsi
+                }, '*');
+            } else {
+                console.error('Map iframe not found or not loaded');
+            }
+        }
     </script>
 </body>
 </html>
