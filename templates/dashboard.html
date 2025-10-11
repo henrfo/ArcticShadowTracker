@@ -252,13 +252,20 @@
             padding: 12px 15px;
             margin-bottom: 10px;
             transition: all 0.3s;
+        }
+
+        .anomaly-item.clickable {
             cursor: pointer;
         }
 
-        .anomaly-item:hover {
+        .anomaly-item.clickable:hover {
             background: rgba(15, 25, 45, 0.9);
             border-color: rgba(255, 255, 255, 0.3);
             transform: translateX(5px);
+        }
+
+        .anomaly-item.not-clickable {
+            cursor: default;
         }
 
         .anomaly-header {
@@ -777,15 +784,13 @@
 
                 // Handle rendezvous anomalies (have 2 MMSIs: "123,456")
                 const mmsiList = anomaly.mmsi.toString().split(',');
-                const primaryMmsi = mmsiList[0].trim();
 
                 // Only make clickable if it's a single vessel anomaly
                 const isClickable = mmsiList.length === 1;
-                const clickHandler = isClickable ? `onclick="focusVesselOnMap('${primaryMmsi}')"` : '';
-                const cursorStyle = isClickable ? '' : 'style="cursor: default;"';
+                const clickableClass = isClickable ? 'clickable' : 'not-clickable';
 
                 html += `
-                    <div class="anomaly-item" data-mmsi="${anomaly.mmsi}" ${clickHandler} ${cursorStyle}>
+                    <div class="anomaly-item ${clickableClass}" data-mmsi="${anomaly.mmsi}">
                         <div class="anomaly-header">
                             <div class="anomaly-type">
                                 <span class="severity-badge severity-${anomaly.severity}">${anomaly.severity}</span>
@@ -803,6 +808,14 @@
             });
 
             content.innerHTML = html;
+
+            // Add click handlers via event delegation
+            document.querySelectorAll('.anomaly-item.clickable').forEach(item => {
+                item.addEventListener('click', function() {
+                    const mmsi = this.dataset.mmsi.trim();
+                    focusVesselOnMap(mmsi);
+                });
+            });
         }
 
         function formatAnomalyType(type) {
@@ -966,13 +979,11 @@
             anomalies.forEach(anomaly => {
                 const description = formatAnomalyDescription(anomaly);
                 const mmsiList = anomaly.mmsi.toString().split(',');
-                const primaryMmsi = mmsiList[0].trim();
                 const isClickable = mmsiList.length === 1;
-                const clickHandler = isClickable ? `onclick="focusVesselOnMap('${primaryMmsi}')"` : '';
-                const cursorStyle = isClickable ? '' : 'style="cursor: default;"';
+                const clickableClass = isClickable ? 'clickable' : 'not-clickable';
 
                 html += `
-                    <div class="anomaly-item" data-mmsi="${anomaly.mmsi}" ${clickHandler} ${cursorStyle}>
+                    <div class="anomaly-item ${clickableClass}" data-mmsi="${anomaly.mmsi}">
                         <div class="anomaly-header">
                             <div class="anomaly-type">
                                 <span class="severity-badge severity-${anomaly.severity}">${anomaly.severity}</span>
@@ -990,6 +1001,14 @@
             });
 
             content.innerHTML = html;
+
+            // Add click handlers via event delegation
+            document.querySelectorAll('.anomaly-item.clickable').forEach(item => {
+                item.addEventListener('click', function() {
+                    const mmsi = this.dataset.mmsi.trim();
+                    focusVesselOnMap(mmsi);
+                });
+            });
         }
 
         function setSort(sortType) {
