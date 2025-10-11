@@ -55,6 +55,10 @@ jobs:
         run: |
           python scripts/collect_ais.py
 
+      - name: Detect AIS Anomalies
+        run: |
+          python scripts/suspicious_activity_detection/detect_anomalies.py
+
       - name: Copy data to outputs for GitHub Pages
         run: |
           # Copy vessel tracks
@@ -63,6 +67,16 @@ jobs:
           # Copy snapshots for persistence
           mkdir -p outputs/data/snapshots
           cp data/snapshots/*.json outputs/data/snapshots/ 2>/dev/null || echo "No snapshots to copy (first run)"
+
+          # Copy anomaly detection CSV (rolling 14-day data)
+          mkdir -p outputs/data/anomalies
+          if [ -f data/anomalies/anomalies.csv ]; then
+            cp data/anomalies/anomalies.csv outputs/data/anomalies/
+            ANOMALY_COUNT=$(tail -n +2 data/anomalies/anomalies.csv | wc -l | tr -d ' ')
+            echo "Deploying anomalies.csv with $ANOMALY_COUNT records to gh-pages"
+          else
+            echo "No anomalies CSV found (first run or no detections)"
+          fi
 
           # Count what we're deploying
           SNAPSHOT_COUNT=$(ls -1 outputs/data/snapshots/*.json 2>/dev/null | wc -l | tr -d ' ')
