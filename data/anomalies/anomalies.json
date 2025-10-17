@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-10-17T15:53:42.587069Z",
+  "timestamp": "2025-10-17T15:59:53.822241Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 342,
-  "total_positions": 132712,
-  "anomalies_detected": 6915,
+  "total_positions": 132879,
+  "anomalies_detected": 6917,
   "anomalies": [
     {
       "mmsi": "249903000",
@@ -101724,6 +101724,24 @@
       }
     },
     {
+      "mmsi": "248221000",
+      "vessel_name": "KEY SOUTH",
+      "country": "Malta",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-10-17T15:54:44Z",
+      "details": {
+        "gap_duration_minutes": 54.0,
+        "gap_start": "2025-10-17T15:00:42Z",
+        "gap_end": "2025-10-17T15:54:44Z",
+        "last_position": {
+          "lat": 66.7456,
+          "lon": 13.4968
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "373312000",
       "vessel_name": "ANADOLU S",
       "country": "Panama",
@@ -122450,6 +122468,25 @@
       }
     },
     {
+      "mmsi": "305279000",
+      "vessel_name": "ROVA STONES",
+      "country": "Antigua and Barbuda",
+      "anomaly_type": "loitering",
+      "severity": "medium",
+      "detected_at": "2025-10-17T15:57:43Z",
+      "details": {
+        "duration_hours": 6.0,
+        "radius_km": 5,
+        "center_position": {
+          "lat": 58.3305,
+          "lon": 6.2577
+        },
+        "start_time": "2025-10-17T09:57:43Z",
+        "end_time": "2025-10-17T15:57:43Z",
+        "position_count": 29
+      }
+    },
+    {
       "mmsi": "304627000",
       "vessel_name": "KAIRIT",
       "country": "Antigua and Barbuda",
@@ -123182,6 +123219,35 @@
       "country": "Antigua and Barbuda,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2025-10-16T13:22:56.039152Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "304829000",
+          "name": "FJORDNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3731,
+            "lon": 6.044
+          }
+        },
+        "vessel2": {
+          "mmsi": "256426000",
+          "name": "CSL FLEXVIK",
+          "country": "Malta",
+          "position": {
+            "lat": 59.3776,
+            "lon": 6.0466
+          }
+        },
+        "distance_km": 0.52
+      }
+    },
+    {
+      "mmsi": "304829000,256426000",
+      "vessel_name": "FJORDNES & CSL FLEXVIK",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2025-10-16T15:19:15.773974Z",
       "details": {
         "vessel1": {
@@ -123206,32 +123272,90 @@
       }
     },
     {
-      "mmsi": "304829000,256426000",
-      "vessel_name": "FJORDNES & CSL FLEXVIK",
-      "country": "Antigua and Barbuda,Malta",
+      "mmsi": "304829000,314217000",
+      "vessel_name": "FJORDNES & WILSON MAAS",
+      "country": "Antigua and Barbuda,Barbados",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-16T13:22:56.039152Z",
+      "detected_at": "2025-10-15T07:54:44.989142Z",
       "details": {
         "vessel1": {
           "mmsi": "304829000",
           "name": "FJORDNES",
           "country": "Antigua and Barbuda",
           "position": {
-            "lat": 59.3731,
-            "lon": 6.044
+            "lat": 59.0886,
+            "lon": 5.9024
           }
         },
         "vessel2": {
-          "mmsi": "256426000",
-          "name": "CSL FLEXVIK",
-          "country": "Malta",
+          "mmsi": "314217000",
+          "name": "WILSON MAAS",
+          "country": "Barbados",
           "position": {
-            "lat": 59.3776,
-            "lon": 6.0466
+            "lat": 59.0915,
+            "lon": 5.9091
           }
         },
-        "distance_km": 0.52
+        "distance_km": 0.5
+      }
+    },
+    {
+      "mmsi": "304829000,314217000",
+      "vessel_name": "FJORDNES & WILSON MAAS",
+      "country": "Antigua and Barbuda,Barbados",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-15T06:19:58.704965Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "304829000",
+          "name": "FJORDNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.0886,
+            "lon": 5.9023
+          }
+        },
+        "vessel2": {
+          "mmsi": "314217000",
+          "name": "WILSON MAAS",
+          "country": "Barbados",
+          "position": {
+            "lat": 59.0915,
+            "lon": 5.909
+          }
+        },
+        "distance_km": 0.5
+      }
+    },
+    {
+      "mmsi": "304829000,314217000",
+      "vessel_name": "FJORDNES & WILSON MAAS",
+      "country": "Antigua and Barbuda,Barbados",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-15T09:35:13.230789Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "304829000",
+          "name": "FJORDNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.0886,
+            "lon": 5.9024
+          }
+        },
+        "vessel2": {
+          "mmsi": "314217000",
+          "name": "WILSON MAAS",
+          "country": "Barbados",
+          "position": {
+            "lat": 59.0915,
+            "lon": 5.909
+          }
+        },
+        "distance_km": 0.5
       }
     },
     {
@@ -123257,35 +123381,6 @@
           "country": "Barbados",
           "position": {
             "lat": 59.0915,
-            "lon": 5.9091
-          }
-        },
-        "distance_km": 0.51
-      }
-    },
-    {
-      "mmsi": "304829000,314217000",
-      "vessel_name": "FJORDNES & WILSON MAAS",
-      "country": "Antigua and Barbuda,Barbados",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-15T10:18:15.322903Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "304829000",
-          "name": "FJORDNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.0886,
-            "lon": 5.9024
-          }
-        },
-        "vessel2": {
-          "mmsi": "314217000",
-          "name": "WILSON MAAS",
-          "country": "Barbados",
-          "position": {
-            "lat": 59.0916,
             "lon": 5.9091
           }
         },
@@ -123327,7 +123422,7 @@
       "country": "Antigua and Barbuda,Barbados",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-15T07:54:44.989142Z",
+      "detected_at": "2025-10-15T10:18:15.322903Z",
       "details": {
         "vessel1": {
           "mmsi": "304829000",
@@ -123343,69 +123438,11 @@
           "name": "WILSON MAAS",
           "country": "Barbados",
           "position": {
-            "lat": 59.0915,
+            "lat": 59.0916,
             "lon": 5.9091
           }
         },
-        "distance_km": 0.5
-      }
-    },
-    {
-      "mmsi": "304829000,314217000",
-      "vessel_name": "FJORDNES & WILSON MAAS",
-      "country": "Antigua and Barbuda,Barbados",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-15T09:35:13.230789Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "304829000",
-          "name": "FJORDNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.0886,
-            "lon": 5.9024
-          }
-        },
-        "vessel2": {
-          "mmsi": "314217000",
-          "name": "WILSON MAAS",
-          "country": "Barbados",
-          "position": {
-            "lat": 59.0915,
-            "lon": 5.909
-          }
-        },
-        "distance_km": 0.5
-      }
-    },
-    {
-      "mmsi": "304829000,314217000",
-      "vessel_name": "FJORDNES & WILSON MAAS",
-      "country": "Antigua and Barbuda,Barbados",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-15T06:19:58.704965Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "304829000",
-          "name": "FJORDNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.0886,
-            "lon": 5.9023
-          }
-        },
-        "vessel2": {
-          "mmsi": "314217000",
-          "name": "WILSON MAAS",
-          "country": "Barbados",
-          "position": {
-            "lat": 59.0915,
-            "lon": 5.909
-          }
-        },
-        "distance_km": 0.5
+        "distance_km": 0.51
       }
     },
     {
@@ -123443,35 +123480,6 @@
       "country": "Marshall Islands,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-13T23:30:23.992954Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538001388",
-          "name": "GULF ENERGY",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.359,
-            "lon": 5.3
-          }
-        },
-        "vessel2": {
-          "mmsi": "229061000",
-          "name": "SEA CARGO EXPRESS",
-          "country": "Malta",
-          "position": {
-            "lat": 59.3555,
-            "lon": 5.3117
-          }
-        },
-        "distance_km": 0.77
-      }
-    },
-    {
-      "mmsi": "538001388,229061000",
-      "vessel_name": "GULF ENERGY & SEA CARGO EXPRESS",
-      "country": "Marshall Islands,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-10-10T23:39:10.410627Z",
       "details": {
         "vessel1": {
@@ -123493,6 +123501,35 @@
           }
         },
         "distance_km": 0.52
+      }
+    },
+    {
+      "mmsi": "538001388,229061000",
+      "vessel_name": "GULF ENERGY & SEA CARGO EXPRESS",
+      "country": "Marshall Islands,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-13T23:30:23.992954Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538001388",
+          "name": "GULF ENERGY",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.359,
+            "lon": 5.3
+          }
+        },
+        "vessel2": {
+          "mmsi": "229061000",
+          "name": "SEA CARGO EXPRESS",
+          "country": "Malta",
+          "position": {
+            "lat": 59.3555,
+            "lon": 5.3117
+          }
+        },
+        "distance_km": 0.77
       }
     },
     {
@@ -123617,35 +123654,6 @@
       "country": "Antigua and Barbuda,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-16T20:20:37.535025Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305224000",
-          "name": "FEED STAVANGER",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3732,
-            "lon": 6.044
-          }
-        },
-        "vessel2": {
-          "mmsi": "256426000",
-          "name": "CSL FLEXVIK",
-          "country": "Malta",
-          "position": {
-            "lat": 59.3778,
-            "lon": 6.0471
-          }
-        },
-        "distance_km": 0.54
-      }
-    },
-    {
-      "mmsi": "305224000,256426000",
-      "vessel_name": "FEED STAVANGER & CSL FLEXVIK",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-10-16T22:12:39.101689Z",
       "details": {
         "vessel1": {
@@ -123667,6 +123675,35 @@
           }
         },
         "distance_km": 0.53
+      }
+    },
+    {
+      "mmsi": "305224000,256426000",
+      "vessel_name": "FEED STAVANGER & CSL FLEXVIK",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-16T20:20:37.535025Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305224000",
+          "name": "FEED STAVANGER",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3732,
+            "lon": 6.044
+          }
+        },
+        "vessel2": {
+          "mmsi": "256426000",
+          "name": "CSL FLEXVIK",
+          "country": "Malta",
+          "position": {
+            "lat": 59.3778,
+            "lon": 6.0471
+          }
+        },
+        "distance_km": 0.54
       }
     },
     {
@@ -123704,151 +123741,6 @@
       "country": "Marshall Islands,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-10T19:27:31.971820Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538006497",
-          "name": "DREAM VERMAX",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.2719,
-            "lon": 5.5016
-          }
-        },
-        "vessel2": {
-          "mmsi": "304200000",
-          "name": "BBC SCANDINAVIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2716,
-            "lon": 5.5049
-          }
-        },
-        "distance_km": 0.19
-      }
-    },
-    {
-      "mmsi": "538006497,304200000",
-      "vessel_name": "DREAM VERMAX & BBC SCANDINAVIA",
-      "country": "Marshall Islands,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-10T18:53:24.131150Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538006497",
-          "name": "DREAM VERMAX",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.272,
-            "lon": 5.5016
-          }
-        },
-        "vessel2": {
-          "mmsi": "304200000",
-          "name": "BBC SCANDINAVIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2716,
-            "lon": 5.5048
-          }
-        },
-        "distance_km": 0.19
-      }
-    },
-    {
-      "mmsi": "538006497,304200000",
-      "vessel_name": "DREAM VERMAX & BBC SCANDINAVIA",
-      "country": "Marshall Islands,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-10T17:45:43.497416Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538006497",
-          "name": "DREAM VERMAX",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.272,
-            "lon": 5.5016
-          }
-        },
-        "vessel2": {
-          "mmsi": "304200000",
-          "name": "BBC SCANDINAVIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2716,
-            "lon": 5.5049
-          }
-        },
-        "distance_km": 0.19
-      }
-    },
-    {
-      "mmsi": "538006497,304200000",
-      "vessel_name": "DREAM VERMAX & BBC SCANDINAVIA",
-      "country": "Marshall Islands,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-10T20:50:37.607632Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538006497",
-          "name": "DREAM VERMAX",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.272,
-            "lon": 5.5015
-          }
-        },
-        "vessel2": {
-          "mmsi": "304200000",
-          "name": "BBC SCANDINAVIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2716,
-            "lon": 5.5049
-          }
-        },
-        "distance_km": 0.2
-      }
-    },
-    {
-      "mmsi": "538006497,304200000",
-      "vessel_name": "DREAM VERMAX & BBC SCANDINAVIA",
-      "country": "Marshall Islands,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-10T22:51:12.731950Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538006497",
-          "name": "DREAM VERMAX",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.2719,
-            "lon": 5.5016
-          }
-        },
-        "vessel2": {
-          "mmsi": "304200000",
-          "name": "BBC SCANDINAVIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2716,
-            "lon": 5.5049
-          }
-        },
-        "distance_km": 0.19
-      }
-    },
-    {
-      "mmsi": "538006497,304200000",
-      "vessel_name": "DREAM VERMAX & BBC SCANDINAVIA",
-      "country": "Marshall Islands,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-10-10T23:39:10.410627Z",
       "details": {
         "vessel1": {
@@ -123857,35 +123749,6 @@
           "country": "Marshall Islands",
           "position": {
             "lat": 59.272,
-            "lon": 5.5016
-          }
-        },
-        "vessel2": {
-          "mmsi": "304200000",
-          "name": "BBC SCANDINAVIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2716,
-            "lon": 5.5049
-          }
-        },
-        "distance_km": 0.19
-      }
-    },
-    {
-      "mmsi": "538006497,304200000",
-      "vessel_name": "DREAM VERMAX & BBC SCANDINAVIA",
-      "country": "Marshall Islands,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-10T23:45:13.580459Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538006497",
-          "name": "DREAM VERMAX",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.2719,
             "lon": 5.5016
           }
         },
@@ -123936,7 +123799,94 @@
       "country": "Marshall Islands,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-10T22:11:55.021702Z",
+      "detected_at": "2025-10-10T19:27:31.971820Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538006497",
+          "name": "DREAM VERMAX",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.2719,
+            "lon": 5.5016
+          }
+        },
+        "vessel2": {
+          "mmsi": "304200000",
+          "name": "BBC SCANDINAVIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2716,
+            "lon": 5.5049
+          }
+        },
+        "distance_km": 0.19
+      }
+    },
+    {
+      "mmsi": "538006497,304200000",
+      "vessel_name": "DREAM VERMAX & BBC SCANDINAVIA",
+      "country": "Marshall Islands,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-10T17:45:43.497416Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538006497",
+          "name": "DREAM VERMAX",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.272,
+            "lon": 5.5016
+          }
+        },
+        "vessel2": {
+          "mmsi": "304200000",
+          "name": "BBC SCANDINAVIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2716,
+            "lon": 5.5049
+          }
+        },
+        "distance_km": 0.19
+      }
+    },
+    {
+      "mmsi": "538006497,304200000",
+      "vessel_name": "DREAM VERMAX & BBC SCANDINAVIA",
+      "country": "Marshall Islands,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-10T18:53:24.131150Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538006497",
+          "name": "DREAM VERMAX",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.272,
+            "lon": 5.5016
+          }
+        },
+        "vessel2": {
+          "mmsi": "304200000",
+          "name": "BBC SCANDINAVIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2716,
+            "lon": 5.5048
+          }
+        },
+        "distance_km": 0.19
+      }
+    },
+    {
+      "mmsi": "538006497,304200000",
+      "vessel_name": "DREAM VERMAX & BBC SCANDINAVIA",
+      "country": "Marshall Islands,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-10T23:45:13.580459Z",
       "details": {
         "vessel1": {
           "mmsi": "538006497",
@@ -124018,6 +123968,93 @@
       }
     },
     {
+      "mmsi": "538006497,304200000",
+      "vessel_name": "DREAM VERMAX & BBC SCANDINAVIA",
+      "country": "Marshall Islands,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-10T22:11:55.021702Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538006497",
+          "name": "DREAM VERMAX",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.2719,
+            "lon": 5.5016
+          }
+        },
+        "vessel2": {
+          "mmsi": "304200000",
+          "name": "BBC SCANDINAVIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2716,
+            "lon": 5.5049
+          }
+        },
+        "distance_km": 0.19
+      }
+    },
+    {
+      "mmsi": "538006497,304200000",
+      "vessel_name": "DREAM VERMAX & BBC SCANDINAVIA",
+      "country": "Marshall Islands,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-10T22:51:12.731950Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538006497",
+          "name": "DREAM VERMAX",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.2719,
+            "lon": 5.5016
+          }
+        },
+        "vessel2": {
+          "mmsi": "304200000",
+          "name": "BBC SCANDINAVIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2716,
+            "lon": 5.5049
+          }
+        },
+        "distance_km": 0.19
+      }
+    },
+    {
+      "mmsi": "538006497,304200000",
+      "vessel_name": "DREAM VERMAX & BBC SCANDINAVIA",
+      "country": "Marshall Islands,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-10T20:50:37.607632Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538006497",
+          "name": "DREAM VERMAX",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.272,
+            "lon": 5.5015
+          }
+        },
+        "vessel2": {
+          "mmsi": "304200000",
+          "name": "BBC SCANDINAVIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2716,
+            "lon": 5.5049
+          }
+        },
+        "distance_km": 0.2
+      }
+    },
+    {
       "mmsi": "375378000,249208000",
       "vessel_name": "BOA SUND & INEOS INSPIRATION",
       "country": "Saint Vincent and the Grenadines,Malta",
@@ -124081,7 +124118,7 @@
       "country": "Antigua and Barbuda,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-13T14:47:56.182472Z",
+      "detected_at": "2025-10-13T21:49:57.288222Z",
       "details": {
         "vessel1": {
           "mmsi": "305530000",
@@ -124089,7 +124126,7 @@
           "country": "Antigua and Barbuda",
           "position": {
             "lat": 59.3778,
-            "lon": 6.0468
+            "lon": 6.0469
           }
         },
         "vessel2": {
@@ -124097,11 +124134,11 @@
           "name": "CSL THAMES",
           "country": "Malta",
           "position": {
-            "lat": 59.3728,
-            "lon": 6.0439
+            "lat": 59.3725,
+            "lon": 6.0438
           }
         },
-        "distance_km": 0.58
+        "distance_km": 0.61
       }
     },
     {
@@ -124139,7 +124176,7 @@
       "country": "Antigua and Barbuda,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-13T21:49:57.288222Z",
+      "detected_at": "2025-10-13T14:47:56.182472Z",
       "details": {
         "vessel1": {
           "mmsi": "305530000",
@@ -124147,7 +124184,7 @@
           "country": "Antigua and Barbuda",
           "position": {
             "lat": 59.3778,
-            "lon": 6.0469
+            "lon": 6.0468
           }
         },
         "vessel2": {
@@ -124155,11 +124192,11 @@
           "name": "CSL THAMES",
           "country": "Malta",
           "position": {
-            "lat": 59.3725,
-            "lon": 6.0438
+            "lat": 59.3728,
+            "lon": 6.0439
           }
         },
-        "distance_km": 0.61
+        "distance_km": 0.58
       }
     },
     {
@@ -124226,14 +124263,14 @@
       "country": "Marshall Islands,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-10T22:42:43Z",
+      "detected_at": "2025-10-10T23:24:43Z",
       "details": {
         "vessel1": {
           "mmsi": "538009228",
           "name": "NORDIC ODYSSEY",
           "country": "Marshall Islands",
           "position": {
-            "lat": 68.4305,
+            "lat": 68.4306,
             "lon": 17.4021
           }
         },
@@ -124255,14 +124292,14 @@
       "country": "Marshall Islands,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-10T23:24:43Z",
+      "detected_at": "2025-10-10T22:42:43Z",
       "details": {
         "vessel1": {
           "mmsi": "538009228",
           "name": "NORDIC ODYSSEY",
           "country": "Marshall Islands",
           "position": {
-            "lat": 68.4306,
+            "lat": 68.4305,
             "lon": 17.4021
           }
         },
@@ -124313,35 +124350,6 @@
       "country": "Russia,Russia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-17T13:50:27.273158Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273398460",
-          "name": "KAPITAN DEMIDENKO",
-          "country": "Russia",
-          "position": {
-            "lat": 67.0025,
-            "lon": 7.6337
-          }
-        },
-        "vessel2": {
-          "mmsi": "273332560",
-          "name": "KAPITAN NAZIN",
-          "country": "Russia",
-          "position": {
-            "lat": 67.0021,
-            "lon": 7.6539
-          }
-        },
-        "distance_km": 0.88
-      }
-    },
-    {
-      "mmsi": "273398460,273332560",
-      "vessel_name": "KAPITAN DEMIDENKO & KAPITAN NAZIN",
-      "country": "Russia,Russia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-10-17T14:02:26.700008Z",
       "details": {
         "vessel1": {
@@ -124363,6 +124371,35 @@
           }
         },
         "distance_km": 0.97
+      }
+    },
+    {
+      "mmsi": "273398460,273332560",
+      "vessel_name": "KAPITAN DEMIDENKO & KAPITAN NAZIN",
+      "country": "Russia,Russia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-17T13:50:27.273158Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273398460",
+          "name": "KAPITAN DEMIDENKO",
+          "country": "Russia",
+          "position": {
+            "lat": 67.0025,
+            "lon": 7.6337
+          }
+        },
+        "vessel2": {
+          "mmsi": "273332560",
+          "name": "KAPITAN NAZIN",
+          "country": "Russia",
+          "position": {
+            "lat": 67.0021,
+            "lon": 7.6539
+          }
+        },
+        "distance_km": 0.88
       }
     },
     {
@@ -124429,35 +124466,6 @@
       "country": "Panama,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-10T16:59:15.257437Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "372145000",
-          "name": "OCEAN GEOGRAPH",
-          "country": "Panama",
-          "position": {
-            "lat": 60.3887,
-            "lon": 5.311
-          }
-        },
-        "vessel2": {
-          "mmsi": "229061000",
-          "name": "SEA CARGO EXPRESS",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3891,
-            "lon": 5.311
-          }
-        },
-        "distance_km": 0.05
-      }
-    },
-    {
-      "mmsi": "372145000,229061000",
-      "vessel_name": "OCEAN GEOGRAPH & SEA CARGO EXPRESS",
-      "country": "Panama,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-10-10T16:00:16.255055Z",
       "details": {
         "vessel1": {
@@ -124479,6 +124487,35 @@
           }
         },
         "distance_km": 0.06
+      }
+    },
+    {
+      "mmsi": "372145000,229061000",
+      "vessel_name": "OCEAN GEOGRAPH & SEA CARGO EXPRESS",
+      "country": "Panama,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-10T16:59:15.257437Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "372145000",
+          "name": "OCEAN GEOGRAPH",
+          "country": "Panama",
+          "position": {
+            "lat": 60.3887,
+            "lon": 5.311
+          }
+        },
+        "vessel2": {
+          "mmsi": "229061000",
+          "name": "SEA CARGO EXPRESS",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3891,
+            "lon": 5.311
+          }
+        },
+        "distance_km": 0.05
       }
     },
     {
@@ -124516,6 +124553,35 @@
       "country": "Panama,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2025-10-11T11:15:17.807539Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "372145000",
+          "name": "OCEAN GEOGRAPH",
+          "country": "Panama",
+          "position": {
+            "lat": 60.3887,
+            "lon": 5.3109
+          }
+        },
+        "vessel2": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3162
+          }
+        },
+        "distance_km": 0.99
+      }
+    },
+    {
+      "mmsi": "372145000,325314700",
+      "vessel_name": "OCEAN GEOGRAPH & VIKINGFJORD",
+      "country": "Panama,Dominica",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2025-10-11T10:19:01.691555Z",
       "details": {
         "vessel1": {
@@ -124537,35 +124603,6 @@
           }
         },
         "distance_km": 0.98
-      }
-    },
-    {
-      "mmsi": "372145000,325314700",
-      "vessel_name": "OCEAN GEOGRAPH & VIKINGFJORD",
-      "country": "Panama,Dominica",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-11T09:42:36.104599Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "372145000",
-          "name": "OCEAN GEOGRAPH",
-          "country": "Panama",
-          "position": {
-            "lat": 60.3887,
-            "lon": 5.3109
-          }
-        },
-        "vessel2": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3163
-          }
-        },
-        "distance_km": 0.97
       }
     },
     {
@@ -124603,7 +124640,7 @@
       "country": "Panama,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-11T13:29:51.931266Z",
+      "detected_at": "2025-10-11T09:42:36.104599Z",
       "details": {
         "vessel1": {
           "mmsi": "372145000",
@@ -124620,39 +124657,10 @@
           "country": "Dominica",
           "position": {
             "lat": 60.397,
-            "lon": 5.3164
+            "lon": 5.3163
           }
         },
-        "distance_km": 0.98
-      }
-    },
-    {
-      "mmsi": "372145000,325314700",
-      "vessel_name": "OCEAN GEOGRAPH & VIKINGFJORD",
-      "country": "Panama,Dominica",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-11T11:15:17.807539Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "372145000",
-          "name": "OCEAN GEOGRAPH",
-          "country": "Panama",
-          "position": {
-            "lat": 60.3887,
-            "lon": 5.3109
-          }
-        },
-        "vessel2": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3162
-          }
-        },
-        "distance_km": 0.99
+        "distance_km": 0.97
       }
     },
     {
@@ -124690,7 +124698,7 @@
       "country": "Panama,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-11T14:44:41.698587Z",
+      "detected_at": "2025-10-11T15:09:22.145318Z",
       "details": {
         "vessel1": {
           "mmsi": "372145000",
@@ -124699,35 +124707,6 @@
           "position": {
             "lat": 60.3887,
             "lon": 5.311
-          }
-        },
-        "vessel2": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3164
-          }
-        },
-        "distance_km": 0.98
-      }
-    },
-    {
-      "mmsi": "372145000,325314700",
-      "vessel_name": "OCEAN GEOGRAPH & VIKINGFJORD",
-      "country": "Panama,Dominica",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-11T09:36:21.666223Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "372145000",
-          "name": "OCEAN GEOGRAPH",
-          "country": "Panama",
-          "position": {
-            "lat": 60.3887,
-            "lon": 5.3109
           }
         },
         "vessel2": {
@@ -124736,39 +124715,10 @@
           "country": "Dominica",
           "position": {
             "lat": 60.397,
-            "lon": 5.3162
+            "lon": 5.3164
           }
         },
         "distance_km": 0.97
-      }
-    },
-    {
-      "mmsi": "372145000,325314700",
-      "vessel_name": "OCEAN GEOGRAPH & VIKINGFJORD",
-      "country": "Panama,Dominica",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-11T13:44:23.921184Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "372145000",
-          "name": "OCEAN GEOGRAPH",
-          "country": "Panama",
-          "position": {
-            "lat": 60.3887,
-            "lon": 5.311
-          }
-        },
-        "vessel2": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3969,
-            "lon": 5.3162
-          }
-        },
-        "distance_km": 0.96
       }
     },
     {
@@ -124835,7 +124785,7 @@
       "country": "Panama,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-11T11:56:35.898141Z",
+      "detected_at": "2025-10-11T13:29:51.931266Z",
       "details": {
         "vessel1": {
           "mmsi": "372145000",
@@ -124851,8 +124801,8 @@
           "name": "VIKINGFJORD",
           "country": "Dominica",
           "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
+            "lat": 60.397,
+            "lon": 5.3164
           }
         },
         "distance_km": 0.98
@@ -124864,7 +124814,7 @@
       "country": "Panama,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-11T13:50:31.239669Z",
+      "detected_at": "2025-10-11T09:36:21.666223Z",
       "details": {
         "vessel1": {
           "mmsi": "372145000",
@@ -124872,7 +124822,7 @@
           "country": "Panama",
           "position": {
             "lat": 60.3887,
-            "lon": 5.311
+            "lon": 5.3109
           }
         },
         "vessel2": {
@@ -124880,11 +124830,11 @@
           "name": "VIKINGFJORD",
           "country": "Dominica",
           "position": {
-            "lat": 60.3971,
-            "lon": 5.3164
+            "lat": 60.397,
+            "lon": 5.3162
           }
         },
-        "distance_km": 0.98
+        "distance_km": 0.97
       }
     },
     {
@@ -124922,7 +124872,36 @@
       "country": "Panama,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-11T15:09:22.145318Z",
+      "detected_at": "2025-10-11T11:56:35.898141Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "372145000",
+          "name": "OCEAN GEOGRAPH",
+          "country": "Panama",
+          "position": {
+            "lat": 60.3887,
+            "lon": 5.3109
+          }
+        },
+        "vessel2": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3163
+          }
+        },
+        "distance_km": 0.98
+      }
+    },
+    {
+      "mmsi": "372145000,325314700",
+      "vessel_name": "OCEAN GEOGRAPH & VIKINGFJORD",
+      "country": "Panama,Dominica",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-11T14:44:41.698587Z",
       "details": {
         "vessel1": {
           "mmsi": "372145000",
@@ -124938,11 +124917,69 @@
           "name": "VIKINGFJORD",
           "country": "Dominica",
           "position": {
-            "lat": 60.397,
+            "lat": 60.3971,
             "lon": 5.3164
           }
         },
-        "distance_km": 0.97
+        "distance_km": 0.98
+      }
+    },
+    {
+      "mmsi": "372145000,325314700",
+      "vessel_name": "OCEAN GEOGRAPH & VIKINGFJORD",
+      "country": "Panama,Dominica",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-11T13:44:23.921184Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "372145000",
+          "name": "OCEAN GEOGRAPH",
+          "country": "Panama",
+          "position": {
+            "lat": 60.3887,
+            "lon": 5.311
+          }
+        },
+        "vessel2": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3969,
+            "lon": 5.3162
+          }
+        },
+        "distance_km": 0.96
+      }
+    },
+    {
+      "mmsi": "372145000,325314700",
+      "vessel_name": "OCEAN GEOGRAPH & VIKINGFJORD",
+      "country": "Panama,Dominica",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-11T13:50:31.239669Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "372145000",
+          "name": "OCEAN GEOGRAPH",
+          "country": "Panama",
+          "position": {
+            "lat": 60.3887,
+            "lon": 5.311
+          }
+        },
+        "vessel2": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3164
+          }
+        },
+        "distance_km": 0.98
       }
     },
     {
@@ -125009,35 +125046,6 @@
       "country": "Malta,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-14T09:48:11.632908Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "229061000",
-          "name": "SEA CARGO EXPRESS",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3926,
-            "lon": 5.3109
-          }
-        },
-        "vessel2": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3162
-          }
-        },
-        "distance_km": 0.58
-      }
-    },
-    {
-      "mmsi": "229061000,325314700",
-      "vessel_name": "SEA CARGO EXPRESS & VIKINGFJORD",
-      "country": "Malta,Dominica",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-10-14T08:27:14.329730Z",
       "details": {
         "vessel1": {
@@ -125059,64 +125067,6 @@
           }
         },
         "distance_km": 0.58
-      }
-    },
-    {
-      "mmsi": "229061000,325314700",
-      "vessel_name": "SEA CARGO EXPRESS & VIKINGFJORD",
-      "country": "Malta,Dominica",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-14T16:52:18.917146Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "229061000",
-          "name": "SEA CARGO EXPRESS",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3924,
-            "lon": 5.3084
-          }
-        },
-        "vessel2": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
-          }
-        },
-        "distance_km": 0.67
-      }
-    },
-    {
-      "mmsi": "229061000,325314700",
-      "vessel_name": "SEA CARGO EXPRESS & VIKINGFJORD",
-      "country": "Malta,Dominica",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-14T15:12:22.782294Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "229061000",
-          "name": "SEA CARGO EXPRESS",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3892,
-            "lon": 5.3111
-          }
-        },
-        "vessel2": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3164
-          }
-        },
-        "distance_km": 0.92
       }
     },
     {
@@ -125154,6 +125104,35 @@
       "country": "Malta,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2025-10-14T15:12:22.782294Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "229061000",
+          "name": "SEA CARGO EXPRESS",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3892,
+            "lon": 5.3111
+          }
+        },
+        "vessel2": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3164
+          }
+        },
+        "distance_km": 0.92
+      }
+    },
+    {
+      "mmsi": "229061000,325314700",
+      "vessel_name": "SEA CARGO EXPRESS & VIKINGFJORD",
+      "country": "Malta,Dominica",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2025-10-14T17:13:00.172148Z",
       "details": {
         "vessel1": {
@@ -125172,6 +125151,64 @@
           "position": {
             "lat": 60.397,
             "lon": 5.3164
+          }
+        },
+        "distance_km": 0.67
+      }
+    },
+    {
+      "mmsi": "229061000,325314700",
+      "vessel_name": "SEA CARGO EXPRESS & VIKINGFJORD",
+      "country": "Malta,Dominica",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-14T09:48:11.632908Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "229061000",
+          "name": "SEA CARGO EXPRESS",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3926,
+            "lon": 5.3109
+          }
+        },
+        "vessel2": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3162
+          }
+        },
+        "distance_km": 0.58
+      }
+    },
+    {
+      "mmsi": "229061000,325314700",
+      "vessel_name": "SEA CARGO EXPRESS & VIKINGFJORD",
+      "country": "Malta,Dominica",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-14T17:44:06.367307Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "229061000",
+          "name": "SEA CARGO EXPRESS",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3925,
+            "lon": 5.3084
+          }
+        },
+        "vessel2": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3163
           }
         },
         "distance_km": 0.67
@@ -125241,14 +125278,14 @@
       "country": "Malta,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-14T17:44:06.367307Z",
+      "detected_at": "2025-10-14T16:52:18.917146Z",
       "details": {
         "vessel1": {
           "mmsi": "229061000",
           "name": "SEA CARGO EXPRESS",
           "country": "Malta",
           "position": {
-            "lat": 60.3925,
+            "lat": 60.3924,
             "lon": 5.3084
           }
         },
@@ -125257,7 +125294,7 @@
           "name": "VIKINGFJORD",
           "country": "Dominica",
           "position": {
-            "lat": 60.397,
+            "lat": 60.3971,
             "lon": 5.3163
           }
         },
@@ -125415,35 +125452,6 @@
       "country": "Liberia,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-15T09:16:36.741739Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "636091569",
-          "name": "CONTI BENGUELA",
-          "country": "Liberia",
-          "position": {
-            "lat": 60.8167,
-            "lon": 5.0394
-          }
-        },
-        "vessel2": {
-          "mmsi": "305850000",
-          "name": "SLOMAN HERA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 60.8141,
-            "lon": 5.0428
-          }
-        },
-        "distance_km": 0.35
-      }
-    },
-    {
-      "mmsi": "636091569,305850000",
-      "vessel_name": "CONTI BENGUELA & SLOMAN HERA",
-      "country": "Liberia,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-10-15T11:54:41.980627Z",
       "details": {
         "vessel1": {
@@ -125468,32 +125476,32 @@
       }
     },
     {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
+      "mmsi": "636091569,305850000",
+      "vessel_name": "CONTI BENGUELA & SLOMAN HERA",
+      "country": "Liberia,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-16T10:24:51.795150Z",
+      "detected_at": "2025-10-15T09:16:36.741739Z",
       "details": {
         "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
+          "mmsi": "636091569",
+          "name": "CONTI BENGUELA",
+          "country": "Liberia",
           "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
+            "lat": 60.8167,
+            "lon": 5.0394
           }
         },
         "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
+          "mmsi": "305850000",
+          "name": "SLOMAN HERA",
+          "country": "Antigua and Barbuda",
           "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
+            "lat": 60.8141,
+            "lon": 5.0428
           }
         },
-        "distance_km": 0.21
+        "distance_km": 0.35
       }
     },
     {
@@ -125502,7 +125510,7 @@
       "country": "Dominica,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-16T20:52:37.327226Z",
+      "detected_at": "2025-10-17T07:56:10.827718Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -125519,7 +125527,7 @@
           "country": "Marshall Islands",
           "position": {
             "lat": 60.3983,
-            "lon": 5.3193
+            "lon": 5.3192
           }
         },
         "distance_km": 0.22
@@ -125560,7 +125568,7 @@
       "country": "Dominica,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-15T20:46:27.158963Z",
+      "detected_at": "2025-10-15T22:20:22.227015Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -125568,6 +125576,64 @@
           "country": "Dominica",
           "position": {
             "lat": 60.397,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.22
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-16T23:10:48.762389Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3969,
+            "lon": 5.3161
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.24
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-15T18:27:54.072152Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
             "lon": 5.3164
           }
         },
@@ -125589,36 +125655,7 @@
       "country": "Dominica,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-15T17:16:10.088673Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.22
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-16T00:02:05.476588Z",
+      "detected_at": "2025-10-17T09:50:01.307175Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -125647,36 +125684,7 @@
       "country": "Dominica,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-16T05:34:40.655393Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3164
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-17T04:56:06.649413Z",
+      "detected_at": "2025-10-16T20:52:37.327226Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -125705,7 +125713,7 @@
       "country": "Dominica,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-16T18:45:44.030093Z",
+      "detected_at": "2025-10-16T21:47:04.589148Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -125713,6 +125721,383 @@
           "country": "Dominica",
           "position": {
             "lat": 60.397,
+            "lon": 5.3164
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-17T07:42:55.260408Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3162
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.22
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-16T23:24:57.337651Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3164
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-16T08:52:21.043325Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-17T05:36:16.170606Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3164
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-16T05:45:12.132815Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-15T17:42:36.720347Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-17T07:34:01.231700Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-17T09:43:57.510251Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3164
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-15T22:02:48.095007Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3164
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-17T14:49:40.751312Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-17T15:46:22.483348Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3164
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-17T09:33:19.604448Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3161
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.23
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-16T07:22:19.242808Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
             "lon": 5.3163
           }
         },
@@ -125792,36 +126177,7 @@
       "country": "Dominica,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-17T12:03:20.397634Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3162
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.22
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-16T08:52:21.043325Z",
+      "detected_at": "2025-10-17T08:57:42.771196Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -125842,325 +126198,6 @@
           }
         },
         "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-16T17:35:08.195299Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-15T19:31:50.138681Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-17T05:36:16.170606Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3164
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-17T02:17:18.923332Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.22
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-16T23:10:48.762389Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3969,
-            "lon": 5.3161
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.24
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-17T05:45:57.465653Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-15T17:42:36.720347Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-17T09:43:57.510251Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3164
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-16T06:45:44.872247Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3164
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-15T14:00:28.021805Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.22
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-15T22:20:22.227015Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.22
       }
     },
     {
@@ -126198,94 +126235,7 @@
       "country": "Dominica,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-17T06:19:21.109201Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-15T23:30:03.961131Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3164
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-17T07:56:10.827718Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.22
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-17T11:29:29.312216Z",
+      "detected_at": "2025-10-16T19:34:14.872783Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -126314,7 +126264,181 @@
       "country": "Dominica,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-17T09:50:01.307175Z",
+      "detected_at": "2025-10-16T23:39:36.924944Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.22
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-15T14:00:28.021805Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.22
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-16T18:56:15.521822Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-17T04:56:06.649413Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.22
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-15T17:16:10.088673Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.22
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-17T05:45:57.465653Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-15T19:31:50.138681Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -126372,15 +126496,15 @@
       "country": "Dominica,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-16T07:22:19.242808Z",
+      "detected_at": "2025-10-16T05:34:40.655393Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
           "name": "VIKINGFJORD",
           "country": "Dominica",
           "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
+            "lat": 60.397,
+            "lon": 5.3164
           }
         },
         "vessel2": {
@@ -126389,7 +126513,7 @@
           "country": "Marshall Islands",
           "position": {
             "lat": 60.3983,
-            "lon": 5.3192
+            "lon": 5.3193
           }
         },
         "distance_km": 0.21
@@ -126430,413 +126554,7 @@
       "country": "Dominica,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-15T22:02:48.095007Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3164
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-10-16T05:51:16.969978Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.22
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-17T15:46:22.483348Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3164
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-16T19:34:14.872783Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3164
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-16T22:29:27.030660Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3969,
-            "lon": 5.3164
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.22
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-16T05:45:12.132815Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-16T21:47:04.589148Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3164
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-17T07:34:01.231700Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-16T15:53:22.168954Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-17T08:57:42.771196Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-15T17:33:11.943531Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.22
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-16T09:01:16.423213Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3164
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-17T09:33:19.604448Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3161
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.23
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-15T18:00:56.255037Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-16T23:39:36.924944Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -126894,7 +126612,7 @@
       "country": "Dominica,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-16T23:24:57.337651Z",
+      "detected_at": "2025-10-16T10:24:51.795150Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -126902,7 +126620,7 @@
           "country": "Dominica",
           "position": {
             "lat": 60.3971,
-            "lon": 5.3164
+            "lon": 5.3163
           }
         },
         "vessel2": {
@@ -126911,7 +126629,7 @@
           "country": "Marshall Islands",
           "position": {
             "lat": 60.3983,
-            "lon": 5.3193
+            "lon": 5.3192
           }
         },
         "distance_km": 0.21
@@ -126923,7 +126641,65 @@
       "country": "Dominica,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-16T18:56:15.521822Z",
+      "detected_at": "2025-10-16T13:22:56.039152Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3968,
+            "lon": 5.3162
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.24
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-16T06:45:44.872247Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3164
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-15T17:33:11.943531Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -126940,7 +126716,36 @@
           "country": "Marshall Islands",
           "position": {
             "lat": 60.3983,
-            "lon": 5.3192
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.22
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-16T17:35:08.195299Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
           }
         },
         "distance_km": 0.21
@@ -126981,7 +126786,36 @@
       "country": "Dominica,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-16T12:02:56.882029Z",
+      "detected_at": "2025-10-16T15:53:22.168954Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-17T08:29:35.423791Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -127068,64 +126902,6 @@
       "country": "Dominica,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-17T14:49:40.751312Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-16T13:22:56.039152Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3968,
-            "lon": 5.3162
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.24
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-10-16T08:33:26.918338Z",
       "details": {
         "vessel1": {
@@ -127155,65 +126931,7 @@
       "country": "Dominica,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-10-15T18:27:54.072152Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3164
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3193
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-17T07:42:55.260408Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3162
-          }
-        },
-        "vessel2": {
-          "mmsi": "538071850",
-          "name": "EMOTIONAL",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.3983,
-            "lon": 5.3192
-          }
-        },
-        "distance_km": 0.22
-      }
-    },
-    {
-      "mmsi": "325314700,538071850",
-      "vessel_name": "VIKINGFJORD & EMOTIONAL",
-      "country": "Dominica,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-10-17T08:29:35.423791Z",
+      "detected_at": "2025-10-16T09:01:16.423213Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -127263,6 +126981,325 @@
           }
         },
         "distance_km": 0.22
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-15T23:30:03.961131Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3164
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-16T22:29:27.030660Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3969,
+            "lon": 5.3164
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.22
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-17T11:29:29.312216Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3164
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-17T12:03:20.397634Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3162
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.22
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-16T18:45:44.030093Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-15T20:46:27.158963Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3164
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-17T06:19:21.109201Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-16T00:02:05.476588Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-16T12:02:56.882029Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3164
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.21
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-17T02:17:18.923332Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3192
+          }
+        },
+        "distance_km": 0.22
+      }
+    },
+    {
+      "mmsi": "325314700,538071850",
+      "vessel_name": "VIKINGFJORD & EMOTIONAL",
+      "country": "Dominica,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-10-15T18:00:56.255037Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "538071850",
+          "name": "EMOTIONAL",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.3983,
+            "lon": 5.3193
+          }
+        },
+        "distance_km": 0.21
       }
     },
     {
@@ -127325,15 +127362,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 6533,
+    "transmission_gaps": 6534,
     "impossible_speeds": 117,
-    "loitering": 112,
+    "loitering": 113,
     "rendezvous": 153
   },
   "severity_breakdown": {
     "critical": 41,
     "high": 360,
-    "medium": 2500,
-    "low": 4014
+    "medium": 2501,
+    "low": 4015
   }
 }
