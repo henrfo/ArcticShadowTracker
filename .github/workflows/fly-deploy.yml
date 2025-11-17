@@ -5,11 +5,17 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'data/**'
+      - 'outputs/**'
 jobs:
   deploy:
     name: Deploy app
     runs-on: ubuntu-latest
-    concurrency: deploy-group    # optional: ensure only one action runs at a time
+    timeout-minutes: 10
+    concurrency:
+      group: deploy-group
+      cancel-in-progress: true  # Cancel outdated deploys
     steps:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master

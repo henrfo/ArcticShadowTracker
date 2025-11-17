@@ -1,0 +1,54 @@
+name: Satellite Imagery Monitor
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # Daily at midnight UTC (SAR imagery updates less frequently than AIS)
+  workflow_dispatch:       # Manual trigger for testing
+
+permissions:
+  contents: write
+
+jobs:
+  collect-satellite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30  # Satellite imagery can take longer
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Collect Sentinel-1 SAR imagery
+        env:
+          SENTINEL_CLIENT_ID: ${{ secrets.SENTINEL_CLIENT_ID }}
+          SENTINEL_CLIENT_SECRET: ${{ secrets.SENTINEL_CLIENT_SECRET }}
+        run: |
+          python scripts/collect_satellite.py
+
+      - name: Commit metadata changes
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+          # Only commit metadata.json (TIFF files are excluded by .gitignore)
+          git add data/satellite_imagery/metadata.json
+
+          if git diff --staged --quiet; then
+            echo "No changes to satellite metadata"
+          else
+            git commit -m "Satellite imagery metadata update $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git pull --rebase origin main
+            git push
+          fi

@@ -2,18 +2,17 @@ name: Arctic AIS Monitor
 
 concurrency:
   group: gh-pages-deployment
-  cancel-in-progress: false  # Queue deployments to prevent conflicts
+  cancel-in-progress: true  # Cancel stale runs to prevent queue buildup
 
 on:
   schedule:
     - cron: '*/5 * * * *'   # Every 5 minutes
   workflow_dispatch:         # Manual trigger for testing
-  push:
-    branches: [main]         # Also run on push to main (for testing)
 
 jobs:
   collect:
     runs-on: ubuntu-latest
+    timeout-minutes: 20  # Prevent indefinite hangs
 
     permissions:
       contents: write  # Allow pushing changes back to repo

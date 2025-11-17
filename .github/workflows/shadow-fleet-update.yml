@@ -11,6 +11,7 @@ permissions:
 jobs:
   update-shadow-fleet:
     runs-on: ubuntu-latest
+    timeout-minutes: 15  # PDF parsing and web scraping
 
     steps:
     - uses: actions/checkout@v4
