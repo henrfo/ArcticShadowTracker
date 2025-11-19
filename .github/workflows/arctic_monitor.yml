@@ -1,8 +1,8 @@
 name: Arctic AIS Monitor
 
 concurrency:
-  group: gh-pages-deployment
-  cancel-in-progress: true  # Cancel stale runs to prevent queue buildup
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false  # Allow scheduled runs to queue properly
 
 on:
   schedule:
