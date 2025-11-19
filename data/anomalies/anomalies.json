@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-11-19T20:28:38.378774Z",
+  "timestamp": "2025-11-19T20:42:56.173211Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 290,
-  "total_positions": 67395,
-  "anomalies_detected": 8761,
+  "total_positions": 67536,
+  "anomalies_detected": 8763,
   "anomalies": [
     {
       "mmsi": "314473000",
@@ -17191,6 +17191,24 @@
         "last_position": {
           "lat": 71.7917,
           "lon": 30.3133
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "352351000",
+      "vessel_name": "AVUNDA REEFER",
+      "country": "Panama",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-11-19T20:40:48Z",
+      "details": {
+        "gap_duration_minutes": 30.9,
+        "gap_start": "2025-11-19T20:09:51Z",
+        "gap_end": "2025-11-19T20:40:48Z",
+        "last_position": {
+          "lat": 71.7833,
+          "lon": 30.2967
         },
         "near_border": false
       }
@@ -98052,6 +98070,24 @@
       }
     },
     {
+      "mmsi": "304783000",
+      "vessel_name": "SANDNES",
+      "country": "Antigua and Barbuda",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-11-19T20:41:47.389369Z",
+      "details": {
+        "gap_duration_minutes": 30.0,
+        "gap_start": "2025-11-19T20:11:47.277303Z",
+        "gap_end": "2025-11-19T20:41:47.389369Z",
+        "last_position": {
+          "lat": 58.8385,
+          "lon": 6.1672
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "314583000",
       "vessel_name": "WILSON LIVERPOOL",
       "country": "Barbados",
@@ -155442,7 +155478,36 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-17T17:08:24.347980Z",
+      "detected_at": "2025-11-17T16:27:12.375930Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "304819000",
+          "name": "STARNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3781,
+            "lon": 6.047
+          }
+        },
+        "vessel2": {
+          "mmsi": "305425000",
+          "name": "BULKNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3732,
+            "lon": 6.0438
+          }
+        },
+        "distance_km": 0.58
+      }
+    },
+    {
+      "mmsi": "304819000,305425000",
+      "vessel_name": "STARNES & BULKNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-17T16:40:03.037843Z",
       "details": {
         "vessel1": {
           "mmsi": "304819000",
@@ -155462,36 +155527,7 @@
             "lon": 6.0438
           }
         },
-        "distance_km": 0.57
-      }
-    },
-    {
-      "mmsi": "304819000,305425000",
-      "vessel_name": "STARNES & BULKNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-17T17:44:45.093659Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "304819000",
-          "name": "STARNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.378,
-            "lon": 6.0465
-          }
-        },
-        "vessel2": {
-          "mmsi": "305425000",
-          "name": "BULKNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3732,
-            "lon": 6.0438
-          }
-        },
-        "distance_km": 0.56
+        "distance_km": 0.58
       }
     },
     {
@@ -155558,7 +155594,7 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-17T16:27:12.375930Z",
+      "detected_at": "2025-11-17T17:08:24.347980Z",
       "details": {
         "vessel1": {
           "mmsi": "304819000",
@@ -155566,7 +155602,7 @@
           "country": "Antigua and Barbuda",
           "position": {
             "lat": 59.3781,
-            "lon": 6.047
+            "lon": 6.0471
           }
         },
         "vessel2": {
@@ -155578,7 +155614,7 @@
             "lon": 6.0438
           }
         },
-        "distance_km": 0.58
+        "distance_km": 0.57
       }
     },
     {
@@ -155616,15 +155652,15 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-17T16:40:03.037843Z",
+      "detected_at": "2025-11-17T17:44:45.093659Z",
       "details": {
         "vessel1": {
           "mmsi": "304819000",
           "name": "STARNES",
           "country": "Antigua and Barbuda",
           "position": {
-            "lat": 59.3781,
-            "lon": 6.0471
+            "lat": 59.378,
+            "lon": 6.0465
           }
         },
         "vessel2": {
@@ -155636,7 +155672,7 @@
             "lon": 6.0438
           }
         },
-        "distance_km": 0.58
+        "distance_km": 0.56
       }
     },
     {
@@ -155645,7 +155681,7 @@
       "country": "Antigua and Barbuda,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-17T19:56:07.366293Z",
+      "detected_at": "2025-11-17T21:15:28.233875Z",
       "details": {
         "vessel1": {
           "mmsi": "305425000",
@@ -155653,7 +155689,7 @@
           "country": "Antigua and Barbuda",
           "position": {
             "lat": 59.3725,
-            "lon": 6.0437
+            "lon": 6.0438
           }
         },
         "vessel2": {
@@ -155661,8 +155697,37 @@
           "name": "CSL FLEXVIK",
           "country": "Malta",
           "position": {
-            "lat": 59.3775,
-            "lon": 6.0462
+            "lat": 59.3777,
+            "lon": 6.0468
+          }
+        },
+        "distance_km": 0.6
+      }
+    },
+    {
+      "mmsi": "305425000,256426000",
+      "vessel_name": "BULKNES & CSL FLEXVIK",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-18T01:33:17.689850Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305425000",
+          "name": "BULKNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3727,
+            "lon": 6.0438
+          }
+        },
+        "vessel2": {
+          "mmsi": "256426000",
+          "name": "CSL FLEXVIK",
+          "country": "Malta",
+          "position": {
+            "lat": 59.3777,
+            "lon": 6.0468
           }
         },
         "distance_km": 0.58
@@ -155732,6 +155797,35 @@
       "country": "Antigua and Barbuda,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2025-11-17T20:21:39.815852Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305425000",
+          "name": "BULKNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3725,
+            "lon": 6.0437
+          }
+        },
+        "vessel2": {
+          "mmsi": "256426000",
+          "name": "CSL FLEXVIK",
+          "country": "Malta",
+          "position": {
+            "lat": 59.3777,
+            "lon": 6.0468
+          }
+        },
+        "distance_km": 0.6
+      }
+    },
+    {
+      "mmsi": "305425000,256426000",
+      "vessel_name": "BULKNES & CSL FLEXVIK",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2025-11-18T05:07:43.143833Z",
       "details": {
         "vessel1": {
@@ -155761,65 +155855,7 @@
       "country": "Antigua and Barbuda,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-18T01:33:17.689850Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305425000",
-          "name": "BULKNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3727,
-            "lon": 6.0438
-          }
-        },
-        "vessel2": {
-          "mmsi": "256426000",
-          "name": "CSL FLEXVIK",
-          "country": "Malta",
-          "position": {
-            "lat": 59.3777,
-            "lon": 6.0468
-          }
-        },
-        "distance_km": 0.58
-      }
-    },
-    {
-      "mmsi": "305425000,256426000",
-      "vessel_name": "BULKNES & CSL FLEXVIK",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-17T21:15:28.233875Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305425000",
-          "name": "BULKNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3725,
-            "lon": 6.0438
-          }
-        },
-        "vessel2": {
-          "mmsi": "256426000",
-          "name": "CSL FLEXVIK",
-          "country": "Malta",
-          "position": {
-            "lat": 59.3777,
-            "lon": 6.0468
-          }
-        },
-        "distance_km": 0.6
-      }
-    },
-    {
-      "mmsi": "305425000,256426000",
-      "vessel_name": "BULKNES & CSL FLEXVIK",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-17T20:21:39.815852Z",
+      "detected_at": "2025-11-17T19:56:07.366293Z",
       "details": {
         "vessel1": {
           "mmsi": "305425000",
@@ -155835,11 +155871,11 @@
           "name": "CSL FLEXVIK",
           "country": "Malta",
           "position": {
-            "lat": 59.3777,
-            "lon": 6.0468
+            "lat": 59.3775,
+            "lon": 6.0462
           }
         },
-        "distance_km": 0.6
+        "distance_km": 0.58
       }
     },
     {
@@ -155935,36 +155971,7 @@
       "country": "Antigua and Barbuda,Russia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T23:41:48.665020Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "distance_km": 0.33
-      }
-    },
-    {
-      "mmsi": "305426000,273250830",
-      "vessel_name": "BELTNES & KEMEROVO",
-      "country": "Antigua and Barbuda,Russia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T22:43:24.389091Z",
+      "detected_at": "2025-11-13T23:53:48.651721Z",
       "details": {
         "vessel1": {
           "mmsi": "305426000",
@@ -156022,326 +156029,7 @@
       "country": "Antigua and Barbuda,Russia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T23:53:48.651721Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "distance_km": 0.33
-      }
-    },
-    {
-      "mmsi": "305426000,273250830",
-      "vessel_name": "BELTNES & KEMEROVO",
-      "country": "Antigua and Barbuda,Russia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T00:05:46.452542Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "distance_km": 0.33
-      }
-    },
-    {
-      "mmsi": "305426000,273250830",
-      "vessel_name": "BELTNES & KEMEROVO",
-      "country": "Antigua and Barbuda,Russia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T22:25:56.681835Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "distance_km": 0.33
-      }
-    },
-    {
-      "mmsi": "305426000,273250830",
-      "vessel_name": "BELTNES & KEMEROVO",
-      "country": "Antigua and Barbuda,Russia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T20:58:36.780310Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "distance_km": 0.33
-      }
-    },
-    {
-      "mmsi": "305426000,273250830",
-      "vessel_name": "BELTNES & KEMEROVO",
-      "country": "Antigua and Barbuda,Russia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T21:38:20.318355Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "distance_km": 0.33
-      }
-    },
-    {
-      "mmsi": "305426000,273250830",
-      "vessel_name": "BELTNES & KEMEROVO",
-      "country": "Antigua and Barbuda,Russia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T23:10:30.748243Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "distance_km": 0.33
-      }
-    },
-    {
-      "mmsi": "305426000,273250830",
-      "vessel_name": "BELTNES & KEMEROVO",
-      "country": "Antigua and Barbuda,Russia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-11-13T21:26:26.123148Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "distance_km": 0.33
-      }
-    },
-    {
-      "mmsi": "305426000,273250830",
-      "vessel_name": "BELTNES & KEMEROVO",
-      "country": "Antigua and Barbuda,Russia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T00:17:50.086761Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "distance_km": 0.33
-      }
-    },
-    {
-      "mmsi": "305426000,273250830",
-      "vessel_name": "BELTNES & KEMEROVO",
-      "country": "Antigua and Barbuda,Russia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T21:12:20.001744Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "distance_km": 0.33
-      }
-    },
-    {
-      "mmsi": "305426000,273250830",
-      "vessel_name": "BELTNES & KEMEROVO",
-      "country": "Antigua and Barbuda,Russia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T21:50:05.981876Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "distance_km": 0.33
-      }
-    },
-    {
-      "mmsi": "305426000,273250830",
-      "vessel_name": "BELTNES & KEMEROVO",
-      "country": "Antigua and Barbuda,Russia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T23:22:28.532336Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "distance_km": 0.33
-      }
-    },
-    {
-      "mmsi": "305426000,273250830",
-      "vessel_name": "BELTNES & KEMEROVO",
-      "country": "Antigua and Barbuda,Russia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T22:02:03.289365Z",
       "details": {
         "vessel1": {
           "mmsi": "305426000",
@@ -156423,12 +156111,12 @@
       }
     },
     {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
+      "mmsi": "305426000,273250830",
+      "vessel_name": "BELTNES & KEMEROVO",
+      "country": "Antigua and Barbuda,Russia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T18:19:45.562397Z",
+      "detected_at": "2025-11-13T23:22:28.532336Z",
       "details": {
         "vessel1": {
           "mmsi": "305426000",
@@ -156440,24 +156128,24 @@
           }
         },
         "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
           "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
+            "lat": 56.2149,
+            "lon": 3.6906
           }
         },
-        "distance_km": 0.62
+        "distance_km": 0.33
       }
     },
     {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
+      "mmsi": "305426000,273250830",
+      "vessel_name": "BELTNES & KEMEROVO",
+      "country": "Antigua and Barbuda,Russia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T23:41:48.665020Z",
+      "detected_at": "2025-11-13T21:50:05.981876Z",
       "details": {
         "vessel1": {
           "mmsi": "305426000",
@@ -156469,79 +156157,21 @@
           }
         },
         "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
           "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
+            "lat": 56.2149,
+            "lon": 3.6906
           }
         },
-        "distance_km": 0.62
+        "distance_km": 0.33
       }
     },
     {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T15:13:30.753000Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T13:19:44.730163Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
+      "mmsi": "305426000,273250830",
+      "vessel_name": "BELTNES & KEMEROVO",
+      "country": "Antigua and Barbuda,Russia",
       "anomaly_type": "rendezvous",
       "severity": "high",
       "detected_at": "2025-11-13T22:43:24.389091Z",
@@ -156556,15 +156186,276 @@
           }
         },
         "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
           "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
+            "lat": 56.2149,
+            "lon": 3.6906
           }
         },
-        "distance_km": 0.62
+        "distance_km": 0.33
+      }
+    },
+    {
+      "mmsi": "305426000,273250830",
+      "vessel_name": "BELTNES & KEMEROVO",
+      "country": "Antigua and Barbuda,Russia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T22:25:56.681835Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "distance_km": 0.33
+      }
+    },
+    {
+      "mmsi": "305426000,273250830",
+      "vessel_name": "BELTNES & KEMEROVO",
+      "country": "Antigua and Barbuda,Russia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T21:38:20.318355Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "distance_km": 0.33
+      }
+    },
+    {
+      "mmsi": "305426000,273250830",
+      "vessel_name": "BELTNES & KEMEROVO",
+      "country": "Antigua and Barbuda,Russia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T21:12:20.001744Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "distance_km": 0.33
+      }
+    },
+    {
+      "mmsi": "305426000,273250830",
+      "vessel_name": "BELTNES & KEMEROVO",
+      "country": "Antigua and Barbuda,Russia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T00:05:46.452542Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "distance_km": 0.33
+      }
+    },
+    {
+      "mmsi": "305426000,273250830",
+      "vessel_name": "BELTNES & KEMEROVO",
+      "country": "Antigua and Barbuda,Russia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T23:10:30.748243Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "distance_km": 0.33
+      }
+    },
+    {
+      "mmsi": "305426000,273250830",
+      "vessel_name": "BELTNES & KEMEROVO",
+      "country": "Antigua and Barbuda,Russia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T00:17:50.086761Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "distance_km": 0.33
+      }
+    },
+    {
+      "mmsi": "305426000,273250830",
+      "vessel_name": "BELTNES & KEMEROVO",
+      "country": "Antigua and Barbuda,Russia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T23:41:48.665020Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "distance_km": 0.33
+      }
+    },
+    {
+      "mmsi": "305426000,273250830",
+      "vessel_name": "BELTNES & KEMEROVO",
+      "country": "Antigua and Barbuda,Russia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T20:58:36.780310Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "distance_km": 0.33
+      }
+    },
+    {
+      "mmsi": "305426000,273250830",
+      "vessel_name": "BELTNES & KEMEROVO",
+      "country": "Antigua and Barbuda,Russia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T22:02:03.289365Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "distance_km": 0.33
       }
     },
     {
@@ -156573,7 +156464,7 @@
       "country": "Antigua and Barbuda,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T16:26:59.856905Z",
+      "detected_at": "2025-11-13T23:53:48.651721Z",
       "details": {
         "vessel1": {
           "mmsi": "305426000",
@@ -156631,732 +156522,7 @@
       "country": "Antigua and Barbuda,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T18:07:49.432411Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T13:52:49.787132Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T23:53:48.651721Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T00:05:46.452542Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T18:38:01.281484Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T19:49:37.296294Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T12:41:28.872499Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T14:06:08.775867Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T22:25:56.681835Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T20:46:46.486259Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T15:28:32.190050Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T20:13:13.351772Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T19:37:30.920602Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T23:10:30.748243Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T17:18:19.075340Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T20:58:36.780310Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T21:38:20.318355Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T15:01:20.769828Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T21:26:26.123148Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T19:24:10.547005Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T00:17:50.086761Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T21:12:20.001744Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T21:50:05.981876Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T23:22:28.532336Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T22:02:03.289365Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 56.2163,
-            "lon": 3.6953
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305426000,248006000",
-      "vessel_name": "BELTNES & OSLO TS",
-      "country": "Antigua and Barbuda,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T15:45:42.293591Z",
+      "detected_at": "2025-11-13T13:19:44.730163Z",
       "details": {
         "vessel1": {
           "mmsi": "305426000",
@@ -157414,7 +156580,7 @@
       "country": "Antigua and Barbuda,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T19:12:20.206694Z",
+      "detected_at": "2025-11-13T21:26:26.123148Z",
       "details": {
         "vessel1": {
           "mmsi": "305426000",
@@ -157472,7 +156638,7 @@
       "country": "Antigua and Barbuda,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T17:44:13.092990Z",
+      "detected_at": "2025-11-13T17:56:12.496878Z",
       "details": {
         "vessel1": {
           "mmsi": "305426000",
@@ -157501,7 +156667,65 @@
       "country": "Antigua and Barbuda,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T17:56:12.496878Z",
+      "detected_at": "2025-11-13T19:49:37.296294Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T20:01:25.146938Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T22:14:01.562343Z",
       "details": {
         "vessel1": {
           "mmsi": "305426000",
@@ -157588,6 +156812,644 @@
       "country": "Antigua and Barbuda,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2025-11-13T17:18:19.075340Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T23:22:28.532336Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T18:19:45.562397Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T15:01:20.769828Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T15:45:42.293591Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T12:41:28.872499Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T21:50:05.981876Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T19:24:10.547005Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T22:43:24.389091Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T18:38:01.281484Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T22:25:56.681835Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T15:13:30.753000Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T14:06:08.775867Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T21:38:20.318355Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T15:28:32.190050Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T20:46:46.486259Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T19:12:20.206694Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T20:13:13.351772Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T21:12:20.001744Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T19:37:30.920602Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T00:05:46.452542Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T23:10:30.748243Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2025-11-13T17:30:20.102545Z",
       "details": {
         "vessel1": {
@@ -157617,7 +157479,7 @@
       "country": "Antigua and Barbuda,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T20:01:25.146938Z",
+      "detected_at": "2025-11-14T00:17:50.086761Z",
       "details": {
         "vessel1": {
           "mmsi": "305426000",
@@ -157646,7 +157508,7 @@
       "country": "Antigua and Barbuda,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T22:14:01.562343Z",
+      "detected_at": "2025-11-13T23:41:48.665020Z",
       "details": {
         "vessel1": {
           "mmsi": "305426000",
@@ -157667,6 +157529,209 @@
           }
         },
         "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T13:52:49.787132Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T18:07:49.432411Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T20:58:36.780310Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T17:44:13.092990Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T16:26:59.856905Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,248006000",
+      "vessel_name": "BELTNES & OSLO TS",
+      "country": "Antigua and Barbuda,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T22:02:03.289365Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2163,
+            "lon": 3.6953
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "305426000,304783000",
+      "vessel_name": "BELTNES & SANDNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-19T08:25:47.849180Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305426000",
+          "name": "BELTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3732,
+            "lon": 6.0438
+          }
+        },
+        "vessel2": {
+          "mmsi": "304783000",
+          "name": "SANDNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3777,
+            "lon": 6.0465
+          }
+        },
+        "distance_km": 0.52
       }
     },
     {
@@ -157754,35 +157819,6 @@
           }
         },
         "distance_km": 0.58
-      }
-    },
-    {
-      "mmsi": "305426000,304783000",
-      "vessel_name": "BELTNES & SANDNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-19T08:25:47.849180Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305426000",
-          "name": "BELTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3732,
-            "lon": 6.0438
-          }
-        },
-        "vessel2": {
-          "mmsi": "304783000",
-          "name": "SANDNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3777,
-            "lon": 6.0465
-          }
-        },
-        "distance_km": 0.52
       }
     },
     {
@@ -158052,7 +158088,7 @@
       "country": "Marshall Islands,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T16:22:07.958787Z",
+      "detected_at": "2025-11-14T15:11:58.409633Z",
       "details": {
         "vessel1": {
           "mmsi": "538008089",
@@ -158081,7 +158117,7 @@
       "country": "Marshall Islands,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T15:11:58.409633Z",
+      "detected_at": "2025-11-14T16:22:07.958787Z",
       "details": {
         "vessel1": {
           "mmsi": "538008089",
@@ -158131,6 +158167,35 @@
           }
         },
         "distance_km": 0.38
+      }
+    },
+    {
+      "mmsi": "538008089,249587000",
+      "vessel_name": "FEDERAL YELLOWSTONE & TRANS SOL",
+      "country": "Marshall Islands,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-15T08:07:45.393995Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538008089",
+          "name": "FEDERAL YELLOWSTONE",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.3115,
+            "lon": 5.3254
+          }
+        },
+        "vessel2": {
+          "mmsi": "249587000",
+          "name": "TRANS SOL",
+          "country": "Malta",
+          "position": {
+            "lat": 59.3155,
+            "lon": 5.3229
+          }
+        },
+        "distance_km": 0.47
       }
     },
     {
@@ -158221,35 +158286,6 @@
       }
     },
     {
-      "mmsi": "538008089,249587000",
-      "vessel_name": "FEDERAL YELLOWSTONE & TRANS SOL",
-      "country": "Marshall Islands,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-15T08:07:45.393995Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538008089",
-          "name": "FEDERAL YELLOWSTONE",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.3115,
-            "lon": 5.3254
-          }
-        },
-        "vessel2": {
-          "mmsi": "249587000",
-          "name": "TRANS SOL",
-          "country": "Malta",
-          "position": {
-            "lat": 59.3155,
-            "lon": 5.3229
-          }
-        },
-        "distance_km": 0.47
-      }
-    },
-    {
       "mmsi": "538010467,305265000",
       "vessel_name": "STI MYSTERY & SLOMAN HEBE",
       "country": "Marshall Islands,Antigua and Barbuda",
@@ -158313,7 +158349,7 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T02:59:57.957563Z",
+      "detected_at": "2025-11-13T23:53:48.651721Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -158342,7 +158378,7 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T12:29:55.302111Z",
+      "detected_at": "2025-11-14T01:25:44.740167Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -158371,7 +158407,7 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T05:54:50.296127Z",
+      "detected_at": "2025-11-14T07:41:48.716354Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -158400,7 +158436,7 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T06:57:38.887543Z",
+      "detected_at": "2025-11-14T07:26:19.297007Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -158429,7 +158465,36 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T12:15:48.879922Z",
+      "detected_at": "2025-11-13T22:57:02.635911Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T04:33:13.977361Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -158545,7 +158610,7 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T23:53:48.651721Z",
+      "detected_at": "2025-11-14T12:29:55.302111Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -158574,7 +158639,7 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T05:43:02.173575Z",
+      "detected_at": "2025-11-14T08:19:32.930834Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -158632,7 +158697,94 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T22:57:02.635911Z",
+      "detected_at": "2025-11-14T11:14:29.553521Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T05:54:50.296127Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T08:57:44.111240Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T04:50:58.498803Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -158690,7 +158842,7 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T23:41:48.665020Z",
+      "detected_at": "2025-11-14T12:03:40.478245Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -158719,36 +158871,7 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T04:09:48.126529Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T10:49:57.733747Z",
+      "detected_at": "2025-11-14T09:56:17.481705Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -158806,7 +158929,7 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T07:26:19.297007Z",
+      "detected_at": "2025-11-14T06:57:38.887543Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -158835,7 +158958,7 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T10:08:28.071273Z",
+      "detected_at": "2025-11-13T22:02:03.289365Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -158864,7 +158987,7 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T23:10:30.748243Z",
+      "detected_at": "2025-11-14T07:09:49.406589Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -158893,36 +159016,7 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T05:27:33.505899Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T00:17:50.086761Z",
+      "detected_at": "2025-11-14T09:26:53.421463Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -159009,558 +159103,7 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T06:30:52.127461Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T11:14:29.553521Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T07:41:48.716354Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T09:26:53.421463Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-11-13T22:43:24.389091Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T01:25:44.740167Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T00:05:46.452542Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T04:33:13.977361Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T23:22:28.532336Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T06:06:57.647288Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T22:02:03.289365Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T12:03:40.478245Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T11:26:51.272598Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T07:53:53.447509Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T09:10:06.943738Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T08:19:32.930834Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T09:44:07.821179Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T11:38:55.546435Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T08:57:44.111240Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-13T22:25:56.681835Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -159618,7 +159161,36 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T06:18:58.364598Z",
+      "detected_at": "2025-11-13T21:38:20.318355Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T23:10:30.748243Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -159676,36 +159248,7 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T21:38:20.318355Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T07:09:49.406589Z",
+      "detected_at": "2025-11-14T05:27:33.505899Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -159763,64 +159306,6 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T03:47:28.481985Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-14T09:56:17.481705Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273250830",
-          "name": "KEMEROVO",
-          "country": "Russia",
-          "position": {
-            "lat": 56.2149,
-            "lon": 3.6906
-          }
-        },
-        "vessel2": {
-          "mmsi": "248006000",
-          "name": "OSLO TS",
-          "country": "Malta",
-          "position": {
-            "lat": 56.2136,
-            "lon": 3.6866
-          }
-        },
-        "distance_km": 0.28
-      }
-    },
-    {
-      "mmsi": "273250830,248006000",
-      "vessel_name": "KEMEROVO & OSLO TS",
-      "country": "Russia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-11-13T22:14:01.562343Z",
       "details": {
         "vessel1": {
@@ -159850,7 +159335,558 @@
       "country": "Russia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T04:50:58.498803Z",
+      "detected_at": "2025-11-14T04:09:48.126529Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T05:43:02.173575Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T12:15:48.879922Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T06:30:52.127461Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T09:44:07.821179Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T22:25:56.681835Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T00:17:50.086761Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T11:26:51.272598Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T03:47:28.481985Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T06:18:58.364598Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T10:49:57.733747Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T11:38:55.546435Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T23:22:28.532336Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T02:59:57.957563Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T06:06:57.647288Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T10:08:28.071273Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T00:05:46.452542Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T23:41:48.665020Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T09:10:06.943738Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273250830",
+          "name": "KEMEROVO",
+          "country": "Russia",
+          "position": {
+            "lat": 56.2149,
+            "lon": 3.6906
+          }
+        },
+        "vessel2": {
+          "mmsi": "248006000",
+          "name": "OSLO TS",
+          "country": "Malta",
+          "position": {
+            "lat": 56.2136,
+            "lon": 3.6866
+          }
+        },
+        "distance_km": 0.28
+      }
+    },
+    {
+      "mmsi": "273250830,248006000",
+      "vessel_name": "KEMEROVO & OSLO TS",
+      "country": "Russia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T07:53:53.447509Z",
       "details": {
         "vessel1": {
           "mmsi": "273250830",
@@ -159879,7 +159915,7 @@
       "country": "Cook Islands,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T06:06:55Z",
+      "detected_at": "2025-11-14T05:42:54Z",
       "details": {
         "vessel1": {
           "mmsi": "518100276",
@@ -159908,7 +159944,7 @@
       "country": "Cook Islands,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T05:42:54Z",
+      "detected_at": "2025-11-14T06:06:55Z",
       "details": {
         "vessel1": {
           "mmsi": "518100276",
@@ -160082,35 +160118,6 @@
       "country": "Dominica,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-13T21:50:05.981876Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "256149000",
-          "name": "SC CONNECTOR",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3927,
-            "lon": 5.3023
-          }
-        },
-        "distance_km": 0.91
-      }
-    },
-    {
-      "mmsi": "325314700,256149000",
-      "vessel_name": "VIKINGFJORD & SC CONNECTOR",
-      "country": "Dominica,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-11-13T20:46:46.486259Z",
       "details": {
         "vessel1": {
@@ -160129,6 +160136,35 @@
           "position": {
             "lat": 60.3921,
             "lon": 5.3029
+          }
+        },
+        "distance_km": 0.91
+      }
+    },
+    {
+      "mmsi": "325314700,256149000",
+      "vessel_name": "VIKINGFJORD & SC CONNECTOR",
+      "country": "Dominica,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-13T21:50:05.981876Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "256149000",
+          "name": "SC CONNECTOR",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3927,
+            "lon": 5.3023
           }
         },
         "distance_km": 0.91
@@ -160169,35 +160205,6 @@
       "country": "Dominica,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T20:26:31.891322Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "249587000",
-          "name": "TRANS SOL",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3888,
-            "lon": 5.3118
-          }
-        },
-        "distance_km": 0.95
-      }
-    },
-    {
-      "mmsi": "325314700,249587000",
-      "vessel_name": "VIKINGFJORD & TRANS SOL",
-      "country": "Dominica,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-11-14T19:51:58.174859Z",
       "details": {
         "vessel1": {
@@ -160227,35 +160234,6 @@
       "country": "Dominica,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-14T21:15:55.394277Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3164
-          }
-        },
-        "vessel2": {
-          "mmsi": "249587000",
-          "name": "TRANS SOL",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3888,
-            "lon": 5.3117
-          }
-        },
-        "distance_km": 0.95
-      }
-    },
-    {
-      "mmsi": "325314700,249587000",
-      "vessel_name": "VIKINGFJORD & TRANS SOL",
-      "country": "Dominica,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-11-14T21:29:49.546130Z",
       "details": {
         "vessel1": {
@@ -160277,6 +160255,64 @@
           }
         },
         "distance_km": 0.96
+      }
+    },
+    {
+      "mmsi": "325314700,249587000",
+      "vessel_name": "VIKINGFJORD & TRANS SOL",
+      "country": "Dominica,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T20:26:31.891322Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "249587000",
+          "name": "TRANS SOL",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3888,
+            "lon": 5.3118
+          }
+        },
+        "distance_km": 0.95
+      }
+    },
+    {
+      "mmsi": "325314700,249587000",
+      "vessel_name": "VIKINGFJORD & TRANS SOL",
+      "country": "Dominica,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-14T21:15:55.394277Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3164
+          }
+        },
+        "vessel2": {
+          "mmsi": "249587000",
+          "name": "TRANS SOL",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3888,
+            "lon": 5.3117
+          }
+        },
+        "distance_km": 0.95
       }
     },
     {
@@ -160368,7 +160404,7 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 8438,
+    "transmission_gaps": 8440,
     "impossible_speeds": 80,
     "loitering": 73,
     "rendezvous": 170
@@ -160377,6 +160413,6 @@
     "critical": 43,
     "high": 409,
     "medium": 1985,
-    "low": 6324
+    "low": 6326
   }
 }
