@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-11-29T15:25:43.542359Z",
+  "timestamp": "2025-11-29T15:41:53.409822Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 298,
-  "total_positions": 68586,
-  "anomalies_detected": 6895,
+  "total_positions": 68584,
+  "anomalies_detected": 6894,
   "anomalies": [
     {
       "mmsi": "314472000",
@@ -17548,6 +17548,24 @@
         "gap_duration_minutes": 93.0,
         "gap_start": "2025-11-29T12:54:03Z",
         "gap_end": "2025-11-29T14:27:03Z",
+        "last_position": {
+          "lat": 63.415,
+          "lon": 10.7817
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "305057000",
+      "vessel_name": "MARTEN",
+      "country": "Antigua and Barbuda",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2025-11-29T15:29:26Z",
+      "details": {
+        "gap_duration_minutes": 62.4,
+        "gap_start": "2025-11-29T14:27:03Z",
+        "gap_end": "2025-11-29T15:29:26Z",
         "last_position": {
           "lat": 63.415,
           "lon": 10.7817
@@ -51833,24 +51851,6 @@
       "country": "Russia",
       "anomaly_type": "transmission_gap",
       "severity": "low",
-      "detected_at": "2025-11-22T15:40:47Z",
-      "details": {
-        "gap_duration_minutes": 59.3,
-        "gap_start": "2025-11-22T14:41:30Z",
-        "gap_end": "2025-11-22T15:40:47Z",
-        "last_position": {
-          "lat": 72.9623,
-          "lon": 25.5876
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "273252100",
-      "vessel_name": "VYBORGSKIY",
-      "country": "Russia",
-      "anomaly_type": "transmission_gap",
-      "severity": "low",
       "detected_at": "2025-11-22T16:25:46Z",
       "details": {
         "gap_duration_minutes": 41.1,
@@ -71129,24 +71129,6 @@
       "country": "Liberia",
       "anomaly_type": "transmission_gap",
       "severity": "low",
-      "detected_at": "2025-11-22T15:41:31Z",
-      "details": {
-        "gap_duration_minutes": 58.8,
-        "gap_start": "2025-11-22T14:42:46Z",
-        "gap_end": "2025-11-22T15:41:31Z",
-        "last_position": {
-          "lat": 65.7182,
-          "lon": 5.8238
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "636021568",
-      "vessel_name": "KAUPANG",
-      "country": "Liberia",
-      "anomaly_type": "transmission_gap",
-      "severity": "low",
       "detected_at": "2025-11-22T20:56:45.002626Z",
       "details": {
         "gap_duration_minutes": 35.3,
@@ -72757,24 +72739,6 @@
         "last_position": {
           "lat": 57.4475,
           "lon": 7.6191
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "273352280",
-      "vessel_name": "MELKART-4",
-      "country": "Russia",
-      "anomaly_type": "transmission_gap",
-      "severity": "low",
-      "detected_at": "2025-11-22T15:39:03Z",
-      "details": {
-        "gap_duration_minutes": 59.3,
-        "gap_start": "2025-11-22T14:39:44Z",
-        "gap_end": "2025-11-22T15:39:03Z",
-        "last_position": {
-          "lat": 75.3779,
-          "lon": 23.309
         },
         "near_border": false
       }
@@ -115962,6 +115926,24 @@
       }
     },
     {
+      "mmsi": "273259700",
+      "vessel_name": "STARGAZER",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-11-29T15:28:58Z",
+      "details": {
+        "gap_duration_minutes": 46.4,
+        "gap_start": "2025-11-29T14:42:36Z",
+        "gap_end": "2025-11-29T15:28:58Z",
+        "last_position": {
+          "lat": 69.2818,
+          "lon": 12.076
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "538009197",
       "vessel_name": "PACIFIC EMERALD",
       "country": "Marshall Islands",
@@ -123164,7 +123146,36 @@
       "country": "Barbados,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-23T17:17:28.165950Z",
+      "detected_at": "2025-11-24T07:37:33.111412Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314472000",
+          "name": "WILSON ONEGA",
+          "country": "Barbados",
+          "position": {
+            "lat": 58.9454,
+            "lon": 5.7551
+          }
+        },
+        "vessel2": {
+          "mmsi": "305057000",
+          "name": "MARTEN",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.9433,
+            "lon": 5.7551
+          }
+        },
+        "distance_km": 0.22
+      }
+    },
+    {
+      "mmsi": "314472000,305057000",
+      "vessel_name": "WILSON ONEGA & MARTEN",
+      "country": "Barbados,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-23T06:58:12.966718Z",
       "details": {
         "vessel1": {
           "mmsi": "314472000",
@@ -123180,7 +123191,7 @@
           "name": "MARTEN",
           "country": "Antigua and Barbuda",
           "position": {
-            "lat": 58.9464,
+            "lat": 58.9465,
             "lon": 5.7545
           }
         },
@@ -123222,6 +123233,35 @@
       "country": "Barbados,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2025-11-23T08:19:41.795573Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314472000",
+          "name": "WILSON ONEGA",
+          "country": "Barbados",
+          "position": {
+            "lat": 58.9454,
+            "lon": 5.7551
+          }
+        },
+        "vessel2": {
+          "mmsi": "305057000",
+          "name": "MARTEN",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.9465,
+            "lon": 5.7545
+          }
+        },
+        "distance_km": 0.13
+      }
+    },
+    {
+      "mmsi": "314472000,305057000",
+      "vessel_name": "WILSON ONEGA & MARTEN",
+      "country": "Barbados,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2025-11-23T18:12:25.136123Z",
       "details": {
         "vessel1": {
@@ -123231,6 +123271,122 @@
           "position": {
             "lat": 58.9454,
             "lon": 5.755
+          }
+        },
+        "vessel2": {
+          "mmsi": "305057000",
+          "name": "MARTEN",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.9465,
+            "lon": 5.7545
+          }
+        },
+        "distance_km": 0.12
+      }
+    },
+    {
+      "mmsi": "314472000,305057000",
+      "vessel_name": "WILSON ONEGA & MARTEN",
+      "country": "Barbados,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-24T00:19:26.231803Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314472000",
+          "name": "WILSON ONEGA",
+          "country": "Barbados",
+          "position": {
+            "lat": 58.9453,
+            "lon": 5.7549
+          }
+        },
+        "vessel2": {
+          "mmsi": "305057000",
+          "name": "MARTEN",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.9433,
+            "lon": 5.7551
+          }
+        },
+        "distance_km": 0.22
+      }
+    },
+    {
+      "mmsi": "314472000,305057000",
+      "vessel_name": "WILSON ONEGA & MARTEN",
+      "country": "Barbados,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-23T04:09:22.324881Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314472000",
+          "name": "WILSON ONEGA",
+          "country": "Barbados",
+          "position": {
+            "lat": 58.9454,
+            "lon": 5.7552
+          }
+        },
+        "vessel2": {
+          "mmsi": "305057000",
+          "name": "MARTEN",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.9465,
+            "lon": 5.7545
+          }
+        },
+        "distance_km": 0.12
+      }
+    },
+    {
+      "mmsi": "314472000,305057000",
+      "vessel_name": "WILSON ONEGA & MARTEN",
+      "country": "Barbados,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-23T11:55:36.290031Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314472000",
+          "name": "WILSON ONEGA",
+          "country": "Barbados",
+          "position": {
+            "lat": 58.9454,
+            "lon": 5.7549
+          }
+        },
+        "vessel2": {
+          "mmsi": "305057000",
+          "name": "MARTEN",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.9464,
+            "lon": 5.7545
+          }
+        },
+        "distance_km": 0.12
+      }
+    },
+    {
+      "mmsi": "314472000,305057000",
+      "vessel_name": "WILSON ONEGA & MARTEN",
+      "country": "Barbados,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-23T08:53:11.459626Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314472000",
+          "name": "WILSON ONEGA",
+          "country": "Barbados",
+          "position": {
+            "lat": 58.9454,
+            "lon": 5.7549
           }
         },
         "vessel2": {
@@ -123280,7 +123436,7 @@
       "country": "Barbados,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-23T08:19:41.795573Z",
+      "detected_at": "2025-11-23T06:12:37.681794Z",
       "details": {
         "vessel1": {
           "mmsi": "314472000",
@@ -123309,65 +123465,7 @@
       "country": "Barbados,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-23T08:53:11.459626Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314472000",
-          "name": "WILSON ONEGA",
-          "country": "Barbados",
-          "position": {
-            "lat": 58.9454,
-            "lon": 5.7549
-          }
-        },
-        "vessel2": {
-          "mmsi": "305057000",
-          "name": "MARTEN",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.9465,
-            "lon": 5.7545
-          }
-        },
-        "distance_km": 0.12
-      }
-    },
-    {
-      "mmsi": "314472000,305057000",
-      "vessel_name": "WILSON ONEGA & MARTEN",
-      "country": "Barbados,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-23T04:09:22.324881Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314472000",
-          "name": "WILSON ONEGA",
-          "country": "Barbados",
-          "position": {
-            "lat": 58.9454,
-            "lon": 5.7552
-          }
-        },
-        "vessel2": {
-          "mmsi": "305057000",
-          "name": "MARTEN",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.9465,
-            "lon": 5.7545
-          }
-        },
-        "distance_km": 0.12
-      }
-    },
-    {
-      "mmsi": "314472000,305057000",
-      "vessel_name": "WILSON ONEGA & MARTEN",
-      "country": "Barbados,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-23T06:58:12.966718Z",
+      "detected_at": "2025-11-23T17:17:28.165950Z",
       "details": {
         "vessel1": {
           "mmsi": "314472000",
@@ -123376,64 +123474,6 @@
           "position": {
             "lat": 58.9454,
             "lon": 5.755
-          }
-        },
-        "vessel2": {
-          "mmsi": "305057000",
-          "name": "MARTEN",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.9465,
-            "lon": 5.7545
-          }
-        },
-        "distance_km": 0.12
-      }
-    },
-    {
-      "mmsi": "314472000,305057000",
-      "vessel_name": "WILSON ONEGA & MARTEN",
-      "country": "Barbados,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-24T07:37:33.111412Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314472000",
-          "name": "WILSON ONEGA",
-          "country": "Barbados",
-          "position": {
-            "lat": 58.9454,
-            "lon": 5.7551
-          }
-        },
-        "vessel2": {
-          "mmsi": "305057000",
-          "name": "MARTEN",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.9433,
-            "lon": 5.7551
-          }
-        },
-        "distance_km": 0.22
-      }
-    },
-    {
-      "mmsi": "314472000,305057000",
-      "vessel_name": "WILSON ONEGA & MARTEN",
-      "country": "Barbados,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-23T11:55:36.290031Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314472000",
-          "name": "WILSON ONEGA",
-          "country": "Barbados",
-          "position": {
-            "lat": 58.9454,
-            "lon": 5.7549
           }
         },
         "vessel2": {
@@ -123475,93 +123515,6 @@
           }
         },
         "distance_km": 0.12
-      }
-    },
-    {
-      "mmsi": "314472000,305057000",
-      "vessel_name": "WILSON ONEGA & MARTEN",
-      "country": "Barbados,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-23T06:12:37.681794Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314472000",
-          "name": "WILSON ONEGA",
-          "country": "Barbados",
-          "position": {
-            "lat": 58.9454,
-            "lon": 5.7551
-          }
-        },
-        "vessel2": {
-          "mmsi": "305057000",
-          "name": "MARTEN",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.9465,
-            "lon": 5.7545
-          }
-        },
-        "distance_km": 0.13
-      }
-    },
-    {
-      "mmsi": "314472000,305057000",
-      "vessel_name": "WILSON ONEGA & MARTEN",
-      "country": "Barbados,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-24T00:19:26.231803Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314472000",
-          "name": "WILSON ONEGA",
-          "country": "Barbados",
-          "position": {
-            "lat": 58.9453,
-            "lon": 5.7549
-          }
-        },
-        "vessel2": {
-          "mmsi": "305057000",
-          "name": "MARTEN",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.9433,
-            "lon": 5.7551
-          }
-        },
-        "distance_km": 0.22
-      }
-    },
-    {
-      "mmsi": "304819000,305425000",
-      "vessel_name": "STARNES & BULKNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-27T07:59:22.529937Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "304819000",
-          "name": "STARNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.373,
-            "lon": 6.044
-          }
-        },
-        "vessel2": {
-          "mmsi": "305425000",
-          "name": "BULKNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3777,
-            "lon": 6.0467
-          }
-        },
-        "distance_km": 0.54
       }
     },
     {
@@ -123623,90 +123576,32 @@
       }
     },
     {
-      "mmsi": "305425000,304829000",
-      "vessel_name": "BULKNES & FJORDNES",
+      "mmsi": "304819000,305425000",
+      "vessel_name": "STARNES & BULKNES",
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-22T20:56:45.002626Z",
+      "detected_at": "2025-11-27T07:59:22.529937Z",
       "details": {
         "vessel1": {
-          "mmsi": "305425000",
-          "name": "BULKNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3727,
-            "lon": 6.0438
-          }
-        },
-        "vessel2": {
-          "mmsi": "304829000",
-          "name": "FJORDNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3778,
-            "lon": 6.0465
-          }
-        },
-        "distance_km": 0.58
-      }
-    },
-    {
-      "mmsi": "305425000,304829000",
-      "vessel_name": "BULKNES & FJORDNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-22T22:45:14.504405Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305425000",
-          "name": "BULKNES",
+          "mmsi": "304819000",
+          "name": "STARNES",
           "country": "Antigua and Barbuda",
           "position": {
             "lat": 59.373,
-            "lon": 6.0438
+            "lon": 6.044
           }
         },
         "vessel2": {
-          "mmsi": "304829000",
-          "name": "FJORDNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3778,
-            "lon": 6.0465
-          }
-        },
-        "distance_km": 0.55
-      }
-    },
-    {
-      "mmsi": "305425000,304829000",
-      "vessel_name": "BULKNES & FJORDNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-22T15:42:14.809076Z",
-      "details": {
-        "vessel1": {
           "mmsi": "305425000",
           "name": "BULKNES",
           "country": "Antigua and Barbuda",
           "position": {
-            "lat": 59.3733,
-            "lon": 6.0438
+            "lat": 59.3777,
+            "lon": 6.0467
           }
         },
-        "vessel2": {
-          "mmsi": "304829000",
-          "name": "FJORDNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3776,
-            "lon": 6.0462
-          }
-        },
-        "distance_km": 0.5
+        "distance_km": 0.54
       }
     },
     {
@@ -123744,6 +123639,35 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2025-11-22T20:00:34.528100Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305425000",
+          "name": "BULKNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3727,
+            "lon": 6.0438
+          }
+        },
+        "vessel2": {
+          "mmsi": "304829000",
+          "name": "FJORDNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3782,
+            "lon": 6.0473
+          }
+        },
+        "distance_km": 0.64
+      }
+    },
+    {
+      "mmsi": "305425000,304829000",
+      "vessel_name": "BULKNES & FJORDNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2025-11-27T18:36:52.773654Z",
       "details": {
         "vessel1": {
@@ -123773,101 +123697,14 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-27T10:18:03.011763Z",
+      "detected_at": "2025-11-22T22:45:14.504405Z",
       "details": {
         "vessel1": {
           "mmsi": "305425000",
           "name": "BULKNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3778,
-            "lon": 6.047
-          }
-        },
-        "vessel2": {
-          "mmsi": "304829000",
-          "name": "FJORDNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3729,
-            "lon": 6.0439
-          }
-        },
-        "distance_km": 0.57
-      }
-    },
-    {
-      "mmsi": "305425000,304829000",
-      "vessel_name": "BULKNES & FJORDNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-22T16:11:09.787832Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305425000",
-          "name": "BULKNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3733,
-            "lon": 6.0438
-          }
-        },
-        "vessel2": {
-          "mmsi": "304829000",
-          "name": "FJORDNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3776,
-            "lon": 6.0462
-          }
-        },
-        "distance_km": 0.5
-      }
-    },
-    {
-      "mmsi": "305425000,304829000",
-      "vessel_name": "BULKNES & FJORDNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-27T14:29:09.285769Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305425000",
-          "name": "BULKNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3778,
-            "lon": 6.0468
-          }
-        },
-        "vessel2": {
-          "mmsi": "304829000",
-          "name": "FJORDNES",
           "country": "Antigua and Barbuda",
           "position": {
             "lat": 59.373,
-            "lon": 6.044
-          }
-        },
-        "distance_km": 0.56
-      }
-    },
-    {
-      "mmsi": "305425000,304829000",
-      "vessel_name": "BULKNES & FJORDNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-22T21:23:42.227155Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305425000",
-          "name": "BULKNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3727,
             "lon": 6.0438
           }
         },
@@ -123880,94 +123717,7 @@
             "lon": 6.0465
           }
         },
-        "distance_km": 0.59
-      }
-    },
-    {
-      "mmsi": "305425000,304829000",
-      "vessel_name": "BULKNES & FJORDNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-23T05:13:49.777806Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305425000",
-          "name": "BULKNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3732,
-            "lon": 6.0438
-          }
-        },
-        "vessel2": {
-          "mmsi": "304829000",
-          "name": "FJORDNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.378,
-            "lon": 6.0469
-          }
-        },
-        "distance_km": 0.57
-      }
-    },
-    {
-      "mmsi": "305425000,304829000",
-      "vessel_name": "BULKNES & FJORDNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-27T23:13:05.117776Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305425000",
-          "name": "BULKNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.378,
-            "lon": 6.047
-          }
-        },
-        "vessel2": {
-          "mmsi": "304829000",
-          "name": "FJORDNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3733,
-            "lon": 6.044
-          }
-        },
         "distance_km": 0.55
-      }
-    },
-    {
-      "mmsi": "305425000,304829000",
-      "vessel_name": "BULKNES & FJORDNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-22T20:00:34.528100Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305425000",
-          "name": "BULKNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3727,
-            "lon": 6.0438
-          }
-        },
-        "vessel2": {
-          "mmsi": "304829000",
-          "name": "FJORDNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3782,
-            "lon": 6.0473
-          }
-        },
-        "distance_km": 0.64
       }
     },
     {
@@ -124005,7 +123755,7 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-22T21:10:16.500718Z",
+      "detected_at": "2025-11-22T21:23:42.227155Z",
       "details": {
         "vessel1": {
           "mmsi": "305425000",
@@ -124026,93 +123776,6 @@
           }
         },
         "distance_km": 0.59
-      }
-    },
-    {
-      "mmsi": "305425000,304829000",
-      "vessel_name": "BULKNES & FJORDNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-27T09:47:29.790148Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305425000",
-          "name": "BULKNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3777,
-            "lon": 6.0467
-          }
-        },
-        "vessel2": {
-          "mmsi": "304829000",
-          "name": "FJORDNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3728,
-            "lon": 6.0438
-          }
-        },
-        "distance_km": 0.56
-      }
-    },
-    {
-      "mmsi": "305425000,304829000",
-      "vessel_name": "BULKNES & FJORDNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-27T18:57:50.349317Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305425000",
-          "name": "BULKNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3782,
-            "lon": 6.0475
-          }
-        },
-        "vessel2": {
-          "mmsi": "304829000",
-          "name": "FJORDNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3724,
-            "lon": 6.0439
-          }
-        },
-        "distance_km": 0.67
-      }
-    },
-    {
-      "mmsi": "305425000,304829000",
-      "vessel_name": "BULKNES & FJORDNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-27T20:21:24.882502Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305425000",
-          "name": "BULKNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3775,
-            "lon": 6.0463
-          }
-        },
-        "vessel2": {
-          "mmsi": "304829000",
-          "name": "FJORDNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3724,
-            "lon": 6.0439
-          }
-        },
-        "distance_km": 0.58
       }
     },
     {
@@ -124208,6 +123871,35 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2025-11-27T10:18:03.011763Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305425000",
+          "name": "BULKNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3778,
+            "lon": 6.047
+          }
+        },
+        "vessel2": {
+          "mmsi": "304829000",
+          "name": "FJORDNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3729,
+            "lon": 6.0439
+          }
+        },
+        "distance_km": 0.57
+      }
+    },
+    {
+      "mmsi": "305425000,304829000",
+      "vessel_name": "BULKNES & FJORDNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2025-11-22T23:53:19.796381Z",
       "details": {
         "vessel1": {
@@ -124232,32 +123924,293 @@
       }
     },
     {
-      "mmsi": "273523300,273252100",
-      "vessel_name": "ALEKSANDR MIRONENKO & VYBORGSKIY",
-      "country": "Russia,Russia",
+      "mmsi": "305425000,304829000",
+      "vessel_name": "BULKNES & FJORDNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-26T03:08:37.811603Z",
+      "detected_at": "2025-11-23T05:13:49.777806Z",
       "details": {
         "vessel1": {
-          "mmsi": "273523300",
-          "name": "ALEKSANDR MIRONENKO",
-          "country": "Russia",
+          "mmsi": "305425000",
+          "name": "BULKNES",
+          "country": "Antigua and Barbuda",
           "position": {
-            "lat": 77.2408,
-            "lon": 13.1193
+            "lat": 59.3732,
+            "lon": 6.0438
           }
         },
         "vessel2": {
-          "mmsi": "273252100",
-          "name": "VYBORGSKIY",
-          "country": "Russia",
+          "mmsi": "304829000",
+          "name": "FJORDNES",
+          "country": "Antigua and Barbuda",
           "position": {
-            "lat": 77.2409,
-            "lon": 13.118
+            "lat": 59.378,
+            "lon": 6.0469
           }
         },
-        "distance_km": 0.03
+        "distance_km": 0.57
+      }
+    },
+    {
+      "mmsi": "305425000,304829000",
+      "vessel_name": "BULKNES & FJORDNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-22T15:42:14.809076Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305425000",
+          "name": "BULKNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3733,
+            "lon": 6.0438
+          }
+        },
+        "vessel2": {
+          "mmsi": "304829000",
+          "name": "FJORDNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3776,
+            "lon": 6.0462
+          }
+        },
+        "distance_km": 0.5
+      }
+    },
+    {
+      "mmsi": "305425000,304829000",
+      "vessel_name": "BULKNES & FJORDNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-22T20:56:45.002626Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305425000",
+          "name": "BULKNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3727,
+            "lon": 6.0438
+          }
+        },
+        "vessel2": {
+          "mmsi": "304829000",
+          "name": "FJORDNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3778,
+            "lon": 6.0465
+          }
+        },
+        "distance_km": 0.58
+      }
+    },
+    {
+      "mmsi": "305425000,304829000",
+      "vessel_name": "BULKNES & FJORDNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-22T21:10:16.500718Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305425000",
+          "name": "BULKNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3727,
+            "lon": 6.0438
+          }
+        },
+        "vessel2": {
+          "mmsi": "304829000",
+          "name": "FJORDNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3778,
+            "lon": 6.0465
+          }
+        },
+        "distance_km": 0.59
+      }
+    },
+    {
+      "mmsi": "305425000,304829000",
+      "vessel_name": "BULKNES & FJORDNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-27T20:21:24.882502Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305425000",
+          "name": "BULKNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3775,
+            "lon": 6.0463
+          }
+        },
+        "vessel2": {
+          "mmsi": "304829000",
+          "name": "FJORDNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3724,
+            "lon": 6.0439
+          }
+        },
+        "distance_km": 0.58
+      }
+    },
+    {
+      "mmsi": "305425000,304829000",
+      "vessel_name": "BULKNES & FJORDNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-22T16:11:09.787832Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305425000",
+          "name": "BULKNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3733,
+            "lon": 6.0438
+          }
+        },
+        "vessel2": {
+          "mmsi": "304829000",
+          "name": "FJORDNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3776,
+            "lon": 6.0462
+          }
+        },
+        "distance_km": 0.5
+      }
+    },
+    {
+      "mmsi": "305425000,304829000",
+      "vessel_name": "BULKNES & FJORDNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-27T18:57:50.349317Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305425000",
+          "name": "BULKNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3782,
+            "lon": 6.0475
+          }
+        },
+        "vessel2": {
+          "mmsi": "304829000",
+          "name": "FJORDNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3724,
+            "lon": 6.0439
+          }
+        },
+        "distance_km": 0.67
+      }
+    },
+    {
+      "mmsi": "305425000,304829000",
+      "vessel_name": "BULKNES & FJORDNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-27T09:47:29.790148Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305425000",
+          "name": "BULKNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3777,
+            "lon": 6.0467
+          }
+        },
+        "vessel2": {
+          "mmsi": "304829000",
+          "name": "FJORDNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3728,
+            "lon": 6.0438
+          }
+        },
+        "distance_km": 0.56
+      }
+    },
+    {
+      "mmsi": "305425000,304829000",
+      "vessel_name": "BULKNES & FJORDNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-27T14:29:09.285769Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305425000",
+          "name": "BULKNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3778,
+            "lon": 6.0468
+          }
+        },
+        "vessel2": {
+          "mmsi": "304829000",
+          "name": "FJORDNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.373,
+            "lon": 6.044
+          }
+        },
+        "distance_km": 0.56
+      }
+    },
+    {
+      "mmsi": "305425000,304829000",
+      "vessel_name": "BULKNES & FJORDNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-27T23:13:05.117776Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305425000",
+          "name": "BULKNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.378,
+            "lon": 6.047
+          }
+        },
+        "vessel2": {
+          "mmsi": "304829000",
+          "name": "FJORDNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3733,
+            "lon": 6.044
+          }
+        },
+        "distance_km": 0.55
       }
     },
     {
@@ -124287,6 +124240,35 @@
           }
         },
         "distance_km": 0.05
+      }
+    },
+    {
+      "mmsi": "273523300,273252100",
+      "vessel_name": "ALEKSANDR MIRONENKO & VYBORGSKIY",
+      "country": "Russia,Russia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-26T03:08:37.811603Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273523300",
+          "name": "ALEKSANDR MIRONENKO",
+          "country": "Russia",
+          "position": {
+            "lat": 77.2408,
+            "lon": 13.1193
+          }
+        },
+        "vessel2": {
+          "mmsi": "273252100",
+          "name": "VYBORGSKIY",
+          "country": "Russia",
+          "position": {
+            "lat": 77.2409,
+            "lon": 13.118
+          }
+        },
+        "distance_km": 0.03
       }
     },
     {
@@ -124527,35 +124509,6 @@
       "country": "Panama,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-25T12:44:09Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "352001125",
-          "name": "ULTRA OSORNO",
-          "country": "Panama",
-          "position": {
-            "lat": 59.1088,
-            "lon": 9.614
-          }
-        },
-        "vessel2": {
-          "mmsi": "636016149",
-          "name": "CORAL LACERA",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.1097,
-            "lon": 9.6239
-          }
-        },
-        "distance_km": 0.58
-      }
-    },
-    {
-      "mmsi": "352001125,636016149",
-      "vessel_name": "ULTRA OSORNO & CORAL LACERA",
-      "country": "Panama,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-11-25T11:38:09Z",
       "details": {
         "vessel1": {
@@ -124577,6 +124530,35 @@
           }
         },
         "distance_km": 0.49
+      }
+    },
+    {
+      "mmsi": "352001125,636016149",
+      "vessel_name": "ULTRA OSORNO & CORAL LACERA",
+      "country": "Panama,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-25T12:44:09Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "352001125",
+          "name": "ULTRA OSORNO",
+          "country": "Panama",
+          "position": {
+            "lat": 59.1088,
+            "lon": 9.614
+          }
+        },
+        "vessel2": {
+          "mmsi": "636016149",
+          "name": "CORAL LACERA",
+          "country": "Liberia",
+          "position": {
+            "lat": 59.1097,
+            "lon": 9.6239
+          }
+        },
+        "distance_km": 0.58
       }
     },
     {
@@ -124643,35 +124625,6 @@
       "country": "Malta,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-27T12:12:24.711043Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "229061000",
-          "name": "SEA CARGO EXPRESS",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3892,
-            "lon": 5.3111
-          }
-        },
-        "vessel2": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
-          }
-        },
-        "distance_km": 0.92
-      }
-    },
-    {
-      "mmsi": "229061000,325314700",
-      "vessel_name": "SEA CARGO EXPRESS & VIKINGFJORD",
-      "country": "Malta,Dominica",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-11-27T14:00:14.136356Z",
       "details": {
         "vessel1": {
@@ -124696,32 +124649,32 @@
       }
     },
     {
-      "mmsi": "248221000,256149000",
-      "vessel_name": "KEY SOUTH & SC CONNECTOR",
-      "country": "Malta,Malta",
+      "mmsi": "229061000,325314700",
+      "vessel_name": "SEA CARGO EXPRESS & VIKINGFJORD",
+      "country": "Malta,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-28T21:03:44.564853Z",
+      "detected_at": "2025-11-27T12:12:24.711043Z",
       "details": {
         "vessel1": {
-          "mmsi": "248221000",
-          "name": "KEY SOUTH",
+          "mmsi": "229061000",
+          "name": "SEA CARGO EXPRESS",
           "country": "Malta",
           "position": {
-            "lat": 59.3413,
-            "lon": 5.3101
+            "lat": 60.3892,
+            "lon": 5.3111
           }
         },
         "vessel2": {
-          "mmsi": "256149000",
-          "name": "SC CONNECTOR",
-          "country": "Malta",
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
           "position": {
-            "lat": 59.3371,
-            "lon": 5.3069
+            "lat": 60.3971,
+            "lon": 5.3163
           }
         },
-        "distance_km": 0.49
+        "distance_km": 0.92
       }
     },
     {
@@ -124812,6 +124765,35 @@
       }
     },
     {
+      "mmsi": "248221000,256149000",
+      "vessel_name": "KEY SOUTH & SC CONNECTOR",
+      "country": "Malta,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-28T21:03:44.564853Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "248221000",
+          "name": "KEY SOUTH",
+          "country": "Malta",
+          "position": {
+            "lat": 59.3413,
+            "lon": 5.3101
+          }
+        },
+        "vessel2": {
+          "mmsi": "256149000",
+          "name": "SC CONNECTOR",
+          "country": "Malta",
+          "position": {
+            "lat": 59.3371,
+            "lon": 5.3069
+          }
+        },
+        "distance_km": 0.49
+      }
+    },
+    {
       "mmsi": "325314700,249587000",
       "vessel_name": "VIKINGFJORD & TRANS SOL",
       "country": "Dominica,Malta",
@@ -124838,35 +124820,6 @@
           }
         },
         "distance_km": 0.74
-      }
-    },
-    {
-      "mmsi": "305265000,305793000",
-      "vessel_name": "SLOMAN HEBE & RHOGAS",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-26T21:49:25.194388Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305265000",
-          "name": "SLOMAN HEBE",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2715,
-            "lon": 5.4974
-          }
-        },
-        "vessel2": {
-          "mmsi": "305793000",
-          "name": "RHOGAS",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2719,
-            "lon": 5.5016
-          }
-        },
-        "distance_km": 0.25
       }
     },
     {
@@ -124904,7 +124857,7 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-26T11:05:42.718523Z",
+      "detected_at": "2025-11-26T20:06:22.009559Z",
       "details": {
         "vessel1": {
           "mmsi": "305265000",
@@ -124912,7 +124865,7 @@
           "country": "Antigua and Barbuda",
           "position": {
             "lat": 59.2715,
-            "lon": 5.4975
+            "lon": 5.4974
           }
         },
         "vessel2": {
@@ -124920,8 +124873,8 @@
           "name": "RHOGAS",
           "country": "Antigua and Barbuda",
           "position": {
-            "lat": 59.272,
-            "lon": 5.5016
+            "lat": 59.2719,
+            "lon": 5.5015
           }
         },
         "distance_km": 0.24
@@ -124962,7 +124915,7 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-26T10:04:20.514507Z",
+      "detected_at": "2025-11-26T19:09:25.626266Z",
       "details": {
         "vessel1": {
           "mmsi": "305265000",
@@ -124970,151 +124923,6 @@
           "country": "Antigua and Barbuda",
           "position": {
             "lat": 59.2715,
-            "lon": 5.4975
-          }
-        },
-        "vessel2": {
-          "mmsi": "305793000",
-          "name": "RHOGAS",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.272,
-            "lon": 5.5017
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305265000,305793000",
-      "vessel_name": "SLOMAN HEBE & RHOGAS",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-26T12:49:14.765252Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305265000",
-          "name": "SLOMAN HEBE",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2714,
-            "lon": 5.4974
-          }
-        },
-        "vessel2": {
-          "mmsi": "305793000",
-          "name": "RHOGAS",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.272,
-            "lon": 5.5016
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305265000,305793000",
-      "vessel_name": "SLOMAN HEBE & RHOGAS",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-26T20:06:22.009559Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305265000",
-          "name": "SLOMAN HEBE",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2715,
-            "lon": 5.4974
-          }
-        },
-        "vessel2": {
-          "mmsi": "305793000",
-          "name": "RHOGAS",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2719,
-            "lon": 5.5015
-          }
-        },
-        "distance_km": 0.24
-      }
-    },
-    {
-      "mmsi": "305265000,305793000",
-      "vessel_name": "SLOMAN HEBE & RHOGAS",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-26T11:35:55.919348Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305265000",
-          "name": "SLOMAN HEBE",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2714,
-            "lon": 5.4975
-          }
-        },
-        "vessel2": {
-          "mmsi": "305793000",
-          "name": "RHOGAS",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.272,
-            "lon": 5.5016
-          }
-        },
-        "distance_km": 0.24
-      }
-    },
-    {
-      "mmsi": "305265000,305793000",
-      "vessel_name": "SLOMAN HEBE & RHOGAS",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-26T22:48:49.074321Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305265000",
-          "name": "SLOMAN HEBE",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2714,
-            "lon": 5.4975
-          }
-        },
-        "vessel2": {
-          "mmsi": "305793000",
-          "name": "RHOGAS",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2679,
-            "lon": 5.5081
-          }
-        },
-        "distance_km": 0.72
-      }
-    },
-    {
-      "mmsi": "305265000,305793000",
-      "vessel_name": "SLOMAN HEBE & RHOGAS",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-26T16:39:24.914884Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305265000",
-          "name": "SLOMAN HEBE",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2714,
             "lon": 5.4974
           }
         },
@@ -125165,15 +124973,15 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-26T19:09:25.626266Z",
+      "detected_at": "2025-11-26T10:32:29.409386Z",
       "details": {
         "vessel1": {
           "mmsi": "305265000",
           "name": "SLOMAN HEBE",
           "country": "Antigua and Barbuda",
           "position": {
-            "lat": 59.2715,
-            "lon": 5.4974
+            "lat": 59.2714,
+            "lon": 5.4975
           }
         },
         "vessel2": {
@@ -125181,8 +124989,8 @@
           "name": "RHOGAS",
           "country": "Antigua and Barbuda",
           "position": {
-            "lat": 59.272,
-            "lon": 5.5016
+            "lat": 59.2719,
+            "lon": 5.5017
           }
         },
         "distance_km": 0.25
@@ -125194,14 +125002,43 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-26T11:21:45.749882Z",
+      "detected_at": "2025-11-26T22:48:49.074321Z",
       "details": {
         "vessel1": {
           "mmsi": "305265000",
           "name": "SLOMAN HEBE",
           "country": "Antigua and Barbuda",
           "position": {
-            "lat": 59.2715,
+            "lat": 59.2714,
+            "lon": 5.4975
+          }
+        },
+        "vessel2": {
+          "mmsi": "305793000",
+          "name": "RHOGAS",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2679,
+            "lon": 5.5081
+          }
+        },
+        "distance_km": 0.72
+      }
+    },
+    {
+      "mmsi": "305265000,305793000",
+      "vessel_name": "SLOMAN HEBE & RHOGAS",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-26T08:55:55.355749Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305265000",
+          "name": "SLOMAN HEBE",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2714,
             "lon": 5.4975
           }
         },
@@ -125223,7 +125060,36 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-26T08:55:55.355749Z",
+      "detected_at": "2025-11-26T11:35:55.919348Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305265000",
+          "name": "SLOMAN HEBE",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2714,
+            "lon": 5.4975
+          }
+        },
+        "vessel2": {
+          "mmsi": "305793000",
+          "name": "RHOGAS",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.272,
+            "lon": 5.5016
+          }
+        },
+        "distance_km": 0.24
+      }
+    },
+    {
+      "mmsi": "305265000,305793000",
+      "vessel_name": "SLOMAN HEBE & RHOGAS",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-26T15:24:22.051132Z",
       "details": {
         "vessel1": {
           "mmsi": "305265000",
@@ -125281,43 +125147,14 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-26T10:32:29.409386Z",
+      "detected_at": "2025-11-26T11:05:42.718523Z",
       "details": {
         "vessel1": {
           "mmsi": "305265000",
           "name": "SLOMAN HEBE",
           "country": "Antigua and Barbuda",
           "position": {
-            "lat": 59.2714,
-            "lon": 5.4975
-          }
-        },
-        "vessel2": {
-          "mmsi": "305793000",
-          "name": "RHOGAS",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2719,
-            "lon": 5.5017
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305265000,305793000",
-      "vessel_name": "SLOMAN HEBE & RHOGAS",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-26T15:24:22.051132Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305265000",
-          "name": "SLOMAN HEBE",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2714,
+            "lat": 59.2715,
             "lon": 5.4975
           }
         },
@@ -125334,12 +125171,157 @@
       }
     },
     {
+      "mmsi": "305265000,305793000",
+      "vessel_name": "SLOMAN HEBE & RHOGAS",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-26T12:49:14.765252Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305265000",
+          "name": "SLOMAN HEBE",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2714,
+            "lon": 5.4974
+          }
+        },
+        "vessel2": {
+          "mmsi": "305793000",
+          "name": "RHOGAS",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.272,
+            "lon": 5.5016
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305265000,305793000",
+      "vessel_name": "SLOMAN HEBE & RHOGAS",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-26T10:04:20.514507Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305265000",
+          "name": "SLOMAN HEBE",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2715,
+            "lon": 5.4975
+          }
+        },
+        "vessel2": {
+          "mmsi": "305793000",
+          "name": "RHOGAS",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.272,
+            "lon": 5.5017
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305265000,305793000",
+      "vessel_name": "SLOMAN HEBE & RHOGAS",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-26T11:21:45.749882Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305265000",
+          "name": "SLOMAN HEBE",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2715,
+            "lon": 5.4975
+          }
+        },
+        "vessel2": {
+          "mmsi": "305793000",
+          "name": "RHOGAS",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.272,
+            "lon": 5.5016
+          }
+        },
+        "distance_km": 0.24
+      }
+    },
+    {
+      "mmsi": "305265000,305793000",
+      "vessel_name": "SLOMAN HEBE & RHOGAS",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-26T21:49:25.194388Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305265000",
+          "name": "SLOMAN HEBE",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2715,
+            "lon": 5.4974
+          }
+        },
+        "vessel2": {
+          "mmsi": "305793000",
+          "name": "RHOGAS",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2719,
+            "lon": 5.5016
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305265000,305793000",
+      "vessel_name": "SLOMAN HEBE & RHOGAS",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-26T16:39:24.914884Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305265000",
+          "name": "SLOMAN HEBE",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2714,
+            "lon": 5.4974
+          }
+        },
+        "vessel2": {
+          "mmsi": "305793000",
+          "name": "RHOGAS",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.272,
+            "lon": 5.5016
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
       "mmsi": "305265000,538006497",
       "vessel_name": "SLOMAN HEBE & DREAM VERMAX",
       "country": "Antigua and Barbuda,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-29T08:58:47.246507Z",
+      "detected_at": "2025-11-29T08:42:47.283754Z",
       "details": {
         "vessel1": {
           "mmsi": "305265000",
@@ -125355,11 +125337,11 @@
           "name": "DREAM VERMAX",
           "country": "Marshall Islands",
           "position": {
-            "lat": 59.2719,
-            "lon": 5.5017
+            "lat": 59.2718,
+            "lon": 5.5012
           }
         },
-        "distance_km": 0.25
+        "distance_km": 0.22
       }
     },
     {
@@ -125397,7 +125379,7 @@
       "country": "Antigua and Barbuda,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-29T08:42:47.283754Z",
+      "detected_at": "2025-11-29T08:58:47.246507Z",
       "details": {
         "vessel1": {
           "mmsi": "305265000",
@@ -125413,11 +125395,11 @@
           "name": "DREAM VERMAX",
           "country": "Marshall Islands",
           "position": {
-            "lat": 59.2718,
-            "lon": 5.5012
+            "lat": 59.2719,
+            "lon": 5.5017
           }
         },
-        "distance_km": 0.22
+        "distance_km": 0.25
       }
     },
     {
@@ -125455,7 +125437,7 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-26T10:04:20.514507Z",
+      "detected_at": "2025-11-26T09:50:10.479650Z",
       "details": {
         "vessel1": {
           "mmsi": "305530000",
@@ -125475,7 +125457,7 @@
             "lon": 6.0473
           }
         },
-        "distance_km": 0.63
+        "distance_km": 0.62
       }
     },
     {
@@ -125484,14 +125466,14 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-26T12:49:14.765252Z",
+      "detected_at": "2025-11-26T15:08:08.301340Z",
       "details": {
         "vessel1": {
           "mmsi": "305530000",
           "name": "FITNES",
           "country": "Antigua and Barbuda",
           "position": {
-            "lat": 59.3731,
+            "lat": 59.373,
             "lon": 6.0438
           }
         },
@@ -125500,11 +125482,11 @@
           "name": "SPLITTNES",
           "country": "Antigua and Barbuda",
           "position": {
-            "lat": 59.3777,
+            "lat": 59.3778,
             "lon": 6.0468
           }
         },
-        "distance_km": 0.55
+        "distance_km": 0.56
       }
     },
     {
@@ -125542,64 +125524,6 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-26T06:16:05.635485Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305530000",
-          "name": "FITNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3733,
-            "lon": 6.0438
-          }
-        },
-        "vessel2": {
-          "mmsi": "304219000",
-          "name": "SPLITTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3761,
-            "lon": 6.0385
-          }
-        },
-        "distance_km": 0.43
-      }
-    },
-    {
-      "mmsi": "305530000,304219000",
-      "vessel_name": "FITNES & SPLITTNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-26T09:50:10.479650Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305530000",
-          "name": "FITNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3727,
-            "lon": 6.0437
-          }
-        },
-        "vessel2": {
-          "mmsi": "304219000",
-          "name": "SPLITTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.378,
-            "lon": 6.0473
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "305530000,304219000",
-      "vessel_name": "FITNES & SPLITTNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-11-26T14:52:03.257300Z",
       "details": {
         "vessel1": {
@@ -125629,14 +125553,14 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-26T15:08:08.301340Z",
+      "detected_at": "2025-11-26T12:49:14.765252Z",
       "details": {
         "vessel1": {
           "mmsi": "305530000",
           "name": "FITNES",
           "country": "Antigua and Barbuda",
           "position": {
-            "lat": 59.373,
+            "lat": 59.3731,
             "lon": 6.0438
           }
         },
@@ -125645,11 +125569,69 @@
           "name": "SPLITTNES",
           "country": "Antigua and Barbuda",
           "position": {
-            "lat": 59.3778,
+            "lat": 59.3777,
             "lon": 6.0468
           }
         },
-        "distance_km": 0.56
+        "distance_km": 0.55
+      }
+    },
+    {
+      "mmsi": "305530000,304219000",
+      "vessel_name": "FITNES & SPLITTNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-26T06:16:05.635485Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305530000",
+          "name": "FITNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3733,
+            "lon": 6.0438
+          }
+        },
+        "vessel2": {
+          "mmsi": "304219000",
+          "name": "SPLITTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3761,
+            "lon": 6.0385
+          }
+        },
+        "distance_km": 0.43
+      }
+    },
+    {
+      "mmsi": "305530000,304219000",
+      "vessel_name": "FITNES & SPLITTNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-26T10:04:20.514507Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305530000",
+          "name": "FITNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.3727,
+            "lon": 6.0437
+          }
+        },
+        "vessel2": {
+          "mmsi": "304219000",
+          "name": "SPLITTNES",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.378,
+            "lon": 6.0473
+          }
+        },
+        "distance_km": 0.63
       }
     },
     {
@@ -125687,35 +125669,6 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-26T00:21:29.372364Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "304783000",
-          "name": "SANDNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3778,
-            "lon": 6.0466
-          }
-        },
-        "vessel2": {
-          "mmsi": "304219000",
-          "name": "SPLITTNES",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.3727,
-            "lon": 6.0438
-          }
-        },
-        "distance_km": 0.59
-      }
-    },
-    {
-      "mmsi": "304783000,304219000",
-      "vessel_name": "SANDNES & SPLITTNES",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-11-26T03:08:37.811603Z",
       "details": {
         "vessel1": {
@@ -125740,32 +125693,32 @@
       }
     },
     {
-      "mmsi": "538006497,249224000",
-      "vessel_name": "DREAM VERMAX & CGAS TIGER",
-      "country": "Marshall Islands,Malta",
+      "mmsi": "304783000,304219000",
+      "vessel_name": "SANDNES & SPLITTNES",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-11-29T14:55:17.331035Z",
+      "detected_at": "2025-11-26T00:21:29.372364Z",
       "details": {
         "vessel1": {
-          "mmsi": "538006497",
-          "name": "DREAM VERMAX",
-          "country": "Marshall Islands",
+          "mmsi": "304783000",
+          "name": "SANDNES",
+          "country": "Antigua and Barbuda",
           "position": {
-            "lat": 59.2719,
-            "lon": 5.5016
+            "lat": 59.3778,
+            "lon": 6.0466
           }
         },
         "vessel2": {
-          "mmsi": "249224000",
-          "name": "CGAS TIGER",
-          "country": "Malta",
+          "mmsi": "304219000",
+          "name": "SPLITTNES",
+          "country": "Antigua and Barbuda",
           "position": {
-            "lat": 59.2707,
-            "lon": 5.4968
+            "lat": 59.3727,
+            "lon": 6.0438
           }
         },
-        "distance_km": 0.31
+        "distance_km": 0.59
       }
     },
     {
@@ -125775,35 +125728,6 @@
       "anomaly_type": "rendezvous",
       "severity": "high",
       "detected_at": "2025-11-29T13:56:21.801021Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538006497",
-          "name": "DREAM VERMAX",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.2719,
-            "lon": 5.5016
-          }
-        },
-        "vessel2": {
-          "mmsi": "249224000",
-          "name": "CGAS TIGER",
-          "country": "Malta",
-          "position": {
-            "lat": 59.2707,
-            "lon": 5.4968
-          }
-        },
-        "distance_km": 0.31
-      }
-    },
-    {
-      "mmsi": "538006497,249224000",
-      "vessel_name": "DREAM VERMAX & CGAS TIGER",
-      "country": "Marshall Islands,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-11-29T11:47:05.557566Z",
       "details": {
         "vessel1": {
           "mmsi": "538006497",
@@ -125854,10 +125778,68 @@
         },
         "distance_km": 0.31
       }
+    },
+    {
+      "mmsi": "538006497,249224000",
+      "vessel_name": "DREAM VERMAX & CGAS TIGER",
+      "country": "Marshall Islands,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-29T14:55:17.331035Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538006497",
+          "name": "DREAM VERMAX",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.2719,
+            "lon": 5.5016
+          }
+        },
+        "vessel2": {
+          "mmsi": "249224000",
+          "name": "CGAS TIGER",
+          "country": "Malta",
+          "position": {
+            "lat": 59.2707,
+            "lon": 5.4968
+          }
+        },
+        "distance_km": 0.31
+      }
+    },
+    {
+      "mmsi": "538006497,249224000",
+      "vessel_name": "DREAM VERMAX & CGAS TIGER",
+      "country": "Marshall Islands,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-11-29T11:47:05.557566Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538006497",
+          "name": "DREAM VERMAX",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.2719,
+            "lon": 5.5016
+          }
+        },
+        "vessel2": {
+          "mmsi": "249224000",
+          "name": "CGAS TIGER",
+          "country": "Malta",
+          "position": {
+            "lat": 59.2707,
+            "lon": 5.4968
+          }
+        },
+        "distance_km": 0.31
+      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 6653,
+    "transmission_gaps": 6652,
     "impossible_speeds": 71,
     "loitering": 78,
     "rendezvous": 93
@@ -125865,7 +125847,7 @@
   "severity_breakdown": {
     "critical": 36,
     "high": 354,
-    "medium": 1951,
-    "low": 4554
+    "medium": 1952,
+    "low": 4552
   }
 }
