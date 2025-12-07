@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-07T05:23:49.138485Z",
+  "timestamp": "2025-12-07T05:39:34.311239Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 284,
-  "total_positions": 60154,
-  "anomalies_detected": 7251,
+  "total_positions": 60144,
+  "anomalies_detected": 7248,
   "anomalies": [
     {
       "mmsi": "314474000",
@@ -8551,24 +8551,6 @@
         "last_position": {
           "lat": 60.5964,
           "lon": 1.941
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "305057000",
-      "vessel_name": "MARTEN",
-      "country": "Antigua and Barbuda",
-      "anomaly_type": "transmission_gap",
-      "severity": "medium",
-      "detected_at": "2025-11-30T05:33:04Z",
-      "details": {
-        "gap_duration_minutes": 90.0,
-        "gap_start": "2025-11-30T04:03:04Z",
-        "gap_end": "2025-11-30T05:33:04Z",
-        "last_position": {
-          "lat": 63.415,
-          "lon": 10.7817
         },
         "near_border": false
       }
@@ -58636,24 +58618,6 @@
       "vessel_name": "VEERSEBORG",
       "country": "Saint Kitts and Nevis",
       "anomaly_type": "transmission_gap",
-      "severity": "medium",
-      "detected_at": "2025-11-30T05:33:04Z",
-      "details": {
-        "gap_duration_minutes": 153.9,
-        "gap_start": "2025-11-30T02:59:11Z",
-        "gap_end": "2025-11-30T05:33:04Z",
-        "last_position": {
-          "lat": 67.0256,
-          "lon": 9.3976
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "341599000",
-      "vessel_name": "VEERSEBORG",
-      "country": "Saint Kitts and Nevis",
-      "anomaly_type": "transmission_gap",
       "severity": "low",
       "detected_at": "2025-11-30T06:27:03Z",
       "details": {
@@ -59941,24 +59905,6 @@
         "last_position": {
           "lat": 70.5075,
           "lon": 32.351
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "273259700",
-      "vessel_name": "STARGAZER",
-      "country": "Russia",
-      "anomaly_type": "transmission_gap",
-      "severity": "medium",
-      "detected_at": "2025-11-30T05:32:33Z",
-      "details": {
-        "gap_duration_minutes": 87.5,
-        "gap_start": "2025-11-30T04:05:05Z",
-        "gap_end": "2025-11-30T05:32:33Z",
-        "last_position": {
-          "lat": 70.4678,
-          "lon": 15.9485
         },
         "near_border": false
       }
@@ -73855,24 +73801,6 @@
         "last_position": {
           "lat": 57.8432,
           "lon": 8.8757
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "256149000",
-      "vessel_name": "SC CONNECTOR",
-      "country": "Malta",
-      "anomaly_type": "transmission_gap",
-      "severity": "high",
-      "detected_at": "2025-11-30T05:32:18Z",
-      "details": {
-        "gap_duration_minutes": 279.6,
-        "gap_start": "2025-11-30T00:52:41Z",
-        "gap_end": "2025-11-30T05:32:18Z",
-        "last_position": {
-          "lat": 57.1167,
-          "lon": 5.0917
         },
         "near_border": false
       }
@@ -129021,6 +128949,33 @@
       }
     },
     {
+      "mmsi": "538005799",
+      "vessel_name": "ECO INVICTUS",
+      "country": "Marshall Islands",
+      "anomaly_type": "impossible_speed",
+      "severity": "critical",
+      "detected_at": "2025-12-07T05:23:39Z",
+      "details": {
+        "calculated_speed_knots": 590.8,
+        "max_allowed_knots": 40,
+        "vessel_type": "Tanker, hazardous category D",
+        "distance_km": 10.4,
+        "time_delta_minutes": 0.6,
+        "positions": [
+          {
+            "lat": 56.7405,
+            "lon": 3.5665,
+            "time": "2025-12-07T05:23:04.792880Z"
+          },
+          {
+            "lat": 56.77,
+            "lon": 3.7283,
+            "time": "2025-12-07T05:23:39Z"
+          }
+        ]
+      }
+    },
+    {
       "mmsi": "305426000",
       "vessel_name": "BELTNES",
       "country": "Antigua and Barbuda",
@@ -130594,6 +130549,93 @@
       "country": "Marshall Islands,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2025-12-01T23:47:36.183350Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538010822",
+          "name": "CETUS ORCA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 58.9198,
+            "lon": 5.5845
+          }
+        },
+        "vessel2": {
+          "mmsi": "229061000",
+          "name": "SEA CARGO EXPRESS",
+          "country": "Malta",
+          "position": {
+            "lat": 58.9193,
+            "lon": 5.5863
+          }
+        },
+        "distance_km": 0.12
+      }
+    },
+    {
+      "mmsi": "538010822,229061000",
+      "vessel_name": "CETUS ORCA & SEA CARGO EXPRESS",
+      "country": "Marshall Islands,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-02T07:30:21.777759Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538010822",
+          "name": "CETUS ORCA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 58.9198,
+            "lon": 5.5845
+          }
+        },
+        "vessel2": {
+          "mmsi": "229061000",
+          "name": "SEA CARGO EXPRESS",
+          "country": "Malta",
+          "position": {
+            "lat": 58.9193,
+            "lon": 5.5863
+          }
+        },
+        "distance_km": 0.12
+      }
+    },
+    {
+      "mmsi": "538010822,229061000",
+      "vessel_name": "CETUS ORCA & SEA CARGO EXPRESS",
+      "country": "Marshall Islands,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-01T20:17:50.711438Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538010822",
+          "name": "CETUS ORCA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 58.9198,
+            "lon": 5.5845
+          }
+        },
+        "vessel2": {
+          "mmsi": "229061000",
+          "name": "SEA CARGO EXPRESS",
+          "country": "Malta",
+          "position": {
+            "lat": 58.9193,
+            "lon": 5.5863
+          }
+        },
+        "distance_km": 0.12
+      }
+    },
+    {
+      "mmsi": "538010822,229061000",
+      "vessel_name": "CETUS ORCA & SEA CARGO EXPRESS",
+      "country": "Marshall Islands,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2025-12-02T06:05:28.861510Z",
       "details": {
         "vessel1": {
@@ -130623,7 +130665,7 @@
       "country": "Marshall Islands,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-02T09:01:51.649666Z",
+      "detected_at": "2025-12-01T19:04:12.416232Z",
       "details": {
         "vessel1": {
           "mmsi": "538010822",
@@ -130652,7 +130694,65 @@
       "country": "Marshall Islands,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-02T05:50:14.353087Z",
+      "detected_at": "2025-12-01T17:14:17.762658Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538010822",
+          "name": "CETUS ORCA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 58.9198,
+            "lon": 5.5845
+          }
+        },
+        "vessel2": {
+          "mmsi": "229061000",
+          "name": "SEA CARGO EXPRESS",
+          "country": "Malta",
+          "position": {
+            "lat": 58.9193,
+            "lon": 5.5863
+          }
+        },
+        "distance_km": 0.12
+      }
+    },
+    {
+      "mmsi": "538010822,229061000",
+      "vessel_name": "CETUS ORCA & SEA CARGO EXPRESS",
+      "country": "Marshall Islands,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-01T15:10:59.844154Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538010822",
+          "name": "CETUS ORCA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 58.9198,
+            "lon": 5.5845
+          }
+        },
+        "vessel2": {
+          "mmsi": "229061000",
+          "name": "SEA CARGO EXPRESS",
+          "country": "Malta",
+          "position": {
+            "lat": 58.9193,
+            "lon": 5.5863
+          }
+        },
+        "distance_km": 0.12
+      }
+    },
+    {
+      "mmsi": "538010822,229061000",
+      "vessel_name": "CETUS ORCA & SEA CARGO EXPRESS",
+      "country": "Marshall Islands,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-02T10:56:59.630977Z",
       "details": {
         "vessel1": {
           "mmsi": "538010822",
@@ -130739,7 +130839,7 @@
       "country": "Marshall Islands,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-01T20:17:50.711438Z",
+      "detected_at": "2025-12-02T05:50:14.353087Z",
       "details": {
         "vessel1": {
           "mmsi": "538010822",
@@ -130768,152 +130868,7 @@
       "country": "Marshall Islands,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-01T19:04:12.416232Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538010822",
-          "name": "CETUS ORCA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 58.9198,
-            "lon": 5.5845
-          }
-        },
-        "vessel2": {
-          "mmsi": "229061000",
-          "name": "SEA CARGO EXPRESS",
-          "country": "Malta",
-          "position": {
-            "lat": 58.9193,
-            "lon": 5.5863
-          }
-        },
-        "distance_km": 0.12
-      }
-    },
-    {
-      "mmsi": "538010822,229061000",
-      "vessel_name": "CETUS ORCA & SEA CARGO EXPRESS",
-      "country": "Marshall Islands,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-02T07:30:21.777759Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538010822",
-          "name": "CETUS ORCA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 58.9198,
-            "lon": 5.5845
-          }
-        },
-        "vessel2": {
-          "mmsi": "229061000",
-          "name": "SEA CARGO EXPRESS",
-          "country": "Malta",
-          "position": {
-            "lat": 58.9193,
-            "lon": 5.5863
-          }
-        },
-        "distance_km": 0.12
-      }
-    },
-    {
-      "mmsi": "538010822,229061000",
-      "vessel_name": "CETUS ORCA & SEA CARGO EXPRESS",
-      "country": "Marshall Islands,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-02T10:56:59.630977Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538010822",
-          "name": "CETUS ORCA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 58.9198,
-            "lon": 5.5845
-          }
-        },
-        "vessel2": {
-          "mmsi": "229061000",
-          "name": "SEA CARGO EXPRESS",
-          "country": "Malta",
-          "position": {
-            "lat": 58.9193,
-            "lon": 5.5863
-          }
-        },
-        "distance_km": 0.12
-      }
-    },
-    {
-      "mmsi": "538010822,229061000",
-      "vessel_name": "CETUS ORCA & SEA CARGO EXPRESS",
-      "country": "Marshall Islands,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-01T15:10:59.844154Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538010822",
-          "name": "CETUS ORCA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 58.9198,
-            "lon": 5.5845
-          }
-        },
-        "vessel2": {
-          "mmsi": "229061000",
-          "name": "SEA CARGO EXPRESS",
-          "country": "Malta",
-          "position": {
-            "lat": 58.9193,
-            "lon": 5.5863
-          }
-        },
-        "distance_km": 0.12
-      }
-    },
-    {
-      "mmsi": "538010822,229061000",
-      "vessel_name": "CETUS ORCA & SEA CARGO EXPRESS",
-      "country": "Marshall Islands,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-01T17:14:17.762658Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538010822",
-          "name": "CETUS ORCA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 58.9198,
-            "lon": 5.5845
-          }
-        },
-        "vessel2": {
-          "mmsi": "229061000",
-          "name": "SEA CARGO EXPRESS",
-          "country": "Malta",
-          "position": {
-            "lat": 58.9193,
-            "lon": 5.5863
-          }
-        },
-        "distance_km": 0.12
-      }
-    },
-    {
-      "mmsi": "538010822,229061000",
-      "vessel_name": "CETUS ORCA & SEA CARGO EXPRESS",
-      "country": "Marshall Islands,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-01T23:47:36.183350Z",
+      "detected_at": "2025-12-02T09:01:51.649666Z",
       "details": {
         "vessel1": {
           "mmsi": "538010822",
@@ -130942,7 +130897,7 @@
       "country": "Marshall Islands,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-02T09:01:51.649666Z",
+      "detected_at": "2025-12-01T21:25:10.953400Z",
       "details": {
         "vessel1": {
           "mmsi": "538010822",
@@ -130971,7 +130926,7 @@
       "country": "Marshall Islands,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-02T05:50:14.353087Z",
+      "detected_at": "2025-12-02T05:18:57.956538Z",
       "details": {
         "vessel1": {
           "mmsi": "538010822",
@@ -130988,7 +130943,7 @@
           "country": "Liberia",
           "position": {
             "lat": 58.9283,
-            "lon": 5.5877
+            "lon": 5.5876
           }
         },
         "distance_km": 0.96
@@ -131029,65 +130984,7 @@
       "country": "Marshall Islands,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-01T19:47:12.911354Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538010822",
-          "name": "CETUS ORCA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 58.9198,
-            "lon": 5.5845
-          }
-        },
-        "vessel2": {
-          "mmsi": "636092890",
-          "name": "BBC DAKOTA",
-          "country": "Liberia",
-          "position": {
-            "lat": 58.9251,
-            "lon": 5.5811
-          }
-        },
-        "distance_km": 0.62
-      }
-    },
-    {
-      "mmsi": "538010822,636092890",
-      "vessel_name": "CETUS ORCA & BBC DAKOTA",
-      "country": "Marshall Islands,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-01T20:17:50.711438Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538010822",
-          "name": "CETUS ORCA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 58.9198,
-            "lon": 5.5845
-          }
-        },
-        "vessel2": {
-          "mmsi": "636092890",
-          "name": "BBC DAKOTA",
-          "country": "Liberia",
-          "position": {
-            "lat": 58.9283,
-            "lon": 5.5876
-          }
-        },
-        "distance_km": 0.96
-      }
-    },
-    {
-      "mmsi": "538010822,636092890",
-      "vessel_name": "CETUS ORCA & BBC DAKOTA",
-      "country": "Marshall Islands,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-01T21:25:10.953400Z",
       "details": {
         "vessel1": {
           "mmsi": "538010822",
@@ -131145,7 +131042,7 @@
       "country": "Marshall Islands,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-02T05:18:57.956538Z",
+      "detected_at": "2025-12-02T10:20:34.035341Z",
       "details": {
         "vessel1": {
           "mmsi": "538010822",
@@ -131203,7 +131100,65 @@
       "country": "Marshall Islands,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-02T10:20:34.035341Z",
+      "detected_at": "2025-12-01T19:47:12.911354Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538010822",
+          "name": "CETUS ORCA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 58.9198,
+            "lon": 5.5845
+          }
+        },
+        "vessel2": {
+          "mmsi": "636092890",
+          "name": "BBC DAKOTA",
+          "country": "Liberia",
+          "position": {
+            "lat": 58.9251,
+            "lon": 5.5811
+          }
+        },
+        "distance_km": 0.62
+      }
+    },
+    {
+      "mmsi": "538010822,636092890",
+      "vessel_name": "CETUS ORCA & BBC DAKOTA",
+      "country": "Marshall Islands,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-02T05:50:14.353087Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538010822",
+          "name": "CETUS ORCA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 58.9198,
+            "lon": 5.5845
+          }
+        },
+        "vessel2": {
+          "mmsi": "636092890",
+          "name": "BBC DAKOTA",
+          "country": "Liberia",
+          "position": {
+            "lat": 58.9283,
+            "lon": 5.5877
+          }
+        },
+        "distance_km": 0.96
+      }
+    },
+    {
+      "mmsi": "538010822,636092890",
+      "vessel_name": "CETUS ORCA & BBC DAKOTA",
+      "country": "Marshall Islands,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-02T09:01:51.649666Z",
       "details": {
         "vessel1": {
           "mmsi": "538010822",
@@ -131224,35 +131179,6 @@
           }
         },
         "distance_km": 0.96
-      }
-    },
-    {
-      "mmsi": "352001125,636019179",
-      "vessel_name": "ULTRA OSORNO & SUNRISE RAY",
-      "country": "Panama,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-03T21:25:55Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "352001125",
-          "name": "ULTRA OSORNO",
-          "country": "Panama",
-          "position": {
-            "lat": 59.1175,
-            "lon": 9.6211
-          }
-        },
-        "vessel2": {
-          "mmsi": "636019179",
-          "name": "SUNRISE RAY",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.1154,
-            "lon": 9.6278
-          }
-        },
-        "distance_km": 0.44
       }
     },
     {
@@ -131282,6 +131208,35 @@
           }
         },
         "distance_km": 0.45
+      }
+    },
+    {
+      "mmsi": "352001125,636019179",
+      "vessel_name": "ULTRA OSORNO & SUNRISE RAY",
+      "country": "Panama,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-03T21:25:55Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "352001125",
+          "name": "ULTRA OSORNO",
+          "country": "Panama",
+          "position": {
+            "lat": 59.1175,
+            "lon": 9.6211
+          }
+        },
+        "vessel2": {
+          "mmsi": "636019179",
+          "name": "SUNRISE RAY",
+          "country": "Liberia",
+          "position": {
+            "lat": 59.1154,
+            "lon": 9.6278
+          }
+        },
+        "distance_km": 0.44
       }
     },
     {
@@ -131377,35 +131332,6 @@
       "country": "Antigua and Barbuda,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-03T10:32:26Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "304776000",
-          "name": "KERDA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.8856,
-            "lon": 10.7615
-          }
-        },
-        "vessel2": {
-          "mmsi": "538009722",
-          "name": "POLARIS LIBERTY",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.8841,
-            "lon": 10.7664
-          }
-        },
-        "distance_km": 0.31
-      }
-    },
-    {
-      "mmsi": "304776000,538009722",
-      "vessel_name": "KERDA & POLARIS LIBERTY",
-      "country": "Antigua and Barbuda,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-03T10:56:26Z",
       "details": {
         "vessel1": {
@@ -131428,18 +131354,47 @@
         },
         "distance_km": 0.31
       }
+    },
+    {
+      "mmsi": "304776000,538009722",
+      "vessel_name": "KERDA & POLARIS LIBERTY",
+      "country": "Antigua and Barbuda,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-03T10:32:26Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "304776000",
+          "name": "KERDA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.8856,
+            "lon": 10.7615
+          }
+        },
+        "vessel2": {
+          "mmsi": "538009722",
+          "name": "POLARIS LIBERTY",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.8841,
+            "lon": 10.7664
+          }
+        },
+        "distance_km": 0.31
+      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 7085,
-    "impossible_speeds": 55,
+    "transmission_gaps": 7081,
+    "impossible_speeds": 56,
     "loitering": 81,
     "rendezvous": 30
   },
   "severity_breakdown": {
-    "critical": 28,
-    "high": 270,
-    "medium": 2418,
+    "critical": 29,
+    "high": 269,
+    "medium": 2415,
     "low": 4535
   }
 }
