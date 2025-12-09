@@ -1,28 +1,10 @@
 {
-  "timestamp": "2025-12-09T07:51:59.454878Z",
+  "timestamp": "2025-12-09T08:08:16.333241Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 285,
-  "total_positions": 58380,
+  "total_positions": 58383,
   "anomalies_detected": 7528,
   "anomalies": [
-    {
-      "mmsi": "314474000",
-      "vessel_name": "WILSON DORDRECHT",
-      "country": "Barbados",
-      "anomaly_type": "transmission_gap",
-      "severity": "medium",
-      "detected_at": "2025-12-02T08:03:43Z",
-      "details": {
-        "gap_duration_minutes": 177.0,
-        "gap_start": "2025-12-02T05:06:43Z",
-        "gap_end": "2025-12-02T08:03:43Z",
-        "last_position": {
-          "lat": 57.365,
-          "lon": 4.7283
-        },
-        "near_border": false
-      }
-    },
     {
       "mmsi": "314474000",
       "vessel_name": "WILSON DORDRECHT",
@@ -46266,6 +46248,24 @@
       }
     },
     {
+      "mmsi": "518100276",
+      "vessel_name": "CAPE RACE",
+      "country": "Cook Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2025-12-09T08:05:46Z",
+      "details": {
+        "gap_duration_minutes": 233.4,
+        "gap_start": "2025-12-09T04:12:19Z",
+        "gap_end": "2025-12-09T08:05:46Z",
+        "last_position": {
+          "lat": 69.9333,
+          "lon": 21.7337
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "518100656",
       "vessel_name": "VALFREYJA",
       "country": "Cook Islands",
@@ -49285,24 +49285,6 @@
         "last_position": {
           "lat": 70.7105,
           "lon": 31.7778
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "352005391",
-      "vessel_name": "BALTO",
-      "country": "Panama",
-      "anomaly_type": "transmission_gap",
-      "severity": "low",
-      "detected_at": "2025-12-02T08:18:17Z",
-      "details": {
-        "gap_duration_minutes": 36.5,
-        "gap_start": "2025-12-02T07:41:45Z",
-        "gap_end": "2025-12-02T08:18:17Z",
-        "last_position": {
-          "lat": 61.7683,
-          "lon": 5.2352
         },
         "near_border": false
       }
@@ -133341,6 +133323,33 @@
       }
     },
     {
+      "mmsi": "636014571",
+      "vessel_name": "W-ACE",
+      "country": "Liberia",
+      "anomaly_type": "impossible_speed",
+      "severity": "high",
+      "detected_at": "2025-12-09T08:07:33.394726Z",
+      "details": {
+        "calculated_speed_knots": 58.3,
+        "max_allowed_knots": 30,
+        "vessel_type": "Cargo",
+        "distance_km": 29.32,
+        "time_delta_minutes": 16.3,
+        "positions": [
+          {
+            "lat": 56.668,
+            "lon": 4.0583,
+            "time": "2025-12-09T07:51:15.106225Z"
+          },
+          {
+            "lat": 56.4043,
+            "lon": 4.0559,
+            "time": "2025-12-09T08:07:33.394726Z"
+          }
+        ]
+      }
+    },
+    {
       "mmsi": "636021274",
       "vessel_name": "KALLIOPI S",
       "country": "Liberia",
@@ -135300,7 +135309,7 @@
       "country": "Liberia",
       "anomaly_type": "loitering",
       "severity": "medium",
-      "detected_at": "2025-12-02T13:57:30Z",
+      "detected_at": "2025-12-02T15:48:30Z",
       "details": {
         "duration_hours": 6.0,
         "radius_km": 5,
@@ -135308,9 +135317,9 @@
           "lat": 60.8221,
           "lon": 5.0198
         },
-        "start_time": "2025-12-02T07:57:30Z",
-        "end_time": "2025-12-02T13:57:30Z",
-        "position_count": 17
+        "start_time": "2025-12-02T09:48:30Z",
+        "end_time": "2025-12-02T15:48:30Z",
+        "position_count": 18
       }
     },
     {
@@ -135927,35 +135936,6 @@
       "country": "Antigua and Barbuda,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-03T10:56:26Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "304776000",
-          "name": "KERDA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.8856,
-            "lon": 10.7615
-          }
-        },
-        "vessel2": {
-          "mmsi": "538009722",
-          "name": "POLARIS LIBERTY",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.8841,
-            "lon": 10.7663
-          }
-        },
-        "distance_km": 0.31
-      }
-    },
-    {
-      "mmsi": "304776000,538009722",
-      "vessel_name": "KERDA & POLARIS LIBERTY",
-      "country": "Antigua and Barbuda,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-03T10:32:26Z",
       "details": {
         "vessel1": {
@@ -135974,6 +135954,35 @@
           "position": {
             "lat": 59.8841,
             "lon": 10.7664
+          }
+        },
+        "distance_km": 0.31
+      }
+    },
+    {
+      "mmsi": "304776000,538009722",
+      "vessel_name": "KERDA & POLARIS LIBERTY",
+      "country": "Antigua and Barbuda,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-03T10:56:26Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "304776000",
+          "name": "KERDA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.8856,
+            "lon": 10.7615
+          }
+        },
+        "vessel2": {
+          "mmsi": "538009722",
+          "name": "POLARIS LIBERTY",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.8841,
+            "lon": 10.7663
           }
         },
         "distance_km": 0.31
@@ -136072,35 +136081,6 @@
       "country": "Marshall Islands,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-02T09:01:51.649666Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538010822",
-          "name": "CETUS ORCA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 58.9198,
-            "lon": 5.5845
-          }
-        },
-        "vessel2": {
-          "mmsi": "636092890",
-          "name": "BBC DAKOTA",
-          "country": "Liberia",
-          "position": {
-            "lat": 58.9283,
-            "lon": 5.5876
-          }
-        },
-        "distance_km": 0.96
-      }
-    },
-    {
-      "mmsi": "538010822,636092890",
-      "vessel_name": "CETUS ORCA & BBC DAKOTA",
-      "country": "Marshall Islands,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-02T11:27:35.534386Z",
       "details": {
         "vessel1": {
@@ -136131,6 +136111,35 @@
       "anomaly_type": "rendezvous",
       "severity": "high",
       "detected_at": "2025-12-02T10:20:34.035341Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538010822",
+          "name": "CETUS ORCA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 58.9198,
+            "lon": 5.5845
+          }
+        },
+        "vessel2": {
+          "mmsi": "636092890",
+          "name": "BBC DAKOTA",
+          "country": "Liberia",
+          "position": {
+            "lat": 58.9283,
+            "lon": 5.5876
+          }
+        },
+        "distance_km": 0.96
+      }
+    },
+    {
+      "mmsi": "538010822,636092890",
+      "vessel_name": "CETUS ORCA & BBC DAKOTA",
+      "country": "Marshall Islands,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-02T09:01:51.649666Z",
       "details": {
         "vessel1": {
           "mmsi": "538010822",
@@ -136300,15 +136309,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 7373,
-    "impossible_speeds": 63,
+    "transmission_gaps": 7372,
+    "impossible_speeds": 64,
     "loitering": 79,
     "rendezvous": 13
   },
   "severity_breakdown": {
     "critical": 32,
-    "high": 257,
-    "medium": 2436,
-    "low": 4803
+    "high": 259,
+    "medium": 2435,
+    "low": 4802
   }
 }
