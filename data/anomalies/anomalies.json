@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-09T06:50:26.449906Z",
+  "timestamp": "2025-12-09T07:11:57.026502Z",
   "analysis_period_days": 7,
-  "vessels_analyzed": 285,
-  "total_positions": 58499,
-  "anomalies_detected": 7437,
+  "vessels_analyzed": 284,
+  "total_positions": 58501,
+  "anomalies_detected": 7440,
   "anomalies": [
     {
       "mmsi": "314474000",
@@ -23236,6 +23236,24 @@
         "gap_duration_minutes": 39.0,
         "gap_start": "2025-12-09T04:58:34Z",
         "gap_end": "2025-12-09T05:37:32Z",
+        "last_position": {
+          "lat": 65.1433,
+          "lon": 7.43
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "538004905",
+      "vessel_name": "TO.SPITSBERGEN",
+      "country": "Marshall Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2025-12-09T07:11:14.171362Z",
+      "details": {
+        "gap_duration_minutes": 93.7,
+        "gap_start": "2025-12-09T05:37:32Z",
+        "gap_end": "2025-12-09T07:11:14.171362Z",
         "last_position": {
           "lat": 65.1433,
           "lon": 7.43
@@ -61669,6 +61687,24 @@
         "last_position": {
           "lat": 69.9427,
           "lon": 22.0427
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "352842000",
+      "vessel_name": "SJOVEIEN",
+      "country": "Panama",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-12-09T07:03:00Z",
+      "details": {
+        "gap_duration_minutes": 42.0,
+        "gap_start": "2025-12-09T06:21:01Z",
+        "gap_end": "2025-12-09T07:03:00Z",
+        "last_position": {
+          "lat": 69.9428,
+          "lon": 22.0426
         },
         "near_border": false
       }
@@ -134376,6 +134412,35 @@
       "country": "Marshall Islands,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2025-12-02T07:30:21.777759Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538010822",
+          "name": "CETUS ORCA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 58.9198,
+            "lon": 5.5845
+          }
+        },
+        "vessel2": {
+          "mmsi": "229061000",
+          "name": "SEA CARGO EXPRESS",
+          "country": "Malta",
+          "position": {
+            "lat": 58.9193,
+            "lon": 5.5863
+          }
+        },
+        "distance_km": 0.12
+      }
+    },
+    {
+      "mmsi": "538010822,229061000",
+      "vessel_name": "CETUS ORCA & SEA CARGO EXPRESS",
+      "country": "Marshall Islands,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2025-12-02T10:56:59.630977Z",
       "details": {
         "vessel1": {
@@ -134429,41 +134494,12 @@
       }
     },
     {
-      "mmsi": "538010822,229061000",
-      "vessel_name": "CETUS ORCA & SEA CARGO EXPRESS",
-      "country": "Marshall Islands,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-02T07:30:21.777759Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538010822",
-          "name": "CETUS ORCA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 58.9198,
-            "lon": 5.5845
-          }
-        },
-        "vessel2": {
-          "mmsi": "229061000",
-          "name": "SEA CARGO EXPRESS",
-          "country": "Malta",
-          "position": {
-            "lat": 58.9193,
-            "lon": 5.5863
-          }
-        },
-        "distance_km": 0.12
-      }
-    },
-    {
       "mmsi": "538010822,636092890",
       "vessel_name": "CETUS ORCA & BBC DAKOTA",
       "country": "Marshall Islands,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-02T10:20:34.035341Z",
+      "detected_at": "2025-12-02T11:27:35.534386Z",
       "details": {
         "vessel1": {
           "mmsi": "538010822",
@@ -134521,7 +134557,7 @@
       "country": "Marshall Islands,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-02T11:27:35.534386Z",
+      "detected_at": "2025-12-02T10:20:34.035341Z",
       "details": {
         "vessel1": {
           "mmsi": "538010822",
@@ -134659,18 +134695,47 @@
         },
         "distance_km": 0.91
       }
+    },
+    {
+      "mmsi": "325314700,229090000",
+      "vessel_name": "VIKINGFJORD & MEIN SCHIFF 3",
+      "country": "Dominica,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-09T07:11:04Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3162
+          }
+        },
+        "vessel2": {
+          "mmsi": "229090000",
+          "name": "MEIN SCHIFF 3",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3899,
+            "lon": 5.3091
+          }
+        },
+        "distance_km": 0.89
+      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 7282,
+    "transmission_gaps": 7284,
     "impossible_speeds": 63,
     "loitering": 79,
-    "rendezvous": 13
+    "rendezvous": 14
   },
   "severity_breakdown": {
     "critical": 32,
-    "high": 254,
-    "medium": 2434,
-    "low": 4717
+    "high": 255,
+    "medium": 2435,
+    "low": 4718
   }
 }
