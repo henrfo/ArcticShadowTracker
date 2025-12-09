@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-09T11:20:21.679604Z",
+  "timestamp": "2025-12-09T11:39:01.652223Z",
   "analysis_period_days": 7,
-  "vessels_analyzed": 285,
-  "total_positions": 58536,
-  "anomalies_detected": 7349,
+  "vessels_analyzed": 284,
+  "total_positions": 58539,
+  "anomalies_detected": 7348,
   "anomalies": [
     {
       "mmsi": "314474000",
@@ -12187,24 +12187,6 @@
         "last_position": {
           "lat": 57.8555,
           "lon": 8.5123
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "412552109",
-      "vessel_name": "ONWASHENZHEN",
-      "country": "China",
-      "anomaly_type": "transmission_gap",
-      "severity": "high",
-      "detected_at": "2025-12-02T11:40:06Z",
-      "details": {
-        "gap_duration_minutes": 344.0,
-        "gap_start": "2025-12-02T05:56:06Z",
-        "gap_end": "2025-12-02T11:40:06Z",
-        "last_position": {
-          "lat": 63.7956,
-          "lon": 8.7863
         },
         "near_border": false
       }
@@ -131280,6 +131262,33 @@
       }
     },
     {
+      "mmsi": "412549265",
+      "vessel_name": "ZHONG SHUI 787",
+      "country": "China",
+      "anomaly_type": "impossible_speed",
+      "severity": "critical",
+      "detected_at": "2025-12-09T10:22:49Z",
+      "details": {
+        "calculated_speed_knots": 6309.5,
+        "max_allowed_knots": 15,
+        "vessel_type": "Fishing",
+        "distance_km": 584.26,
+        "time_delta_minutes": 3.0,
+        "positions": [
+          {
+            "lat": 64.055,
+            "lon": 10.4133,
+            "time": "2025-12-09T10:19:49Z"
+          },
+          {
+            "lat": 58.8383,
+            "lon": 9.0933,
+            "time": "2025-12-09T10:22:49Z"
+          }
+        ]
+      }
+    },
+    {
       "mmsi": "248020000",
       "vessel_name": "SOLA TS",
       "country": "Malta",
@@ -132767,35 +132776,6 @@
       "country": "Antigua and Barbuda,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-03T10:32:26Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "304776000",
-          "name": "KERDA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.8856,
-            "lon": 10.7615
-          }
-        },
-        "vessel2": {
-          "mmsi": "538009722",
-          "name": "POLARIS LIBERTY",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.8841,
-            "lon": 10.7664
-          }
-        },
-        "distance_km": 0.31
-      }
-    },
-    {
-      "mmsi": "304776000,538009722",
-      "vessel_name": "KERDA & POLARIS LIBERTY",
-      "country": "Antigua and Barbuda,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-03T10:56:26Z",
       "details": {
         "vessel1": {
@@ -132814,6 +132794,35 @@
           "position": {
             "lat": 59.8841,
             "lon": 10.7663
+          }
+        },
+        "distance_km": 0.31
+      }
+    },
+    {
+      "mmsi": "304776000,538009722",
+      "vessel_name": "KERDA & POLARIS LIBERTY",
+      "country": "Antigua and Barbuda,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-03T10:32:26Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "304776000",
+          "name": "KERDA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.8856,
+            "lon": 10.7615
+          }
+        },
+        "vessel2": {
+          "mmsi": "538009722",
+          "name": "POLARIS LIBERTY",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.8841,
+            "lon": 10.7664
           }
         },
         "distance_km": 0.31
@@ -132849,32 +132858,32 @@
       }
     },
     {
-      "mmsi": "538010822,636092890",
-      "vessel_name": "CETUS ORCA & BBC DAKOTA",
-      "country": "Marshall Islands,Liberia",
+      "mmsi": "352001125,636019179",
+      "vessel_name": "ULTRA OSORNO & SUNRISE RAY",
+      "country": "Panama,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-02T11:27:35.534386Z",
+      "detected_at": "2025-12-03T13:19:55Z",
       "details": {
         "vessel1": {
-          "mmsi": "538010822",
-          "name": "CETUS ORCA",
-          "country": "Marshall Islands",
+          "mmsi": "352001125",
+          "name": "ULTRA OSORNO",
+          "country": "Panama",
           "position": {
-            "lat": 58.9198,
-            "lon": 5.5845
+            "lat": 59.1176,
+            "lon": 9.6212
           }
         },
         "vessel2": {
-          "mmsi": "636092890",
-          "name": "BBC DAKOTA",
+          "mmsi": "636019179",
+          "name": "SUNRISE RAY",
           "country": "Liberia",
           "position": {
-            "lat": 58.9283,
-            "lon": 5.5876
+            "lat": 59.1154,
+            "lon": 9.6278
           }
         },
-        "distance_km": 0.96
+        "distance_km": 0.45
       }
     },
     {
@@ -132904,35 +132913,6 @@
           }
         },
         "distance_km": 0.44
-      }
-    },
-    {
-      "mmsi": "352001125,636019179",
-      "vessel_name": "ULTRA OSORNO & SUNRISE RAY",
-      "country": "Panama,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-03T13:19:55Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "352001125",
-          "name": "ULTRA OSORNO",
-          "country": "Panama",
-          "position": {
-            "lat": 59.1176,
-            "lon": 9.6212
-          }
-        },
-        "vessel2": {
-          "mmsi": "636019179",
-          "name": "SUNRISE RAY",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.1154,
-            "lon": 9.6278
-          }
-        },
-        "distance_km": 0.45
       }
     },
     {
@@ -132999,35 +132979,6 @@
       "country": "Dominica,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-09T09:23:04Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "229090000",
-          "name": "MEIN SCHIFF 3",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3899,
-            "lon": 5.3091
-          }
-        },
-        "distance_km": 0.89
-      }
-    },
-    {
-      "mmsi": "325314700,229090000",
-      "vessel_name": "VIKINGFJORD & MEIN SCHIFF 3",
-      "country": "Dominica,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-09T07:11:04Z",
       "details": {
         "vessel1": {
@@ -133050,17 +133001,46 @@
         },
         "distance_km": 0.89
       }
+    },
+    {
+      "mmsi": "325314700,229090000",
+      "vessel_name": "VIKINGFJORD & MEIN SCHIFF 3",
+      "country": "Dominica,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-09T09:23:04Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "229090000",
+          "name": "MEIN SCHIFF 3",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3899,
+            "lon": 5.3091
+          }
+        },
+        "distance_km": 0.89
+      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 7197,
-    "impossible_speeds": 64,
+    "transmission_gaps": 7196,
+    "impossible_speeds": 65,
     "loitering": 78,
-    "rendezvous": 10
+    "rendezvous": 9
   },
   "severity_breakdown": {
-    "critical": 32,
-    "high": 255,
+    "critical": 33,
+    "high": 253,
     "medium": 2430,
     "low": 4632
   }
