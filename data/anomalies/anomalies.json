@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-09T15:52:38.277865Z",
+  "timestamp": "2025-12-09T16:09:16.953716Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 286,
-  "total_positions": 58546,
-  "anomalies_detected": 7277,
+  "total_positions": 58547,
+  "anomalies_detected": 7279,
   "anomalies": [
     {
       "mmsi": "314474000",
@@ -38292,6 +38292,24 @@
       }
     },
     {
+      "mmsi": "538010630",
+      "vessel_name": "NOBLE INTEGRATOR",
+      "country": "Marshall Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2025-12-09T16:00:18Z",
+      "details": {
+        "gap_duration_minutes": 93.0,
+        "gap_start": "2025-12-09T14:27:17Z",
+        "gap_end": "2025-12-09T16:00:18Z",
+        "last_position": {
+          "lat": 59.87,
+          "lon": 2.5667
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "538010632",
       "vessel_name": "NOBLE INVINCIBLE",
       "country": "Marshall Islands",
@@ -43687,6 +43705,24 @@
         "last_position": {
           "lat": 69.9949,
           "lon": 21.7797
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "518100656",
+      "vessel_name": "VALFREYJA",
+      "country": "Cook Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2025-12-09T16:00:47Z",
+      "details": {
+        "gap_duration_minutes": 283.2,
+        "gap_start": "2025-12-09T11:17:37Z",
+        "gap_end": "2025-12-09T16:00:47Z",
+        "last_position": {
+          "lat": 69.9984,
+          "lon": 21.7763
         },
         "near_border": false
       }
@@ -131539,35 +131575,6 @@
       "country": "Panama,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-03T21:25:55Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "352001125",
-          "name": "ULTRA OSORNO",
-          "country": "Panama",
-          "position": {
-            "lat": 59.1175,
-            "lon": 9.6211
-          }
-        },
-        "vessel2": {
-          "mmsi": "636019179",
-          "name": "SUNRISE RAY",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.1154,
-            "lon": 9.6278
-          }
-        },
-        "distance_km": 0.44
-      }
-    },
-    {
-      "mmsi": "352001125,636019179",
-      "vessel_name": "ULTRA OSORNO & SUNRISE RAY",
-      "country": "Panama,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-03T13:19:55Z",
       "details": {
         "vessel1": {
@@ -131589,6 +131596,35 @@
           }
         },
         "distance_km": 0.45
+      }
+    },
+    {
+      "mmsi": "352001125,636019179",
+      "vessel_name": "ULTRA OSORNO & SUNRISE RAY",
+      "country": "Panama,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-03T21:25:55Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "352001125",
+          "name": "ULTRA OSORNO",
+          "country": "Panama",
+          "position": {
+            "lat": 59.1175,
+            "lon": 9.6211
+          }
+        },
+        "vessel2": {
+          "mmsi": "636019179",
+          "name": "SUNRISE RAY",
+          "country": "Liberia",
+          "position": {
+            "lat": 59.1154,
+            "lon": 9.6278
+          }
+        },
+        "distance_km": 0.44
       }
     },
     {
@@ -131655,7 +131691,7 @@
       "country": "Dominica,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-09T07:11:04Z",
+      "detected_at": "2025-12-09T14:38:05Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -131663,7 +131699,36 @@
           "country": "Dominica",
           "position": {
             "lat": 60.3971,
-            "lon": 5.3162
+            "lon": 5.3164
+          }
+        },
+        "vessel2": {
+          "mmsi": "229090000",
+          "name": "MEIN SCHIFF 3",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3899,
+            "lon": 5.3091
+          }
+        },
+        "distance_km": 0.9
+      }
+    },
+    {
+      "mmsi": "325314700,229090000",
+      "vessel_name": "VIKINGFJORD & MEIN SCHIFF 3",
+      "country": "Dominica,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-09T09:23:04Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3163
           }
         },
         "vessel2": {
@@ -131684,7 +131749,7 @@
       "country": "Dominica,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-09T09:23:04Z",
+      "detected_at": "2025-12-09T07:11:04Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -131692,7 +131757,7 @@
           "country": "Dominica",
           "position": {
             "lat": 60.3971,
-            "lon": 5.3163
+            "lon": 5.3162
           }
         },
         "vessel2": {
@@ -131735,47 +131800,18 @@
         },
         "distance_km": 0.89
       }
-    },
-    {
-      "mmsi": "325314700,229090000",
-      "vessel_name": "VIKINGFJORD & MEIN SCHIFF 3",
-      "country": "Dominica,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-09T14:38:05Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3164
-          }
-        },
-        "vessel2": {
-          "mmsi": "229090000",
-          "name": "MEIN SCHIFF 3",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3899,
-            "lon": 5.3091
-          }
-        },
-        "distance_km": 0.9
-      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 7125,
+    "transmission_gaps": 7127,
     "impossible_speeds": 64,
     "loitering": 77,
     "rendezvous": 11
   },
   "severity_breakdown": {
     "critical": 32,
-    "high": 255,
-    "medium": 2430,
+    "high": 256,
+    "medium": 2431,
     "low": 4560
   }
 }
