@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-09T14:39:09.136147Z",
+  "timestamp": "2025-12-09T14:59:36.514498Z",
   "analysis_period_days": 7,
-  "vessels_analyzed": 284,
-  "total_positions": 58542,
-  "anomalies_detected": 7289,
+  "vessels_analyzed": 283,
+  "total_positions": 58541,
+  "anomalies_detected": 7290,
   "anomalies": [
     {
       "mmsi": "314474000",
@@ -30367,6 +30367,24 @@
         "last_position": {
           "lat": 70.0665,
           "lon": 21.3515
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "518998962",
+      "vessel_name": "VALKLIMT",
+      "country": "Cook Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2025-12-09T14:58:03Z",
+      "details": {
+        "gap_duration_minutes": 99.2,
+        "gap_start": "2025-12-09T13:18:53Z",
+        "gap_end": "2025-12-09T14:58:03Z",
+        "last_position": {
+          "lat": 70.1458,
+          "lon": 21.3211
         },
         "near_border": false
       }
@@ -131782,35 +131800,6 @@
       "country": "Panama,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-03T21:25:55Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "352001125",
-          "name": "ULTRA OSORNO",
-          "country": "Panama",
-          "position": {
-            "lat": 59.1175,
-            "lon": 9.6211
-          }
-        },
-        "vessel2": {
-          "mmsi": "636019179",
-          "name": "SUNRISE RAY",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.1154,
-            "lon": 9.6278
-          }
-        },
-        "distance_km": 0.44
-      }
-    },
-    {
-      "mmsi": "352001125,636019179",
-      "vessel_name": "ULTRA OSORNO & SUNRISE RAY",
-      "country": "Panama,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-03T13:19:55Z",
       "details": {
         "vessel1": {
@@ -131832,6 +131821,35 @@
           }
         },
         "distance_km": 0.45
+      }
+    },
+    {
+      "mmsi": "352001125,636019179",
+      "vessel_name": "ULTRA OSORNO & SUNRISE RAY",
+      "country": "Panama,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-03T21:25:55Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "352001125",
+          "name": "ULTRA OSORNO",
+          "country": "Panama",
+          "position": {
+            "lat": 59.1175,
+            "lon": 9.6211
+          }
+        },
+        "vessel2": {
+          "mmsi": "636019179",
+          "name": "SUNRISE RAY",
+          "country": "Liberia",
+          "position": {
+            "lat": 59.1154,
+            "lon": 9.6278
+          }
+        },
+        "distance_km": 0.44
       }
     },
     {
@@ -131898,35 +131916,6 @@
       "country": "Dominica,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-09T07:11:04Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3162
-          }
-        },
-        "vessel2": {
-          "mmsi": "229090000",
-          "name": "MEIN SCHIFF 3",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3899,
-            "lon": 5.3091
-          }
-        },
-        "distance_km": 0.89
-      }
-    },
-    {
-      "mmsi": "325314700,229090000",
-      "vessel_name": "VIKINGFJORD & MEIN SCHIFF 3",
-      "country": "Dominica,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-09T14:38:05Z",
       "details": {
         "vessel1": {
@@ -131948,6 +131937,35 @@
           }
         },
         "distance_km": 0.9
+      }
+    },
+    {
+      "mmsi": "325314700,229090000",
+      "vessel_name": "VIKINGFJORD & MEIN SCHIFF 3",
+      "country": "Dominica,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-09T07:11:04Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3162
+          }
+        },
+        "vessel2": {
+          "mmsi": "229090000",
+          "name": "MEIN SCHIFF 3",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3899,
+            "lon": 5.3091
+          }
+        },
+        "distance_km": 0.89
       }
     },
     {
@@ -131981,7 +131999,7 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 7137,
+    "transmission_gaps": 7138,
     "impossible_speeds": 65,
     "loitering": 77,
     "rendezvous": 10
@@ -131989,7 +132007,7 @@
   "severity_breakdown": {
     "critical": 33,
     "high": 254,
-    "medium": 2426,
+    "medium": 2427,
     "low": 4576
   }
 }
