@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-09T16:09:16.953716Z",
+  "timestamp": "2025-12-09T16:28:36.544640Z",
   "analysis_period_days": 7,
-  "vessels_analyzed": 286,
-  "total_positions": 58547,
-  "anomalies_detected": 7279,
+  "vessels_analyzed": 287,
+  "total_positions": 58550,
+  "anomalies_detected": 7280,
   "anomalies": [
     {
       "mmsi": "314474000",
@@ -595,6 +595,24 @@
         "last_position": {
           "lat": 57.7063,
           "lon": 7.7246
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "304819000",
+      "vessel_name": "STARNES",
+      "country": "Antigua and Barbuda",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2025-12-09T16:27:51Z",
+      "details": {
+        "gap_duration_minutes": 7228.0,
+        "gap_start": "2025-12-04T15:59:49Z",
+        "gap_end": "2025-12-09T16:27:51Z",
+        "last_position": {
+          "lat": 57.7419,
+          "lon": 8.9349
         },
         "near_border": false
       }
@@ -56287,24 +56305,6 @@
         "last_position": {
           "lat": 58.238,
           "lon": 9.0667
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "352842000",
-      "vessel_name": "SJOVEIEN",
-      "country": "Panama",
-      "anomaly_type": "transmission_gap",
-      "severity": "low",
-      "detected_at": "2025-12-02T16:34:11Z",
-      "details": {
-        "gap_duration_minutes": 48.0,
-        "gap_start": "2025-12-02T15:46:10Z",
-        "gap_end": "2025-12-02T16:34:11Z",
-        "last_position": {
-          "lat": 69.9428,
-          "lon": 22.041
         },
         "near_border": false
       }
@@ -112056,6 +112056,24 @@
       }
     },
     {
+      "mmsi": "352004695",
+      "vessel_name": "HAI QI",
+      "country": "Panama",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2025-12-09T13:42:04Z",
+      "details": {
+        "gap_duration_minutes": 726.0,
+        "gap_start": "2025-12-09T01:36:07Z",
+        "gap_end": "2025-12-09T13:42:04Z",
+        "last_position": {
+          "lat": 80.45,
+          "lon": 1.5867
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "413559690",
       "vessel_name": "RUN HAI XIANG YANG",
       "country": "China",
@@ -128724,33 +128742,6 @@
       }
     },
     {
-      "mmsi": "304783000",
-      "vessel_name": "SANDNES",
-      "country": "Antigua and Barbuda",
-      "anomaly_type": "impossible_speed",
-      "severity": "low",
-      "detected_at": "2025-12-02T16:27:50Z",
-      "details": {
-        "calculated_speed_knots": 35.8,
-        "max_allowed_knots": 30,
-        "vessel_type": "Cargo",
-        "distance_km": 3.91,
-        "time_delta_minutes": 3.5,
-        "positions": [
-          {
-            "lat": 57.5155,
-            "lon": 4.875,
-            "time": "2025-12-02T16:24:17.662037Z"
-          },
-          {
-            "lat": 57.4807,
-            "lon": 4.8659,
-            "time": "2025-12-02T16:27:50Z"
-          }
-        ]
-      }
-    },
-    {
       "mmsi": "374637000",
       "vessel_name": "SANTANDER",
       "country": "Panama",
@@ -129610,6 +129601,33 @@
             "lat": 79.8433,
             "lon": 1.0433,
             "time": "2025-12-05T04:21:32Z"
+          }
+        ]
+      }
+    },
+    {
+      "mmsi": "352004695",
+      "vessel_name": "HAI QI",
+      "country": "Panama",
+      "anomaly_type": "impossible_speed",
+      "severity": "medium",
+      "detected_at": "2025-12-09T13:42:04Z",
+      "details": {
+        "calculated_speed_knots": 40.2,
+        "max_allowed_knots": 30,
+        "vessel_type": "Cargo",
+        "distance_km": 900.56,
+        "time_delta_minutes": 726.0,
+        "positions": [
+          {
+            "lat": 80.45,
+            "lon": 1.5867,
+            "time": "2025-12-09T01:36:07Z"
+          },
+          {
+            "lat": 73.7367,
+            "lon": 22.6933,
+            "time": "2025-12-09T13:42:04Z"
           }
         ]
       }
@@ -131575,35 +131593,6 @@
       "country": "Panama,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-03T13:19:55Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "352001125",
-          "name": "ULTRA OSORNO",
-          "country": "Panama",
-          "position": {
-            "lat": 59.1176,
-            "lon": 9.6212
-          }
-        },
-        "vessel2": {
-          "mmsi": "636019179",
-          "name": "SUNRISE RAY",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.1154,
-            "lon": 9.6278
-          }
-        },
-        "distance_km": 0.45
-      }
-    },
-    {
-      "mmsi": "352001125,636019179",
-      "vessel_name": "ULTRA OSORNO & SUNRISE RAY",
-      "country": "Panama,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-03T21:25:55Z",
       "details": {
         "vessel1": {
@@ -131625,6 +131614,35 @@
           }
         },
         "distance_km": 0.44
+      }
+    },
+    {
+      "mmsi": "352001125,636019179",
+      "vessel_name": "ULTRA OSORNO & SUNRISE RAY",
+      "country": "Panama,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-03T13:19:55Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "352001125",
+          "name": "ULTRA OSORNO",
+          "country": "Panama",
+          "position": {
+            "lat": 59.1176,
+            "lon": 9.6212
+          }
+        },
+        "vessel2": {
+          "mmsi": "636019179",
+          "name": "SUNRISE RAY",
+          "country": "Liberia",
+          "position": {
+            "lat": 59.1154,
+            "lon": 9.6278
+          }
+        },
+        "distance_km": 0.45
       }
     },
     {
@@ -131691,6 +131709,35 @@
       "country": "Dominica,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2025-12-09T09:23:04Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "229090000",
+          "name": "MEIN SCHIFF 3",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3899,
+            "lon": 5.3091
+          }
+        },
+        "distance_km": 0.89
+      }
+    },
+    {
+      "mmsi": "325314700,229090000",
+      "vessel_name": "VIKINGFJORD & MEIN SCHIFF 3",
+      "country": "Dominica,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2025-12-09T14:38:05Z",
       "details": {
         "vessel1": {
@@ -131720,7 +131767,7 @@
       "country": "Dominica,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-09T09:23:04Z",
+      "detected_at": "2025-12-09T15:14:03Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -131771,47 +131818,18 @@
         },
         "distance_km": 0.89
       }
-    },
-    {
-      "mmsi": "325314700,229090000",
-      "vessel_name": "VIKINGFJORD & MEIN SCHIFF 3",
-      "country": "Dominica,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-09T15:14:03Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "229090000",
-          "name": "MEIN SCHIFF 3",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3899,
-            "lon": 5.3091
-          }
-        },
-        "distance_km": 0.89
-      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 7127,
+    "transmission_gaps": 7128,
     "impossible_speeds": 64,
     "loitering": 77,
     "rendezvous": 11
   },
   "severity_breakdown": {
     "critical": 32,
-    "high": 256,
-    "medium": 2431,
-    "low": 4560
+    "high": 258,
+    "medium": 2432,
+    "low": 4558
   }
 }
