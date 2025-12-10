@@ -1,8 +1,8 @@
 {
-  "timestamp": "2025-12-10T20:53:12.422052Z",
+  "timestamp": "2025-12-10T21:10:00.603455Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 297,
-  "total_positions": 57145,
+  "total_positions": 57123,
   "anomalies_detected": 6888,
   "anomalies": [
     {
@@ -24244,6 +24244,24 @@
         "gap_duration_minutes": 90.0,
         "gap_start": "2025-12-10T19:07:37Z",
         "gap_end": "2025-12-10T20:37:37Z",
+        "last_position": {
+          "lat": 65.1433,
+          "lon": 7.43
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "538004905",
+      "vessel_name": "TO.SPITSBERGEN",
+      "country": "Marshall Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-12-10T21:09:18.122032Z",
+      "details": {
+        "gap_duration_minutes": 31.7,
+        "gap_start": "2025-12-10T20:37:37Z",
+        "gap_end": "2025-12-10T21:09:18.122032Z",
         "last_position": {
           "lat": 65.1433,
           "lon": 7.43
@@ -49071,24 +49089,6 @@
           "lon": 21.1253
         },
         "near_border": false
-      }
-    },
-    {
-      "mmsi": "667001770",
-      "vessel_name": "YOU SHUN 9",
-      "country": "Sierra Leone",
-      "anomaly_type": "transmission_gap",
-      "severity": "critical",
-      "detected_at": "2025-12-06T01:28:17Z",
-      "details": {
-        "gap_duration_minutes": 4583.7,
-        "gap_start": "2025-12-02T21:04:35Z",
-        "gap_end": "2025-12-06T01:28:17Z",
-        "last_position": {
-          "lat": 80.7733,
-          "lon": 19.1067
-        },
-        "near_border": true
       }
     },
     {
@@ -124685,14 +124685,14 @@
       "country": "Dominica,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-09T16:59:03Z",
+      "detected_at": "2025-12-09T09:23:04Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
           "name": "VIKINGFJORD",
           "country": "Dominica",
           "position": {
-            "lat": 60.397,
+            "lat": 60.3971,
             "lon": 5.3163
           }
         },
@@ -124705,7 +124705,7 @@
             "lon": 5.3091
           }
         },
-        "distance_km": 0.88
+        "distance_km": 0.89
       }
     },
     {
@@ -124735,35 +124735,6 @@
           }
         },
         "distance_km": 0.9
-      }
-    },
-    {
-      "mmsi": "325314700,229090000",
-      "vessel_name": "VIKINGFJORD & MEIN SCHIFF 3",
-      "country": "Dominica,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-09T09:23:04Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "229090000",
-          "name": "MEIN SCHIFF 3",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3899,
-            "lon": 5.3091
-          }
-        },
-        "distance_km": 0.89
       }
     },
     {
@@ -124823,6 +124794,35 @@
         },
         "distance_km": 0.89
       }
+    },
+    {
+      "mmsi": "325314700,229090000",
+      "vessel_name": "VIKINGFJORD & MEIN SCHIFF 3",
+      "country": "Dominica,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-09T16:59:03Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3163
+          }
+        },
+        "vessel2": {
+          "mmsi": "229090000",
+          "name": "MEIN SCHIFF 3",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3899,
+            "lon": 5.3091
+          }
+        },
+        "distance_km": 0.88
+      }
     }
   ],
   "statistics": {
@@ -124832,9 +124832,9 @@
     "rendezvous": 10
   },
   "severity_breakdown": {
-    "critical": 42,
+    "critical": 41,
     "high": 345,
     "medium": 2182,
-    "low": 4319
+    "low": 4320
   }
 }
