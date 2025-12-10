@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-10T11:41:10.049084Z",
+  "timestamp": "2025-12-10T11:57:47.984035Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 287,
-  "total_positions": 57581,
-  "anomalies_detected": 7071,
+  "total_positions": 57710,
+  "anomalies_detected": 7072,
   "anomalies": [
     {
       "mmsi": "314474000",
@@ -36415,6 +36415,24 @@
         "last_position": {
           "lat": 64.3747,
           "lon": 5.5774
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "538009402",
+      "vessel_name": "SYLVIA",
+      "country": "Marshall Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-12-10T11:56:00Z",
+      "details": {
+        "gap_duration_minutes": 31.0,
+        "gap_start": "2025-12-10T11:25:00Z",
+        "gap_end": "2025-12-10T11:56:00Z",
+        "last_position": {
+          "lat": 63.9688,
+          "lon": 5.0766
         },
         "near_border": false
       }
@@ -127929,35 +127947,6 @@
       "country": "Dominica,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-09T15:14:03Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
-          }
-        },
-        "vessel2": {
-          "mmsi": "229090000",
-          "name": "MEIN SCHIFF 3",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3899,
-            "lon": 5.3091
-          }
-        },
-        "distance_km": 0.89
-      }
-    },
-    {
-      "mmsi": "325314700,229090000",
-      "vessel_name": "VIKINGFJORD & MEIN SCHIFF 3",
-      "country": "Dominica,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-09T14:38:05Z",
       "details": {
         "vessel1": {
@@ -127987,7 +127976,7 @@
       "country": "Dominica,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-09T07:11:04Z",
+      "detected_at": "2025-12-09T09:23:04Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -127995,7 +127984,7 @@
           "country": "Dominica",
           "position": {
             "lat": 60.3971,
-            "lon": 5.3162
+            "lon": 5.3163
           }
         },
         "vessel2": {
@@ -128016,7 +128005,7 @@
       "country": "Dominica,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-09T09:23:04Z",
+      "detected_at": "2025-12-09T15:14:03Z",
       "details": {
         "vessel1": {
           "mmsi": "325314700",
@@ -128067,10 +128056,39 @@
         },
         "distance_km": 0.88
       }
+    },
+    {
+      "mmsi": "325314700,229090000",
+      "vessel_name": "VIKINGFJORD & MEIN SCHIFF 3",
+      "country": "Dominica,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-09T07:11:04Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3162
+          }
+        },
+        "vessel2": {
+          "mmsi": "229090000",
+          "name": "MEIN SCHIFF 3",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3899,
+            "lon": 5.3091
+          }
+        },
+        "distance_km": 0.89
+      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 6916,
+    "transmission_gaps": 6917,
     "impossible_speeds": 65,
     "loitering": 79,
     "rendezvous": 11
@@ -128079,6 +128097,6 @@
     "critical": 35,
     "high": 353,
     "medium": 2215,
-    "low": 4468
+    "low": 4469
   }
 }
