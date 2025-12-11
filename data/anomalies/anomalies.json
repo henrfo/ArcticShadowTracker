@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-11T22:15:27.832210Z",
+  "timestamp": "2025-12-11T22:35:18.303439Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 294,
-  "total_positions": 55761,
-  "anomalies_detected": 6744,
+  "total_positions": 55889,
+  "anomalies_detected": 6750,
   "anomalies": [
     {
       "mmsi": "304819000",
@@ -5437,6 +5437,24 @@
         "last_position": {
           "lat": 78.475,
           "lon": -0.4933
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "412464117",
+      "vessel_name": "HUA NAN YU 703",
+      "country": "China",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2025-12-11T20:48:57Z",
+      "details": {
+        "gap_duration_minutes": 491.5,
+        "gap_start": "2025-12-11T12:37:25Z",
+        "gap_end": "2025-12-11T20:48:57Z",
+        "last_position": {
+          "lat": 59.3117,
+          "lon": 3.92
         },
         "near_border": false
       }
@@ -76794,6 +76812,24 @@
       }
     },
     {
+      "mmsi": "273354540",
+      "vessel_name": "MELKART 3",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-12-11T22:34:19Z",
+      "details": {
+        "gap_duration_minutes": 36.0,
+        "gap_start": "2025-12-11T21:58:19Z",
+        "gap_end": "2025-12-11T22:34:19Z",
+        "last_position": {
+          "lat": 76.2876,
+          "lon": 15.7791
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "215349000",
       "vessel_name": "CSL TRIMNES",
       "country": "Malta",
@@ -82711,6 +82747,24 @@
         "last_position": {
           "lat": 78.0817,
           "lon": 5.2667
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "413559690",
+      "vessel_name": "RUN HAI XIANG YANG",
+      "country": "China",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2025-12-11T21:37:03Z",
+      "details": {
+        "gap_duration_minutes": 96.0,
+        "gap_start": "2025-12-11T20:01:03Z",
+        "gap_end": "2025-12-11T21:37:03Z",
+        "last_position": {
+          "lat": 78.0867,
+          "lon": 5.3467
         },
         "near_border": false
       }
@@ -118140,6 +118194,24 @@
       }
     },
     {
+      "mmsi": "273341920",
+      "vessel_name": "MELKART 2",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-12-11T22:31:58Z",
+      "details": {
+        "gap_duration_minutes": 33.4,
+        "gap_start": "2025-12-11T21:58:36Z",
+        "gap_end": "2025-12-11T22:31:58Z",
+        "last_position": {
+          "lat": 68.031,
+          "lon": 7.2494
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "305479000",
       "vessel_name": "KARMEL",
       "country": "Antigua and Barbuda",
@@ -118882,6 +118954,33 @@
             "lat": 58.975,
             "lon": 5.7257,
             "time": "2025-12-10T12:31:59Z"
+          }
+        ]
+      }
+    },
+    {
+      "mmsi": "412464117",
+      "vessel_name": "HUA NAN YU 703",
+      "country": "China",
+      "anomaly_type": "impossible_speed",
+      "severity": "critical",
+      "detected_at": "2025-12-11T20:48:57Z",
+      "details": {
+        "calculated_speed_knots": 107.4,
+        "max_allowed_knots": 15,
+        "vessel_type": "Fishing",
+        "distance_km": 1629.41,
+        "time_delta_minutes": 491.5,
+        "positions": [
+          {
+            "lat": 59.3117,
+            "lon": 3.92,
+            "time": "2025-12-11T12:37:25Z"
+          },
+          {
+            "lat": 73.6833,
+            "lon": 11.44,
+            "time": "2025-12-11T20:48:57Z"
           }
         ]
       }
@@ -120588,6 +120687,33 @@
       }
     },
     {
+      "mmsi": "248221000",
+      "vessel_name": "KEY SOUTH",
+      "country": "Malta",
+      "anomaly_type": "impossible_speed",
+      "severity": "high",
+      "detected_at": "2025-12-11T22:32:18Z",
+      "details": {
+        "calculated_speed_knots": 64.5,
+        "max_allowed_knots": 40,
+        "vessel_type": "Tanker, hazardous category B",
+        "distance_km": 34.91,
+        "time_delta_minutes": 17.5,
+        "positions": [
+          {
+            "lat": 56.3886,
+            "lon": 3.8257,
+            "time": "2025-12-11T22:14:45.665470Z"
+          },
+          {
+            "lat": 56.7016,
+            "lon": 3.869,
+            "time": "2025-12-11T22:32:18Z"
+          }
+        ]
+      }
+    },
+    {
       "mmsi": "256923000",
       "vessel_name": "JULIA THERESA",
       "country": "Malta",
@@ -121961,35 +122087,6 @@
       "country": "Malta,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-09T16:59:03Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "229090000",
-          "name": "MEIN SCHIFF 3",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3899,
-            "lon": 5.3091
-          }
-        },
-        "vessel2": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3163
-          }
-        },
-        "distance_km": 0.88
-      }
-    },
-    {
-      "mmsi": "229090000,325314700",
-      "vessel_name": "MEIN SCHIFF 3 & VIKINGFJORD",
-      "country": "Malta,Dominica",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-09T15:14:03Z",
       "details": {
         "vessel1": {
@@ -122008,6 +122105,64 @@
           "position": {
             "lat": 60.3971,
             "lon": 5.3163
+          }
+        },
+        "distance_km": 0.89
+      }
+    },
+    {
+      "mmsi": "229090000,325314700",
+      "vessel_name": "MEIN SCHIFF 3 & VIKINGFJORD",
+      "country": "Malta,Dominica",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-09T09:23:04Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "229090000",
+          "name": "MEIN SCHIFF 3",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3899,
+            "lon": 5.3091
+          }
+        },
+        "vessel2": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3163
+          }
+        },
+        "distance_km": 0.89
+      }
+    },
+    {
+      "mmsi": "229090000,325314700",
+      "vessel_name": "MEIN SCHIFF 3 & VIKINGFJORD",
+      "country": "Malta,Dominica",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-09T07:11:04Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "229090000",
+          "name": "MEIN SCHIFF 3",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3899,
+            "lon": 5.3091
+          }
+        },
+        "vessel2": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3162
           }
         },
         "distance_km": 0.89
@@ -122048,7 +122203,7 @@
       "country": "Malta,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-09T07:11:04Z",
+      "detected_at": "2025-12-09T16:59:03Z",
       "details": {
         "vessel1": {
           "mmsi": "229090000",
@@ -122064,40 +122219,11 @@
           "name": "VIKINGFJORD",
           "country": "Dominica",
           "position": {
-            "lat": 60.3971,
-            "lon": 5.3162
-          }
-        },
-        "distance_km": 0.89
-      }
-    },
-    {
-      "mmsi": "229090000,325314700",
-      "vessel_name": "MEIN SCHIFF 3 & VIKINGFJORD",
-      "country": "Malta,Dominica",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-09T09:23:04Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "229090000",
-          "name": "MEIN SCHIFF 3",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3899,
-            "lon": 5.3091
-          }
-        },
-        "vessel2": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
+            "lat": 60.397,
             "lon": 5.3163
           }
         },
-        "distance_km": 0.89
+        "distance_km": 0.88
       }
     },
     {
@@ -122160,15 +122286,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 6597,
-    "impossible_speeds": 68,
+    "transmission_gaps": 6601,
+    "impossible_speeds": 70,
     "loitering": 72,
     "rendezvous": 7
   },
   "severity_breakdown": {
-    "critical": 40,
-    "high": 321,
-    "medium": 1891,
-    "low": 4492
+    "critical": 41,
+    "high": 323,
+    "medium": 1892,
+    "low": 4494
   }
 }
