@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-12T21:19:14.653283Z",
+  "timestamp": "2025-12-12T21:36:15.447398Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 285,
-  "total_positions": 54961,
-  "anomalies_detected": 6706,
+  "total_positions": 54956,
+  "anomalies_detected": 6707,
   "anomalies": [
     {
       "mmsi": "248020000",
@@ -41698,12 +41698,12 @@
       "vessel_name": "SAMADHA",
       "country": "Sierra Leone",
       "anomaly_type": "transmission_gap",
-      "severity": "low",
-      "detected_at": "2025-12-05T21:33:57.326485Z",
+      "severity": "medium",
+      "detected_at": "2025-12-05T21:49:49.788989Z",
       "details": {
-        "gap_duration_minutes": 44.2,
+        "gap_duration_minutes": 60.0,
         "gap_start": "2025-12-05T20:49:48Z",
-        "gap_end": "2025-12-05T21:33:57.326485Z",
+        "gap_end": "2025-12-05T21:49:49.788989Z",
         "last_position": {
           "lat": 56.9005,
           "lon": 4.0154
@@ -118262,13 +118262,13 @@
       "country": "Sierra Leone",
       "anomaly_type": "impossible_speed",
       "severity": "low",
-      "detected_at": "2025-12-05T21:33:57.326485Z",
+      "detected_at": "2025-12-05T21:49:49.788989Z",
       "details": {
-        "calculated_speed_knots": 29.0,
+        "calculated_speed_knots": 21.3,
         "max_allowed_knots": 20,
         "vessel_type": "Tanker",
         "distance_km": 39.51,
-        "time_delta_minutes": 44.2,
+        "time_delta_minutes": 60.0,
         "positions": [
           {
             "lat": 56.9005,
@@ -118278,7 +118278,7 @@
           {
             "lat": 57.2559,
             "lon": 4.0177,
-            "time": "2025-12-05T21:33:57.326485Z"
+            "time": "2025-12-05T21:49:49.788989Z"
           }
         ]
       }
@@ -120920,93 +120920,6 @@
       "country": "Malta,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-09T09:23:04Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "229090000",
-          "name": "MEIN SCHIFF 3",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3899,
-            "lon": 5.3091
-          }
-        },
-        "vessel2": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
-          }
-        },
-        "distance_km": 0.89
-      }
-    },
-    {
-      "mmsi": "229090000,325314700",
-      "vessel_name": "MEIN SCHIFF 3 & VIKINGFJORD",
-      "country": "Malta,Dominica",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-09T07:11:04Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "229090000",
-          "name": "MEIN SCHIFF 3",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3899,
-            "lon": 5.3091
-          }
-        },
-        "vessel2": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3162
-          }
-        },
-        "distance_km": 0.89
-      }
-    },
-    {
-      "mmsi": "229090000,325314700",
-      "vessel_name": "MEIN SCHIFF 3 & VIKINGFJORD",
-      "country": "Malta,Dominica",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-09T16:59:03Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "229090000",
-          "name": "MEIN SCHIFF 3",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3899,
-            "lon": 5.3091
-          }
-        },
-        "vessel2": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.397,
-            "lon": 5.3163
-          }
-        },
-        "distance_km": 0.88
-      }
-    },
-    {
-      "mmsi": "229090000,325314700",
-      "vessel_name": "MEIN SCHIFF 3 & VIKINGFJORD",
-      "country": "Malta,Dominica",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-09T15:14:03Z",
       "details": {
         "vessel1": {
@@ -121057,6 +120970,93 @@
           }
         },
         "distance_km": 0.9
+      }
+    },
+    {
+      "mmsi": "229090000,325314700",
+      "vessel_name": "MEIN SCHIFF 3 & VIKINGFJORD",
+      "country": "Malta,Dominica",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-09T09:23:04Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "229090000",
+          "name": "MEIN SCHIFF 3",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3899,
+            "lon": 5.3091
+          }
+        },
+        "vessel2": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3163
+          }
+        },
+        "distance_km": 0.89
+      }
+    },
+    {
+      "mmsi": "229090000,325314700",
+      "vessel_name": "MEIN SCHIFF 3 & VIKINGFJORD",
+      "country": "Malta,Dominica",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-09T16:59:03Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "229090000",
+          "name": "MEIN SCHIFF 3",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3899,
+            "lon": 5.3091
+          }
+        },
+        "vessel2": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.397,
+            "lon": 5.3163
+          }
+        },
+        "distance_km": 0.88
+      }
+    },
+    {
+      "mmsi": "229090000,325314700",
+      "vessel_name": "MEIN SCHIFF 3 & VIKINGFJORD",
+      "country": "Malta,Dominica",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-09T07:11:04Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "229090000",
+          "name": "MEIN SCHIFF 3",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3899,
+            "lon": 5.3091
+          }
+        },
+        "vessel2": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3162
+          }
+        },
+        "distance_km": 0.89
       }
     },
     {
@@ -121181,7 +121181,7 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-12T19:37:02.459763Z",
+      "detected_at": "2025-12-12T20:44:33.233583Z",
       "details": {
         "vessel1": {
           "mmsi": "538009203",
@@ -121210,36 +121210,7 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-12T16:28:15.803834Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538009203",
-          "name": "PACIFIC GARNET",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.199,
-            "lon": 3.6356
-          }
-        },
-        "vessel2": {
-          "mmsi": "538005402",
-          "name": "STI CAMDEN",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.1994,
-            "lon": 3.6372
-          }
-        },
-        "distance_km": 0.11
-      }
-    },
-    {
-      "mmsi": "538009203,538005402",
-      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
-      "country": "Marshall Islands,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-12T14:57:45.773401Z",
+      "detected_at": "2025-12-12T21:35:34.117015Z",
       "details": {
         "vessel1": {
           "mmsi": "538009203",
@@ -121297,7 +121268,7 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-12T15:54:08.019352Z",
+      "detected_at": "2025-12-12T14:57:45.773401Z",
       "details": {
         "vessel1": {
           "mmsi": "538009203",
@@ -121326,7 +121297,7 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-12T17:22:40.227452Z",
+      "detected_at": "2025-12-12T17:57:08.356130Z",
       "details": {
         "vessel1": {
           "mmsi": "538009203",
@@ -121355,65 +121326,7 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-12T15:14:45.709756Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538009203",
-          "name": "PACIFIC GARNET",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.199,
-            "lon": 3.6356
-          }
-        },
-        "vessel2": {
-          "mmsi": "538005402",
-          "name": "STI CAMDEN",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.1994,
-            "lon": 3.6372
-          }
-        },
-        "distance_km": 0.11
-      }
-    },
-    {
-      "mmsi": "538009203,538005402",
-      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
-      "country": "Marshall Islands,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-12T18:31:30.079891Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538009203",
-          "name": "PACIFIC GARNET",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.199,
-            "lon": 3.6356
-          }
-        },
-        "vessel2": {
-          "mmsi": "538005402",
-          "name": "STI CAMDEN",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.1994,
-            "lon": 3.6372
-          }
-        },
-        "distance_km": 0.11
-      }
-    },
-    {
-      "mmsi": "538009203,538005402",
-      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
-      "country": "Marshall Islands,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-12T16:11:22.235465Z",
+      "detected_at": "2025-12-12T17:39:40.644114Z",
       "details": {
         "vessel1": {
           "mmsi": "538009203",
@@ -121500,35 +121413,6 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-12T19:19:52.860503Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538009203",
-          "name": "PACIFIC GARNET",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.199,
-            "lon": 3.6356
-          }
-        },
-        "vessel2": {
-          "mmsi": "538005402",
-          "name": "STI CAMDEN",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.1994,
-            "lon": 3.6372
-          }
-        },
-        "distance_km": 0.11
-      }
-    },
-    {
-      "mmsi": "538009203,538005402",
-      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
-      "country": "Marshall Islands,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-12T19:54:05.014818Z",
       "details": {
         "vessel1": {
@@ -121558,7 +121442,326 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2025-12-12T14:20:39.606001Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538009203",
+          "name": "PACIFIC GARNET",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.199,
+            "lon": 3.6356
+          }
+        },
+        "vessel2": {
+          "mmsi": "538005402",
+          "name": "STI CAMDEN",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.1994,
+            "lon": 3.6372
+          }
+        },
+        "distance_km": 0.11
+      }
+    },
+    {
+      "mmsi": "538009203,538005402",
+      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
+      "country": "Marshall Islands,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-12T16:28:15.803834Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538009203",
+          "name": "PACIFIC GARNET",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.199,
+            "lon": 3.6356
+          }
+        },
+        "vessel2": {
+          "mmsi": "538005402",
+          "name": "STI CAMDEN",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.1994,
+            "lon": 3.6372
+          }
+        },
+        "distance_km": 0.11
+      }
+    },
+    {
+      "mmsi": "538009203,538005402",
+      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
+      "country": "Marshall Islands,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-12T15:54:08.019352Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538009203",
+          "name": "PACIFIC GARNET",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.199,
+            "lon": 3.6356
+          }
+        },
+        "vessel2": {
+          "mmsi": "538005402",
+          "name": "STI CAMDEN",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.1994,
+            "lon": 3.6372
+          }
+        },
+        "distance_km": 0.11
+      }
+    },
+    {
+      "mmsi": "538009203,538005402",
+      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
+      "country": "Marshall Islands,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2025-12-12T21:01:32.577948Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538009203",
+          "name": "PACIFIC GARNET",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.199,
+            "lon": 3.6356
+          }
+        },
+        "vessel2": {
+          "mmsi": "538005402",
+          "name": "STI CAMDEN",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.1994,
+            "lon": 3.6372
+          }
+        },
+        "distance_km": 0.11
+      }
+    },
+    {
+      "mmsi": "538009203,538005402",
+      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
+      "country": "Marshall Islands,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-12T17:05:16.428761Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538009203",
+          "name": "PACIFIC GARNET",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.199,
+            "lon": 3.6356
+          }
+        },
+        "vessel2": {
+          "mmsi": "538005402",
+          "name": "STI CAMDEN",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.1994,
+            "lon": 3.6372
+          }
+        },
+        "distance_km": 0.11
+      }
+    },
+    {
+      "mmsi": "538009203,538005402",
+      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
+      "country": "Marshall Islands,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-12T16:45:13.218265Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538009203",
+          "name": "PACIFIC GARNET",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.199,
+            "lon": 3.6356
+          }
+        },
+        "vessel2": {
+          "mmsi": "538005402",
+          "name": "STI CAMDEN",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.1994,
+            "lon": 3.6372
+          }
+        },
+        "distance_km": 0.11
+      }
+    },
+    {
+      "mmsi": "538009203,538005402",
+      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
+      "country": "Marshall Islands,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-12T20:27:29.491345Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538009203",
+          "name": "PACIFIC GARNET",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.199,
+            "lon": 3.6356
+          }
+        },
+        "vessel2": {
+          "mmsi": "538005402",
+          "name": "STI CAMDEN",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.1994,
+            "lon": 3.6372
+          }
+        },
+        "distance_km": 0.11
+      }
+    },
+    {
+      "mmsi": "538009203,538005402",
+      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
+      "country": "Marshall Islands,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-12T20:10:46.832639Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538009203",
+          "name": "PACIFIC GARNET",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.199,
+            "lon": 3.6356
+          }
+        },
+        "vessel2": {
+          "mmsi": "538005402",
+          "name": "STI CAMDEN",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.1994,
+            "lon": 3.6372
+          }
+        },
+        "distance_km": 0.11
+      }
+    },
+    {
+      "mmsi": "538009203,538005402",
+      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
+      "country": "Marshall Islands,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-12T17:22:40.227452Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538009203",
+          "name": "PACIFIC GARNET",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.199,
+            "lon": 3.6356
+          }
+        },
+        "vessel2": {
+          "mmsi": "538005402",
+          "name": "STI CAMDEN",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.1994,
+            "lon": 3.6372
+          }
+        },
+        "distance_km": 0.11
+      }
+    },
+    {
+      "mmsi": "538009203,538005402",
+      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
+      "country": "Marshall Islands,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-12T19:19:52.860503Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538009203",
+          "name": "PACIFIC GARNET",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.199,
+            "lon": 3.6356
+          }
+        },
+        "vessel2": {
+          "mmsi": "538005402",
+          "name": "STI CAMDEN",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.1994,
+            "lon": 3.6372
+          }
+        },
+        "distance_km": 0.11
+      }
+    },
+    {
+      "mmsi": "538009203,538005402",
+      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
+      "country": "Marshall Islands,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-12T19:37:02.459763Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538009203",
+          "name": "PACIFIC GARNET",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.199,
+            "lon": 3.6356
+          }
+        },
+        "vessel2": {
+          "mmsi": "538005402",
+          "name": "STI CAMDEN",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 56.1994,
+            "lon": 3.6372
+          }
+        },
+        "distance_km": 0.11
+      }
+    },
+    {
+      "mmsi": "538009203,538005402",
+      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
+      "country": "Marshall Islands,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-12T15:14:45.709756Z",
       "details": {
         "vessel1": {
           "mmsi": "538009203",
@@ -121645,7 +121848,7 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-12T17:05:16.428761Z",
+      "detected_at": "2025-12-12T18:31:30.079891Z",
       "details": {
         "vessel1": {
           "mmsi": "538009203",
@@ -121674,181 +121877,7 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-12T20:27:29.491345Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538009203",
-          "name": "PACIFIC GARNET",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.199,
-            "lon": 3.6356
-          }
-        },
-        "vessel2": {
-          "mmsi": "538005402",
-          "name": "STI CAMDEN",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.1994,
-            "lon": 3.6372
-          }
-        },
-        "distance_km": 0.11
-      }
-    },
-    {
-      "mmsi": "538009203,538005402",
-      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
-      "country": "Marshall Islands,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-12T16:45:13.218265Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538009203",
-          "name": "PACIFIC GARNET",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.199,
-            "lon": 3.6356
-          }
-        },
-        "vessel2": {
-          "mmsi": "538005402",
-          "name": "STI CAMDEN",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.1994,
-            "lon": 3.6372
-          }
-        },
-        "distance_km": 0.11
-      }
-    },
-    {
-      "mmsi": "538009203,538005402",
-      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
-      "country": "Marshall Islands,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-12T20:10:46.832639Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538009203",
-          "name": "PACIFIC GARNET",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.199,
-            "lon": 3.6356
-          }
-        },
-        "vessel2": {
-          "mmsi": "538005402",
-          "name": "STI CAMDEN",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.1994,
-            "lon": 3.6372
-          }
-        },
-        "distance_km": 0.11
-      }
-    },
-    {
-      "mmsi": "538009203,538005402",
-      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
-      "country": "Marshall Islands,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-12T17:39:40.644114Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538009203",
-          "name": "PACIFIC GARNET",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.199,
-            "lon": 3.6356
-          }
-        },
-        "vessel2": {
-          "mmsi": "538005402",
-          "name": "STI CAMDEN",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.1994,
-            "lon": 3.6372
-          }
-        },
-        "distance_km": 0.11
-      }
-    },
-    {
-      "mmsi": "538009203,538005402",
-      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
-      "country": "Marshall Islands,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-12T17:57:08.356130Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538009203",
-          "name": "PACIFIC GARNET",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.199,
-            "lon": 3.6356
-          }
-        },
-        "vessel2": {
-          "mmsi": "538005402",
-          "name": "STI CAMDEN",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.1994,
-            "lon": 3.6372
-          }
-        },
-        "distance_km": 0.11
-      }
-    },
-    {
-      "mmsi": "538009203,538005402",
-      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
-      "country": "Marshall Islands,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-12T14:20:39.606001Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538009203",
-          "name": "PACIFIC GARNET",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.199,
-            "lon": 3.6356
-          }
-        },
-        "vessel2": {
-          "mmsi": "538005402",
-          "name": "STI CAMDEN",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 56.1994,
-            "lon": 3.6372
-          }
-        },
-        "distance_km": 0.11
-      }
-    },
-    {
-      "mmsi": "538009203,538005402",
-      "vessel_name": "PACIFIC GARNET & STI CAMDEN",
-      "country": "Marshall Islands,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-12T20:44:33.233583Z",
+      "detected_at": "2025-12-12T16:11:22.235465Z",
       "details": {
         "vessel1": {
           "mmsi": "538009203",
@@ -121876,12 +121905,12 @@
     "transmission_gaps": 6526,
     "impossible_speeds": 81,
     "loitering": 66,
-    "rendezvous": 33
+    "rendezvous": 34
   },
   "severity_breakdown": {
     "critical": 50,
-    "high": 329,
-    "medium": 1692,
-    "low": 4635
+    "high": 330,
+    "medium": 1693,
+    "low": 4634
   }
 }
