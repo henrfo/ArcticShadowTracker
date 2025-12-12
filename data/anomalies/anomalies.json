@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-12T11:54:58.220697Z",
+  "timestamp": "2025-12-12T12:11:45.545860Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 293,
-  "total_positions": 55094,
-  "anomalies_detected": 6844,
+  "total_positions": 55087,
+  "anomalies_detected": 6846,
   "anomalies": [
     {
       "mmsi": "304819000",
@@ -73896,6 +73896,24 @@
       }
     },
     {
+      "mmsi": "273354540",
+      "vessel_name": "MELKART 3",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-12-12T11:26:29Z",
+      "details": {
+        "gap_duration_minutes": 41.9,
+        "gap_start": "2025-12-12T10:44:38Z",
+        "gap_end": "2025-12-12T11:26:29Z",
+        "last_position": {
+          "lat": 76.0172,
+          "lon": 18.8199
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "215349000",
       "vessel_name": "CSL TRIMNES",
       "country": "Malta",
@@ -120660,6 +120678,33 @@
       }
     },
     {
+      "mmsi": "229090000",
+      "vessel_name": "MEIN SCHIFF 3",
+      "country": "Malta",
+      "anomaly_type": "impossible_speed",
+      "severity": "critical",
+      "detected_at": "2025-12-12T12:10:24Z",
+      "details": {
+        "calculated_speed_knots": 389.1,
+        "max_allowed_knots": 40,
+        "vessel_type": "Passenger, no additional info",
+        "distance_km": 202.75,
+        "time_delta_minutes": 16.9,
+        "positions": [
+          {
+            "lat": 59.9074,
+            "lon": 10.717,
+            "time": "2025-12-12T11:53:31Z"
+          },
+          {
+            "lat": 58.2871,
+            "lon": 9.0883,
+            "time": "2025-12-12T12:10:24Z"
+          }
+        ]
+      }
+    },
+    {
       "mmsi": "412464117",
       "vessel_name": "HUA NAN YU 703",
       "country": "China",
@@ -123814,7 +123859,7 @@
       "country": "Malta,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-09T14:38:05Z",
+      "detected_at": "2025-12-09T09:23:04Z",
       "details": {
         "vessel1": {
           "mmsi": "229090000",
@@ -123831,10 +123876,10 @@
           "country": "Dominica",
           "position": {
             "lat": 60.3971,
-            "lon": 5.3164
+            "lon": 5.3163
           }
         },
-        "distance_km": 0.9
+        "distance_km": 0.89
       }
     },
     {
@@ -123843,7 +123888,7 @@
       "country": "Malta,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-09T09:23:04Z",
+      "detected_at": "2025-12-09T15:14:03Z",
       "details": {
         "vessel1": {
           "mmsi": "229090000",
@@ -123901,7 +123946,7 @@
       "country": "Malta,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-09T15:14:03Z",
+      "detected_at": "2025-12-09T14:38:05Z",
       "details": {
         "vessel1": {
           "mmsi": "229090000",
@@ -123918,10 +123963,10 @@
           "country": "Dominica",
           "position": {
             "lat": 60.3971,
-            "lon": 5.3163
+            "lon": 5.3164
           }
         },
-        "distance_km": 0.89
+        "distance_km": 0.9
       }
     },
     {
@@ -124042,15 +124087,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 6691,
-    "impossible_speeds": 75,
+    "transmission_gaps": 6692,
+    "impossible_speeds": 76,
     "loitering": 69,
     "rendezvous": 9
   },
   "severity_breakdown": {
-    "critical": 45,
+    "critical": 46,
     "high": 312,
     "medium": 1725,
-    "low": 4762
+    "low": 4763
   }
 }
