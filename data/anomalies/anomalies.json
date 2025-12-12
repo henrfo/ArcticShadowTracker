@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-12T12:28:46.176362Z",
+  "timestamp": "2025-12-12T12:56:03.055649Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 292,
-  "total_positions": 55080,
-  "anomalies_detected": 6760,
+  "total_positions": 55204,
+  "anomalies_detected": 6762,
   "anomalies": [
     {
       "mmsi": "304819000",
@@ -54505,6 +54505,24 @@
         "last_position": {
           "lat": 69.9211,
           "lon": 21.8449
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "352842000",
+      "vessel_name": "SJOVEIEN",
+      "country": "Panama",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-12-12T12:54:41Z",
+      "details": {
+        "gap_duration_minutes": 38.9,
+        "gap_start": "2025-12-12T12:15:45Z",
+        "gap_end": "2025-12-12T12:54:41Z",
+        "last_position": {
+          "lat": 69.9762,
+          "lon": 22.022
         },
         "near_border": false
       }
@@ -119148,6 +119166,33 @@
       }
     },
     {
+      "mmsi": "229090000",
+      "vessel_name": "MEIN SCHIFF 3",
+      "country": "Malta",
+      "anomaly_type": "impossible_speed",
+      "severity": "critical",
+      "detected_at": "2025-12-12T12:54:59Z",
+      "details": {
+        "calculated_speed_knots": 290.3,
+        "max_allowed_knots": 40,
+        "vessel_type": "Passenger, no additional info",
+        "distance_km": 254.92,
+        "time_delta_minutes": 28.4,
+        "positions": [
+          {
+            "lat": 59.9074,
+            "lon": 10.717,
+            "time": "2025-12-12T12:26:32Z"
+          },
+          {
+            "lat": 58.056,
+            "lon": 8.0921,
+            "time": "2025-12-12T12:54:59Z"
+          }
+        ]
+      }
+    },
+    {
       "mmsi": "412464117",
       "vessel_name": "HUA NAN YU 703",
       "country": "China",
@@ -122300,6 +122345,35 @@
       "country": "Malta,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2025-12-09T15:14:03Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "229090000",
+          "name": "MEIN SCHIFF 3",
+          "country": "Malta",
+          "position": {
+            "lat": 60.3899,
+            "lon": 5.3091
+          }
+        },
+        "vessel2": {
+          "mmsi": "325314700",
+          "name": "VIKINGFJORD",
+          "country": "Dominica",
+          "position": {
+            "lat": 60.3971,
+            "lon": 5.3163
+          }
+        },
+        "distance_km": 0.89
+      }
+    },
+    {
+      "mmsi": "229090000,325314700",
+      "vessel_name": "MEIN SCHIFF 3 & VIKINGFJORD",
+      "country": "Malta,Dominica",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2025-12-09T07:11:04Z",
       "details": {
         "vessel1": {
@@ -122318,35 +122392,6 @@
           "position": {
             "lat": 60.3971,
             "lon": 5.3162
-          }
-        },
-        "distance_km": 0.89
-      }
-    },
-    {
-      "mmsi": "229090000,325314700",
-      "vessel_name": "MEIN SCHIFF 3 & VIKINGFJORD",
-      "country": "Malta,Dominica",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-09T09:23:04Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "229090000",
-          "name": "MEIN SCHIFF 3",
-          "country": "Malta",
-          "position": {
-            "lat": 60.3899,
-            "lon": 5.3091
-          }
-        },
-        "vessel2": {
-          "mmsi": "325314700",
-          "name": "VIKINGFJORD",
-          "country": "Dominica",
-          "position": {
-            "lat": 60.3971,
-            "lon": 5.3163
           }
         },
         "distance_km": 0.89
@@ -122387,7 +122432,7 @@
       "country": "Malta,Dominica",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-09T15:14:03Z",
+      "detected_at": "2025-12-09T09:23:04Z",
       "details": {
         "vessel1": {
           "mmsi": "229090000",
@@ -122557,15 +122602,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 6604,
-    "impossible_speeds": 78,
+    "transmission_gaps": 6605,
+    "impossible_speeds": 79,
     "loitering": 69,
     "rendezvous": 9
   },
   "severity_breakdown": {
-    "critical": 47,
+    "critical": 48,
     "high": 312,
     "medium": 1720,
-    "low": 4681
+    "low": 4682
   }
 }
