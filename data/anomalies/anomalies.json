@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-23T09:03:43.501669Z",
+  "timestamp": "2025-12-23T09:22:10.723789Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 311,
-  "total_positions": 54430,
-  "anomalies_detected": 9045,
+  "total_positions": 54441,
+  "anomalies_detected": 9041,
   "anomalies": [
     {
       "mmsi": "273890200",
@@ -18712,24 +18712,6 @@
       "vessel_name": "HUA XIN 858",
       "country": "China",
       "anomaly_type": "transmission_gap",
-      "severity": "medium",
-      "detected_at": "2025-12-16T04:10:49Z",
-      "details": {
-        "gap_duration_minutes": 165.0,
-        "gap_start": "2025-12-16T01:25:49Z",
-        "gap_end": "2025-12-16T04:10:49Z",
-        "last_position": {
-          "lat": 79.7567,
-          "lon": 1.4933
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "412703860",
-      "vessel_name": "HUA XIN 858",
-      "country": "China",
-      "anomaly_type": "transmission_gap",
       "severity": "high",
       "detected_at": "2025-12-16T11:55:46Z",
       "details": {
@@ -18856,12 +18838,12 @@
       "vessel_name": "SEAFRIEND",
       "country": "Malta",
       "anomaly_type": "transmission_gap",
-      "severity": "medium",
-      "detected_at": "2025-12-16T09:07:24.645926Z",
+      "severity": "high",
+      "detected_at": "2025-12-16T09:30:22.858161Z",
       "details": {
-        "gap_duration_minutes": 173.9,
+        "gap_duration_minutes": 196.9,
         "gap_start": "2025-12-16T06:13:30Z",
-        "gap_end": "2025-12-16T09:07:24.645926Z",
+        "gap_end": "2025-12-16T09:30:22.858161Z",
         "last_position": {
           "lat": 57.0683,
           "lon": 5.2983
@@ -37558,24 +37540,6 @@
       "vessel_name": "VALKYRIA",
       "country": "Cook Islands",
       "anomaly_type": "transmission_gap",
-      "severity": "high",
-      "detected_at": "2025-12-16T09:29:57Z",
-      "details": {
-        "gap_duration_minutes": 1278.2,
-        "gap_start": "2025-12-15T12:11:46Z",
-        "gap_end": "2025-12-16T09:29:57Z",
-        "last_position": {
-          "lat": 70.2225,
-          "lon": 21.1686
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "518998328",
-      "vessel_name": "VALKYRIA",
-      "country": "Cook Islands",
-      "anomaly_type": "transmission_gap",
       "severity": "low",
       "detected_at": "2025-12-16T10:12:59Z",
       "details": {
@@ -54739,24 +54703,6 @@
         "last_position": {
           "lat": 70.0328,
           "lon": 20.9783
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "518100656",
-      "vessel_name": "VALFREYJA",
-      "country": "Cook Islands",
-      "anomaly_type": "transmission_gap",
-      "severity": "low",
-      "detected_at": "2025-12-16T09:30:03Z",
-      "details": {
-        "gap_duration_minutes": 32.6,
-        "gap_start": "2025-12-16T08:57:29Z",
-        "gap_end": "2025-12-16T09:30:03Z",
-        "last_position": {
-          "lat": 70.0473,
-          "lon": 21.7135
         },
         "near_border": false
       }
@@ -159711,6 +159657,33 @@
       }
     },
     {
+      "mmsi": "412549937",
+      "vessel_name": "ZHONGSHUI 937",
+      "country": "China",
+      "anomaly_type": "impossible_speed",
+      "severity": "critical",
+      "detected_at": "2025-12-16T08:39:44Z",
+      "details": {
+        "calculated_speed_knots": 2694.2,
+        "max_allowed_knots": 15,
+        "vessel_type": "Fishing",
+        "distance_km": 498.96,
+        "time_delta_minutes": 6.0,
+        "positions": [
+          {
+            "lat": 72.29,
+            "lon": -1.08,
+            "time": "2025-12-16T08:33:44Z"
+          },
+          {
+            "lat": 74.09,
+            "lon": 13.1867,
+            "time": "2025-12-16T08:39:44Z"
+          }
+        ]
+      }
+    },
+    {
       "mmsi": "412330105",
       "vessel_name": "LU RONG YUAN YU 619",
       "country": "China",
@@ -160084,33 +160057,6 @@
             "lat": 56.64,
             "lon": 4.5,
             "time": "2025-12-20T19:57:50Z"
-          }
-        ]
-      }
-    },
-    {
-      "mmsi": "412549937",
-      "vessel_name": "ZHONGSHUI 937",
-      "country": "China",
-      "anomaly_type": "impossible_speed",
-      "severity": "critical",
-      "detected_at": "2025-12-16T08:39:44Z",
-      "details": {
-        "calculated_speed_knots": 2694.2,
-        "max_allowed_knots": 15,
-        "vessel_type": "Fishing",
-        "distance_km": 498.96,
-        "time_delta_minutes": 6.0,
-        "positions": [
-          {
-            "lat": 72.29,
-            "lon": -1.08,
-            "time": "2025-12-16T08:33:44Z"
-          },
-          {
-            "lat": 74.09,
-            "lon": 13.1867,
-            "time": "2025-12-16T08:39:44Z"
           }
         ]
       }
@@ -161512,7 +161458,7 @@
       "country": "Antigua and Barbuda",
       "anomaly_type": "loitering",
       "severity": "medium",
-      "detected_at": "2025-12-16T15:06:48Z",
+      "detected_at": "2025-12-17T21:54:57Z",
       "details": {
         "duration_hours": 6.0,
         "radius_km": 5,
@@ -161520,9 +161466,9 @@
           "lat": 58.5006,
           "lon": 8.8888
         },
-        "start_time": "2025-12-16T09:06:48Z",
-        "end_time": "2025-12-16T15:06:48Z",
-        "position_count": 16
+        "start_time": "2025-12-17T15:54:57Z",
+        "end_time": "2025-12-17T21:54:57Z",
+        "position_count": 19
       }
     },
     {
@@ -161769,25 +161715,6 @@
         },
         "start_time": "2025-12-17T05:03:43Z",
         "end_time": "2025-12-17T11:03:43Z",
-        "position_count": 16
-      }
-    },
-    {
-      "mmsi": "538006249",
-      "vessel_name": "ECO ROYALTY",
-      "country": "Marshall Islands",
-      "anomaly_type": "loitering",
-      "severity": "medium",
-      "detected_at": "2025-12-16T15:06:24Z",
-      "details": {
-        "duration_hours": 6.0,
-        "radius_km": 5,
-        "center_position": {
-          "lat": 60.8146,
-          "lon": 5.021
-        },
-        "start_time": "2025-12-16T09:06:24Z",
-        "end_time": "2025-12-16T15:06:24Z",
         "position_count": 16
       }
     },
@@ -162120,17 +162047,17 @@
       "country": "Liberia",
       "anomaly_type": "loitering",
       "severity": "medium",
-      "detected_at": "2025-12-16T15:07:08Z",
+      "detected_at": "2025-12-16T23:25:08Z",
       "details": {
         "duration_hours": 6.0,
         "radius_km": 5,
         "center_position": {
-          "lat": 60.8608,
+          "lat": 60.8607,
           "lon": 5.0343
         },
-        "start_time": "2025-12-16T09:07:08Z",
-        "end_time": "2025-12-16T15:07:08Z",
-        "position_count": 16
+        "start_time": "2025-12-16T17:25:08Z",
+        "end_time": "2025-12-16T23:25:08Z",
+        "position_count": 18
       }
     },
     {
@@ -162196,17 +162123,17 @@
       "country": "Liberia",
       "anomaly_type": "loitering",
       "severity": "medium",
-      "detected_at": "2025-12-16T15:07:19Z",
+      "detected_at": "2025-12-16T23:25:19Z",
       "details": {
         "duration_hours": 6.0,
         "radius_km": 5,
         "center_position": {
           "lat": 59.2701,
-          "lon": 5.4897
+          "lon": 5.4898
         },
-        "start_time": "2025-12-16T09:07:19Z",
-        "end_time": "2025-12-16T15:07:19Z",
-        "position_count": 16
+        "start_time": "2025-12-16T17:25:19Z",
+        "end_time": "2025-12-16T23:25:19Z",
+        "position_count": 18
       }
     },
     {
@@ -162899,268 +162826,7 @@
       "country": "Barbados,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-17T11:37:08Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314035000",
-          "name": "WILSON BERGEN",
-          "country": "Barbados",
-          "position": {
-            "lat": 60.8101,
-            "lon": 5.0436
-          }
-        },
-        "vessel2": {
-          "mmsi": "538008452",
-          "name": "PHILOXENIA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.8166,
-            "lon": 5.0394
-          }
-        },
-        "distance_km": 0.75
-      }
-    },
-    {
-      "mmsi": "314035000,538008452",
-      "vessel_name": "WILSON BERGEN & PHILOXENIA",
-      "country": "Barbados,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-17T17:58:08Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314035000",
-          "name": "WILSON BERGEN",
-          "country": "Barbados",
-          "position": {
-            "lat": 60.8102,
-            "lon": 5.0435
-          }
-        },
-        "vessel2": {
-          "mmsi": "538008452",
-          "name": "PHILOXENIA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.8166,
-            "lon": 5.0394
-          }
-        },
-        "distance_km": 0.74
-      }
-    },
-    {
-      "mmsi": "314035000,538008452",
-      "vessel_name": "WILSON BERGEN & PHILOXENIA",
-      "country": "Barbados,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-17T21:16:08Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314035000",
-          "name": "WILSON BERGEN",
-          "country": "Barbados",
-          "position": {
-            "lat": 60.8102,
-            "lon": 5.0436
-          }
-        },
-        "vessel2": {
-          "mmsi": "538008452",
-          "name": "PHILOXENIA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.8166,
-            "lon": 5.0394
-          }
-        },
-        "distance_km": 0.75
-      }
-    },
-    {
-      "mmsi": "314035000,538008452",
-      "vessel_name": "WILSON BERGEN & PHILOXENIA",
-      "country": "Barbados,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-17T17:34:08Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314035000",
-          "name": "WILSON BERGEN",
-          "country": "Barbados",
-          "position": {
-            "lat": 60.8102,
-            "lon": 5.0435
-          }
-        },
-        "vessel2": {
-          "mmsi": "538008452",
-          "name": "PHILOXENIA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.8166,
-            "lon": 5.0394
-          }
-        },
-        "distance_km": 0.75
-      }
-    },
-    {
-      "mmsi": "314035000,538008452",
-      "vessel_name": "WILSON BERGEN & PHILOXENIA",
-      "country": "Barbados,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-18T08:43:06Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314035000",
-          "name": "WILSON BERGEN",
-          "country": "Barbados",
-          "position": {
-            "lat": 60.8101,
-            "lon": 5.0436
-          }
-        },
-        "vessel2": {
-          "mmsi": "538008452",
-          "name": "PHILOXENIA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.8166,
-            "lon": 5.0394
-          }
-        },
-        "distance_km": 0.76
-      }
-    },
-    {
-      "mmsi": "314035000,538008452",
-      "vessel_name": "WILSON BERGEN & PHILOXENIA",
-      "country": "Barbados,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-18T07:34:06Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314035000",
-          "name": "WILSON BERGEN",
-          "country": "Barbados",
-          "position": {
-            "lat": 60.8102,
-            "lon": 5.0436
-          }
-        },
-        "vessel2": {
-          "mmsi": "538008452",
-          "name": "PHILOXENIA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.8166,
-            "lon": 5.0394
-          }
-        },
-        "distance_km": 0.75
-      }
-    },
-    {
-      "mmsi": "314035000,538008452",
-      "vessel_name": "WILSON BERGEN & PHILOXENIA",
-      "country": "Barbados,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-18T04:37:06Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314035000",
-          "name": "WILSON BERGEN",
-          "country": "Barbados",
-          "position": {
-            "lat": 60.8102,
-            "lon": 5.0436
-          }
-        },
-        "vessel2": {
-          "mmsi": "538008452",
-          "name": "PHILOXENIA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.8166,
-            "lon": 5.0394
-          }
-        },
-        "distance_km": 0.75
-      }
-    },
-    {
-      "mmsi": "314035000,538008452",
-      "vessel_name": "WILSON BERGEN & PHILOXENIA",
-      "country": "Barbados,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-17T04:01:08Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314035000",
-          "name": "WILSON BERGEN",
-          "country": "Barbados",
-          "position": {
-            "lat": 60.8102,
-            "lon": 5.0436
-          }
-        },
-        "vessel2": {
-          "mmsi": "538008452",
-          "name": "PHILOXENIA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.8166,
-            "lon": 5.0394
-          }
-        },
-        "distance_km": 0.75
-      }
-    },
-    {
-      "mmsi": "314035000,538008452",
-      "vessel_name": "WILSON BERGEN & PHILOXENIA",
-      "country": "Barbados,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-17T18:16:08Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314035000",
-          "name": "WILSON BERGEN",
-          "country": "Barbados",
-          "position": {
-            "lat": 60.8102,
-            "lon": 5.0435
-          }
-        },
-        "vessel2": {
-          "mmsi": "538008452",
-          "name": "PHILOXENIA",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.8166,
-            "lon": 5.0393
-          }
-        },
-        "distance_km": 0.75
-      }
-    },
-    {
-      "mmsi": "314035000,538008452",
-      "vessel_name": "WILSON BERGEN & PHILOXENIA",
-      "country": "Barbados,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-18T05:04:06Z",
       "details": {
         "vessel1": {
           "mmsi": "314035000",
@@ -163247,6 +162913,180 @@
       "country": "Barbados,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2025-12-18T08:43:06Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314035000",
+          "name": "WILSON BERGEN",
+          "country": "Barbados",
+          "position": {
+            "lat": 60.8101,
+            "lon": 5.0436
+          }
+        },
+        "vessel2": {
+          "mmsi": "538008452",
+          "name": "PHILOXENIA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.8166,
+            "lon": 5.0394
+          }
+        },
+        "distance_km": 0.76
+      }
+    },
+    {
+      "mmsi": "314035000,538008452",
+      "vessel_name": "WILSON BERGEN & PHILOXENIA",
+      "country": "Barbados,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-18T07:34:06Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314035000",
+          "name": "WILSON BERGEN",
+          "country": "Barbados",
+          "position": {
+            "lat": 60.8102,
+            "lon": 5.0436
+          }
+        },
+        "vessel2": {
+          "mmsi": "538008452",
+          "name": "PHILOXENIA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.8166,
+            "lon": 5.0394
+          }
+        },
+        "distance_km": 0.75
+      }
+    },
+    {
+      "mmsi": "314035000,538008452",
+      "vessel_name": "WILSON BERGEN & PHILOXENIA",
+      "country": "Barbados,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-18T05:04:06Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314035000",
+          "name": "WILSON BERGEN",
+          "country": "Barbados",
+          "position": {
+            "lat": 60.8102,
+            "lon": 5.0436
+          }
+        },
+        "vessel2": {
+          "mmsi": "538008452",
+          "name": "PHILOXENIA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.8166,
+            "lon": 5.0394
+          }
+        },
+        "distance_km": 0.75
+      }
+    },
+    {
+      "mmsi": "314035000,538008452",
+      "vessel_name": "WILSON BERGEN & PHILOXENIA",
+      "country": "Barbados,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-17T04:01:08Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314035000",
+          "name": "WILSON BERGEN",
+          "country": "Barbados",
+          "position": {
+            "lat": 60.8102,
+            "lon": 5.0436
+          }
+        },
+        "vessel2": {
+          "mmsi": "538008452",
+          "name": "PHILOXENIA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.8166,
+            "lon": 5.0394
+          }
+        },
+        "distance_km": 0.75
+      }
+    },
+    {
+      "mmsi": "314035000,538008452",
+      "vessel_name": "WILSON BERGEN & PHILOXENIA",
+      "country": "Barbados,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-17T17:34:08Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314035000",
+          "name": "WILSON BERGEN",
+          "country": "Barbados",
+          "position": {
+            "lat": 60.8102,
+            "lon": 5.0435
+          }
+        },
+        "vessel2": {
+          "mmsi": "538008452",
+          "name": "PHILOXENIA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.8166,
+            "lon": 5.0394
+          }
+        },
+        "distance_km": 0.75
+      }
+    },
+    {
+      "mmsi": "314035000,538008452",
+      "vessel_name": "WILSON BERGEN & PHILOXENIA",
+      "country": "Barbados,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-17T11:37:08Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314035000",
+          "name": "WILSON BERGEN",
+          "country": "Barbados",
+          "position": {
+            "lat": 60.8101,
+            "lon": 5.0436
+          }
+        },
+        "vessel2": {
+          "mmsi": "538008452",
+          "name": "PHILOXENIA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.8166,
+            "lon": 5.0394
+          }
+        },
+        "distance_km": 0.75
+      }
+    },
+    {
+      "mmsi": "314035000,538008452",
+      "vessel_name": "WILSON BERGEN & PHILOXENIA",
+      "country": "Barbados,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2025-12-18T05:58:06Z",
       "details": {
         "vessel1": {
@@ -163265,6 +163105,93 @@
           "position": {
             "lat": 60.8166,
             "lon": 5.0394
+          }
+        },
+        "distance_km": 0.75
+      }
+    },
+    {
+      "mmsi": "314035000,538008452",
+      "vessel_name": "WILSON BERGEN & PHILOXENIA",
+      "country": "Barbados,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-17T21:16:08Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314035000",
+          "name": "WILSON BERGEN",
+          "country": "Barbados",
+          "position": {
+            "lat": 60.8102,
+            "lon": 5.0436
+          }
+        },
+        "vessel2": {
+          "mmsi": "538008452",
+          "name": "PHILOXENIA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.8166,
+            "lon": 5.0394
+          }
+        },
+        "distance_km": 0.75
+      }
+    },
+    {
+      "mmsi": "314035000,538008452",
+      "vessel_name": "WILSON BERGEN & PHILOXENIA",
+      "country": "Barbados,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-17T17:58:08Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314035000",
+          "name": "WILSON BERGEN",
+          "country": "Barbados",
+          "position": {
+            "lat": 60.8102,
+            "lon": 5.0435
+          }
+        },
+        "vessel2": {
+          "mmsi": "538008452",
+          "name": "PHILOXENIA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.8166,
+            "lon": 5.0394
+          }
+        },
+        "distance_km": 0.74
+      }
+    },
+    {
+      "mmsi": "314035000,538008452",
+      "vessel_name": "WILSON BERGEN & PHILOXENIA",
+      "country": "Barbados,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-17T18:16:08Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314035000",
+          "name": "WILSON BERGEN",
+          "country": "Barbados",
+          "position": {
+            "lat": 60.8102,
+            "lon": 5.0435
+          }
+        },
+        "vessel2": {
+          "mmsi": "538008452",
+          "name": "PHILOXENIA",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.8166,
+            "lon": 5.0393
           }
         },
         "distance_km": 0.75
@@ -163421,7 +163348,7 @@
       "country": "Panama,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-20T09:19:13Z",
+      "detected_at": "2025-12-17T21:01:13Z",
       "details": {
         "vessel1": {
           "mmsi": "352005698",
@@ -163479,7 +163406,7 @@
       "country": "Panama,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-17T21:01:13Z",
+      "detected_at": "2025-12-20T09:19:13Z",
       "details": {
         "vessel1": {
           "mmsi": "352005698",
@@ -163508,15 +163435,15 @@
       "country": "Antigua and Barbuda,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-17T21:56:27Z",
+      "detected_at": "2025-12-17T12:14:27Z",
       "details": {
         "vessel1": {
           "mmsi": "305773000",
           "name": "VOHBURG",
           "country": "Antigua and Barbuda",
           "position": {
-            "lat": 59.8864,
-            "lon": 10.7563
+            "lat": 59.8865,
+            "lon": 10.7562
           }
         },
         "vessel2": {
@@ -163529,64 +163456,6 @@
           }
         },
         "distance_km": 0.22
-      }
-    },
-    {
-      "mmsi": "305773000,636019292",
-      "vessel_name": "VOHBURG & MSC ABIGAIL F",
-      "country": "Antigua and Barbuda,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-17T20:41:27Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305773000",
-          "name": "VOHBURG",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.8866,
-            "lon": 10.7561
-          }
-        },
-        "vessel2": {
-          "mmsi": "636019292",
-          "name": "MSC ABIGAIL F",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.8861,
-            "lon": 10.7524
-          }
-        },
-        "distance_km": 0.21
-      }
-    },
-    {
-      "mmsi": "305773000,636019292",
-      "vessel_name": "VOHBURG & MSC ABIGAIL F",
-      "country": "Antigua and Barbuda,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-17T06:47:27Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305773000",
-          "name": "VOHBURG",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.8865,
-            "lon": 10.7563
-          }
-        },
-        "vessel2": {
-          "mmsi": "636019292",
-          "name": "MSC ABIGAIL F",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.8861,
-            "lon": 10.7523
-          }
-        },
-        "distance_km": 0.23
       }
     },
     {
@@ -163653,7 +163522,36 @@
       "country": "Antigua and Barbuda,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-17T05:20:27Z",
+      "detected_at": "2025-12-17T06:47:27Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305773000",
+          "name": "VOHBURG",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.8865,
+            "lon": 10.7563
+          }
+        },
+        "vessel2": {
+          "mmsi": "636019292",
+          "name": "MSC ABIGAIL F",
+          "country": "Liberia",
+          "position": {
+            "lat": 59.8861,
+            "lon": 10.7523
+          }
+        },
+        "distance_km": 0.23
+      }
+    },
+    {
+      "mmsi": "305773000,636019292",
+      "vessel_name": "VOHBURG & MSC ABIGAIL F",
+      "country": "Antigua and Barbuda,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-17T14:17:27Z",
       "details": {
         "vessel1": {
           "mmsi": "305773000",
@@ -163670,7 +163568,7 @@
           "country": "Liberia",
           "position": {
             "lat": 59.8861,
-            "lon": 10.7523
+            "lon": 10.7524
           }
         },
         "distance_km": 0.22
@@ -163682,15 +163580,15 @@
       "country": "Antigua and Barbuda,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-17T12:14:27Z",
+      "detected_at": "2025-12-17T21:56:27Z",
       "details": {
         "vessel1": {
           "mmsi": "305773000",
           "name": "VOHBURG",
           "country": "Antigua and Barbuda",
           "position": {
-            "lat": 59.8865,
-            "lon": 10.7562
+            "lat": 59.8864,
+            "lon": 10.7563
           }
         },
         "vessel2": {
@@ -163703,6 +163601,35 @@
           }
         },
         "distance_km": 0.22
+      }
+    },
+    {
+      "mmsi": "305773000,636019292",
+      "vessel_name": "VOHBURG & MSC ABIGAIL F",
+      "country": "Antigua and Barbuda,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-17T20:41:27Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305773000",
+          "name": "VOHBURG",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.8866,
+            "lon": 10.7561
+          }
+        },
+        "vessel2": {
+          "mmsi": "636019292",
+          "name": "MSC ABIGAIL F",
+          "country": "Liberia",
+          "position": {
+            "lat": 59.8861,
+            "lon": 10.7524
+          }
+        },
+        "distance_km": 0.21
       }
     },
     {
@@ -163740,7 +163667,7 @@
       "country": "Antigua and Barbuda,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-17T14:17:27Z",
+      "detected_at": "2025-12-17T05:20:27Z",
       "details": {
         "vessel1": {
           "mmsi": "305773000",
@@ -163757,7 +163684,7 @@
           "country": "Liberia",
           "position": {
             "lat": 59.8861,
-            "lon": 10.7524
+            "lon": 10.7523
           }
         },
         "distance_km": 0.22
@@ -163823,15 +163750,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 8871,
+    "transmission_gaps": 8868,
     "impossible_speeds": 64,
-    "loitering": 78,
+    "loitering": 77,
     "rendezvous": 32
   },
   "severity_breakdown": {
     "critical": 38,
     "high": 328,
-    "medium": 2306,
-    "low": 6373
+    "medium": 2303,
+    "low": 6372
   }
 }
