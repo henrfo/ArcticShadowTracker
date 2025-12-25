@@ -1,8 +1,8 @@
 {
-  "timestamp": "2025-12-25T10:24:37.887563Z",
+  "timestamp": "2025-12-25T10:43:11.434872Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 306,
-  "total_positions": 53156,
+  "total_positions": 53139,
   "anomalies_detected": 8956,
   "anomalies": [
     {
@@ -87436,24 +87436,6 @@
       "vessel_name": "ROSTRUM STOIC",
       "country": "Liberia",
       "anomaly_type": "transmission_gap",
-      "severity": "high",
-      "detected_at": "2025-12-18T10:49:20Z",
-      "details": {
-        "gap_duration_minutes": 298.4,
-        "gap_start": "2025-12-18T05:50:57Z",
-        "gap_end": "2025-12-18T10:49:20Z",
-        "last_position": {
-          "lat": 63.8333,
-          "lon": 4.3817
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "636093262",
-      "vessel_name": "ROSTRUM STOIC",
-      "country": "Liberia",
-      "anomaly_type": "transmission_gap",
       "severity": "low",
       "detected_at": "2025-12-18T11:43:29Z",
       "details": {
@@ -156534,6 +156516,24 @@
       }
     },
     {
+      "mmsi": "577202000",
+      "vessel_name": "JIA YUN",
+      "country": "Vanuatu",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2025-12-25T09:13:51Z",
+      "details": {
+        "gap_duration_minutes": 2429.9,
+        "gap_start": "2025-12-23T16:43:59Z",
+        "gap_end": "2025-12-25T09:13:51Z",
+        "last_position": {
+          "lat": 64.4567,
+          "lon": 5.4
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "636017782",
       "vessel_name": "ORPHEUS",
       "country": "Liberia",
@@ -159180,33 +159180,6 @@
       }
     },
     {
-      "mmsi": "636015105",
-      "vessel_name": "GAS MYTH",
-      "country": "Liberia",
-      "anomaly_type": "impossible_speed",
-      "severity": "critical",
-      "detected_at": "2025-12-18T10:48:28Z",
-      "details": {
-        "calculated_speed_knots": 137.4,
-        "max_allowed_knots": 40,
-        "vessel_type": "Tanker, hazardous category D",
-        "distance_km": 71.45,
-        "time_delta_minutes": 16.8,
-        "positions": [
-          {
-            "lat": 56.3259,
-            "lon": 3.9014,
-            "time": "2025-12-18T10:31:37.195136Z"
-          },
-          {
-            "lat": 56.6296,
-            "lon": 4.9268,
-            "time": "2025-12-18T10:48:28Z"
-          }
-        ]
-      }
-    },
-    {
       "mmsi": "357229000",
       "vessel_name": "H ORCA",
       "country": "Panama",
@@ -160309,6 +160282,33 @@
             "lat": 78.6617,
             "lon": 33.1733,
             "time": "2025-12-24T20:23:53Z"
+          }
+        ]
+      }
+    },
+    {
+      "mmsi": "577202000",
+      "vessel_name": "JIA YUN",
+      "country": "Vanuatu",
+      "anomaly_type": "impossible_speed",
+      "severity": "low",
+      "detected_at": "2025-12-25T09:13:51Z",
+      "details": {
+        "calculated_speed_knots": 18.8,
+        "max_allowed_knots": 15,
+        "vessel_type": "Fishing",
+        "distance_km": 1408.43,
+        "time_delta_minutes": 2429.9,
+        "positions": [
+          {
+            "lat": 64.4567,
+            "lon": 5.4,
+            "time": "2025-12-23T16:43:59Z"
+          },
+          {
+            "lat": 77.09,
+            "lon": 8.33,
+            "time": "2025-12-25T09:13:51Z"
           }
         ]
       }
@@ -161705,35 +161705,6 @@
       "country": "Marshall Islands,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-19T10:26:06Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538006218",
-          "name": "OCEAN GREATWHITE",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 58.2596,
-            "lon": 6.8361
-          }
-        },
-        "vessel2": {
-          "mmsi": "374032000",
-          "name": "ATLANTIC TONJER",
-          "country": "Panama",
-          "position": {
-            "lat": 58.2601,
-            "lon": 6.8405
-          }
-        },
-        "distance_km": 0.26
-      }
-    },
-    {
-      "mmsi": "538006218,374032000",
-      "vessel_name": "OCEAN GREATWHITE & ATLANTIC TONJER",
-      "country": "Marshall Islands,Panama",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-24T15:18:00Z",
       "details": {
         "vessel1": {
@@ -161755,6 +161726,35 @@
           }
         },
         "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "538006218,374032000",
+      "vessel_name": "OCEAN GREATWHITE & ATLANTIC TONJER",
+      "country": "Marshall Islands,Panama",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-19T10:26:06Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538006218",
+          "name": "OCEAN GREATWHITE",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 58.2596,
+            "lon": 6.8361
+          }
+        },
+        "vessel2": {
+          "mmsi": "374032000",
+          "name": "ATLANTIC TONJER",
+          "country": "Panama",
+          "position": {
+            "lat": 58.2601,
+            "lon": 6.8405
+          }
+        },
+        "distance_km": 0.26
       }
     },
     {
@@ -161850,7 +161850,7 @@
       "country": "Panama,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-20T09:19:13Z",
+      "detected_at": "2025-12-19T13:04:13Z",
       "details": {
         "vessel1": {
           "mmsi": "352005698",
@@ -161879,7 +161879,7 @@
       "country": "Panama,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-19T13:04:13Z",
+      "detected_at": "2025-12-20T09:19:13Z",
       "details": {
         "vessel1": {
           "mmsi": "352005698",
@@ -161939,9 +161939,9 @@
     "rendezvous": 9
   },
   "severity_breakdown": {
-    "critical": 43,
+    "critical": 42,
     "high": 294,
     "medium": 2267,
-    "low": 6352
+    "low": 6353
   }
 }
