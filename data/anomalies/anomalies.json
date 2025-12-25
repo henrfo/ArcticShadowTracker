@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-25T08:50:42.076508Z",
+  "timestamp": "2025-12-25T09:09:15.156603Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 307,
-  "total_positions": 52716,
-  "anomalies_detected": 9049,
+  "total_positions": 52830,
+  "anomalies_detected": 9052,
   "anomalies": [
     {
       "mmsi": "273890200",
@@ -16854,6 +16854,24 @@
       }
     },
     {
+      "mmsi": "677083500",
+      "vessel_name": "XIN HUA MAO 005",
+      "country": "Tanzania",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-12-25T07:33:55Z",
+      "details": {
+        "gap_duration_minutes": 33.0,
+        "gap_start": "2025-12-25T07:00:56Z",
+        "gap_end": "2025-12-25T07:33:55Z",
+        "last_position": {
+          "lat": 78.5367,
+          "lon": 13.74
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "305662000",
       "vessel_name": "FEED FISKAA",
       "country": "Antigua and Barbuda",
@@ -19549,6 +19567,24 @@
         "last_position": {
           "lat": 64.55,
           "lon": 12.0133
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "412549917",
+      "vessel_name": "ZHONGSHUI 917",
+      "country": "China",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2025-12-25T08:13:15Z",
+      "details": {
+        "gap_duration_minutes": 9433.2,
+        "gap_start": "2025-12-18T19:00:03Z",
+        "gap_end": "2025-12-25T08:13:15Z",
+        "last_position": {
+          "lat": 73.2933,
+          "lon": 36.32
         },
         "near_border": false
       }
@@ -143898,6 +143934,24 @@
       }
     },
     {
+      "mmsi": "636015094",
+      "vessel_name": "TINA S",
+      "country": "Liberia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-12-25T09:05:37Z",
+      "details": {
+        "gap_duration_minutes": 37.1,
+        "gap_start": "2025-12-25T08:28:29Z",
+        "gap_end": "2025-12-25T09:05:37Z",
+        "last_position": {
+          "lat": 64.4945,
+          "lon": 1.5148
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "304962000",
       "vessel_name": "SEELAND",
       "country": "Antigua and Barbuda",
@@ -163399,35 +163453,6 @@
       "country": "Marshall Islands,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-24T15:18:00Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538006218",
-          "name": "OCEAN GREATWHITE",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 58.2596,
-            "lon": 6.8362
-          }
-        },
-        "vessel2": {
-          "mmsi": "374032000",
-          "name": "ATLANTIC TONJER",
-          "country": "Panama",
-          "position": {
-            "lat": 58.26,
-            "lon": 6.8404
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "538006218,374032000",
-      "vessel_name": "OCEAN GREATWHITE & ATLANTIC TONJER",
-      "country": "Marshall Islands,Panama",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-19T10:26:06Z",
       "details": {
         "vessel1": {
@@ -163449,6 +163474,35 @@
           }
         },
         "distance_km": 0.26
+      }
+    },
+    {
+      "mmsi": "538006218,374032000",
+      "vessel_name": "OCEAN GREATWHITE & ATLANTIC TONJER",
+      "country": "Marshall Islands,Panama",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-24T15:18:00Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538006218",
+          "name": "OCEAN GREATWHITE",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 58.2596,
+            "lon": 6.8362
+          }
+        },
+        "vessel2": {
+          "mmsi": "374032000",
+          "name": "ATLANTIC TONJER",
+          "country": "Panama",
+          "position": {
+            "lat": 58.26,
+            "lon": 6.8404
+          }
+        },
+        "distance_km": 0.25
       }
     },
     {
@@ -163627,15 +163681,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 8907,
+    "transmission_gaps": 8910,
     "impossible_speeds": 62,
     "loitering": 70,
     "rendezvous": 10
   },
   "severity_breakdown": {
     "critical": 43,
-    "high": 296,
+    "high": 297,
     "medium": 2365,
-    "low": 6345
+    "low": 6347
   }
 }
