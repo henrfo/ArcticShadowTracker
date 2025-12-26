@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-26T10:44:57.589826Z",
+  "timestamp": "2025-12-26T11:03:46.574232Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 304,
-  "total_positions": 51898,
-  "anomalies_detected": 9222,
+  "total_positions": 52013,
+  "anomalies_detected": 9223,
   "anomalies": [
     {
       "mmsi": "413588630",
@@ -163392,6 +163392,24 @@
       }
     },
     {
+      "mmsi": "273264340",
+      "vessel_name": "BURAN",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-12-26T11:02:49Z",
+      "details": {
+        "gap_duration_minutes": 43.3,
+        "gap_start": "2025-12-26T10:19:31Z",
+        "gap_end": "2025-12-26T11:02:49Z",
+        "last_position": {
+          "lat": 71.675,
+          "lon": 19.555
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "305666000",
       "vessel_name": "KATRE",
       "country": "Antigua and Barbuda",
@@ -166544,7 +166562,7 @@
       "country": "Panama,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-19T13:04:13Z",
+      "detected_at": "2025-12-20T09:19:13Z",
       "details": {
         "vessel1": {
           "mmsi": "352005698",
@@ -166573,7 +166591,7 @@
       "country": "Panama,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-20T09:19:13Z",
+      "detected_at": "2025-12-19T13:04:13Z",
       "details": {
         "vessel1": {
           "mmsi": "352005698",
@@ -166627,7 +166645,7 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 9102,
+    "transmission_gaps": 9103,
     "impossible_speeds": 53,
     "loitering": 59,
     "rendezvous": 8
@@ -166636,6 +166654,6 @@
     "critical": 34,
     "high": 231,
     "medium": 2318,
-    "low": 6639
+    "low": 6640
   }
 }
