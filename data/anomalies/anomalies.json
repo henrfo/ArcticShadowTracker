@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-26T04:44:07.801622Z",
+  "timestamp": "2025-12-26T05:09:31.341762Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 303,
-  "total_positions": 52024,
-  "anomalies_detected": 9338,
+  "total_positions": 52142,
+  "anomalies_detected": 9340,
   "anomalies": [
     {
       "mmsi": "413588630",
@@ -57115,6 +57115,24 @@
         "last_position": {
           "lat": 61.702,
           "lon": 4.96
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "256426000",
+      "vessel_name": "CSL FLEXVIK",
+      "country": "Malta",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-12-26T05:08:32Z",
+      "details": {
+        "gap_duration_minutes": 30.0,
+        "gap_start": "2025-12-26T04:38:31Z",
+        "gap_end": "2025-12-26T05:08:32Z",
+        "last_position": {
+          "lat": 61.7025,
+          "lon": 4.9601
         },
         "near_border": false
       }
@@ -124530,6 +124548,24 @@
       }
     },
     {
+      "mmsi": "273397130",
+      "vessel_name": "TAIMYR",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-12-26T03:03:40Z",
+      "details": {
+        "gap_duration_minutes": 47.7,
+        "gap_start": "2025-12-26T02:15:56Z",
+        "gap_end": "2025-12-26T03:03:40Z",
+        "last_position": {
+          "lat": 78.0629,
+          "lon": 14.2007
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "304219000",
       "vessel_name": "SPLITTNES",
       "country": "Antigua and Barbuda",
@@ -168528,35 +168564,6 @@
       "country": "Marshall Islands,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-19T10:26:06Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538006218",
-          "name": "OCEAN GREATWHITE",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 58.2596,
-            "lon": 6.8361
-          }
-        },
-        "vessel2": {
-          "mmsi": "374032000",
-          "name": "ATLANTIC TONJER",
-          "country": "Panama",
-          "position": {
-            "lat": 58.2601,
-            "lon": 6.8405
-          }
-        },
-        "distance_km": 0.26
-      }
-    },
-    {
-      "mmsi": "538006218,374032000",
-      "vessel_name": "OCEAN GREATWHITE & ATLANTIC TONJER",
-      "country": "Marshall Islands,Panama",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-24T15:18:00Z",
       "details": {
         "vessel1": {
@@ -168578,6 +168585,35 @@
           }
         },
         "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "538006218,374032000",
+      "vessel_name": "OCEAN GREATWHITE & ATLANTIC TONJER",
+      "country": "Marshall Islands,Panama",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-19T10:26:06Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538006218",
+          "name": "OCEAN GREATWHITE",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 58.2596,
+            "lon": 6.8361
+          }
+        },
+        "vessel2": {
+          "mmsi": "374032000",
+          "name": "ATLANTIC TONJER",
+          "country": "Panama",
+          "position": {
+            "lat": 58.2601,
+            "lon": 6.8405
+          }
+        },
+        "distance_km": 0.26
       }
     },
     {
@@ -168756,7 +168792,7 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 9211,
+    "transmission_gaps": 9213,
     "impossible_speeds": 56,
     "loitering": 62,
     "rendezvous": 9
@@ -168765,6 +168801,6 @@
     "critical": 37,
     "high": 234,
     "medium": 2320,
-    "low": 6747
+    "low": 6749
   }
 }
