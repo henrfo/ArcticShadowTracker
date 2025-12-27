@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-27T05:22:59.515043Z",
+  "timestamp": "2025-12-27T05:41:45.066869Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 303,
-  "total_positions": 51376,
-  "anomalies_detected": 8745,
+  "total_positions": 51496,
+  "anomalies_detected": 8747,
   "anomalies": [
     {
       "mmsi": "413588630",
@@ -22681,6 +22681,24 @@
         "last_position": {
           "lat": 63.7956,
           "lon": 8.7863
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "412552109",
+      "vessel_name": "ONWASHENZHEN",
+      "country": "China",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-12-27T05:36:47Z",
+      "details": {
+        "gap_duration_minutes": 47.0,
+        "gap_start": "2025-12-27T04:49:47Z",
+        "gap_end": "2025-12-27T05:36:47Z",
+        "last_position": {
+          "lat": 63.7956,
+          "lon": 8.7864
         },
         "near_border": false
       }
@@ -129804,6 +129822,24 @@
       }
     },
     {
+      "mmsi": "304089000",
+      "vessel_name": "FOKKO UKENA",
+      "country": "Antigua and Barbuda",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-12-27T05:33:35Z",
+      "details": {
+        "gap_duration_minutes": 32.9,
+        "gap_start": "2025-12-27T05:00:43Z",
+        "gap_end": "2025-12-27T05:33:35Z",
+        "last_position": {
+          "lat": 57.6635,
+          "lon": 8.3789
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "353186000",
       "vessel_name": "GLOMAR PATRIOT",
       "country": "Panama",
@@ -157927,35 +157963,6 @@
       "country": "Antigua and Barbuda,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-23T03:07:49Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305793000",
-          "name": "RHOGAS",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2712,
-            "lon": 5.4974
-          }
-        },
-        "vessel2": {
-          "mmsi": "538008262",
-          "name": "HOURAI MARU",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.27,
-            "lon": 5.4899
-          }
-        },
-        "distance_km": 0.45
-      }
-    },
-    {
-      "mmsi": "305793000,538008262",
-      "vessel_name": "RHOGAS & HOURAI MARU",
-      "country": "Antigua and Barbuda,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-22T21:34:47Z",
       "details": {
         "vessel1": {
@@ -157978,10 +157985,39 @@
         },
         "distance_km": 0.44
       }
+    },
+    {
+      "mmsi": "305793000,538008262",
+      "vessel_name": "RHOGAS & HOURAI MARU",
+      "country": "Antigua and Barbuda,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-23T03:07:49Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305793000",
+          "name": "RHOGAS",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2712,
+            "lon": 5.4974
+          }
+        },
+        "vessel2": {
+          "mmsi": "538008262",
+          "name": "HOURAI MARU",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.27,
+            "lon": 5.4899
+          }
+        },
+        "distance_km": 0.45
+      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 8635,
+    "transmission_gaps": 8637,
     "impossible_speeds": 48,
     "loitering": 55,
     "rendezvous": 7
@@ -157990,6 +158026,6 @@
     "critical": 30,
     "high": 220,
     "medium": 2073,
-    "low": 6422
+    "low": 6424
   }
 }
