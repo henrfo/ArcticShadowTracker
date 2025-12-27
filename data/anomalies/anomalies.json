@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-27T10:45:04.008882Z",
+  "timestamp": "2025-12-27T11:03:53.818898Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 303,
-  "total_positions": 50784,
-  "anomalies_detected": 8789,
+  "total_positions": 50759,
+  "anomalies_detected": 8788,
   "anomalies": [
     {
       "mmsi": "413588630",
@@ -97134,6 +97134,24 @@
       }
     },
     {
+      "mmsi": "357229000",
+      "vessel_name": "H ORCA",
+      "country": "Panama",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2025-12-22T02:55:30Z",
+      "details": {
+        "gap_duration_minutes": 2487.1,
+        "gap_start": "2025-12-20T09:28:27Z",
+        "gap_end": "2025-12-22T02:55:30Z",
+        "last_position": {
+          "lat": 71.79,
+          "lon": 24.8067
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "249740000",
       "vessel_name": "LUDOGORETS",
       "country": "Malta",
@@ -108253,24 +108271,6 @@
         "last_position": {
           "lat": 57.7986,
           "lon": 8.2151
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "357229000",
-      "vessel_name": "H ORCA",
-      "country": "Panama",
-      "anomaly_type": "transmission_gap",
-      "severity": "high",
-      "detected_at": "2025-12-22T02:55:30Z",
-      "details": {
-        "gap_duration_minutes": 2487.1,
-        "gap_start": "2025-12-20T09:28:27Z",
-        "gap_end": "2025-12-22T02:55:30Z",
-        "last_position": {
-          "lat": 71.79,
-          "lon": 24.8067
         },
         "near_border": false
       }
@@ -156309,33 +156309,6 @@
       }
     },
     {
-      "mmsi": "304829000",
-      "vessel_name": "FJORDNES",
-      "country": "Antigua and Barbuda",
-      "anomaly_type": "impossible_speed",
-      "severity": "critical",
-      "detected_at": "2025-12-20T10:54:31Z",
-      "details": {
-        "calculated_speed_knots": 604.2,
-        "max_allowed_knots": 30,
-        "vessel_type": "Cargo",
-        "distance_km": 60.23,
-        "time_delta_minutes": 3.2,
-        "positions": [
-          {
-            "lat": 57.4826,
-            "lon": 5.0745,
-            "time": "2025-12-20T10:51:17.205817Z"
-          },
-          {
-            "lat": 56.985,
-            "lon": 5.47,
-            "time": "2025-12-20T10:54:31Z"
-          }
-        ]
-      }
-    },
-    {
       "mmsi": "677083500",
       "vessel_name": "XIN HUA MAO 005",
       "country": "Tanzania",
@@ -158690,35 +158663,6 @@
       "country": "Antigua and Barbuda,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-23T03:07:49Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305793000",
-          "name": "RHOGAS",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2712,
-            "lon": 5.4974
-          }
-        },
-        "vessel2": {
-          "mmsi": "538008262",
-          "name": "HOURAI MARU",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.27,
-            "lon": 5.4899
-          }
-        },
-        "distance_km": 0.45
-      }
-    },
-    {
-      "mmsi": "305793000,538008262",
-      "vessel_name": "RHOGAS & HOURAI MARU",
-      "country": "Antigua and Barbuda,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-22T21:34:47Z",
       "details": {
         "vessel1": {
@@ -158741,16 +158685,45 @@
         },
         "distance_km": 0.44
       }
+    },
+    {
+      "mmsi": "305793000,538008262",
+      "vessel_name": "RHOGAS & HOURAI MARU",
+      "country": "Antigua and Barbuda,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-23T03:07:49Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305793000",
+          "name": "RHOGAS",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2712,
+            "lon": 5.4974
+          }
+        },
+        "vessel2": {
+          "mmsi": "538008262",
+          "name": "HOURAI MARU",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.27,
+            "lon": 5.4899
+          }
+        },
+        "distance_km": 0.45
+      }
     }
   ],
   "statistics": {
     "transmission_gaps": 8682,
-    "impossible_speeds": 46,
+    "impossible_speeds": 45,
     "loitering": 55,
     "rendezvous": 6
   },
   "severity_breakdown": {
-    "critical": 28,
+    "critical": 27,
     "high": 222,
     "medium": 2091,
     "low": 6448
