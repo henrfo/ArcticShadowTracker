@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-27T23:01:30.461476Z",
+  "timestamp": "2025-12-27T23:20:26.227308Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 301,
-  "total_positions": 49249,
-  "anomalies_detected": 8900,
+  "total_positions": 49365,
+  "anomalies_detected": 8902,
   "anomalies": [
     {
       "mmsi": "413588630",
@@ -158064,6 +158064,24 @@
       }
     },
     {
+      "mmsi": "577204000",
+      "vessel_name": "JIA  XING",
+      "country": "Vanuatu",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2025-12-27T22:08:47Z",
+      "details": {
+        "gap_duration_minutes": 600.2,
+        "gap_start": "2025-12-27T12:08:33Z",
+        "gap_end": "2025-12-27T22:08:47Z",
+        "last_position": {
+          "lat": 71.9333,
+          "lon": -9.3783
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "273259530",
       "vessel_name": "BELGOROD",
       "country": "Russia",
@@ -159265,6 +159283,33 @@
             "lat": 69.7633,
             "lon": -4.4533,
             "time": "2025-12-27T00:01:18Z"
+          }
+        ]
+      }
+    },
+    {
+      "mmsi": "577204000",
+      "vessel_name": "JIA  XING",
+      "country": "Vanuatu",
+      "anomaly_type": "impossible_speed",
+      "severity": "high",
+      "detected_at": "2025-12-27T22:08:47Z",
+      "details": {
+        "calculated_speed_knots": 50.4,
+        "max_allowed_knots": 15,
+        "vessel_type": "Fishing",
+        "distance_km": 933.52,
+        "time_delta_minutes": 600.2,
+        "positions": [
+          {
+            "lat": 71.9333,
+            "lon": -9.3783,
+            "time": "2025-12-27T12:08:33Z"
+          },
+          {
+            "lat": 65.2,
+            "lon": 4.5383,
+            "time": "2025-12-27T22:08:47Z"
           }
         ]
       }
@@ -160661,35 +160706,6 @@
       "country": "Antigua and Barbuda,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-23T03:07:49Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305793000",
-          "name": "RHOGAS",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2712,
-            "lon": 5.4974
-          }
-        },
-        "vessel2": {
-          "mmsi": "538008262",
-          "name": "HOURAI MARU",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.27,
-            "lon": 5.4899
-          }
-        },
-        "distance_km": 0.45
-      }
-    },
-    {
-      "mmsi": "305793000,538008262",
-      "vessel_name": "RHOGAS & HOURAI MARU",
-      "country": "Antigua and Barbuda,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-22T21:34:47Z",
       "details": {
         "vessel1": {
@@ -160712,17 +160728,46 @@
         },
         "distance_km": 0.44
       }
+    },
+    {
+      "mmsi": "305793000,538008262",
+      "vessel_name": "RHOGAS & HOURAI MARU",
+      "country": "Antigua and Barbuda,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-23T03:07:49Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305793000",
+          "name": "RHOGAS",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2712,
+            "lon": 5.4974
+          }
+        },
+        "vessel2": {
+          "mmsi": "538008262",
+          "name": "HOURAI MARU",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.27,
+            "lon": 5.4899
+          }
+        },
+        "distance_km": 0.45
+      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 8788,
-    "impossible_speeds": 42,
+    "transmission_gaps": 8789,
+    "impossible_speeds": 43,
     "loitering": 64,
     "rendezvous": 6
   },
   "severity_breakdown": {
     "critical": 25,
-    "high": 214,
+    "high": 216,
     "medium": 2001,
     "low": 6660
   }
