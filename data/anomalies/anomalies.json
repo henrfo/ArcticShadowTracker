@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-27T11:03:53.818898Z",
+  "timestamp": "2025-12-27T11:22:47.249262Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 303,
-  "total_positions": 50759,
-  "anomalies_detected": 8788,
+  "total_positions": 50732,
+  "anomalies_detected": 8787,
   "anomalies": [
     {
       "mmsi": "413588630",
@@ -847,24 +847,6 @@
         "last_position": {
           "lat": 57.8631,
           "lon": 8.6425
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "273438740",
-      "vessel_name": "AZIMUT",
-      "country": "Russia",
-      "anomaly_type": "transmission_gap",
-      "severity": "high",
-      "detected_at": "2025-12-20T11:27:26.138631Z",
-      "details": {
-        "gap_duration_minutes": 319.5,
-        "gap_start": "2025-12-20T06:07:55Z",
-        "gap_end": "2025-12-20T11:27:26.138631Z",
-        "last_position": {
-          "lat": 63.6719,
-          "lon": 4.9834
         },
         "near_border": false
       }
@@ -65310,6 +65292,24 @@
       }
     },
     {
+      "mmsi": "518100276",
+      "vessel_name": "CAPE RACE",
+      "country": "Cook Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-12-27T11:16:22Z",
+      "details": {
+        "gap_duration_minutes": 42.3,
+        "gap_start": "2025-12-27T10:34:06Z",
+        "gap_end": "2025-12-27T11:16:22Z",
+        "last_position": {
+          "lat": 70.0712,
+          "lon": 21.8621
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "352001852",
       "vessel_name": "BARBAROS ULUC VARDAL",
       "country": "Panama",
@@ -84682,24 +84682,6 @@
       "vessel_name": "AKADEMIK N. STRAKHOV",
       "country": "Russia",
       "anomaly_type": "transmission_gap",
-      "severity": "low",
-      "detected_at": "2025-12-20T11:27:16Z",
-      "details": {
-        "gap_duration_minutes": 35.8,
-        "gap_start": "2025-12-20T10:51:27Z",
-        "gap_end": "2025-12-20T11:27:16Z",
-        "last_position": {
-          "lat": 66.8132,
-          "lon": 9.7002
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "273418070",
-      "vessel_name": "AKADEMIK N. STRAKHOV",
-      "country": "Russia",
-      "anomaly_type": "transmission_gap",
       "severity": "medium",
       "detected_at": "2025-12-20T13:43:07Z",
       "details": {
@@ -91927,24 +91909,6 @@
         "last_position": {
           "lat": 78.93,
           "lon": 31.18
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "636093257",
-      "vessel_name": "SERGEY BODROV",
-      "country": "Liberia",
-      "anomaly_type": "transmission_gap",
-      "severity": "low",
-      "detected_at": "2025-12-20T11:22:27Z",
-      "details": {
-        "gap_duration_minutes": 36.2,
-        "gap_start": "2025-12-20T10:46:13Z",
-        "gap_end": "2025-12-20T11:22:27Z",
-        "last_position": {
-          "lat": 62.4583,
-          "lon": 1.82
         },
         "near_border": false
       }
@@ -158124,6 +158088,25 @@
       }
     },
     {
+      "mmsi": "374637000",
+      "vessel_name": "SANTANDER",
+      "country": "Panama",
+      "anomaly_type": "loitering",
+      "severity": "medium",
+      "detected_at": "2025-12-27T11:22:06Z",
+      "details": {
+        "duration_hours": 6.0,
+        "radius_km": 5,
+        "center_position": {
+          "lat": 68.4703,
+          "lon": 17.4318
+        },
+        "start_time": "2025-12-27T05:22:06Z",
+        "end_time": "2025-12-27T11:22:06Z",
+        "position_count": 15
+      }
+    },
+    {
       "mmsi": "314377000",
       "vessel_name": "WILSON EYDE",
       "country": "Barbados",
@@ -158663,35 +158646,6 @@
       "country": "Antigua and Barbuda,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-22T21:34:47Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305793000",
-          "name": "RHOGAS",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2712,
-            "lon": 5.4973
-          }
-        },
-        "vessel2": {
-          "mmsi": "538008262",
-          "name": "HOURAI MARU",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.27,
-            "lon": 5.4899
-          }
-        },
-        "distance_km": 0.44
-      }
-    },
-    {
-      "mmsi": "305793000,538008262",
-      "vessel_name": "RHOGAS & HOURAI MARU",
-      "country": "Antigua and Barbuda,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-23T03:07:49Z",
       "details": {
         "vessel1": {
@@ -158714,18 +158668,47 @@
         },
         "distance_km": 0.45
       }
+    },
+    {
+      "mmsi": "305793000,538008262",
+      "vessel_name": "RHOGAS & HOURAI MARU",
+      "country": "Antigua and Barbuda,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-22T21:34:47Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305793000",
+          "name": "RHOGAS",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2712,
+            "lon": 5.4973
+          }
+        },
+        "vessel2": {
+          "mmsi": "538008262",
+          "name": "HOURAI MARU",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.27,
+            "lon": 5.4899
+          }
+        },
+        "distance_km": 0.44
+      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 8682,
+    "transmission_gaps": 8680,
     "impossible_speeds": 45,
-    "loitering": 55,
+    "loitering": 56,
     "rendezvous": 6
   },
   "severity_breakdown": {
     "critical": 27,
-    "high": 222,
-    "medium": 2091,
-    "low": 6448
+    "high": 221,
+    "medium": 2092,
+    "low": 6447
   }
 }
