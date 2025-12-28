@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-28T09:23:46.149269Z",
+  "timestamp": "2025-12-28T09:42:33.085044Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 299,
-  "total_positions": 48308,
-  "anomalies_detected": 8765,
+  "total_positions": 48423,
+  "anomalies_detected": 8767,
   "anomalies": [
     {
       "mmsi": "413588630",
@@ -47845,6 +47845,24 @@
         "last_position": {
           "lat": 69.9964,
           "lon": 21.8059
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "518998961",
+      "vessel_name": "VALESKA",
+      "country": "Cook Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2025-12-28T09:28:07Z",
+      "details": {
+        "gap_duration_minutes": 5527.0,
+        "gap_start": "2025-12-24T13:21:07Z",
+        "gap_end": "2025-12-28T09:28:07Z",
+        "last_position": {
+          "lat": 70.1368,
+          "lon": 21.3096
         },
         "near_border": false
       }
@@ -156723,6 +156741,33 @@
       }
     },
     {
+      "mmsi": "273250200",
+      "vessel_name": "LAZURNYY",
+      "country": "Russia",
+      "anomaly_type": "impossible_speed",
+      "severity": "low",
+      "detected_at": "2025-12-28T09:41:56Z",
+      "details": {
+        "calculated_speed_knots": 15.0,
+        "max_allowed_knots": 15,
+        "vessel_type": "Fishing",
+        "distance_km": 8.71,
+        "time_delta_minutes": 18.8,
+        "positions": [
+          {
+            "lat": 57.9988,
+            "lon": 5.9378,
+            "time": "2025-12-28T09:23:09Z"
+          },
+          {
+            "lat": 57.9487,
+            "lon": 6.0512,
+            "time": "2025-12-28T09:41:56Z"
+          }
+        ]
+      }
+    },
+    {
       "mmsi": "412549937",
       "vessel_name": "ZHONGSHUI 937",
       "country": "China",
@@ -158276,15 +158321,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 8654,
-    "impossible_speeds": 41,
+    "transmission_gaps": 8655,
+    "impossible_speeds": 42,
     "loitering": 64,
     "rendezvous": 6
   },
   "severity_breakdown": {
     "critical": 26,
-    "high": 212,
+    "high": 213,
     "medium": 1999,
-    "low": 6528
+    "low": 6529
   }
 }
