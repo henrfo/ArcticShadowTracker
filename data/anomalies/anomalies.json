@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-28T08:08:04.529997Z",
+  "timestamp": "2025-12-28T08:26:45.450222Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 298,
-  "total_positions": 48444,
-  "anomalies_detected": 8871,
+  "total_positions": 48408,
+  "anomalies_detected": 8870,
   "anomalies": [
     {
       "mmsi": "413588630",
@@ -158073,33 +158073,6 @@
       }
     },
     {
-      "mmsi": "304502000",
-      "vessel_name": "KRIS",
-      "country": "Antigua and Barbuda",
-      "anomaly_type": "impossible_speed",
-      "severity": "medium",
-      "detected_at": "2025-12-21T08:41:30.110378Z",
-      "details": {
-        "calculated_speed_knots": 48.3,
-        "max_allowed_knots": 30,
-        "vessel_type": "Cargo",
-        "distance_km": 26.89,
-        "time_delta_minutes": 18.0,
-        "positions": [
-          {
-            "lat": 58.1082,
-            "lon": 3.606,
-            "time": "2025-12-21T08:23:27.982087Z"
-          },
-          {
-            "lat": 58.0545,
-            "lon": 4.052,
-            "time": "2025-12-21T08:41:30.110378Z"
-          }
-        ]
-      }
-    },
-    {
       "mmsi": "636022259",
       "vessel_name": "CAPT NATURE",
       "country": "Liberia",
@@ -159263,17 +159236,17 @@
       "country": "Marshall Islands",
       "anomaly_type": "loitering",
       "severity": "medium",
-      "detected_at": "2025-12-21T14:23:23Z",
+      "detected_at": "2025-12-21T18:02:24Z",
       "details": {
         "duration_hours": 6.0,
         "radius_km": 5,
         "center_position": {
           "lat": 68.4306,
-          "lon": 17.402
+          "lon": 17.4019
         },
-        "start_time": "2025-12-21T08:23:23Z",
-        "end_time": "2025-12-21T14:23:23Z",
-        "position_count": 17
+        "start_time": "2025-12-21T12:02:24Z",
+        "end_time": "2025-12-21T18:02:24Z",
+        "position_count": 18
       }
     },
     {
@@ -160139,35 +160112,6 @@
       "country": "Antigua and Barbuda,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-22T21:34:47Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305793000",
-          "name": "RHOGAS",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.2712,
-            "lon": 5.4973
-          }
-        },
-        "vessel2": {
-          "mmsi": "538008262",
-          "name": "HOURAI MARU",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.27,
-            "lon": 5.4899
-          }
-        },
-        "distance_km": 0.44
-      }
-    },
-    {
-      "mmsi": "305793000,538008262",
-      "vessel_name": "RHOGAS & HOURAI MARU",
-      "country": "Antigua and Barbuda,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-23T03:07:49Z",
       "details": {
         "vessel1": {
@@ -160190,18 +160134,47 @@
         },
         "distance_km": 0.45
       }
+    },
+    {
+      "mmsi": "305793000,538008262",
+      "vessel_name": "RHOGAS & HOURAI MARU",
+      "country": "Antigua and Barbuda,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-22T21:34:47Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305793000",
+          "name": "RHOGAS",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.2712,
+            "lon": 5.4973
+          }
+        },
+        "vessel2": {
+          "mmsi": "538008262",
+          "name": "HOURAI MARU",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.27,
+            "lon": 5.4899
+          }
+        },
+        "distance_km": 0.44
+      }
     }
   ],
   "statistics": {
     "transmission_gaps": 8759,
-    "impossible_speeds": 42,
+    "impossible_speeds": 41,
     "loitering": 64,
     "rendezvous": 6
   },
   "severity_breakdown": {
     "critical": 26,
     "high": 212,
-    "medium": 2004,
+    "medium": 2003,
     "low": 6629
   }
 }
