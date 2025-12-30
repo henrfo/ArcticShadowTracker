@@ -1,8 +1,8 @@
 {
-  "timestamp": "2025-12-30T23:03:16.125252Z",
+  "timestamp": "2025-12-30T23:22:24.186012Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 273,
-  "total_positions": 42523,
+  "total_positions": 42522,
   "anomalies_detected": 8331,
   "anomalies": [
     {
@@ -18136,24 +18136,6 @@
       "vessel_name": "ONWASHENZHEN",
       "country": "China",
       "anomaly_type": "transmission_gap",
-      "severity": "low",
-      "detected_at": "2025-12-23T23:25:40Z",
-      "details": {
-        "gap_duration_minutes": 31.0,
-        "gap_start": "2025-12-23T22:54:40Z",
-        "gap_end": "2025-12-23T23:25:40Z",
-        "last_position": {
-          "lat": 63.7956,
-          "lon": 8.7863
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "412552109",
-      "vessel_name": "ONWASHENZHEN",
-      "country": "China",
-      "anomaly_type": "transmission_gap",
       "severity": "medium",
       "detected_at": "2025-12-24T02:15:59Z",
       "details": {
@@ -34255,6 +34237,24 @@
         "last_position": {
           "lat": 65.1439,
           "lon": 7.4313
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "538004905",
+      "vessel_name": "TO.SPITSBERGEN",
+      "country": "Marshall Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2025-12-30T23:21:53.758233Z",
+      "details": {
+        "gap_duration_minutes": 128.2,
+        "gap_start": "2025-12-30T21:13:43Z",
+        "gap_end": "2025-12-30T23:21:53.758233Z",
+        "last_position": {
+          "lat": 65.1433,
+          "lon": 7.43
         },
         "near_border": false
       }
@@ -61921,24 +61921,6 @@
         "last_position": {
           "lat": 65.8517,
           "lon": 13.1833
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "352004159",
-      "vessel_name": "DOLPHIN 19",
-      "country": "Panama",
-      "anomaly_type": "transmission_gap",
-      "severity": "low",
-      "detected_at": "2025-12-23T23:27:26Z",
-      "details": {
-        "gap_duration_minutes": 50.7,
-        "gap_start": "2025-12-23T22:36:46Z",
-        "gap_end": "2025-12-23T23:27:26Z",
-        "last_position": {
-          "lat": 67.505,
-          "lon": 9.2579
         },
         "near_border": false
       }
@@ -131514,6 +131496,24 @@
       }
     },
     {
+      "mmsi": "412549937",
+      "vessel_name": "ZHONGSHUI 937",
+      "country": "China",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2025-12-30T21:48:18Z",
+      "details": {
+        "gap_duration_minutes": 3698.5,
+        "gap_start": "2025-12-28T08:09:48Z",
+        "gap_end": "2025-12-30T21:48:18Z",
+        "last_position": {
+          "lat": 69.2483,
+          "lon": -8.28
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "412440315",
       "vessel_name": "FUYUANYU8206",
       "country": "China",
@@ -150330,35 +150330,6 @@
       "country": "Tanzania,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-28T23:17:53Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "677082800",
-          "name": "TORVIND",
-          "country": "Tanzania",
-          "position": {
-            "lat": 63.0139,
-            "lon": 7.8171
-          }
-        },
-        "vessel2": {
-          "mmsi": "304011027",
-          "name": "THESEUS",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 63.0177,
-            "lon": 7.8342
-          }
-        },
-        "distance_km": 0.96
-      }
-    },
-    {
-      "mmsi": "677082800,304011027",
-      "vessel_name": "TORVIND & THESEUS",
-      "country": "Tanzania,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-28T14:47:54Z",
       "details": {
         "vessel1": {
@@ -150377,6 +150348,35 @@
           "position": {
             "lat": 63.0186,
             "lon": 7.8352
+          }
+        },
+        "distance_km": 0.96
+      }
+    },
+    {
+      "mmsi": "677082800,304011027",
+      "vessel_name": "TORVIND & THESEUS",
+      "country": "Tanzania,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-28T23:17:53Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "677082800",
+          "name": "TORVIND",
+          "country": "Tanzania",
+          "position": {
+            "lat": 63.0139,
+            "lon": 7.8171
+          }
+        },
+        "vessel2": {
+          "mmsi": "304011027",
+          "name": "THESEUS",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 63.0177,
+            "lon": 7.8342
           }
         },
         "distance_km": 0.96
@@ -150420,8 +150420,8 @@
   },
   "severity_breakdown": {
     "critical": 22,
-    "high": 292,
-    "medium": 1968,
-    "low": 6049
+    "high": 293,
+    "medium": 1969,
+    "low": 6047
   }
 }
