@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-30T22:04:53.264547Z",
+  "timestamp": "2025-12-30T22:24:16.717712Z",
   "analysis_period_days": 7,
-  "vessels_analyzed": 271,
-  "total_positions": 42534,
-  "anomalies_detected": 8319,
+  "vessels_analyzed": 272,
+  "total_positions": 42530,
+  "anomalies_detected": 8324,
   "anomalies": [
     {
       "mmsi": "314474000",
@@ -110076,6 +110076,24 @@
       }
     },
     {
+      "mmsi": "412703860",
+      "vessel_name": "HUA XIN 858",
+      "country": "China",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2025-12-30T21:30:47Z",
+      "details": {
+        "gap_duration_minutes": 111.3,
+        "gap_start": "2025-12-30T19:39:28Z",
+        "gap_end": "2025-12-30T21:30:47Z",
+        "last_position": {
+          "lat": 80.34,
+          "lon": 0.4267
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "352001341",
       "vessel_name": "BUNDU",
       "country": "Panama",
@@ -121213,6 +121231,24 @@
         "last_position": {
           "lat": 57.7157,
           "lon": 8.7591
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "412421134",
+      "vessel_name": "XIN SHI JI 65",
+      "country": "China",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2025-12-30T16:40:46Z",
+      "details": {
+        "gap_duration_minutes": 7268.9,
+        "gap_start": "2025-12-25T15:31:55Z",
+        "gap_end": "2025-12-30T16:40:46Z",
+        "last_position": {
+          "lat": 68.505,
+          "lon": 6.2933
         },
         "near_border": false
       }
@@ -147228,6 +147264,24 @@
       }
     },
     {
+      "mmsi": "538003298",
+      "vessel_name": "INASE",
+      "country": "Marshall Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2025-12-30T22:23:39Z",
+      "details": {
+        "gap_duration_minutes": 92.0,
+        "gap_start": "2025-12-30T20:51:38Z",
+        "gap_end": "2025-12-30T22:23:39Z",
+        "last_position": {
+          "lat": 71.5062,
+          "lon": 25.9585
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "248891000",
       "vessel_name": "KEY MARMARA",
       "country": "Malta",
@@ -147781,6 +147835,24 @@
         "last_position": {
           "lat": 59.1125,
           "lon": 9.6099
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "577248000",
+      "vessel_name": "HAI SHUN 5",
+      "country": "Vanuatu",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2025-12-30T16:00:41Z",
+      "details": {
+        "gap_duration_minutes": 216.3,
+        "gap_start": "2025-12-30T12:24:22Z",
+        "gap_end": "2025-12-30T16:00:41Z",
+        "last_position": {
+          "lat": 75.6467,
+          "lon": 21.62
         },
         "near_border": false
       }
@@ -148879,6 +148951,33 @@
             "lat": 71.6601,
             "lon": 30.8161,
             "time": "2025-12-29T18:07:20Z"
+          }
+        ]
+      }
+    },
+    {
+      "mmsi": "577248000",
+      "vessel_name": "HAI SHUN 5",
+      "country": "Vanuatu",
+      "anomaly_type": "impossible_speed",
+      "severity": "critical",
+      "detected_at": "2025-12-30T16:00:41Z",
+      "details": {
+        "calculated_speed_knots": 137.1,
+        "max_allowed_knots": 15,
+        "vessel_type": "Fishing",
+        "distance_km": 915.54,
+        "time_delta_minutes": 216.3,
+        "positions": [
+          {
+            "lat": 75.6467,
+            "lon": 21.62,
+            "time": "2025-12-30T12:24:22Z"
+          },
+          {
+            "lat": 83.8433,
+            "lon": 26.3933,
+            "time": "2025-12-30T16:00:41Z"
           }
         ]
       }
@@ -150105,35 +150204,6 @@
       "country": "Tanzania,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-28T14:47:54Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "677082800",
-          "name": "TORVIND",
-          "country": "Tanzania",
-          "position": {
-            "lat": 63.0156,
-            "lon": 7.8175
-          }
-        },
-        "vessel2": {
-          "mmsi": "304011027",
-          "name": "THESEUS",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 63.0186,
-            "lon": 7.8352
-          }
-        },
-        "distance_km": 0.96
-      }
-    },
-    {
-      "mmsi": "677082800,304011027",
-      "vessel_name": "TORVIND & THESEUS",
-      "country": "Tanzania,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-28T23:17:53Z",
       "details": {
         "vessel1": {
@@ -150152,6 +150222,35 @@
           "position": {
             "lat": 63.0177,
             "lon": 7.8342
+          }
+        },
+        "distance_km": 0.96
+      }
+    },
+    {
+      "mmsi": "677082800,304011027",
+      "vessel_name": "TORVIND & THESEUS",
+      "country": "Tanzania,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-28T14:47:54Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "677082800",
+          "name": "TORVIND",
+          "country": "Tanzania",
+          "position": {
+            "lat": 63.0156,
+            "lon": 7.8175
+          }
+        },
+        "vessel2": {
+          "mmsi": "304011027",
+          "name": "THESEUS",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 63.0186,
+            "lon": 7.8352
           }
         },
         "distance_km": 0.96
@@ -150188,15 +150287,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 8214,
-    "impossible_speeds": 38,
+    "transmission_gaps": 8218,
+    "impossible_speeds": 39,
     "loitering": 64,
     "rendezvous": 3
   },
   "severity_breakdown": {
-    "critical": 21,
-    "high": 291,
-    "medium": 1958,
+    "critical": 22,
+    "high": 293,
+    "medium": 1960,
     "low": 6049
   }
 }
