@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-31T15:03:17.465088Z",
+  "timestamp": "2025-12-31T15:22:38.663231Z",
   "analysis_period_days": 7,
-  "vessels_analyzed": 268,
-  "total_positions": 42410,
-  "anomalies_detected": 8516,
+  "vessels_analyzed": 270,
+  "total_positions": 42424,
+  "anomalies_detected": 8517,
   "anomalies": [
     {
       "mmsi": "273437550",
@@ -53443,6 +53443,24 @@
         "last_position": {
           "lat": 59.8714,
           "lon": 2.5677
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "538010630",
+      "vessel_name": "NOBLE INTEGRATOR",
+      "country": "Marshall Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2025-12-31T15:13:11Z",
+      "details": {
+        "gap_duration_minutes": 114.0,
+        "gap_start": "2025-12-31T13:19:11Z",
+        "gap_end": "2025-12-31T15:13:11Z",
+        "last_position": {
+          "lat": 59.87,
+          "lon": 2.5667
         },
         "near_border": false
       }
@@ -151422,6 +151440,24 @@
       }
     },
     {
+      "mmsi": "314475000",
+      "vessel_name": "WILSON MONSOON",
+      "country": "Barbados",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2025-12-31T15:11:53Z",
+      "details": {
+        "gap_duration_minutes": 96.8,
+        "gap_start": "2025-12-31T13:35:06Z",
+        "gap_end": "2025-12-31T15:11:53Z",
+        "last_position": {
+          "lat": 56.8033,
+          "lon": 5.1533
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "273437550",
       "vessel_name": "VITYAZ",
       "country": "Russia",
@@ -152173,6 +152209,33 @@
             "lat": 67.3069,
             "lon": 8.737,
             "time": "2025-12-30T06:55:45Z"
+          }
+        ]
+      }
+    },
+    {
+      "mmsi": "305265000",
+      "vessel_name": "SLOMAN HEBE",
+      "country": "Antigua and Barbuda",
+      "anomaly_type": "impossible_speed",
+      "severity": "critical",
+      "detected_at": "2025-12-31T15:12:29Z",
+      "details": {
+        "calculated_speed_knots": 89.0,
+        "max_allowed_knots": 20,
+        "vessel_type": "Tanker",
+        "distance_km": 26.67,
+        "time_delta_minutes": 9.7,
+        "positions": [
+          {
+            "lat": 57.2893,
+            "lon": 4.2661,
+            "time": "2025-12-31T15:02:46.875456Z"
+          },
+          {
+            "lat": 57.05,
+            "lon": 4.295,
+            "time": "2025-12-31T15:12:29Z"
           }
         ]
       }
@@ -153184,25 +153247,6 @@
       }
     },
     {
-      "mmsi": "305793000",
-      "vessel_name": "RHOGAS",
-      "country": "Antigua and Barbuda",
-      "anomaly_type": "loitering",
-      "severity": "medium",
-      "detected_at": "2025-12-24T21:12:29Z",
-      "details": {
-        "duration_hours": 6.0,
-        "radius_km": 5,
-        "center_position": {
-          "lat": 59.2334,
-          "lon": 5.5106
-        },
-        "start_time": "2025-12-24T15:12:29Z",
-        "end_time": "2025-12-24T21:12:29Z",
-        "position_count": 19
-      }
-    },
-    {
       "mmsi": "636019292",
       "vessel_name": "MSC ABIGAIL F",
       "country": "Liberia",
@@ -153569,35 +153613,6 @@
       "country": "Tanzania,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-28T23:17:53Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "677082800",
-          "name": "TORVIND",
-          "country": "Tanzania",
-          "position": {
-            "lat": 63.0139,
-            "lon": 7.8171
-          }
-        },
-        "vessel2": {
-          "mmsi": "304011027",
-          "name": "THESEUS",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 63.0177,
-            "lon": 7.8342
-          }
-        },
-        "distance_km": 0.96
-      }
-    },
-    {
-      "mmsi": "677082800,304011027",
-      "vessel_name": "TORVIND & THESEUS",
-      "country": "Tanzania,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-28T14:47:54Z",
       "details": {
         "vessel1": {
@@ -153616,6 +153631,35 @@
           "position": {
             "lat": 63.0186,
             "lon": 7.8352
+          }
+        },
+        "distance_km": 0.96
+      }
+    },
+    {
+      "mmsi": "677082800,304011027",
+      "vessel_name": "TORVIND & THESEUS",
+      "country": "Tanzania,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-28T23:17:53Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "677082800",
+          "name": "TORVIND",
+          "country": "Tanzania",
+          "position": {
+            "lat": 63.0139,
+            "lon": 7.8171
+          }
+        },
+        "vessel2": {
+          "mmsi": "304011027",
+          "name": "THESEUS",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 63.0177,
+            "lon": 7.8342
           }
         },
         "distance_km": 0.96
@@ -153648,35 +153692,6 @@
           }
         },
         "distance_km": 0.36
-      }
-    },
-    {
-      "mmsi": "538006218,374032000",
-      "vessel_name": "NOBLE GREATWHITE & ATLANTIC TONJER",
-      "country": "Marshall Islands,Panama",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2025-12-24T15:18:00Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538006218",
-          "name": "NOBLE GREATWHITE",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 58.2596,
-            "lon": 6.8362
-          }
-        },
-        "vessel2": {
-          "mmsi": "374032000",
-          "name": "ATLANTIC TONJER",
-          "country": "Panama",
-          "position": {
-            "lat": 58.26,
-            "lon": 6.8404
-          }
-        },
-        "distance_km": 0.25
       }
     },
     {
@@ -153739,15 +153754,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 8412,
-    "impossible_speeds": 35,
-    "loitering": 63,
-    "rendezvous": 6
+    "transmission_gaps": 8414,
+    "impossible_speeds": 36,
+    "loitering": 62,
+    "rendezvous": 5
   },
   "severity_breakdown": {
-    "critical": 20,
-    "high": 320,
-    "medium": 2223,
+    "critical": 21,
+    "high": 319,
+    "medium": 2224,
     "low": 5953
   }
 }
