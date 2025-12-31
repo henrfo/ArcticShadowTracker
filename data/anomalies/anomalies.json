@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-31T18:17:36.028846Z",
+  "timestamp": "2025-12-31T18:36:59.314293Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 271,
-  "total_positions": 42647,
-  "anomalies_detected": 8431,
+  "total_positions": 42656,
+  "anomalies_detected": 8434,
   "anomalies": [
     {
       "mmsi": "273437550",
@@ -35260,6 +35260,24 @@
         "gap_duration_minutes": 93.0,
         "gap_start": "2025-12-31T15:13:44Z",
         "gap_end": "2025-12-31T16:46:44Z",
+        "last_position": {
+          "lat": 65.1433,
+          "lon": 7.43
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "538004905",
+      "vessel_name": "TO.SPITSBERGEN",
+      "country": "Marshall Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2025-12-31T18:22:44Z",
+      "details": {
+        "gap_duration_minutes": 96.0,
+        "gap_start": "2025-12-31T16:46:44Z",
+        "gap_end": "2025-12-31T18:22:44Z",
         "last_position": {
           "lat": 65.1433,
           "lon": 7.43
@@ -149964,6 +149982,24 @@
       }
     },
     {
+      "mmsi": "273272340",
+      "vessel_name": "ARCTIC PIONEER",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2025-12-31T18:21:41Z",
+      "details": {
+        "gap_duration_minutes": 93.5,
+        "gap_start": "2025-12-31T16:48:08Z",
+        "gap_end": "2025-12-31T18:21:41Z",
+        "last_position": {
+          "lat": 63.005,
+          "lon": 1.02
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "273437550",
       "vessel_name": "VITYAZ",
       "country": "Russia",
@@ -152041,6 +152077,25 @@
       }
     },
     {
+      "mmsi": "636021570",
+      "vessel_name": "STIKLESTAD",
+      "country": "Liberia",
+      "anomaly_type": "loitering",
+      "severity": "medium",
+      "detected_at": "2025-12-31T18:33:37Z",
+      "details": {
+        "duration_hours": 6.0,
+        "radius_km": 5,
+        "center_position": {
+          "lat": 59.2701,
+          "lon": 5.4898
+        },
+        "start_time": "2025-12-31T12:33:37Z",
+        "end_time": "2025-12-31T18:33:37Z",
+        "position_count": 18
+      }
+    },
+    {
       "mmsi": "677082800,304011027",
       "vessel_name": "TORVIND & THESEUS",
       "country": "Tanzania,Antigua and Barbuda",
@@ -152187,15 +152242,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 8331,
+    "transmission_gaps": 8333,
     "impossible_speeds": 34,
-    "loitering": 61,
+    "loitering": 62,
     "rendezvous": 5
   },
   "severity_breakdown": {
     "critical": 21,
     "high": 320,
-    "medium": 2232,
+    "medium": 2235,
     "low": 5858
   }
 }
