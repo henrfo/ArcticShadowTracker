@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-31T14:24:37.960933Z",
+  "timestamp": "2025-12-31T14:43:59.526285Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 268,
-  "total_positions": 42386,
-  "anomalies_detected": 8520,
+  "total_positions": 42398,
+  "anomalies_detected": 8518,
   "anomalies": [
     {
       "mmsi": "273437550",
@@ -16903,24 +16903,6 @@
         "last_position": {
           "lat": 62.8739,
           "lon": 6.7054
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "677083500",
-      "vessel_name": "GREAT WALL22",
-      "country": "Tanzania",
-      "anomaly_type": "transmission_gap",
-      "severity": "high",
-      "detected_at": "2025-12-24T13:27:58Z",
-      "details": {
-        "gap_duration_minutes": 297.0,
-        "gap_start": "2025-12-24T08:31:00Z",
-        "gap_end": "2025-12-24T13:27:58Z",
-        "last_position": {
-          "lat": 64.32,
-          "lon": 2.4833
         },
         "near_border": false
       }
@@ -34147,24 +34129,6 @@
         "last_position": {
           "lat": 58.8615,
           "lon": 9.3025
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "538004905",
-      "vessel_name": "TO.SPITSBERGEN",
-      "country": "Marshall Islands",
-      "anomaly_type": "transmission_gap",
-      "severity": "low",
-      "detected_at": "2025-12-24T14:59:32.541666Z",
-      "details": {
-        "gap_duration_minutes": 30.9,
-        "gap_start": "2025-12-24T14:28:41Z",
-        "gap_end": "2025-12-24T14:59:32.541666Z",
-        "last_position": {
-          "lat": 65.1433,
-          "lon": 7.43
         },
         "near_border": false
       }
@@ -151579,33 +151543,6 @@
       "vessel_name": "GREAT WALL22",
       "country": "Tanzania",
       "anomaly_type": "impossible_speed",
-      "severity": "critical",
-      "detected_at": "2025-12-24T13:27:58Z",
-      "details": {
-        "calculated_speed_knots": 207.0,
-        "max_allowed_knots": 30,
-        "vessel_type": "Cargo",
-        "distance_km": 1897.47,
-        "time_delta_minutes": 297.0,
-        "positions": [
-          {
-            "lat": 64.32,
-            "lon": 2.4833,
-            "time": "2025-12-24T08:31:00Z"
-          },
-          {
-            "lat": 81.2017,
-            "lon": 12.0967,
-            "time": "2025-12-24T13:27:58Z"
-          }
-        ]
-      }
-    },
-    {
-      "mmsi": "677083500",
-      "vessel_name": "GREAT WALL22",
-      "country": "Tanzania",
-      "anomaly_type": "impossible_speed",
       "severity": "low",
       "detected_at": "2025-12-24T14:16:13Z",
       "details": {
@@ -153806,18 +153743,47 @@
         },
         "distance_km": 0.71
       }
+    },
+    {
+      "mmsi": "314512000,636019172",
+      "vessel_name": "ALEXANDRA & CHEM MIA",
+      "country": "Barbados,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-31T14:42:33Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314512000",
+          "name": "ALEXANDRA",
+          "country": "Barbados",
+          "position": {
+            "lat": 59.1222,
+            "lon": 9.6154
+          }
+        },
+        "vessel2": {
+          "mmsi": "636019172",
+          "name": "CHEM MIA",
+          "country": "Liberia",
+          "position": {
+            "lat": 59.1159,
+            "lon": 9.6263
+          }
+        },
+        "distance_km": 0.95
+      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 8416,
-    "impossible_speeds": 36,
+    "transmission_gaps": 8414,
+    "impossible_speeds": 35,
     "loitering": 63,
-    "rendezvous": 5
+    "rendezvous": 6
   },
   "severity_breakdown": {
-    "critical": 21,
+    "critical": 20,
     "high": 321,
     "medium": 2218,
-    "low": 5960
+    "low": 5959
   }
 }
