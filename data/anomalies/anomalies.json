@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-12-31T08:11:55.390080Z",
+  "timestamp": "2025-12-31T08:31:15.805058Z",
   "analysis_period_days": 7,
-  "vessels_analyzed": 269,
-  "total_positions": 42347,
-  "anomalies_detected": 8421,
+  "vessels_analyzed": 270,
+  "total_positions": 42479,
+  "anomalies_detected": 8426,
   "anomalies": [
     {
       "mmsi": "314474000",
@@ -8173,6 +8173,24 @@
         "last_position": {
           "lat": 69.5933,
           "lon": 0.4966
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "273523400",
+      "vessel_name": "YANTARNYY",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2025-12-31T08:27:41Z",
+      "details": {
+        "gap_duration_minutes": 185.7,
+        "gap_start": "2025-12-31T05:22:00Z",
+        "gap_end": "2025-12-31T08:27:41Z",
+        "last_position": {
+          "lat": 69.5012,
+          "lon": 0.5837
         },
         "near_border": false
       }
@@ -103830,6 +103848,24 @@
       }
     },
     {
+      "mmsi": "273437550",
+      "vessel_name": "VITYAZ",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2025-12-31T08:27:19Z",
+      "details": {
+        "gap_duration_minutes": 93.6,
+        "gap_start": "2025-12-31T06:53:42Z",
+        "gap_end": "2025-12-31T08:27:19Z",
+        "last_position": {
+          "lat": 72.795,
+          "lon": 15.825
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "636016848",
       "vessel_name": "SKYFALL",
       "country": "Liberia",
@@ -137418,6 +137454,24 @@
       }
     },
     {
+      "mmsi": "273213010",
+      "vessel_name": "OBELIAI",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2025-12-31T08:28:18Z",
+      "details": {
+        "gap_duration_minutes": 37.4,
+        "gap_start": "2025-12-31T07:50:57Z",
+        "gap_end": "2025-12-31T08:28:18Z",
+        "last_position": {
+          "lat": 71.2733,
+          "lon": 19.0957
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "273617080",
       "vessel_name": "SINEGORSK",
       "country": "Russia",
@@ -146634,6 +146688,24 @@
       }
     },
     {
+      "mmsi": "249225000",
+      "vessel_name": "CGAS LEOPARD",
+      "country": "Malta",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2025-12-31T08:30:43.680950Z",
+      "details": {
+        "gap_duration_minutes": 70.7,
+        "gap_start": "2025-12-31T07:19:59Z",
+        "gap_end": "2025-12-31T08:30:43.680950Z",
+        "last_position": {
+          "lat": 58.4952,
+          "lon": 3.8928
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "249223000",
       "vessel_name": "CGAS JAGUAR",
       "country": "Malta",
@@ -151993,6 +152065,35 @@
       }
     },
     {
+      "mmsi": "314260000,314377000",
+      "vessel_name": "WILSON RHINE & WILSON EYDE",
+      "country": "Barbados,Barbados",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-31T08:30:38Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314260000",
+          "name": "WILSON RHINE",
+          "country": "Barbados",
+          "position": {
+            "lat": 63.0183,
+            "lon": 7.8177
+          }
+        },
+        "vessel2": {
+          "mmsi": "314377000",
+          "name": "WILSON EYDE",
+          "country": "Barbados",
+          "position": {
+            "lat": 63.0167,
+            "lon": 7.8117
+          }
+        },
+        "distance_km": 0.36
+      }
+    },
+    {
       "mmsi": "538006218,374032000",
       "vessel_name": "NOBLE GREATWHITE & ATLANTIC TONJER",
       "country": "Marshall Islands,Panama",
@@ -152023,15 +152124,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 8317,
+    "transmission_gaps": 8321,
     "impossible_speeds": 38,
     "loitering": 63,
-    "rendezvous": 3
+    "rendezvous": 4
   },
   "severity_breakdown": {
     "critical": 22,
-    "high": 310,
-    "medium": 2133,
-    "low": 5956
+    "high": 312,
+    "medium": 2135,
+    "low": 5957
   }
 }
