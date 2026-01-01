@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-01-01T20:28:16.786737Z",
+  "timestamp": "2026-01-01T20:47:48.679799Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 259,
-  "total_positions": 41942,
-  "anomalies_detected": 8240,
+  "total_positions": 42067,
+  "anomalies_detected": 8241,
   "anomalies": [
     {
       "mmsi": "273437550",
@@ -18628,6 +18628,24 @@
         "gap_duration_minutes": 1236.9,
         "gap_start": "2025-12-30T23:06:54Z",
         "gap_end": "2025-12-31T19:43:50Z",
+        "last_position": {
+          "lat": 63.7956,
+          "lon": 8.7864
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "412552109",
+      "vessel_name": "ONWASHENZHEN",
+      "country": "China",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2026-01-01T20:29:06Z",
+      "details": {
+        "gap_duration_minutes": 1455.3,
+        "gap_start": "2025-12-31T20:13:50Z",
+        "gap_end": "2026-01-01T20:29:06Z",
         "last_position": {
           "lat": 63.7956,
           "lon": 8.7864
@@ -148667,35 +148685,6 @@
       "country": "Tanzania,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-28T23:17:53Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "677082800",
-          "name": "TORVIND",
-          "country": "Tanzania",
-          "position": {
-            "lat": 63.0139,
-            "lon": 7.8171
-          }
-        },
-        "vessel2": {
-          "mmsi": "304011027",
-          "name": "THESEUS",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 63.0177,
-            "lon": 7.8342
-          }
-        },
-        "distance_km": 0.96
-      }
-    },
-    {
-      "mmsi": "677082800,304011027",
-      "vessel_name": "TORVIND & THESEUS",
-      "country": "Tanzania,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-28T14:47:54Z",
       "details": {
         "vessel1": {
@@ -148714,6 +148703,35 @@
           "position": {
             "lat": 63.0186,
             "lon": 7.8352
+          }
+        },
+        "distance_km": 0.96
+      }
+    },
+    {
+      "mmsi": "677082800,304011027",
+      "vessel_name": "TORVIND & THESEUS",
+      "country": "Tanzania,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-28T23:17:53Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "677082800",
+          "name": "TORVIND",
+          "country": "Tanzania",
+          "position": {
+            "lat": 63.0139,
+            "lon": 7.8171
+          }
+        },
+        "vessel2": {
+          "mmsi": "304011027",
+          "name": "THESEUS",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 63.0177,
+            "lon": 7.8342
           }
         },
         "distance_km": 0.96
@@ -148783,35 +148801,6 @@
       "country": "Barbados,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-01T10:30:37Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314512000",
-          "name": "ALEXANDRA",
-          "country": "Barbados",
-          "position": {
-            "lat": 59.1222,
-            "lon": 9.6154
-          }
-        },
-        "vessel2": {
-          "mmsi": "636019172",
-          "name": "CHEM MIA",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.1158,
-            "lon": 9.6263
-          }
-        },
-        "distance_km": 0.95
-      }
-    },
-    {
-      "mmsi": "314512000,636019172",
-      "vessel_name": "ALEXANDRA & CHEM MIA",
-      "country": "Barbados,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-31T14:42:33Z",
       "details": {
         "vessel1": {
@@ -148829,6 +148818,35 @@
           "country": "Liberia",
           "position": {
             "lat": 59.1159,
+            "lon": 9.6263
+          }
+        },
+        "distance_km": 0.95
+      }
+    },
+    {
+      "mmsi": "314512000,636019172",
+      "vessel_name": "ALEXANDRA & CHEM MIA",
+      "country": "Barbados,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-01-01T10:30:37Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314512000",
+          "name": "ALEXANDRA",
+          "country": "Barbados",
+          "position": {
+            "lat": 59.1222,
+            "lon": 9.6154
+          }
+        },
+        "vessel2": {
+          "mmsi": "636019172",
+          "name": "CHEM MIA",
+          "country": "Liberia",
+          "position": {
+            "lat": 59.1158,
             "lon": 9.6263
           }
         },
@@ -148866,14 +148884,14 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 8123,
+    "transmission_gaps": 8124,
     "impossible_speeds": 44,
     "loitering": 66,
     "rendezvous": 7
   },
   "severity_breakdown": {
     "critical": 23,
-    "high": 420,
+    "high": 421,
     "medium": 2237,
     "low": 5560
   }
