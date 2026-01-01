@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-01-01T12:14:04.431335Z",
+  "timestamp": "2026-01-01T12:33:17.657443Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 257,
-  "total_positions": 42371,
-  "anomalies_detected": 8407,
+  "total_positions": 42495,
+  "anomalies_detected": 8408,
   "anomalies": [
     {
       "mmsi": "273437550",
@@ -77874,6 +77874,24 @@
       }
     },
     {
+      "mmsi": "677049600",
+      "vessel_name": "SC 609",
+      "country": "Tanzania",
+      "anomaly_type": "transmission_gap",
+      "severity": "critical",
+      "detected_at": "2026-01-01T10:47:40Z",
+      "details": {
+        "gap_duration_minutes": 351.0,
+        "gap_start": "2026-01-01T04:56:40Z",
+        "gap_end": "2026-01-01T10:47:40Z",
+        "last_position": {
+          "lat": 80.87,
+          "lon": 23.6133
+        },
+        "near_border": true
+      }
+    },
+    {
       "mmsi": "636015145",
       "vessel_name": "OSX 1",
       "country": "Liberia",
@@ -151787,35 +151805,6 @@
       "country": "Barbados,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-31T14:42:33Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314512000",
-          "name": "ALEXANDRA",
-          "country": "Barbados",
-          "position": {
-            "lat": 59.1222,
-            "lon": 9.6154
-          }
-        },
-        "vessel2": {
-          "mmsi": "636019172",
-          "name": "CHEM MIA",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.1159,
-            "lon": 9.6263
-          }
-        },
-        "distance_km": 0.95
-      }
-    },
-    {
-      "mmsi": "314512000,636019172",
-      "vessel_name": "ALEXANDRA & CHEM MIA",
-      "country": "Barbados,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-01-01T10:30:37Z",
       "details": {
         "vessel1": {
@@ -151838,16 +151827,45 @@
         },
         "distance_km": 0.95
       }
+    },
+    {
+      "mmsi": "314512000,636019172",
+      "vessel_name": "ALEXANDRA & CHEM MIA",
+      "country": "Barbados,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-31T14:42:33Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314512000",
+          "name": "ALEXANDRA",
+          "country": "Barbados",
+          "position": {
+            "lat": 59.1222,
+            "lon": 9.6154
+          }
+        },
+        "vessel2": {
+          "mmsi": "636019172",
+          "name": "CHEM MIA",
+          "country": "Liberia",
+          "position": {
+            "lat": 59.1159,
+            "lon": 9.6263
+          }
+        },
+        "distance_km": 0.95
+      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 8289,
+    "transmission_gaps": 8290,
     "impossible_speeds": 40,
     "loitering": 71,
     "rendezvous": 7
   },
   "severity_breakdown": {
-    "critical": 20,
+    "critical": 21,
     "high": 418,
     "medium": 2149,
     "low": 5820
