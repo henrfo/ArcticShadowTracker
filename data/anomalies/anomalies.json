@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-01-01T21:27:10.136099Z",
+  "timestamp": "2026-01-01T21:46:34.351954Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 260,
-  "total_positions": 42203,
-  "anomalies_detected": 8162,
+  "total_positions": 42212,
+  "anomalies_detected": 8164,
   "anomalies": [
     {
       "mmsi": "273437550",
@@ -121506,6 +121506,24 @@
       }
     },
     {
+      "mmsi": "273213010",
+      "vessel_name": "OBELIAI",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-01-01T21:37:19Z",
+      "details": {
+        "gap_duration_minutes": 30.2,
+        "gap_start": "2026-01-01T21:07:08Z",
+        "gap_end": "2026-01-01T21:37:19Z",
+        "last_position": {
+          "lat": 72.5436,
+          "lon": 16.5079
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "305279000",
       "vessel_name": "ROVA STONES",
       "country": "Antigua and Barbuda",
@@ -144492,6 +144510,24 @@
       }
     },
     {
+      "mmsi": "273254860",
+      "vessel_name": "KAPITAN TARAN",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-01-01T21:39:23Z",
+      "details": {
+        "gap_duration_minutes": 30.0,
+        "gap_start": "2026-01-01T21:09:22Z",
+        "gap_end": "2026-01-01T21:39:23Z",
+        "last_position": {
+          "lat": 72.2817,
+          "lon": 25.4433
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "248886000",
       "vessel_name": "TRANS FJELL",
       "country": "Malta",
@@ -147379,35 +147415,6 @@
       "country": "Barbados,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-31T14:42:33Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314512000",
-          "name": "ALEXANDRA",
-          "country": "Barbados",
-          "position": {
-            "lat": 59.1222,
-            "lon": 9.6154
-          }
-        },
-        "vessel2": {
-          "mmsi": "636019172",
-          "name": "CHEM MIA",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.1159,
-            "lon": 9.6263
-          }
-        },
-        "distance_km": 0.95
-      }
-    },
-    {
-      "mmsi": "314512000,636019172",
-      "vessel_name": "ALEXANDRA & CHEM MIA",
-      "country": "Barbados,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-01-01T10:30:37Z",
       "details": {
         "vessel1": {
@@ -147425,6 +147432,35 @@
           "country": "Liberia",
           "position": {
             "lat": 59.1158,
+            "lon": 9.6263
+          }
+        },
+        "distance_km": 0.95
+      }
+    },
+    {
+      "mmsi": "314512000,636019172",
+      "vessel_name": "ALEXANDRA & CHEM MIA",
+      "country": "Barbados,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-31T14:42:33Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314512000",
+          "name": "ALEXANDRA",
+          "country": "Barbados",
+          "position": {
+            "lat": 59.1222,
+            "lon": 9.6154
+          }
+        },
+        "vessel2": {
+          "mmsi": "636019172",
+          "name": "CHEM MIA",
+          "country": "Liberia",
+          "position": {
+            "lat": 59.1159,
             "lon": 9.6263
           }
         },
@@ -147462,7 +147498,7 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 8045,
+    "transmission_gaps": 8047,
     "impossible_speeds": 44,
     "loitering": 66,
     "rendezvous": 7
@@ -147471,6 +147507,6 @@
     "critical": 23,
     "high": 421,
     "medium": 2244,
-    "low": 5474
+    "low": 5476
   }
 }
