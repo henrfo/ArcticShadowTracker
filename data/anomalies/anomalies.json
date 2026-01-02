@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-01-02T22:02:39.316462Z",
+  "timestamp": "2026-01-02T22:22:10.010976Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 266,
-  "total_positions": 40863,
-  "anomalies_detected": 8940,
+  "total_positions": 40878,
+  "anomalies_detected": 8945,
   "anomalies": [
     {
       "mmsi": "273437550",
@@ -22632,6 +22632,24 @@
       }
     },
     {
+      "mmsi": "412552109",
+      "vessel_name": "ONWASHENZHEN",
+      "country": "China",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2026-01-02T22:17:45Z",
+      "details": {
+        "gap_duration_minutes": 90.0,
+        "gap_start": "2026-01-02T20:47:45Z",
+        "gap_end": "2026-01-02T22:17:45Z",
+        "last_position": {
+          "lat": 63.7956,
+          "lon": 8.7863
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "412703860",
       "vessel_name": "HUA XIN 858",
       "country": "China",
@@ -42100,6 +42118,24 @@
         "gap_duration_minutes": 71.3,
         "gap_start": "2026-01-02T20:10:45Z",
         "gap_end": "2026-01-02T21:22:05.597446Z",
+        "last_position": {
+          "lat": 65.1433,
+          "lon": 7.43
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "538004905",
+      "vessel_name": "TO.SPITSBERGEN",
+      "country": "Marshall Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-01-02T22:21:21.709389Z",
+      "details": {
+        "gap_duration_minutes": 34.6,
+        "gap_start": "2026-01-02T21:46:46Z",
+        "gap_end": "2026-01-02T22:21:21.709389Z",
         "last_position": {
           "lat": 65.1433,
           "lon": 7.43
@@ -146436,6 +146472,24 @@
       }
     },
     {
+      "mmsi": "412421134",
+      "vessel_name": "XIN SHI JI 65",
+      "country": "China",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2026-01-02T20:40:09Z",
+      "details": {
+        "gap_duration_minutes": 1574.9,
+        "gap_start": "2026-01-01T18:25:15Z",
+        "gap_end": "2026-01-02T20:40:09Z",
+        "last_position": {
+          "lat": 74.56,
+          "lon": 17.5867
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "352002691",
       "vessel_name": "PACIFIC SUCCESS",
       "country": "Panama",
@@ -159810,6 +159864,33 @@
       }
     },
     {
+      "mmsi": "412421134",
+      "vessel_name": "XIN SHI JI 65",
+      "country": "China",
+      "anomaly_type": "impossible_speed",
+      "severity": "low",
+      "detected_at": "2026-01-02T20:40:09Z",
+      "details": {
+        "calculated_speed_knots": 15.6,
+        "max_allowed_knots": 15,
+        "vessel_type": "Fishing",
+        "distance_km": 760.16,
+        "time_delta_minutes": 1574.9,
+        "positions": [
+          {
+            "lat": 74.56,
+            "lon": 17.5867,
+            "time": "2026-01-01T18:25:15Z"
+          },
+          {
+            "lat": 72.8467,
+            "lon": -6.1867,
+            "time": "2026-01-02T20:40:09Z"
+          }
+        ]
+      }
+    },
+    {
       "mmsi": "677049600",
       "vessel_name": "SC 609",
       "country": "Tanzania",
@@ -161204,6 +161285,25 @@
       }
     },
     {
+      "mmsi": "538010879",
+      "vessel_name": "PUPLINGE",
+      "country": "Marshall Islands",
+      "anomaly_type": "loitering",
+      "severity": "medium",
+      "detected_at": "2026-01-02T22:21:18Z",
+      "details": {
+        "duration_hours": 6.0,
+        "radius_km": 5,
+        "center_position": {
+          "lat": 68.4163,
+          "lon": 17.4169
+        },
+        "start_time": "2026-01-02T16:21:18Z",
+        "end_time": "2026-01-02T22:21:18Z",
+        "position_count": 13
+      }
+    },
+    {
       "mmsi": "636021570",
       "vessel_name": "STIKLESTAD",
       "country": "Liberia",
@@ -161401,35 +161501,6 @@
       "country": "Barbados,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-31T14:42:33Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314512000",
-          "name": "ALEXANDRA",
-          "country": "Barbados",
-          "position": {
-            "lat": 59.1222,
-            "lon": 9.6154
-          }
-        },
-        "vessel2": {
-          "mmsi": "636019172",
-          "name": "CHEM MIA",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.1159,
-            "lon": 9.6263
-          }
-        },
-        "distance_km": 0.95
-      }
-    },
-    {
-      "mmsi": "314512000,636019172",
-      "vessel_name": "ALEXANDRA & CHEM MIA",
-      "country": "Barbados,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-01-01T10:30:37Z",
       "details": {
         "vessel1": {
@@ -161447,6 +161518,35 @@
           "country": "Liberia",
           "position": {
             "lat": 59.1158,
+            "lon": 9.6263
+          }
+        },
+        "distance_km": 0.95
+      }
+    },
+    {
+      "mmsi": "314512000,636019172",
+      "vessel_name": "ALEXANDRA & CHEM MIA",
+      "country": "Barbados,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2025-12-31T14:42:33Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "314512000",
+          "name": "ALEXANDRA",
+          "country": "Barbados",
+          "position": {
+            "lat": 59.1222,
+            "lon": 9.6154
+          }
+        },
+        "vessel2": {
+          "mmsi": "636019172",
+          "name": "CHEM MIA",
+          "country": "Liberia",
+          "position": {
+            "lat": 59.1159,
             "lon": 9.6263
           }
         },
@@ -161484,15 +161584,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 8821,
-    "impossible_speeds": 46,
-    "loitering": 66,
+    "transmission_gaps": 8824,
+    "impossible_speeds": 47,
+    "loitering": 67,
     "rendezvous": 7
   },
   "severity_breakdown": {
     "critical": 21,
-    "high": 427,
-    "medium": 2504,
-    "low": 5988
+    "high": 428,
+    "medium": 2506,
+    "low": 5990
   }
 }
