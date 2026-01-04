@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-01-04T15:14:37.844057Z",
+  "timestamp": "2026-01-04T15:34:28.195512Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 269,
-  "total_positions": 41008,
-  "anomalies_detected": 9968,
+  "total_positions": 41024,
+  "anomalies_detected": 9973,
   "anomalies": [
     {
       "mmsi": "273437550",
@@ -1963,6 +1963,24 @@
         "last_position": {
           "lat": 72.0883,
           "lon": 16.44
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "273437550",
+      "vessel_name": "VITYAZ",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-01-04T15:32:36Z",
+      "details": {
+        "gap_duration_minutes": 48.0,
+        "gap_start": "2026-01-04T14:44:37Z",
+        "gap_end": "2026-01-04T15:32:36Z",
+        "last_position": {
+          "lat": 72.0543,
+          "lon": 16.4601
         },
         "near_border": false
       }
@@ -123540,6 +123558,24 @@
       }
     },
     {
+      "mmsi": "413559690",
+      "vessel_name": "RUN HAI XIANG YANG",
+      "country": "China",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2026-01-04T13:42:05Z",
+      "details": {
+        "gap_duration_minutes": 9227.4,
+        "gap_start": "2025-12-29T03:54:42Z",
+        "gap_end": "2026-01-04T13:42:05Z",
+        "last_position": {
+          "lat": 72.1467,
+          "lon": 18.6667
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "248669000",
       "vessel_name": "EAGLE SAN FRANCISCO",
       "country": "Malta",
@@ -160836,6 +160872,24 @@
       }
     },
     {
+      "mmsi": "273510600",
+      "vessel_name": "KAPITAN ROGOZIN",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-01-04T15:33:45Z",
+      "details": {
+        "gap_duration_minutes": 50.8,
+        "gap_start": "2026-01-04T14:42:55Z",
+        "gap_end": "2026-01-04T15:33:45Z",
+        "last_position": {
+          "lat": 73.7886,
+          "lon": 32.1234
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "314473000",
       "vessel_name": "WILSON WISLA",
       "country": "Barbados",
@@ -167725,6 +167779,24 @@
         "last_position": {
           "lat": 77.0433,
           "lon": 12.93
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "273398460",
+      "vessel_name": "KAPITAN DEMIDENKO",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-01-04T15:32:03Z",
+      "details": {
+        "gap_duration_minutes": 47.6,
+        "gap_start": "2026-01-04T14:44:27Z",
+        "gap_end": "2026-01-04T15:32:03Z",
+        "last_position": {
+          "lat": 77.0436,
+          "lon": 12.8868
         },
         "near_border": false
       }
@@ -177729,6 +177801,33 @@
       }
     },
     {
+      "mmsi": "248669000",
+      "vessel_name": "EAGLE SAN FRANCISCO",
+      "country": "Malta",
+      "anomaly_type": "impossible_speed",
+      "severity": "critical",
+      "detected_at": "2026-01-04T15:33:56.660943Z",
+      "details": {
+        "calculated_speed_knots": 80.9,
+        "max_allowed_knots": 20,
+        "vessel_type": "Tanker",
+        "distance_km": 49.48,
+        "time_delta_minutes": 19.8,
+        "positions": [
+          {
+            "lat": 58.6101,
+            "lon": 3.9536,
+            "time": "2026-01-04T15:14:08.527971Z"
+          },
+          {
+            "lat": 58.1662,
+            "lon": 3.8958,
+            "time": "2026-01-04T15:33:56.660943Z"
+          }
+        ]
+      }
+    },
+    {
       "mmsi": "273897000",
       "vessel_name": "MYS SLEPIKOVSKOGO",
       "country": "Russia",
@@ -179910,7 +180009,7 @@
       "country": "Panama,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-03T21:29:45Z",
+      "detected_at": "2026-01-03T10:05:45Z",
       "details": {
         "vessel1": {
           "mmsi": "352005698",
@@ -179939,7 +180038,7 @@
       "country": "Panama,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-03T10:05:45Z",
+      "detected_at": "2026-01-03T21:29:45Z",
       "details": {
         "vessel1": {
           "mmsi": "352005698",
@@ -179960,35 +180059,6 @@
           }
         },
         "distance_km": 0.05
-      }
-    },
-    {
-      "mmsi": "636019172,256243000",
-      "vessel_name": "CHEM MIA & DRAWSKO",
-      "country": "Liberia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-01-03T11:02:35Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "636019172",
-          "name": "CHEM MIA",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.1158,
-            "lon": 9.6263
-          }
-        },
-        "vessel2": {
-          "mmsi": "256243000",
-          "name": "DRAWSKO",
-          "country": "Malta",
-          "position": {
-            "lat": 59.1174,
-            "lon": 9.6215
-          }
-        },
-        "distance_km": 0.33
       }
     },
     {
@@ -180021,32 +180091,32 @@
       }
     },
     {
-      "mmsi": "273398460,273523300",
-      "vessel_name": "KAPITAN DEMIDENKO & ALEKSANDR MIRONENKO",
-      "country": "Russia,Russia",
+      "mmsi": "636019172,256243000",
+      "vessel_name": "CHEM MIA & DRAWSKO",
+      "country": "Liberia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-03T23:28:08Z",
+      "detected_at": "2026-01-03T11:02:35Z",
       "details": {
         "vessel1": {
-          "mmsi": "273398460",
-          "name": "KAPITAN DEMIDENKO",
-          "country": "Russia",
+          "mmsi": "636019172",
+          "name": "CHEM MIA",
+          "country": "Liberia",
           "position": {
-            "lat": 77.0162,
-            "lon": 13.3866
+            "lat": 59.1158,
+            "lon": 9.6263
           }
         },
         "vessel2": {
-          "mmsi": "273523300",
-          "name": "ALEKSANDR MIRONENKO",
-          "country": "Russia",
+          "mmsi": "256243000",
+          "name": "DRAWSKO",
+          "country": "Malta",
           "position": {
-            "lat": 77.0162,
-            "lon": 13.3876
+            "lat": 59.1174,
+            "lon": 9.6215
           }
         },
-        "distance_km": 0.03
+        "distance_km": 0.33
       }
     },
     {
@@ -180077,18 +180147,47 @@
         },
         "distance_km": 0.03
       }
+    },
+    {
+      "mmsi": "273398460,273523300",
+      "vessel_name": "KAPITAN DEMIDENKO & ALEKSANDR MIRONENKO",
+      "country": "Russia,Russia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-01-03T23:28:08Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273398460",
+          "name": "KAPITAN DEMIDENKO",
+          "country": "Russia",
+          "position": {
+            "lat": 77.0162,
+            "lon": 13.3866
+          }
+        },
+        "vessel2": {
+          "mmsi": "273523300",
+          "name": "ALEKSANDR MIRONENKO",
+          "country": "Russia",
+          "position": {
+            "lat": 77.0162,
+            "lon": 13.3876
+          }
+        },
+        "distance_km": 0.03
+      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 9839,
-    "impossible_speeds": 50,
+    "transmission_gaps": 9843,
+    "impossible_speeds": 51,
     "loitering": 67,
     "rendezvous": 12
   },
   "severity_breakdown": {
-    "critical": 24,
-    "high": 447,
+    "critical": 25,
+    "high": 448,
     "medium": 2656,
-    "low": 6841
+    "low": 6844
   }
 }
