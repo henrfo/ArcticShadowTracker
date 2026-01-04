@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-01-04T14:54:54.489997Z",
+  "timestamp": "2026-01-04T15:14:37.844057Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 269,
-  "total_positions": 40877,
-  "anomalies_detected": 9967,
+  "total_positions": 41008,
+  "anomalies_detected": 9968,
   "anomalies": [
     {
       "mmsi": "273437550",
@@ -148434,6 +148434,24 @@
       }
     },
     {
+      "mmsi": "249967000",
+      "vessel_name": "POLA ANISIA",
+      "country": "Malta",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2026-01-04T12:20:09Z",
+      "details": {
+        "gap_duration_minutes": 243.6,
+        "gap_start": "2026-01-04T08:16:32Z",
+        "gap_end": "2026-01-04T12:20:09Z",
+        "last_position": {
+          "lat": 71.6796,
+          "lon": 29.3609
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "412460073",
       "vessel_name": "HUA NAN YU 731",
       "country": "China",
@@ -179834,35 +179852,6 @@
       "country": "Barbados,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-01T10:30:37Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314512000",
-          "name": "ALEXANDRA",
-          "country": "Barbados",
-          "position": {
-            "lat": 59.1222,
-            "lon": 9.6154
-          }
-        },
-        "vessel2": {
-          "mmsi": "636019172",
-          "name": "CHEM MIA",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.1158,
-            "lon": 9.6263
-          }
-        },
-        "distance_km": 0.95
-      }
-    },
-    {
-      "mmsi": "314512000,636019172",
-      "vessel_name": "ALEXANDRA & CHEM MIA",
-      "country": "Barbados,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2025-12-31T14:42:33Z",
       "details": {
         "vessel1": {
@@ -179887,32 +179876,32 @@
       }
     },
     {
-      "mmsi": "352005698,352005700",
-      "vessel_name": "MOBILE VIKING & MOBILE VOYAGER",
-      "country": "Panama,Panama",
+      "mmsi": "314512000,636019172",
+      "vessel_name": "ALEXANDRA & CHEM MIA",
+      "country": "Barbados,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-03T10:05:45Z",
+      "detected_at": "2026-01-01T10:30:37Z",
       "details": {
         "vessel1": {
-          "mmsi": "352005698",
-          "name": "MOBILE VIKING",
-          "country": "Panama",
+          "mmsi": "314512000",
+          "name": "ALEXANDRA",
+          "country": "Barbados",
           "position": {
-            "lat": 59.4257,
-            "lon": 10.4833
+            "lat": 59.1222,
+            "lon": 9.6154
           }
         },
         "vessel2": {
-          "mmsi": "352005700",
-          "name": "MOBILE VOYAGER",
-          "country": "Panama",
+          "mmsi": "636019172",
+          "name": "CHEM MIA",
+          "country": "Liberia",
           "position": {
-            "lat": 59.4256,
-            "lon": 10.4842
+            "lat": 59.1158,
+            "lon": 9.6263
           }
         },
-        "distance_km": 0.05
+        "distance_km": 0.95
       }
     },
     {
@@ -179945,32 +179934,32 @@
       }
     },
     {
-      "mmsi": "636019172,256243000",
-      "vessel_name": "CHEM MIA & DRAWSKO",
-      "country": "Liberia,Malta",
+      "mmsi": "352005698,352005700",
+      "vessel_name": "MOBILE VIKING & MOBILE VOYAGER",
+      "country": "Panama,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-03T10:44:35Z",
+      "detected_at": "2026-01-03T10:05:45Z",
       "details": {
         "vessel1": {
-          "mmsi": "636019172",
-          "name": "CHEM MIA",
-          "country": "Liberia",
+          "mmsi": "352005698",
+          "name": "MOBILE VIKING",
+          "country": "Panama",
           "position": {
-            "lat": 59.1158,
-            "lon": 9.6263
+            "lat": 59.4257,
+            "lon": 10.4833
           }
         },
         "vessel2": {
-          "mmsi": "256243000",
-          "name": "DRAWSKO",
-          "country": "Malta",
+          "mmsi": "352005700",
+          "name": "MOBILE VOYAGER",
+          "country": "Panama",
           "position": {
-            "lat": 59.1173,
-            "lon": 9.6215
+            "lat": 59.4256,
+            "lon": 10.4842
           }
         },
-        "distance_km": 0.32
+        "distance_km": 0.05
       }
     },
     {
@@ -180000,6 +179989,35 @@
           }
         },
         "distance_km": 0.33
+      }
+    },
+    {
+      "mmsi": "636019172,256243000",
+      "vessel_name": "CHEM MIA & DRAWSKO",
+      "country": "Liberia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-01-03T10:44:35Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "636019172",
+          "name": "CHEM MIA",
+          "country": "Liberia",
+          "position": {
+            "lat": 59.1158,
+            "lon": 9.6263
+          }
+        },
+        "vessel2": {
+          "mmsi": "256243000",
+          "name": "DRAWSKO",
+          "country": "Malta",
+          "position": {
+            "lat": 59.1173,
+            "lon": 9.6215
+          }
+        },
+        "distance_km": 0.32
       }
     },
     {
@@ -180062,14 +180080,14 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 9838,
+    "transmission_gaps": 9839,
     "impossible_speeds": 50,
     "loitering": 67,
     "rendezvous": 12
   },
   "severity_breakdown": {
     "critical": 24,
-    "high": 446,
+    "high": 447,
     "medium": 2656,
     "low": 6841
   }
