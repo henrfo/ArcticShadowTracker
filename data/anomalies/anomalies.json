@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-01-05T19:36:31.012386Z",
+  "timestamp": "2026-01-05T19:56:13.518886Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 266,
-  "total_positions": 40311,
-  "anomalies_detected": 9938,
+  "total_positions": 40433,
+  "anomalies_detected": 9939,
   "anomalies": [
     {
       "mmsi": "273437550",
@@ -136482,6 +136482,24 @@
       }
     },
     {
+      "mmsi": "314475000",
+      "vessel_name": "WILSON MONSOON",
+      "country": "Barbados",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-01-05T19:52:35Z",
+      "details": {
+        "gap_duration_minutes": 60.0,
+        "gap_start": "2026-01-05T18:52:35Z",
+        "gap_end": "2026-01-05T19:52:35Z",
+        "last_position": {
+          "lat": 66.8086,
+          "lon": 13.9349
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "273434350",
       "vessel_name": "ARARAT",
       "country": "Russia",
@@ -179245,35 +179263,6 @@
       "country": "Barbados,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2025-12-31T14:42:33Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "314512000",
-          "name": "ALEXANDRA",
-          "country": "Barbados",
-          "position": {
-            "lat": 59.1222,
-            "lon": 9.6154
-          }
-        },
-        "vessel2": {
-          "mmsi": "636019172",
-          "name": "CHEM MIA",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.1159,
-            "lon": 9.6263
-          }
-        },
-        "distance_km": 0.95
-      }
-    },
-    {
-      "mmsi": "314512000,636019172",
-      "vessel_name": "ALEXANDRA & CHEM MIA",
-      "country": "Barbados,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-01-01T10:30:37Z",
       "details": {
         "vessel1": {
@@ -179298,61 +179287,32 @@
       }
     },
     {
-      "mmsi": "352005698,352005700",
-      "vessel_name": "MOBILE VIKING & MOBILE VOYAGER",
-      "country": "Panama,Panama",
+      "mmsi": "314512000,636019172",
+      "vessel_name": "ALEXANDRA & CHEM MIA",
+      "country": "Barbados,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-03T21:29:45Z",
+      "detected_at": "2025-12-31T14:42:33Z",
       "details": {
         "vessel1": {
-          "mmsi": "352005698",
-          "name": "MOBILE VIKING",
-          "country": "Panama",
+          "mmsi": "314512000",
+          "name": "ALEXANDRA",
+          "country": "Barbados",
           "position": {
-            "lat": 59.4257,
-            "lon": 10.4833
+            "lat": 59.1222,
+            "lon": 9.6154
           }
         },
         "vessel2": {
-          "mmsi": "352005700",
-          "name": "MOBILE VOYAGER",
-          "country": "Panama",
+          "mmsi": "636019172",
+          "name": "CHEM MIA",
+          "country": "Liberia",
           "position": {
-            "lat": 59.4256,
-            "lon": 10.4842
+            "lat": 59.1159,
+            "lon": 9.6263
           }
         },
-        "distance_km": 0.05
-      }
-    },
-    {
-      "mmsi": "352005698,352005700",
-      "vessel_name": "MOBILE VIKING & MOBILE VOYAGER",
-      "country": "Panama,Panama",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-01-03T10:05:45Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "352005698",
-          "name": "MOBILE VIKING",
-          "country": "Panama",
-          "position": {
-            "lat": 59.4257,
-            "lon": 10.4833
-          }
-        },
-        "vessel2": {
-          "mmsi": "352005700",
-          "name": "MOBILE VOYAGER",
-          "country": "Panama",
-          "position": {
-            "lat": 59.4256,
-            "lon": 10.4842
-          }
-        },
-        "distance_km": 0.05
+        "distance_km": 0.95
       }
     },
     {
@@ -179390,7 +179350,65 @@
       "country": "Panama,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2026-01-03T21:29:45Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "352005698",
+          "name": "MOBILE VIKING",
+          "country": "Panama",
+          "position": {
+            "lat": 59.4257,
+            "lon": 10.4833
+          }
+        },
+        "vessel2": {
+          "mmsi": "352005700",
+          "name": "MOBILE VOYAGER",
+          "country": "Panama",
+          "position": {
+            "lat": 59.4256,
+            "lon": 10.4842
+          }
+        },
+        "distance_km": 0.05
+      }
+    },
+    {
+      "mmsi": "352005698,352005700",
+      "vessel_name": "MOBILE VIKING & MOBILE VOYAGER",
+      "country": "Panama,Panama",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2026-01-05T18:53:45Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "352005698",
+          "name": "MOBILE VIKING",
+          "country": "Panama",
+          "position": {
+            "lat": 59.4257,
+            "lon": 10.4833
+          }
+        },
+        "vessel2": {
+          "mmsi": "352005700",
+          "name": "MOBILE VOYAGER",
+          "country": "Panama",
+          "position": {
+            "lat": 59.4256,
+            "lon": 10.4842
+          }
+        },
+        "distance_km": 0.05
+      }
+    },
+    {
+      "mmsi": "352005698,352005700",
+      "vessel_name": "MOBILE VIKING & MOBILE VOYAGER",
+      "country": "Panama,Panama",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-01-03T10:05:45Z",
       "details": {
         "vessel1": {
           "mmsi": "352005698",
@@ -179560,7 +179578,7 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 9817,
+    "transmission_gaps": 9818,
     "impossible_speeds": 51,
     "loitering": 56,
     "rendezvous": 14
@@ -179569,6 +179587,6 @@
     "critical": 28,
     "high": 480,
     "medium": 3065,
-    "low": 6365
+    "low": 6366
   }
 }
