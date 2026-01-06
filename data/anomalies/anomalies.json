@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-01-06T05:08:08.122802Z",
+  "timestamp": "2026-01-06T05:28:00.613628Z",
   "analysis_period_days": 7,
-  "vessels_analyzed": 271,
-  "total_positions": 40489,
-  "anomalies_detected": 10006,
+  "vessels_analyzed": 272,
+  "total_positions": 40612,
+  "anomalies_detected": 10007,
   "anomalies": [
     {
       "mmsi": "273437550",
@@ -174156,6 +174156,24 @@
       }
     },
     {
+      "mmsi": "352002808",
+      "vessel_name": "BOSFOR",
+      "country": "Panama",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2026-01-06T05:27:27.698468Z",
+      "details": {
+        "gap_duration_minutes": 83.7,
+        "gap_start": "2026-01-06T04:03:44Z",
+        "gap_end": "2026-01-06T05:27:27.698468Z",
+        "last_position": {
+          "lat": 64.1208,
+          "lon": 5.4446
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "305497000",
       "vessel_name": "KEIT",
       "country": "Antigua and Barbuda",
@@ -180543,36 +180561,7 @@
       "country": "Panama,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-03T10:05:45Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "352005698",
-          "name": "MOBILE VIKING",
-          "country": "Panama",
-          "position": {
-            "lat": 59.4257,
-            "lon": 10.4833
-          }
-        },
-        "vessel2": {
-          "mmsi": "352005700",
-          "name": "MOBILE VOYAGER",
-          "country": "Panama",
-          "position": {
-            "lat": 59.4256,
-            "lon": 10.4842
-          }
-        },
-        "distance_km": 0.05
-      }
-    },
-    {
-      "mmsi": "352005698,352005700",
-      "vessel_name": "MOBILE VIKING & MOBILE VOYAGER",
-      "country": "Panama,Panama",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-01-03T21:29:45Z",
+      "detected_at": "2026-01-05T18:53:45Z",
       "details": {
         "vessel1": {
           "mmsi": "352005698",
@@ -180630,7 +180619,36 @@
       "country": "Panama,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-05T18:53:45Z",
+      "detected_at": "2026-01-03T10:05:45Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "352005698",
+          "name": "MOBILE VIKING",
+          "country": "Panama",
+          "position": {
+            "lat": 59.4257,
+            "lon": 10.4833
+          }
+        },
+        "vessel2": {
+          "mmsi": "352005700",
+          "name": "MOBILE VOYAGER",
+          "country": "Panama",
+          "position": {
+            "lat": 59.4256,
+            "lon": 10.4842
+          }
+        },
+        "distance_km": 0.05
+      }
+    },
+    {
+      "mmsi": "352005698,352005700",
+      "vessel_name": "MOBILE VIKING & MOBILE VOYAGER",
+      "country": "Panama,Panama",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-01-03T21:29:45Z",
       "details": {
         "vessel1": {
           "mmsi": "352005698",
@@ -180659,7 +180677,7 @@
       "country": "Liberia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-03T11:02:35Z",
+      "detected_at": "2026-01-05T10:46:30Z",
       "details": {
         "vessel1": {
           "mmsi": "636019172",
@@ -180676,7 +180694,7 @@
           "country": "Malta",
           "position": {
             "lat": 59.1174,
-            "lon": 9.6215
+            "lon": 9.6214
           }
         },
         "distance_km": 0.33
@@ -180717,7 +180735,7 @@
       "country": "Liberia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-05T10:46:30Z",
+      "detected_at": "2026-01-03T11:02:35Z",
       "details": {
         "vessel1": {
           "mmsi": "636019172",
@@ -180734,7 +180752,7 @@
           "country": "Malta",
           "position": {
             "lat": 59.1174,
-            "lon": 9.6214
+            "lon": 9.6215
           }
         },
         "distance_km": 0.33
@@ -180800,7 +180818,7 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 9885,
+    "transmission_gaps": 9886,
     "impossible_speeds": 53,
     "loitering": 54,
     "rendezvous": 14
@@ -180808,7 +180826,7 @@
   "severity_breakdown": {
     "critical": 30,
     "high": 482,
-    "medium": 3116,
+    "medium": 3117,
     "low": 6378
   }
 }
