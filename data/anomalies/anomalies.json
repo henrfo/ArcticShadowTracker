@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-01-06T22:12:13.819929Z",
+  "timestamp": "2026-01-06T22:31:30.021411Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 282,
-  "total_positions": 39828,
+  "total_positions": 39840,
   "anomalies_detected": 10162,
   "anomalies": [
     {
@@ -4573,6 +4573,24 @@
         "last_position": {
           "lat": 72.4218,
           "lon": 16.7492
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "273213010",
+      "vessel_name": "OBELIAI",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2026-01-06T22:28:18Z",
+      "details": {
+        "gap_duration_minutes": 90.0,
+        "gap_start": "2026-01-06T20:58:18Z",
+        "gap_end": "2026-01-06T22:28:18Z",
+        "last_position": {
+          "lat": 72.39,
+          "lon": 16.54
         },
         "near_border": false
       }
@@ -21097,24 +21115,6 @@
         "last_position": {
           "lat": 57.4872,
           "lon": 5.0621
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "412552109",
-      "vessel_name": "ONWASHENZHEN",
-      "country": "China",
-      "anomaly_type": "transmission_gap",
-      "severity": "medium",
-      "detected_at": "2025-12-30T22:38:34Z",
-      "details": {
-        "gap_duration_minutes": 97.2,
-        "gap_start": "2025-12-30T21:01:24Z",
-        "gap_end": "2025-12-30T22:38:34Z",
-        "last_position": {
-          "lat": 63.7955,
-          "lon": 8.7864
         },
         "near_border": false
       }
@@ -64117,24 +64117,6 @@
         "last_position": {
           "lat": 65.1418,
           "lon": 8.3933
-        },
-        "near_border": false
-      }
-    },
-    {
-      "mmsi": "538011481",
-      "vessel_name": "SUDESTADA",
-      "country": "Marshall Islands",
-      "anomaly_type": "transmission_gap",
-      "severity": "low",
-      "detected_at": "2025-12-30T22:41:52Z",
-      "details": {
-        "gap_duration_minutes": 32.9,
-        "gap_start": "2025-12-30T22:08:57Z",
-        "gap_end": "2025-12-30T22:41:52Z",
-        "last_position": {
-          "lat": 68.4305,
-          "lon": 17.4022
         },
         "near_border": false
       }
@@ -177720,6 +177702,24 @@
       }
     },
     {
+      "mmsi": "273278330",
+      "vessel_name": "ARCTIC VOSTOK",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2026-01-06T22:30:54Z",
+      "details": {
+        "gap_duration_minutes": 93.5,
+        "gap_start": "2026-01-06T20:57:22Z",
+        "gap_end": "2026-01-06T22:30:54Z",
+        "last_position": {
+          "lat": 68.4867,
+          "lon": 9.785
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "538011463",
       "vessel_name": "LONG MEI",
       "country": "Marshall Islands",
@@ -183094,35 +183094,6 @@
       "country": "Malta,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-03T11:02:35Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "256243000",
-          "name": "DRAWSKO",
-          "country": "Malta",
-          "position": {
-            "lat": 59.1174,
-            "lon": 9.6215
-          }
-        },
-        "vessel2": {
-          "mmsi": "636019172",
-          "name": "CHEM MIA",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.1158,
-            "lon": 9.6263
-          }
-        },
-        "distance_km": 0.33
-      }
-    },
-    {
-      "mmsi": "256243000,636019172",
-      "vessel_name": "DRAWSKO & CHEM MIA",
-      "country": "Malta,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-01-03T10:44:35Z",
       "details": {
         "vessel1": {
@@ -183161,6 +183132,35 @@
           "position": {
             "lat": 59.1174,
             "lon": 9.6214
+          }
+        },
+        "vessel2": {
+          "mmsi": "636019172",
+          "name": "CHEM MIA",
+          "country": "Liberia",
+          "position": {
+            "lat": 59.1158,
+            "lon": 9.6263
+          }
+        },
+        "distance_km": 0.33
+      }
+    },
+    {
+      "mmsi": "256243000,636019172",
+      "vessel_name": "DRAWSKO & CHEM MIA",
+      "country": "Malta,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-01-03T11:02:35Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "256243000",
+          "name": "DRAWSKO",
+          "country": "Malta",
+          "position": {
+            "lat": 59.1174,
+            "lon": 9.6215
           }
         },
         "vessel2": {
@@ -183384,94 +183384,7 @@
       "country": "Panama,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-06T06:32:45Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "352005698",
-          "name": "MOBILE VIKING",
-          "country": "Panama",
-          "position": {
-            "lat": 59.4257,
-            "lon": 10.4833
-          }
-        },
-        "vessel2": {
-          "mmsi": "352005700",
-          "name": "MOBILE VOYAGER",
-          "country": "Panama",
-          "position": {
-            "lat": 59.4256,
-            "lon": 10.4842
-          }
-        },
-        "distance_km": 0.05
-      }
-    },
-    {
-      "mmsi": "352005698,352005700",
-      "vessel_name": "MOBILE VIKING & MOBILE VOYAGER",
-      "country": "Panama,Panama",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-01-06T18:47:45Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "352005698",
-          "name": "MOBILE VIKING",
-          "country": "Panama",
-          "position": {
-            "lat": 59.4257,
-            "lon": 10.4833
-          }
-        },
-        "vessel2": {
-          "mmsi": "352005700",
-          "name": "MOBILE VOYAGER",
-          "country": "Panama",
-          "position": {
-            "lat": 59.4256,
-            "lon": 10.4842
-          }
-        },
-        "distance_km": 0.05
-      }
-    },
-    {
-      "mmsi": "352005698,352005700",
-      "vessel_name": "MOBILE VIKING & MOBILE VOYAGER",
-      "country": "Panama,Panama",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-01-05T18:23:46Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "352005698",
-          "name": "MOBILE VIKING",
-          "country": "Panama",
-          "position": {
-            "lat": 59.4257,
-            "lon": 10.4833
-          }
-        },
-        "vessel2": {
-          "mmsi": "352005700",
-          "name": "MOBILE VOYAGER",
-          "country": "Panama",
-          "position": {
-            "lat": 59.4256,
-            "lon": 10.4842
-          }
-        },
-        "distance_km": 0.05
-      }
-    },
-    {
-      "mmsi": "352005698,352005700",
-      "vessel_name": "MOBILE VIKING & MOBILE VOYAGER",
-      "country": "Panama,Panama",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-01-05T18:53:45Z",
+      "detected_at": "2026-01-06T16:26:46Z",
       "details": {
         "vessel1": {
           "mmsi": "352005698",
@@ -183529,7 +183442,7 @@
       "country": "Panama,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-06T16:26:46Z",
+      "detected_at": "2026-01-06T18:47:45Z",
       "details": {
         "vessel1": {
           "mmsi": "352005698",
@@ -183553,32 +183466,90 @@
       }
     },
     {
-      "mmsi": "273398460,273523300",
-      "vessel_name": "KAPITAN DEMIDENKO & ALEKSANDR MIRONENKO",
-      "country": "Russia,Russia",
+      "mmsi": "352005698,352005700",
+      "vessel_name": "MOBILE VIKING & MOBILE VOYAGER",
+      "country": "Panama,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-03T23:28:08Z",
+      "detected_at": "2026-01-06T06:32:45Z",
       "details": {
         "vessel1": {
-          "mmsi": "273398460",
-          "name": "KAPITAN DEMIDENKO",
-          "country": "Russia",
+          "mmsi": "352005698",
+          "name": "MOBILE VIKING",
+          "country": "Panama",
           "position": {
-            "lat": 77.0162,
-            "lon": 13.3866
+            "lat": 59.4257,
+            "lon": 10.4833
           }
         },
         "vessel2": {
-          "mmsi": "273523300",
-          "name": "ALEKSANDR MIRONENKO",
-          "country": "Russia",
+          "mmsi": "352005700",
+          "name": "MOBILE VOYAGER",
+          "country": "Panama",
           "position": {
-            "lat": 77.0162,
-            "lon": 13.3876
+            "lat": 59.4256,
+            "lon": 10.4842
           }
         },
-        "distance_km": 0.03
+        "distance_km": 0.05
+      }
+    },
+    {
+      "mmsi": "352005698,352005700",
+      "vessel_name": "MOBILE VIKING & MOBILE VOYAGER",
+      "country": "Panama,Panama",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-01-05T18:53:45Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "352005698",
+          "name": "MOBILE VIKING",
+          "country": "Panama",
+          "position": {
+            "lat": 59.4257,
+            "lon": 10.4833
+          }
+        },
+        "vessel2": {
+          "mmsi": "352005700",
+          "name": "MOBILE VOYAGER",
+          "country": "Panama",
+          "position": {
+            "lat": 59.4256,
+            "lon": 10.4842
+          }
+        },
+        "distance_km": 0.05
+      }
+    },
+    {
+      "mmsi": "352005698,352005700",
+      "vessel_name": "MOBILE VIKING & MOBILE VOYAGER",
+      "country": "Panama,Panama",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-01-05T18:23:46Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "352005698",
+          "name": "MOBILE VIKING",
+          "country": "Panama",
+          "position": {
+            "lat": 59.4257,
+            "lon": 10.4833
+          }
+        },
+        "vessel2": {
+          "mmsi": "352005700",
+          "name": "MOBILE VOYAGER",
+          "country": "Panama",
+          "position": {
+            "lat": 59.4256,
+            "lon": 10.4842
+          }
+        },
+        "distance_km": 0.05
       }
     },
     {
@@ -183609,6 +183580,35 @@
         },
         "distance_km": 0.03
       }
+    },
+    {
+      "mmsi": "273398460,273523300",
+      "vessel_name": "KAPITAN DEMIDENKO & ALEKSANDR MIRONENKO",
+      "country": "Russia,Russia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-01-03T23:28:08Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273398460",
+          "name": "KAPITAN DEMIDENKO",
+          "country": "Russia",
+          "position": {
+            "lat": 77.0162,
+            "lon": 13.3866
+          }
+        },
+        "vessel2": {
+          "mmsi": "273523300",
+          "name": "ALEKSANDR MIRONENKO",
+          "country": "Russia",
+          "position": {
+            "lat": 77.0162,
+            "lon": 13.3876
+          }
+        },
+        "distance_km": 0.03
+      }
     }
   ],
   "statistics": {
@@ -183620,7 +183620,7 @@
   "severity_breakdown": {
     "critical": 28,
     "high": 491,
-    "medium": 3371,
-    "low": 6272
+    "medium": 3372,
+    "low": 6271
   }
 }
