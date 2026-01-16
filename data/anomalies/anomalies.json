@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-01-16T20:32:22.215809Z",
+  "timestamp": "2026-01-16T20:52:07.544797Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 300,
-  "total_positions": 10552,
-  "anomalies_detected": 6943,
+  "total_positions": 10700,
+  "anomalies_detected": 6944,
   "anomalies": [
     {
       "mmsi": "273437550",
@@ -11863,6 +11863,24 @@
         "last_position": {
           "lat": 72.7106,
           "lon": 15.8965
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "273217010",
+      "vessel_name": "BOOTES",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2026-01-16T20:32:42Z",
+      "details": {
+        "gap_duration_minutes": 95.0,
+        "gap_start": "2026-01-16T18:57:43Z",
+        "gap_end": "2026-01-16T20:32:42Z",
+        "last_position": {
+          "lat": 72.6905,
+          "lon": 15.8813
         },
         "near_border": false
       }
@@ -125225,35 +125243,6 @@
       "country": "Panama,Liberia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-15T21:20:58Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "352005593",
-          "name": "MH IBUKI",
-          "country": "Panama",
-          "position": {
-            "lat": 60.8166,
-            "lon": 5.0393
-          }
-        },
-        "vessel2": {
-          "mmsi": "636021569",
-          "name": "MYKLEBUST",
-          "country": "Liberia",
-          "position": {
-            "lat": 60.8154,
-            "lon": 5.0427
-          }
-        },
-        "distance_km": 0.22
-      }
-    },
-    {
-      "mmsi": "352005593,636021569",
-      "vessel_name": "MH IBUKI & MYKLEBUST",
-      "country": "Panama,Liberia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-01-15T22:02:58Z",
       "details": {
         "vessel1": {
@@ -125276,10 +125265,39 @@
         },
         "distance_km": 0.22
       }
+    },
+    {
+      "mmsi": "352005593,636021569",
+      "vessel_name": "MH IBUKI & MYKLEBUST",
+      "country": "Panama,Liberia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-01-15T21:20:58Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "352005593",
+          "name": "MH IBUKI",
+          "country": "Panama",
+          "position": {
+            "lat": 60.8166,
+            "lon": 5.0393
+          }
+        },
+        "vessel2": {
+          "mmsi": "636021569",
+          "name": "MYKLEBUST",
+          "country": "Liberia",
+          "position": {
+            "lat": 60.8154,
+            "lon": 5.0427
+          }
+        },
+        "distance_km": 0.22
+      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 6911,
+    "transmission_gaps": 6912,
     "impossible_speeds": 27,
     "loitering": 0,
     "rendezvous": 5
@@ -125287,7 +125305,7 @@
   "severity_breakdown": {
     "critical": 31,
     "high": 2097,
-    "medium": 3150,
+    "medium": 3151,
     "low": 1665
   }
 }
