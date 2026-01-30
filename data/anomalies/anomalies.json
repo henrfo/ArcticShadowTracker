@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-01-30T21:46:08.166014Z",
+  "timestamp": "2026-01-30T22:05:37.021603Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 311,
-  "total_positions": 7002,
-  "anomalies_detected": 5083,
+  "total_positions": 7159,
+  "anomalies_detected": 5085,
   "anomalies": [
     {
       "mmsi": "273437550",
@@ -28153,6 +28153,24 @@
         "last_position": {
           "lat": 57.7583,
           "lon": 8.3788
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "256426000",
+      "vessel_name": "CSL FLEXVIK",
+      "country": "Malta",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2026-01-30T22:05:17Z",
+      "details": {
+        "gap_duration_minutes": 5714.2,
+        "gap_start": "2026-01-26T22:51:07Z",
+        "gap_end": "2026-01-30T22:05:17Z",
+        "last_position": {
+          "lat": 57.5248,
+          "lon": 8.0879
         },
         "near_border": false
       }
@@ -91068,6 +91086,33 @@
       }
     },
     {
+      "mmsi": "677049600",
+      "vessel_name": "SC 609",
+      "country": "Tanzania",
+      "anomaly_type": "impossible_speed",
+      "severity": "high",
+      "detected_at": "2026-01-30T16:51:56Z",
+      "details": {
+        "calculated_speed_knots": 59.6,
+        "max_allowed_knots": 30,
+        "vessel_type": "Cargo",
+        "distance_km": 38.62,
+        "time_delta_minutes": 21.0,
+        "positions": [
+          {
+            "lat": 76.61,
+            "lon": 12.3717,
+            "time": "2026-01-30T16:30:56Z"
+          },
+          {
+            "lat": 76.95,
+            "lon": 12.6817,
+            "time": "2026-01-30T16:51:56Z"
+          }
+        ]
+      }
+    },
+    {
       "mmsi": "677014200",
       "vessel_name": "JIA FU",
       "country": "Tanzania",
@@ -91480,7 +91525,7 @@
       "country": "Malta,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-24T09:32:15.927886Z",
+      "detected_at": "2026-01-24T14:18:34.312270Z",
       "details": {
         "vessel1": {
           "mmsi": "215400000",
@@ -91567,35 +91612,6 @@
       "country": "Malta,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-24T14:18:34.312270Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "215400000",
-          "name": "OSOGOVO",
-          "country": "Malta",
-          "position": {
-            "lat": 58.3884,
-            "lon": 1.5207
-          }
-        },
-        "vessel2": {
-          "mmsi": "305922000",
-          "name": "KAILEEN",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3857,
-            "lon": 1.5225
-          }
-        },
-        "distance_km": 0.32
-      }
-    },
-    {
-      "mmsi": "215400000,305922000",
-      "vessel_name": "OSOGOVO & KAILEEN",
-      "country": "Malta,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-01-24T14:58:39.849389Z",
       "details": {
         "vessel1": {
@@ -91649,61 +91665,32 @@
       }
     },
     {
-      "mmsi": "538090714,314632000",
-      "vessel_name": "KITIKMEOT W & WILSON DURNESS",
-      "country": "Marshall Islands,Barbados",
+      "mmsi": "215400000,305922000",
+      "vessel_name": "OSOGOVO & KAILEEN",
+      "country": "Malta,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-01-30T02:29:08Z",
+      "detected_at": "2026-01-24T09:32:15.927886Z",
       "details": {
         "vessel1": {
-          "mmsi": "538090714",
-          "name": "KITIKMEOT W",
-          "country": "Marshall Islands",
+          "mmsi": "215400000",
+          "name": "OSOGOVO",
+          "country": "Malta",
           "position": {
-            "lat": 60.8189,
-            "lon": 4.9696
+            "lat": 58.3884,
+            "lon": 1.5207
           }
         },
         "vessel2": {
-          "mmsi": "314632000",
-          "name": "WILSON DURNESS",
-          "country": "Barbados",
+          "mmsi": "305922000",
+          "name": "KAILEEN",
+          "country": "Antigua and Barbuda",
           "position": {
-            "lat": 60.8181,
-            "lon": 4.9587
+            "lat": 58.3857,
+            "lon": 1.5225
           }
         },
-        "distance_km": 0.6
-      }
-    },
-    {
-      "mmsi": "538090714,314632000",
-      "vessel_name": "KITIKMEOT W & WILSON DURNESS",
-      "country": "Marshall Islands,Barbados",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-01-30T14:26:08Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538090714",
-          "name": "KITIKMEOT W",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.8192,
-            "lon": 4.9694
-          }
-        },
-        "vessel2": {
-          "mmsi": "314632000",
-          "name": "WILSON DURNESS",
-          "country": "Barbados",
-          "position": {
-            "lat": 60.8183,
-            "lon": 4.9588
-          }
-        },
-        "distance_km": 0.59
+        "distance_km": 0.32
       }
     },
     {
@@ -91733,6 +91720,35 @@
           }
         },
         "distance_km": 0.56
+      }
+    },
+    {
+      "mmsi": "538090714,314632000",
+      "vessel_name": "KITIKMEOT W & WILSON DURNESS",
+      "country": "Marshall Islands,Barbados",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-01-30T02:29:08Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538090714",
+          "name": "KITIKMEOT W",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.8189,
+            "lon": 4.9696
+          }
+        },
+        "vessel2": {
+          "mmsi": "314632000",
+          "name": "WILSON DURNESS",
+          "country": "Barbados",
+          "position": {
+            "lat": 60.8181,
+            "lon": 4.9587
+          }
+        },
+        "distance_km": 0.6
       }
     },
     {
@@ -91792,17 +91808,46 @@
         },
         "distance_km": 0.61
       }
+    },
+    {
+      "mmsi": "538090714,314632000",
+      "vessel_name": "KITIKMEOT W & WILSON DURNESS",
+      "country": "Marshall Islands,Barbados",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-01-30T14:26:08Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538090714",
+          "name": "KITIKMEOT W",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.8192,
+            "lon": 4.9694
+          }
+        },
+        "vessel2": {
+          "mmsi": "314632000",
+          "name": "WILSON DURNESS",
+          "country": "Barbados",
+          "position": {
+            "lat": 60.8183,
+            "lon": 4.9588
+          }
+        },
+        "distance_km": 0.59
+      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 5053,
-    "impossible_speeds": 18,
+    "transmission_gaps": 5054,
+    "impossible_speeds": 19,
     "loitering": 0,
     "rendezvous": 12
   },
   "severity_breakdown": {
     "critical": 45,
-    "high": 2663,
+    "high": 2665,
     "medium": 1448,
     "low": 927
   }
