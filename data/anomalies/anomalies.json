@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-02-21T19:35:40.924034Z",
+  "timestamp": "2026-02-21T19:56:46.280015Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 347,
-  "total_positions": 5139,
-  "anomalies_detected": 3291,
+  "total_positions": 5312,
+  "anomalies_detected": 3294,
   "anomalies": [
     {
       "mmsi": "273437550",
@@ -12511,6 +12511,24 @@
         "last_position": {
           "lat": 70.4992,
           "lon": 17.2
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "273613930",
+      "vessel_name": "BELOYE MORE",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-02-21T19:54:26Z",
+      "details": {
+        "gap_duration_minutes": 53.5,
+        "gap_start": "2026-02-21T19:00:57Z",
+        "gap_end": "2026-02-21T19:54:26Z",
+        "last_position": {
+          "lat": 70.618,
+          "lon": 17.2059
         },
         "near_border": false
       }
@@ -37284,6 +37302,24 @@
       }
     },
     {
+      "mmsi": "273436210",
+      "vessel_name": "BARENTSEVO MORE",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-02-21T19:53:33Z",
+      "details": {
+        "gap_duration_minutes": 47.4,
+        "gap_start": "2026-02-21T19:06:12Z",
+        "gap_end": "2026-02-21T19:53:33Z",
+        "last_position": {
+          "lat": 70.6675,
+          "lon": 17.1952
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "314396000",
       "vessel_name": "WILSON FLUSHING",
       "country": "Barbados",
@@ -59410,32 +59446,32 @@
       }
     },
     {
-      "mmsi": "636015145,370506000",
-      "vessel_name": "OSX 1 & WEST PHOENIX",
-      "country": "Liberia,Panama",
+      "mmsi": "305057000,373267000",
+      "vessel_name": "MARTEN & PESCADORES SW",
+      "country": "Antigua and Barbuda,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-02-15T15:10:08Z",
+      "detected_at": "2026-02-21T19:56:33.626078Z",
       "details": {
         "vessel1": {
-          "mmsi": "636015145",
-          "name": "OSX 1",
-          "country": "Liberia",
+          "mmsi": "305057000",
+          "name": "MARTEN",
+          "country": "Antigua and Barbuda",
           "position": {
-            "lat": 60.8608,
-            "lon": 5.0344
+            "lat": 56.2581,
+            "lon": 3.8392
           }
         },
         "vessel2": {
-          "mmsi": "370506000",
-          "name": "WEST PHOENIX",
+          "mmsi": "373267000",
+          "name": "PESCADORES SW",
           "country": "Panama",
           "position": {
-            "lat": 60.8672,
-            "lon": 5.029
+            "lat": 56.2591,
+            "lon": 3.8432
           }
         },
-        "distance_km": 0.77
+        "distance_km": 0.27
       }
     },
     {
@@ -59462,6 +59498,35 @@
           "position": {
             "lat": 60.8673,
             "lon": 5.0287
+          }
+        },
+        "distance_km": 0.77
+      }
+    },
+    {
+      "mmsi": "636015145,370506000",
+      "vessel_name": "OSX 1 & WEST PHOENIX",
+      "country": "Liberia,Panama",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-02-15T15:10:08Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "636015145",
+          "name": "OSX 1",
+          "country": "Liberia",
+          "position": {
+            "lat": 60.8608,
+            "lon": 5.0344
+          }
+        },
+        "vessel2": {
+          "mmsi": "370506000",
+          "name": "WEST PHOENIX",
+          "country": "Panama",
+          "position": {
+            "lat": 60.8672,
+            "lon": 5.029
           }
         },
         "distance_km": 0.77
@@ -59498,15 +59563,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 3264,
+    "transmission_gaps": 3266,
     "impossible_speeds": 22,
     "loitering": 0,
-    "rendezvous": 5
+    "rendezvous": 6
   },
   "severity_breakdown": {
     "critical": 38,
-    "high": 2166,
+    "high": 2167,
     "medium": 864,
-    "low": 223
+    "low": 225
   }
 }
