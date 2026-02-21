@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-02-21T23:17:51.411069Z",
+  "timestamp": "2026-02-21T23:37:49.070670Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 339,
-  "total_positions": 5511,
-  "anomalies_detected": 3449,
+  "total_positions": 5684,
+  "anomalies_detected": 3452,
   "anomalies": [
     {
       "mmsi": "273437550",
@@ -35916,6 +35916,24 @@
       }
     },
     {
+      "mmsi": "636093394",
+      "vessel_name": "KALLE OLDENDORFF",
+      "country": "Liberia",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2026-02-21T23:22:11Z",
+      "details": {
+        "gap_duration_minutes": 99.3,
+        "gap_start": "2026-02-21T21:42:50Z",
+        "gap_end": "2026-02-21T23:22:11Z",
+        "last_position": {
+          "lat": 65.412,
+          "lon": 8.6425
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "314607000",
       "vessel_name": "WILSON SAIMAA",
       "country": "Barbados",
@@ -51252,6 +51270,24 @@
       }
     },
     {
+      "mmsi": "538007150",
+      "vessel_name": "LMZ VEGA",
+      "country": "Marshall Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2026-02-21T23:22:29Z",
+      "details": {
+        "gap_duration_minutes": 70.7,
+        "gap_start": "2026-02-21T22:11:48Z",
+        "gap_end": "2026-02-21T23:22:29Z",
+        "last_position": {
+          "lat": 64.9008,
+          "lon": 2.2824
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "538007572",
       "vessel_name": "SEAHORSE",
       "country": "Marshall Islands",
@@ -62178,7 +62214,36 @@
       "country": "Antigua and Barbuda,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-02-21T19:35:28.703239Z",
+      "detected_at": "2026-02-21T23:37:36.309664Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305057000",
+          "name": "MARTEN",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 56.2581,
+            "lon": 3.8392
+          }
+        },
+        "vessel2": {
+          "mmsi": "373267000",
+          "name": "PESCADORES SW",
+          "country": "Panama",
+          "position": {
+            "lat": 56.2591,
+            "lon": 3.8432
+          }
+        },
+        "distance_km": 0.27
+      }
+    },
+    {
+      "mmsi": "305057000,373267000",
+      "vessel_name": "MARTEN & PESCADORES SW",
+      "country": "Antigua and Barbuda,Panama",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-02-21T19:56:33.626078Z",
       "details": {
         "vessel1": {
           "mmsi": "305057000",
@@ -62236,7 +62301,7 @@
       "country": "Antigua and Barbuda,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-02-21T23:17:38.761689Z",
+      "detected_at": "2026-02-21T19:35:28.703239Z",
       "details": {
         "vessel1": {
           "mmsi": "305057000",
@@ -62265,7 +62330,7 @@
       "country": "Antigua and Barbuda,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-02-21T19:56:33.626078Z",
+      "detected_at": "2026-02-21T23:17:38.761689Z",
       "details": {
         "vessel1": {
           "mmsi": "305057000",
@@ -62294,35 +62359,6 @@
       "country": "Liberia,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-02-15T18:34:11Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "636015145",
-          "name": "OSX 1",
-          "country": "Liberia",
-          "position": {
-            "lat": 60.8609,
-            "lon": 5.0343
-          }
-        },
-        "vessel2": {
-          "mmsi": "370506000",
-          "name": "WEST PHOENIX",
-          "country": "Panama",
-          "position": {
-            "lat": 60.8673,
-            "lon": 5.0287
-          }
-        },
-        "distance_km": 0.77
-      }
-    },
-    {
-      "mmsi": "636015145,370506000",
-      "vessel_name": "OSX 1 & WEST PHOENIX",
-      "country": "Liberia,Panama",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-02-15T15:10:08Z",
       "details": {
         "vessel1": {
@@ -62341,6 +62377,35 @@
           "position": {
             "lat": 60.8672,
             "lon": 5.029
+          }
+        },
+        "distance_km": 0.77
+      }
+    },
+    {
+      "mmsi": "636015145,370506000",
+      "vessel_name": "OSX 1 & WEST PHOENIX",
+      "country": "Liberia,Panama",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-02-15T18:34:11Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "636015145",
+          "name": "OSX 1",
+          "country": "Liberia",
+          "position": {
+            "lat": 60.8609,
+            "lon": 5.0343
+          }
+        },
+        "vessel2": {
+          "mmsi": "370506000",
+          "name": "WEST PHOENIX",
+          "country": "Panama",
+          "position": {
+            "lat": 60.8673,
+            "lon": 5.0287
           }
         },
         "distance_km": 0.77
@@ -62377,15 +62442,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 3419,
+    "transmission_gaps": 3421,
     "impossible_speeds": 21,
     "loitering": 0,
-    "rendezvous": 9
+    "rendezvous": 10
   },
   "severity_breakdown": {
     "critical": 36,
-    "high": 2061,
-    "medium": 1126,
+    "high": 2062,
+    "medium": 1128,
     "low": 226
   }
 }
