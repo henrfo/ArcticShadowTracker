@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-04-03T11:55:58.181997Z",
+  "timestamp": "2026-04-03T12:22:37.617224Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 252,
-  "total_positions": 936,
-  "anomalies_detected": 598,
+  "total_positions": 1086,
+  "anomalies_detected": 602,
   "anomalies": [
     {
       "mmsi": "249903000",
@@ -1207,6 +1207,24 @@
         "last_position": {
           "lat": 59.3779,
           "lon": 6.0473
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "304219000",
+      "vessel_name": "SPLITTNES",
+      "country": "Antigua and Barbuda",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-04-03T12:21:07Z",
+      "details": {
+        "gap_duration_minutes": 33.1,
+        "gap_start": "2026-04-03T11:47:58Z",
+        "gap_end": "2026-04-03T12:21:07Z",
+        "last_position": {
+          "lat": 59.3776,
+          "lon": 6.0466
         },
         "near_border": false
       }
@@ -2665,6 +2683,24 @@
         "last_position": {
           "lat": 66.2124,
           "lon": 13.0112
+        },
+        "near_border": false
+      }
+    },
+    {
+      "mmsi": "304011025",
+      "vessel_name": "ZEUS",
+      "country": "Antigua and Barbuda",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-04-03T12:21:20Z",
+      "details": {
+        "gap_duration_minutes": 38.0,
+        "gap_start": "2026-04-03T11:43:20Z",
+        "gap_end": "2026-04-03T12:21:20Z",
+        "last_position": {
+          "lat": 66.2124,
+          "lon": 13.0109
         },
         "near_border": false
       }
@@ -7062,6 +7098,24 @@
       }
     },
     {
+      "mmsi": "677049600",
+      "vessel_name": "SC 609",
+      "country": "Tanzania",
+      "anomaly_type": "transmission_gap",
+      "severity": "high",
+      "detected_at": "2026-04-03T10:39:03Z",
+      "details": {
+        "gap_duration_minutes": 7845.4,
+        "gap_start": "2026-03-28T23:53:39Z",
+        "gap_end": "2026-04-03T10:39:03Z",
+        "last_position": {
+          "lat": 68.5617,
+          "lon": 19.4267
+        },
+        "near_border": false
+      }
+    },
+    {
       "mmsi": "636015145",
       "vessel_name": "OSX 1",
       "country": "Liberia",
@@ -10037,11 +10091,11 @@
       "country": "Malta",
       "anomaly_type": "transmission_gap",
       "severity": "high",
-      "detected_at": "2026-04-03T10:27:02.893101Z",
+      "detected_at": "2026-04-03T10:24:16Z",
       "details": {
-        "gap_duration_minutes": 4861.4,
+        "gap_duration_minutes": 4858.7,
         "gap_start": "2026-03-31T01:25:36Z",
-        "gap_end": "2026-04-03T10:27:02.893101Z",
+        "gap_end": "2026-04-03T10:24:16Z",
         "last_position": {
           "lat": 58.879,
           "lon": 5.5273
@@ -10768,18 +10822,45 @@
         },
         "near_border": false
       }
+    },
+    {
+      "mmsi": "249497000",
+      "vessel_name": "TRANS HAV",
+      "country": "Malta",
+      "anomaly_type": "impossible_speed",
+      "severity": "critical",
+      "detected_at": "2026-04-03T10:27:02.893101Z",
+      "details": {
+        "calculated_speed_knots": 138.3,
+        "max_allowed_knots": 40,
+        "vessel_type": "Cargo, no additional info",
+        "distance_km": 11.88,
+        "time_delta_minutes": 2.8,
+        "positions": [
+          {
+            "lat": 56.695,
+            "lon": 4.3667,
+            "time": "2026-04-03T10:24:16Z"
+          },
+          {
+            "lat": 56.8015,
+            "lon": 4.3528,
+            "time": "2026-04-03T10:27:02.893101Z"
+          }
+        ]
+      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 598,
-    "impossible_speeds": 0,
+    "transmission_gaps": 601,
+    "impossible_speeds": 1,
     "loitering": 0,
     "rendezvous": 0
   },
   "severity_breakdown": {
-    "critical": 5,
-    "high": 267,
+    "critical": 6,
+    "high": 268,
     "medium": 324,
-    "low": 2
+    "low": 4
   }
 }
