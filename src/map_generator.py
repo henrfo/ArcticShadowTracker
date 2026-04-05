@@ -209,7 +209,7 @@ def generate_focused_map(vessel_tracks):
     # Layer 3: 200 Nautical Mile Boundary - Most visible (primary border)
     boundary_200nm = load_200nm_boundary()
     if boundary_200nm['features']:
-        boundary_layer = folium.FeatureGroup(name='200nm Boundary', show=True)
+        boundary_layer = folium.FeatureGroup(name='200nm Boundary', show=False)
         folium.GeoJson(
             boundary_200nm,
             style_function=lambda feature: {
@@ -226,7 +226,7 @@ def generate_focused_map(vessel_tracks):
     shadow_fleet_layer = folium.FeatureGroup(name='Shadow Fleet', show=True)
     suspected_shadow_layer = folium.FeatureGroup(name='Suspected Shadow Fleet', show=True)
     china_layer = folium.FeatureGroup(name='China', show=True)
-    norwegian_military_layer = folium.FeatureGroup(name='Norwegian Military/Law', show=True)
+    norwegian_military_layer = folium.FeatureGroup(name='Norwegian Military/Law', show=False)
     norway_layer = folium.FeatureGroup(name='Norway (Civilian)', show=False)
     other_layer = folium.FeatureGroup(name='Other Countries', show=False)
     buoy_layer = folium.FeatureGroup(name='Buoys', show=False)
@@ -377,7 +377,7 @@ def generate_focused_map(vessel_tracks):
     add_focus_mode_script(m, vessel_tracks)
 
     # Add layer control to toggle all categories
-    folium.LayerControl(position='topright', collapsed=False).add_to(m)
+    folium.LayerControl(position='topright', collapsed=True).add_to(m)
 
     # Add JavaScript for cross-iframe communication (clicking anomalies)
     vessel_click_js = """

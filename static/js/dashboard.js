@@ -8,6 +8,29 @@
   const REFRESH_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
 
   // --------------------------------------------------------------------------
+  // StaleBanner — show/hide + update message based on stats payload
+  // --------------------------------------------------------------------------
+  const StaleBanner = (function () {
+    const el = document.getElementById('stale-banner');
+    const detail = document.getElementById('stale-banner-detail');
+
+    function render(stats) {
+      if (!el) return;
+      if (stats && stats.is_stale) {
+        el.hidden = false;
+        if (detail) {
+          detail.textContent = stats.stale_reason ||
+            ('Last update ' + (stats.last_update || 'unknown'));
+        }
+      } else {
+        el.hidden = true;
+      }
+    }
+
+    return { render };
+  })();
+
+  // --------------------------------------------------------------------------
   // MapBridge — iframe + postMessage + skeleton loader
   // --------------------------------------------------------------------------
   const MapBridge = (function () {
@@ -58,7 +81,9 @@
       const updateEl = document.getElementById('last-update');
       if (updateEl && stats.last_update) {
         updateEl.textContent = 'Updated ' + stats.last_update;
+        updateEl.classList.toggle('nav__status--stale', !!stats.is_stale);
       }
+      StaleBanner.render(stats);
     }
 
     async function fetchAndRender() {
@@ -155,7 +180,7 @@
       });
     }
 
-    function getSelected(prefix, keys) {
+    function getSelected(keys) {
       return keys.filter(k => {
         const el = document.getElementById('filter-' + k);
         return el && el.checked;
@@ -224,8 +249,8 @@
     }
 
     function applyFilters() {
-      const sev = getSelected('severity', SEVERITIES);
-      const typ = getSelected('type', TYPES);
+      const sev = getSelected(SEVERITIES);
+      const typ = getSelected(TYPES);
       const filtered = all.filter(a => sev.includes(a.severity) && typ.includes(a.anomaly_type));
       render(sort(filtered, currentSort));
     }

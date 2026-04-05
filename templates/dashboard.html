@@ -19,7 +19,7 @@
             Arctic Shadow Tracker
         </a>
         <div class="nav__actions">
-            <span class="nav__status" id="last-update" aria-live="polite">
+            <span class="nav__status {% if stats.is_stale %}nav__status--stale{% endif %}" id="last-update" aria-live="polite">
                 {% if stats.last_update %}Updated {{ stats.last_update }}{% else %}No data{% endif %}
             </span>
             <button class="refresh-btn" id="refresh-btn" type="button" aria-label="Refresh data">
@@ -28,38 +28,44 @@
         </div>
     </header>
 
+    <div
+        class="stale-banner"
+        id="stale-banner"
+        role="alert"
+        {% if not stats.is_stale %}hidden{% endif %}
+    >
+        <span class="stale-banner__icon" aria-hidden="true">⚠</span>
+        <div class="stale-banner__body">
+            <strong class="stale-banner__title">Data pipeline stalled</strong>
+            <span class="stale-banner__detail" id="stale-banner-detail">
+                {{ stats.stale_reason or 'Last update unknown' }}
+            </span>
+        </div>
+        <a class="stale-banner__link" href="https://github.com/henrfo/ArcticShadowTracker/actions/workflows/arctic_monitor.yml" target="_blank" rel="noopener">
+            Check Actions →
+        </a>
+    </div>
+
     <main class="app">
         <section class="kpi-strip" aria-label="Vessel statistics">
-            <!-- Total -->
+            <!-- 1. Total -->
             <article class="kpi-card kpi-card--total">
                 <div class="kpi-card__label">Total Vessels</div>
                 <div class="kpi-card__value" id="stat-total" aria-live="polite">{{ stats.total }}</div>
                 <div class="kpi-card__caption">Tracked in Arctic</div>
             </article>
 
-            <!-- By Country -->
-            <article class="kpi-card kpi-card--alert">
-                <div class="kpi-card__label">By Country</div>
+            <!-- 2. Flag State (mutually exclusive with Risk) -->
+            <article class="kpi-card">
+                <div class="kpi-card__label">Flag State</div>
                 <ul class="kpi-card__list">
                     <li class="kpi-card__row">
                         <span><span class="swatch swatch--russia" aria-hidden="true"></span>Russia</span>
                         <strong id="stat-russian">{{ stats.russian }}</strong>
                     </li>
-                    <li class="kpi-card__row kpi-card__row--indent">
-                        <span><span class="swatch swatch--shadow" aria-hidden="true"></span>Shadow Fleet</span>
-                        <strong id="stat-shadow_fleet">{{ stats.shadow_fleet }}</strong>
-                    </li>
-                    <li class="kpi-card__row kpi-card__row--indent">
-                        <span><span class="swatch swatch--suspected" aria-hidden="true"></span>Suspected</span>
-                        <strong id="stat-suspected_shadow">{{ stats.suspected_shadow }}</strong>
-                    </li>
                     <li class="kpi-card__row">
                         <span><span class="swatch swatch--china" aria-hidden="true"></span>China</span>
                         <strong id="stat-chinese">{{ stats.chinese }}</strong>
-                    </li>
-                    <li class="kpi-card__row">
-                        <span><span class="swatch swatch--norway-mil" aria-hidden="true"></span>Norway Mil/Law</span>
-                        <strong id="stat-norwegian_military">{{ stats.norwegian_military }}</strong>
                     </li>
                     <li class="kpi-card__row">
                         <span><span class="swatch swatch--norway" aria-hidden="true"></span>Norway</span>
@@ -69,37 +75,35 @@
                         <span><span class="swatch swatch--other" aria-hidden="true"></span>Other</span>
                         <strong id="stat-other">{{ stats.other }}</strong>
                     </li>
+                </ul>
+                <div class="kpi-card__caption">Non-risk vessels only · risk-flagged shown in next card</div>
+            </article>
+
+            <!-- 3. Risk Classification (mutually exclusive with Flag State) -->
+            <article class="kpi-card kpi-card--alert">
+                <div class="kpi-card__label">Risk Classification</div>
+                <div class="kpi-card__sublabel">Takes priority over flag state</div>
+                <ul class="kpi-card__list">
                     <li class="kpi-card__row">
-                        <span><span class="swatch swatch--buoy" aria-hidden="true"></span>Buoy</span>
+                        <span><span class="swatch swatch--shadow" aria-hidden="true"></span>Shadow Fleet</span>
+                        <strong id="stat-shadow_fleet">{{ stats.shadow_fleet }}</strong>
+                    </li>
+                    <li class="kpi-card__row">
+                        <span><span class="swatch swatch--suspected" aria-hidden="true"></span>Suspected</span>
+                        <strong id="stat-suspected_shadow">{{ stats.suspected_shadow }}</strong>
+                    </li>
+                    <li class="kpi-card__row">
+                        <span><span class="swatch swatch--norway-mil" aria-hidden="true"></span>Norway Mil/Law</span>
+                        <strong id="stat-norwegian_military">{{ stats.norwegian_military }}</strong>
+                    </li>
+                    <li class="kpi-card__row">
+                        <span><span class="swatch swatch--buoy" aria-hidden="true"></span>Buoys</span>
                         <strong id="stat-buoy">{{ stats.buoy }}</strong>
                     </li>
                 </ul>
             </article>
 
-            <!-- Data Tiers -->
-            <article class="kpi-card">
-                <div class="kpi-card__label">Data Tiers</div>
-                <ul class="kpi-card__list">
-                    <li class="kpi-card__row">
-                        <span><span class="swatch swatch--tier-rt" aria-hidden="true"></span>Real-time</span>
-                        <strong>0–2 h</strong>
-                    </li>
-                    <li class="kpi-card__row">
-                        <span><span class="swatch swatch--tier-tac" aria-hidden="true"></span>Tactical</span>
-                        <strong>2–48 h</strong>
-                    </li>
-                    <li class="kpi-card__row">
-                        <span><span class="swatch swatch--tier-strat" aria-hidden="true"></span>Strategic</span>
-                        <strong>2–7 d</strong>
-                    </li>
-                    <li class="kpi-card__row">
-                        <span><span class="swatch swatch--cables" aria-hidden="true"></span>Submarine Cables</span>
-                        <strong>39</strong>
-                    </li>
-                </ul>
-            </article>
-
-            <!-- Infrastructure -->
+            <!-- 4. Infrastructure (airports + submarine cables) -->
             <article class="kpi-card">
                 <div class="kpi-card__label">Infrastructure</div>
                 <ul class="kpi-card__list">
@@ -107,8 +111,12 @@
                     <li class="kpi-card__row"><span>Medium Airports</span><strong>38</strong></li>
                     <li class="kpi-card__row"><span>Small Airports</span><strong>41</strong></li>
                     <li class="kpi-card__row"><span>Heliports</span><strong>39</strong></li>
-                    <li class="kpi-card__row" style="border-top:1px solid var(--border-soft); padding-top:8px; margin-top:4px;">
-                        <span>Total Facilities</span><strong>123</strong>
+                    <li class="kpi-card__row">
+                        <span><span class="swatch swatch--cables" aria-hidden="true"></span>Submarine Cables</span>
+                        <strong>39</strong>
+                    </li>
+                    <li class="kpi-card__row kpi-card__row--total">
+                        <span>Total Facilities</span><strong>162</strong>
                     </li>
                 </ul>
             </article>
