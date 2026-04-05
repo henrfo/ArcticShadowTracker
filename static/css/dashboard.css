@@ -30,6 +30,12 @@ body {
   animation: asr-fade-in var(--t-slow) var(--ease-out);
 }
 
+/* Reserve space for fixed nav once at the body level so downstream flow
+   (stale banner, then .app) doesn't need to know the nav height. */
+body {
+  padding-top: var(--nav-h);
+}
+
 @keyframes asr-fade-in {
   from { opacity: 0; }
   to   { opacity: 1; }
@@ -77,11 +83,11 @@ button {
   grid-template-areas:
     "sidebar map"
     "feed    feed";
-  min-height: 100vh;
+  min-height: calc(100vh - var(--nav-h));
   width: 100%;
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: calc(var(--nav-h) + var(--s-3)) var(--s-4) 0;
+  padding: var(--s-3) var(--s-4) 0;
   gap: var(--s-3);
 }
 
@@ -186,14 +192,10 @@ button {
 }
 
 /* ==========================================================================
-   Stale data banner
+   Stale data banner — flows in document order between nav and main,
+   wraps naturally on narrow viewports.
    ========================================================================== */
 .stale-banner {
-  position: fixed;
-  top: var(--nav-h);
-  left: 0;
-  right: 0;
-  z-index: 900;
   display: flex;
   align-items: center;
   gap: var(--s-4);
@@ -244,9 +246,6 @@ button {
 .stale-banner__detail {
   color: var(--text-muted);
   font-size: 0.78rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .stale-banner__link {
@@ -268,10 +267,7 @@ button {
   background: rgba(255, 255, 255, 0.05);
 }
 
-/* When banner is visible, push content down */
-.stale-banner:not([hidden]) ~ .app {
-  padding-top: calc(var(--nav-h) + 60px + var(--s-3));
-}
+/* (banner is now in the document flow, so no push rule needed) */
 
 .refresh-btn {
   display: inline-flex;
@@ -843,7 +839,7 @@ button {
       "sidebar"
       "map"
       "feed";
-    padding: calc(var(--nav-h) + var(--s-3)) var(--s-3) 0;
+    padding: var(--s-3) var(--s-3) 0;
     gap: var(--s-3);
   }
   .sidebar {
@@ -852,13 +848,19 @@ button {
     overflow-y: hidden;
     padding-bottom: var(--s-2);
     gap: var(--s-2);
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
   }
   .sidebar::-webkit-scrollbar {
     height: 6px;
   }
   .kpi-card {
-    min-width: 220px;
+    min-width: 200px;
     flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+  .kpi-card--total {
+    min-width: 150px;
   }
   .nav {
     padding: 0 var(--s-4);
@@ -867,6 +869,167 @@ button {
     display: none;
   }
   .map-wrapper {
-    min-height: 420px;
+    min-height: 360px;
   }
+
+  /* Stale banner stacks vertically on mobile so the detail can wrap freely */
+  .stale-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s-2);
+    padding: var(--s-3) var(--s-4);
+  }
+  .stale-banner__icon {
+    display: none;  /* save space; title colour already signals urgency */
+  }
+
+  /* Feed becomes a single column — anomalies full width, filter aside hidden */
+  .feed {
+    grid-template-columns: 1fr;
+  }
+  .filter-panel {
+    /* At mobile, filter panel is only shown via the bottom sheet mechanism */
+    display: none;
+  }
+  .filter-panel.filter-panel--open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 72vh;
+    z-index: 1100;
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+    background: var(--bg-base);
+    border: 1px solid var(--border-muted);
+    border-bottom: 0;
+    box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.6);
+    overflow-y: auto;
+    animation: asr-sheet-up var(--t-med) var(--ease-out);
+    padding-bottom: max(var(--s-5), env(safe-area-inset-bottom));
+  }
+
+  @keyframes asr-sheet-up {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
+
+  .filter-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    animation: asr-fade-in var(--t-fast) var(--ease-out);
+  }
+  .filter-backdrop[hidden] { display: none; }
+
+  /* Filter toggle button in anomaly feed header (hidden on desktop) */
+  .filter-toggle {
+    display: inline-flex !important;
+  }
+
+  /* Nav brand shrink at narrow viewports */
+  .nav__brand {
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* Larger tap targets */
+  .refresh-btn {
+    min-height: 40px;
+    padding: 10px 16px;
+  }
+  .sort-row,
+  .filter-row {
+    min-height: 44px;
+    padding: 10px 12px;
+  }
+  .resizer {
+    height: 18px;
+    width: 100px;
+    background: var(--border-muted);
+  }
+  .anomaly-card {
+    padding: var(--s-3) var(--s-4);
+  }
+}
+
+/* Extra-narrow phones — hide the wordmark, keep only the pulsing brand dot */
+@media (max-width: 360px) {
+  .nav__brand {
+    font-size: 0;  /* hides text node, pseudo-elements and img children stay visible */
+    gap: 0;
+  }
+  .nav__brand-mark {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* Filter toggle button — hidden by default on desktop, shown on mobile */
+.filter-toggle {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  background: var(--surface-glass-strong);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--r-pill);
+  padding: 8px 14px;
+  min-height: 36px;
+  cursor: pointer;
+  transition: all var(--t-fast) var(--ease-out);
+}
+
+.filter-toggle:hover,
+.filter-toggle:active {
+  color: var(--text-primary);
+  border-color: var(--border-focus);
+}
+
+.anomaly-feed__header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+/* Anomaly card tap affordance — replaces hover-only translateX */
+.anomaly-card.is-clickable {
+  position: relative;
+}
+
+.anomaly-card.is-clickable::after {
+  content: "›";
+  position: absolute;
+  right: var(--s-3);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-faint);
+  font-size: 1.4rem;
+  line-height: 1;
+  pointer-events: none;
+  transition: color var(--t-fast) var(--ease-out), right var(--t-fast) var(--ease-out);
+}
+
+.anomaly-card.is-clickable:hover::after,
+.anomaly-card.is-clickable:focus-visible::after {
+  color: var(--text-soft);
+  right: calc(var(--s-3) - 2px);
+}
+
+.anomaly-card.is-clickable:active {
+  background: rgba(223, 239, 255, 0.08);
+  transition: background 80ms;
+}
+
+/* Give card body right-padding so text doesn't run under the chevron */
+.anomaly-card__body {
+  padding-right: var(--s-5);
 }

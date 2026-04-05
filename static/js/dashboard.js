@@ -346,6 +346,56 @@
   })();
 
   // --------------------------------------------------------------------------
+  // FilterSheet — on mobile, the filter panel is a slide-up bottom sheet
+  // triggered by a "Filters" button. No-op on desktop.
+  // --------------------------------------------------------------------------
+  const FilterSheet = (function () {
+    const toggleBtn = document.getElementById('filter-toggle');
+    const panel = document.getElementById('filter-panel');
+    const backdrop = document.getElementById('filter-backdrop');
+
+    function isOpen() {
+      return panel && panel.classList.contains('filter-panel--open');
+    }
+
+    function open() {
+      if (!panel) return;
+      panel.classList.add('filter-panel--open');
+      if (backdrop) backdrop.hidden = false;
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      if (!panel) return;
+      panel.classList.remove('filter-panel--open');
+      if (backdrop) backdrop.hidden = true;
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    function toggle() {
+      if (isOpen()) close();
+      else open();
+    }
+
+    function init() {
+      if (toggleBtn) toggleBtn.addEventListener('click', toggle);
+      if (backdrop) backdrop.addEventListener('click', close);
+      // Esc closes the sheet
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen()) close();
+      });
+      // Also close if user resizes to desktop width
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768 && isOpen()) close();
+      });
+    }
+
+    return { init, open, close };
+  })();
+
+  // --------------------------------------------------------------------------
   // Resizer — drag + keyboard resize of feed area
   // --------------------------------------------------------------------------
   const Resizer = (function () {
@@ -353,7 +403,7 @@
     const feed = document.getElementById('feed');
     if (!handle || !feed) return { init() {} };
 
-    const MIN = 260;
+    function getMin() { return window.innerWidth < 768 ? 180 : 260; }
     function getMax() { return Math.round(window.innerHeight * 0.75); }
 
     let dragging = false;
@@ -361,21 +411,31 @@
     let startH = 0;
 
     function setHeight(h) {
-      const clamped = Math.max(MIN, Math.min(h, getMax()));
+      const clamped = Math.max(getMin(), Math.min(h, getMax()));
       feed.style.minHeight = clamped + 'px';
       feed.style.maxHeight = clamped + 'px';
     }
 
+    // Normalize mouse and touch events to a single clientY value
+    function coordY(e) {
+      if (e.touches && e.touches.length) return e.touches[0].clientY;
+      if (e.changedTouches && e.changedTouches.length) return e.changedTouches[0].clientY;
+      return e.clientY;
+    }
+
     function onDown(e) {
       dragging = true;
-      startY = e.clientY;
+      startY = coordY(e);
       startH = feed.offsetHeight;
       document.body.style.cursor = 'ns-resize';
       e.preventDefault();
     }
     function onMove(e) {
       if (!dragging) return;
-      setHeight(startH + (startY - e.clientY));
+      // touchmove must be passive:false to call preventDefault, which we need
+      // to stop the page from scrolling while dragging the handle
+      if (e.cancelable) e.preventDefault();
+      setHeight(startH + (startY - coordY(e)));
     }
     function onUp() {
       if (dragging) {
@@ -392,10 +452,21 @@
     }
 
     function init() {
+      // Mouse
       handle.addEventListener('mousedown', onDown);
       document.addEventListener('mousemove', onMove);
       document.addEventListener('mouseup', onUp);
+      // Touch — passive:false so we can preventDefault during drag
+      handle.addEventListener('touchstart', onDown, { passive: false });
+      document.addEventListener('touchmove', onMove, { passive: false });
+      document.addEventListener('touchend', onUp);
+      document.addEventListener('touchcancel', onUp);
+      // Keyboard
       handle.addEventListener('keydown', onKey);
+      // Re-clamp on viewport rotate/resize
+      window.addEventListener('resize', () => {
+        if (feed.style.minHeight) setHeight(feed.offsetHeight);
+      });
     }
 
     return { init };
@@ -458,6 +529,7 @@
   function boot() {
     AnomalyFeed.init();
     Resizer.init();
+    FilterSheet.init();
     wireRefreshButton();
     AnomalyFeed.fetchAndRender();
     AutoRefresh.start();

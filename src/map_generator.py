@@ -15,21 +15,22 @@ from .airport_loader import load_norwegian_airports
 
 # ============================================================================
 # Palette — single source of truth for vessel + layer colors.
-# Chosen for maximum distinguishability at small CircleMarker radii on dark tiles.
+# These values match the pre-refactor inline palette in add_vessel_to_map so
+# the legend swatches and actual markers agree.
 # ============================================================================
 CATEGORY_COLORS = {
-    'russia':         '#e53935',   # bright red
-    'shadow':         '#b71c1c',   # dark red — distinct from Russia
-    'suspected':      '#ffb300',   # amber — distinct from China
-    'china':          '#fb8c00',   # deep orange
-    'norway_mil':     '#43a047',   # green
-    'norway_civ':     '#90a4ae',   # cool grey
-    'other':          '#29b6f6',   # sky blue
-    'buoy':           '#546e7a',   # dark grey
-    'cables':         '#ab47bc',   # purple
-    'eez':            '#42a5f5',   # light blue
-    'territorial':    '#5c6bc0',   # indigo
-    'boundary_200nm': '#1976d2',   # dark blue
+    'russia':         '#d32f2f',   # red
+    'shadow':         '#c62828',   # dark red
+    'suspected':      '#ff5722',   # orange-red
+    'china':          '#ff9800',   # orange
+    'norway_mil':     '#2E7D32',   # dark green
+    'norway_civ':     '#888888',   # grey
+    'other':          '#2196F3',   # blue
+    'buoy':           '#616161',   # dark grey
+    'cables':         '#9C27B0',   # purple
+    'eez':            '#2196F3',   # blue
+    'territorial':    '#64B5F6',   # light blue
+    'boundary_200nm': '#1976D2',   # dark blue
 }
 
 

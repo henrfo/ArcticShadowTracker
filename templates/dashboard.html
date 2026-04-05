@@ -136,14 +136,27 @@
             <article class="anomaly-feed">
                 <header class="anomaly-feed__header">
                     <h2 class="anomaly-feed__title">Anomaly Detections</h2>
-                    <span class="anomaly-feed__count" id="anomaly-count">Loading…</span>
+                    <div class="anomaly-feed__header-actions">
+                        <span class="anomaly-feed__count" id="anomaly-count">Loading…</span>
+                        <button
+                            type="button"
+                            class="filter-toggle"
+                            id="filter-toggle"
+                            aria-expanded="false"
+                            aria-controls="filter-panel"
+                        >
+                            Filters
+                        </button>
+                    </div>
                 </header>
                 <div class="anomaly-feed__list" id="anomaly-list">
                     <div class="anomaly-feed__empty">Loading anomaly detections…</div>
                 </div>
             </article>
 
-            <aside class="filter-panel" aria-label="Filter and sort">
+            <div class="filter-backdrop" id="filter-backdrop" hidden></div>
+
+            <aside class="filter-panel" id="filter-panel" aria-label="Filter and sort">
                 <div class="filter-panel__group">
                     <fieldset class="filter-panel__fieldset">
                         <legend class="filter-panel__legend">Severity</legend>
