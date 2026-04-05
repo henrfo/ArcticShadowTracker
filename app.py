@@ -484,17 +484,22 @@ def api_anomalies():
         with open(anomalies_file, 'r') as f:
             data = json.load(f)
 
-    all_anomalies = data.get('anomalies', []) or []
+    main_anomalies = data.get('anomalies', []) or []
+    main_anomalies.sort(key=lambda x: x.get('detected_at', ''), reverse=True)
+    main_anomalies = main_anomalies[:100]
 
     # Merge dark_vessel anomalies written by the daily satellite_monitor.yml
     # pipeline. Separate file avoids clobbering between the two workflows.
+    # Dark vessels are naturally ~12-24h "older" than the continuous AIS stream
+    # (daily cron vs 5-min cron), so we cap main_anomalies and dark_anomalies
+    # INDEPENDENTLY before merging — otherwise dark vessels get crowded out.
     dark_data = _load_dark_vessels()
     dark_anomalies = dark_data.get('anomalies', []) or []
-    if dark_anomalies:
-        all_anomalies = all_anomalies + dark_anomalies
+    dark_anomalies.sort(key=lambda x: x.get('detected_at', ''), reverse=True)
+    dark_anomalies = dark_anomalies[:50]  # top 50 dark vessels by recency
 
+    all_anomalies = main_anomalies + dark_anomalies
     all_anomalies.sort(key=lambda x: x.get('detected_at', ''), reverse=True)
-    all_anomalies = all_anomalies[:100]
 
     # Preload SAR metadata once for the whole batch (cached by mtime anyway)
     _load_sar_metadata()
