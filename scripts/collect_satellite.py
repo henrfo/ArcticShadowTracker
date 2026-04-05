@@ -118,6 +118,12 @@ TILE_RETENTION_DAYS = 14
 MONTHLY_PU_BUDGET = 30_000
 PU_WARNING_THRESHOLD = 0.83   # warn at 83% of monthly budget
 
+# Copernicus Data Space Process API hard limit: neither output dimension can
+# exceed 2500 px per request. At 100 m resolution, any scene wider than
+# ~250 km needs resolution automatically scaled down to fit. Zone tiles can
+# span ~300 km so this kicks in routinely.
+MAX_OUTPUT_DIM = 2500
+
 # Retry policy for Copernicus API download calls
 MAX_DOWNLOAD_RETRIES = 3
 RETRY_BACKOFF_SECONDS = (1, 2, 4)
@@ -368,6 +374,32 @@ def _scene_bbox(tile_info: dict) -> BBox:
     return _arctic_bbox()
 
 
+def _fit_dimensions(bbox: BBox, target_res_m: int) -> tuple:
+    """Compute (width, height) for a bbox at a target resolution, scaling the
+    resolution down if either dimension would exceed MAX_OUTPUT_DIM.
+
+    Returns ((width, height), effective_resolution_m).
+
+    Copernicus Data Space caps Process API output at 2500 px per side. Zone
+    tiles at 100 m often exceed this (e.g. 283 km wide → 2830 px). When that
+    happens we bump the resolution (meters/pixel) up until the size fits.
+    """
+    size = bbox_to_dimensions(bbox, resolution=target_res_m)
+    eff_res = target_res_m
+    if max(size) > MAX_OUTPUT_DIM:
+        # Ceiling of (target_res * ratio) gives us the smallest resolution
+        # that pulls both dimensions under the cap. One extra +1 for safety
+        # against bbox_to_dimensions rounding edge cases.
+        scale = max(size) / MAX_OUTPUT_DIM
+        eff_res = int(target_res_m * scale) + 1
+        size = bbox_to_dimensions(bbox, resolution=eff_res)
+        # Iterate once more in case rounding still leaves a dimension over
+        while max(size) > MAX_OUTPUT_DIM:
+            eff_res += 1
+            size = bbox_to_dimensions(bbox, resolution=eff_res)
+    return size, eff_res
+
+
 def download_sentinel1_tile(config: SHConfig, tile_info: dict, resolution_m: int) -> str | None:
     """Download one Sentinel-1 tile as VV+VH float32 GeoTIFF. Returns local path or None."""
     tile_id = tile_info.get('id', 'unknown')
@@ -375,10 +407,15 @@ def download_sentinel1_tile(config: SHConfig, tile_info: dict, resolution_m: int
 
     # Use the scene's own bbox (not full Arctic) to keep PU cost bounded.
     bbox = _scene_bbox(tile_info)
-    size = bbox_to_dimensions(bbox, resolution=resolution_m)
+    size, eff_res = _fit_dimensions(bbox, resolution_m)
+    if eff_res != resolution_m:
+        logger.info(
+            "  resolution auto-scaled from %dm to %dm to fit %dpx API cap",
+            resolution_m, eff_res, MAX_OUTPUT_DIM,
+        )
     logger.info(
-        "Downloading %s (%s) — bbox %s, size %dx%d",
-        tile_id, tile_date, list(bbox), size[0], size[1],
+        "Downloading %s (%s) — bbox %s, size %dx%d @ %dm",
+        tile_id, tile_date, list(bbox), size[0], size[1], eff_res,
     )
 
     evalscript = """
