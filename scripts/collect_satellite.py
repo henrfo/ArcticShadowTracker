@@ -300,11 +300,17 @@ def download_sentinel1_tile(config: SHConfig, tile_info: dict, resolution_m: int
                 logger.warning("Empty response on attempt %d for %s", attempt + 1, tile_id)
                 continue
 
+            # sentinelhub returns a list of numpy arrays (decoded imagery), NOT
+            # raw TIFF bytes. Previously we were writing tile_data[0].tobytes()
+            # which produced a float32 buffer with no TIFF header — broken for
+            # any downstream reader. Use tifffile.imwrite() to produce a real
+            # multi-sample GeoTIFF-compatible file.
+            import tifffile  # transitively installed via sentinelhub
+
             timestamp_str = datetime.fromisoformat(tile_date.replace('Z', '')).strftime('%Y%m%d_%H%M%S')
             tile_filename = f"{timestamp_str}_{tile_id[:8]}.tiff"
             tile_path = TILES_DIR / tile_filename
-            with open(tile_path, 'wb') as f:
-                f.write(tile_data[0])
+            tifffile.imwrite(str(tile_path), tile_data[0])
             size_mb = tile_path.stat().st_size / 1024 / 1024
             logger.info("Saved %s (%.1f MB)", tile_path.name, size_mb)
             return str(tile_path)
