@@ -55,6 +55,47 @@ NORWEGIAN_EEZ_BOUNDS = {
 }
 BORDER_PROXIMITY_KM = 50  # Flag gaps within 50km of border
 
+# Empirical coverage-edge map — learned from historical anomaly positions by
+# scripts/analyze_coverage_boundary.py. Gaps whose last_position falls inside
+# one of these cells are reclassified as 'left_coverage' (expected signal loss
+# at the edge of BarentsWatch coverage) rather than 'transmission_gap'.
+COVERAGE_EDGE_FILE = BASE_DIR / 'data' / 'coverage_edge_cells.json'
+
+
+def _load_coverage_edge_cells():
+    """Load the empirical coverage-edge cells once, returning (set, cell_size).
+
+    Returns (empty_set, default_size) if the file is missing — the detector
+    then falls through to the old behaviour (all gaps are transmission_gap).
+    """
+    try:
+        with open(COVERAGE_EDGE_FILE, 'r') as f:
+            payload = json.load(f)
+        cells = {tuple(c) for c in payload.get('edge_cells', [])}
+        cell_size = float(payload.get('cell_size_deg', 0.1))
+        return cells, cell_size
+    except FileNotFoundError:
+        print(f"[coverage-edge] {COVERAGE_EDGE_FILE} not found — no reclassification")
+        return set(), 0.1
+    except Exception as exc:  # noqa: BLE001
+        print(f"[coverage-edge] failed to load edge cells: {exc}")
+        return set(), 0.1
+
+
+_COVERAGE_EDGE_CELLS, _COVERAGE_CELL_SIZE = _load_coverage_edge_cells()
+
+
+def _is_coverage_edge(lat, lon):
+    """Return True if (lat, lon) falls inside a known coverage-edge cell."""
+    if not _COVERAGE_EDGE_CELLS:
+        return False
+    size = _COVERAGE_CELL_SIZE
+    key = (
+        round((lat // size) * size, 4),
+        round((lon // size) * size, 4),
+    )
+    return key in _COVERAGE_EDGE_CELLS
+
 # Corrupt MMSI patterns
 INVALID_MMSI_PATTERNS = [
     '000000000', '111111111', '123456789', '999999999',
@@ -289,22 +330,36 @@ def detect_transmission_gaps(vessels_data):
             gap_minutes = (time2 - time1).total_seconds() / 60
 
             if gap_minutes > MAX_TRANSMISSION_GAP_MINUTES:
-                # Check if near border (higher severity)
-                near_border = is_near_border(prev_pos['lat'], prev_pos['lon'])
+                last_lat = prev_pos['lat']
+                last_lon = prev_pos['lon']
+                near_border = is_near_border(last_lat, last_lon)
 
-                # Determine severity
-                if gap_minutes > 180:  # >3 hours
-                    severity = 'critical' if near_border else 'high'
-                elif gap_minutes > 60:  # >1 hour
-                    severity = 'high' if near_border else 'medium'
+                # Empirical coverage-edge check: if the vessel's last seen
+                # position falls in a cell where gaps are known to cluster
+                # (learned from historical data by analyze_coverage_boundary.py),
+                # this is an expected boundary exit, not a suspicious signal loss.
+                in_coverage_edge = _is_coverage_edge(last_lat, last_lon)
+
+                if in_coverage_edge:
+                    anomaly_type = 'left_coverage'
+                    severity = 'low'  # informational; hidden by default in the dashboard
                 else:
-                    severity = 'medium' if near_border else 'low'
+                    anomaly_type = 'transmission_gap'
+                    # Severity is primarily a function of gap duration; near_border
+                    # remains as a tiebreaker that can still escalate genuine gaps
+                    # in real border zones (not coverage-edge cells).
+                    if gap_minutes > 180:  # >3 hours
+                        severity = 'critical' if near_border else 'high'
+                    elif gap_minutes > 60:  # >1 hour
+                        severity = 'high' if near_border else 'medium'
+                    else:
+                        severity = 'medium' if near_border else 'low'
 
                 anomalies.append({
                     'mmsi': mmsi,
                     'vessel_name': vessel_info['name'],
                     'country': vessel_info['country'],
-                    'anomaly_type': 'transmission_gap',
+                    'anomaly_type': anomaly_type,
                     'severity': severity,
                     'detected_at': curr_pos['timestamp'],
                     'details': {
@@ -312,10 +367,11 @@ def detect_transmission_gaps(vessels_data):
                         'gap_start': prev_pos['timestamp'],
                         'gap_end': curr_pos['timestamp'],
                         'last_position': {
-                            'lat': round(prev_pos['lat'], 4),
-                            'lon': round(prev_pos['lon'], 4)
+                            'lat': round(last_lat, 4),
+                            'lon': round(last_lon, 4),
                         },
-                        'near_border': near_border
+                        'near_border': near_border,
+                        'coverage_edge': in_coverage_edge,
                     }
                 })
 

@@ -120,11 +120,12 @@
       transmission_gap: 'AIS Gap',
       impossible_speed: 'Impossible Speed',
       loitering: 'Loitering',
-      rendezvous: 'Rendezvous'
+      rendezvous: 'Rendezvous',
+      left_coverage: 'Left Coverage',
     };
     const SEVERITY_ORDER = { critical: 0, high: 1, medium: 2, low: 3 };
     const SEVERITIES = ['critical', 'high', 'medium', 'low'];
-    const TYPES = ['transmission_gap', 'impossible_speed', 'loitering', 'rendezvous'];
+    const TYPES = ['transmission_gap', 'impossible_speed', 'loitering', 'rendezvous', 'left_coverage'];
 
     let all = [];
     let currentSort = 'newest';
@@ -144,6 +145,8 @@
     function describe(a) {
       const d = a.details || {};
       switch (a.anomaly_type) {
+        case 'left_coverage':
+          return `Vessel left BarentsWatch coverage area after ${Math.round(d.gap_duration_minutes || 0)} minutes of silence (expected)`;
         case 'transmission_gap':
           return `AIS signal lost for ${Math.round(d.gap_duration_minutes || 0)} minutes` +
                  (d.near_border ? ' near Norwegian border' : '');
