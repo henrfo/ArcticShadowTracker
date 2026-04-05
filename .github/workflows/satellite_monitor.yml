@@ -17,7 +17,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1  # Shallow — gh-pages history isn't needed here.
+                          # Avoids the 20-min hang we hit on arctic_monitor.yml.
 
       - name: Setup Python 3.9
         uses: actions/setup-python@v4
@@ -31,11 +32,25 @@ jobs:
           pip install -r requirements.txt
 
       - name: Collect Sentinel-1 SAR imagery
+        id: collect
         env:
           SENTINEL_CLIENT_ID: ${{ secrets.SENTINEL_CLIENT_ID }}
           SENTINEL_CLIENT_SECRET: ${{ secrets.SENTINEL_CLIENT_SECRET }}
         run: |
           python scripts/collect_satellite.py
+
+      - name: Show metadata on failure for quick debugging
+        if: failure()
+        run: |
+          echo "=== satellite collection FAILED ==="
+          if [ -f data/satellite_imagery/metadata.json ]; then
+            echo "Last metadata.json on disk:"
+            cat data/satellite_imagery/metadata.json
+          else
+            echo "No metadata.json present"
+          fi
+          echo "=== Tile directory ==="
+          ls -la data/satellite_imagery/tiles/ 2>/dev/null || echo "(no tiles dir)"
 
       - name: Commit metadata changes
         run: |
