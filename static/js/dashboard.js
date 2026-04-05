@@ -7,6 +7,14 @@
 
   const REFRESH_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
 
+  // Shared HTML-escaping helper used by any module that interpolates
+  // user/API-supplied strings into innerHTML.
+  function escapeHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
   // --------------------------------------------------------------------------
   // StaleBanner — show/hide + update message based on stats payload
   // --------------------------------------------------------------------------
@@ -306,12 +314,6 @@
         default:
           return 'Suspicious activity detected';
       }
-    }
-
-    function escapeHtml(s) {
-      return String(s == null ? '' : s)
-        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
 
     function updateCounts(anomalies) {
