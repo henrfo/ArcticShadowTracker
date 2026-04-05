@@ -57,10 +57,22 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
 
+          echo "=== Thumbnails directory contents ==="
+          ls -la data/satellite_imagery/thumbnails/ 2>&1 || echo "(dir does not exist)"
+          echo ""
+
           # Commit metadata.json + the generated thumbnails directory.
           # TIFF files in tiles/ are excluded by .gitignore.
           git add data/satellite_imagery/metadata.json
-          git add data/satellite_imagery/thumbnails/ 2>/dev/null || true
+          if [ -d data/satellite_imagery/thumbnails ]; then
+            git add -v data/satellite_imagery/thumbnails/
+          else
+            echo "No thumbnails directory to add"
+          fi
+
+          echo ""
+          echo "=== Staged changes ==="
+          git diff --staged --stat
 
           if git diff --staged --quiet; then
             echo "No changes to satellite metadata or thumbnails"
