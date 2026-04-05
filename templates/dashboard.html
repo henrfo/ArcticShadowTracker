@@ -61,7 +61,15 @@
                 <h2 class="sat-panel__title">Sentinel-1 SAR Imagery</h2>
                 <div class="sat-panel__subtitle" id="sat-panel-subtitle">Loading…</div>
             </div>
-            <button class="sat-panel__close" id="sat-close" type="button" aria-label="Close satellite viewer">×</button>
+            <div class="sat-panel__header-actions">
+                <button
+                    class="sat-panel__analysis"
+                    id="sat-open-analysis"
+                    type="button"
+                    aria-label="Open full-screen SAR analysis view"
+                >Analysis&nbsp;▶</button>
+                <button class="sat-panel__close" id="sat-close" type="button" aria-label="Close satellite viewer">×</button>
+            </div>
         </header>
         <div class="sat-panel__body" id="sat-panel-body">
             <div class="sat-panel__empty">Loading satellite tiles…</div>
@@ -269,6 +277,13 @@
                             </span>
                             <span class="filter-count" id="count-left_coverage">0</span>
                         </label>
+                        <label class="filter-row" title="SAR detection with no matching AIS signal — possible dark vessel">
+                            <span class="filter-row__label">
+                                <input type="checkbox" id="filter-dark_vessel" checked>
+                                <span>Dark Vessel</span>
+                            </span>
+                            <span class="filter-count" id="count-dark_vessel">0</span>
+                        </label>
                     </fieldset>
                 </div>
 
@@ -281,6 +296,11 @@
             </aside>
         </section>
     </main>
+
+    <!-- Full-screen SAR Analysis overlay (lazy-loaded iframe) -->
+    <div class="analysis-overlay" id="analysis-overlay" hidden>
+        <iframe id="analysis-frame" title="SAR Analysis View" src="about:blank"></iframe>
+    </div>
 
     <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 </body>

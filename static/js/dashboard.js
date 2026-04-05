@@ -86,6 +86,10 @@
     const body = document.getElementById('sat-panel-body');
     const subtitle = document.getElementById('sat-panel-subtitle');
     const badge = document.getElementById('sat-count-badge');
+    const analysisBtn = document.getElementById('sat-open-analysis');
+    const analysisOverlay = document.getElementById('analysis-overlay');
+    const analysisFrame = document.getElementById('analysis-frame');
+    let analysisLoaded = false;
 
     let lastFetchAt = 0;
     let currentTiles = [];
@@ -116,6 +120,26 @@
     function toggle() {
       if (isOpen()) close();
       else open();
+    }
+
+    function isAnalysisOpen() {
+      return analysisOverlay && !analysisOverlay.hidden;
+    }
+
+    function openAnalysis() {
+      if (!analysisOverlay || !analysisFrame) return;
+      if (!analysisLoaded) {
+        analysisFrame.src = '/analysis-view';
+        analysisLoaded = true;
+      }
+      analysisOverlay.hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAnalysis() {
+      if (!analysisOverlay) return;
+      analysisOverlay.hidden = true;
+      document.body.style.overflow = '';
     }
 
     function formatTileTime(isoTs) {
@@ -207,15 +231,22 @@
       if (toggleBtn) toggleBtn.addEventListener('click', toggle);
       if (closeBtn) closeBtn.addEventListener('click', close);
       if (backdrop) backdrop.addEventListener('click', close);
+      if (analysisBtn) analysisBtn.addEventListener('click', openAnalysis);
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && isOpen()) close();
+        if (e.key !== 'Escape') return;
+        if (isAnalysisOpen()) { closeAnalysis(); return; }
+        if (isOpen()) close();
+      });
+      // Listen for close messages posted from the analysis iframe.
+      window.addEventListener('message', (e) => {
+        if (e && e.data && e.data.type === 'close-analysis') closeAnalysis();
       });
       // Prefetch once on boot so the nav badge shows a count without needing
       // the user to open the panel first.
       fetchAndRender();
     }
 
-    return { init, open, close, fetchAndRender };
+    return { init, open, close, fetchAndRender, openAnalysis, closeAnalysis };
   })();
 
   // --------------------------------------------------------------------------
@@ -275,10 +306,11 @@
       loitering: 'Loitering',
       rendezvous: 'Rendezvous',
       left_coverage: 'Left Coverage',
+      dark_vessel: 'Dark Vessel',
     };
     const SEVERITY_ORDER = { critical: 0, high: 1, medium: 2, low: 3 };
     const SEVERITIES = ['critical', 'high', 'medium', 'low'];
-    const TYPES = ['transmission_gap', 'impossible_speed', 'loitering', 'rendezvous', 'left_coverage'];
+    const TYPES = ['transmission_gap', 'impossible_speed', 'loitering', 'rendezvous', 'left_coverage', 'dark_vessel'];
 
     let all = [];
     let currentSort = 'newest';
@@ -298,6 +330,12 @@
     function describe(a) {
       const d = a.details || {};
       switch (a.anomaly_type) {
+        case 'dark_vessel': {
+          const det = d.detection || {};
+          const conf = det.confidence_db != null ? `${det.confidence_db.toFixed(1)}σ` : 'unknown σ';
+          const len = det.estimated_length_m != null ? `~${det.estimated_length_m}m` : 'unknown size';
+          return `SAR detection with no AIS match — confidence ${conf}, ${len}`;
+        }
         case 'left_coverage':
           return `Vessel left BarentsWatch coverage area after ${Math.round(d.gap_duration_minutes || 0)} minutes of silence (expected)`;
         case 'transmission_gap':
@@ -318,7 +356,14 @@
 
     function updateCounts(anomalies) {
       const sev = { critical: 0, high: 0, medium: 0, low: 0 };
-      const typ = { transmission_gap: 0, impossible_speed: 0, loitering: 0, rendezvous: 0 };
+      const typ = {
+        transmission_gap: 0,
+        impossible_speed: 0,
+        loitering: 0,
+        rendezvous: 0,
+        left_coverage: 0,
+        dark_vessel: 0,
+      };
       anomalies.forEach(a => {
         if (sev[a.severity] !== undefined) sev[a.severity]++;
         if (typ[a.anomaly_type] !== undefined) typ[a.anomaly_type]++;
@@ -417,7 +462,7 @@
         const desc = escapeHtml(describe(a));
         const sarChip = renderSarChip(a.sar_coverage);
         return `
-          <article class="anomaly-card ${clickable ? 'is-clickable' : ''}" data-mmsi="${escapeHtml(primary)}" ${clickable ? 'tabindex="0" role="button"' : ''}>
+          <article class="anomaly-card ${clickable ? 'is-clickable' : ''}" data-mmsi="${escapeHtml(primary)}" data-type="${escapeHtml(a.anomaly_type || '')}" ${clickable ? 'tabindex="0" role="button"' : ''}>
             <div class="anomaly-card__head">
               <div class="anomaly-card__meta">
                 <span class="badge badge--${sev}">${sev}</span>

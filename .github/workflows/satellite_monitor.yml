@@ -39,10 +39,18 @@ jobs:
         run: |
           python scripts/collect_satellite.py
 
+      - name: Detect vessels via CFAR
+        run: |
+          python scripts/detect_vessels_cfar.py
+
+      - name: Correlate detections with AIS (emit dark_vessel anomalies)
+        run: |
+          python scripts/correlate_detections.py
+
       - name: Show metadata on failure for quick debugging
         if: failure()
         run: |
-          echo "=== satellite collection FAILED ==="
+          echo "=== satellite pipeline FAILED ==="
           if [ -f data/satellite_imagery/metadata.json ]; then
             echo "Last metadata.json on disk:"
             cat data/satellite_imagery/metadata.json
@@ -51,8 +59,12 @@ jobs:
           fi
           echo "=== Tile directory ==="
           ls -la data/satellite_imagery/tiles/ 2>/dev/null || echo "(no tiles dir)"
+          echo "=== Detections (if any) ==="
+          if [ -f data/satellite_imagery/detections.json ]; then
+            head -50 data/satellite_imagery/detections.json
+          fi
 
-      - name: Commit metadata + thumbnails
+      - name: Commit metadata + thumbnails + detections + dark vessels
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
@@ -61,13 +73,19 @@ jobs:
           ls -la data/satellite_imagery/thumbnails/ 2>&1 || echo "(dir does not exist)"
           echo ""
 
-          # Commit metadata.json + the generated thumbnails directory.
+          # Commit metadata.json + thumbnails + CFAR detections + dark vessels.
           # TIFF files in tiles/ are excluded by .gitignore.
           git add data/satellite_imagery/metadata.json
           if [ -d data/satellite_imagery/thumbnails ]; then
             git add -v data/satellite_imagery/thumbnails/
           else
             echo "No thumbnails directory to add"
+          fi
+          if [ -f data/satellite_imagery/detections.json ]; then
+            git add data/satellite_imagery/detections.json
+          fi
+          if [ -f data/anomalies/dark_vessels.json ]; then
+            git add data/anomalies/dark_vessels.json
           fi
 
           echo ""

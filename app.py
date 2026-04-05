@@ -58,6 +58,12 @@ _sar_cache = {'data': None, 'mtime': 0.0, 'loaded_at': 0.0}
 SAR_CACHE_TTL_SECONDS = 60
 SAR_TIME_WINDOW_HOURS = 12  # ± window for "nearby" SAR passes on an anomaly
 
+# Dark-vessel anomalies — written by scripts/correlate_detections.py inside
+# the satellite_monitor.yml workflow. Lives in a separate file from the
+# main anomalies.json to avoid clobbering between the two workflows.
+# /api/anomalies merges both at request time.
+_dark_vessels_cache = {'data': None, 'mtime': 0.0, 'loaded_at': 0.0}
+
 
 def add_cors_headers(response):
     """Add CORS headers to response"""
@@ -219,6 +225,36 @@ def _load_sar_metadata():
     except Exception as exc:  # noqa: BLE001
         logger.warning("Could not load SAR metadata: %s", exc)
         return {'tiles': []}
+
+
+def _load_dark_vessels():
+    """Load data/anomalies/dark_vessels.json with mtime-based cache invalidation.
+
+    This file is written by scripts/correlate_detections.py inside the daily
+    satellite_monitor.yml workflow. api_anomalies() merges its contents with
+    the main anomalies.json stream from gh-pages at request time.
+    """
+    import time as _time
+    path = DATA_DIR / 'anomalies' / 'dark_vessels.json'
+    if not path.exists():
+        return {'anomalies': []}
+    try:
+        mtime = path.stat().st_mtime
+        now = _time.monotonic()
+        cached = _dark_vessels_cache['data']
+        if (cached is not None
+                and _dark_vessels_cache['mtime'] == mtime
+                and (now - _dark_vessels_cache['loaded_at']) < SAR_CACHE_TTL_SECONDS):
+            return cached
+        with open(path, 'r') as f:
+            data = json.load(f)
+        _dark_vessels_cache['data'] = data
+        _dark_vessels_cache['mtime'] = mtime
+        _dark_vessels_cache['loaded_at'] = now
+        return data
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("Could not load dark_vessels.json: %s", exc)
+        return {'anomalies': []}
 
 
 def _anomaly_position(anomaly):
@@ -449,6 +485,14 @@ def api_anomalies():
             data = json.load(f)
 
     all_anomalies = data.get('anomalies', []) or []
+
+    # Merge dark_vessel anomalies written by the daily satellite_monitor.yml
+    # pipeline. Separate file avoids clobbering between the two workflows.
+    dark_data = _load_dark_vessels()
+    dark_anomalies = dark_data.get('anomalies', []) or []
+    if dark_anomalies:
+        all_anomalies = all_anomalies + dark_anomalies
+
     all_anomalies.sort(key=lambda x: x.get('detected_at', ''), reverse=True)
     all_anomalies = all_anomalies[:100]
 
@@ -495,6 +539,7 @@ def api_satellite_tiles():
             'datetime': t.get('datetime'),
             'bbox': t.get('bbox'),
             'instrument_mode': t.get('instrument_mode'),
+            'zone': t.get('zone'),
             'thumbnail_url': f'/satellite-thumbnails/{thumb}' if thumb else None,
         })
     body = {
@@ -504,6 +549,17 @@ def api_satellite_tiles():
         'tiles': tiles_out,
     }
     return no_cache(make_response(jsonify(body)))
+
+
+@app.route('/analysis-view')
+def analysis_view():
+    """Serve the standalone full-screen SAR Analysis View page.
+
+    The page fetches /api/satellite-tiles and /api/vessels on load and
+    renders SAR tiles as Leaflet ImageOverlays with AIS markers overlaid
+    (filtered to ±60 min of any visible tile's acquisition time).
+    """
+    return render_template('analysis.html')
 
 
 @app.route('/satellite-thumbnails/<path:filename>')

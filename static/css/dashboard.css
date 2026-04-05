@@ -395,6 +395,35 @@ button {
   letter-spacing: 0.03em;
 }
 
+.sat-panel__header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-shrink: 0;
+}
+
+.sat-panel__analysis {
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  background: var(--surface-glass);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-pill);
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: color var(--t-fast) var(--ease-out),
+              border-color var(--t-fast) var(--ease-out),
+              background var(--t-fast) var(--ease-out);
+}
+.sat-panel__analysis:hover {
+  color: var(--text-primary);
+  border-color: var(--border-focus);
+  background: var(--surface-glass-strong);
+}
+
 .sat-panel__close {
   flex-shrink: 0;
   width: 32px;
@@ -408,6 +437,7 @@ button {
   background: transparent;
   border: 1px solid var(--border-soft);
   border-radius: var(--r-pill);
+  cursor: pointer;
   transition: color var(--t-fast) var(--ease-out),
               border-color var(--t-fast) var(--ease-out);
 }
@@ -415,6 +445,23 @@ button {
 .sat-panel__close:hover {
   color: var(--text-primary);
   border-color: var(--border-focus);
+}
+
+/* -------- Full-screen SAR Analysis overlay (iframe host) -------- */
+.analysis-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: #000;
+}
+.analysis-overlay[hidden] {
+  display: none;
+}
+.analysis-overlay iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
 }
 
 .sat-panel__body {
@@ -938,6 +985,17 @@ button {
 .badge--high     { color: var(--sev-high);     background: var(--sev-high-bg);     border-color: rgba(255, 169, 77, 0.35); }
 .badge--medium   { color: var(--sev-medium);   background: var(--sev-medium-bg);   border-color: rgba(255, 210, 77, 0.35); }
 .badge--low      { color: var(--sev-low);      background: var(--sev-low-bg);      border-color: rgba(142, 205, 255, 0.35); }
+
+/* Dark vessel anomaly cards get a purple left accent + purple type label to
+   distinguish SAR-originated detections from AIS-based anomalies at a glance. */
+.anomaly-card[data-type="dark_vessel"] {
+  border-left: 3px solid #b86ff0;
+  padding-left: calc(var(--s-4) - 3px);
+}
+.anomaly-card[data-type="dark_vessel"] .anomaly-card__type {
+  color: #b86ff0;
+  font-weight: var(--fw-medium);
+}
 
 /* ==========================================================================
    Filter panel
