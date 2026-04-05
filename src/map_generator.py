@@ -963,7 +963,9 @@ def add_focus_mode_script(map_obj, vessel_tracks):
             'border-radius: 6px',
             'box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4)',
             'white-space: nowrap',
-            'transform: translate(12px, -12px)',
+            // Down-right of cursor — Leaflet marker tooltips default to
+            // the upper-right quadrant, so we stay out of their lane.
+            'transform: translate(14px, 18px)',
             'display: none'
         ].join(';');
         document.body.appendChild(el);
@@ -983,7 +985,21 @@ def add_focus_mode_script(map_obj, vessel_tracks):
             return;
         }
         const className = target.getAttribute('class') || '';
-        // Polyline segments carry classes like "vessel-12345 tier-realtime leaflet-interactive"
+
+        // Distinguish track polyline segments from vessel markers: BOTH are
+        // rendered as SVG <path> with a vessel-MMSI class, so the old tag-name
+        // check wasn't enough — a CircleMarker is a circular <path>, not a
+        // <circle>. Polyline segments have a tier-* class (from add_track_lines);
+        // markers have a vessel-marker class (from add_vessel_marker). Only
+        // respond to tier-* paths so the marker keeps its native Leaflet
+        // tooltip to itself.
+        const isTrackLine = className.indexOf('tier-') !== -1 &&
+                            className.indexOf('vessel-marker') === -1;
+        if (!isTrackLine) {
+            _hideTrackTooltip();
+            return;
+        }
+
         const match = className.match(/vessel-(\\d+)/);
         if (!match) {
             _hideTrackTooltip();
@@ -992,13 +1008,6 @@ def add_focus_mode_script(map_obj, vessel_tracks):
         const mmsi = match[1];
         const points = trackPointsMap[mmsi];
         if (!points || points.length === 0) {
-            _hideTrackTooltip();
-            return;
-        }
-
-        // Skip CircleMarkers (those also have vessel-MMSI class). Only respond
-        // to <path> elements, which are the polyline segments.
-        if (target.tagName && target.tagName.toLowerCase() !== 'path') {
             _hideTrackTooltip();
             return;
         }
