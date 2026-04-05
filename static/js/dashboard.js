@@ -370,7 +370,7 @@
         `${p.datetime} (${formatRelativeDelta(p.delta_minutes)})`
       );
       const title = 'Sentinel-1 passes nearby:\n' + tooltipLines.join('\n');
-      return `<div class="sar-chip" title="${escapeHtml(title)}">🛰️ SAR pass ${escapeHtml(rel)}</div>`;
+      return `<div class="sar-chip" title="${escapeHtml(title)}">SAR pass ${escapeHtml(rel)}</div>`;
     }
 
     // Pull the best-available (lat, lon) out of an anomaly's details blob.

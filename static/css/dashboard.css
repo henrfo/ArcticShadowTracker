@@ -306,8 +306,16 @@ button {
 }
 
 .nav-sat-btn__icon {
-  font-size: 0.9rem;
-  line-height: 1;
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.nav-sat-btn:hover .nav-sat-btn__icon,
+.nav-sat-btn[aria-expanded="true"] .nav-sat-btn__icon {
+  opacity: 1;
 }
 
 .nav-sat-btn__badge {

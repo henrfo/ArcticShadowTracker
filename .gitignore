@@ -51,6 +51,9 @@ logs/
 
 # Output files (allow HTML dashboards for GitHub Pages)
 *.png
+# Exception: SAR thumbnail PNGs are small (<150 KB) and need to be committed
+# so the dashboard viewer can serve them.
+!data/satellite_imagery/thumbnails/*.png
 # Allow PDFs in docs/reference/
 *.pdf
 !docs/reference/*.pdf
