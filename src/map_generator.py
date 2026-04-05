@@ -697,7 +697,7 @@ def add_vessel_marker(map_obj, mmsi, track_data, current_pos, color):
         fillOpacity=fill_opacity,
         weight=2,
         opacity=line_opacity,
-        popup=folium.Popup(popup_html, max_width=300),
+        popup=folium.Popup(popup_html, max_width=220),
         tooltip=f"{flag} {track_data['name']}",
         className=f"vessel-marker vessel-{mmsi}"
     ).add_to(map_obj)
@@ -752,6 +752,38 @@ def add_focus_mode_script(map_obj, vessel_tracks):
     vessel_data_json = json.dumps(vessel_data_map)
 
     focus_script = """
+    <!-- Mobile-responsive styles for the Leaflet popup and the vessel info panel -->
+    <style>
+      /* Leaflet popup: constrain on narrow viewports so it doesn't cover markers */
+      @media (max-width: 600px) {
+        .leaflet-popup-content {
+          max-width: 75vw !important;
+          margin: 10px 12px !important;
+          font-size: 12px !important;
+        }
+        .leaflet-popup-content table { font-size: 11px !important; }
+        .leaflet-popup-content h4 { font-size: 13px !important; }
+      }
+
+      /* Vessel info panel: on mobile, dock to bottom so it doesn't obscure the map */
+      @media (max-width: 600px) {
+        #vessel-info-panel {
+          top: auto !important;
+          bottom: 10px !important;
+          left: 10px !important;
+          right: 10px !important;
+          width: auto !important;
+          transform: none !important;
+          max-height: 40vh;
+          overflow-y: auto;
+          padding: 10px 12px !important;
+          font-size: 12px !important;
+        }
+        #vessel-info-panel h4 { font-size: 13px !important; }
+        #vessel-info-panel table { font-size: 11px !important; }
+      }
+    </style>
+
     <!-- Vessel Info Panel (center-left, initially hidden) -->
     <div id="vessel-info-panel" style="display: none; position: fixed; top: 50%; left: 10px; transform: translateY(-50%); width: 250px; z-index: 10000; background-color: white; padding: 15px; border: 2px solid #333; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
         <h4 id="vessel-info-name" style="margin: 0 0 10px 0;"></h4>
