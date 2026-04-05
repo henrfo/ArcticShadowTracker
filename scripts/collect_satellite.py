@@ -320,28 +320,97 @@ def download_sentinel1_tile(config: SHConfig, tile_info: dict, resolution_m: int
 # Metadata + cleanup
 # ============================================================================
 
-def save_metadata(imagery_results: list, downloaded: list, resolution_m: int) -> None:
+def _tile_entry(tile_path: str, tile_info: dict) -> dict:
+    """Build a serializable tile metadata entry from a downloaded (path, catalog_item) pair.
+
+    Uses basename for `filename` — the full runner path is ephemeral and useless
+    outside the GH Actions environment. The bbox is the per-scene footprint we
+    actually downloaded (not the full Arctic), extracted via _scene_bbox().
+    """
+    bbox = _scene_bbox(tile_info)
+    return {
+        'id': tile_info.get('id', 'unknown'),
+        'filename': Path(tile_path).name,
+        'datetime': tile_info.get('properties', {}).get('datetime', ''),
+        'instrument_mode': tile_info.get('properties', {}).get('sar:instrument_mode', ''),
+        'bbox': [round(c, 4) for c in list(bbox)],  # [min_lon, min_lat, max_lon, max_lat]
+    }
+
+
+def _parse_tile_ts(iso_ts: str) -> datetime | None:
+    """Parse a tile's ISO timestamp. Returns None on failure."""
+    if not iso_ts:
+        return None
+    try:
+        return datetime.fromisoformat(iso_ts.replace('Z', '+00:00'))
+    except Exception:
+        return None
+
+
+def _load_existing_metadata() -> dict:
+    """Read the current metadata.json if it exists; return empty dict on any failure."""
     import json
     metadata_file = SATELLITE_DIR / 'metadata.json'
+    if not metadata_file.exists():
+        return {}
+    try:
+        with open(metadata_file, 'r') as f:
+            return json.load(f) or {}
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("Could not read existing metadata.json, starting fresh: %s", exc)
+        return {}
+
+
+def save_metadata(imagery_results: list, downloaded: list, resolution_m: int) -> None:
+    """Merge this run's tiles into metadata.json, keeping a rolling TILE_RETENTION_DAYS window.
+
+    Enables downstream consumers (dashboard, detection) to see coverage from the
+    last N days of runs, not just the current run.
+    """
+    import json
+    metadata_file = SATELLITE_DIR / 'metadata.json'
+
+    existing = _load_existing_metadata()
+    old_tiles = existing.get('tiles', []) or []
+    new_tiles = [_tile_entry(path, info) for path, info in downloaded]
+
+    # Merge by tile id; new entries win on conflict
+    by_id: dict[str, dict] = {t['id']: t for t in old_tiles}
+    for t in new_tiles:
+        by_id[t['id']] = t
+
+    # Drop tiles outside the retention window (matches on-disk TIFF cleanup)
+    cutoff = datetime.now(timezone.utc) - timedelta(days=TILE_RETENTION_DAYS)
+    merged: list[dict] = []
+    dropped = 0
+    for t in by_id.values():
+        ts = _parse_tile_ts(t.get('datetime', ''))
+        if ts is None or ts < cutoff:
+            dropped += 1
+            continue
+        merged.append(t)
+    merged.sort(key=lambda t: t.get('datetime', ''), reverse=True)
+
     metadata = {
         'last_updated': datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
         'region': ARCTIC_REGION,
         'resolution_m': resolution_m,
-        'total_images_available': len(imagery_results),
-        'images_downloaded': len(downloaded),
-        'tiles': [
-            {
-                'path': path,
-                'id': info.get('id', 'unknown'),
-                'datetime': info.get('properties', {}).get('datetime', ''),
-                'instrument_mode': info.get('properties', {}).get('sar:instrument_mode', ''),
-            }
-            for path, info in downloaded
-        ],
+        'history_window_days': TILE_RETENTION_DAYS,
+        'tiles_downloaded_last_run': len(new_tiles),
+        'tiles_in_history': len(merged),
+        'catalog_results_last_run': len(imagery_results),
+        'tiles': merged,
     }
-    with open(metadata_file, 'w') as f:
+    # Atomic write: write to temp then rename
+    tmp_file = metadata_file.with_suffix('.json.tmp')
+    with open(tmp_file, 'w') as f:
         json.dump(metadata, f, indent=2)
-    logger.info("Wrote %s", metadata_file.name)
+    tmp_file.replace(metadata_file)
+
+    logger.info(
+        "Wrote %s — %d new tiles, %d in history (dropped %d older than %d days)",
+        metadata_file.name, len(new_tiles), len(merged), dropped, TILE_RETENTION_DAYS,
+    )
 
 
 def cleanup_old_tiles(days: int = TILE_RETENTION_DAYS) -> None:

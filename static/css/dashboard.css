@@ -643,6 +643,27 @@ button {
   margin-left: var(--s-2);
 }
 
+/* Satellite coverage chip — informational, shown in anomaly cards when a
+   recent Sentinel-1 pass covered the vessel's last known position. Muted
+   blue tint (not an alert). */
+.sar-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: var(--s-2);
+  padding: 3px 9px;
+  font-size: 0.7rem;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.04em;
+  color: var(--text-soft);
+  background: rgba(142, 205, 255, 0.08);
+  border: 1px solid rgba(142, 205, 255, 0.22);
+  border-radius: var(--r-pill);
+  line-height: 1;
+  cursor: default;
+  white-space: nowrap;
+}
+
 /* Severity badges */
 .badge {
   display: inline-flex;

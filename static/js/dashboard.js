@@ -205,6 +205,29 @@
       return sorted;
     }
 
+    // Format a signed time delta in minutes as a human "+45m" / "-2.3h" string.
+    function formatRelativeDelta(minutes) {
+      if (minutes == null || isNaN(minutes)) return '';
+      const abs = Math.abs(minutes);
+      const sign = minutes >= 0 ? '+' : '-';
+      if (abs < 60) return `${sign}${Math.round(abs)}m`;
+      const h = Math.round((abs / 60) * 10) / 10;  // one decimal
+      return `${sign}${h}h`;
+    }
+
+    // Render a Sentinel-1 coverage chip if any nearby SAR passes exist.
+    // Shows the nearest pass; tooltip lists all passes in the window.
+    function renderSarChip(sarCoverage) {
+      if (!sarCoverage || sarCoverage.length === 0) return '';
+      const nearest = sarCoverage[0];
+      const rel = formatRelativeDelta(nearest.delta_minutes);
+      const tooltipLines = sarCoverage.map(p =>
+        `${p.datetime} (${formatRelativeDelta(p.delta_minutes)})`
+      );
+      const title = 'Sentinel-1 passes nearby:\n' + tooltipLines.join('\n');
+      return `<div class="sar-chip" title="${escapeHtml(title)}">🛰️ SAR pass ${escapeHtml(rel)}</div>`;
+    }
+
     // Pull the best-available (lat, lon) out of an anomaly's details blob.
     // Different anomaly types store position in different keys; rendezvous has none.
     function extractPosition(a) {
@@ -245,6 +268,7 @@
         const sev = escapeHtml(a.severity || 'low');
         const type = escapeHtml(formatType(a.anomaly_type));
         const desc = escapeHtml(describe(a));
+        const sarChip = renderSarChip(a.sar_coverage);
         return `
           <article class="anomaly-card ${clickable ? 'is-clickable' : ''}" data-mmsi="${escapeHtml(primary)}" ${clickable ? 'tabindex="0" role="button"' : ''}>
             <div class="anomaly-card__head">
@@ -258,6 +282,7 @@
               <span class="anomaly-card__vessel">${vessel}</span>
               <span class="anomaly-card__country">(${country})</span>
               <div>${desc}</div>
+              ${sarChip}
             </div>
           </article>`;
       }).join('');

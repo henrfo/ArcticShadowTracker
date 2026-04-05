@@ -50,6 +50,14 @@ _map_cache = {'html': None, 'raw_last_update': None}
 _data_cache = {'result': None, 'fetched_at': 0.0}
 DATA_TTL_SECONDS = 30
 
+# SAR satellite coverage metadata — read from data/satellite_imagery/metadata.json
+# which is updated daily by the satellite_monitor.yml workflow. Cached by file
+# mtime so changes from new workflow runs are picked up automatically without
+# needing a restart. Each anomaly is enriched with any nearby SAR passes.
+_sar_cache = {'data': None, 'mtime': 0.0, 'loaded_at': 0.0}
+SAR_CACHE_TTL_SECONDS = 60
+SAR_TIME_WINDOW_HOURS = 12  # ± window for "nearby" SAR passes on an anomaly
+
 
 def add_cors_headers(response):
     """Add CORS headers to response"""
@@ -177,6 +185,102 @@ def _compute_freshness(raw_last_update):
         return minutes, pretty, is_stale, reason
     except Exception as exc:  # noqa: BLE001
         return None, 'Unknown', True, f'Could not parse last_updated: {exc}'
+
+
+# ============================================================================
+# SAR coverage — match anomalies to nearby Sentinel-1 passes
+# ============================================================================
+
+def _load_sar_metadata():
+    """Load data/satellite_imagery/metadata.json with mtime-based cache invalidation.
+
+    The file is written by scripts/collect_satellite.py after each workflow run.
+    Cache is keyed on the file's mtime so new workflow deploys invalidate it
+    automatically without needing a Flask restart.
+    """
+    import time as _time
+    path = DATA_DIR / 'satellite_imagery' / 'metadata.json'
+    if not path.exists():
+        return {'tiles': []}
+    try:
+        mtime = path.stat().st_mtime
+        now = _time.monotonic()
+        cached = _sar_cache['data']
+        if (cached is not None
+                and _sar_cache['mtime'] == mtime
+                and (now - _sar_cache['loaded_at']) < SAR_CACHE_TTL_SECONDS):
+            return cached
+        with open(path, 'r') as f:
+            data = json.load(f)
+        _sar_cache['data'] = data
+        _sar_cache['mtime'] = mtime
+        _sar_cache['loaded_at'] = now
+        return data
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("Could not load SAR metadata: %s", exc)
+        return {'tiles': []}
+
+
+def _anomaly_position(anomaly):
+    """Extract a (lat, lon) for an anomaly, matching the dashboard's pan logic.
+
+    Checks details.last_position, then details.center_position, then the last
+    element of details.positions[]. Returns (None, None) for rendezvous and
+    any other anomaly type without embedded coordinates.
+    """
+    details = (anomaly or {}).get('details') or {}
+    last = details.get('last_position') or {}
+    if last.get('lat') is not None and last.get('lon') is not None:
+        return last['lat'], last['lon']
+    center = details.get('center_position') or {}
+    if center.get('lat') is not None and center.get('lon') is not None:
+        return center['lat'], center['lon']
+    positions = details.get('positions')
+    if isinstance(positions, list) and positions:
+        p = positions[-1]
+        if isinstance(p, dict) and p.get('lat') is not None and p.get('lon') is not None:
+            return p['lat'], p['lon']
+    return None, None
+
+
+def _sar_coverage_for(lat, lon, iso_ts, window_hours=SAR_TIME_WINDOW_HOURS):
+    """Return up to 3 nearest Sentinel-1 passes that covered (lat, lon) within
+    ±window_hours of iso_ts.
+
+    Each entry: {tile_id, filename, datetime, bbox, delta_minutes}.
+    Sorted closest-pass-first by abs(delta_minutes).
+    """
+    if lat is None or lon is None or not iso_ts:
+        return []
+    try:
+        target = datetime.fromisoformat(iso_ts.replace('Z', '+00:00'))
+    except Exception:
+        return []
+    metadata = _load_sar_metadata()
+    hits = []
+    for t in metadata.get('tiles', []) or []:
+        bbox = t.get('bbox')
+        if not bbox or len(bbox) != 4:
+            continue
+        min_lon, min_lat, max_lon, max_lat = bbox
+        if not (min_lon <= lon <= max_lon and min_lat <= lat <= max_lat):
+            continue
+        try:
+            tile_ts = datetime.fromisoformat((t.get('datetime') or '').replace('Z', '+00:00'))
+        except Exception:
+            continue
+        delta_min = (tile_ts - target).total_seconds() / 60
+        if abs(delta_min) > window_hours * 60:
+            continue
+        hits.append({
+            'tile_id': t.get('id'),
+            'filename': t.get('filename'),
+            'datetime': t.get('datetime'),
+            'bbox': bbox,
+            'delta_minutes': round(delta_min, 0),
+        })
+    hits.sort(key=lambda h: abs(h['delta_minutes']))
+    return hits[:3]
 
 
 def load_vessel_data():
@@ -348,6 +452,9 @@ def api_anomalies():
     all_anomalies.sort(key=lambda x: x.get('detected_at', ''), reverse=True)
     all_anomalies = all_anomalies[:100]
 
+    # Preload SAR metadata once for the whole batch (cached by mtime anyway)
+    _load_sar_metadata()
+
     for anomaly in all_anomalies:
         if 'detected_at' in anomaly:
             try:
@@ -355,6 +462,15 @@ def api_anomalies():
                 anomaly['formatted_time'] = dt.strftime('%b %d, %H:%M')
             except Exception:
                 anomaly['formatted_time'] = "Unknown"
+
+        # Attach nearby Sentinel-1 passes if we have coverage for this vessel's
+        # last known position within ±SAR_TIME_WINDOW_HOURS of the anomaly time.
+        # Rendezvous and other position-less anomalies get an empty list.
+        lat, lon = _anomaly_position(anomaly)
+        anomaly['sar_coverage'] = _sar_coverage_for(
+            lat, lon,
+            anomaly.get('detected_at') or (anomaly.get('details') or {}).get('gap_start'),
+        )
 
     response = make_response(jsonify({'anomalies': all_anomalies, 'total': len(all_anomalies)}))
     return no_cache(response)
