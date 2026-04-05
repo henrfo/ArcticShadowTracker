@@ -52,18 +52,20 @@ jobs:
           echo "=== Tile directory ==="
           ls -la data/satellite_imagery/tiles/ 2>/dev/null || echo "(no tiles dir)"
 
-      - name: Commit metadata changes
+      - name: Commit metadata + thumbnails
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
 
-          # Only commit metadata.json (TIFF files are excluded by .gitignore)
+          # Commit metadata.json + the generated thumbnails directory.
+          # TIFF files in tiles/ are excluded by .gitignore.
           git add data/satellite_imagery/metadata.json
+          git add data/satellite_imagery/thumbnails/ 2>/dev/null || true
 
           if git diff --staged --quiet; then
-            echo "No changes to satellite metadata"
+            echo "No changes to satellite metadata or thumbnails"
           else
-            git commit -m "Satellite imagery metadata update $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git commit -m "Satellite imagery update $(date -u '+%Y-%m-%d %H:%M UTC')"
             git pull --rebase origin main
             git push
           fi

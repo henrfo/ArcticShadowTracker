@@ -22,11 +22,45 @@
             <span class="nav__status {% if stats.is_stale %}nav__status--stale{% endif %}" id="last-update" aria-live="polite">
                 {% if stats.last_update %}Updated {{ stats.last_update }}{% else %}No data{% endif %}
             </span>
+            <button
+                class="nav-sat-btn"
+                id="sat-toggle"
+                type="button"
+                aria-label="Open satellite imagery viewer"
+                aria-expanded="false"
+                aria-controls="sat-panel"
+            >
+                <span class="nav-sat-btn__icon" aria-hidden="true">🛰️</span>
+                <span class="nav-sat-btn__label">Satellite</span>
+                <span class="nav-sat-btn__badge" id="sat-count-badge" hidden>0</span>
+            </button>
             <button class="refresh-btn" id="refresh-btn" type="button" aria-label="Refresh data">
                 <span class="refresh-btn__label">Refresh</span>
             </button>
         </div>
     </header>
+
+    <!-- Satellite imagery viewer (slide-in panel from the right edge) -->
+    <div class="sat-backdrop" id="sat-backdrop" hidden></div>
+    <aside
+        class="sat-panel"
+        id="sat-panel"
+        role="dialog"
+        aria-label="Satellite imagery viewer"
+        aria-modal="true"
+        hidden
+    >
+        <header class="sat-panel__header">
+            <div>
+                <h2 class="sat-panel__title">Sentinel-1 SAR Imagery</h2>
+                <div class="sat-panel__subtitle" id="sat-panel-subtitle">Loading…</div>
+            </div>
+            <button class="sat-panel__close" id="sat-close" type="button" aria-label="Close satellite viewer">×</button>
+        </header>
+        <div class="sat-panel__body" id="sat-panel-body">
+            <div class="sat-panel__empty">Loading satellite tiles…</div>
+        </div>
+    </aside>
 
     <div
         class="stale-banner"

@@ -57,6 +57,11 @@ BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / 'data'
 SATELLITE_DIR = DATA_DIR / 'satellite_imagery'
 TILES_DIR = SATELLITE_DIR / 'tiles'
+THUMBNAILS_DIR = SATELLITE_DIR / 'thumbnails'
+
+# Thumbnail size — grayscale PNG, committed to git for the dashboard viewer.
+# Larger dim = more detail but bigger commits. 512 px keeps PNGs ~80–180 KB.
+THUMBNAIL_MAX_DIM = 512
 
 # Arctic monitoring region (matches AIS coverage zone).
 ARCTIC_REGION = {
@@ -317,24 +322,118 @@ def download_sentinel1_tile(config: SHConfig, tile_info: dict, resolution_m: int
 
 
 # ============================================================================
+# Thumbnail generation — SAR GeoTIFF → grayscale PNG for the dashboard viewer
+# ============================================================================
+
+def generate_thumbnail(tiff_path: str) -> str | None:
+    """Convert a Sentinel-1 GRD GeoTIFF to a grayscale PNG thumbnail.
+
+    Sentinel-1 data is FLOAT32 backscatter in linear power units (range ~0 to ~1,
+    most values near zero). A raw conversion looks almost black. We:
+
+        1. Take the VV band (first channel; VH is second)
+        2. Apply log scaling (dB) to stretch the dynamic range
+        3. Percentile clip to 2nd–98th for contrast
+        4. Normalize to 0–255 uint8
+        5. Downscale to THUMBNAIL_MAX_DIM with Lanczos resampling
+
+    Returns the PNG path, or None on failure (logged, non-fatal).
+    """
+    try:
+        import numpy as np
+        import tifffile
+        from PIL import Image
+    except ImportError as exc:
+        logger.error("Cannot generate thumbnails — missing dep: %s", exc)
+        return None
+
+    try:
+        THUMBNAILS_DIR.mkdir(parents=True, exist_ok=True)
+        tiff_path_obj = Path(tiff_path)
+        png_path = THUMBNAILS_DIR / (tiff_path_obj.stem + '.png')
+
+        arr = tifffile.imread(str(tiff_path_obj))
+        # SAR GRD VV+VH is stored as shape (H, W, 2) — take the VV band
+        if arr.ndim == 3 and arr.shape[-1] >= 1:
+            vv = arr[..., 0].astype(np.float32)
+        else:
+            vv = arr.astype(np.float32)
+
+        # Guard against all-zero / all-NaN tiles
+        finite = np.isfinite(vv) & (vv > 0)
+        if not finite.any():
+            logger.warning("Thumbnail skipped — tile has no valid SAR samples: %s", tiff_path_obj.name)
+            return None
+
+        # Log scale to dB (avoid log(0) by masking zeros to a small floor)
+        db = np.where(finite, 10.0 * np.log10(np.where(vv > 0, vv, 1e-10)), -50.0)
+
+        # Percentile clip for contrast stretch
+        p_lo, p_hi = np.percentile(db[finite], [2, 98])
+        if p_hi - p_lo < 1e-6:
+            p_hi = p_lo + 1.0  # degenerate range guard
+        clipped = np.clip(db, p_lo, p_hi)
+
+        # Normalize to uint8 grayscale
+        normalized = ((clipped - p_lo) / (p_hi - p_lo) * 255.0).astype(np.uint8)
+
+        img = Image.fromarray(normalized, mode='L')
+        img.thumbnail((THUMBNAIL_MAX_DIM, THUMBNAIL_MAX_DIM), Image.LANCZOS)
+        img.save(str(png_path), 'PNG', optimize=True)
+
+        size_kb = png_path.stat().st_size / 1024
+        logger.info("Thumbnail %s (%dx%d, %.0f KB)", png_path.name, img.width, img.height, size_kb)
+        return str(png_path)
+
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("Thumbnail generation failed for %s: %s", tiff_path, exc)
+        return None
+
+
+def cleanup_old_thumbnails(days: int = TILE_RETENTION_DAYS) -> None:
+    """Delete thumbnails whose timestamp is older than `days`. Mirrors cleanup_old_tiles."""
+    if not THUMBNAILS_DIR.exists():
+        return
+    cutoff = datetime.now(timezone.utc) - timedelta(days=days)
+    deleted = 0
+    for png_file in THUMBNAILS_DIR.glob('*.png'):
+        try:
+            parts = png_file.stem.split('_')[:2]
+            if len(parts) != 2:
+                continue
+            file_time = datetime.strptime('_'.join(parts), '%Y%m%d_%H%M%S').replace(tzinfo=timezone.utc)
+            if file_time < cutoff:
+                png_file.unlink()
+                deleted += 1
+        except (ValueError, OSError):
+            continue
+    if deleted:
+        logger.info("Cleaned up %d thumbnails older than %d days", deleted, days)
+
+
+# ============================================================================
 # Metadata + cleanup
 # ============================================================================
 
-def _tile_entry(tile_path: str, tile_info: dict) -> dict:
+def _tile_entry(tile_path: str, tile_info: dict, thumbnail_path: str | None = None) -> dict:
     """Build a serializable tile metadata entry from a downloaded (path, catalog_item) pair.
 
     Uses basename for `filename` — the full runner path is ephemeral and useless
     outside the GH Actions environment. The bbox is the per-scene footprint we
     actually downloaded (not the full Arctic), extracted via _scene_bbox().
+    If a thumbnail was generated, its basename is included too.
     """
     bbox = _scene_bbox(tile_info)
-    return {
+    entry = {
         'id': tile_info.get('id', 'unknown'),
         'filename': Path(tile_path).name,
         'datetime': tile_info.get('properties', {}).get('datetime', ''),
         'instrument_mode': tile_info.get('properties', {}).get('sar:instrument_mode', ''),
         'bbox': [round(c, 4) for c in list(bbox)],  # [min_lon, min_lat, max_lon, max_lat]
     }
+    if thumbnail_path:
+        entry['thumbnail'] = Path(thumbnail_path).name
+    return entry
 
 
 def _parse_tile_ts(iso_ts: str) -> datetime | None:
@@ -372,7 +471,8 @@ def save_metadata(imagery_results: list, downloaded: list, resolution_m: int) ->
 
     existing = _load_existing_metadata()
     old_tiles = existing.get('tiles', []) or []
-    new_tiles = [_tile_entry(path, info) for path, info in downloaded]
+    # `downloaded` is a list of (tile_path, tile_info, thumbnail_path) tuples
+    new_tiles = [_tile_entry(path, info, thumb) for path, info, thumb in downloaded]
 
     # Merge by tile id; new entries win on conflict
     by_id: dict[str, dict] = {t['id']: t for t in old_tiles}
@@ -480,15 +580,17 @@ def main() -> int:
             logger.info("[DRY RUN] No tiles downloaded, no metadata written")
             return 0
 
-        downloaded: list[tuple[str, dict]] = []
+        downloaded: list[tuple[str, dict, str | None]] = []
         for i, tile_info in enumerate(imagery_results[: args.tiles], start=1):
             logger.info("Tile %d/%d", i, min(args.tiles, len(imagery_results)))
             tile_path = download_sentinel1_tile(config, tile_info, resolution_m=args.resolution)
             if tile_path:
-                downloaded.append((tile_path, tile_info))
+                thumbnail_path = generate_thumbnail(tile_path)
+                downloaded.append((tile_path, tile_info, thumbnail_path))
 
         save_metadata(imagery_results, downloaded, resolution_m=args.resolution)
         cleanup_old_tiles()
+        cleanup_old_thumbnails()
 
         logger.info("=" * 60)
         logger.info("Collection complete — %d/%d tiles downloaded", len(downloaded), args.tiles)

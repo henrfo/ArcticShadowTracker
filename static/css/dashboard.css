@@ -269,6 +269,245 @@ button {
 
 /* (banner is now in the document flow, so no push rule needed) */
 
+/* ==========================================================================
+   Satellite viewer — nav button, slide-in panel, thumbnail grid
+   ========================================================================== */
+
+/* Nav button (between status chip and refresh) */
+.nav-sat-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-weight: var(--fw-regular);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  background: transparent;
+  border: 1px solid var(--border-muted);
+  border-radius: var(--r-pill);
+  transition: color var(--t-fast) var(--ease-out),
+              border-color var(--t-fast) var(--ease-out),
+              background var(--t-fast) var(--ease-out);
+}
+
+.nav-sat-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-focus);
+  background: rgba(142, 205, 255, 0.06);
+}
+
+.nav-sat-btn[aria-expanded="true"] {
+  color: var(--text-primary);
+  border-color: rgba(142, 205, 255, 0.55);
+  background: rgba(142, 205, 255, 0.1);
+}
+
+.nav-sat-btn__icon {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.nav-sat-btn__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  font-size: 0.62rem;
+  font-weight: var(--fw-medium);
+  color: var(--bg-base);
+  background: var(--text-soft);
+  border-radius: var(--r-pill);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.nav-sat-btn__badge[hidden] { display: none; }
+
+/* Slide-in panel + backdrop */
+.sat-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  z-index: 1800;
+  animation: asr-fade-in var(--t-fast) var(--ease-out);
+}
+.sat-backdrop[hidden] { display: none; }
+
+.sat-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(460px, 100vw);
+  z-index: 1900;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-base);
+  border-left: 1px solid var(--border-muted);
+  box-shadow: -20px 0 60px rgba(0, 0, 0, 0.6);
+  animation: sat-panel-slide-in var(--t-med) var(--ease-out);
+}
+.sat-panel[hidden] { display: none; }
+
+@keyframes sat-panel-slide-in {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+.sat-panel__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-5) var(--s-5) var(--s-3);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.sat-panel__title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.sat-panel__subtitle {
+  margin-top: 4px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+
+.sat-panel__close {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-pill);
+  transition: color var(--t-fast) var(--ease-out),
+              border-color var(--t-fast) var(--ease-out);
+}
+
+.sat-panel__close:hover {
+  color: var(--text-primary);
+  border-color: var(--border-focus);
+}
+
+.sat-panel__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--s-4) var(--s-5);
+}
+
+.sat-panel__empty {
+  text-align: center;
+  padding: var(--s-7) var(--s-5);
+  color: var(--text-faint);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+/* Thumbnail grid */
+.sat-tile-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.sat-tile {
+  background: var(--surface-glass);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--t-fast) var(--ease-out);
+}
+
+.sat-tile:hover {
+  border-color: var(--border-muted);
+}
+
+.sat-tile__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #000;
+  image-rendering: auto;
+}
+
+.sat-tile__img--missing {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-faint);
+  font-size: 0.8rem;
+}
+
+.sat-tile__meta {
+  padding: var(--s-3) var(--s-4);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sat-tile__time {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+}
+
+.sat-tile__bbox {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.sat-tile__mode {
+  font-size: 0.66rem;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Mobile: full-width panel, slide up from bottom */
+@media (max-width: 640px) {
+  .sat-panel {
+    top: auto;
+    width: 100%;
+    max-height: 85vh;
+    border-left: 0;
+    border-top: 1px solid var(--border-muted);
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+    animation: sat-panel-slide-up var(--t-med) var(--ease-out);
+  }
+  @keyframes sat-panel-slide-up {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
+  .nav-sat-btn__label { display: none; }
+  .nav-sat-btn { padding: 6px 10px; }
+}
+
 .refresh-btn {
   display: inline-flex;
   align-items: center;

@@ -11,3 +11,8 @@ gunicorn==21.2.0
 # Satellite imagery (Sentinel Hub API)
 sentinelhub>=3.11.0
 numpy>=1.24.0
+# Pillow + tifffile power the SAR GeoTIFF → PNG thumbnail pipeline in
+# scripts/collect_satellite.py. Both are transitive deps of sentinelhub, but
+# pinned explicitly because our code imports them directly.
+Pillow>=10.0.0
+tifffile>=2024.1.0

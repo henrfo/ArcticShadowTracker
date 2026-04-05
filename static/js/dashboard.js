@@ -66,6 +66,151 @@
   })();
 
   // --------------------------------------------------------------------------
+  // SatelliteViewer — slide-in panel showing recent Sentinel-1 SAR tiles.
+  // Fetches /api/satellite-tiles on open, renders thumbnail grid, auto-updates
+  // the nav badge with the current tile count.
+  // --------------------------------------------------------------------------
+  const SatelliteViewer = (function () {
+    const toggleBtn = document.getElementById('sat-toggle');
+    const panel = document.getElementById('sat-panel');
+    const backdrop = document.getElementById('sat-backdrop');
+    const closeBtn = document.getElementById('sat-close');
+    const body = document.getElementById('sat-panel-body');
+    const subtitle = document.getElementById('sat-panel-subtitle');
+    const badge = document.getElementById('sat-count-badge');
+
+    let lastFetchAt = 0;
+    let currentTiles = [];
+    const REFRESH_COOLDOWN_MS = 10 * 1000; // don't re-fetch more than once per 10s
+
+    function isOpen() {
+      return panel && !panel.hidden;
+    }
+
+    function open() {
+      if (!panel) return;
+      panel.hidden = false;
+      if (backdrop) backdrop.hidden = false;
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
+      // Refresh on open (cheap, cached server-side by mtime)
+      if (Date.now() - lastFetchAt > REFRESH_COOLDOWN_MS) {
+        fetchAndRender();
+      }
+    }
+
+    function close() {
+      if (!panel) return;
+      panel.hidden = true;
+      if (backdrop) backdrop.hidden = true;
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    function toggle() {
+      if (isOpen()) close();
+      else open();
+    }
+
+    function formatTileTime(isoTs) {
+      if (!isoTs) return 'Unknown time';
+      try {
+        const d = new Date(isoTs);
+        if (isNaN(d.getTime())) return isoTs;
+        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        const mon = months[d.getUTCMonth()];
+        const day = String(d.getUTCDate()).padStart(2, '0');
+        const hh = String(d.getUTCHours()).padStart(2, '0');
+        const mm = String(d.getUTCMinutes()).padStart(2, '0');
+        return `${mon} ${day}, ${hh}:${mm} UTC`;
+      } catch (e) {
+        return isoTs;
+      }
+    }
+
+    function formatBbox(bbox) {
+      if (!bbox || bbox.length !== 4) return '';
+      const [minLon, minLat, maxLon, maxLat] = bbox;
+      return `lon ${minLon.toFixed(1)}°–${maxLon.toFixed(1)}° · lat ${minLat.toFixed(1)}°–${maxLat.toFixed(1)}°`;
+    }
+
+    function renderTiles(tiles) {
+      if (!body) return;
+      if (!tiles || tiles.length === 0) {
+        body.innerHTML = '<div class="sat-panel__empty">No satellite tiles collected yet. The daily workflow will populate this on its next run.</div>';
+        return;
+      }
+      const cards = tiles.map(t => {
+        const thumb = t.thumbnail_url
+          ? `<img class="sat-tile__img" src="${escapeHtml(t.thumbnail_url)}" alt="Sentinel-1 SAR tile ${escapeHtml(t.id || '')}" loading="lazy">`
+          : `<div class="sat-tile__img sat-tile__img--missing">No thumbnail</div>`;
+        const time = formatTileTime(t.datetime);
+        const bbox = formatBbox(t.bbox);
+        const mode = t.instrument_mode || 'IW';
+        return `
+          <article class="sat-tile">
+            ${thumb}
+            <div class="sat-tile__meta">
+              <div class="sat-tile__time">${escapeHtml(time)}</div>
+              <div class="sat-tile__bbox">${escapeHtml(bbox)}</div>
+              <div class="sat-tile__mode">Sentinel-1 ${escapeHtml(mode)}</div>
+            </div>
+          </article>`;
+      }).join('');
+      body.innerHTML = `<div class="sat-tile-grid">${cards}</div>`;
+    }
+
+    function updateBadge(count) {
+      if (!badge) return;
+      if (count > 0) {
+        badge.textContent = String(count);
+        badge.hidden = false;
+      } else {
+        badge.hidden = true;
+      }
+    }
+
+    async function fetchAndRender() {
+      lastFetchAt = Date.now();
+      if (body && currentTiles.length === 0) {
+        body.innerHTML = '<div class="sat-panel__empty">Loading satellite tiles…</div>';
+      }
+      try {
+        const res = await fetch('/api/satellite-tiles');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        currentTiles = data.tiles || [];
+        updateBadge(currentTiles.length);
+        if (subtitle) {
+          if (currentTiles.length > 0) {
+            subtitle.textContent = `${currentTiles.length} tile${currentTiles.length !== 1 ? 's' : ''} · last ${data.history_window_days || 14} days`;
+          } else {
+            subtitle.textContent = 'No tiles available yet';
+          }
+        }
+        renderTiles(currentTiles);
+      } catch (err) {
+        console.error('[SatelliteViewer] fetch failed:', err);
+        if (body) {
+          body.innerHTML = '<div class="sat-panel__empty">Failed to load satellite tiles. Check console for details.</div>';
+        }
+      }
+    }
+
+    function init() {
+      if (toggleBtn) toggleBtn.addEventListener('click', toggle);
+      if (closeBtn) closeBtn.addEventListener('click', close);
+      if (backdrop) backdrop.addEventListener('click', close);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen()) close();
+      });
+      // Prefetch once on boot so the nav badge shows a count without needing
+      // the user to open the panel first.
+      fetchAndRender();
+    }
+
+    return { init, open, close, fetchAndRender };
+  })();
+
+  // --------------------------------------------------------------------------
   // Stats — fetch vessel stats and update KPI cards
   // --------------------------------------------------------------------------
   const Stats = (function () {
@@ -558,6 +703,7 @@
     AnomalyFeed.init();
     Resizer.init();
     FilterSheet.init();
+    SatelliteViewer.init();
     wireRefreshButton();
     AnomalyFeed.fetchAndRender();
     AutoRefresh.start();

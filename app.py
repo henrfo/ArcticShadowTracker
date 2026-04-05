@@ -4,7 +4,7 @@ Arctic Shadow Tracker - Real-Time Dashboard
 Simple Flask server with auto-refreshing vessel map
 """
 
-from flask import Flask, render_template, jsonify, make_response
+from flask import Flask, render_template, jsonify, make_response, send_from_directory, abort
 from pathlib import Path
 import json
 import logging
@@ -474,6 +474,54 @@ def api_anomalies():
 
     response = make_response(jsonify({'anomalies': all_anomalies, 'total': len(all_anomalies)}))
     return no_cache(response)
+
+
+@app.route('/api/satellite-tiles')
+@cors_enabled
+def api_satellite_tiles():
+    """Return the current SAR tile history for the dashboard satellite viewer.
+
+    Each tile entry includes a `thumbnail_url` field (served by this Flask app)
+    so the frontend can render it directly without needing to know the on-disk
+    layout. Tiles are returned newest-first.
+    """
+    metadata = _load_sar_metadata()
+    tiles_out = []
+    for t in metadata.get('tiles', []) or []:
+        thumb = t.get('thumbnail')
+        tiles_out.append({
+            'id': t.get('id'),
+            'filename': t.get('filename'),
+            'datetime': t.get('datetime'),
+            'bbox': t.get('bbox'),
+            'instrument_mode': t.get('instrument_mode'),
+            'thumbnail_url': f'/satellite-thumbnails/{thumb}' if thumb else None,
+        })
+    body = {
+        'last_updated': metadata.get('last_updated'),
+        'history_window_days': metadata.get('history_window_days'),
+        'count': len(tiles_out),
+        'tiles': tiles_out,
+    }
+    return no_cache(make_response(jsonify(body)))
+
+
+@app.route('/satellite-thumbnails/<path:filename>')
+def satellite_thumbnail(filename):
+    """Serve a generated SAR thumbnail PNG from data/satellite_imagery/thumbnails/.
+
+    These PNGs are committed to the repo by the satellite_monitor.yml workflow
+    after each collection run, so they're always present wherever the Flask
+    app is deployed. Served with a short browser cache since filenames are
+    content-addressed by timestamp + tile-id.
+    """
+    thumbnails_dir = DATA_DIR / 'satellite_imagery' / 'thumbnails'
+    # send_from_directory prevents path traversal (`..` etc.)
+    if not (thumbnails_dir / filename).exists():
+        abort(404)
+    response = make_response(send_from_directory(str(thumbnails_dir), filename))
+    response.headers['Cache-Control'] = 'public, max-age=3600'
+    return response
 
 
 @app.route('/health')
