@@ -302,9 +302,9 @@ def save_detections(per_tile_records: list, dry_run: bool = False) -> None:
         'generated_at': datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
         'algorithm': 'CFAR (scipy.ndimage uniform_filter)',
         'params': {
+            'variant': 'median-MAD robust CFAR',
             'alpha': ALPHA,
             'background_cells': BACKGROUND_CELLS,
-            'guard_cells': GUARD_CELLS,
             'min_blob_pixels': MIN_BLOB_PIXELS,
             'max_blob_pixels': MAX_BLOB_PIXELS,
             'min_confidence_db': MIN_CONFIDENCE_DB,
