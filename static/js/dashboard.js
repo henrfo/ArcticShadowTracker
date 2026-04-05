@@ -86,7 +86,7 @@
     const body = document.getElementById('sat-panel-body');
     const subtitle = document.getElementById('sat-panel-subtitle');
     const badge = document.getElementById('sat-count-badge');
-    const analysisBtn = document.getElementById('sat-open-analysis');
+    const analysisBtn = document.getElementById('nav-open-analysis');
     const analysisOverlay = document.getElementById('analysis-overlay');
     const analysisFrame = document.getElementById('analysis-frame');
     let analysisLoaded = false;

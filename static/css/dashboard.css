@@ -157,6 +157,16 @@ button {
   50%      { opacity: 1;    transform: scale(1.15); }
 }
 
+.nav__primary {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-3);
+  padding: 0 var(--s-5);
+  min-width: 0;
+}
+
 .nav__actions {
   display: flex;
   align-items: center;
@@ -273,39 +283,41 @@ button {
    Satellite viewer — nav button, slide-in panel, thumbnail grid
    ========================================================================== */
 
-/* Nav button (between status chip and refresh) */
-.nav-sat-btn {
+/* Primary nav buttons (Satellite + Analysis) — headline feature access */
+.nav-btn {
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: var(--s-2);
-  padding: 6px 12px;
+  padding: 7px 14px;
+  font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: var(--fw-regular);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-soft);
   background: transparent;
   border: 1px solid var(--border-muted);
   border-radius: var(--r-pill);
+  cursor: pointer;
   transition: color var(--t-fast) var(--ease-out),
               border-color var(--t-fast) var(--ease-out),
               background var(--t-fast) var(--ease-out);
 }
 
-.nav-sat-btn:hover {
+.nav-btn:hover {
   color: var(--text-primary);
   border-color: var(--border-focus);
   background: rgba(142, 205, 255, 0.06);
 }
 
-.nav-sat-btn[aria-expanded="true"] {
+.nav-btn--sat[aria-expanded="true"] {
   color: var(--text-primary);
   border-color: rgba(142, 205, 255, 0.55);
   background: rgba(142, 205, 255, 0.1);
 }
 
-.nav-sat-btn__icon {
+.nav-btn__icon {
   width: 14px;
   height: 14px;
   display: inline-block;
@@ -313,12 +325,12 @@ button {
   opacity: 0.85;
 }
 
-.nav-sat-btn:hover .nav-sat-btn__icon,
-.nav-sat-btn[aria-expanded="true"] .nav-sat-btn__icon {
+.nav-btn:hover .nav-btn__icon,
+.nav-btn--sat[aria-expanded="true"] .nav-btn__icon {
   opacity: 1;
 }
 
-.nav-sat-btn__badge {
+.nav-btn__badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -334,7 +346,7 @@ button {
   letter-spacing: 0;
 }
 
-.nav-sat-btn__badge[hidden] { display: none; }
+.nav-btn__badge[hidden] { display: none; }
 
 /* Slide-in panel + backdrop */
 .sat-backdrop {
@@ -393,35 +405,6 @@ button {
   font-size: 0.72rem;
   color: var(--text-muted);
   letter-spacing: 0.03em;
-}
-
-.sat-panel__header-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--s-2);
-  flex-shrink: 0;
-}
-
-.sat-panel__analysis {
-  flex-shrink: 0;
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-soft);
-  background: var(--surface-glass);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-pill);
-  padding: 6px 12px;
-  cursor: pointer;
-  transition: color var(--t-fast) var(--ease-out),
-              border-color var(--t-fast) var(--ease-out),
-              background var(--t-fast) var(--ease-out);
-}
-.sat-panel__analysis:hover {
-  color: var(--text-primary);
-  border-color: var(--border-focus);
-  background: var(--surface-glass-strong);
 }
 
 .sat-panel__close {
@@ -559,8 +542,10 @@ button {
     from { transform: translateY(100%); }
     to   { transform: translateY(0); }
   }
-  .nav-sat-btn__label { display: none; }
-  .nav-sat-btn { padding: 6px 10px; }
+  .nav-btn__label { display: none; }
+  .nav-btn { padding: 7px 10px; }
+  .nav__primary { padding: 0 var(--s-2); gap: var(--s-2); }
+  .nav { padding: 0 var(--s-3); }
 }
 
 .refresh-btn {
