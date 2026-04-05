@@ -227,7 +227,7 @@ def generate_focused_map(vessel_tracks):
     m = folium.Map(
         location=[68, 15],
         zoom_start=5,
-        tiles='OpenStreetMap'
+        tiles='cartodbdark_matter'
     )
 
     # Add Norwegian maritime zones (3 layers with different visibility)
