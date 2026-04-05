@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-04-05T21:37:08.959348Z",
+  "timestamp": "2026-04-05T21:58:39.615651Z",
   "analysis_period_days": 7,
-  "vessels_analyzed": 268,
-  "total_positions": 3751,
-  "anomalies_detected": 2047,
+  "vessels_analyzed": 269,
+  "total_positions": 3902,
+  "anomalies_detected": 2050,
   "anomalies": [
     {
       "mmsi": "249903000",
@@ -19994,6 +19994,25 @@
       }
     },
     {
+      "mmsi": "314602000",
+      "vessel_name": "WILSON AMSTERDAM",
+      "country": "Barbados",
+      "anomaly_type": "left_coverage",
+      "severity": "low",
+      "detected_at": "2026-04-05T21:50:07Z",
+      "details": {
+        "gap_duration_minutes": 33.0,
+        "gap_start": "2026-04-05T21:17:08Z",
+        "gap_end": "2026-04-05T21:50:07Z",
+        "last_position": {
+          "lat": 66.8086,
+          "lon": 13.9351
+        },
+        "near_border": false,
+        "coverage_edge": true
+      }
+    },
+    {
       "mmsi": "273341920",
       "vessel_name": "MELKART 2",
       "country": "Russia",
@@ -21698,6 +21717,25 @@
         "last_position": {
           "lat": 66.3733,
           "lon": 8.9509
+        },
+        "near_border": false,
+        "coverage_edge": false
+      }
+    },
+    {
+      "mmsi": "636092816",
+      "vessel_name": "ROLAND OLDENDORFF",
+      "country": "Liberia",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2026-04-05T21:58:28.560198Z",
+      "details": {
+        "gap_duration_minutes": 82.8,
+        "gap_start": "2026-04-05T20:35:42Z",
+        "gap_end": "2026-04-05T21:58:28.560198Z",
+        "last_position": {
+          "lat": 66.3451,
+          "lon": 8.782
         },
         "near_border": false,
         "coverage_edge": false
@@ -38310,6 +38348,25 @@
       }
     },
     {
+      "mmsi": "305966000",
+      "vessel_name": "PREGOL HAV",
+      "country": "Antigua and Barbuda",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2026-04-05T20:09:03Z",
+      "details": {
+        "gap_duration_minutes": 117.0,
+        "gap_start": "2026-04-05T18:12:03Z",
+        "gap_end": "2026-04-05T20:09:03Z",
+        "last_position": {
+          "lat": 56.575,
+          "lon": 4.8433
+        },
+        "near_border": false,
+        "coverage_edge": false
+      }
+    },
+    {
       "mmsi": "414234000",
       "vessel_name": "XIN HAI ZHOU 71",
       "country": "China",
@@ -39002,7 +39059,7 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 2018,
+    "transmission_gaps": 2021,
     "impossible_speeds": 9,
     "loitering": 17,
     "rendezvous": 3
@@ -39010,7 +39067,7 @@
   "severity_breakdown": {
     "critical": 7,
     "high": 411,
-    "medium": 275,
-    "low": 1354
+    "medium": 277,
+    "low": 1355
   }
 }
