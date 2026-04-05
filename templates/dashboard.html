@@ -41,13 +41,10 @@
                 {{ stats.stale_reason or 'Last update unknown' }}
             </span>
         </div>
-        <a class="stale-banner__link" href="https://github.com/henrfo/ArcticShadowTracker/actions/workflows/arctic_monitor.yml" target="_blank" rel="noopener">
-            Check Actions →
-        </a>
     </div>
 
     <main class="app">
-        <section class="kpi-strip" aria-label="Vessel statistics">
+        <aside class="sidebar" aria-label="Vessel statistics">
             <!-- 1. Total -->
             <article class="kpi-card kpi-card--total">
                 <div class="kpi-card__label">Total Vessels</div>
@@ -76,7 +73,6 @@
                         <strong id="stat-other">{{ stats.other }}</strong>
                     </li>
                 </ul>
-                <div class="kpi-card__caption">Non-risk vessels only · risk-flagged shown in next card</div>
             </article>
 
             <!-- 3. Risk Classification (mutually exclusive with Flag State) -->
@@ -120,7 +116,7 @@
                     </li>
                 </ul>
             </article>
-        </section>
+        </aside>
 
         <section class="map-wrapper" aria-label="Vessel map">
             <div class="map-wrapper__loading" id="map-loading">Loading map</div>

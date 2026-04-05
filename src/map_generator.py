@@ -13,6 +13,62 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 from .airport_loader import load_norwegian_airports
 
+# ============================================================================
+# Palette — single source of truth for vessel + layer colors.
+# Chosen for maximum distinguishability at small CircleMarker radii on dark tiles.
+# ============================================================================
+CATEGORY_COLORS = {
+    'russia':         '#e53935',   # bright red
+    'shadow':         '#b71c1c',   # dark red — distinct from Russia
+    'suspected':      '#ffb300',   # amber — distinct from China
+    'china':          '#fb8c00',   # deep orange
+    'norway_mil':     '#43a047',   # green
+    'norway_civ':     '#90a4ae',   # cool grey
+    'other':          '#29b6f6',   # sky blue
+    'buoy':           '#546e7a',   # dark grey
+    'cables':         '#ab47bc',   # purple
+    'eez':            '#42a5f5',   # light blue
+    'territorial':    '#5c6bc0',   # indigo
+    'boundary_200nm': '#1976d2',   # dark blue
+}
+
+
+def _swatch(key):
+    """Return an inline HTML colored dot for use in Folium layer control labels.
+
+    Leaflet's L.control.layers renders label names via innerHTML, so HTML
+    in a FeatureGroup name= argument is preserved and appears next to the checkbox.
+    """
+    return (
+        f'<span style="display:inline-block;width:10px;height:10px;'
+        f'border-radius:50%;background:{CATEGORY_COLORS[key]};'
+        f'margin-right:6px;vertical-align:middle;"></span>'
+    )
+
+
+def _vessel_color(track_data):
+    """Map a vessel's classification to a CATEGORY_COLORS entry.
+
+    Priority matches app.py _classify_vessels: buoy > shadow > suspected > norway_mil > country.
+    """
+    if track_data.get('is_buoy'):
+        return CATEGORY_COLORS['buoy']
+    if track_data.get('is_shadow_fleet'):
+        return CATEGORY_COLORS['shadow']
+    if track_data.get('is_suspected_shadow'):
+        return CATEGORY_COLORS['suspected']
+    country = track_data.get('country') or ''
+    ship_type = (track_data.get('ship_type') or '').lower()
+    if country == 'Norway' and ('military' in ship_type or 'law enforcement' in ship_type):
+        return CATEGORY_COLORS['norway_mil']
+    if country == 'Russia':
+        return CATEGORY_COLORS['russia']
+    if country == 'China':
+        return CATEGORY_COLORS['china']
+    if country == 'Norway':
+        return CATEGORY_COLORS['norway_civ']
+    return CATEGORY_COLORS['other']
+
 def load_submarine_cables():
     """
     Load submarine cable GeoJSON and filter for Norwegian/Svalbard region
@@ -177,7 +233,7 @@ def generate_focused_map(vessel_tracks):
     # Layer 1: Territorial Waters (12nm) - Most transparent, hidden by default
     territorial_waters = load_territorial_waters()
     if territorial_waters['features']:
-        territorial_layer = folium.FeatureGroup(name='Territorial Waters (12nm)', show=False)
+        territorial_layer = folium.FeatureGroup(name=_swatch('territorial') + 'Territorial Waters (12nm)', show=False)
         folium.GeoJson(
             territorial_waters,
             style_function=lambda feature: {
@@ -193,7 +249,7 @@ def generate_focused_map(vessel_tracks):
     # Layer 2: Norwegian Economic Zone (EEZ) - Semi-transparent
     eez_zone = load_eez_zone()
     if eez_zone['features']:
-        eez_layer = folium.FeatureGroup(name='Norwegian EEZ', show=True)
+        eez_layer = folium.FeatureGroup(name=_swatch('eez') + 'Norwegian EEZ', show=True)
         folium.GeoJson(
             eez_zone,
             style_function=lambda feature: {
@@ -209,7 +265,7 @@ def generate_focused_map(vessel_tracks):
     # Layer 3: 200 Nautical Mile Boundary - Most visible (primary border)
     boundary_200nm = load_200nm_boundary()
     if boundary_200nm['features']:
-        boundary_layer = folium.FeatureGroup(name='200nm Boundary', show=False)
+        boundary_layer = folium.FeatureGroup(name=_swatch('boundary_200nm') + '200nm Boundary', show=False)
         folium.GeoJson(
             boundary_200nm,
             style_function=lambda feature: {
@@ -221,24 +277,24 @@ def generate_focused_map(vessel_tracks):
         ).add_to(boundary_layer)
         boundary_layer.add_to(m)
 
-    # Create feature groups for toggleable layers
-    russia_layer = folium.FeatureGroup(name='Russia', show=True)
-    shadow_fleet_layer = folium.FeatureGroup(name='Shadow Fleet', show=True)
-    suspected_shadow_layer = folium.FeatureGroup(name='Suspected Shadow Fleet', show=True)
-    china_layer = folium.FeatureGroup(name='China', show=True)
-    norwegian_military_layer = folium.FeatureGroup(name='Norwegian Military/Law', show=False)
-    norway_layer = folium.FeatureGroup(name='Norway (Civilian)', show=False)
-    other_layer = folium.FeatureGroup(name='Other Countries', show=False)
-    buoy_layer = folium.FeatureGroup(name='Buoys', show=False)
+    # Create feature groups for toggleable layers (HTML swatches render via Leaflet innerHTML)
+    russia_layer             = folium.FeatureGroup(name=_swatch('russia')     + 'Russia', show=True)
+    shadow_fleet_layer       = folium.FeatureGroup(name=_swatch('shadow')     + 'Shadow Fleet', show=True)
+    suspected_shadow_layer   = folium.FeatureGroup(name=_swatch('suspected')  + 'Suspected Shadow Fleet', show=True)
+    china_layer              = folium.FeatureGroup(name=_swatch('china')      + 'China', show=True)
+    norwegian_military_layer = folium.FeatureGroup(name=_swatch('norway_mil') + 'Norwegian Military/Law', show=False)
+    norway_layer             = folium.FeatureGroup(name=_swatch('norway_civ') + 'Norway (Civilian)', show=False)
+    other_layer              = folium.FeatureGroup(name=_swatch('other')      + 'Other Countries', show=False)
+    buoy_layer               = folium.FeatureGroup(name=_swatch('buoy')       + 'Buoys', show=False)
 
     # Add submarine cables layer
-    cables_layer = folium.FeatureGroup(name='Submarine Cables', show=True)
+    cables_layer = folium.FeatureGroup(name=_swatch('cables') + 'Submarine Cables', show=True)
     cables_geojson = load_submarine_cables()
     if cables_geojson['features']:
         folium.GeoJson(
             cables_geojson,
             style_function=lambda feature: {
-                'color': '#9C27B0',  # Purple for all submarine cables
+                'color': CATEGORY_COLORS['cables'],
                 'weight': 2,
                 'opacity': 0.7,
                 'dashArray': '5, 5',  # Dashed line for cables
@@ -390,29 +446,19 @@ def generate_focused_map(vessel_tracks):
 
         if (event.data && event.data.type === 'clickVessel') {
             const mmsi = event.data.mmsi;
-            console.log('Message type: clickVessel');
-            console.log('MMSI:', mmsi, 'Type:', typeof mmsi);
-
-            // Call focusVessel function directly (defined in focus mode script)
-            // This properly triggers focus mode: highlights vessel, shows tracks, displays info panel
-            console.log('Checking if focusVessel function exists...');
-            console.log('typeof focusVessel:', typeof focusVessel);
+            const hintLat = event.data.lat;  // optional — from anomaly.details
+            const hintLon = event.data.lon;  // optional — from anomaly.details
+            console.log('clickVessel received. mmsi:', mmsi, 'hint:', hintLat, hintLon);
 
             if (typeof focusVessel === 'function') {
-                console.log('✓ focusVessel found! Calling it now...');
-                focusVessel(mmsi);
+                focusVessel(mmsi, hintLat, hintLon);
             } else {
-                console.error('✗ focusVessel function not found - focus mode script may not be loaded yet');
-                console.log('Available functions:', Object.keys(window).filter(k => typeof window[k] === 'function'));
-
-                // Fallback: try again after a short delay
+                // Fallback: focus mode script may not be loaded yet
                 setTimeout(function() {
-                    console.log('Retry: Checking focusVessel after 500ms...');
                     if (typeof focusVessel === 'function') {
-                        console.log('✓ focusVessel found on retry! Calling it now...');
-                        focusVessel(mmsi);
+                        focusVessel(mmsi, hintLat, hintLon);
                     } else {
-                        console.error('✗ focusVessel still not available after retry');
+                        console.error('focusVessel still not available after retry');
                     }
                 }, 500);
             }
@@ -447,28 +493,8 @@ def add_vessel_to_map(map_obj, mmsi, track_data):
     if not current_pos:
         return  # No position data
 
-    # Color scheme by priority and country
-    if track_data.get('is_buoy', False):
-        color = '#616161'      # Dark grey for buoys
-    elif track_data.get('is_shadow_fleet', False):
-        color = '#c62828'      # Dark red for confirmed shadow fleet
-    elif track_data.get('is_suspected_shadow', False):
-        color = '#ff5722'      # Orange-red for suspected shadow fleet
-    elif track_data['country'] == 'Russia':
-        color = '#d32f2f'      # Red
-    elif track_data['country'] == 'China':
-        color = '#ff9800'      # Orange
-    elif track_data['country'] == 'Norway':
-        # Check if Norwegian military or law enforcement
-        ship_type = track_data['ship_type'].lower()
-        if 'military' in ship_type or 'law enforcement' in ship_type:
-            color = '#2E7D32'  # Dark green for Norwegian military/law enforcement
-        else:
-            color = '#888888'  # Gray for other Norwegian vessels
-    elif priority_level == 'low':
-        color = '#9e9e9e'      # Gray
-    else:
-        color = '#2196F3'      # Blue for "Other" countries
+    # Unified palette lookup (see CATEGORY_COLORS at top of module)
+    color = _vessel_color(track_data)
 
     # Check if Norwegian civilian or buoy (no tracks for these)
     ship_type = track_data['ship_type'].lower()
@@ -675,72 +701,6 @@ def add_vessel_marker(map_obj, mmsi, track_data, current_pos, color):
         className=f"vessel-marker vessel-{mmsi}"
     ).add_to(map_obj)
 
-def add_legend(map_obj, risk_counts, total_vessels, last_update=None):
-    """Add legend and statistics to map (left sidebar, scrollable)"""
-
-    # Format data collection timestamp
-    if last_update:
-        from datetime import datetime, timezone
-        try:
-            # Parse ISO timestamp
-            dt = datetime.fromisoformat(last_update.replace('Z', '+00:00'))
-            local_dt = dt.astimezone(ZoneInfo('Europe/Oslo'))
-            update_text = local_dt.strftime('%Y-%m-%d %H:%M %Z')
-
-            # Calculate time ago
-            now = datetime.now(timezone.utc)
-            time_diff = now - dt.replace(tzinfo=timezone.utc)
-            hours_ago = int(time_diff.total_seconds() / 3600)
-            mins_ago = int((time_diff.total_seconds() % 3600) / 60)
-
-            if hours_ago > 0:
-                time_ago = f"({hours_ago}h {mins_ago}m ago)"
-            else:
-                time_ago = f"({mins_ago}m ago)"
-        except Exception:
-            update_text = "Unknown"
-            time_ago = ""
-    else:
-        update_text = datetime.now(ZoneInfo('Europe/Oslo')).strftime('%Y-%m-%d %H:%M %Z')
-        time_ago = "(just generated)"
-
-    legend_html = f"""
-    <div style="position: fixed;
-                top: 10px;
-                left: 10px;
-                bottom: 10px;
-                width: 250px;
-                z-index: 9999;
-                background-color: white;
-                padding: 15px;
-                border: 2px solid #333;
-                border-radius: 5px;
-                box-shadow: 0 0 10px rgba(0,0,0,0.3);
-                overflow-y: auto;
-                overflow-x: hidden;">
-        <h4 style="margin: 0 0 10px 0;">Arctic Intelligence</h4>
-        <p style="margin: 5px 0; font-size: 12px;"><b>Total Vessels:</b> {total_vessels}</p>
-        <p style="margin: 5px 0; font-size: 11px; color: #666;">
-            Data: {update_text}<br>
-            <span style="font-size: 10px; color: #999;">{time_ago}</span>
-        </p>
-        <hr style="margin: 10px 0;">
-        <h5 style="margin: 10px 0 5px 0; font-size: 13px;">Data Tiers</h5>
-        <p style="margin: 3px 0; font-size: 11px; line-height: 1.6;">
-            <span style="color: #333; font-weight: bold;">━━━</span> Realtime (0-2hr)<br>
-            <span style="color: #333; font-weight: bold;">╌╌╌</span> Tactical (2-48hr)<br>
-            <span style="color: #333; font-weight: bold;">···</span> Strategic (2-7d)<br>
-            <span style="color: #9C27B0; font-weight: bold;">━ ━</span> Submarine Cables
-        </p>
-        <hr style="margin: 10px 0;">
-        <p style="margin: 10px 0 5px 0; font-size: 10px; color: #999;">
-            💡 Click vessel to focus
-        </p>
-    </div>
-    """
-
-    map_obj.get_root().html.add_child(folium.Element(legend_html))
-
 def add_focus_mode_script(map_obj, vessel_tracks):
     """Add JavaScript for vessel focus mode"""
 
@@ -783,7 +743,9 @@ def add_focus_mode_script(map_obj, vessel_tracks):
             'speed': f"{current_pos['speed']:.1f} kts",
             'course': f"{current_pos['course']:.0f}°",
             'lastSignal': last_signal,
-            'priority': track_data['priority_level'].upper()
+            'priority': track_data['priority_level'].upper(),
+            'lat': current_pos['lat'],
+            'lon': current_pos['lon'],
         }
 
     vessel_data_json = json.dumps(vessel_data_map)
@@ -813,10 +775,36 @@ def add_focus_mode_script(map_obj, vessel_tracks):
     // Focus mode: Click vessel to highlight and show all tiers
     let focusedVessel = null;
 
+    // Locate the Leaflet map instance that Folium creates as window.map_<hash>
+    function getLeafletMap() {
+        try {
+            const key = Object.keys(window).find(function (k) {
+                return k.startsWith('map_') && window[k] instanceof L.Map;
+            });
+            return key ? window[key] : null;
+        } catch (e) {
+            console.warn('getLeafletMap failed:', e);
+            return null;
+        }
+    }
+
+    // Pan and zoom the map to a given lat/lon with a smooth animation
+    function panMapTo(lat, lon, zoom) {
+        const mapInstance = getLeafletMap();
+        if (mapInstance && lat != null && lon != null) {
+            mapInstance.flyTo([lat, lon], zoom || 9, { duration: 0.8 });
+            console.log('Map flying to', lat, lon);
+        } else {
+            console.warn('panMapTo skipped — map or coords missing', {mapInstance: !!mapInstance, lat, lon});
+        }
+    }
+
     // Define focus/unfocus functions in global scope (so postMessage can access them)
-    function focusVessel(mmsi) {
+    // Optional hintLat/hintLon come from the parent dashboard (from anomaly details); if
+    // absent, fall back to vesselDataMap. Handles rendezvous anomalies gracefully.
+    function focusVessel(mmsi, hintLat, hintLon) {
         console.log('=== FOCUS VESSEL CALLED ===');
-        console.log('MMSI:', mmsi, 'Type:', typeof mmsi);
+        console.log('MMSI:', mmsi, 'hint:', hintLat, hintLon);
 
         // Unfocus previous vessel
         if (focusedVessel) {
@@ -854,6 +842,14 @@ def add_focus_mode_script(map_obj, vessel_tracks):
             console.warn('⚠️ Vessel data not found for MMSI:', mmsi);
             console.log('Available MMSI keys:', Object.keys(vesselDataMap));
         }
+
+        // Pan/zoom the map to the vessel. Prefer hint coordinates from the parent
+        // (which come from anomaly.details.last_position etc.); fall back to the
+        // vessel's current position in vesselDataMap. Rendezvous anomalies lack
+        // position data, so the fallback keeps click-to-navigate working.
+        const panLat = (hintLat != null) ? hintLat : (vData ? vData.lat : null);
+        const panLon = (hintLon != null) ? hintLon : (vData ? vData.lon : null);
+        panMapTo(panLat, panLon, 9);
 
         // Collect focused vessel's track lines for reordering
         const focusedTracks = [];

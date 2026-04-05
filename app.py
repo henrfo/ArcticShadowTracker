@@ -280,7 +280,12 @@ def api_map():
         return "<div>No vessel data available</div>"
 
     map_obj = generate_focused_map(data['vessels'])
-    response = make_response(map_obj._repr_html_())
+    # Use get_root().render() to produce a plain HTML document.
+    # _repr_html_() wraps the map in a Jupyter-style srcdoc iframe, which creates
+    # a nested-iframe situation where postMessage from the dashboard can't reach
+    # the actual map window. .render() returns the raw HTML directly.
+    response = make_response(map_obj.get_root().render())
+    response.headers['Content-Type'] = 'text/html; charset=utf-8'
     return no_cache(response)
 
 

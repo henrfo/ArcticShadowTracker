@@ -47,12 +47,15 @@
       frame.src = '/api/map?' + Date.now();
     }
 
-    function focusVessel(mmsi) {
+    function focusVessel(mmsi, lat, lon) {
       if (!frame || !frame.contentWindow) {
         console.error('[MapBridge] iframe not ready');
         return;
       }
-      frame.contentWindow.postMessage({ type: 'clickVessel', mmsi: mmsi }, '*');
+      frame.contentWindow.postMessage(
+        { type: 'clickVessel', mmsi: mmsi, lat: lat, lon: lon },
+        '*'
+      );
     }
 
     if (frame) {
@@ -199,6 +202,23 @@
       return sorted;
     }
 
+    // Pull the best-available (lat, lon) out of an anomaly's details blob.
+    // Different anomaly types store position in different keys; rendezvous has none.
+    function extractPosition(a) {
+      const d = (a && a.details) || {};
+      if (d.last_position && d.last_position.lat != null) {
+        return { lat: d.last_position.lat, lon: d.last_position.lon };
+      }
+      if (d.center_position && d.center_position.lat != null) {
+        return { lat: d.center_position.lat, lon: d.center_position.lon };
+      }
+      if (Array.isArray(d.positions) && d.positions.length) {
+        const p = d.positions[d.positions.length - 1];
+        if (p && p.lat != null) return { lat: p.lat, lon: p.lon };
+      }
+      return { lat: null, lon: null };
+    }
+
     function render(list) {
       if (!listEl) return;
       if (!list || list.length === 0) {
@@ -208,9 +228,13 @@
       }
       if (countEl) countEl.textContent = `${list.length} detection${list.length !== 1 ? 's' : ''}`;
 
+      // Index anomalies by primary MMSI so click handlers can look up position
+      const byMmsi = Object.create(null);
+
       const html = list.map(a => {
         const mmsiList = (a.mmsi || '').toString().split(',');
         const primary = mmsiList[0].trim();
+        byMmsi[primary] = a;
         const clickable = mmsiList.length === 1;
         const vessel = escapeHtml(a.vessel_name || 'Unknown');
         const country = escapeHtml(a.country || 'Unknown');
@@ -237,12 +261,18 @@
 
       listEl.innerHTML = html;
 
+      function focusFromCard(el) {
+        const mmsi = el.dataset.mmsi.trim();
+        const pos = extractPosition(byMmsi[mmsi]);
+        MapBridge.focusVessel(mmsi, pos.lat, pos.lon);
+      }
+
       listEl.querySelectorAll('.anomaly-card.is-clickable').forEach(el => {
-        el.addEventListener('click', () => MapBridge.focusVessel(el.dataset.mmsi.trim()));
+        el.addEventListener('click', () => focusFromCard(el));
         el.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            MapBridge.focusVessel(el.dataset.mmsi.trim());
+            focusFromCard(el);
           }
         });
       });
