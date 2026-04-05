@@ -4,1070 +4,220 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arctic Shadow Tracker</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <meta name="description" content="Real-time Arctic maritime intelligence — vessel tracking, shadow fleet detection, and anomaly monitoring.">
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #001a2e 0%, #000814 100%);
-            color: #ffffff;
-            height: 100vh;
-            overflow: hidden;
-        }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Exo+2:wght@300;400;500&display=swap" rel="stylesheet">
 
-        .container {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            grid-template-rows: 60px 1fr auto;
-            height: 100vh;
-        }
-
-        .header {
-            grid-column: 1 / -1;
-            background: rgba(5, 15, 30, 0.7);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        .header h1 {
-            font-size: 20px;
-            color: #ffffff;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-        }
-
-        .controls {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .refresh-btn {
-            background: rgba(15, 35, 65, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #ffffff;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
-        }
-
-        .refresh-btn:hover {
-            background: rgba(20, 45, 80, 0.8);
-            border-color: rgba(255, 255, 255, 0.6);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-
-        .status {
-            font-size: 12px;
-            color: #ffffff;
-        }
-
-        .sidebar {
-            grid-row: 2 / -1;
-            background: rgba(5, 15, 30, 0.75);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .stat-card {
-            background: rgba(10, 20, 40, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            backdrop-filter: blur(5px);
-        }
-
-        .stat-card h3 {
-            font-size: 12px;
-            color: #bbbbbb;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .stat-value {
-            font-size: 32px;
-            font-weight: bold;
-            color: #ffffff;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: #aaaaaa;
-            margin-top: 5px;
-        }
-
-        .breakdown {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .breakdown-item {
-            display: flex;
-            justify-content: space-between;
-            margin: 5px 0;
-            font-size: 13px;
-        }
-
-        .breakdown-item .country {
-            color: #dddddd;
-        }
-
-        .breakdown-item .count {
-            color: #ffffff;
-            font-weight: bold;
-        }
-
-        .priority-high {
-            color: #ff6666;
-        }
-
-        .map-container {
-            background: rgba(5, 10, 20, 0.95);
-            position: relative;
-            overflow: hidden;
-        }
-
-        #map-frame {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 18px;
-            color: #4fc3f7;
-        }
-
-        .newsfeed-container {
-            grid-column: 2 / -1;
-            background: rgba(5, 15, 30, 0.75);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: grid;
-            grid-template-columns: 1fr 350px;
-            grid-template-rows: auto 1fr;
-            min-height: 200px;
-            max-height: 600px;
-            overflow: hidden;
-        }
-
-        .newsfeed-resize-handle {
-            grid-column: 1 / -1;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            cursor: ns-resize;
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .newsfeed-resize-handle:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .newsfeed-resize-handle::after {
-            content: '═════';
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 8px;
-            letter-spacing: 2px;
-        }
-
-        .newsfeed-feed-section {
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .newsfeed-header {
-            background: rgba(10, 20, 40, 0.7);
-            padding: 15px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .newsfeed-header h2 {
-            font-size: 16px;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 0;
-        }
-
-        .newsfeed-count {
-            font-size: 12px;
-            color: #aaaaaa;
-        }
-
-        .newsfeed-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 10px 20px;
-        }
-
-        .newsfeed-content::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .newsfeed-content::-webkit-scrollbar-track {
-            background: rgba(10, 20, 40, 0.5);
-        }
-
-        .newsfeed-content::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-        }
-
-        .newsfeed-content::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .anomaly-item {
-            background: rgba(10, 20, 40, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 6px;
-            padding: 12px 15px;
-            margin-bottom: 10px;
-            transition: all 0.3s;
-        }
-
-        .anomaly-item.clickable {
-            cursor: pointer;
-        }
-
-        .anomaly-item.clickable:hover {
-            background: rgba(15, 25, 45, 0.9);
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateX(5px);
-        }
-
-        .anomaly-item.not-clickable {
-            cursor: default;
-        }
-
-        .anomaly-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .anomaly-type {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .severity-badge {
-            padding: 3px 8px;
-            border-radius: 3px;
-            font-size: 10px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .severity-critical {
-            background: rgba(211, 47, 47, 0.3);
-            border: 1px solid #d32f2f;
-            color: #ff6666;
-        }
-
-        .severity-high {
-            background: rgba(255, 152, 0, 0.3);
-            border: 1px solid #ff9800;
-            color: #ffb74d;
-        }
-
-        .severity-medium {
-            background: rgba(255, 193, 7, 0.3);
-            border: 1px solid #ffc107;
-            color: #ffd54f;
-        }
-
-        .severity-low {
-            background: rgba(33, 150, 243, 0.3);
-            border: 1px solid #2196F3;
-            color: #64b5f6;
-        }
-
-        .anomaly-type-label {
-            font-size: 12px;
-            color: #bbbbbb;
-            text-transform: capitalize;
-        }
-
-        .anomaly-time {
-            font-size: 11px;
-            color: #888888;
-        }
-
-        .anomaly-body {
-            font-size: 13px;
-            color: #dddddd;
-            line-height: 1.4;
-        }
-
-        .anomaly-vessel {
-            font-weight: bold;
-            color: #ffffff;
-        }
-
-        .anomaly-country {
-            color: #ff9800;
-            font-size: 11px;
-        }
-
-        .newsfeed-empty {
-            text-align: center;
-            padding: 40px 20px;
-            color: #666666;
-            font-size: 14px;
-        }
-
-        /* Filter Panel Styles */
-        .filter-panel {
-            display: flex;
-            flex-direction: column;
-            background: rgba(5, 15, 30, 0.85);
-            overflow-y: auto;
-        }
-
-        .filter-section {
-            padding: 15px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .filter-section h3 {
-            font-size: 13px;
-            color: #bbbbbb;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-        }
-
-        .filter-checkbox {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 6px 0;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .filter-checkbox:hover {
-            background: rgba(255, 255, 255, 0.05);
-            padding-left: 8px;
-            margin-left: -8px;
-            padding-right: 8px;
-            margin-right: -8px;
-            border-radius: 4px;
-        }
-
-        .filter-checkbox input[type="checkbox"] {
-            margin-right: 10px;
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-        }
-
-        .filter-label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex: 1;
-            font-size: 13px;
-            color: #dddddd;
-        }
-
-        .filter-count {
-            font-size: 11px;
-            color: #888888;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2px 8px;
-            border-radius: 10px;
-        }
-
-        .sort-option {
-            display: flex;
-            align-items: center;
-            padding: 8px 0;
-            cursor: pointer;
-            font-size: 13px;
-            color: #dddddd;
-            transition: all 0.2s;
-        }
-
-        .sort-option:hover {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.05);
-            padding-left: 8px;
-            margin-left: -8px;
-            padding-right: 8px;
-            margin-right: -8px;
-            border-radius: 4px;
-        }
-
-        .sort-option.active {
-            color: #4fc3f7;
-            font-weight: bold;
-        }
-
-        .sort-option::before {
-            content: '';
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            margin-right: 10px;
-        }
-
-        .sort-option.active::before {
-            background: #4fc3f7;
-            border-color: #4fc3f7;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Arctic Shadow Tracker</h1>
-            <div class="controls">
-                <span class="status" id="last-update">
-                    {% if stats.last_update %}
-                        Last update: {{ stats.last_update }}
-                    {% else %}
-                        No data
-                    {% endif %}
-                </span>
-                <button class="refresh-btn" onclick="refreshData()">Refresh</button>
-            </div>
+    <header class="nav" role="banner">
+        <a class="nav__brand" href="/">
+            <span class="nav__brand-mark" aria-hidden="true"></span>
+            Arctic Shadow Tracker
+        </a>
+        <div class="nav__actions">
+            <span class="nav__status" id="last-update" aria-live="polite">
+                {% if stats.last_update %}Updated {{ stats.last_update }}{% else %}No data{% endif %}
+            </span>
+            <button class="refresh-btn" id="refresh-btn" type="button" aria-label="Refresh data">
+                <span class="refresh-btn__label">Refresh</span>
+            </button>
         </div>
+    </header>
 
-        <div class="sidebar">
-            <div class="stat-card">
-                <h3>Total Vessels</h3>
-                <div class="stat-value" id="total-vessels">{{ stats.total }}</div>
-                <div class="stat-label">Tracked in Arctic</div>
-            </div>
+    <main class="app">
+        <section class="kpi-strip" aria-label="Vessel statistics">
+            <!-- Total -->
+            <article class="kpi-card kpi-card--total">
+                <div class="kpi-card__label">Total Vessels</div>
+                <div class="kpi-card__value" id="stat-total" aria-live="polite">{{ stats.total }}</div>
+                <div class="kpi-card__caption">Tracked in Arctic</div>
+            </article>
 
-            <div class="stat-card">
-                <h3>By Country</h3>
-                <div class="breakdown">
-                    <div class="breakdown-item">
-                        <span class="country"><span style="color: #d32f2f; font-size: 16px;">●</span> Russia</span>
-                        <span class="count priority-high" id="russian-count">{{ stats.russian }}</span>
-                    </div>
-                    <div class="breakdown-item" style="padding-left: 15px;">
-                        <span class="country"><span style="color: #c62828; font-size: 16px;">●</span> Shadow Fleet</span>
-                        <span class="count priority-high" id="shadow-fleet-count">{{ stats.shadow_fleet }}</span>
-                    </div>
-                    <div class="breakdown-item" style="padding-left: 15px;">
-                        <span class="country"><span style="color: #ff5722; font-size: 16px;">●</span> Suspected Shadow Fleet</span>
-                        <span class="count" id="suspected-shadow-count">{{ stats.suspected_shadow }}</span>
-                    </div>
-                    <div class="breakdown-item">
-                        <span class="country"><span style="color: #ff9800; font-size: 16px;">●</span> China</span>
-                        <span class="count priority-high" id="chinese-count">{{ stats.chinese }}</span>
-                    </div>
-                    <div class="breakdown-item">
-                        <span class="country"><span style="color: #2196F3; font-size: 16px;">●</span> Other</span>
-                        <span class="count" id="other-count">{{ stats.other }}</span>
-                    </div>
-                    <div class="breakdown-item">
-                        <span class="country"><span style="color: #2E7D32; font-size: 16px;">●</span> Norwegian Military/Law</span>
-                        <span class="count" id="norwegian-military-count">{{ stats.norwegian_military }}</span>
-                    </div>
-                    <div class="breakdown-item">
-                        <span class="country"><span style="color: #888888; font-size: 16px;">●</span> Norway</span>
-                        <span class="count" id="norwegian-count">{{ stats.norwegian }}</span>
-                    </div>
-                    <div class="breakdown-item">
-                        <span class="country"><span style="color: #616161; font-size: 16px;">●</span> Buoy</span>
-                        <span class="count" id="buoy-count">{{ stats.buoy }}</span>
-                    </div>
+            <!-- By Country -->
+            <article class="kpi-card kpi-card--alert">
+                <div class="kpi-card__label">By Country</div>
+                <ul class="kpi-card__list">
+                    <li class="kpi-card__row">
+                        <span><span class="swatch swatch--russia" aria-hidden="true"></span>Russia</span>
+                        <strong id="stat-russian">{{ stats.russian }}</strong>
+                    </li>
+                    <li class="kpi-card__row kpi-card__row--indent">
+                        <span><span class="swatch swatch--shadow" aria-hidden="true"></span>Shadow Fleet</span>
+                        <strong id="stat-shadow_fleet">{{ stats.shadow_fleet }}</strong>
+                    </li>
+                    <li class="kpi-card__row kpi-card__row--indent">
+                        <span><span class="swatch swatch--suspected" aria-hidden="true"></span>Suspected</span>
+                        <strong id="stat-suspected_shadow">{{ stats.suspected_shadow }}</strong>
+                    </li>
+                    <li class="kpi-card__row">
+                        <span><span class="swatch swatch--china" aria-hidden="true"></span>China</span>
+                        <strong id="stat-chinese">{{ stats.chinese }}</strong>
+                    </li>
+                    <li class="kpi-card__row">
+                        <span><span class="swatch swatch--norway-mil" aria-hidden="true"></span>Norway Mil/Law</span>
+                        <strong id="stat-norwegian_military">{{ stats.norwegian_military }}</strong>
+                    </li>
+                    <li class="kpi-card__row">
+                        <span><span class="swatch swatch--norway" aria-hidden="true"></span>Norway</span>
+                        <strong id="stat-norwegian">{{ stats.norwegian }}</strong>
+                    </li>
+                    <li class="kpi-card__row">
+                        <span><span class="swatch swatch--other" aria-hidden="true"></span>Other</span>
+                        <strong id="stat-other">{{ stats.other }}</strong>
+                    </li>
+                    <li class="kpi-card__row">
+                        <span><span class="swatch swatch--buoy" aria-hidden="true"></span>Buoy</span>
+                        <strong id="stat-buoy">{{ stats.buoy }}</strong>
+                    </li>
+                </ul>
+            </article>
+
+            <!-- Data Tiers -->
+            <article class="kpi-card">
+                <div class="kpi-card__label">Data Tiers</div>
+                <ul class="kpi-card__list">
+                    <li class="kpi-card__row">
+                        <span><span class="swatch swatch--tier-rt" aria-hidden="true"></span>Real-time</span>
+                        <strong>0–2 h</strong>
+                    </li>
+                    <li class="kpi-card__row">
+                        <span><span class="swatch swatch--tier-tac" aria-hidden="true"></span>Tactical</span>
+                        <strong>2–48 h</strong>
+                    </li>
+                    <li class="kpi-card__row">
+                        <span><span class="swatch swatch--tier-strat" aria-hidden="true"></span>Strategic</span>
+                        <strong>2–7 d</strong>
+                    </li>
+                    <li class="kpi-card__row">
+                        <span><span class="swatch swatch--cables" aria-hidden="true"></span>Submarine Cables</span>
+                        <strong>39</strong>
+                    </li>
+                </ul>
+            </article>
+
+            <!-- Infrastructure -->
+            <article class="kpi-card">
+                <div class="kpi-card__label">Infrastructure</div>
+                <ul class="kpi-card__list">
+                    <li class="kpi-card__row"><span>Large Airports</span><strong>5</strong></li>
+                    <li class="kpi-card__row"><span>Medium Airports</span><strong>38</strong></li>
+                    <li class="kpi-card__row"><span>Small Airports</span><strong>41</strong></li>
+                    <li class="kpi-card__row"><span>Heliports</span><strong>39</strong></li>
+                    <li class="kpi-card__row" style="border-top:1px solid var(--border-soft); padding-top:8px; margin-top:4px;">
+                        <span>Total Facilities</span><strong>123</strong>
+                    </li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="map-wrapper" aria-label="Vessel map">
+            <div class="map-wrapper__loading" id="map-loading">Loading map</div>
+            <iframe id="map-frame" src="/api/map" title="Arctic vessel map"></iframe>
+        </section>
+
+        <div
+            class="resizer"
+            id="resizer"
+            role="separator"
+            aria-orientation="horizontal"
+            aria-label="Resize anomaly feed"
+            tabindex="0"
+        ></div>
+
+        <section class="feed" id="feed" aria-label="Anomaly newsfeed">
+            <article class="anomaly-feed">
+                <header class="anomaly-feed__header">
+                    <h2 class="anomaly-feed__title">Anomaly Detections</h2>
+                    <span class="anomaly-feed__count" id="anomaly-count">Loading…</span>
+                </header>
+                <div class="anomaly-feed__list" id="anomaly-list">
+                    <div class="anomaly-feed__empty">Loading anomaly detections…</div>
                 </div>
-            </div>
+            </article>
 
-            <div class="stat-card">
-                <h3>Data Tiers</h3>
-                <div class="breakdown">
-                    <div class="breakdown-item">
-                        <span class="country">Real-time (All points)</span>
-                        <span class="count">0-2 hrs</span>
-                    </div>
-                    <div class="breakdown-item">
-                        <span class="country">Tactical (1pt/30min)</span>
-                        <span class="count">2-48 hrs</span>
-                    </div>
-                    <div class="breakdown-item">
-                        <span class="country">Strategic (1pt/day)</span>
-                        <span class="count">2-7 days</span>
-                    </div>
-                    <div class="breakdown-item">
-                        <span class="country"><span style="color: #9C27B0; font-size: 16px;">●</span> Submarine Cables</span>
-                        <span class="count">39 cables</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="stat-card">
-                <h3>Infrastructure</h3>
-                <div class="breakdown">
-                    <div class="breakdown-item">
-                        <span class="country">✈️ Large Airports</span>
-                        <span class="count">5</span>
-                    </div>
-                    <div class="breakdown-item">
-                        <span class="country">🛩️ Medium Airports</span>
-                        <span class="count">38</span>
-                    </div>
-                    <div class="breakdown-item">
-                        <span class="country">🛫 Small Airports</span>
-                        <span class="count">41</span>
-                    </div>
-                    <div class="breakdown-item">
-                        <span class="country">🚁 Heliports</span>
-                        <span class="count">39</span>
-                    </div>
-                    <div class="breakdown-item" style="padding-top: 8px; margin-top: 8px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-                        <span class="country">Total Facilities</span>
-                        <span class="count">123</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="map-container">
-            <div class="loading" id="loading">Loading map...</div>
-            <iframe id="map-frame" src="/api/map"></iframe>
-        </div>
-
-        <div class="newsfeed-container" id="newsfeed-container">
-            <div class="newsfeed-resize-handle" id="resize-handle"></div>
-
-            <div class="newsfeed-feed-section">
-                <div class="newsfeed-header">
-                    <h2>🚨 Anomaly Detections</h2>
-                    <span class="newsfeed-count" id="anomaly-count">Loading...</span>
-                </div>
-                <div class="newsfeed-content" id="newsfeed-content">
-                    <div class="newsfeed-empty">Loading anomaly detections...</div>
-                </div>
-            </div>
-
-            <div class="filter-panel">
-                <!-- Severity Filter -->
-                <div class="filter-section">
-                    <h3>Severity</h3>
-                    <label class="filter-checkbox">
-                        <div class="filter-label">
-                            <input type="checkbox" id="filter-critical" checked onchange="applyFilters()">
-                            <span class="severity-badge severity-critical">CRITICAL</span>
-                        </div>
-                        <span class="filter-count" id="count-critical">0</span>
-                    </label>
-                    <label class="filter-checkbox">
-                        <div class="filter-label">
-                            <input type="checkbox" id="filter-high" checked onchange="applyFilters()">
-                            <span class="severity-badge severity-high">HIGH</span>
-                        </div>
-                        <span class="filter-count" id="count-high">0</span>
-                    </label>
-                    <label class="filter-checkbox">
-                        <div class="filter-label">
-                            <input type="checkbox" id="filter-medium" checked onchange="applyFilters()">
-                            <span class="severity-badge severity-medium">MEDIUM</span>
-                        </div>
-                        <span class="filter-count" id="count-medium">0</span>
-                    </label>
-                    <label class="filter-checkbox">
-                        <div class="filter-label">
-                            <input type="checkbox" id="filter-low" checked onchange="applyFilters()">
-                            <span class="severity-badge severity-low">LOW</span>
-                        </div>
-                        <span class="filter-count" id="count-low">0</span>
-                    </label>
-                </div>
-
-                <!-- Type Filter -->
-                <div class="filter-section">
-                    <h3>Anomaly Type</h3>
-                    <label class="filter-checkbox">
-                        <div class="filter-label">
-                            <input type="checkbox" id="filter-transmission_gap" checked onchange="applyFilters()">
-                            <span>AIS Gap</span>
-                        </div>
-                        <span class="filter-count" id="count-transmission_gap">0</span>
-                    </label>
-                    <label class="filter-checkbox">
-                        <div class="filter-label">
-                            <input type="checkbox" id="filter-impossible_speed" checked onchange="applyFilters()">
-                            <span>Impossible Speed</span>
-                        </div>
-                        <span class="filter-count" id="count-impossible_speed">0</span>
-                    </label>
-                    <label class="filter-checkbox">
-                        <div class="filter-label">
-                            <input type="checkbox" id="filter-loitering" checked onchange="applyFilters()">
-                            <span>Loitering</span>
-                        </div>
-                        <span class="filter-count" id="count-loitering">0</span>
-                    </label>
-                    <label class="filter-checkbox">
-                        <div class="filter-label">
-                            <input type="checkbox" id="filter-rendezvous" checked onchange="applyFilters()">
-                            <span>Rendezvous</span>
-                        </div>
-                        <span class="filter-count" id="count-rendezvous">0</span>
-                    </label>
+            <aside class="filter-panel" aria-label="Filter and sort">
+                <div class="filter-panel__group">
+                    <fieldset class="filter-panel__fieldset">
+                        <legend class="filter-panel__legend">Severity</legend>
+                        <label class="filter-row">
+                            <span class="filter-row__label">
+                                <input type="checkbox" id="filter-critical" checked>
+                                <span class="badge badge--critical">Critical</span>
+                            </span>
+                            <span class="filter-count" id="count-critical">0</span>
+                        </label>
+                        <label class="filter-row">
+                            <span class="filter-row__label">
+                                <input type="checkbox" id="filter-high" checked>
+                                <span class="badge badge--high">High</span>
+                            </span>
+                            <span class="filter-count" id="count-high">0</span>
+                        </label>
+                        <label class="filter-row">
+                            <span class="filter-row__label">
+                                <input type="checkbox" id="filter-medium" checked>
+                                <span class="badge badge--medium">Medium</span>
+                            </span>
+                            <span class="filter-count" id="count-medium">0</span>
+                        </label>
+                        <label class="filter-row">
+                            <span class="filter-row__label">
+                                <input type="checkbox" id="filter-low" checked>
+                                <span class="badge badge--low">Low</span>
+                            </span>
+                            <span class="filter-count" id="count-low">0</span>
+                        </label>
+                    </fieldset>
                 </div>
 
-                <!-- Sort Options -->
-                <div class="filter-section">
-                    <h3>Sort By</h3>
-                    <div class="sort-option active" data-sort="newest" onclick="setSort('newest')">
-                        Newest First
-                    </div>
-                    <div class="sort-option" data-sort="oldest" onclick="setSort('oldest')">
-                        Oldest First
-                    </div>
-                    <div class="sort-option" data-sort="severity" onclick="setSort('severity')">
-                        By Severity
-                    </div>
+                <div class="filter-panel__group">
+                    <fieldset class="filter-panel__fieldset">
+                        <legend class="filter-panel__legend">Anomaly Type</legend>
+                        <label class="filter-row">
+                            <span class="filter-row__label">
+                                <input type="checkbox" id="filter-transmission_gap" checked>
+                                <span>AIS Gap</span>
+                            </span>
+                            <span class="filter-count" id="count-transmission_gap">0</span>
+                        </label>
+                        <label class="filter-row">
+                            <span class="filter-row__label">
+                                <input type="checkbox" id="filter-impossible_speed" checked>
+                                <span>Impossible Speed</span>
+                            </span>
+                            <span class="filter-count" id="count-impossible_speed">0</span>
+                        </label>
+                        <label class="filter-row">
+                            <span class="filter-row__label">
+                                <input type="checkbox" id="filter-loitering" checked>
+                                <span>Loitering</span>
+                            </span>
+                            <span class="filter-count" id="count-loitering">0</span>
+                        </label>
+                        <label class="filter-row">
+                            <span class="filter-row__label">
+                                <input type="checkbox" id="filter-rendezvous" checked>
+                                <span>Rendezvous</span>
+                            </span>
+                            <span class="filter-count" id="count-rendezvous">0</span>
+                        </label>
+                    </fieldset>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <script>
-        // Hide loading indicator when map loads
-        document.getElementById('map-frame').addEventListener('load', function() {
-            document.getElementById('loading').style.display = 'none';
-        });
-
-        // Refresh data function
-        function refreshData() {
-            const refreshBtn = document.querySelector('.refresh-btn');
-            const originalText = refreshBtn.textContent;
-
-            // Show loading state
-            refreshBtn.textContent = 'Refreshing...';
-            refreshBtn.disabled = true;
-
-            console.log('Fetching vessel data from /api/vessels');
-
-            fetch('/api/vessels')
-                .then(response => {
-                    console.log('Response status:', response.status);
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Successfully fetched data:', data);
-
-                    // Update stats
-                    document.getElementById('total-vessels').textContent = data.stats.total;
-                    document.getElementById('russian-count').textContent = data.stats.russian;
-                    document.getElementById('shadow-fleet-count').textContent = data.stats.shadow_fleet;
-                    document.getElementById('suspected-shadow-count').textContent = data.stats.suspected_shadow;
-                    document.getElementById('chinese-count').textContent = data.stats.chinese;
-                    document.getElementById('norwegian-count').textContent = data.stats.norwegian;
-                    document.getElementById('norwegian-military-count').textContent = data.stats.norwegian_military;
-                    document.getElementById('other-count').textContent = data.stats.other;
-                    document.getElementById('buoy-count').textContent = data.stats.buoy;
-
-                    if (data.stats.last_update) {
-                        document.getElementById('last-update').textContent =
-                            'Last update: ' + data.stats.last_update;
-                    }
-
-                    // Reload map
-                    console.log('Reloading map...');
-                    document.getElementById('map-frame').src = '/api/map?' + Date.now();
-
-                    // Show success feedback
-                    refreshBtn.textContent = '✓ Refreshed';
-                    setTimeout(() => {
-                        refreshBtn.textContent = originalText;
-                        refreshBtn.disabled = false;
-                    }, 2000);
-                })
-                .catch(error => {
-                    console.error('Error refreshing data:', error);
-
-                    // Show error feedback
-                    refreshBtn.textContent = '✗ Error';
-                    refreshBtn.style.borderColor = '#ff6666';
-
-                    setTimeout(() => {
-                        refreshBtn.textContent = originalText;
-                        refreshBtn.disabled = false;
-                        refreshBtn.style.borderColor = '';
-                    }, 3000);
-
-                    // Update status to show error
-                    document.getElementById('last-update').textContent =
-                        'Refresh failed - ' + error.message;
-                });
-        }
-
-        // Auto-refresh every 5 minutes
-        setInterval(refreshData, 300000);
-
-        // Fetch and display anomalies
-        function loadAnomalies() {
-            console.log('Fetching anomaly data from /api/anomalies');
-
-            fetch('/api/anomalies')
-                .then(response => {
-                    console.log('Anomaly response status:', response.status);
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Successfully fetched anomalies:', data);
-                    displayAnomalies(data);
-                })
-                .catch(error => {
-                    console.error('Error fetching anomalies:', error);
-                    document.getElementById('newsfeed-content').innerHTML =
-                        '<div class="newsfeed-empty">Failed to load anomaly detections</div>';
-                    document.getElementById('anomaly-count').textContent = 'Error';
-                });
-        }
-
-        function displayAnomalies(data) {
-            const content = document.getElementById('newsfeed-content');
-            const countElement = document.getElementById('anomaly-count');
-
-            if (!data.anomalies || data.anomalies.length === 0) {
-                content.innerHTML = '<div class="newsfeed-empty">No anomalies detected</div>';
-                countElement.textContent = '0 detections';
-                return;
-            }
-
-            // Update count
-            countElement.textContent = `${data.total} detection${data.total !== 1 ? 's' : ''}`;
-
-            // Build HTML for anomalies
-            let html = '';
-            data.anomalies.forEach(anomaly => {
-                const description = formatAnomalyDescription(anomaly);
-
-                // Handle rendezvous anomalies (have 2 MMSIs: "123,456")
-                const mmsiList = anomaly.mmsi.toString().split(',');
-
-                // Only make clickable if it's a single vessel anomaly
-                const isClickable = mmsiList.length === 1;
-                const clickableClass = isClickable ? 'clickable' : 'not-clickable';
-
-                html += `
-                    <div class="anomaly-item ${clickableClass}" data-mmsi="${anomaly.mmsi}">
-                        <div class="anomaly-header">
-                            <div class="anomaly-type">
-                                <span class="severity-badge severity-${anomaly.severity}">${anomaly.severity}</span>
-                                <span class="anomaly-type-label">${formatAnomalyType(anomaly.anomaly_type)}</span>
-                            </div>
-                            <span class="anomaly-time">${anomaly.formatted_time || 'Unknown'}</span>
-                        </div>
-                        <div class="anomaly-body">
-                            <span class="anomaly-vessel">${anomaly.vessel_name || 'Unknown'}</span>
-                            <span class="anomaly-country">(${anomaly.country || 'Unknown'})</span>
-                            <div>${description}</div>
-                        </div>
-                    </div>
-                `;
-            });
-
-            content.innerHTML = html;
-
-            // Add click handlers via event delegation
-            document.querySelectorAll('.anomaly-item.clickable').forEach(item => {
-                item.addEventListener('click', function() {
-                    const mmsi = this.dataset.mmsi.trim();
-                    focusVesselOnMap(mmsi);
-                });
-            });
-        }
-
-        function formatAnomalyType(type) {
-            const types = {
-                'transmission_gap': 'AIS Gap',
-                'impossible_speed': 'Impossible Speed',
-                'loitering': 'Loitering',
-                'rendezvous': 'Rendezvous'
-            };
-            return types[type] || type.replace(/_/g, ' ');
-        }
-
-        function formatAnomalyDescription(anomaly) {
-            const details = anomaly.details || {};
-
-            switch (anomaly.anomaly_type) {
-                case 'transmission_gap':
-                    return `AIS signal lost for ${Math.round(details.gap_duration_minutes || 0)} minutes${details.near_border ? ' near Norwegian border' : ''}`;
-
-                case 'impossible_speed':
-                    return `Traveled at ${Math.round(details.calculated_speed_knots || 0)} knots (max ${details.max_allowed_knots || 0} for ${details.vessel_type || 'vessel type'})`;
-
-                case 'loitering':
-                    return `Stayed within ${details.radius_km || 0}km for ${Math.round(details.duration_hours || 0)} hours at ${details.center_position ? formatCoords(details.center_position.lat, details.center_position.lon) : 'unknown location'}`;
-
-                case 'rendezvous':
-                    return `Met with ${details.vessel2 ? details.vessel2.name : 'unknown vessel'} within ${details.distance_km || 0}km`;
-
-                default:
-                    return 'Suspicious activity detected';
-            }
-        }
-
-        function formatCoords(lat, lon) {
-            const latDir = lat >= 0 ? 'N' : 'S';
-            const lonDir = lon >= 0 ? 'E' : 'W';
-            return `${Math.abs(lat).toFixed(2)}°${latDir}, ${Math.abs(lon).toFixed(2)}°${lonDir}`;
-        }
-
-        // Load anomalies on page load
-        loadAnomalies();
-
-        // Refresh anomalies when vessel data refreshes
-        const originalRefreshData = refreshData;
-        refreshData = function() {
-            originalRefreshData();
-            loadAnomalies();
-        };
-
-        // Focus vessel on map when clicking anomaly
-        function focusVesselOnMap(mmsi) {
-            console.log('=== DASHBOARD: Anomaly clicked ===');
-            console.log('MMSI:', mmsi, 'Type:', typeof mmsi);
-
-            const iframe = document.getElementById('map-frame');
-            console.log('Iframe element:', iframe ? 'Found' : 'NOT FOUND');
-            console.log('Iframe contentWindow:', iframe && iframe.contentWindow ? 'Available' : 'NOT AVAILABLE');
-
-            if (iframe && iframe.contentWindow) {
-                const message = {
-                    type: 'clickVessel',
-                    mmsi: mmsi
-                };
-                console.log('Sending postMessage:', JSON.stringify(message));
-                iframe.contentWindow.postMessage(message, '*');
-                console.log('PostMessage sent successfully');
-            } else {
-                console.error('Map iframe not found or not loaded');
-            }
-        }
-
-        // ==============================================================
-        // FILTER & SORT FUNCTIONALITY
-        // ==============================================================
-
-        let allAnomalies = []; // Store all anomalies
-        let currentSort = 'newest';
-
-        function displayAnomaliesWithFilters(data) {
-            allAnomalies = data.anomalies || [];
-
-            // Update filter counts
-            updateFilterCounts(allAnomalies);
-
-            // Apply filters and sort
-            applyFilters();
-        }
-
-        function updateFilterCounts(anomalies) {
-            const counts = {
-                severity: {critical: 0, high: 0, medium: 0, low: 0},
-                type: {transmission_gap: 0, impossible_speed: 0, loitering: 0, rendezvous: 0}
-            };
-
-            anomalies.forEach(a => {
-                if (counts.severity[a.severity] !== undefined) counts.severity[a.severity]++;
-                if (counts.type[a.anomaly_type] !== undefined) counts.type[a.anomaly_type]++;
-            });
-
-            // Update count badges
-            document.getElementById('count-critical').textContent = counts.severity.critical;
-            document.getElementById('count-high').textContent = counts.severity.high;
-            document.getElementById('count-medium').textContent = counts.severity.medium;
-            document.getElementById('count-low').textContent = counts.severity.low;
-
-            document.getElementById('count-transmission_gap').textContent = counts.type.transmission_gap;
-            document.getElementById('count-impossible_speed').textContent = counts.type.impossible_speed;
-            document.getElementById('count-loitering').textContent = counts.type.loitering;
-            document.getElementById('count-rendezvous').textContent = counts.type.rendezvous;
-        }
-
-        function applyFilters() {
-            // Get selected filters
-            const severityFilters = ['critical', 'high', 'medium', 'low']
-                .filter(s => document.getElementById(`filter-${s}`).checked);
-
-            const typeFilters = ['transmission_gap', 'impossible_speed', 'loitering', 'rendezvous']
-                .filter(t => document.getElementById(`filter-${t}`).checked);
-
-            // Filter anomalies
-            let filtered = allAnomalies.filter(a =>
-                severityFilters.includes(a.severity) &&
-                typeFilters.includes(a.anomaly_type)
-            );
-
-            // Sort anomalies
-            filtered = sortAnomalies(filtered, currentSort);
-
-            // Display filtered anomalies
-            renderAnomalies(filtered);
-        }
-
-        function sortAnomalies(anomalies, sortType) {
-            const sorted = [...anomalies];
-
-            if (sortType === 'newest') {
-                sorted.sort((a, b) => (b.detected_at || '').localeCompare(a.detected_at || ''));
-            } else if (sortType === 'oldest') {
-                sorted.sort((a, b) => (a.detected_at || '').localeCompare(b.detected_at || ''));
-            } else if (sortType === 'severity') {
-                const severityOrder = {critical: 0, high: 1, medium: 2, low: 3};
-                sorted.sort((a, b) => severityOrder[a.severity] - severityOrder[b.severity]);
-            }
-
-            return sorted;
-        }
-
-        function renderAnomalies(anomalies) {
-            const content = document.getElementById('newsfeed-content');
-            const countElement = document.getElementById('anomaly-count');
-
-            if (anomalies.length === 0) {
-                content.innerHTML = '<div class="newsfeed-empty">No anomalies match your filters</div>';
-                countElement.textContent = '0 detections';
-                return;
-            }
-
-            countElement.textContent = `${anomalies.length} detection${anomalies.length !== 1 ? 's' : ''}`;
-
-            let html = '';
-            anomalies.forEach(anomaly => {
-                const description = formatAnomalyDescription(anomaly);
-                const mmsiList = anomaly.mmsi.toString().split(',');
-                const isClickable = mmsiList.length === 1;
-                const clickableClass = isClickable ? 'clickable' : 'not-clickable';
-
-                html += `
-                    <div class="anomaly-item ${clickableClass}" data-mmsi="${anomaly.mmsi}">
-                        <div class="anomaly-header">
-                            <div class="anomaly-type">
-                                <span class="severity-badge severity-${anomaly.severity}">${anomaly.severity}</span>
-                                <span class="anomaly-type-label">${formatAnomalyType(anomaly.anomaly_type)}</span>
-                            </div>
-                            <span class="anomaly-time">${anomaly.formatted_time || 'Unknown'}</span>
-                        </div>
-                        <div class="anomaly-body">
-                            <span class="anomaly-vessel">${anomaly.vessel_name || 'Unknown'}</span>
-                            <span class="anomaly-country">(${anomaly.country || 'Unknown'})</span>
-                            <div>${description}</div>
-                        </div>
-                    </div>
-                `;
-            });
-
-            content.innerHTML = html;
-
-            // Add click handlers via event delegation
-            document.querySelectorAll('.anomaly-item.clickable').forEach(item => {
-                item.addEventListener('click', function() {
-                    const mmsi = this.dataset.mmsi.trim();
-                    focusVesselOnMap(mmsi);
-                });
-            });
-        }
-
-        function setSort(sortType) {
-            currentSort = sortType;
-
-            // Update active state
-            document.querySelectorAll('.sort-option').forEach(opt => {
-                opt.classList.remove('active');
-            });
-            document.querySelector(`[data-sort="${sortType}"]`).classList.add('active');
-
-            // Re-apply filters with new sort
-            applyFilters();
-        }
-
-        // Override original displayAnomalies to use filtering
-        const originalDisplayAnomalies = displayAnomalies;
-        displayAnomalies = displayAnomaliesWithFilters;
-
-        // ==============================================================
-        // RESIZE FUNCTIONALITY
-        // ==============================================================
-
-        let isResizing = false;
-        let startY = 0;
-        let startHeight = 0;
-
-        const resizeHandle = document.getElementById('resize-handle');
-        const newsfeedContainer = document.getElementById('newsfeed-container');
-
-        resizeHandle.addEventListener('mousedown', function(e) {
-            isResizing = true;
-            startY = e.clientY;
-            startHeight = newsfeedContainer.offsetHeight;
-            document.body.style.cursor = 'ns-resize';
-            e.preventDefault();
-        });
-
-        document.addEventListener('mousemove', function(e) {
-            if (!isResizing) return;
-
-            const deltaY = startY - e.clientY;
-            const newHeight = startHeight + deltaY;
-
-            // Constrain height between 300px and 80vh
-            const minHeight = 300;
-            const maxHeight = window.innerHeight * 0.8;
-            const constrainedHeight = Math.max(minHeight, Math.min(newHeight, maxHeight));
-
-            newsfeedContainer.style.maxHeight = `${constrainedHeight}px`;
-            newsfeedContainer.style.minHeight = `${constrainedHeight}px`;
-        });
-
-        document.addEventListener('mouseup', function() {
-            if (isResizing) {
-                isResizing = false;
-                document.body.style.cursor = '';
-            }
-        });
-    </script>
+                <div class="filter-panel__group">
+                    <div class="filter-panel__legend">Sort By</div>
+                    <div class="sort-row is-active" data-sort="newest" tabindex="0" role="button">Newest First</div>
+                    <div class="sort-row" data-sort="oldest" tabindex="0" role="button">Oldest First</div>
+                    <div class="sort-row" data-sort="severity" tabindex="0" role="button">By Severity</div>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 </body>
 </html>

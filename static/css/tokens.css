@@ -1,0 +1,94 @@
+/* ==========================================================================
+   Arctic Shadow Tracker — Design Tokens
+   ========================================================================== */
+
+:root {
+  /* ----- Background ----- */
+  --bg-base: #030305;
+  --bg-gradient:
+    radial-gradient(ellipse at 15% 85%, rgba(6, 18, 55, 0.45) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 15%, rgba(6, 18, 55, 0.60) 0%, transparent 55%);
+
+  /* ----- Surfaces (glass morphism) ----- */
+  --surface-glass: rgba(255, 255, 255, 0.03);
+  --surface-glass-strong: rgba(255, 255, 255, 0.05);
+  --surface-nav: rgba(0, 0, 0, 0.25);
+  --surface-raised: rgba(10, 14, 28, 0.55);
+
+  /* ----- Borders ----- */
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --border-muted: rgba(255, 255, 255, 0.12);
+  --border-focus: rgba(223, 239, 255, 0.6);
+
+  /* ----- Text ----- */
+  --text-primary: #ffffff;
+  --text-soft: #dfefff;
+  --text-muted: #a8b0bf;
+  --text-faint: #6c7388;
+
+  /* ----- Severity (semantic — not color-alone) ----- */
+  --sev-critical: #ff5c6b;
+  --sev-critical-bg: rgba(255, 92, 107, 0.12);
+  --sev-high: #ffa94d;
+  --sev-high-bg: rgba(255, 169, 77, 0.12);
+  --sev-medium: #ffd24d;
+  --sev-medium-bg: rgba(255, 210, 77, 0.12);
+  --sev-low: #8ecdff;
+  --sev-low-bg: rgba(142, 205, 255, 0.12);
+
+  /* ----- Country accents ----- */
+  --country-russia: #ff6b6b;
+  --country-shadow: #d84444;
+  --country-suspected: #ff8a5b;
+  --country-china: #ffb454;
+  --country-norway: #a8b0bf;
+  --country-norway-mil: #6ab867;
+  --country-other: #8ecdff;
+  --country-buoy: #6c7388;
+
+  /* ----- Typography ----- */
+  --font-body: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-display: 'Exo 2', 'Inter', 'Segoe UI', sans-serif;
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+
+  --ls-display: 0.12em;
+  --ls-label: 0.08em;
+
+  /* ----- Spacing scale ----- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-7: 32px;
+  --s-8: 48px;
+
+  /* ----- Radii ----- */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-pill: 999px;
+
+  /* ----- Effects ----- */
+  --blur-nav: 12px;
+  --blur-glass: 14px;
+  --shadow-glass: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 20px 40px rgba(0, 0, 0, 0.35);
+  --shadow-focus: 0 0 0 2px rgba(223, 239, 255, 0.35);
+
+  /* ----- Motion ----- */
+  --t-fast: 150ms;
+  --t-med: 250ms;
+  --t-slow: 400ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* ----- Layout ----- */
+  --nav-h: 56px;
+  --kpi-gap: var(--s-4);
+  --content-max: 1600px;
+}
