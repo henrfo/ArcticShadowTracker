@@ -264,6 +264,15 @@
       function focusFromCard(el) {
         const mmsi = el.dataset.mmsi.trim();
         const pos = extractPosition(byMmsi[mmsi]);
+        // 1. Scroll the map into view if it isn't already. `block: 'nearest'`
+        //    is a no-op when the element is already visible, so this is safe
+        //    on the desktop sidebar layout and useful on mobile where the map
+        //    may have scrolled off-screen above the anomaly drawer.
+        const mapEl = document.querySelector('.map-wrapper');
+        if (mapEl) {
+          mapEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        // 2. Pan/zoom map + highlight marker (via iframe postMessage bridge)
         MapBridge.focusVessel(mmsi, pos.lat, pos.lon);
       }
 
