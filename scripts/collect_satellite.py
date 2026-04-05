@@ -71,6 +71,43 @@ ARCTIC_REGION = {
     'lon_max': 40.0,
 }
 
+# ----------------------------------------------------------------------------
+# High-value sub-zones for tile selection.
+#
+# Sentinel-1 scenes are narrow swaths (~250x170 km). Taking the most recent
+# scenes from the full Arctic bbox gives us mid-ocean tiles with almost no
+# AIS traffic — useless for detection validation. Instead, target zones
+# where ships actually are.
+#
+# Each zone gets a `desired` count; we iterate zones in order and take up to
+# `desired` unique scenes from each. If a zone yields 0 scenes (no recent
+# pass) we skip it. After the first pass, any remaining quota is topped up
+# by revisiting zones without the per-zone cap.
+#
+# Total desired across zones should match the default --tiles argument (5)
+# so the quota math stays roughly the same.
+# ----------------------------------------------------------------------------
+HIGH_VALUE_ZONES = [
+    {
+        # Norwegian coast — main coastal traffic, Tromsø, Lofoten, Bodø
+        'name': 'norwegian_coast',
+        'bbox': [10.0, 65.0, 22.0, 71.0],   # [min_lon, min_lat, max_lon, max_lat]
+        'desired': 2,
+    },
+    {
+        # Barents Sea / Murmansk approach — Russian Arctic shipping
+        'name': 'barents_sea',
+        'bbox': [25.0, 68.0, 40.0, 74.0],
+        'desired': 2,
+    },
+    {
+        # Svalbard approach — Svalbard routes + submarine cable corridor
+        'name': 'svalbard_approach',
+        'bbox': [10.0, 74.0, 25.0, 79.0],
+        'desired': 1,
+    },
+]
+
 # Defaults (overridable via CLI)
 DEFAULT_TILES = 5
 DEFAULT_RESOLUTION_M = 100
@@ -193,10 +230,14 @@ def log_quota_forecast(tiles_per_run: int, resolution_m: int, runs_per_month: in
 # Catalog search + download
 # ============================================================================
 
-def search_sentinel1_imagery(config: SHConfig, days_back: int) -> list:
-    """Search the Copernicus catalog for Sentinel-1 IW GRD tiles in the Arctic bbox."""
-    logger.info("Searching Sentinel-1 catalog (last %d days, Arctic bbox)", days_back)
-    bbox = _arctic_bbox()
+def search_sentinel1_imagery(config: SHConfig, bbox: BBox, days_back: int,
+                              zone_name: str = 'arctic') -> list:
+    """Search the Copernicus catalog for Sentinel-1 IW GRD tiles in a given bbox.
+
+    Parameterized by bbox so the caller can query either the full Arctic region
+    or a narrow high-value sub-zone. zone_name is log-only.
+    """
+    logger.info("Searching Sentinel-1 catalog for zone %r (last %d days)", zone_name, days_back)
     end_time = datetime.now(timezone.utc)
     start_time = end_time - timedelta(days=days_back)
 
@@ -223,8 +264,86 @@ def search_sentinel1_imagery(config: SHConfig, days_back: int) -> list:
             'exclude': [],
         },
     ))
-    logger.info("Found %d Sentinel-1 images in window", len(results))
+    logger.info("  %s: found %d Sentinel-1 scenes", zone_name, len(results))
     return results
+
+
+def _bbox_from_list(b: list) -> BBox:
+    return BBox(bbox=b, crs=CRS.WGS84)
+
+
+def select_tiles_from_zones(config: SHConfig, days_back: int, total_target: int) -> list:
+    """Select up to total_target scenes distributed across HIGH_VALUE_ZONES.
+
+    Pass 1: iterate zones in declared order; from each zone's catalog result
+            take up to `desired` unique scenes (by id).
+    Pass 2: if still under total_target, top up from any zone's remaining
+            scenes without the per-zone cap.
+
+    Each returned scene is tagged with a transient '_zone' key so logging
+    and metadata can tell which zone it came from. The download path
+    (_scene_bbox -> download_sentinel1_tile) is unchanged.
+    """
+    logger.info("Zone-based tile selection — target %d tiles across %d zones",
+                total_target, len(HIGH_VALUE_ZONES))
+
+    # Query each zone once, cache results
+    zone_scenes: dict[str, list] = {}
+    for zone in HIGH_VALUE_ZONES:
+        scenes = search_sentinel1_imagery(
+            config,
+            _bbox_from_list(zone['bbox']),
+            days_back=days_back,
+            zone_name=zone['name'],
+        )
+        zone_scenes[zone['name']] = scenes
+
+    selected: list = []
+    seen_ids: set = set()
+
+    # Pass 1: respect per-zone desired counts, in declared order
+    for zone in HIGH_VALUE_ZONES:
+        if len(selected) >= total_target:
+            break
+        desired = zone['desired']
+        picked = 0
+        for s in zone_scenes[zone['name']]:
+            if picked >= desired or len(selected) >= total_target:
+                break
+            sid = s.get('id')
+            if not sid or sid in seen_ids:
+                continue
+            seen_ids.add(sid)
+            s['_zone'] = zone['name']
+            selected.append(s)
+            picked += 1
+        logger.info("  pass 1: picked %d from %s", picked, zone['name'])
+
+    # Pass 2: top up from any zone that still has scenes, no per-zone cap
+    if len(selected) < total_target:
+        shortfall = total_target - len(selected)
+        logger.info("  pass 2: %d scenes short, topping up from any zone", shortfall)
+        for zone in HIGH_VALUE_ZONES:
+            if len(selected) >= total_target:
+                break
+            extra = 0
+            for s in zone_scenes[zone['name']]:
+                if len(selected) >= total_target:
+                    break
+                sid = s.get('id')
+                if not sid or sid in seen_ids:
+                    continue
+                seen_ids.add(sid)
+                s['_zone'] = zone['name']
+                selected.append(s)
+                extra += 1
+            if extra:
+                logger.info("  pass 2: picked %d more from %s", extra, zone['name'])
+
+    logger.info("Selected %d total tiles: %s",
+                len(selected),
+                ', '.join(f"{s.get('_zone')}:{(s.get('id') or '')[:20]}" for s in selected))
+    return selected
 
 
 def _scene_bbox(tile_info: dict) -> BBox:
@@ -427,7 +546,9 @@ def _tile_entry(tile_path: str, tile_info: dict, thumbnail_path: str | None = No
     Uses basename for `filename` — the full runner path is ephemeral and useless
     outside the GH Actions environment. The bbox is the per-scene footprint we
     actually downloaded (not the full Arctic), extracted via _scene_bbox().
-    If a thumbnail was generated, its basename is included too.
+    If a thumbnail was generated, its basename is included too. The zone label
+    (if tile_info was tagged by select_tiles_from_zones) is persisted so the
+    dashboard viewer and validator can show which high-value zone a tile came from.
     """
     bbox = _scene_bbox(tile_info)
     entry = {
@@ -437,6 +558,8 @@ def _tile_entry(tile_path: str, tile_info: dict, thumbnail_path: str | None = No
         'instrument_mode': tile_info.get('properties', {}).get('sar:instrument_mode', ''),
         'bbox': [round(c, 4) for c in list(bbox)],  # [min_lon, min_lat, max_lon, max_lat]
     }
+    if tile_info.get('_zone'):
+        entry['zone'] = tile_info['_zone']
     if thumbnail_path:
         entry['thumbnail'] = Path(thumbnail_path).name
     return entry
@@ -572,29 +695,39 @@ def main() -> int:
         credentials = load_credentials()
         config = configure_sentinel_hub(credentials)
 
-        imagery_results = search_sentinel1_imagery(config, days_back=args.days_back)
-        if not imagery_results:
-            logger.warning("No imagery found for this region + time window")
+        # Zone-based selection: query each high-value sub-bbox and take a
+        # per-zone quota of scenes. Falls back to top-up across zones if any
+        # zone yields nothing.
+        selected = select_tiles_from_zones(
+            config, days_back=args.days_back, total_target=args.tiles,
+        )
+        if not selected:
+            logger.warning("No imagery found in any high-value zone")
             return 0
 
         if args.dry_run:
-            logger.info("[DRY RUN] Would download %d of %d available tiles:",
-                        min(args.tiles, len(imagery_results)), len(imagery_results))
-            for i, info in enumerate(imagery_results[: args.tiles], start=1):
-                logger.info("  %d. %s (%s)", i, info.get('id', '?'),
+            logger.info("[DRY RUN] Would download %d tiles:", len(selected))
+            for i, info in enumerate(selected, start=1):
+                logger.info("  %d. [%s] %s (%s)",
+                            i,
+                            info.get('_zone', '?'),
+                            info.get('id', '?'),
                             info.get('properties', {}).get('datetime', '?'))
             logger.info("[DRY RUN] No tiles downloaded, no metadata written")
             return 0
 
         downloaded: list[tuple[str, dict, str | None]] = []
-        for i, tile_info in enumerate(imagery_results[: args.tiles], start=1):
-            logger.info("Tile %d/%d", i, min(args.tiles, len(imagery_results)))
+        for i, tile_info in enumerate(selected, start=1):
+            zone = tile_info.get('_zone', '?')
+            logger.info("Tile %d/%d [%s]", i, len(selected), zone)
             tile_path = download_sentinel1_tile(config, tile_info, resolution_m=args.resolution)
             if tile_path:
                 thumbnail_path = generate_thumbnail(tile_path)
                 downloaded.append((tile_path, tile_info, thumbnail_path))
 
-        save_metadata(imagery_results, downloaded, resolution_m=args.resolution)
+        # `selected` is passed as imagery_results for the old per-run counter;
+        # it represents "catalog results we considered in this run".
+        save_metadata(selected, downloaded, resolution_m=args.resolution)
         cleanup_old_tiles()
         cleanup_old_thumbnails()
 
