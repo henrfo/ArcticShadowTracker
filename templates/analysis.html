@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAR Analysis — Arctic Shadow Tracker</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Exo+2:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Leaflet (same version Folium bundles for the main map) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tokens.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/analysis.css') }}">
+</head>
+<body>
+    <div class="analysis-shell">
+        <header class="analysis-header">
+            <div class="analysis-header__title">
+                <h1>SAR Analysis</h1>
+                <div class="analysis-header__subtitle" id="analysis-subtitle">Loading SAR tiles &amp; AIS…</div>
+            </div>
+            <div class="analysis-header__stats" id="analysis-stats"></div>
+            <button class="analysis-header__close" id="analysis-close" type="button" aria-label="Close analysis view">×</button>
+        </header>
+
+        <aside class="analysis-sidebar" id="analysis-sidebar">
+            <div class="analysis-sidebar__section">
+                <h2 class="analysis-sidebar__heading">SAR Tiles</h2>
+                <div class="analysis-sidebar__toolbar">
+                    <button type="button" class="analysis-mini-btn" id="tiles-all">All</button>
+                    <button type="button" class="analysis-mini-btn" id="tiles-none">None</button>
+                </div>
+                <ul class="tile-list" id="tile-list">
+                    <li class="tile-list__empty">Loading…</li>
+                </ul>
+            </div>
+            <div class="analysis-sidebar__section">
+                <h2 class="analysis-sidebar__heading">Legend</h2>
+                <ul class="legend">
+                    <li><span class="legend__dot" style="background:#c62828"></span>Shadow fleet</li>
+                    <li><span class="legend__dot" style="background:#d32f2f"></span>Russia</li>
+                    <li><span class="legend__dot" style="background:#ff5722"></span>Suspected shadow</li>
+                    <li><span class="legend__dot" style="background:#ff9800"></span>China</li>
+                    <li><span class="legend__dot" style="background:#2E7D32"></span>Norway mil / law</li>
+                    <li><span class="legend__dot" style="background:#888888"></span>Norway civilian</li>
+                    <li><span class="legend__dot" style="background:#2196F3"></span>Other</li>
+                    <li><span class="legend__dot" style="background:#616161"></span>Buoy</li>
+                </ul>
+                <p class="legend__note">
+                    Vessels shown are those with an AIS sample within <strong>±60&nbsp;min</strong> of any
+                    visible SAR tile's acquisition time. Bright radar returns with no matching marker
+                    are dark-vessel candidates.
+                </p>
+            </div>
+        </aside>
+
+        <div class="analysis-map" id="analysis-map"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/analysis.js') }}"></script>
+</body>
+</html>
