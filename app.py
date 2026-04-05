@@ -37,6 +37,19 @@ GITHUB_PAGES_ANOMALIES_URL = "https://henrfo.github.io/ArcticShadowTracker/data/
 # Data freshness threshold — pipeline runs every 5 min, allow 6x tolerance
 STALE_THRESHOLD_MINUTES = 30
 
+# In-memory cache of the rendered Folium map HTML. Keyed on the ISO timestamp
+# of the underlying vessel snapshot, so it auto-invalidates as soon as new data
+# is published on gh-pages. Regeneration takes ~12s for ~5k vessels; every
+# subsequent request inside the same 5-min window returns the cached HTML.
+_map_cache = {'html': None, 'raw_last_update': None}
+
+# Short-TTL cache for load_vessel_data() so we don't round-trip to GitHub Pages
+# on every request. The upstream pipeline only publishes every ~5 minutes, so
+# 30 seconds is plenty fresh — trades ~30s of staleness for a ~6s speedup per
+# request. Map cache above chains on top of this.
+_data_cache = {'result': None, 'fetched_at': 0.0}
+DATA_TTL_SECONDS = 30
+
 
 def add_cors_headers(response):
     """Add CORS headers to response"""
@@ -169,10 +182,19 @@ def _compute_freshness(raw_last_update):
 def load_vessel_data():
     """Load pre-processed vessel track data from GitHub Pages or local file.
 
+    Returns a cached result if called within DATA_TTL_SECONDS of the last fetch.
+    Upstream only publishes every ~5 min, so a 30-second TTL is plenty fresh
+    and eliminates per-request GitHub Pages round-trips.
+
     Priority:
         1. Try GitHub Pages (for cloud deployment)
         2. Fallback to local bootstrap file data/vessel_tracks.json
     """
+    import time as _time
+    now = _time.monotonic()
+    if _data_cache['result'] is not None and (now - _data_cache['fetched_at']) < DATA_TTL_SECONDS:
+        return _data_cache['result']
+
     data = None
     source = None
     fetch_error = None
@@ -251,7 +273,10 @@ def load_vessel_data():
             bucket_sum, stats['total'], counts,
         )
 
-    return {'vessels': vessel_tracks, 'stats': stats}
+    result = {'vessels': vessel_tracks, 'stats': stats}
+    _data_cache['result'] = result
+    _data_cache['fetched_at'] = _time.monotonic()
+    return result
 
 
 @app.route('/')
@@ -273,18 +298,31 @@ def api_vessels():
 @app.route('/api/map')
 @cors_enabled
 def api_map():
-    """Generate and return map HTML"""
+    """Generate and return map HTML, with in-memory caching keyed on snapshot ISO timestamp."""
     data = load_vessel_data()
+    snapshot_ts = data['stats'].get('raw_last_update')
+
+    # Cache hit: the snapshot timestamp matches the one we already rendered — return instantly.
+    if _map_cache['html'] and _map_cache['raw_last_update'] == snapshot_ts:
+        logger.info("Map cache HIT for snapshot %s", snapshot_ts)
+        response = make_response(_map_cache['html'])
+        response.headers['Content-Type'] = 'text/html; charset=utf-8'
+        return no_cache(response)
 
     if not data['vessels']:
         return "<div>No vessel data available</div>"
 
+    # Cache miss: regenerate and store. Use get_root().render() for plain HTML
+    # (not the Jupyter srcdoc wrapper from _repr_html_()) so postMessage from
+    # the dashboard iframe can reach the map window.
+    logger.info("Map cache MISS for snapshot %s — regenerating", snapshot_ts)
     map_obj = generate_focused_map(data['vessels'])
-    # Use get_root().render() to produce a plain HTML document.
-    # _repr_html_() wraps the map in a Jupyter-style srcdoc iframe, which creates
-    # a nested-iframe situation where postMessage from the dashboard can't reach
-    # the actual map window. .render() returns the raw HTML directly.
-    response = make_response(map_obj.get_root().render())
+    html = map_obj.get_root().render()
+
+    _map_cache['html'] = html
+    _map_cache['raw_last_update'] = snapshot_ts
+
+    response = make_response(html)
     response.headers['Content-Type'] = 'text/html; charset=utf-8'
     return no_cache(response)
 
