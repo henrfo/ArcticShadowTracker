@@ -702,6 +702,64 @@ def add_vessel_marker(map_obj, mmsi, track_data, current_pos, color):
         className=f"vessel-marker vessel-{mmsi}"
     ).add_to(map_obj)
 
+def _build_track_points_map(vessel_tracks):
+    """Build a compact {mmsi: [[lat, lon, iso_ts, speed], ...]} dict for tooltip scrubbing.
+
+    Only includes vessels whose tracks are actually rendered on the map
+    (mirrors the skip_tracks logic in add_track_lines): Norwegian civilians
+    and buoys have no polylines, so no tooltip data either. Points are
+    chronologically sorted across all tiers so index order matches the
+    polyline vertex order.
+
+    Size budget: ~1100 vessels × average ~50 points × ~32 bytes JSON ≈ 1.7 MB
+    on top of the ~13 MB base map response. Acceptable given gzip reduces
+    this further on the wire.
+    """
+    track_points_map = {}
+    for mmsi, track_data in vessel_tracks.items():
+        ship_type = (track_data.get('ship_type') or '').lower()
+        country = track_data.get('country') or ''
+        is_norwegian_civilian = (
+            country == 'Norway'
+            and 'military' not in ship_type
+            and 'law enforcement' not in ship_type
+        )
+        is_buoy = bool(track_data.get('is_buoy'))
+        if is_norwegian_civilian or is_buoy:
+            continue
+
+        tiers = track_data.get('tiers', {})
+        all_positions = []
+        for tier_name in ('realtime', 'tactical', 'strategic'):
+            for p in tiers.get(tier_name, []) or []:
+                all_positions.append(p)
+        if len(all_positions) < 2:
+            continue
+
+        # De-dupe + sort chronologically to match polyline vertex order
+        seen = set()
+        unique = []
+        for p in all_positions:
+            ts = p.get('timestamp')
+            if ts in seen:
+                continue
+            seen.add(ts)
+            unique.append(p)
+        unique.sort(key=lambda p: p.get('timestamp') or '')
+
+        # Compact representation: [lat, lon, iso_ts, speed_knots]
+        track_points_map[str(mmsi)] = [
+            [
+                round(p['lat'], 4),
+                round(p['lon'], 4),
+                p.get('timestamp'),
+                round(p.get('speed') or 0, 1),
+            ]
+            for p in unique
+        ]
+    return track_points_map
+
+
 def add_focus_mode_script(map_obj, vessel_tracks):
     """Add JavaScript for vessel focus mode"""
 
@@ -750,6 +808,10 @@ def add_focus_mode_script(map_obj, vessel_tracks):
         }
 
     vessel_data_json = json.dumps(vessel_data_map)
+
+    # Track-point index for hover scrubbing — only vessels with rendered tracks
+    track_points_map = _build_track_points_map(vessel_tracks)
+    track_points_json = json.dumps(track_points_map, separators=(',', ':'))
 
     focus_script = """
     <!-- Mobile-responsive styles for the Leaflet popup and the vessel info panel -->
@@ -805,6 +867,12 @@ def add_focus_mode_script(map_obj, vessel_tracks):
     // Vessel data map (generated from Python)
     const vesselDataMap = """ + vessel_data_json + """;
 
+    // Track-point index: { mmsi: [[lat, lon, iso_ts, speed_knots], ...] }
+    // Only includes vessels whose tracks are actually rendered on the map.
+    // Used by the hover-scrub tooltip to show timestamp + speed at any
+    // point along a track polyline.
+    const trackPointsMap = """ + track_points_json + """;
+
     // Focus mode: Click vessel to highlight and show all tiers
     let focusedVessel = null;
 
@@ -831,6 +899,137 @@ def add_focus_mode_script(map_obj, vessel_tracks):
             console.warn('panMapTo skipped — map or coords missing', {mapInstance: !!mapInstance, lat, lon});
         }
     }
+
+    // ==========================================================================
+    // Track hover scrubbing — shows timestamp + speed at any point along a
+    // vessel's track polyline when the cursor moves over it.
+    //
+    // Architecture: ONE map-level mousemove handler (Leaflet dispatches it
+    // efficiently), using DOM-class detection on the event target to find
+    // which vessel's track the cursor is on. Nearest-point lookup is a simple
+    // O(n) scan over that vessel's track points (~75 points max), sub-ms.
+    // ==========================================================================
+    const trackScrubState = { tooltip: null, activeMmsi: null };
+
+    function _formatTrackTimestamp(isoTs) {
+        if (!isoTs) return '';
+        try {
+            const d = new Date(isoTs);
+            if (isNaN(d.getTime())) return isoTs;
+            const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            const mon = months[d.getUTCMonth()];
+            const day = String(d.getUTCDate()).padStart(2, '0');
+            const hh  = String(d.getUTCHours()).padStart(2, '0');
+            const mm  = String(d.getUTCMinutes()).padStart(2, '0');
+            return mon + ' ' + day + ', ' + hh + ':' + mm + ' UTC';
+        } catch (e) {
+            return isoTs;
+        }
+    }
+
+    function _nearestTrackPointIndex(points, lat, lon) {
+        // Euclidean nearest is fine for tooltip-scale precision at this zoom
+        let best = 0;
+        let bestDist = Infinity;
+        for (let i = 0; i < points.length; i++) {
+            const dLat = points[i][0] - lat;
+            const dLon = points[i][1] - lon;
+            const d = dLat * dLat + dLon * dLon;
+            if (d < bestDist) {
+                bestDist = d;
+                best = i;
+            }
+        }
+        return best;
+    }
+
+    function _ensureTrackTooltip(mapInstance) {
+        if (trackScrubState.tooltip) return trackScrubState.tooltip;
+        // Lightweight DOM tooltip that follows the cursor — cheaper than
+        // Leaflet's .bindTooltip per path and works with our delegated handler
+        const el = document.createElement('div');
+        el.className = 'track-scrub-tooltip';
+        el.style.cssText = [
+            'position: fixed',
+            'pointer-events: none',
+            'z-index: 10001',
+            'background: rgba(3, 3, 5, 0.92)',
+            'color: #dfefff',
+            'font-family: "Inter", system-ui, -apple-system, sans-serif',
+            'font-size: 11px',
+            'font-weight: 500',
+            'padding: 6px 10px',
+            'border: 1px solid rgba(255, 255, 255, 0.15)',
+            'border-radius: 6px',
+            'box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4)',
+            'white-space: nowrap',
+            'transform: translate(12px, -12px)',
+            'display: none'
+        ].join(';');
+        document.body.appendChild(el);
+        trackScrubState.tooltip = el;
+        return el;
+    }
+
+    function _hideTrackTooltip() {
+        if (trackScrubState.tooltip) trackScrubState.tooltip.style.display = 'none';
+        trackScrubState.activeMmsi = null;
+    }
+
+    function _handleTrackMouseMove(e) {
+        const target = e.originalEvent && e.originalEvent.target;
+        if (!target || !target.getAttribute) {
+            _hideTrackTooltip();
+            return;
+        }
+        const className = target.getAttribute('class') || '';
+        // Polyline segments carry classes like "vessel-12345 tier-realtime leaflet-interactive"
+        const match = className.match(/vessel-(\\d+)/);
+        if (!match) {
+            _hideTrackTooltip();
+            return;
+        }
+        const mmsi = match[1];
+        const points = trackPointsMap[mmsi];
+        if (!points || points.length === 0) {
+            _hideTrackTooltip();
+            return;
+        }
+
+        // Skip CircleMarkers (those also have vessel-MMSI class). Only respond
+        // to <path> elements, which are the polyline segments.
+        if (target.tagName && target.tagName.toLowerCase() !== 'path') {
+            _hideTrackTooltip();
+            return;
+        }
+
+        const idx = _nearestTrackPointIndex(points, e.latlng.lat, e.latlng.lng);
+        const [plat, plon, ts, speed] = points[idx];
+        const tip = _ensureTrackTooltip(getLeafletMap());
+        tip.innerHTML =
+            _formatTrackTimestamp(ts) +
+            '<br><span style="color:#8ecdff">' + (speed != null ? speed.toFixed(1) + ' kts' : '—') + '</span>';
+        const evt = e.originalEvent;
+        tip.style.left = evt.clientX + 'px';
+        tip.style.top = evt.clientY + 'px';
+        tip.style.display = 'block';
+        trackScrubState.activeMmsi = mmsi;
+    }
+
+    function _initTrackScrubbing() {
+        const mapInstance = getLeafletMap();
+        if (!mapInstance) {
+            setTimeout(_initTrackScrubbing, 300);
+            return;
+        }
+        mapInstance.on('mousemove', _handleTrackMouseMove);
+        mapInstance.on('mouseout', _hideTrackTooltip);
+        mapInstance.getContainer().addEventListener('mouseleave', _hideTrackTooltip);
+        console.log('Track scrubbing initialized for', Object.keys(trackPointsMap).length, 'vessels');
+    }
+
+    // Kick off once DOM + Leaflet are ready
+    setTimeout(_initTrackScrubbing, 500);
 
     // Define focus/unfocus functions in global scope (so postMessage can access them)
     // Optional hintLat/hintLon come from the parent dashboard (from anomaly details); if
