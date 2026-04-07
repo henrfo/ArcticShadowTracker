@@ -351,6 +351,10 @@ def select_tiles_by_ais_hotspots(config: SHConfig, days_back: int,
                 continue
             seen_ids.add(sid)
             s['_zone'] = target['name']
+            # Override download bbox to the tight hotspot area (~50km)
+            # instead of the full scene footprint (~250km). This is what
+            # makes 20m resolution actually achievable within the 2500px cap.
+            s['_target_bbox'] = target['bbox']
             selected.append(s)
             break  # one scene per hotspot
 
@@ -413,8 +417,11 @@ def download_sentinel1_tile(config: SHConfig, tile_info: dict, resolution_m: int
     tile_id = tile_info.get('id', 'unknown')
     tile_date = tile_info.get('properties', {}).get('datetime', '')
 
-    # Use the scene's own bbox (not full Arctic) to keep PU cost bounded.
-    bbox = _scene_bbox(tile_info)
+    # Use the target bbox (hotspot ~50km) if available, otherwise the scene's
+    # own bbox. Hotspot bboxes are small enough for 20m resolution within the
+    # 2500px API cap; full scene bboxes (~250km) would auto-scale to ~100m.
+    target_bbox = tile_info.get('_target_bbox')
+    bbox = _bbox_from_list(target_bbox) if target_bbox else _scene_bbox(tile_info)
     size, eff_res = _fit_dimensions(bbox, resolution_m)
     if eff_res != resolution_m:
         logger.info(
