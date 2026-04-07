@@ -5,11 +5,12 @@ Correlate CFAR SAR detections with AIS vessel positions.
 Reads scripts/detect_vessels_cfar.py output (detections.json) and fetches
 vessel_tracks.json from gh-pages. For each detection:
 
-    - If an AIS position exists within ±60 min and ≤2 km haversine distance,
-      the detection is MATCHED — it validates a known vessel (true positive,
-      good signal for recall measurement).
-    - If no AIS match, the detection becomes a DARK VESSEL candidate and is
-      emitted as an anomaly entry.
+    - Projects each AIS vessel to its estimated position at SAR acquisition
+      time using speed and course (dead-reckoning). Uncertainty grows with
+      projection distance: match radius = base + 10% of travel distance.
+    - If a projected AIS position is within the adaptive radius, the
+      detection is MATCHED (true positive / recall measurement).
+    - If no AIS match, the detection becomes a DARK VESSEL candidate.
 
 Output: data/anomalies/dark_vessels.json. Committed to main by
 satellite_monitor.yml. Flask's /api/anomalies merges it with the main
@@ -107,16 +108,41 @@ def haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     return 2 * r * math.asin(math.sqrt(a))
 
 
+def project_vessel_position(plat: float, plon: float, ais_dt: datetime,
+                            sar_dt: datetime, speed_knots: float,
+                            course_deg: float) -> tuple:
+    """Dead-reckon an AIS position forward (or backward) to SAR acquisition time.
+
+    Returns (projected_lat, projected_lon, travel_distance_km).
+    """
+    dt_hours = (sar_dt - ais_dt).total_seconds() / 3600.0
+    if speed_knots <= 0.5 or abs(dt_hours) < 0.01:
+        return plat, plon, 0.0
+
+    distance_nm = speed_knots * dt_hours
+    course_rad = math.radians(course_deg)
+
+    # 1 nautical mile = 1/60 degree latitude
+    lat_change = (distance_nm / 60.0) * math.cos(course_rad)
+    lon_change = (distance_nm / 60.0) * math.sin(course_rad) / max(math.cos(math.radians(plat)), 1e-6)
+
+    proj_lat = plat + lat_change
+    proj_lon = plon + lon_change
+    travel_km = abs(distance_nm) * 1.852
+    return proj_lat, proj_lon, travel_km
+
+
 def find_nearest_ais(detection_lat: float, detection_lon: float,
                      detection_dt: datetime,
                      vessels: dict,
                      radius_km: float,
                      window_min: int) -> dict | None:
-    """Return the closest-in-distance AIS vessel position within
-    (radius_km, ±window_min) of the detection, or None.
+    """Return the closest AIS vessel after projecting each candidate to the
+    SAR acquisition time using speed + course dead-reckoning.
 
-    Scans all tier points of all vessels. Short-circuits when a match is
-    found well below the radius (< 0.5 km) to avoid unnecessary work.
+    Match radius is adaptive: base radius + 10% of projected travel distance,
+    capped at 3× the base radius. This accounts for course/speed uncertainty
+    growing with time offset.
     """
     window = timedelta(minutes=window_min)
     best_km = float('inf')
@@ -133,8 +159,18 @@ def find_nearest_ais(detection_lat: float, detection_lon: float,
                     continue
                 if abs(pt_dt - detection_dt) > window:
                     continue
-                d_km = haversine_km(detection_lat, detection_lon, plat, plon)
-                if d_km > radius_km:
+
+                speed = p.get('speed') or 0.0
+                course = p.get('course') or 0.0
+                proj_lat, proj_lon, travel_km = project_vessel_position(
+                    plat, plon, pt_dt, detection_dt, speed, course)
+
+                # Adaptive radius: base + 10% of travel, capped at 3× base
+                adaptive_radius = min(radius_km + travel_km * 0.1,
+                                      radius_km * 3.0)
+
+                d_km = haversine_km(detection_lat, detection_lon, proj_lat, proj_lon)
+                if d_km > adaptive_radius:
                     continue
                 if d_km < best_km:
                     best_km = d_km
@@ -146,8 +182,12 @@ def find_nearest_ais(detection_lat: float, detection_lon: float,
                         'distance_km': round(d_km, 3),
                         'timestamp': p.get('timestamp'),
                         'speed': p.get('speed'),
+                        'course': p.get('course'),
+                        'ais_position': [round(plat, 5), round(plon, 5)],
+                        'projected_position': [round(proj_lat, 5), round(proj_lon, 5)],
+                        'projection_travel_km': round(travel_km, 2),
                     }
-                    if best_km < 0.5:  # good enough, stop searching this vessel
+                    if best_km < 0.5:
                         break
         if best_km < 0.5:
             break
@@ -196,6 +236,9 @@ def correlate(tile_records: list, vessels: dict,
                     'mmsi': match['mmsi'],
                     'name': match.get('vessel_name'),
                     'country': match.get('country'),
+                    'ais_position': match.get('ais_position'),
+                    'projected_position': match.get('projected_position'),
+                    'projection_travel_km': match.get('projection_travel_km'),
                 }
                 continue  # Known vessel — not a dark vessel
 

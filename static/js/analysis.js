@@ -344,18 +344,48 @@
         marker.bindPopup(buildDetectionPopup(det), { className: 'det-popup-wrap' });
         marker.addTo(detectionLayer);
       } else {
-        // Matched detection: connection line to AIS vessel (no dot)
-        const mmsi = det.matched_vessel ? det.matched_vessel.mmsi : null;
-        const vPos = mmsi ? vesselPositions[mmsi] : null;
-        if (vPos) {
-          const line = L.polyline([[det.lat, det.lon], vPos], {
+        // Matched detection: connection line to projected AIS position
+        const mv = det.matched_vessel;
+        const projPos = mv && mv.projected_position;
+        const aisPos = mv && mv.ais_position;
+        const mmsi = mv ? mv.mmsi : null;
+
+        // Primary line: detection → projected position (where vessel was at SAR time)
+        if (projPos && projPos.length === 2) {
+          const line = L.polyline([[det.lat, det.lon], projPos], {
             color: '#888',
-            weight: 1,
+            weight: 1.5,
             dashArray: '2,4',
-            opacity: 0.6,
+            opacity: 0.7,
             interactive: false,
           });
           line.addTo(connectionLayer);
+
+          // Ghost line: projected position → original AIS position (shows movement)
+          if (aisPos && aisPos.length === 2 &&
+              (Math.abs(aisPos[0] - projPos[0]) > 0.001 || Math.abs(aisPos[1] - projPos[1]) > 0.001)) {
+            const ghost = L.polyline([projPos, aisPos], {
+              color: '#555',
+              weight: 1,
+              dashArray: '1,3',
+              opacity: 0.35,
+              interactive: false,
+            });
+            ghost.addTo(connectionLayer);
+          }
+        } else {
+          // Fallback: use raw vessel position if no projection data
+          const vPos = mmsi ? vesselPositions[mmsi] : null;
+          if (vPos) {
+            const line = L.polyline([[det.lat, det.lon], vPos], {
+              color: '#888',
+              weight: 1,
+              dashArray: '2,4',
+              opacity: 0.6,
+              interactive: false,
+            });
+            line.addTo(connectionLayer);
+          }
         }
       }
     });
@@ -370,8 +400,19 @@
     const blob = det.blob_size_pixels || '?';
     const tile = formatTileTime(det.tile_datetime);
     const zone = det.tile_zone ? escapeHtml(det.tile_zone.replace(/_/g, ' ')) : '';
+    const isDark = !det.matched_ais;
 
-    const statusHtml = `<div class="det-popup__status det-popup__status--dark">DARK VESSEL \u2014 no AIS within 2 km</div>`;
+    let statusHtml;
+    if (isDark) {
+      statusHtml = `<div class="det-popup__status det-popup__status--dark">DARK VESSEL \u2014 no AIS match</div>`;
+    } else {
+      const mv = det.matched_vessel || {};
+      const name = mv.name ? escapeHtml(mv.name) : 'Unknown';
+      const dist = det.nearest_ais_km != null ? det.nearest_ais_km.toFixed(1) : '?';
+      const travelKm = mv.projection_travel_km;
+      const projNote = travelKm > 0.1 ? ` (projected ${travelKm.toFixed(1)} km)` : '';
+      statusHtml = `<div class="det-popup__status">MATCHED: ${name} at ${dist} km${escapeHtml(projNote)}</div>`;
+    }
 
     return `<div class="det-popup">` +
       `<div class="det-popup__title">CFAR Detection</div>` +
