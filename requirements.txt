@@ -17,5 +17,7 @@ numpy>=1.24.0
 Pillow>=10.0.0
 tifffile>=2024.1.0
 # scipy.ndimage powers the vectorized CFAR ship detector in
-# scripts/detect_vessels_cfar.py (uniform_filter, label, binary_opening).
+# scripts/detect_vessels_cfar.py (median_filter, label, find_objects).
 scipy>=1.11.0
+# scikit-image regionprops for shape filtering in CFAR blob analysis.
+scikit-image>=0.21.0
