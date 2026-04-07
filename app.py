@@ -561,9 +561,12 @@ def api_anomalies():
     # (daily cron vs 5-min cron), so we cap main_anomalies and dark_anomalies
     # INDEPENDENTLY before merging — otherwise dark vessels get crowded out.
     dark_data = _load_dark_vessels()
-    dark_anomalies = dark_data.get('anomalies', []) or []
+    # Only surface critical dark vessels (≥15σ) on the main feed to avoid
+    # cry-wolf noise from sea ice / coastal false positives. The Analysis
+    # View still shows all detections for deep-dive investigation.
+    dark_anomalies = [a for a in dark_data.get('anomalies', []) or []
+                      if a.get('severity') == 'critical']
     dark_anomalies.sort(key=lambda x: x.get('detected_at', ''), reverse=True)
-    dark_anomalies = dark_anomalies[:50]  # top 50 dark vessels by recency
 
     all_anomalies = main_anomalies + dark_anomalies
     all_anomalies.sort(key=lambda x: x.get('detected_at', ''), reverse=True)
