@@ -402,3 +402,154 @@ html, body {
 .leaflet-popup-close-button {
   color: var(--text-muted) !important;
 }
+
+/* ==========================================================================
+   Bottom-sheet drag handle (hidden on desktop, shown on mobile)
+   ========================================================================== */
+.analysis-sidebar__handle {
+  display: none;
+}
+.analysis-sidebar__handle-bar {
+  display: block;
+  width: 36px;
+  height: 4px;
+  border-radius: var(--r-pill);
+  background: var(--border-muted);
+  margin: 0 auto var(--s-2);
+}
+.analysis-sidebar__handle-summary {
+  display: block;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+
+/* ==========================================================================
+   Mobile: sidebar → bottom sheet (≤768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .analysis-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: 48px 1fr;
+    grid-template-areas:
+      "header"
+      "map";
+  }
+
+  /* Header — compact, hide duplicate stats */
+  .analysis-header {
+    padding: 0 var(--s-3);
+    gap: var(--s-2);
+  }
+  .analysis-header__stats {
+    display: none;
+  }
+  .analysis-header__subtitle {
+    display: none;
+  }
+  .analysis-header__title h1 {
+    font-size: 0.85rem;
+  }
+
+  /* Map fills remaining space */
+  .analysis-map {
+    min-height: 0;
+  }
+
+  /* Sidebar → fixed bottom sheet */
+  .analysis-sidebar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 600;
+    grid-area: unset;
+    border-right: none;
+    border-top: 1px solid var(--border-soft);
+    border-radius: 16px 16px 0 0;
+    background: var(--surface-raised);
+    backdrop-filter: blur(var(--blur-glass));
+    max-height: 50vh;
+    padding: var(--s-3) var(--s-4) max(var(--s-5), env(safe-area-inset-bottom));
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    transform: translateY(calc(100% - 48px));
+    transition: transform var(--t-med) var(--ease-out);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+    will-change: transform;
+  }
+  .analysis-sidebar.analysis-sidebar--expanded {
+    transform: translateY(0);
+    overflow-y: auto;
+  }
+
+  /* Show drag handle */
+  .analysis-sidebar__handle {
+    display: block;
+    padding: var(--s-2) 0;
+    cursor: pointer;
+    position: sticky;
+    top: 0;
+    background: var(--surface-raised);
+    z-index: 1;
+  }
+
+  /* Layers section → horizontal pill strip */
+  .analysis-sidebar__section:first-of-type {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: var(--s-2);
+    padding-bottom: var(--s-2);
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .analysis-sidebar__section:first-of-type .analysis-sidebar__heading {
+    display: none;
+  }
+  .analysis-sidebar__section:first-of-type .layer-toggle {
+    display: inline-flex;
+    white-space: nowrap;
+    padding: 6px 10px;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-pill);
+    font-size: 0.68rem;
+    gap: 4px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+
+  /* Tile rows — compact */
+  .tile-row {
+    grid-template-columns: auto 40px 1fr;
+  }
+  .tile-row__thumb {
+    width: 40px;
+    height: 28px;
+  }
+  .tile-row__bbox {
+    display: none;
+  }
+
+  /* Leaflet controls — clear collapsed sheet */
+  .leaflet-control-zoom {
+    margin-bottom: 60px !important;
+  }
+  .leaflet-control-attribution {
+    margin-bottom: 52px !important;
+  }
+}
+
+/* Extra-narrow phones */
+@media (max-width: 360px) {
+  .analysis-header__title h1 {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+  .analysis-header__close {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
+}

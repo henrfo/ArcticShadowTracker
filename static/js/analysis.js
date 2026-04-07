@@ -448,6 +448,11 @@
         `<span><strong>${ds.darkVisible}</strong> dark</span>` +
         `<span><strong>${vesselMatched}</strong> AIS</span>`;
     }
+    // Bottom-sheet handle summary (mobile)
+    const summary = document.getElementById('sidebar-summary');
+    if (summary) {
+      summary.textContent = `${visibleTiles} tiles \u00B7 ${vesselMatched} AIS \u00B7 ${ds.darkVisible} dark`;
+    }
   }
 
   // --------------------------------------------------------------------------
@@ -576,8 +581,67 @@
     });
   }
 
+  // --------------------------------------------------------------------------
+  // Bottom-sheet (mobile): tap toggle + touch drag
+  // --------------------------------------------------------------------------
+  function wireBottomSheet() {
+    const sidebar = document.getElementById('analysis-sidebar');
+    const handle = document.getElementById('sidebar-handle');
+    if (!sidebar || !handle) return;
+
+    // Tap to toggle
+    handle.addEventListener('click', () => {
+      sidebar.classList.toggle('analysis-sidebar--expanded');
+    });
+
+    // Touch drag on handle
+    let startY = 0;
+    let startTranslate = 0;
+    let dragging = false;
+
+    function getTranslateY() {
+      const matrix = new DOMMatrix(getComputedStyle(sidebar).transform);
+      return matrix.m42;
+    }
+
+    handle.addEventListener('touchstart', (e) => {
+      dragging = true;
+      startY = e.touches[0].clientY;
+      startTranslate = getTranslateY();
+      sidebar.style.transition = 'none';
+    }, { passive: true });
+
+    handle.addEventListener('touchmove', (e) => {
+      if (!dragging) return;
+      const dy = e.touches[0].clientY - startY;
+      const maxY = sidebar.offsetHeight - 48;
+      const newY = Math.max(0, Math.min(maxY, startTranslate + dy));
+      sidebar.style.transform = `translateY(${newY}px)`;
+    }, { passive: true });
+
+    handle.addEventListener('touchend', () => {
+      if (!dragging) return;
+      dragging = false;
+      sidebar.style.transition = '';
+      const currentY = getTranslateY();
+      const threshold = (sidebar.offsetHeight - 48) / 2;
+      if (currentY < threshold) {
+        sidebar.classList.add('analysis-sidebar--expanded');
+      } else {
+        sidebar.classList.remove('analysis-sidebar--expanded');
+      }
+      sidebar.style.transform = '';
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     wireControls();
+    wireBottomSheet();
     load();
+
+    // Ensure Leaflet redraws on resize / orientation change
+    window.addEventListener('resize', () => {
+      if (map) setTimeout(() => map.invalidateSize(), 100);
+    });
   });
 })();
