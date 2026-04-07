@@ -177,23 +177,20 @@ def _arctic_bbox() -> BBox:
 
 
 def estimate_pu_per_tile(resolution_m: int, n_bands: int = 2) -> float:
-    """Rough PU estimate for a single Sentinel-1 IW scene at the given resolution.
+    """Rough PU estimate for a single tile at the given resolution.
 
-    A Sentinel-1 IW swath is about 250 km × 170 km. We use per-scene bbox
-    (not the full Arctic) because Copernicus charges by output pixel count.
+    With AIS hotspot targeting, tiles are clipped to ~50×55 km (set by
+    HOTSPOT_HALF_LON/LAT), not the full 250×170 km Sentinel-1 swath.
 
     Copernicus Data Space charges roughly:
         PU = ceil(output_pixels / 512²) × bands × request_type_multiplier
     For Sentinel-1 GRD FLOAT32 output the multiplier is ~3x.
-
-    Real cost is reported on the Copernicus dashboard. We use a conservative
-    estimate that over-counts slightly to give a safety margin.
     """
-    # Typical Sentinel-1 IW scene footprint in km
-    scene_width_km = 250
-    scene_height_km = 170
-    pixels_x = int(scene_width_km * 1000 / resolution_m)
-    pixels_y = int(scene_height_km * 1000 / resolution_m)
+    # Hotspot tile footprint (~50km × 55km at 70°N)
+    tile_width_km = HOTSPOT_HALF_LON * 2 * 38   # ~50km at 70°N (1° lon ≈ 38km)
+    tile_height_km = HOTSPOT_HALF_LAT * 2 * 111  # ~55km (1° lat ≈ 111km)
+    pixels_x = min(int(tile_width_km * 1000 / resolution_m), MAX_OUTPUT_DIM)
+    pixels_y = min(int(tile_height_km * 1000 / resolution_m), MAX_OUTPUT_DIM)
     output_pixels = pixels_x * pixels_y
     tiles_512 = max(1, (output_pixels + 512 * 512 - 1) // (512 * 512))
     return tiles_512 * n_bands * 3.0  # ~3x for S1 GRD FLOAT32
