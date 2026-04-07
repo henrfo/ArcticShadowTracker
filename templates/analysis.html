@@ -34,8 +34,9 @@
                 <h2 class="analysis-sidebar__heading">Layers</h2>
                 <label class="layer-toggle"><input type="checkbox" id="layer-tiles" checked> SAR Tiles</label>
                 <label class="layer-toggle"><input type="checkbox" id="layer-vessels" checked> AIS Vessels</label>
-                <label class="layer-toggle"><input type="checkbox" id="layer-detections" checked> CFAR Detections</label>
-                <label class="layer-toggle"><input type="checkbox" id="layer-bboxes"> Bounding Boxes</label>
+                <label class="layer-toggle"><input type="checkbox" id="layer-detections" checked> Dark Vessels</label>
+                <label class="layer-toggle"><input type="checkbox" id="layer-bboxes"> Detection Boxes</label>
+                <label class="layer-toggle"><input type="checkbox" id="layer-connections"> Correlations</label>
             </div>
             <div class="analysis-sidebar__section">
                 <h2 class="analysis-sidebar__heading">Filter Detections</h2>
@@ -57,9 +58,9 @@
                 <label class="layer-toggle"><input type="checkbox" id="ais-other" data-ais-cat="other"><span class="legend__dot" style="background:#2196F3"></span>Other</label>
                 <label class="layer-toggle"><input type="checkbox" id="ais-buoy" data-ais-cat="buoy"><span class="legend__dot" style="background:#616161"></span>Buoy</label>
                 <div class="detection-legend">
-                    <span class="legend__dot" style="background:#4CAF50"></span>Matched
-                    <span class="legend__dot legend__dot--pulse" style="background:#b86ff0"></span>Dark
-                    <span class="legend__dot" style="background:#ff5252"></span>Critical
+                    <span class="legend__dot legend__dot--pulse" style="background:#b86ff0"></span>Dark vessel
+                    <span class="legend__dot" style="background:#00e5ff"></span>Critical (&ge;15&sigma;)
+                    <span class="detection-legend__line"></span>Correlation
                 </div>
             </div>
             <div class="analysis-sidebar__section">

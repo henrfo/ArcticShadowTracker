@@ -74,6 +74,41 @@ MIN_BLOB_PIXELS = 1        # min connected-component size
 MAX_BLOB_PIXELS = 20       # blobs bigger than this are probably land/ice
 MIN_CONFIDENCE_DB = 4.0    # drop detections weaker than this in dB over median
 
+# --- Land exclusion zones ---------------------------------------------------
+# Known coastal / port areas that trigger CFAR false positives from rocks,
+# buildings, and port infrastructure. Each entry is [min_lon, min_lat,
+# max_lon, max_lat]. Detections inside any zone are flagged on_land=True
+# and excluded from the default output. Extend this list as new false-
+# positive clusters are identified.
+LAND_EXCLUSION_ZONES = [
+    # Hammerfest / Melkøya LNG terminal — bright port infrastructure
+    [23.3, 70.58, 24.1, 70.72],
+    # Tromsø city and harbor
+    [18.85, 69.60, 19.10, 69.70],
+    # Honningsvåg / Nordkapp harbor area
+    [25.9, 70.95, 26.1, 71.05],
+    # Vardø harbor
+    [31.0, 70.35, 31.2, 70.40],
+    # Kirkenes / Bøkfjorden port area
+    [29.6, 69.70, 30.2, 69.80],
+    # Murmansk harbor complex (large, many bright targets)
+    [33.0, 68.90, 33.2, 69.10],
+    # Severomorsk naval base area
+    [33.35, 69.05, 33.55, 69.15],
+    # Longyearbyen, Svalbard
+    [15.5, 78.18, 15.75, 78.25],
+    # Barentsburg, Svalbard
+    [14.15, 78.05, 14.30, 78.10],
+]
+
+
+def _is_on_land(lat: float, lon: float) -> bool:
+    """Check if a point falls inside any known land exclusion zone."""
+    for min_lon, min_lat, max_lon, max_lat in LAND_EXCLUSION_ZONES:
+        if min_lon <= lon <= max_lon and min_lat <= lat <= max_lat:
+            return True
+    return False
+
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 logger = logging.getLogger('cfar-detector')
@@ -225,6 +260,10 @@ def detect_vessels_in_tile(tile_meta: dict, alpha: float) -> list:
             continue
 
         lat, lon = _pixel_to_latlon(int(centroid_row), int(centroid_col), bbox, h, w)
+
+        # Skip detections in known land exclusion zones
+        if _is_on_land(lat, lon):
+            continue
 
         # Rough vessel length: diameter in pixels × resolution.
         # sqrt(pixels) is a reasonable diameter proxy for blobby shapes.

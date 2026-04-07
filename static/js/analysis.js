@@ -59,8 +59,7 @@
   // Detection color logic
   // --------------------------------------------------------------------------
   function detectionColor(det) {
-    if (det.matched_ais) return '#4CAF50';
-    if (det.confidence_db >= 15) return '#ff5252';
+    if (det.confidence_db >= 15) return '#00e5ff';
     return '#b86ff0';
   }
 
@@ -104,12 +103,14 @@
   let map;
   let tileLayers = new Map();   // tile.id -> { tile, layer, visible }
   let vesselLayer;               // L.LayerGroup — AIS markers
-  let detectionLayer;            // L.LayerGroup — CFAR detection markers
+  let detectionLayer;            // L.LayerGroup — dark vessel markers only
   let bboxLayer;                 // L.LayerGroup — detection bounding boxes
+  let connectionLayer;           // L.LayerGroup — lines connecting detections to matched AIS
   let vesselsData = {};          // mmsi -> vessel
   let tilesData = [];            // tile objects from /api/satellite-tiles
   let detectionsRaw = [];        // tile records from /api/satellite-detections
   let allDetections = [];        // flattened detection list
+  let vesselPositions = {};      // mmsi -> [lat, lon] of rendered AIS position
 
   // --------------------------------------------------------------------------
   // Map init
@@ -132,6 +133,7 @@
     vesselLayer = L.layerGroup().addTo(map);
     detectionLayer = L.layerGroup().addTo(map);
     bboxLayer = L.layerGroup(); // starts hidden
+    connectionLayer = L.layerGroup(); // starts hidden
   }
 
   // --------------------------------------------------------------------------
@@ -247,6 +249,7 @@
     if (tileTimes.length === 0) return;
 
     const aisCats = getAisFilterState();
+    vesselPositions = {};
     let matchedCount = 0;
     Object.entries(vesselsData).forEach(([mmsi, vessel]) => {
       const cat = vesselCategory(vessel);
@@ -255,6 +258,7 @@
       if (!match) return;
       matchedCount++;
       const { point, tile } = match;
+      vesselPositions[mmsi] = [point.lat, point.lon];
       const color = vesselColor(vessel);
       const radius = vesselRadius(vessel);
       const marker = L.circleMarker([point.lat, point.lon], {
@@ -297,9 +301,10 @@
   }
 
   function renderDetections() {
-    if (!detectionLayer || !bboxLayer) return;
+    if (!detectionLayer || !bboxLayer || !connectionLayer) return;
     detectionLayer.clearLayers();
     bboxLayer.clearLayers();
+    connectionLayer.clearLayers();
 
     const visible = visibleTileIds();
     const filters = getFilterState();
@@ -314,34 +319,50 @@
       if (!det.matched_ais && !filters.showDark) return;
 
       totalVisible++;
-      if (det.matched_ais) matchedVisible++;
-      else darkVisible++;
-
-      const color = detectionColor(det);
-      const radius = detectionRadius(det);
       const isDark = !det.matched_ais;
+      if (isDark) darkVisible++;
+      else matchedVisible++;
 
-      const marker = L.circleMarker([det.lat, det.lon], {
-        radius,
-        fillColor: color,
-        color: isDark ? color : '#000',
-        weight: isDark ? 2 : 1,
-        fillOpacity: isDark ? 0.8 : 0.6,
-        opacity: 1,
-        className: isDark ? 'detection--pulse' : '',
-      });
-
-      marker.bindPopup(buildDetectionPopup(det), { className: 'det-popup-wrap' });
-      marker.addTo(detectionLayer);
-
-      // Bounding box rectangle
+      // Bounding box rectangle for all detections
       if (det.bbox_geo && det.bbox_geo.length === 4) {
         const [minLon, minLat, maxLon, maxLat] = det.bbox_geo;
+        const bboxColor = isDark ? detectionColor(det) : '#888';
         const rect = L.rectangle(
           [[minLat, minLon], [maxLat, maxLon]],
-          { color, weight: 1.5, fill: false, dashArray: '6,4', interactive: false }
+          { color: bboxColor, weight: 1.5, fill: false, dashArray: '4,4', interactive: false }
         );
         rect.addTo(bboxLayer);
+      }
+
+      if (isDark) {
+        // Dark vessel: circle marker with popup
+        const color = detectionColor(det);
+        const radius = detectionRadius(det);
+        const marker = L.circleMarker([det.lat, det.lon], {
+          radius,
+          fillColor: color,
+          color: color,
+          weight: 2,
+          fillOpacity: 0.8,
+          opacity: 1,
+          className: 'detection--pulse',
+        });
+        marker.bindPopup(buildDetectionPopup(det), { className: 'det-popup-wrap' });
+        marker.addTo(detectionLayer);
+      } else {
+        // Matched detection: connection line to AIS vessel (no dot)
+        const mmsi = det.matched_vessel ? det.matched_vessel.mmsi : null;
+        const vPos = mmsi ? vesselPositions[mmsi] : null;
+        if (vPos) {
+          const line = L.polyline([[det.lat, det.lon], vPos], {
+            color: '#888',
+            weight: 1,
+            dashArray: '2,4',
+            opacity: 0.6,
+            interactive: false,
+          });
+          line.addTo(connectionLayer);
+        }
       }
     });
 
@@ -356,18 +377,8 @@
     const tile = formatTileTime(det.tile_datetime);
     const zone = det.tile_zone ? escapeHtml(det.tile_zone.replace(/_/g, ' ')) : '';
 
-    let statusHtml;
-    if (det.matched_ais && det.matched_vessel) {
-      const mv = det.matched_vessel;
-      statusHtml = `<div class="det-popup__status det-popup__status--matched">` +
-        `Matched \u2192 ${escapeHtml(mv.name || 'Unknown')} (MMSI ${escapeHtml(mv.mmsi || '?')}, ${escapeHtml(mv.country || '?')})` +
-        `</div>` +
-        (det.nearest_ais_km != null ? `<div class="det-popup__row">Distance: ${det.nearest_ais_km.toFixed(1)} km</div>` : '');
-    } else if (det.confidence_db >= 15) {
-      statusHtml = `<div class="det-popup__status det-popup__status--critical">DARK VESSEL \u2014 critical confidence, no AIS within 2 km</div>`;
-    } else {
-      statusHtml = `<div class="det-popup__status det-popup__status--dark">DARK VESSEL \u2014 no AIS within 2 km</div>`;
-    }
+    const statusClass = det.confidence_db >= 15 ? 'det-popup__status--critical' : 'det-popup__status--dark';
+    const statusHtml = `<div class="det-popup__status ${statusClass}">DARK VESSEL \u2014 no AIS within 2 km</div>`;
 
     return `<div class="det-popup">` +
       `<div class="det-popup__title">CFAR Detection</div>` +
@@ -540,6 +551,8 @@
     if (layerVessels) layerVessels.addEventListener('change', (e) => toggleLayerGroup(vesselLayer, e.target.checked));
     if (layerDetections) layerDetections.addEventListener('change', (e) => toggleLayerGroup(detectionLayer, e.target.checked));
     if (layerBboxes) layerBboxes.addEventListener('change', (e) => toggleLayerGroup(bboxLayer, e.target.checked));
+    const layerConns = document.getElementById('layer-connections');
+    if (layerConns) layerConns.addEventListener('change', (e) => toggleLayerGroup(connectionLayer, e.target.checked));
 
     // Detection filter controls
     const filterMatched = document.getElementById('filter-matched');
