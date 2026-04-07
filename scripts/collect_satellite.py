@@ -100,7 +100,8 @@ DEFAULT_DAYS_BACK = 7
 # Retention / quota constants
 TILE_RETENTION_DAYS = 14
 MONTHLY_PU_BUDGET = 30_000
-PU_WARNING_THRESHOLD = 0.83   # warn at 83% of monthly budget
+PU_SAFETY_MARGIN = 0.90      # hard stop at 90% of monthly budget
+PU_USAGE_FILE = SATELLITE_DIR / 'pu_usage.json'
 
 # Copernicus Data Space Process API hard limit: neither output dimension can
 # exceed 2500 px per request. At 100 m resolution, any scene wider than
@@ -205,12 +206,49 @@ def log_quota_forecast(tiles_per_run: int, resolution_m: int, runs_per_month: in
         "Quota forecast: ~%.0f PU/tile × %d tiles = %.0f PU/run × %d runs/month = %.0f PU/month (%.0f%% of %d budget)",
         per_tile, tiles_per_run, per_run, runs_per_month, monthly, used_pct, MONTHLY_PU_BUDGET,
     )
-    if used_pct >= PU_WARNING_THRESHOLD * 100:
+    limit = MONTHLY_PU_BUDGET * PU_SAFETY_MARGIN
+    if monthly > limit:
         logger.warning(
-            "Projected monthly PU usage (%.0f%%) exceeds %.0f%% warning threshold. "
+            "Projected monthly PU usage (%.0f) exceeds %.0f%% safety margin (%.0f PU). "
             "Consider lowering --tiles, --resolution, or --days-back.",
-            used_pct, PU_WARNING_THRESHOLD * 100,
+            monthly, PU_SAFETY_MARGIN * 100, limit,
         )
+
+
+def _load_pu_usage() -> dict:
+    if PU_USAGE_FILE.exists():
+        try:
+            return json.load(open(PU_USAGE_FILE, 'r'))
+        except Exception:
+            pass
+    return {}
+
+
+def check_quota_budget() -> bool:
+    """Return False if monthly PU budget is exhausted."""
+    usage = _load_pu_usage()
+    month_key = datetime.now(timezone.utc).strftime('%Y-%m')
+    used = usage.get(month_key, 0)
+    limit = MONTHLY_PU_BUDGET * PU_SAFETY_MARGIN
+    if used >= limit:
+        logger.warning("Monthly quota exhausted: %.0f / %.0f PU (%.0f%% cap) — skipping collection",
+                       used, MONTHLY_PU_BUDGET, PU_SAFETY_MARGIN * 100)
+        return False
+    logger.info("PU budget: %.0f used / %.0f limit this month (%.0f%% of cap)",
+                used, limit, used / limit * 100 if limit else 0)
+    return True
+
+
+def record_pu_usage(pu_cost: float) -> None:
+    """Add PU cost to the current month's running total."""
+    usage = _load_pu_usage()
+    month_key = datetime.now(timezone.utc).strftime('%Y-%m')
+    usage[month_key] = usage.get(month_key, 0) + pu_cost
+    PU_USAGE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with open(PU_USAGE_FILE, 'w') as f:
+        json.dump(usage, f, indent=2)
+    logger.info("Recorded %.0f PU — month total: %.0f / %.0f",
+                pu_cost, usage[month_key], MONTHLY_PU_BUDGET)
 
 
 # ============================================================================
@@ -741,6 +779,9 @@ def main() -> int:
 
         log_quota_forecast(tiles_per_run=args.tiles, resolution_m=args.resolution)
 
+        if not check_quota_budget():
+            return 0
+
         credentials = load_credentials()
         config = configure_sentinel_hub(credentials)
 
@@ -779,6 +820,10 @@ def main() -> int:
         save_metadata(selected, downloaded, resolution_m=args.resolution)
         cleanup_old_tiles()
         cleanup_old_thumbnails()
+
+        # Record PU usage for this run
+        run_pu = estimate_pu_per_tile(args.resolution) * len(downloaded)
+        record_pu_usage(run_pu)
 
         logger.info("=" * 60)
         logger.info("Collection complete — %d/%d tiles downloaded", len(downloaded), args.tiles)
