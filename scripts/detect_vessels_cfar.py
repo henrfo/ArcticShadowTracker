@@ -70,8 +70,8 @@ HISTORY_RETENTION_DAYS = 14
 # standard CFAR-on-median formulation from the SAR processing literature.
 BACKGROUND_CELLS = 15      # odd square window for median + MAD
 ALPHA = 5.0                # multiplier on robust std (MAD × 1.4826)
-MIN_BLOB_PIXELS = 1        # min connected-component size
-MAX_BLOB_PIXELS = 20       # blobs bigger than this are probably land/ice
+MIN_BLOB_PIXELS = 3        # min connected-component size (ships ≥3px at 20m)
+MAX_BLOB_PIXELS = 50       # blobs bigger than this are probably land/ice
 MIN_CONFIDENCE_DB = 4.0    # drop detections weaker than this in dB over median
 MAX_BACKGROUND_DB = -25.0  # reject detections on bright backgrounds (land/coast/ice)
 

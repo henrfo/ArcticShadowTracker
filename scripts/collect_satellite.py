@@ -31,6 +31,7 @@ import traceback
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+import requests
 import yaml
 
 try:
@@ -72,45 +73,28 @@ ARCTIC_REGION = {
 }
 
 # ----------------------------------------------------------------------------
-# High-value sub-zones for tile selection.
-#
-# Sentinel-1 scenes are narrow swaths (~250x170 km). Taking the most recent
-# scenes from the full Arctic bbox gives us mid-ocean tiles with almost no
-# AIS traffic — useless for detection validation. Instead, target zones
-# where ships actually are.
-#
-# Each zone gets a `desired` count; we iterate zones in order and take up to
-# `desired` unique scenes from each. If a zone yields 0 scenes (no recent
-# pass) we skip it. After the first pass, any remaining quota is topped up
-# by revisiting zones without the per-zone cap.
-#
-# Total desired across zones should match the default --tiles argument (5)
-# so the quota math stays roughly the same.
+# AIS-driven targeting: fetch live vessel positions, find density hotspots,
+# request SAR tiles centered on where high-interest vessels actually cluster.
+# This guarantees AIS overlap for validation — any CFAR detection without a
+# nearby AIS match is a real dark-vessel candidate.
+# Falls back to static zones if AIS fetch fails.
 # ----------------------------------------------------------------------------
-HIGH_VALUE_ZONES = [
-    {
-        # Norwegian coast — main coastal traffic, Tromsø, Lofoten, Bodø
-        'name': 'norwegian_coast',
-        'bbox': [10.0, 65.0, 22.0, 71.0],   # [min_lon, min_lat, max_lon, max_lat]
-        'desired': 2,
-    },
-    {
-        # Barents Sea / Murmansk approach — Russian Arctic shipping
-        'name': 'barents_sea',
-        'bbox': [25.0, 68.0, 40.0, 74.0],
-        'desired': 2,
-    },
-    {
-        # Svalbard approach — Svalbard routes + submarine cable corridor
-        'name': 'svalbard_approach',
-        'bbox': [10.0, 74.0, 25.0, 79.0],
-        'desired': 1,
-    },
+AIS_URL = "https://henrfo.github.io/ArcticShadowTracker/vessel_tracks.json"
+MIN_ARCTIC_LAT = 65.0
+CELL_LAT_STEP = 0.5   # grid cell: ~55km lat
+CELL_LON_STEP = 1.0   # grid cell: ~35km lon at 70°N
+HOTSPOT_HALF_LAT = 0.25   # tile bbox: ±28km lat
+HOTSPOT_HALF_LON = 0.65   # tile bbox: ±25km lon at 70°N
+
+FALLBACK_ZONES = [
+    {'name': 'norwegian_coast', 'bbox': [14.0, 69.0, 16.0, 70.0]},
+    {'name': 'barents_sea', 'bbox': [30.0, 70.5, 32.0, 71.5]},
+    {'name': 'svalbard_approach', 'bbox': [14.0, 77.5, 16.0, 78.5]},
 ]
 
 # Defaults (overridable via CLI)
 DEFAULT_TILES = 5
-DEFAULT_RESOLUTION_M = 100
+DEFAULT_RESOLUTION_M = 20
 DEFAULT_DAYS_BACK = 7
 
 # Retention / quota constants
@@ -278,77 +262,101 @@ def _bbox_from_list(b: list) -> BBox:
     return BBox(bbox=b, crs=CRS.WGS84)
 
 
-def select_tiles_from_zones(config: SHConfig, days_back: int, total_target: int) -> list:
-    """Select up to total_target scenes distributed across HIGH_VALUE_ZONES.
+def _get_ais_hotspots(n_tiles: int) -> list:
+    """Compute top vessel density cells from live AIS data.
 
-    Pass 1: iterate zones in declared order; from each zone's catalog result
-            take up to `desired` unique scenes (by id).
-    Pass 2: if still under total_target, top up from any zone's remaining
-            scenes without the per-zone cap.
-
-    Each returned scene is tagged with a transient '_zone' key so logging
-    and metadata can tell which zone it came from. The download path
-    (_scene_bbox -> download_sentinel1_tile) is unchanged.
+    Fetches vessel_tracks.json, filters to high-interest vessels (Russia,
+    China, shadow fleet, suspected shadow) above MIN_ARCTIC_LAT, grids into
+    ~50km cells, and returns the top N cell centers as (lat, lon, name) tuples.
     """
-    logger.info("Zone-based tile selection — target %d tiles across %d zones",
-                total_target, len(HIGH_VALUE_ZONES))
+    try:
+        resp = requests.get(AIS_URL, timeout=15)
+        resp.raise_for_status()
+        data = resp.json()
+    except Exception as exc:
+        logger.warning("AIS fetch failed: %s — using fallback zones", exc)
+        return []
 
-    # Query each zone once, cache results
-    zone_scenes: dict[str, list] = {}
-    for zone in HIGH_VALUE_ZONES:
-        scenes = search_sentinel1_imagery(
-            config,
-            _bbox_from_list(zone['bbox']),
-            days_back=days_back,
-            zone_name=zone['name'],
-        )
-        zone_scenes[zone['name']] = scenes
+    vessels = data.get('vessels', {})
+    logger.info("AIS hotspot targeting — %d vessels loaded", len(vessels))
 
-    selected: list = []
-    seen_ids: set = set()
+    cells = {}  # (cell_lat, cell_lon) -> count
+    for mmsi, v in vessels.items():
+        # High-interest filter
+        if not (v.get('country') in ('Russia', 'China')
+                or v.get('is_shadow_fleet')
+                or v.get('is_suspected_shadow')):
+            continue
+        # Get most recent position
+        for tier in ('realtime', 'tactical', 'strategic'):
+            pts = v.get('tiers', {}).get(tier, [])
+            if pts:
+                pt = max(pts, key=lambda p: p.get('timestamp', ''))
+                lat, lon = pt.get('lat'), pt.get('lon')
+                if lat is not None and lon is not None and lat >= MIN_ARCTIC_LAT:
+                    key = (round(lat / CELL_LAT_STEP) * CELL_LAT_STEP,
+                           round(lon / CELL_LON_STEP) * CELL_LON_STEP)
+                    cells[key] = cells.get(key, 0) + 1
+                break
 
-    # Pass 1: respect per-zone desired counts, in declared order
-    for zone in HIGH_VALUE_ZONES:
+    if not cells:
+        logger.warning("No high-interest Arctic vessels found — using fallback zones")
+        return []
+
+    ranked = sorted(cells.items(), key=lambda x: x[1], reverse=True)
+    hotspots = []
+    for (lat, lon), count in ranked[:n_tiles]:
+        name = f"hotspot_{lat:.1f}N_{lon:.0f}E_{count}v"
+        logger.info("  AIS hotspot: %.1f°N, %.0f°E — %d high-interest vessels", lat, lon, count)
+        hotspots.append((lat, lon, name))
+    return hotspots
+
+
+def select_tiles_by_ais_hotspots(config: SHConfig, days_back: int,
+                                  total_target: int) -> list:
+    """Select SAR tiles centered on live AIS vessel density hotspots.
+
+    Computes hotspots from live AIS, queries the Sentinel-1 catalog for each
+    hotspot bbox (~50km × 50km), and takes the most recent scene per hotspot.
+    Falls back to static FALLBACK_ZONES if AIS fetch fails.
+    """
+    hotspots = _get_ais_hotspots(total_target)
+
+    # Build target bboxes: either from hotspots or fallback zones
+    if hotspots:
+        targets = []
+        for lat, lon, name in hotspots:
+            bbox = [lon - HOTSPOT_HALF_LON, lat - HOTSPOT_HALF_LAT,
+                    lon + HOTSPOT_HALF_LON, lat + HOTSPOT_HALF_LAT]
+            targets.append({'name': name, 'bbox': bbox})
+    else:
+        targets = FALLBACK_ZONES[:total_target]
+
+    logger.info("Querying Sentinel-1 catalog for %d target areas", len(targets))
+
+    selected = []
+    seen_ids = set()
+    for target in targets:
         if len(selected) >= total_target:
             break
-        desired = zone['desired']
-        picked = 0
-        for s in zone_scenes[zone['name']]:
-            if picked >= desired or len(selected) >= total_target:
-                break
+        scenes = search_sentinel1_imagery(
+            config,
+            _bbox_from_list(target['bbox']),
+            days_back=days_back,
+            zone_name=target['name'],
+        )
+        for s in scenes:
             sid = s.get('id')
             if not sid or sid in seen_ids:
                 continue
             seen_ids.add(sid)
-            s['_zone'] = zone['name']
+            s['_zone'] = target['name']
             selected.append(s)
-            picked += 1
-        logger.info("  pass 1: picked %d from %s", picked, zone['name'])
+            break  # one scene per hotspot
 
-    # Pass 2: top up from any zone that still has scenes, no per-zone cap
-    if len(selected) < total_target:
-        shortfall = total_target - len(selected)
-        logger.info("  pass 2: %d scenes short, topping up from any zone", shortfall)
-        for zone in HIGH_VALUE_ZONES:
-            if len(selected) >= total_target:
-                break
-            extra = 0
-            for s in zone_scenes[zone['name']]:
-                if len(selected) >= total_target:
-                    break
-                sid = s.get('id')
-                if not sid or sid in seen_ids:
-                    continue
-                seen_ids.add(sid)
-                s['_zone'] = zone['name']
-                selected.append(s)
-                extra += 1
-            if extra:
-                logger.info("  pass 2: picked %d more from %s", extra, zone['name'])
-
-    logger.info("Selected %d total tiles: %s",
+    logger.info("Selected %d tiles from %s",
                 len(selected),
-                ', '.join(f"{s.get('_zone')}:{(s.get('id') or '')[:20]}" for s in selected))
+                'AIS hotspots' if hotspots else 'fallback zones')
     return selected
 
 
@@ -732,10 +740,10 @@ def main() -> int:
         credentials = load_credentials()
         config = configure_sentinel_hub(credentials)
 
-        # Zone-based selection: query each high-value sub-bbox and take a
-        # per-zone quota of scenes. Falls back to top-up across zones if any
-        # zone yields nothing.
-        selected = select_tiles_from_zones(
+        # AIS-driven selection: fetch live vessel positions, find density
+        # hotspots, request SAR tiles centered on those clusters at 20m.
+        # Falls back to static zones if AIS fetch fails.
+        selected = select_tiles_by_ais_hotspots(
             config, days_back=args.days_back, total_target=args.tiles,
         )
         if not selected:
