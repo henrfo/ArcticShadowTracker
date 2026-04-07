@@ -59,8 +59,7 @@
   // Detection color logic
   // --------------------------------------------------------------------------
   function detectionRadius(det) {
-    const conf = det.confidence_db || 0;
-    return conf > 10 ? Math.min(6 + (conf - 10) * 0.5, 16) : 6;
+    return 12 + (det.confidence_db || 0) * 0.5;
   }
 
   // --------------------------------------------------------------------------
@@ -322,7 +321,7 @@
       // Bounding box rectangle for all detections
       if (det.bbox_geo && det.bbox_geo.length === 4) {
         const [minLon, minLat, maxLon, maxLat] = det.bbox_geo;
-        const bboxColor = isDark ? '#b86ff0' : '#888';
+        const bboxColor = '#6a6a6a';
         const rect = L.rectangle(
           [[minLat, minLon], [maxLat, maxLon]],
           { color: bboxColor, weight: 1.5, fill: false, dashArray: '4,4', interactive: false }
@@ -331,16 +330,16 @@
       }
 
       if (isDark) {
-        // Dark vessel: purple circle marker with popup
+        // Hollow dashed circle — analyst sees SAR imagery inside
         const radius = detectionRadius(det);
+        const strokeColor = det.confidence_db >= 15 ? '#8a8a8a' : '#6a6a6a';
         const marker = L.circleMarker([det.lat, det.lon], {
           radius,
-          fillColor: '#b86ff0',
-          color: '#b86ff0',
-          weight: 2,
-          fillOpacity: 0.8,
-          opacity: 1,
-          className: 'detection--pulse',
+          color: strokeColor,
+          weight: det.confidence_db >= 15 ? 2.5 : 1.5,
+          fillOpacity: 0,
+          opacity: 0.9,
+          dashArray: '4,3',
         });
         marker.bindPopup(buildDetectionPopup(det), { className: 'det-popup-wrap' });
         marker.addTo(detectionLayer);

@@ -359,14 +359,7 @@ html, body {
   margin-right: 4px;
 }
 
-/* -------- Detection pulse animation -------- */
-@keyframes det-pulse {
-  0%, 100% { opacity: 0.9; }
-  50%      { opacity: 0.4; }
-}
-.legend__dot--pulse {
-  animation: det-pulse 2s ease-in-out infinite;
-}
+/* (pulse animation removed — detections are now hollow dashed circles) */
 
 /* -------- Detection popup -------- */
 .det-popup {
@@ -391,7 +384,7 @@ html, body {
   font-weight: var(--fw-medium);
 }
 .det-popup__status--dark {
-  color: #b86ff0;
+  color: #8a8a8a;
 }
 
 /* Leaflet popup dark theme override */
