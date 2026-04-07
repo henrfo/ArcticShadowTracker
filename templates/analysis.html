@@ -38,16 +38,6 @@
                 <label class="layer-toggle"><input type="checkbox" id="layer-bboxes"> Bounding Boxes</label>
             </div>
             <div class="analysis-sidebar__section">
-                <h2 class="analysis-sidebar__heading">SAR Tiles</h2>
-                <div class="analysis-sidebar__toolbar">
-                    <button type="button" class="analysis-mini-btn" id="tiles-all">All</button>
-                    <button type="button" class="analysis-mini-btn" id="tiles-none">None</button>
-                </div>
-                <ul class="tile-list" id="tile-list">
-                    <li class="tile-list__empty">Loading…</li>
-                </ul>
-            </div>
-            <div class="analysis-sidebar__section">
                 <h2 class="analysis-sidebar__heading">Filter Detections</h2>
                 <label class="layer-toggle"><input type="checkbox" id="filter-matched" checked> Show matched</label>
                 <label class="layer-toggle"><input type="checkbox" id="filter-dark" checked> Show dark vessels</label>
@@ -57,26 +47,30 @@
                 </div>
             </div>
             <div class="analysis-sidebar__section">
-                <h2 class="analysis-sidebar__heading">Legend</h2>
-                <ul class="legend">
-                    <li><span class="legend__dot" style="background:#4CAF50"></span>Matched detection</li>
-                    <li><span class="legend__dot legend__dot--pulse" style="background:#b86ff0"></span>Dark vessel</li>
-                    <li><span class="legend__dot" style="background:#ff5252"></span>Critical (&ge;15&#963;)</li>
-                    <li class="legend__sep"></li>
-                    <li><span class="legend__dot" style="background:#c62828"></span>Shadow fleet</li>
-                    <li><span class="legend__dot" style="background:#d32f2f"></span>Russia</li>
-                    <li><span class="legend__dot" style="background:#ff5722"></span>Suspected shadow</li>
-                    <li><span class="legend__dot" style="background:#ff9800"></span>China</li>
-                    <li><span class="legend__dot" style="background:#2E7D32"></span>Norway mil / law</li>
-                    <li><span class="legend__dot" style="background:#888888"></span>Norway civilian</li>
-                    <li><span class="legend__dot" style="background:#2196F3"></span>Other</li>
-                    <li><span class="legend__dot" style="background:#616161"></span>Buoy</li>
+                <h2 class="analysis-sidebar__heading">Filter AIS</h2>
+                <label class="layer-toggle"><input type="checkbox" id="ais-russia" data-ais-cat="russia" checked><span class="legend__dot" style="background:#d32f2f"></span>Russia</label>
+                <label class="layer-toggle"><input type="checkbox" id="ais-china" data-ais-cat="china" checked><span class="legend__dot" style="background:#ff9800"></span>China</label>
+                <label class="layer-toggle"><input type="checkbox" id="ais-shadow" data-ais-cat="shadow_fleet" checked><span class="legend__dot" style="background:#c62828"></span>Shadow Fleet</label>
+                <label class="layer-toggle"><input type="checkbox" id="ais-suspected" data-ais-cat="suspected_shadow" checked><span class="legend__dot" style="background:#ff5722"></span>Suspected Shadow</label>
+                <label class="layer-toggle"><input type="checkbox" id="ais-norway-mil" data-ais-cat="norway_mil"><span class="legend__dot" style="background:#2E7D32"></span>Norway Mil / Law</label>
+                <label class="layer-toggle"><input type="checkbox" id="ais-norway" data-ais-cat="norway"><span class="legend__dot" style="background:#888888"></span>Norway Civilian</label>
+                <label class="layer-toggle"><input type="checkbox" id="ais-other" data-ais-cat="other"><span class="legend__dot" style="background:#2196F3"></span>Other</label>
+                <label class="layer-toggle"><input type="checkbox" id="ais-buoy" data-ais-cat="buoy"><span class="legend__dot" style="background:#616161"></span>Buoy</label>
+                <div class="detection-legend">
+                    <span class="legend__dot" style="background:#4CAF50"></span>Matched
+                    <span class="legend__dot legend__dot--pulse" style="background:#b86ff0"></span>Dark
+                    <span class="legend__dot" style="background:#ff5252"></span>Critical
+                </div>
+            </div>
+            <div class="analysis-sidebar__section">
+                <h2 class="analysis-sidebar__heading">SAR Tiles</h2>
+                <div class="analysis-sidebar__toolbar">
+                    <button type="button" class="analysis-mini-btn" id="tiles-all">All</button>
+                    <button type="button" class="analysis-mini-btn" id="tiles-none">None</button>
+                </div>
+                <ul class="tile-list" id="tile-list">
+                    <li class="tile-list__empty">Loading…</li>
                 </ul>
-                <p class="legend__note">
-                    AIS vessels within <strong>&plusmn;60&nbsp;min</strong> of visible SAR passes.
-                    CFAR detections color-coded by AIS match status.
-                    Purple pulsing markers = dark vessel candidates.
-                </p>
             </div>
         </aside>
 

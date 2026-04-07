@@ -39,6 +39,20 @@
     return 5;
   }
 
+  function vesselCategory(v) {
+    if (!v) return 'other';
+    if (v.is_buoy) return 'buoy';
+    if (v.is_shadow_fleet) return 'shadow_fleet';
+    if (v.is_suspected_shadow) return 'suspected_shadow';
+    const country = v.country || '';
+    const shipType = (v.ship_type || '').toLowerCase();
+    if (country === 'Norway' && (shipType.includes('military') || shipType.includes('law enforcement'))) return 'norway_mil';
+    if (country === 'Russia') return 'russia';
+    if (country === 'China') return 'china';
+    if (country === 'Norway') return 'norway';
+    return 'other';
+  }
+
   const COUNTRY_FLAG = { Russia: '\u{1F1F7}\u{1F1FA}', China: '\u{1F1E8}\u{1F1F3}', Norway: '\u{1F1F3}\u{1F1F4}' };
 
   // --------------------------------------------------------------------------
@@ -218,14 +232,25 @@
     return best;
   }
 
+  function getAisFilterState() {
+    const cats = {};
+    document.querySelectorAll('[data-ais-cat]').forEach(cb => {
+      cats[cb.getAttribute('data-ais-cat')] = cb.checked;
+    });
+    return cats;
+  }
+
   function renderVessels() {
     if (!vesselLayer) return;
     vesselLayer.clearLayers();
     const tileTimes = visibleTileTimes();
     if (tileTimes.length === 0) return;
 
+    const aisCats = getAisFilterState();
     let matchedCount = 0;
     Object.entries(vesselsData).forEach(([mmsi, vessel]) => {
+      const cat = vesselCategory(vessel);
+      if (aisCats[cat] === false) return;
       const match = matchVesselToTiles(vessel, tileTimes);
       if (!match) return;
       matchedCount++;
@@ -522,18 +547,27 @@
     const confSlider = document.getElementById('filter-confidence');
     const confValue = document.getElementById('confidence-value');
 
-    function onFilterChange() {
+    function onDetectionFilterChange() {
       renderDetections();
       updateStats();
     }
-    if (filterMatched) filterMatched.addEventListener('change', onFilterChange);
-    if (filterDark) filterDark.addEventListener('change', onFilterChange);
+    if (filterMatched) filterMatched.addEventListener('change', onDetectionFilterChange);
+    if (filterDark) filterDark.addEventListener('change', onDetectionFilterChange);
     if (confSlider) {
       confSlider.addEventListener('input', () => {
         if (confValue) confValue.textContent = confSlider.value + '\u03C3+';
-        onFilterChange();
+        onDetectionFilterChange();
       });
     }
+
+    // AIS category filter checkboxes
+    function onAisFilterChange() {
+      renderVessels();
+      updateStats();
+    }
+    document.querySelectorAll('[data-ais-cat]').forEach(cb => {
+      cb.addEventListener('change', onAisFilterChange);
+    });
   }
 
   document.addEventListener('DOMContentLoaded', () => {

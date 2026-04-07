@@ -338,6 +338,19 @@ html, body {
   list-style: none;
 }
 
+/* -------- Detection legend (inline, non-clickable) -------- */
+.detection-legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--s-3);
+  padding-top: var(--s-2);
+  border-top: 1px solid var(--border-soft);
+  font-size: 0.68rem;
+  color: var(--text-faint);
+  letter-spacing: 0.03em;
+}
+
 /* -------- Detection pulse animation -------- */
 @keyframes det-pulse {
   0%, 100% { opacity: 0.9; }
