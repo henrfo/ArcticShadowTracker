@@ -28,18 +28,49 @@ SHADOW_FLEET_FLAGS = {
 }
 
 def load_shadow_fleet():
-    """Load shadow fleet MMSI/name lists from config file"""
+    """Load shadow fleet MMSI/name lists from config file.
+
+    Returns confirmed + suspected sets separately so the classifier
+    can distinguish vessels on official sanctions lists from those
+    flagged by single-source intelligence.
+    """
     try:
         shadow_file = Path(__file__).parent / 'shadow_fleet.json'
         with open(shadow_file, 'r') as f:
             data = json.load(f)
-            return {
-                'mmsi': set(data.get('shadow_fleet_mmsi', [])),
-                'names': set(n.lower() for n in data.get('shadow_fleet_names', []))
-            }
+
+        confirmed_mmsi = set()
+        confirmed_names = set()
+        suspected_mmsi = set()
+        suspected_names = set()
+
+        # Per-vessel confidence from multi-source dedup
+        for v in data.get('vessels', []):
+            name = (v.get('vessel_name') or '').lower()
+            mmsi = v.get('mmsi')
+            confidence = v.get('confidence', 'suspected')
+            if confidence == 'confirmed':
+                if mmsi: confirmed_mmsi.add(str(mmsi))
+                if name: confirmed_names.add(name)
+            else:
+                if mmsi: suspected_mmsi.add(str(mmsi))
+                if name: suspected_names.add(name)
+
+        # Legacy top-level arrays (backward compat)
+        for m in data.get('shadow_fleet_mmsi', []):
+            confirmed_mmsi.add(str(m))
+        for n in data.get('shadow_fleet_names', []):
+            confirmed_names.add(n.lower())
+
+        return {
+            'mmsi': confirmed_mmsi,
+            'names': confirmed_names,
+            'suspected_mmsi': suspected_mmsi,
+            'suspected_names': suspected_names,
+        }
     except Exception as e:
         print(f"Warning: Could not load shadow fleet config: {e}")
-        return {'mmsi': set(), 'names': set()}
+        return {'mmsi': set(), 'names': set(), 'suspected_mmsi': set(), 'suspected_names': set()}
 
 def process_vessel_tracks(snapshots: List[Dict]) -> Dict:
     """
@@ -92,14 +123,17 @@ def process_vessel_tracks(snapshots: List[Dict]) -> Dict:
 
         tiers = build_three_tiers(positions)
 
-        # Check if vessel is in confirmed shadow fleet list (our curated list)
+        # Check if vessel is in confirmed shadow fleet list (multi-source)
         vessel_name = data['name'] or 'Unknown'  # Ensure name is never None
         is_shadow_confirmed = (mmsi in shadow_fleet['mmsi'] or
                               vessel_name.lower() in shadow_fleet['names'])
 
-        # Check if vessel flies shadow fleet flag (flag-based suspicion)
-        is_shadow_suspected = (data['country'] in SHADOW_FLEET_FLAGS and
-                              not is_shadow_confirmed)  # Don't double-count
+        # Suspected: single-source registry entry OR flag of convenience
+        is_shadow_suspected = (not is_shadow_confirmed and (
+            mmsi in shadow_fleet.get('suspected_mmsi', set()) or
+            vessel_name.lower() in shadow_fleet.get('suspected_names', set()) or
+            data['country'] in SHADOW_FLEET_FLAGS
+        ))
 
         # Check if vessel is a buoy (based on name - includes common misspelling "BOUY")
         vessel_name_upper = vessel_name.upper()
