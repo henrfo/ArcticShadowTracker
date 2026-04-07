@@ -58,14 +58,9 @@
   // --------------------------------------------------------------------------
   // Detection color logic
   // --------------------------------------------------------------------------
-  function detectionColor(det) {
-    if (det.confidence_db >= 15) return '#e0b0ff'; // bright lavender for critical
-    return '#b86ff0';
-  }
-
   function detectionRadius(det) {
-    const base = det.confidence_db >= 15 ? 10 : 6;
-    return Math.min(base + (det.confidence_db || 0) * 0.3, 18);
+    const conf = det.confidence_db || 0;
+    return conf > 10 ? Math.min(6 + (conf - 10) * 0.5, 16) : 6;
   }
 
   // --------------------------------------------------------------------------
@@ -327,7 +322,7 @@
       // Bounding box rectangle for all detections
       if (det.bbox_geo && det.bbox_geo.length === 4) {
         const [minLon, minLat, maxLon, maxLat] = det.bbox_geo;
-        const bboxColor = isDark ? detectionColor(det) : '#888';
+        const bboxColor = isDark ? '#b86ff0' : '#888';
         const rect = L.rectangle(
           [[minLat, minLon], [maxLat, maxLon]],
           { color: bboxColor, weight: 1.5, fill: false, dashArray: '4,4', interactive: false }
@@ -336,13 +331,12 @@
       }
 
       if (isDark) {
-        // Dark vessel: circle marker with popup
-        const color = detectionColor(det);
+        // Dark vessel: purple circle marker with popup
         const radius = detectionRadius(det);
         const marker = L.circleMarker([det.lat, det.lon], {
           radius,
-          fillColor: color,
-          color: color,
+          fillColor: '#b86ff0',
+          color: '#b86ff0',
           weight: 2,
           fillOpacity: 0.8,
           opacity: 1,
@@ -378,8 +372,7 @@
     const tile = formatTileTime(det.tile_datetime);
     const zone = det.tile_zone ? escapeHtml(det.tile_zone.replace(/_/g, ' ')) : '';
 
-    const statusClass = det.confidence_db >= 15 ? 'det-popup__status--critical' : 'det-popup__status--dark';
-    const statusHtml = `<div class="det-popup__status ${statusClass}">DARK VESSEL \u2014 no AIS within 2 km</div>`;
+    const statusHtml = `<div class="det-popup__status det-popup__status--dark">DARK VESSEL \u2014 no AIS within 2 km</div>`;
 
     return `<div class="det-popup">` +
       `<div class="det-popup__title">CFAR Detection</div>` +
