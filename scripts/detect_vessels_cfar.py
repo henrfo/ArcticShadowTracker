@@ -37,7 +37,7 @@ from pathlib import Path
 try:
     import numpy as np
     import tifffile
-    from scipy.ndimage import median_filter, label, binary_opening
+    from scipy.ndimage import median_filter, label, binary_opening, find_objects
 except ImportError as exc:
     print(f"ERROR: missing dependency: {exc}", file=sys.stderr)
     print("Run: pip install -r requirements.txt", file=sys.stderr)
@@ -194,6 +194,9 @@ def detect_vessels_in_tile(tile_meta: dict, alpha: float) -> list:
     sum_mean = np.bincount(flat_labels, weights=flat_mean, minlength=n_blobs + 1)
     sum_std = np.bincount(flat_labels, weights=flat_std, minlength=n_blobs + 1)
 
+    # Per-blob bounding boxes in pixel coords (slice objects)
+    blob_slices = find_objects(blobs)  # list[tuple[slice, slice]], indexed 0..n_blobs-1
+
     # Centroids: need row/col per label. Use np.argwhere — fine since most
     # blobs are tiny at 1–3 pixels.
     rows, cols = np.nonzero(blobs)
@@ -228,6 +231,15 @@ def detect_vessels_in_tile(tile_meta: dict, alpha: float) -> list:
         diameter_px = float(np.sqrt(size))
         est_length_m = round(diameter_px * resolution_m, 0)
 
+        # Pixel and geographic bounding box for this blob
+        row_sl, col_sl = blob_slices[bid - 1]  # find_objects is 0-indexed
+        bbox_px = [int(col_sl.start), int(row_sl.start),
+                   int(col_sl.stop), int(row_sl.stop)]
+        sw_lat, sw_lon = _pixel_to_latlon(row_sl.stop, col_sl.start, bbox, h, w)
+        ne_lat, ne_lon = _pixel_to_latlon(row_sl.start, col_sl.stop, bbox, h, w)
+        bbox_geo = [round(sw_lon, 5), round(sw_lat, 5),
+                    round(ne_lon, 5), round(ne_lat, 5)]
+
         detections.append({
             'lat': round(float(lat), 5),
             'lon': round(float(lon), 5),
@@ -237,6 +249,8 @@ def detect_vessels_in_tile(tile_meta: dict, alpha: float) -> list:
             'confidence_db': round(float(confidence_db), 2),
             'blob_size_pixels': size,
             'estimated_length_m': est_length_m,
+            'bbox_pixels': bbox_px,
+            'bbox_geo': bbox_geo,
             'severity': _severity_from_confidence(float(confidence_db)),
             'tile_id': tile_id,
             'tile_datetime': tile_meta.get('datetime'),

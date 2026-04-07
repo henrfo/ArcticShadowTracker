@@ -186,9 +186,22 @@ def correlate(tile_records: list, vessels: dict,
 
             match = find_nearest_ais(lat, lon, tile_dt, vessels,
                                      radius_km=radius_km, window_min=window_min)
+
+            # Enrich detection in-place with match status
             if match is not None:
                 matched_count += 1
+                det['matched_ais'] = True
+                det['nearest_ais_km'] = match['distance_km']
+                det['matched_vessel'] = {
+                    'mmsi': match['mmsi'],
+                    'name': match.get('vessel_name'),
+                    'country': match.get('country'),
+                }
                 continue  # Known vessel — not a dark vessel
+
+            det['matched_ais'] = False
+            det['nearest_ais_km'] = None
+            det['matched_vessel'] = None
 
             # No AIS within radius — emit dark_vessel anomaly
             anomalies.append({
@@ -300,6 +313,18 @@ def main() -> int:
         json.dump(payload, f, indent=2)
     tmp.replace(DARK_VESSELS_PATH)
     logger.info("Wrote %s — %d dark vessel anomalies", DARK_VESSELS_PATH, len(anomalies))
+
+    # Write enriched detections back (now includes matched_ais, nearest_ais_km,
+    # matched_vessel per detection). The tile_records list was mutated in-place
+    # by correlate().
+    det_payload['correlated_at'] = payload['last_updated']
+    det_payload['matched_to_ais'] = matched
+    det_payload['dark_vessel_candidates'] = dark_candidates
+    tmp_det = DETECTIONS_PATH.with_suffix('.json.tmp')
+    with open(tmp_det, 'w') as f:
+        json.dump(det_payload, f, indent=2)
+    tmp_det.replace(DETECTIONS_PATH)
+    logger.info("Wrote enriched %s — %d matched, %d dark", DETECTIONS_PATH, matched, dark_candidates)
     return 0
 
 

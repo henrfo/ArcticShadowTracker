@@ -2,8 +2,9 @@
    SAR Analysis View — standalone Leaflet page logic.
    Loaded by templates/analysis.html (served at /analysis-view).
 
-   Fetches SAR tiles + AIS vessels, draws tiles as ImageOverlays at their
-   bboxes, overlays AIS markers filtered to ±60 min of any visible tile.
+   Fetches SAR tiles + AIS vessels + CFAR detections, draws tiles as
+   ImageOverlays, overlays AIS markers (±60 min), and renders CFAR
+   detections as color-coded circle markers with bounding boxes.
    ========================================================================== */
 (function () {
   'use strict';
@@ -13,8 +14,7 @@
   const ARCTIC_ZOOM = 4;
 
   // --------------------------------------------------------------------------
-  // Vessel color mapping — port of src/map_generator.py:21-71 (_vessel_color).
-  // Keep in sync if the Python logic changes.
+  // Vessel color mapping — port of src/map_generator.py:21-71
   // --------------------------------------------------------------------------
   function vesselColor(v) {
     if (!v) return '#2196F3';
@@ -39,9 +39,20 @@
     return 5;
   }
 
-  const COUNTRY_FLAG = {
-    Russia: '🇷🇺', China: '🇨🇳', Norway: '🇳🇴',
-  };
+  const COUNTRY_FLAG = { Russia: '\u{1F1F7}\u{1F1FA}', China: '\u{1F1E8}\u{1F1F3}', Norway: '\u{1F1F3}\u{1F1F4}' };
+
+  // --------------------------------------------------------------------------
+  // Detection color logic
+  // --------------------------------------------------------------------------
+  function detectionColor(det) {
+    if (det.matched_ais) return '#4CAF50';
+    if (det.confidence_db >= 15) return '#ff5252';
+    return '#b86ff0';
+  }
+
+  function detectionRadius(det) {
+    return Math.min(6 + (det.confidence_db || 0) * 0.3, 16);
+  }
 
   // --------------------------------------------------------------------------
   // Formatting helpers
@@ -51,17 +62,13 @@
     const d = new Date(iso);
     if (isNaN(d)) return iso;
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    const mon = months[d.getUTCMonth()];
-    const day = String(d.getUTCDate()).padStart(2, '0');
-    const hh = String(d.getUTCHours()).padStart(2, '0');
-    const mm = String(d.getUTCMinutes()).padStart(2, '0');
-    return `${mon} ${day}, ${hh}:${mm} UTC`;
+    return `${months[d.getUTCMonth()]} ${String(d.getUTCDate()).padStart(2,'0')}, ${String(d.getUTCHours()).padStart(2,'0')}:${String(d.getUTCMinutes()).padStart(2,'0')} UTC`;
   }
 
   function formatBboxShort(bbox) {
     if (!bbox || bbox.length !== 4) return '';
     const [minLon, minLat, maxLon, maxLat] = bbox;
-    return `${minLon.toFixed(1)}°E–${maxLon.toFixed(1)}°E · ${minLat.toFixed(1)}°N–${maxLat.toFixed(1)}°N`;
+    return `${minLon.toFixed(1)}\u00B0E\u2013${maxLon.toFixed(1)}\u00B0E \u00B7 ${minLat.toFixed(1)}\u00B0N\u2013${maxLat.toFixed(1)}\u00B0N`;
   }
 
   function escapeHtml(s) {
@@ -82,9 +89,13 @@
   // --------------------------------------------------------------------------
   let map;
   let tileLayers = new Map();   // tile.id -> { tile, layer, visible }
-  let vesselLayer;               // L.LayerGroup of current vessel markers
+  let vesselLayer;               // L.LayerGroup — AIS markers
+  let detectionLayer;            // L.LayerGroup — CFAR detection markers
+  let bboxLayer;                 // L.LayerGroup — detection bounding boxes
   let vesselsData = {};          // mmsi -> vessel
-  let tilesData = [];            // array of tile objects
+  let tilesData = [];            // tile objects from /api/satellite-tiles
+  let detectionsRaw = [];        // tile records from /api/satellite-detections
+  let allDetections = [];        // flattened detection list
 
   // --------------------------------------------------------------------------
   // Map init
@@ -105,6 +116,8 @@
     }).addTo(map);
 
     vesselLayer = L.layerGroup().addTo(map);
+    detectionLayer = L.layerGroup().addTo(map);
+    bboxLayer = L.layerGroup(); // starts hidden
   }
 
   // --------------------------------------------------------------------------
@@ -143,6 +156,7 @@
       entry.visible = false;
     }
     renderVessels();
+    renderDetections();
     updateStats();
   }
 
@@ -157,8 +171,16 @@
   }
 
   // --------------------------------------------------------------------------
-  // Vessel matching + rendering
+  // Visible tile IDs
   // --------------------------------------------------------------------------
+  function visibleTileIds() {
+    const ids = new Set();
+    tileLayers.forEach((entry, tileId) => {
+      if (entry.visible) ids.add(tileId);
+    });
+    return ids;
+  }
+
   function visibleTileTimes() {
     const times = [];
     tileLayers.forEach(entry => {
@@ -170,11 +192,9 @@
     return times;
   }
 
-  /**
-   * For a given vessel, return the best-matching position sample within
-   * ±MATCH_WINDOW_MS of any visible SAR tile. Returns null if no match.
-   * Walks realtime → tactical → strategic tiers.
-   */
+  // --------------------------------------------------------------------------
+  // Vessel matching + rendering
+  // --------------------------------------------------------------------------
   function matchVesselToTiles(vessel, tileTimes) {
     if (!vessel || !vessel.tiers || tileTimes.length === 0) return null;
     let best = null;
@@ -193,7 +213,7 @@
           }
         }
       }
-      if (best) break; // prefer higher-fidelity tiers
+      if (best) break;
     }
     return best;
   }
@@ -226,7 +246,7 @@
         (offset === 0 ? 'at SAR pass' : (offset > 0 ? `+${offset} min after SAR` : `${Math.abs(offset)} min before SAR`));
       marker.bindTooltip(
         `<b>${escapeHtml(vessel.name || mmsi)}</b> ${flag}` +
-        `<span class="vt-meta">${escapeHtml(vessel.country || '—')} · ${escapeHtml(vessel.ship_type || '')}</span>` +
+        `<span class="vt-meta">${escapeHtml(vessel.country || '\u2014')} \u00B7 ${escapeHtml(vessel.ship_type || '')}</span>` +
         `<span class="vt-meta">MMSI ${escapeHtml(mmsi)}</span>` +
         `<span class="vt-meta">AIS ${escapeHtml(formatTileTime(point.timestamp))}</span>` +
         `<span class="vt-meta">${escapeHtml(offsetStr)}</span>`,
@@ -234,7 +254,105 @@
       );
       marker.addTo(vesselLayer);
     });
-    window.__matchedCount = matchedCount; // consumed by updateStats
+    window.__matchedVesselCount = matchedCount;
+  }
+
+  // --------------------------------------------------------------------------
+  // CFAR detection rendering
+  // --------------------------------------------------------------------------
+  function getFilterState() {
+    const showMatched = document.getElementById('filter-matched');
+    const showDark = document.getElementById('filter-dark');
+    const confSlider = document.getElementById('filter-confidence');
+    return {
+      showMatched: showMatched ? showMatched.checked : true,
+      showDark: showDark ? showDark.checked : true,
+      minConfidence: confSlider ? Number(confSlider.value) : 4,
+    };
+  }
+
+  function renderDetections() {
+    if (!detectionLayer || !bboxLayer) return;
+    detectionLayer.clearLayers();
+    bboxLayer.clearLayers();
+
+    const visible = visibleTileIds();
+    const filters = getFilterState();
+    let totalVisible = 0;
+    let matchedVisible = 0;
+    let darkVisible = 0;
+
+    allDetections.forEach(det => {
+      if (!visible.has(det.tile_id)) return;
+      if (det.confidence_db < filters.minConfidence) return;
+      if (det.matched_ais && !filters.showMatched) return;
+      if (!det.matched_ais && !filters.showDark) return;
+
+      totalVisible++;
+      if (det.matched_ais) matchedVisible++;
+      else darkVisible++;
+
+      const color = detectionColor(det);
+      const radius = detectionRadius(det);
+      const isDark = !det.matched_ais;
+
+      const marker = L.circleMarker([det.lat, det.lon], {
+        radius,
+        fillColor: color,
+        color: isDark ? color : '#000',
+        weight: isDark ? 2 : 1,
+        fillOpacity: isDark ? 0.8 : 0.6,
+        opacity: 1,
+        className: isDark ? 'detection--pulse' : '',
+      });
+
+      marker.bindPopup(buildDetectionPopup(det), { className: 'det-popup-wrap' });
+      marker.addTo(detectionLayer);
+
+      // Bounding box rectangle
+      if (det.bbox_geo && det.bbox_geo.length === 4) {
+        const [minLon, minLat, maxLon, maxLat] = det.bbox_geo;
+        const rect = L.rectangle(
+          [[minLat, minLon], [maxLat, maxLon]],
+          { color, weight: 1.5, fill: false, dashArray: '6,4', interactive: false }
+        );
+        rect.addTo(bboxLayer);
+      }
+    });
+
+    window.__detStats = { totalVisible, matchedVisible, darkVisible };
+  }
+
+  function buildDetectionPopup(det) {
+    const conf = det.confidence_db != null ? det.confidence_db.toFixed(1) : '?';
+    const sev = escapeHtml(det.severity || 'unknown');
+    const length = det.estimated_length_m != null ? `~${Math.round(det.estimated_length_m)} m` : 'unknown';
+    const blob = det.blob_size_pixels || '?';
+    const tile = formatTileTime(det.tile_datetime);
+    const zone = det.tile_zone ? escapeHtml(det.tile_zone.replace(/_/g, ' ')) : '';
+
+    let statusHtml;
+    if (det.matched_ais && det.matched_vessel) {
+      const mv = det.matched_vessel;
+      statusHtml = `<div class="det-popup__status det-popup__status--matched">` +
+        `Matched \u2192 ${escapeHtml(mv.name || 'Unknown')} (MMSI ${escapeHtml(mv.mmsi || '?')}, ${escapeHtml(mv.country || '?')})` +
+        `</div>` +
+        (det.nearest_ais_km != null ? `<div class="det-popup__row">Distance: ${det.nearest_ais_km.toFixed(1)} km</div>` : '');
+    } else if (det.confidence_db >= 15) {
+      statusHtml = `<div class="det-popup__status det-popup__status--critical">DARK VESSEL \u2014 critical confidence, no AIS within 2 km</div>`;
+    } else {
+      statusHtml = `<div class="det-popup__status det-popup__status--dark">DARK VESSEL \u2014 no AIS within 2 km</div>`;
+    }
+
+    return `<div class="det-popup">` +
+      `<div class="det-popup__title">CFAR Detection</div>` +
+      `<div class="det-popup__row">Confidence: <strong>${conf}\u03C3</strong> (${sev})</div>` +
+      `<div class="det-popup__row">Est. length: ${length}</div>` +
+      `<div class="det-popup__row">Blob: ${blob} px</div>` +
+      `<div class="det-popup__row">Tile: ${escapeHtml(tile)}</div>` +
+      (zone ? `<div class="det-popup__row">Zone: ${zone}</div>` : '') +
+      statusHtml +
+      `</div>`;
   }
 
   // --------------------------------------------------------------------------
@@ -288,15 +406,18 @@
     let visibleTiles = 0;
     tileLayers.forEach(e => { if (e.visible) visibleTiles++; });
     const totalTiles = tileLayers.size;
-    const matched = window.__matchedCount || 0;
+    const vesselMatched = window.__matchedVesselCount || 0;
+    const ds = window.__detStats || { totalVisible: 0, matchedVisible: 0, darkVisible: 0 };
     if (subtitle) {
-      subtitle.textContent = `${visibleTiles}/${totalTiles} tiles visible · ${matched} AIS vessel${matched !== 1 ? 's' : ''} matched (±60 min)`;
+      subtitle.textContent = `${visibleTiles}/${totalTiles} tiles \u00B7 ${allDetections.length} detections \u00B7 ${ds.darkVisible} dark`;
     }
     if (stats) {
       stats.innerHTML =
-        `<span><strong>${visibleTiles}</strong>SAR tiles</span>` +
-        `<span><strong>${matched}</strong>matched vessels</span>` +
-        `<span><strong>${Object.keys(vesselsData).length}</strong>total tracked</span>`;
+        `<span><strong>${visibleTiles}</strong> tiles</span>` +
+        `<span><strong>${ds.totalVisible}</strong> detections</span>` +
+        `<span><strong>${ds.matchedVisible}</strong> matched</span>` +
+        `<span><strong>${ds.darkVisible}</strong> dark</span>` +
+        `<span><strong>${vesselMatched}</strong> AIS</span>`;
     }
   }
 
@@ -306,9 +427,10 @@
   async function load() {
     initMap();
     try {
-      const [tilesRes, vesselsRes] = await Promise.all([
+      const [tilesRes, vesselsRes, detectionsRes] = await Promise.all([
         fetch('/api/satellite-tiles'),
         fetch('/api/vessels'),
+        fetch('/api/satellite-detections'),
       ]);
       if (!tilesRes.ok) throw new Error('tiles HTTP ' + tilesRes.status);
       if (!vesselsRes.ok) throw new Error('vessels HTTP ' + vesselsRes.status);
@@ -317,21 +439,54 @@
       tilesData = tilesJson.tiles || [];
       vesselsData = vesselsJson.vessels || {};
 
+      // Flatten detections from tiles[] → detections[] structure
+      if (detectionsRes.ok) {
+        const dJson = await detectionsRes.json();
+        detectionsRaw = dJson.tiles || [];
+        allDetections = [];
+        detectionsRaw.forEach(tr => {
+          (tr.detections || []).forEach(d => allDetections.push(d));
+        });
+      }
+
       addTileOverlays(tilesData);
       renderTileList(tilesData);
       renderVessels();
+      renderDetections();
       updateStats();
     } catch (err) {
       console.error('[AnalysisView] load failed:', err);
       const subtitle = document.getElementById('analysis-subtitle');
-      if (subtitle) subtitle.textContent = 'Failed to load data — see console.';
+      if (subtitle) subtitle.textContent = 'Failed to load data \u2014 see console.';
     }
+  }
+
+  // --------------------------------------------------------------------------
+  // Layer toggle helpers
+  // --------------------------------------------------------------------------
+  function toggleLayerGroup(group, visible) {
+    if (!group || !map) return;
+    if (visible && !map.hasLayer(group)) group.addTo(map);
+    if (!visible && map.hasLayer(group)) map.removeLayer(group);
+  }
+
+  function toggleAllTileOverlays(visible) {
+    tileLayers.forEach(entry => {
+      if (visible && !entry.visible) {
+        entry.layer.addTo(map);
+        entry.visible = true;
+      } else if (!visible && entry.visible) {
+        map.removeLayer(entry.layer);
+        entry.visible = false;
+      }
+    });
   }
 
   // --------------------------------------------------------------------------
   // Event wiring
   // --------------------------------------------------------------------------
   function wireControls() {
+    // Close
     const closeBtn = document.getElementById('analysis-close');
     if (closeBtn) {
       closeBtn.addEventListener('click', () => {
@@ -343,10 +498,42 @@
         try { window.parent.postMessage({ type: 'close-analysis' }, '*'); } catch (err) {}
       }
     });
+
+    // Tile all/none
     const allBtn = document.getElementById('tiles-all');
     const noneBtn = document.getElementById('tiles-none');
     if (allBtn) allBtn.addEventListener('click', () => setAllTilesVisible(true));
     if (noneBtn) noneBtn.addEventListener('click', () => setAllTilesVisible(false));
+
+    // Layer toggles
+    const layerTiles = document.getElementById('layer-tiles');
+    const layerVessels = document.getElementById('layer-vessels');
+    const layerDetections = document.getElementById('layer-detections');
+    const layerBboxes = document.getElementById('layer-bboxes');
+
+    if (layerTiles) layerTiles.addEventListener('change', (e) => toggleAllTileOverlays(e.target.checked));
+    if (layerVessels) layerVessels.addEventListener('change', (e) => toggleLayerGroup(vesselLayer, e.target.checked));
+    if (layerDetections) layerDetections.addEventListener('change', (e) => toggleLayerGroup(detectionLayer, e.target.checked));
+    if (layerBboxes) layerBboxes.addEventListener('change', (e) => toggleLayerGroup(bboxLayer, e.target.checked));
+
+    // Detection filter controls
+    const filterMatched = document.getElementById('filter-matched');
+    const filterDark = document.getElementById('filter-dark');
+    const confSlider = document.getElementById('filter-confidence');
+    const confValue = document.getElementById('confidence-value');
+
+    function onFilterChange() {
+      renderDetections();
+      updateStats();
+    }
+    if (filterMatched) filterMatched.addEventListener('change', onFilterChange);
+    if (filterDark) filterDark.addEventListener('change', onFilterChange);
+    if (confSlider) {
+      confSlider.addEventListener('input', () => {
+        if (confValue) confValue.textContent = confSlider.value + '\u03C3+';
+        onFilterChange();
+      });
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {

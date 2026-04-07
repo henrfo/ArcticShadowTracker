@@ -38,6 +38,7 @@ GITHUB_PAGES_ANOMALIES_URL = "https://henrfo.github.io/ArcticShadowTracker/data/
 # Raw GitHub URLs for satellite data (committed to main by satellite_monitor.yml daily)
 GITHUB_RAW_BASE = "https://raw.githubusercontent.com/henrfo/ArcticShadowTracker/main"
 GITHUB_RAW_SAR_METADATA_URL = f"{GITHUB_RAW_BASE}/data/satellite_imagery/metadata.json"
+GITHUB_RAW_DETECTIONS_URL = f"{GITHUB_RAW_BASE}/data/satellite_imagery/detections.json"
 GITHUB_RAW_DARK_VESSELS_URL = f"{GITHUB_RAW_BASE}/data/anomalies/dark_vessels.json"
 GITHUB_RAW_THUMBNAILS_BASE = f"{GITHUB_RAW_BASE}/data/satellite_imagery/thumbnails"
 
@@ -70,6 +71,9 @@ SAR_TIME_WINDOW_HOURS = 12  # ± window for "nearby" SAR passes on an anomaly
 # anomalies.json to avoid clobbering between the two workflows.
 # /api/anomalies merges both at request time.
 _dark_vessels_cache = {'data': None, 'fetched_at': 0.0}
+
+# CFAR detections — enriched with AIS match status by correlate_detections.py
+_detections_cache = {'data': None, 'fetched_at': 0.0}
 
 
 def add_cors_headers(response):
@@ -278,6 +282,45 @@ def _load_dark_vessels():
 
     _dark_vessels_cache['data'] = data
     _dark_vessels_cache['fetched_at'] = now
+    return data
+
+
+def _load_detections():
+    """Fetch CFAR detections from GitHub, with local-disk fallback.
+
+    Returns the full detections.json payload (tiles + detections + metadata).
+    After correlate_detections.py runs, each detection is enriched with
+    matched_ais, nearest_ais_km, and matched_vessel fields.
+    """
+    import time as _time
+    now = _time.monotonic()
+    if _detections_cache['data'] is not None and (now - _detections_cache['fetched_at']) < SAR_CACHE_TTL_SECONDS:
+        return _detections_cache['data']
+
+    data = None
+    try:
+        resp = requests.get(GITHUB_RAW_DETECTIONS_URL, timeout=10)
+        resp.raise_for_status()
+        data = resp.json()
+        logger.info("Fetched detections from GitHub (%d detections)",
+                    data.get('total_detections_in_history', 0))
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("GitHub detections fetch failed: %s — falling back to local file", exc)
+
+    if data is None:
+        path = DATA_DIR / 'satellite_imagery' / 'detections.json'
+        if path.exists():
+            try:
+                with open(path, 'r') as f:
+                    data = json.load(f)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("Could not load local detections.json: %s", exc)
+
+    if data is None:
+        return {'tiles': [], 'total_detections_in_history': 0}
+
+    _detections_cache['data'] = data
+    _detections_cache['fetched_at'] = now
     return data
 
 
@@ -580,14 +623,22 @@ def api_satellite_tiles():
     return no_cache(make_response(jsonify(body)))
 
 
+@app.route('/api/satellite-detections')
+@cors_enabled
+def api_satellite_detections():
+    """Return CFAR detections enriched with AIS match status.
+
+    Each detection includes lat/lon centroid, confidence, severity,
+    bbox_geo (geographic bounding box), and match info (matched_ais,
+    nearest_ais_km, matched_vessel) added by correlate_detections.py.
+    """
+    data = _load_detections()
+    return no_cache(make_response(jsonify(data)))
+
+
 @app.route('/analysis-view')
 def analysis_view():
-    """Serve the standalone full-screen SAR Analysis View page.
-
-    The page fetches /api/satellite-tiles and /api/vessels on load and
-    renders SAR tiles as Leaflet ImageOverlays with AIS markers overlaid
-    (filtered to ±60 min of any visible tile's acquisition time).
-    """
+    """Serve the standalone full-screen SAR Analysis View page."""
     return render_template('analysis.html')
 
 

@@ -297,3 +297,100 @@ html, body {
 .vessel-tooltip::before { display: none !important; }
 .vessel-tooltip b { color: var(--text-soft); }
 .vessel-tooltip .vt-meta { color: var(--text-muted); display: block; margin-top: 2px; }
+
+/* -------- Layer toggles -------- */
+.layer-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding: 4px 0;
+  cursor: pointer;
+}
+.layer-toggle input[type="checkbox"] {
+  accent-color: var(--text-soft);
+  cursor: pointer;
+}
+
+/* -------- Filter slider -------- */
+.filter-slider {
+  margin-top: var(--s-2);
+}
+.filter-slider label {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.filter-slider input[type="range"] {
+  width: 100%;
+  accent-color: var(--text-soft);
+  height: 4px;
+}
+
+/* -------- Legend separator -------- */
+.legend__sep {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: var(--border-soft);
+  margin: 4px 0;
+  list-style: none;
+}
+
+/* -------- Detection pulse animation -------- */
+@keyframes det-pulse {
+  0%, 100% { opacity: 0.9; }
+  50%      { opacity: 0.4; }
+}
+.legend__dot--pulse {
+  animation: det-pulse 2s ease-in-out infinite;
+}
+
+/* -------- Detection popup -------- */
+.det-popup {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  min-width: 180px;
+}
+.det-popup__title {
+  font-family: var(--font-display);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  margin-bottom: 4px;
+}
+.det-popup__row {
+  color: var(--text-muted);
+}
+.det-popup__status {
+  margin-top: 4px;
+  font-weight: var(--fw-medium);
+}
+.det-popup__status--dark {
+  color: #b86ff0;
+}
+.det-popup__status--matched {
+  color: #4CAF50;
+}
+.det-popup__status--critical {
+  color: #ff5252;
+}
+
+/* Leaflet popup dark theme override */
+.leaflet-popup-content-wrapper {
+  background: rgba(10, 14, 28, 0.95) !important;
+  border: 1px solid var(--border-focus) !important;
+  border-radius: var(--r-sm) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
+}
+.leaflet-popup-tip {
+  background: rgba(10, 14, 28, 0.95) !important;
+  border: 1px solid var(--border-focus) !important;
+}
+.leaflet-popup-close-button {
+  color: var(--text-muted) !important;
+}

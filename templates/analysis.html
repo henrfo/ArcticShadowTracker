@@ -31,6 +31,13 @@
 
         <aside class="analysis-sidebar" id="analysis-sidebar">
             <div class="analysis-sidebar__section">
+                <h2 class="analysis-sidebar__heading">Layers</h2>
+                <label class="layer-toggle"><input type="checkbox" id="layer-tiles" checked> SAR Tiles</label>
+                <label class="layer-toggle"><input type="checkbox" id="layer-vessels" checked> AIS Vessels</label>
+                <label class="layer-toggle"><input type="checkbox" id="layer-detections" checked> CFAR Detections</label>
+                <label class="layer-toggle"><input type="checkbox" id="layer-bboxes"> Bounding Boxes</label>
+            </div>
+            <div class="analysis-sidebar__section">
                 <h2 class="analysis-sidebar__heading">SAR Tiles</h2>
                 <div class="analysis-sidebar__toolbar">
                     <button type="button" class="analysis-mini-btn" id="tiles-all">All</button>
@@ -41,8 +48,21 @@
                 </ul>
             </div>
             <div class="analysis-sidebar__section">
+                <h2 class="analysis-sidebar__heading">Filter Detections</h2>
+                <label class="layer-toggle"><input type="checkbox" id="filter-matched" checked> Show matched</label>
+                <label class="layer-toggle"><input type="checkbox" id="filter-dark" checked> Show dark vessels</label>
+                <div class="filter-slider">
+                    <label for="filter-confidence">Min confidence: <strong id="confidence-value">4&#963;+</strong></label>
+                    <input type="range" id="filter-confidence" min="4" max="30" value="4" step="1">
+                </div>
+            </div>
+            <div class="analysis-sidebar__section">
                 <h2 class="analysis-sidebar__heading">Legend</h2>
                 <ul class="legend">
+                    <li><span class="legend__dot" style="background:#4CAF50"></span>Matched detection</li>
+                    <li><span class="legend__dot legend__dot--pulse" style="background:#b86ff0"></span>Dark vessel</li>
+                    <li><span class="legend__dot" style="background:#ff5252"></span>Critical (&ge;15&#963;)</li>
+                    <li class="legend__sep"></li>
                     <li><span class="legend__dot" style="background:#c62828"></span>Shadow fleet</li>
                     <li><span class="legend__dot" style="background:#d32f2f"></span>Russia</li>
                     <li><span class="legend__dot" style="background:#ff5722"></span>Suspected shadow</li>
@@ -53,9 +73,9 @@
                     <li><span class="legend__dot" style="background:#616161"></span>Buoy</li>
                 </ul>
                 <p class="legend__note">
-                    Vessels shown are those with an AIS sample within <strong>±60&nbsp;min</strong> of any
-                    visible SAR tile's acquisition time. Bright radar returns with no matching marker
-                    are dark-vessel candidates.
+                    AIS vessels within <strong>&plusmn;60&nbsp;min</strong> of visible SAR passes.
+                    CFAR detections color-coded by AIS match status.
+                    Purple pulsing markers = dark vessel candidates.
                 </p>
             </div>
         </aside>
