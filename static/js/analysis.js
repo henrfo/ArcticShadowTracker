@@ -59,12 +59,13 @@
   // Detection color logic
   // --------------------------------------------------------------------------
   function detectionColor(det) {
-    if (det.confidence_db >= 15) return '#00e5ff';
+    if (det.confidence_db >= 15) return '#e0b0ff'; // bright lavender for critical
     return '#b86ff0';
   }
 
   function detectionRadius(det) {
-    return Math.min(6 + (det.confidence_db || 0) * 0.3, 16);
+    const base = det.confidence_db >= 15 ? 10 : 6;
+    return Math.min(base + (det.confidence_db || 0) * 0.3, 18);
   }
 
   // --------------------------------------------------------------------------
