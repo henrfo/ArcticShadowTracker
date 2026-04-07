@@ -70,10 +70,10 @@ HISTORY_RETENTION_DAYS = 14
 # standard CFAR-on-median formulation from the SAR processing literature.
 BACKGROUND_CELLS = 15      # odd square window for median + MAD
 ALPHA = 5.0                # multiplier on robust std (MAD × 1.4826)
-MIN_BLOB_PIXELS = 3        # min connected-component size (ships ≥3px at 20m)
+MIN_BLOB_PIXELS = 1        # min connected-component size (keep single-pixel targets)
 MAX_BLOB_PIXELS = 50       # blobs bigger than this are probably land/ice
 MIN_CONFIDENCE_DB = 4.0    # drop detections weaker than this in dB over median
-MAX_BACKGROUND_DB = -25.0  # reject detections on bright backgrounds (land/coast/ice)
+MAX_BACKGROUND_DB = -15.0  # reject bright backgrounds (land/coast); water is brighter at 20m
 
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
@@ -173,9 +173,6 @@ def detect_vessels_in_tile(tile_meta: dict, alpha: float) -> list:
     # Threshold in dB space
     with np.errstate(invalid='ignore'):
         target_mask = db > (mean + alpha * std)
-
-    # Kill single-pixel speckle, keep 2+ connected bright pixels
-    target_mask = binary_opening(target_mask, structure=np.ones((2, 2), dtype=bool))
 
     # Connected components → blobs
     blobs, n_blobs = label(target_mask)
