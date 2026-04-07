@@ -12,6 +12,7 @@ import sys
 import requests
 from datetime import datetime, timezone
 from functools import wraps
+import re
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent))
@@ -34,6 +35,12 @@ OUTPUTS_DIR = BASE_DIR / 'outputs'
 GITHUB_PAGES_VESSELS_URL = "https://henrfo.github.io/ArcticShadowTracker/vessel_tracks.json"
 GITHUB_PAGES_ANOMALIES_URL = "https://henrfo.github.io/ArcticShadowTracker/data/anomalies/anomalies.json"
 
+# Raw GitHub URLs for satellite data (committed to main by satellite_monitor.yml daily)
+GITHUB_RAW_BASE = "https://raw.githubusercontent.com/henrfo/ArcticShadowTracker/main"
+GITHUB_RAW_SAR_METADATA_URL = f"{GITHUB_RAW_BASE}/data/satellite_imagery/metadata.json"
+GITHUB_RAW_DARK_VESSELS_URL = f"{GITHUB_RAW_BASE}/data/anomalies/dark_vessels.json"
+GITHUB_RAW_THUMBNAILS_BASE = f"{GITHUB_RAW_BASE}/data/satellite_imagery/thumbnails"
+
 # Data freshness threshold — pipeline runs every 5 min, allow 6x tolerance
 STALE_THRESHOLD_MINUTES = 30
 
@@ -50,19 +57,19 @@ _map_cache = {'html': None, 'raw_last_update': None}
 _data_cache = {'result': None, 'fetched_at': 0.0}
 DATA_TTL_SECONDS = 30
 
-# SAR satellite coverage metadata — read from data/satellite_imagery/metadata.json
-# which is updated daily by the satellite_monitor.yml workflow. Cached by file
-# mtime so changes from new workflow runs are picked up automatically without
-# needing a restart. Each anomaly is enriched with any nearby SAR passes.
-_sar_cache = {'data': None, 'mtime': 0.0, 'loaded_at': 0.0}
+# SAR satellite coverage metadata — fetched from raw.githubusercontent.com at
+# runtime (with local-disk fallback for dev). Updated daily by the
+# satellite_monitor.yml workflow. Each anomaly is enriched with any nearby
+# SAR passes.
+_sar_cache = {'data': None, 'fetched_at': 0.0}
 SAR_CACHE_TTL_SECONDS = 60
 SAR_TIME_WINDOW_HOURS = 12  # ± window for "nearby" SAR passes on an anomaly
 
-# Dark-vessel anomalies — written by scripts/correlate_detections.py inside
-# the satellite_monitor.yml workflow. Lives in a separate file from the
-# main anomalies.json to avoid clobbering between the two workflows.
+# Dark-vessel anomalies — fetched from raw.githubusercontent.com at runtime
+# (with local-disk fallback). Lives in a separate file from the main
+# anomalies.json to avoid clobbering between the two workflows.
 # /api/anomalies merges both at request time.
-_dark_vessels_cache = {'data': None, 'mtime': 0.0, 'loaded_at': 0.0}
+_dark_vessels_cache = {'data': None, 'fetched_at': 0.0}
 
 
 def add_cors_headers(response):
@@ -198,63 +205,80 @@ def _compute_freshness(raw_last_update):
 # ============================================================================
 
 def _load_sar_metadata():
-    """Load data/satellite_imagery/metadata.json with mtime-based cache invalidation.
+    """Fetch SAR tile metadata from GitHub, with local-disk fallback.
 
-    The file is written by scripts/collect_satellite.py after each workflow run.
-    Cache is keyed on the file's mtime so new workflow deploys invalidate it
-    automatically without needing a Flask restart.
+    Primary: raw.githubusercontent.com (always up to date after workflow push).
+    Fallback: data/satellite_imagery/metadata.json on disk (stale on Fly.io
+    but works for local dev).
     """
     import time as _time
-    path = DATA_DIR / 'satellite_imagery' / 'metadata.json'
-    if not path.exists():
-        return {'tiles': []}
+    now = _time.monotonic()
+    if _sar_cache['data'] is not None and (now - _sar_cache['fetched_at']) < SAR_CACHE_TTL_SECONDS:
+        return _sar_cache['data']
+
+    data = None
     try:
-        mtime = path.stat().st_mtime
-        now = _time.monotonic()
-        cached = _sar_cache['data']
-        if (cached is not None
-                and _sar_cache['mtime'] == mtime
-                and (now - _sar_cache['loaded_at']) < SAR_CACHE_TTL_SECONDS):
-            return cached
-        with open(path, 'r') as f:
-            data = json.load(f)
-        _sar_cache['data'] = data
-        _sar_cache['mtime'] = mtime
-        _sar_cache['loaded_at'] = now
-        return data
+        resp = requests.get(GITHUB_RAW_SAR_METADATA_URL, timeout=10)
+        resp.raise_for_status()
+        data = resp.json()
+        logger.info("Fetched SAR metadata from GitHub (%d tiles)", len(data.get('tiles', [])))
     except Exception as exc:  # noqa: BLE001
-        logger.warning("Could not load SAR metadata: %s", exc)
+        logger.warning("GitHub SAR metadata fetch failed: %s — falling back to local file", exc)
+
+    if data is None:
+        path = DATA_DIR / 'satellite_imagery' / 'metadata.json'
+        if path.exists():
+            try:
+                with open(path, 'r') as f:
+                    data = json.load(f)
+                logger.info("Using local SAR metadata (%d tiles)", len(data.get('tiles', [])))
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("Could not load local SAR metadata: %s", exc)
+
+    if data is None:
         return {'tiles': []}
+
+    _sar_cache['data'] = data
+    _sar_cache['fetched_at'] = now
+    return data
 
 
 def _load_dark_vessels():
-    """Load data/anomalies/dark_vessels.json with mtime-based cache invalidation.
+    """Fetch dark-vessel anomalies from GitHub, with local-disk fallback.
 
-    This file is written by scripts/correlate_detections.py inside the daily
-    satellite_monitor.yml workflow. api_anomalies() merges its contents with
-    the main anomalies.json stream from gh-pages at request time.
+    Primary: raw.githubusercontent.com (committed by satellite_monitor.yml).
+    Fallback: data/anomalies/dark_vessels.json on disk.
     """
     import time as _time
-    path = DATA_DIR / 'anomalies' / 'dark_vessels.json'
-    if not path.exists():
-        return {'anomalies': []}
+    now = _time.monotonic()
+    if _dark_vessels_cache['data'] is not None and (now - _dark_vessels_cache['fetched_at']) < SAR_CACHE_TTL_SECONDS:
+        return _dark_vessels_cache['data']
+
+    data = None
     try:
-        mtime = path.stat().st_mtime
-        now = _time.monotonic()
-        cached = _dark_vessels_cache['data']
-        if (cached is not None
-                and _dark_vessels_cache['mtime'] == mtime
-                and (now - _dark_vessels_cache['loaded_at']) < SAR_CACHE_TTL_SECONDS):
-            return cached
-        with open(path, 'r') as f:
-            data = json.load(f)
-        _dark_vessels_cache['data'] = data
-        _dark_vessels_cache['mtime'] = mtime
-        _dark_vessels_cache['loaded_at'] = now
-        return data
+        resp = requests.get(GITHUB_RAW_DARK_VESSELS_URL, timeout=10)
+        resp.raise_for_status()
+        data = resp.json()
+        logger.info("Fetched dark_vessels.json from GitHub (%d anomalies)", len(data.get('anomalies', [])))
     except Exception as exc:  # noqa: BLE001
-        logger.warning("Could not load dark_vessels.json: %s", exc)
+        logger.warning("GitHub dark_vessels fetch failed: %s — falling back to local file", exc)
+
+    if data is None:
+        path = DATA_DIR / 'anomalies' / 'dark_vessels.json'
+        if path.exists():
+            try:
+                with open(path, 'r') as f:
+                    data = json.load(f)
+                logger.info("Using local dark_vessels.json (%d anomalies)", len(data.get('anomalies', [])))
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("Could not load local dark_vessels.json: %s", exc)
+
+    if data is None:
         return {'anomalies': []}
+
+    _dark_vessels_cache['data'] = data
+    _dark_vessels_cache['fetched_at'] = now
+    return data
 
 
 def _anomaly_position(anomaly):
@@ -567,22 +591,42 @@ def analysis_view():
     return render_template('analysis.html')
 
 
+_THUMBNAIL_RE = re.compile(r'^[\w][\w.\-]*\.png$')
+
+
 @app.route('/satellite-thumbnails/<path:filename>')
 def satellite_thumbnail(filename):
-    """Serve a generated SAR thumbnail PNG from data/satellite_imagery/thumbnails/.
+    """Serve a SAR thumbnail PNG, fetched from GitHub with local-disk fallback.
 
-    These PNGs are committed to the repo by the satellite_monitor.yml workflow
-    after each collection run, so they're always present wherever the Flask
-    app is deployed. Served with a short browser cache since filenames are
-    content-addressed by timestamp + tile-id.
+    Primary: proxy from raw.githubusercontent.com (always current after a
+    satellite_monitor.yml push, no redeploy required).
+    Fallback: send_from_directory for local dev where thumbnails exist on disk.
+    Filenames are content-addressed (timestamp + tile-id) so they're immutable
+    once written — a 1-hour browser cache is safe.
     """
+    if not _THUMBNAIL_RE.match(filename):
+        abort(400)
+
+    # Try local disk first (fast, no network hop — works in dev and if the
+    # thumbnail happens to be baked into the current Docker image)
     thumbnails_dir = DATA_DIR / 'satellite_imagery' / 'thumbnails'
-    # send_from_directory prevents path traversal (`..` etc.)
-    if not (thumbnails_dir / filename).exists():
+    if (thumbnails_dir / filename).exists():
+        response = make_response(send_from_directory(str(thumbnails_dir), filename))
+        response.headers['Cache-Control'] = 'public, max-age=3600'
+        return response
+
+    # Proxy from GitHub (handles new tiles committed after last Fly.io deploy)
+    try:
+        url = f"{GITHUB_RAW_THUMBNAILS_BASE}/{filename}"
+        resp = requests.get(url, timeout=15)
+        resp.raise_for_status()
+        response = make_response(resp.content)
+        response.headers['Content-Type'] = 'image/png'
+        response.headers['Cache-Control'] = 'public, max-age=3600'
+        return response
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("Thumbnail proxy failed for %s: %s", filename, exc)
         abort(404)
-    response = make_response(send_from_directory(str(thumbnails_dir), filename))
-    response.headers['Cache-Control'] = 'public, max-age=3600'
-    return response
 
 
 @app.route('/health')
