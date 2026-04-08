@@ -41,6 +41,9 @@ try:
     import tifffile
     from scipy.ndimage import median_filter, label, find_objects
     from skimage.measure import regionprops
+    from shapely.geometry import shape, Point
+    from shapely.ops import unary_union
+    from shapely.prepared import prep
 except ImportError as exc:
     print(f"ERROR: missing dependency: {exc}", file=sys.stderr)
     print("Run: pip install -r requirements.txt", file=sys.stderr)
@@ -86,6 +89,43 @@ COARSE_MEDIAN_MULT = 3.0   # stage-1 coarse filter: pixels > N × global median
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 logger = logging.getLogger('cfar-detector')
+
+LAND_GEOJSON_PATH = BASE_DIR / 'data' / 'ne_50m_land.geojson'
+
+
+# ============================================================================
+# Land mask — reject detections over land/coast/port infrastructure
+# ============================================================================
+
+_LAND_MASK = None
+
+
+def _load_land_mask():
+    """Load Natural Earth 1:50m land polygons once, with shapely prep() for
+    fast repeated point-in-polygon queries. Returns a PreparedGeometry or None."""
+    global _LAND_MASK
+    if _LAND_MASK is not None:
+        return _LAND_MASK
+    if not LAND_GEOJSON_PATH.exists():
+        logger.warning("Land mask not found at %s — skipping land filter", LAND_GEOJSON_PATH)
+        return None
+    import json as _json
+    with open(LAND_GEOJSON_PATH) as f:
+        fc = _json.load(f)
+    polys = [shape(feat['geometry']) for feat in fc['features']]
+    combined = unary_union(polys)
+    _LAND_MASK = prep(combined)
+    logger.info("Loaded land mask (%d polygons)", len(polys))
+    return _LAND_MASK
+
+
+def _is_on_water(lat: float, lon: float) -> bool:
+    """Return True if (lat, lon) is over water. If no land mask is loaded,
+    defaults to True (pass everything through)."""
+    mask = _load_land_mask()
+    if mask is None:
+        return True
+    return not mask.contains(Point(lon, lat))
 
 
 # ============================================================================
@@ -313,9 +353,14 @@ def detect_vessels_in_tile(tile_meta: dict, alpha: float) -> list:
             'tile_zone': tile_meta.get('zone'),
         })
 
+    # Land mask: reject detections over land/coast/port infrastructure
+    before_land = len(detections)
+    detections = [d for d in detections if _is_on_water(d['lat'], d['lon'])]
+    land_filtered = before_land - len(detections)
+
     detections.sort(key=lambda d: d['confidence_db'], reverse=True)
-    logger.info("  %d blobs → %d detections (%d shape-rejected)",
-                n_blobs, len(detections), shape_rejected)
+    logger.info("  %d blobs → %d detections (%d shape-rejected, %d land-filtered)",
+                n_blobs, len(detections), shape_rejected, land_filtered)
     return detections
 
 

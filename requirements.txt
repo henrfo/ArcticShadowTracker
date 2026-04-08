@@ -21,3 +21,6 @@ tifffile>=2024.1.0
 scipy>=1.11.0
 # scikit-image regionprops for shape filtering in CFAR blob analysis.
 scikit-image>=0.21.0
+# shapely for land-mask point-in-polygon filtering of CFAR detections.
+# Transitive dep of sentinelhub but imported directly in detect_vessels_cfar.py.
+shapely>=2.0.0
