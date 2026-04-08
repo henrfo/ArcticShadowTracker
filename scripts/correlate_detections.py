@@ -46,7 +46,7 @@ DARK_VESSELS_DIR = DATA_DIR / 'anomalies'
 DARK_VESSELS_PATH = DARK_VESSELS_DIR / 'dark_vessels.json'
 
 DEFAULT_VESSEL_TRACKS_URL = "https://henrfo.github.io/ArcticShadowTracker/vessel_tracks.json"
-DEFAULT_SEARCH_RADIUS_KM = 2.0
+DEFAULT_SEARCH_RADIUS_KM = 5.0
 DEFAULT_SEARCH_WINDOW_MIN = 60
 
 
