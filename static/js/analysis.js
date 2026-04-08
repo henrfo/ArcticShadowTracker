@@ -56,12 +56,6 @@
   const COUNTRY_FLAG = { Russia: '\u{1F1F7}\u{1F1FA}', China: '\u{1F1E8}\u{1F1F3}', Norway: '\u{1F1F3}\u{1F1F4}' };
 
   // --------------------------------------------------------------------------
-  // Detection color logic
-  // --------------------------------------------------------------------------
-  function detectionRadius(det) {
-    return 12 + (det.confidence_db || 0) * 0.5;
-  }
-
   // --------------------------------------------------------------------------
   // Formatting helpers
   // --------------------------------------------------------------------------
@@ -330,16 +324,13 @@
       }
 
       if (isDark) {
-        // Hollow dashed circle — analyst sees SAR imagery inside
-        const radius = detectionRadius(det);
-        const strokeColor = det.confidence_db >= 15 ? '#8a8a8a' : '#6a6a6a';
+        // Solid pale cyan circle — hollow so the SAR imagery shows inside
         const marker = L.circleMarker([det.lat, det.lon], {
-          radius,
-          color: strokeColor,
-          weight: det.confidence_db >= 15 ? 2.5 : 1.5,
+          radius: 14,
+          color: '#80deea',
+          weight: 2,
           fillOpacity: 0,
           opacity: 0.9,
-          dashArray: '4,3',
         });
         marker.bindPopup(buildDetectionPopup(det), { className: 'det-popup-wrap' });
         marker.addTo(detectionLayer);
