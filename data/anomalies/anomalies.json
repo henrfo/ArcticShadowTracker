@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-04-07T23:42:20.548200Z",
+  "timestamp": "2026-04-08T00:07:37.622740Z",
   "analysis_period_days": 7,
-  "vessels_analyzed": 287,
-  "total_positions": 11610,
-  "anomalies_detected": 7312,
+  "vessels_analyzed": 288,
+  "total_positions": 11777,
+  "anomalies_detected": 7316,
   "anomalies": [
     {
       "mmsi": "249903000",
@@ -33427,6 +33427,25 @@
       }
     },
     {
+      "mmsi": "538004905",
+      "vessel_name": "TO.SPITSBERGEN",
+      "country": "Marshall Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2026-04-07T22:12:20Z",
+      "details": {
+        "gap_duration_minutes": 96.0,
+        "gap_start": "2026-04-07T20:36:20Z",
+        "gap_end": "2026-04-07T22:12:20Z",
+        "last_position": {
+          "lat": 64.8433,
+          "lon": 6.55
+        },
+        "near_border": false,
+        "coverage_edge": false
+      }
+    },
+    {
       "mmsi": "538005072",
       "vessel_name": "YENISEI RIVER",
       "country": "Marshall Islands",
@@ -35454,6 +35473,25 @@
         "last_position": {
           "lat": 72.3116,
           "lon": 26.5217
+        },
+        "near_border": false,
+        "coverage_edge": false
+      }
+    },
+    {
+      "mmsi": "538005350",
+      "vessel_name": "CLEAN OCEAN",
+      "country": "Marshall Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-04-08T00:07:02Z",
+      "details": {
+        "gap_duration_minutes": 36.2,
+        "gap_start": "2026-04-07T23:30:50Z",
+        "gap_end": "2026-04-08T00:07:02Z",
+        "last_position": {
+          "lat": 72.3126,
+          "lon": 26.5315
         },
         "near_border": false,
         "coverage_edge": false
@@ -115146,6 +115184,25 @@
       }
     },
     {
+      "mmsi": "352001686",
+      "vessel_name": "HAI JING HANG",
+      "country": "Panama",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-04-07T23:20:08Z",
+      "details": {
+        "gap_duration_minutes": 51.0,
+        "gap_start": "2026-04-07T22:29:08Z",
+        "gap_end": "2026-04-07T23:20:08Z",
+        "last_position": {
+          "lat": 74.905,
+          "lon": 30.2667
+        },
+        "near_border": false,
+        "coverage_edge": false
+      }
+    },
+    {
       "mmsi": "352003809",
       "vessel_name": "DAKAR",
       "country": "Panama",
@@ -138263,6 +138320,33 @@
       }
     },
     {
+      "mmsi": "352001686",
+      "vessel_name": "HAI JING HANG",
+      "country": "Panama",
+      "anomaly_type": "impossible_speed",
+      "severity": "low",
+      "detected_at": "2026-04-07T23:20:08Z",
+      "details": {
+        "calculated_speed_knots": 39.8,
+        "max_allowed_knots": 30,
+        "vessel_type": "Cargo",
+        "distance_km": 62.65,
+        "time_delta_minutes": 51.0,
+        "positions": [
+          {
+            "lat": 74.905,
+            "lon": 30.2667,
+            "time": "2026-04-07T22:29:08Z"
+          },
+          {
+            "lat": 74.345,
+            "lon": 30.5,
+            "time": "2026-04-07T23:20:08Z"
+          }
+        ]
+      }
+    },
+    {
       "mmsi": "414234000",
       "vessel_name": "XIN HAI ZHOU 71",
       "country": "China",
@@ -138950,35 +139034,6 @@
       "country": "Antigua and Barbuda,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-04-07T09:48:23Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "304011028",
-          "name": "NESTOR",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 59.1239,
-            "lon": 9.6174
-          }
-        },
-        "vessel2": {
-          "mmsi": "538009752",
-          "name": "GENCO MARY",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 59.1172,
-            "lon": 9.6219
-          }
-        },
-        "distance_km": 0.79
-      }
-    },
-    {
-      "mmsi": "304011028,538009752",
-      "vessel_name": "NESTOR & GENCO MARY",
-      "country": "Antigua and Barbuda,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-04-07T04:54:23Z",
       "details": {
         "vessel1": {
@@ -139000,6 +139055,35 @@
           }
         },
         "distance_km": 0.81
+      }
+    },
+    {
+      "mmsi": "304011028,538009752",
+      "vessel_name": "NESTOR & GENCO MARY",
+      "country": "Antigua and Barbuda,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-04-07T09:48:23Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "304011028",
+          "name": "NESTOR",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 59.1239,
+            "lon": 9.6174
+          }
+        },
+        "vessel2": {
+          "mmsi": "538009752",
+          "name": "GENCO MARY",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 59.1172,
+            "lon": 9.6219
+          }
+        },
+        "distance_km": 0.79
       }
     },
     {
@@ -139037,35 +139121,6 @@
       "country": "Malta,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-04-07T19:38:17Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "249110000",
-          "name": "PIONEERING SPIRIT",
-          "country": "Malta",
-          "position": {
-            "lat": 60.6922,
-            "lon": 3.6747
-          }
-        },
-        "vessel2": {
-          "mmsi": "249119000",
-          "name": "LORELAY",
-          "country": "Malta",
-          "position": {
-            "lat": 60.6988,
-            "lon": 3.6669
-          }
-        },
-        "distance_km": 0.85
-      }
-    },
-    {
-      "mmsi": "249110000,249119000",
-      "vessel_name": "PIONEERING SPIRIT & LORELAY",
-      "country": "Malta,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-04-07T06:14:36Z",
       "details": {
         "vessel1": {
@@ -139087,6 +139142,35 @@
           }
         },
         "distance_km": 0.89
+      }
+    },
+    {
+      "mmsi": "249110000,249119000",
+      "vessel_name": "PIONEERING SPIRIT & LORELAY",
+      "country": "Malta,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-04-07T22:22:06Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "249110000",
+          "name": "PIONEERING SPIRIT",
+          "country": "Malta",
+          "position": {
+            "lat": 60.6898,
+            "lon": 3.6773
+          }
+        },
+        "vessel2": {
+          "mmsi": "249119000",
+          "name": "LORELAY",
+          "country": "Malta",
+          "position": {
+            "lat": 60.6964,
+            "lon": 3.6705
+          }
+        },
+        "distance_km": 0.82
       }
     },
     {
@@ -139124,6 +139208,35 @@
       "country": "Malta,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2026-04-07T19:38:17Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "249110000",
+          "name": "PIONEERING SPIRIT",
+          "country": "Malta",
+          "position": {
+            "lat": 60.6922,
+            "lon": 3.6747
+          }
+        },
+        "vessel2": {
+          "mmsi": "249119000",
+          "name": "LORELAY",
+          "country": "Malta",
+          "position": {
+            "lat": 60.6988,
+            "lon": 3.6669
+          }
+        },
+        "distance_km": 0.85
+      }
+    },
+    {
+      "mmsi": "249110000,249119000",
+      "vessel_name": "PIONEERING SPIRIT & LORELAY",
+      "country": "Malta,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2026-04-07T07:49:56Z",
       "details": {
         "vessel1": {
@@ -139145,35 +139258,6 @@
           }
         },
         "distance_km": 0.8
-      }
-    },
-    {
-      "mmsi": "249110000,249119000",
-      "vessel_name": "PIONEERING SPIRIT & LORELAY",
-      "country": "Malta,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-04-07T22:22:06Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "249110000",
-          "name": "PIONEERING SPIRIT",
-          "country": "Malta",
-          "position": {
-            "lat": 60.6898,
-            "lon": 3.6773
-          }
-        },
-        "vessel2": {
-          "mmsi": "249119000",
-          "name": "LORELAY",
-          "country": "Malta",
-          "position": {
-            "lat": 60.6964,
-            "lon": 3.6705
-          }
-        },
-        "distance_km": 0.82
       }
     },
     {
@@ -139240,35 +139324,6 @@
       "country": "Liberia,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-04-05T19:58:11Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "636015145",
-          "name": "OSX 1",
-          "country": "Liberia",
-          "position": {
-            "lat": 60.8607,
-            "lon": 5.0344
-          }
-        },
-        "vessel2": {
-          "mmsi": "370506000",
-          "name": "WEST PHOENIX",
-          "country": "Panama",
-          "position": {
-            "lat": 60.8671,
-            "lon": 5.0288
-          }
-        },
-        "distance_km": 0.78
-      }
-    },
-    {
-      "mmsi": "636015145,370506000",
-      "vessel_name": "OSX 1 & WEST PHOENIX",
-      "country": "Liberia,Panama",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-04-05T15:04:11Z",
       "details": {
         "vessel1": {
@@ -139287,6 +139342,35 @@
           "position": {
             "lat": 60.8671,
             "lon": 5.0289
+          }
+        },
+        "distance_km": 0.78
+      }
+    },
+    {
+      "mmsi": "636015145,370506000",
+      "vessel_name": "OSX 1 & WEST PHOENIX",
+      "country": "Liberia,Panama",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-04-05T19:58:11Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "636015145",
+          "name": "OSX 1",
+          "country": "Liberia",
+          "position": {
+            "lat": 60.8607,
+            "lon": 5.0344
+          }
+        },
+        "vessel2": {
+          "mmsi": "370506000",
+          "name": "WEST PHOENIX",
+          "country": "Panama",
+          "position": {
+            "lat": 60.8671,
+            "lon": 5.0288
           }
         },
         "distance_km": 0.78
@@ -139323,15 +139407,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 7244,
-    "impossible_speeds": 31,
+    "transmission_gaps": 7247,
+    "impossible_speeds": 32,
     "loitering": 23,
     "rendezvous": 14
   },
   "severity_breakdown": {
     "critical": 15,
     "high": 474,
-    "medium": 1748,
-    "low": 5075
+    "medium": 1749,
+    "low": 5078
   }
 }
