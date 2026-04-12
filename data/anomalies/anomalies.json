@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-04-12T19:44:36.049453Z",
+  "timestamp": "2026-04-12T20:06:07.959169Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 169,
-  "total_positions": 1653,
-  "anomalies_detected": 899,
+  "total_positions": 1817,
+  "anomalies_detected": 901,
   "anomalies": [
     {
       "mmsi": "249903000",
@@ -15320,6 +15320,25 @@
       }
     },
     {
+      "mmsi": "636021569",
+      "vessel_name": "MYKLEBUST",
+      "country": "Liberia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-04-12T19:58:37.754517Z",
+      "details": {
+        "gap_duration_minutes": 40.9,
+        "gap_start": "2026-04-12T19:17:46Z",
+        "gap_end": "2026-04-12T19:58:37.754517Z",
+        "last_position": {
+          "lat": 66.7226,
+          "lon": 8.1188
+        },
+        "near_border": false,
+        "coverage_edge": false
+      }
+    },
+    {
       "mmsi": "273275260",
       "vessel_name": "SKIF",
       "country": "Russia",
@@ -17117,18 +17136,37 @@
           }
         ]
       }
+    },
+    {
+      "mmsi": "671568100",
+      "vessel_name": "BJARNI SAEMUNDSSON",
+      "country": "Togo",
+      "anomaly_type": "loitering",
+      "severity": "medium",
+      "detected_at": "2026-04-12T20:05:54Z",
+      "details": {
+        "duration_hours": 6.0,
+        "radius_km": 5,
+        "center_position": {
+          "lat": 63.1196,
+          "lon": 7.7349
+        },
+        "start_time": "2026-04-12T14:05:54Z",
+        "end_time": "2026-04-12T20:05:54Z",
+        "position_count": 11
+      }
     }
   ],
   "statistics": {
-    "transmission_gaps": 895,
+    "transmission_gaps": 896,
     "impossible_speeds": 4,
-    "loitering": 0,
+    "loitering": 1,
     "rendezvous": 0
   },
   "severity_breakdown": {
     "critical": 3,
     "high": 5,
-    "medium": 58,
-    "low": 833
+    "medium": 59,
+    "low": 834
   }
 }
