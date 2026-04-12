@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-04-12T21:53:59.153741Z",
+  "timestamp": "2026-04-12T22:19:52.224964Z",
   "analysis_period_days": 7,
-  "vessels_analyzed": 169,
-  "total_positions": 2297,
-  "anomalies_detected": 1272,
+  "vessels_analyzed": 170,
+  "total_positions": 2456,
+  "anomalies_detected": 1276,
   "anomalies": [
     {
       "mmsi": "249903000",
@@ -589,6 +589,25 @@
         "last_position": {
           "lat": 74.6078,
           "lon": 16.214
+        },
+        "near_border": false,
+        "coverage_edge": false
+      }
+    },
+    {
+      "mmsi": "273891000",
+      "vessel_name": "MYS KORSAKOVA",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2026-04-12T22:11:35Z",
+      "details": {
+        "gap_duration_minutes": 81.0,
+        "gap_start": "2026-04-12T20:50:35Z",
+        "gap_end": "2026-04-12T22:11:35Z",
+        "last_position": {
+          "lat": 74.6295,
+          "lon": 16.2731
         },
         "near_border": false,
         "coverage_edge": false
@@ -1346,6 +1365,25 @@
         "gap_duration_minutes": 33.0,
         "gap_start": "2026-04-12T20:46:37Z",
         "gap_end": "2026-04-12T21:19:37Z",
+        "last_position": {
+          "lat": 60.6175,
+          "lon": 4.8621
+        },
+        "near_border": false,
+        "coverage_edge": false
+      }
+    },
+    {
+      "mmsi": "248020000",
+      "vessel_name": "SOLA TS",
+      "country": "Malta",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-04-12T22:16:37Z",
+      "details": {
+        "gap_duration_minutes": 33.0,
+        "gap_start": "2026-04-12T21:43:37Z",
+        "gap_end": "2026-04-12T22:16:37Z",
         "last_position": {
           "lat": 60.6175,
           "lon": 4.8621
@@ -9117,6 +9155,25 @@
         "gap_duration_minutes": 93.0,
         "gap_start": "2026-04-12T17:39:22Z",
         "gap_end": "2026-04-12T19:12:24Z",
+        "last_position": {
+          "lat": 64.8433,
+          "lon": 6.55
+        },
+        "near_border": false,
+        "coverage_edge": false
+      }
+    },
+    {
+      "mmsi": "538004905",
+      "vessel_name": "TO.SPITSBERGEN",
+      "country": "Marshall Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2026-04-12T21:53:24Z",
+      "details": {
+        "gap_duration_minutes": 161.0,
+        "gap_start": "2026-04-12T19:12:24Z",
+        "gap_end": "2026-04-12T21:53:24Z",
         "last_position": {
           "lat": 64.8433,
           "lon": 6.55
@@ -24176,6 +24233,33 @@
       }
     },
     {
+      "mmsi": "273273160",
+      "vessel_name": "PERSEY",
+      "country": "Russia",
+      "anomaly_type": "impossible_speed",
+      "severity": "high",
+      "detected_at": "2026-04-12T22:11:39Z",
+      "details": {
+        "calculated_speed_knots": 47.8,
+        "max_allowed_knots": 20,
+        "vessel_type": "Tanker",
+        "distance_km": 26.23,
+        "time_delta_minutes": 17.8,
+        "positions": [
+          {
+            "lat": 65.0933,
+            "lon": 4.9137,
+            "time": "2026-04-12T21:53:51.824084Z"
+          },
+          {
+            "lat": 65.3133,
+            "lon": 5.1162,
+            "time": "2026-04-12T22:11:39Z"
+          }
+        ]
+      }
+    },
+    {
       "mmsi": "671568100",
       "vessel_name": "BJARNI SAEMUNDSSON",
       "country": "Togo",
@@ -24215,15 +24299,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 1265,
-    "impossible_speeds": 5,
+    "transmission_gaps": 1268,
+    "impossible_speeds": 6,
     "loitering": 2,
     "rendezvous": 0
   },
   "severity_breakdown": {
     "critical": 4,
-    "high": 9,
-    "medium": 82,
-    "low": 1177
+    "high": 10,
+    "medium": 84,
+    "low": 1178
   }
 }
