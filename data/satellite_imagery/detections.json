@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-03T02:48:48.088212Z",
+  "generated_at": "2026-06-04T02:46:39.075109Z",
   "algorithm": "Two-stage CFAR with VV+VH fusion and shape filtering",
   "params": {
     "variant": "median-MAD robust CFAR, dual-band OR fusion",
@@ -13,9 +13,178 @@
     "max_aspect_ratio": 8.0
   },
   "history_window_days": 14,
-  "tiles_in_history": 49,
-  "total_detections_in_history": 0,
+  "tiles_in_history": 47,
+  "total_detections_in_history": 3,
   "tiles": [
+    {
+      "tile_id": "S1C_IW_GRDH_1SDV_20260603T150953_20260603T151018_007943_010270_F62B_COG.SAFE",
+      "filename": "20260603_150953_S1C_IW_G.tiff",
+      "tile_datetime": "2026-06-03T15:09:53Z",
+      "zone": "hotspot_71.0N_33E_3v",
+      "bbox": [
+        27.4902,
+        70.896,
+        35.6987,
+        72.9014
+      ],
+      "detection_count": 0,
+      "detections": []
+    },
+    {
+      "tile_id": "S1C_IW_GRDH_1SDV_20260603T150928_20260603T150953_007943_010270_0B86_COG.SAFE",
+      "filename": "20260603_150928_S1C_IW_G.tiff",
+      "tile_datetime": "2026-06-03T15:09:28Z",
+      "zone": "hotspot_70.5N_32E_10v",
+      "bbox": [
+        28.9243,
+        69.4412,
+        36.5017,
+        71.4236
+      ],
+      "detection_count": 3,
+      "detections": [
+        {
+          "lat": 70.52485,
+          "lon": 31.99681,
+          "intensity_db": 2.27,
+          "background_mean_db": -17.03,
+          "background_std_db": 2.84,
+          "confidence_db": 6.8,
+          "blob_size_pixels": 13,
+          "estimated_length_m": 361.0,
+          "bbox_pixels": [
+            908,
+            1130,
+            911,
+            1136
+          ],
+          "bbox_geo": [
+            31.99343,
+            70.52168,
+            32.00357,
+            70.52644
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20260603T150928_20260603T150953_007943_010270_0B86_COG.SAFE",
+          "tile_datetime": "2026-06-03T15:09:28Z",
+          "tile_zone": "hotspot_70.5N_32E_10v",
+          "matched_ais": true,
+          "nearest_ais_km": 4.564,
+          "matched_vessel": {
+            "mmsi": "613007420",
+            "name": "CHIOS",
+            "country": "Cameroon",
+            "ais_position": [
+              70.51244,
+              31.84604
+            ],
+            "projected_position": [
+              70.51315,
+              31.87884
+            ],
+            "projection_travel_km": 1.22
+          }
+        },
+        {
+          "lat": 70.53279,
+          "lon": 32.00019,
+          "intensity_db": 3.38,
+          "background_mean_db": -16.98,
+          "background_std_db": 3.11,
+          "confidence_db": 6.54,
+          "blob_size_pixels": 9,
+          "estimated_length_m": 300.0,
+          "bbox_pixels": [
+            909,
+            1121,
+            913,
+            1125
+          ],
+          "bbox_geo": [
+            31.99681,
+            70.53041,
+            32.01033,
+            70.53358
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20260603T150928_20260603T150953_007943_010270_0B86_COG.SAFE",
+          "tile_datetime": "2026-06-03T15:09:28Z",
+          "tile_zone": "hotspot_70.5N_32E_10v",
+          "matched_ais": true,
+          "nearest_ais_km": 5.001,
+          "matched_vessel": {
+            "mmsi": "613007420",
+            "name": "CHIOS",
+            "country": "Cameroon",
+            "ais_position": [
+              70.51244,
+              31.84604
+            ],
+            "projected_position": [
+              70.51315,
+              31.87884
+            ],
+            "projection_travel_km": 1.22
+          }
+        },
+        {
+          "lat": 70.53041,
+          "lon": 32.00357,
+          "intensity_db": 0.38,
+          "background_mean_db": -16.21,
+          "background_std_db": 3.28,
+          "confidence_db": 5.05,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            911,
+            1125,
+            912,
+            1126
+          ],
+          "bbox_geo": [
+            32.00357,
+            70.52962,
+            32.00695,
+            70.53041
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20260603T150928_20260603T150953_007943_010270_0B86_COG.SAFE",
+          "tile_datetime": "2026-06-03T15:09:28Z",
+          "tile_zone": "hotspot_70.5N_32E_10v",
+          "matched_ais": true,
+          "nearest_ais_km": 5.007,
+          "matched_vessel": {
+            "mmsi": "613007420",
+            "name": "CHIOS",
+            "country": "Cameroon",
+            "ais_position": [
+              70.51244,
+              31.84604
+            ],
+            "projected_position": [
+              70.51315,
+              31.87884
+            ],
+            "projection_travel_km": 1.22
+          }
+        }
+      ]
+    },
+    {
+      "tile_id": "S1A_IW_GRDH_1SDV_20260603T061556_20260603T061627_064801_082A36_6E0F_COG.SAFE",
+      "filename": "20260603_061556_S1A_IW_G.tiff",
+      "tile_datetime": "2026-06-03T06:15:56Z",
+      "zone": "hotspot_76.5N_14E_3v",
+      "bbox": [
+        6.7722,
+        76.1625,
+        19.0292,
+        78.5253
+      ],
+      "detection_count": 0,
+      "detections": []
+    },
     {
       "tile_id": "S1D_IW_GRDH_1SDV_20260602T152557_20260602T152622_003059_005487_4645_COG.SAFE",
       "filename": "20260602_152557_S1D_IW_G.tiff",
@@ -631,79 +800,9 @@
       ],
       "detection_count": 0,
       "detections": []
-    },
-    {
-      "tile_id": "S1D_IW_GRDH_1SDV_20260520T162415_20260520T162452_002870_004E47_A626_COG.SAFE",
-      "filename": "20260520_162415_S1D_IW_G.tiff",
-      "tile_datetime": "2026-05-20T16:24:15Z",
-      "zone": "hotspot_74.0N_16E_4v",
-      "bbox": [
-        7.7286,
-        71.485,
-        16.8289,
-        74.0334
-      ],
-      "detection_count": 0,
-      "detections": []
-    },
-    {
-      "tile_id": "S1D_IW_GRDH_1SDV_20260520T162300_20260520T162325_002870_004E47_4884_COG.SAFE",
-      "filename": "20260520_162300_S1D_IW_G.tiff",
-      "tile_datetime": "2026-05-20T16:23:00Z",
-      "zone": "hotspot_68.5N_17E_6v",
-      "bbox": [
-        12.3463,
-        67.1094,
-        19.1188,
-        69.0634
-      ],
-      "detection_count": 0,
-      "detections": []
-    },
-    {
-      "tile_id": "S1A_IW_GRDH_1SDV_20260520T161713_20260520T161727_064603_082348_EAB8_COG.SAFE",
-      "filename": "20260520_161713_S1A_IW_G.tiff",
-      "tile_datetime": "2026-05-20T16:17:13Z",
-      "zone": "hotspot_74.5N_16E_2v",
-      "bbox": [
-        9.469,
-        72.9894,
-        17.8961,
-        74.3114
-      ],
-      "detection_count": 0,
-      "detections": []
-    },
-    {
-      "tile_id": "S1A_IW_GRDH_1SDV_20260520T161648_20260520T161713_064603_082348_ACDA_COG.SAFE",
-      "filename": "20260520_161648_S1A_IW_G.tiff",
-      "tile_datetime": "2026-05-20T16:16:48Z",
-      "zone": "hotspot_73.0N_17E_2v",
-      "bbox": [
-        10.3357,
-        71.5473,
-        18.8592,
-        73.5637
-      ],
-      "detection_count": 0,
-      "detections": []
-    },
-    {
-      "tile_id": "S1C_IW_GRDH_1SDV_20260520T152546_20260520T152611_007739_00FBA3_3634_COG.SAFE",
-      "filename": "20260520_152546_S1C_IW_G.tiff",
-      "tile_datetime": "2026-05-20T15:25:46Z",
-      "zone": "hotspot_70.5N_32E_10v",
-      "bbox": [
-        25.2487,
-        68.9575,
-        32.6354,
-        70.9327
-      ],
-      "detection_count": 0,
-      "detections": []
     }
   ],
-  "correlated_at": "2026-06-03T02:48:48.801356Z",
-  "matched_to_ais": 0,
+  "correlated_at": "2026-06-04T02:46:39.823746Z",
+  "matched_to_ais": 3,
   "dark_vessel_candidates": 0
 }
