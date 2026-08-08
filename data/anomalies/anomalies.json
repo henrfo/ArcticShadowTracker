@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-08T09:49:25.653930Z",
+  "timestamp": "2026-08-08T10:15:34.025783Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 371,
-  "total_positions": 19315,
-  "anomalies_detected": 14643,
+  "total_positions": 19485,
+  "anomalies_detected": 14646,
   "anomalies": [
     {
       "mmsi": "273890200",
@@ -78875,6 +78875,25 @@
       }
     },
     {
+      "mmsi": "538004905",
+      "vessel_name": "TO.SPITSBERGEN",
+      "country": "Marshall Islands",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2026-08-08T08:02:56Z",
+      "details": {
+        "gap_duration_minutes": 93.3,
+        "gap_start": "2026-08-08T06:29:40Z",
+        "gap_end": "2026-08-08T08:02:56Z",
+        "last_position": {
+          "lat": 64.88,
+          "lon": 6.4317
+        },
+        "near_border": false,
+        "coverage_edge": false
+      }
+    },
+    {
       "mmsi": "538005073",
       "vessel_name": "LENA RIVER",
       "country": "Marshall Islands",
@@ -136838,6 +136857,25 @@
         "last_position": {
           "lat": 58.2599,
           "lon": 6.8401
+        },
+        "near_border": false,
+        "coverage_edge": true
+      }
+    },
+    {
+      "mmsi": "374032000",
+      "vessel_name": "ATLANTIC TONJER",
+      "country": "Panama",
+      "anomaly_type": "left_coverage",
+      "severity": "low",
+      "detected_at": "2026-08-08T10:13:57Z",
+      "details": {
+        "gap_duration_minutes": 30.1,
+        "gap_start": "2026-08-08T09:43:52Z",
+        "gap_end": "2026-08-08T10:13:57Z",
+        "last_position": {
+          "lat": 58.2599,
+          "lon": 6.8402
         },
         "near_border": false,
         "coverage_edge": true
@@ -222173,6 +222211,25 @@
       }
     },
     {
+      "mmsi": "538080020",
+      "vessel_name": "HYPERION",
+      "country": "Marshall Islands",
+      "anomaly_type": "left_coverage",
+      "severity": "low",
+      "detected_at": "2026-08-08T10:14:14Z",
+      "details": {
+        "gap_duration_minutes": 30.0,
+        "gap_start": "2026-08-08T09:44:13Z",
+        "gap_end": "2026-08-08T10:14:14Z",
+        "last_position": {
+          "lat": 60.3967,
+          "lon": 5.3166
+        },
+        "near_border": false,
+        "coverage_edge": true
+      }
+    },
+    {
       "mmsi": "538009519",
       "vessel_name": "MAGIC PLUTO",
       "country": "Marshall Islands",
@@ -278519,35 +278576,6 @@
       "country": "Liberia,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-06T07:58:11Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "636015145",
-          "name": "OSX 1",
-          "country": "Liberia",
-          "position": {
-            "lat": 60.8607,
-            "lon": 5.0344
-          }
-        },
-        "vessel2": {
-          "mmsi": "370506000",
-          "name": "WEST PHOENIX",
-          "country": "Panama",
-          "position": {
-            "lat": 60.8671,
-            "lon": 5.0287
-          }
-        },
-        "distance_km": 0.78
-      }
-    },
-    {
-      "mmsi": "636015145,370506000",
-      "vessel_name": "OSX 1 & WEST PHOENIX",
-      "country": "Liberia,Panama",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-08-05T13:13:08Z",
       "details": {
         "vessel1": {
@@ -278566,6 +278594,35 @@
           "position": {
             "lat": 60.8672,
             "lon": 5.0288
+          }
+        },
+        "distance_km": 0.78
+      }
+    },
+    {
+      "mmsi": "636015145,370506000",
+      "vessel_name": "OSX 1 & WEST PHOENIX",
+      "country": "Liberia,Panama",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-06T07:58:11Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "636015145",
+          "name": "OSX 1",
+          "country": "Liberia",
+          "position": {
+            "lat": 60.8607,
+            "lon": 5.0344
+          }
+        },
+        "vessel2": {
+          "mmsi": "370506000",
+          "name": "WEST PHOENIX",
+          "country": "Panama",
+          "position": {
+            "lat": 60.8671,
+            "lon": 5.0287
           }
         },
         "distance_km": 0.78
@@ -278602,7 +278659,7 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 14598,
+    "transmission_gaps": 14601,
     "impossible_speeds": 36,
     "loitering": 0,
     "rendezvous": 9
@@ -278610,7 +278667,7 @@
   "severity_breakdown": {
     "critical": 25,
     "high": 1220,
-    "medium": 6133,
-    "low": 7265
+    "medium": 6134,
+    "low": 7267
   }
 }
