@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-09T22:39:16.406191Z",
+  "timestamp": "2026-08-09T23:04:06.821612Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 378,
-  "total_positions": 24582,
-  "anomalies_detected": 15406,
+  "total_positions": 24749,
+  "anomalies_detected": 15409,
   "anomalies": [
     {
       "mmsi": "273890200",
@@ -142905,6 +142905,25 @@
       }
     },
     {
+      "mmsi": "352006339",
+      "vessel_name": "GAS LONG",
+      "country": "Panama",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-08-09T23:02:54.010495Z",
+      "details": {
+        "gap_duration_minutes": 39.5,
+        "gap_start": "2026-08-09T22:23:27Z",
+        "gap_end": "2026-08-09T23:02:54.010495Z",
+        "last_position": {
+          "lat": 57.4517,
+          "lon": 4.3283
+        },
+        "near_border": false,
+        "coverage_edge": false
+      }
+    },
+    {
       "mmsi": "352006343",
       "vessel_name": "H-405",
       "country": "Panama",
@@ -219418,6 +219437,25 @@
       }
     },
     {
+      "mmsi": "412421136",
+      "vessel_name": "XIN SHI JI 66",
+      "country": "China",
+      "anomaly_type": "transmission_gap",
+      "severity": "critical",
+      "detected_at": "2026-08-09T21:18:17Z",
+      "details": {
+        "gap_duration_minutes": 5030.7,
+        "gap_start": "2026-08-06T09:27:35Z",
+        "gap_end": "2026-08-09T21:18:17Z",
+        "last_position": {
+          "lat": 83.2317,
+          "lon": 34.68
+        },
+        "near_border": true,
+        "coverage_edge": false
+      }
+    },
+    {
       "mmsi": "352005698",
       "vessel_name": "MOBILE VIKING",
       "country": "Panama",
@@ -292108,6 +292146,33 @@
       }
     },
     {
+      "mmsi": "412421136",
+      "vessel_name": "XIN SHI JI 66",
+      "country": "China",
+      "anomaly_type": "impossible_speed",
+      "severity": "low",
+      "detected_at": "2026-08-09T21:18:17Z",
+      "details": {
+        "calculated_speed_knots": 17.7,
+        "max_allowed_knots": 15,
+        "vessel_type": "Fishing",
+        "distance_km": 2752.23,
+        "time_delta_minutes": 5030.7,
+        "positions": [
+          {
+            "lat": 83.2317,
+            "lon": 34.68,
+            "time": "2026-08-06T09:27:35Z"
+          },
+          {
+            "lat": 59.6833,
+            "lon": 3.5067,
+            "time": "2026-08-09T21:18:17Z"
+          }
+        ]
+      }
+    },
+    {
       "mmsi": "412549937",
       "vessel_name": "ZHONGSHUI 937",
       "country": "China",
@@ -293064,35 +293129,6 @@
       "country": "Liberia,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-05T13:13:08Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "636015145",
-          "name": "OSX 1",
-          "country": "Liberia",
-          "position": {
-            "lat": 60.8607,
-            "lon": 5.0344
-          }
-        },
-        "vessel2": {
-          "mmsi": "370506000",
-          "name": "WEST PHOENIX",
-          "country": "Panama",
-          "position": {
-            "lat": 60.8672,
-            "lon": 5.0288
-          }
-        },
-        "distance_km": 0.78
-      }
-    },
-    {
-      "mmsi": "636015145,370506000",
-      "vessel_name": "OSX 1 & WEST PHOENIX",
-      "country": "Liberia,Panama",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-08-06T07:58:11Z",
       "details": {
         "vessel1": {
@@ -293111,6 +293147,35 @@
           "position": {
             "lat": 60.8671,
             "lon": 5.0287
+          }
+        },
+        "distance_km": 0.78
+      }
+    },
+    {
+      "mmsi": "636015145,370506000",
+      "vessel_name": "OSX 1 & WEST PHOENIX",
+      "country": "Liberia,Panama",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-05T13:13:08Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "636015145",
+          "name": "OSX 1",
+          "country": "Liberia",
+          "position": {
+            "lat": 60.8607,
+            "lon": 5.0344
+          }
+        },
+        "vessel2": {
+          "mmsi": "370506000",
+          "name": "WEST PHOENIX",
+          "country": "Panama",
+          "position": {
+            "lat": 60.8672,
+            "lon": 5.0288
           }
         },
         "distance_km": 0.78
@@ -293147,15 +293212,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 15334,
-    "impossible_speeds": 42,
+    "transmission_gaps": 15336,
+    "impossible_speeds": 43,
     "loitering": 21,
     "rendezvous": 9
   },
   "severity_breakdown": {
-    "critical": 24,
+    "critical": 25,
     "high": 1054,
     "medium": 5391,
-    "low": 8937
+    "low": 8939
   }
 }
