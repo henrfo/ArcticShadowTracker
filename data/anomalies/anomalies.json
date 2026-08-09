@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-09T19:38:00.591108Z",
+  "timestamp": "2026-08-09T20:01:56.783948Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 378,
-  "total_positions": 24113,
-  "anomalies_detected": 15407,
+  "total_positions": 24280,
+  "anomalies_detected": 15408,
   "anomalies": [
     {
       "mmsi": "273890200",
@@ -288673,6 +288673,25 @@
       }
     },
     {
+      "mmsi": "314602000",
+      "vessel_name": "WILSON AMSTERDAM",
+      "country": "Barbados",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2026-08-09T20:00:12Z",
+      "details": {
+        "gap_duration_minutes": 70.1,
+        "gap_start": "2026-08-09T18:50:06Z",
+        "gap_end": "2026-08-09T20:00:12Z",
+        "last_position": {
+          "lat": 58.3092,
+          "lon": 3.8304
+        },
+        "near_border": false,
+        "coverage_edge": false
+      }
+    },
+    {
       "mmsi": "636020078",
       "vessel_name": "KOOL ORCA",
       "country": "Liberia",
@@ -292988,6 +293007,35 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2026-08-07T15:07:51Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538006218",
+          "name": "NOBLE CLAUS BACHMANN",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.4374,
+            "lon": 5.1039
+          }
+        },
+        "vessel2": {
+          "mmsi": "538010662",
+          "name": "NOBLE INTERCEPTOR",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.4429,
+            "lon": 5.1007
+          }
+        },
+        "distance_km": 0.63
+      }
+    },
+    {
+      "mmsi": "538006218,538010662",
+      "vessel_name": "NOBLE CLAUS BACHMANN & NOBLE INTERCEPTOR",
+      "country": "Marshall Islands,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2026-08-08T06:56:20Z",
       "details": {
         "vessel1": {
@@ -293041,32 +293089,32 @@
       }
     },
     {
-      "mmsi": "538006218,538010662",
-      "vessel_name": "NOBLE CLAUS BACHMANN & NOBLE INTERCEPTOR",
-      "country": "Marshall Islands,Marshall Islands",
+      "mmsi": "636015145,370506000",
+      "vessel_name": "OSX 1 & WEST PHOENIX",
+      "country": "Liberia,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-07T15:07:51Z",
+      "detected_at": "2026-08-06T07:58:11Z",
       "details": {
         "vessel1": {
-          "mmsi": "538006218",
-          "name": "NOBLE CLAUS BACHMANN",
-          "country": "Marshall Islands",
+          "mmsi": "636015145",
+          "name": "OSX 1",
+          "country": "Liberia",
           "position": {
-            "lat": 60.4374,
-            "lon": 5.1039
+            "lat": 60.8607,
+            "lon": 5.0344
           }
         },
         "vessel2": {
-          "mmsi": "538010662",
-          "name": "NOBLE INTERCEPTOR",
-          "country": "Marshall Islands",
+          "mmsi": "370506000",
+          "name": "WEST PHOENIX",
+          "country": "Panama",
           "position": {
-            "lat": 60.4429,
-            "lon": 5.1007
+            "lat": 60.8671,
+            "lon": 5.0287
           }
         },
-        "distance_km": 0.63
+        "distance_km": 0.78
       }
     },
     {
@@ -293093,35 +293141,6 @@
           "position": {
             "lat": 60.8672,
             "lon": 5.0288
-          }
-        },
-        "distance_km": 0.78
-      }
-    },
-    {
-      "mmsi": "636015145,370506000",
-      "vessel_name": "OSX 1 & WEST PHOENIX",
-      "country": "Liberia,Panama",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-06T07:58:11Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "636015145",
-          "name": "OSX 1",
-          "country": "Liberia",
-          "position": {
-            "lat": 60.8607,
-            "lon": 5.0344
-          }
-        },
-        "vessel2": {
-          "mmsi": "370506000",
-          "name": "WEST PHOENIX",
-          "country": "Panama",
-          "position": {
-            "lat": 60.8671,
-            "lon": 5.0287
           }
         },
         "distance_km": 0.78
@@ -293158,7 +293177,7 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 15336,
+    "transmission_gaps": 15337,
     "impossible_speeds": 41,
     "loitering": 21,
     "rendezvous": 9
@@ -293166,7 +293185,7 @@
   "severity_breakdown": {
     "critical": 24,
     "high": 1054,
-    "medium": 5365,
+    "medium": 5366,
     "low": 8964
   }
 }
