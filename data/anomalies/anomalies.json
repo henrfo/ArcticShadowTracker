@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-09T11:39:39.754413Z",
+  "timestamp": "2026-08-09T12:01:08.377474Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 374,
-  "total_positions": 23006,
-  "anomalies_detected": 15326,
+  "total_positions": 23172,
+  "anomalies_detected": 15327,
   "anomalies": [
     {
       "mmsi": "273890200",
@@ -125153,6 +125153,25 @@
         "last_position": {
           "lat": 79.5,
           "lon": 17.9383
+        },
+        "near_border": false,
+        "coverage_edge": false
+      }
+    },
+    {
+      "mmsi": "352001966",
+      "vessel_name": "LA DATCHA",
+      "country": "Panama",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-08-09T12:00:11Z",
+      "details": {
+        "gap_duration_minutes": 33.0,
+        "gap_start": "2026-08-09T11:27:11Z",
+        "gap_end": "2026-08-09T12:00:11Z",
+        "last_position": {
+          "lat": 79.5509,
+          "lon": 17.6642
         },
         "near_border": false,
         "coverage_edge": false
@@ -291409,6 +291428,35 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2026-08-08T06:56:20Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538006218",
+          "name": "NOBLE CLAUS BACHMANN",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.4374,
+            "lon": 5.1039
+          }
+        },
+        "vessel2": {
+          "mmsi": "538010662",
+          "name": "NOBLE INTERCEPTOR",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.4429,
+            "lon": 5.1009
+          }
+        },
+        "distance_km": 0.63
+      }
+    },
+    {
+      "mmsi": "538006218,538010662",
+      "vessel_name": "NOBLE CLAUS BACHMANN & NOBLE INTERCEPTOR",
+      "country": "Marshall Islands,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2026-08-08T11:14:28Z",
       "details": {
         "vessel1": {
@@ -291456,35 +291504,6 @@
           "position": {
             "lat": 60.4429,
             "lon": 5.1007
-          }
-        },
-        "distance_km": 0.63
-      }
-    },
-    {
-      "mmsi": "538006218,538010662",
-      "vessel_name": "NOBLE CLAUS BACHMANN & NOBLE INTERCEPTOR",
-      "country": "Marshall Islands,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-08T06:56:20Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538006218",
-          "name": "NOBLE CLAUS BACHMANN",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.4374,
-            "lon": 5.1039
-          }
-        },
-        "vessel2": {
-          "mmsi": "538010662",
-          "name": "NOBLE INTERCEPTOR",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.4429,
-            "lon": 5.1009
           }
         },
         "distance_km": 0.63
@@ -291579,7 +291598,7 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 15264,
+    "transmission_gaps": 15265,
     "impossible_speeds": 36,
     "loitering": 17,
     "rendezvous": 9
@@ -291588,6 +291607,6 @@
     "critical": 20,
     "high": 1070,
     "medium": 5694,
-    "low": 8542
+    "low": 8543
   }
 }
