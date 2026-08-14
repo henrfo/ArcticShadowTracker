@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-08-13T01:09:37.552631Z",
+  "last_updated": "2026-08-14T01:06:37.492842Z",
   "source": "satellite_monitor.yml CFAR correlation",
-  "tiles_analyzed": 43,
-  "total_detections": 63,
-  "matched_to_ais": 20,
-  "dark_vessel_candidates": 43,
+  "tiles_analyzed": 42,
+  "total_detections": 29,
+  "matched_to_ais": 15,
+  "dark_vessel_candidates": 14,
   "search_radius_km": 5.0,
   "ais_search_window_min": 60,
   "anomalies": [
@@ -14,29 +14,149 @@
       "mmsi": null,
       "vessel_name": "Unknown",
       "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
+      "detected_at": "2026-08-13T16:14:43Z",
+      "formatted_time": "Aug 13, 16:14",
       "details": {
         "detection": {
-          "lat": 68.27105,
-          "lon": 13.27616,
-          "confidence_db": 8.17,
-          "intensity_db": 3.6,
+          "lat": 69.18225,
+          "lon": 16.60748,
+          "confidence_db": 8.52,
+          "intensity_db": 1.19,
+          "estimated_length_m": 424.0,
+          "blob_size_pixels": 18
+        },
+        "tile_id": "S1C_IW_GRDH_1SDV_20260813T161443_20260813T161508_008979_011D13_618B_COG.SAFE",
+        "tile_zone": "hotspot_68.5N_17E_4v",
+        "tile_datetime": "2026-08-13T16:14:43Z",
+        "nearest_ais_km": null,
+        "search_radius_km": 5.0,
+        "ais_search_window_min": 60,
+        "last_position": {
+          "lat": 69.18225,
+          "lon": 16.60748
+        }
+      },
+      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 8.52\u03c3, ~424.0 m)"
+    },
+    {
+      "anomaly_type": "dark_vessel",
+      "severity": "low",
+      "mmsi": null,
+      "vessel_name": "Unknown",
+      "country": "Unknown",
+      "detected_at": "2026-08-13T16:14:43Z",
+      "formatted_time": "Aug 13, 16:14",
+      "details": {
+        "detection": {
+          "lat": 67.8605,
+          "lon": 14.56473,
+          "confidence_db": 6.27,
+          "intensity_db": -0.62,
+          "estimated_length_m": 100.0,
+          "blob_size_pixels": 1
+        },
+        "tile_id": "S1C_IW_GRDH_1SDV_20260813T161443_20260813T161508_008979_011D13_618B_COG.SAFE",
+        "tile_zone": "hotspot_68.5N_17E_4v",
+        "tile_datetime": "2026-08-13T16:14:43Z",
+        "nearest_ais_km": null,
+        "search_radius_km": 5.0,
+        "ais_search_window_min": 60,
+        "last_position": {
+          "lat": 67.8605,
+          "lon": 14.56473
+        }
+      },
+      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 6.27\u03c3, ~100.0 m)"
+    },
+    {
+      "anomaly_type": "dark_vessel",
+      "severity": "low",
+      "mmsi": null,
+      "vessel_name": "Unknown",
+      "country": "Unknown",
+      "detected_at": "2026-08-13T16:14:43Z",
+      "formatted_time": "Aug 13, 16:14",
+      "details": {
+        "detection": {
+          "lat": 69.28561,
+          "lon": 15.6397,
+          "confidence_db": 6.02,
+          "intensity_db": -3.72,
+          "estimated_length_m": 173.0,
+          "blob_size_pixels": 3
+        },
+        "tile_id": "S1C_IW_GRDH_1SDV_20260813T161443_20260813T161508_008979_011D13_618B_COG.SAFE",
+        "tile_zone": "hotspot_68.5N_17E_4v",
+        "tile_datetime": "2026-08-13T16:14:43Z",
+        "nearest_ais_km": null,
+        "search_radius_km": 5.0,
+        "ais_search_window_min": 60,
+        "last_position": {
+          "lat": 69.28561,
+          "lon": 15.6397
+        }
+      },
+      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 6.02\u03c3, ~173.0 m)"
+    },
+    {
+      "anomaly_type": "dark_vessel",
+      "severity": "low",
+      "mmsi": null,
+      "vessel_name": "Unknown",
+      "country": "Unknown",
+      "detected_at": "2026-08-13T16:14:43Z",
+      "formatted_time": "Aug 13, 16:14",
+      "details": {
+        "detection": {
+          "lat": 68.5433,
+          "lon": 14.51573,
+          "confidence_db": 6.01,
+          "intensity_db": -1.07,
+          "estimated_length_m": 100.0,
+          "blob_size_pixels": 1
+        },
+        "tile_id": "S1C_IW_GRDH_1SDV_20260813T161443_20260813T161508_008979_011D13_618B_COG.SAFE",
+        "tile_zone": "hotspot_68.5N_17E_4v",
+        "tile_datetime": "2026-08-13T16:14:43Z",
+        "nearest_ais_km": null,
+        "search_radius_km": 5.0,
+        "ais_search_window_min": 60,
+        "last_position": {
+          "lat": 68.5433,
+          "lon": 14.51573
+        }
+      },
+      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 6.01\u03c3, ~100.0 m)"
+    },
+    {
+      "anomaly_type": "dark_vessel",
+      "severity": "low",
+      "mmsi": null,
+      "vessel_name": "Unknown",
+      "country": "Unknown",
+      "detected_at": "2026-08-13T16:14:43Z",
+      "formatted_time": "Aug 13, 16:14",
+      "details": {
+        "detection": {
+          "lat": 67.56765,
+          "lon": 14.27378,
+          "confidence_db": 5.8,
+          "intensity_db": -1.36,
           "estimated_length_m": 200.0,
           "blob_size_pixels": 4
         },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
+        "tile_id": "S1C_IW_GRDH_1SDV_20260813T161443_20260813T161508_008979_011D13_618B_COG.SAFE",
         "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
+        "tile_datetime": "2026-08-13T16:14:43Z",
         "nearest_ais_km": null,
         "search_radius_km": 5.0,
         "ais_search_window_min": 60,
         "last_position": {
-          "lat": 68.27105,
-          "lon": 13.27616
+          "lat": 67.56765,
+          "lon": 14.27378
         }
       },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 8.17\u03c3, ~200.0 m)"
+      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.8\u03c3, ~200.0 m)"
     },
     {
       "anomaly_type": "dark_vessel",
@@ -44,29 +164,29 @@
       "mmsi": null,
       "vessel_name": "Unknown",
       "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
+      "detected_at": "2026-08-13T16:14:43Z",
+      "formatted_time": "Aug 13, 16:14",
       "details": {
         "detection": {
-          "lat": 68.43843,
-          "lon": 13.44265,
-          "confidence_db": 7.78,
-          "intensity_db": -3.5,
+          "lat": 67.88008,
+          "lon": 14.58004,
+          "confidence_db": 5.77,
+          "intensity_db": -3.37,
           "estimated_length_m": 173.0,
           "blob_size_pixels": 3
         },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
+        "tile_id": "S1C_IW_GRDH_1SDV_20260813T161443_20260813T161508_008979_011D13_618B_COG.SAFE",
         "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
+        "tile_datetime": "2026-08-13T16:14:43Z",
         "nearest_ais_km": null,
         "search_radius_km": 5.0,
         "ais_search_window_min": 60,
         "last_position": {
-          "lat": 68.43843,
-          "lon": 13.44265
+          "lat": 67.88008,
+          "lon": 14.58004
         }
       },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 7.78\u03c3, ~173.0 m)"
+      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.77\u03c3, ~173.0 m)"
     },
     {
       "anomaly_type": "dark_vessel",
@@ -74,29 +194,29 @@
       "mmsi": null,
       "vessel_name": "Unknown",
       "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
+      "detected_at": "2026-08-13T16:14:43Z",
+      "formatted_time": "Aug 13, 16:14",
       "details": {
         "detection": {
-          "lat": 68.38993,
-          "lon": 13.42448,
-          "confidence_db": 7.4,
-          "intensity_db": 0.26,
-          "estimated_length_m": 265.0,
-          "blob_size_pixels": 7
+          "lat": 69.25429,
+          "lon": 16.64423,
+          "confidence_db": 5.47,
+          "intensity_db": -7.48,
+          "estimated_length_m": 100.0,
+          "blob_size_pixels": 1
         },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
+        "tile_id": "S1C_IW_GRDH_1SDV_20260813T161443_20260813T161508_008979_011D13_618B_COG.SAFE",
         "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
+        "tile_datetime": "2026-08-13T16:14:43Z",
         "nearest_ais_km": null,
         "search_radius_km": 5.0,
         "ais_search_window_min": 60,
         "last_position": {
-          "lat": 68.38993,
-          "lon": 13.42448
+          "lat": 69.25429,
+          "lon": 16.64423
         }
       },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 7.4\u03c3, ~265.0 m)"
+      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.47\u03c3, ~100.0 m)"
     },
     {
       "anomaly_type": "dark_vessel",
@@ -104,29 +224,29 @@
       "mmsi": null,
       "vessel_name": "Unknown",
       "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
+      "detected_at": "2026-08-13T16:14:43Z",
+      "formatted_time": "Aug 13, 16:14",
       "details": {
         "detection": {
-          "lat": 68.72937,
-          "lon": 13.91487,
-          "confidence_db": 7.04,
-          "intensity_db": -6.32,
-          "estimated_length_m": 173.0,
-          "blob_size_pixels": 3
+          "lat": 69.06245,
+          "lon": 15.39163,
+          "confidence_db": 5.42,
+          "intensity_db": 2.04,
+          "estimated_length_m": 100.0,
+          "blob_size_pixels": 1
         },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
+        "tile_id": "S1C_IW_GRDH_1SDV_20260813T161443_20260813T161508_008979_011D13_618B_COG.SAFE",
         "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
+        "tile_datetime": "2026-08-13T16:14:43Z",
         "nearest_ais_km": null,
         "search_radius_km": 5.0,
         "ais_search_window_min": 60,
         "last_position": {
-          "lat": 68.72937,
-          "lon": 13.91487
+          "lat": 69.06245,
+          "lon": 15.39163
         }
       },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 7.04\u03c3, ~173.0 m)"
+      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.42\u03c3, ~100.0 m)"
     },
     {
       "anomaly_type": "dark_vessel",
@@ -134,29 +254,29 @@
       "mmsi": null,
       "vessel_name": "Unknown",
       "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
+      "detected_at": "2026-08-13T16:14:43Z",
+      "formatted_time": "Aug 13, 16:14",
       "details": {
         "detection": {
-          "lat": 68.80758,
-          "lon": 14.07531,
-          "confidence_db": 6.63,
-          "intensity_db": 1.73,
-          "estimated_length_m": 300.0,
-          "blob_size_pixels": 9
+          "lat": 69.17912,
+          "lon": 16.71467,
+          "confidence_db": 5.41,
+          "intensity_db": -2.45,
+          "estimated_length_m": 100.0,
+          "blob_size_pixels": 1
         },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
+        "tile_id": "S1C_IW_GRDH_1SDV_20260813T161443_20260813T161508_008979_011D13_618B_COG.SAFE",
         "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
+        "tile_datetime": "2026-08-13T16:14:43Z",
         "nearest_ais_km": null,
         "search_radius_km": 5.0,
         "ais_search_window_min": 60,
         "last_position": {
-          "lat": 68.80758,
-          "lon": 14.07531
+          "lat": 69.17912,
+          "lon": 16.71467
         }
       },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 6.63\u03c3, ~300.0 m)"
+      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.41\u03c3, ~100.0 m)"
     },
     {
       "anomaly_type": "dark_vessel",
@@ -164,29 +284,59 @@
       "mmsi": null,
       "vessel_name": "Unknown",
       "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
+      "detected_at": "2026-08-13T16:14:43Z",
+      "formatted_time": "Aug 13, 16:14",
       "details": {
         "detection": {
-          "lat": 68.8459,
-          "lon": 13.86947,
-          "confidence_db": 6.53,
-          "intensity_db": -6.85,
+          "lat": 69.2535,
+          "lon": 16.64116,
+          "confidence_db": 5.3,
+          "intensity_db": -6.64,
+          "estimated_length_m": 100.0,
+          "blob_size_pixels": 1
+        },
+        "tile_id": "S1C_IW_GRDH_1SDV_20260813T161443_20260813T161508_008979_011D13_618B_COG.SAFE",
+        "tile_zone": "hotspot_68.5N_17E_4v",
+        "tile_datetime": "2026-08-13T16:14:43Z",
+        "nearest_ais_km": null,
+        "search_radius_km": 5.0,
+        "ais_search_window_min": 60,
+        "last_position": {
+          "lat": 69.2535,
+          "lon": 16.64116
+        }
+      },
+      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.3\u03c3, ~100.0 m)"
+    },
+    {
+      "anomaly_type": "dark_vessel",
+      "severity": "low",
+      "mmsi": null,
+      "vessel_name": "Unknown",
+      "country": "Unknown",
+      "detected_at": "2026-08-13T16:14:43Z",
+      "formatted_time": "Aug 13, 16:14",
+      "details": {
+        "detection": {
+          "lat": 69.20182,
+          "lon": 16.74835,
+          "confidence_db": 5.24,
+          "intensity_db": -4.93,
           "estimated_length_m": 224.0,
           "blob_size_pixels": 5
         },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
+        "tile_id": "S1C_IW_GRDH_1SDV_20260813T161443_20260813T161508_008979_011D13_618B_COG.SAFE",
         "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
+        "tile_datetime": "2026-08-13T16:14:43Z",
         "nearest_ais_km": null,
         "search_radius_km": 5.0,
         "ais_search_window_min": 60,
         "last_position": {
-          "lat": 68.8459,
-          "lon": 13.86947
+          "lat": 69.20182,
+          "lon": 16.74835
         }
       },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 6.53\u03c3, ~224.0 m)"
+      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.24\u03c3, ~224.0 m)"
     },
     {
       "anomaly_type": "dark_vessel",
@@ -194,896 +344,26 @@
       "mmsi": null,
       "vessel_name": "Unknown",
       "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
+      "detected_at": "2026-08-13T16:14:43Z",
+      "formatted_time": "Aug 13, 16:14",
       "details": {
         "detection": {
-          "lat": 68.45485,
-          "lon": 16.56359,
-          "confidence_db": 6.48,
-          "intensity_db": -4.71,
-          "estimated_length_m": 283.0,
-          "blob_size_pixels": 8
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.45485,
-          "lon": 16.56359
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 6.48\u03c3, ~283.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.74736,
-          "lon": 13.6939,
-          "confidence_db": 6.3,
-          "intensity_db": -6.86,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.74736,
-          "lon": 13.6939
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 6.3\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.75831,
-          "lon": 13.78471,
-          "confidence_db": 6.16,
-          "intensity_db": -7.29,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.75831,
-          "lon": 13.78471
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 6.16\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.92411,
-          "lon": 13.84828,
-          "confidence_db": 6.02,
-          "intensity_db": -7.0,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.92411,
-          "lon": 13.84828
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 6.02\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.84747,
-          "lon": 13.76352,
-          "confidence_db": 6.0,
-          "intensity_db": -3.98,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.84747,
-          "lon": 13.76352
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 6.0\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.34457,
-          "lon": 13.31551,
-          "confidence_db": 6.0,
-          "intensity_db": 1.2,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.34457,
-          "lon": 13.31551
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 6.0\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 69.00154,
-          "lon": 12.71917,
-          "confidence_db": 5.91,
-          "intensity_db": -3.0,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 69.00154,
-          "lon": 12.71917
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.91\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.97886,
-          "lon": 14.03899,
-          "confidence_db": 5.91,
-          "intensity_db": -6.53,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.97886,
-          "lon": 14.03899
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.91\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.53854,
-          "lon": 14.72614,
-          "confidence_db": 5.88,
-          "intensity_db": -6.81,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.53854,
-          "lon": 14.72614
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.88\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.73015,
-          "lon": 13.71509,
-          "confidence_db": 5.79,
-          "intensity_db": -7.15,
-          "estimated_length_m": 200.0,
-          "blob_size_pixels": 4
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.73015,
-          "lon": 13.71509
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.79\u03c3, ~200.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 67.2246,
-          "lon": 12.97042,
-          "confidence_db": 5.77,
-          "intensity_db": -3.3,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 67.2246,
-          "lon": 12.97042
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.77\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.85685,
-          "lon": 15.54043,
-          "confidence_db": 5.72,
-          "intensity_db": -4.69,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.85685,
-          "lon": 15.54043
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.72\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.46502,
-          "lon": 13.37,
-          "confidence_db": 5.65,
-          "intensity_db": -4.87,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.46502,
-          "lon": 13.37
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.65\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 67.54213,
-          "lon": 15.36183,
-          "confidence_db": 5.59,
-          "intensity_db": -4.97,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 67.54213,
-          "lon": 15.36183
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.59\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.86702,
-          "lon": 13.85736,
-          "confidence_db": 5.54,
-          "intensity_db": -6.84,
-          "estimated_length_m": 265.0,
-          "blob_size_pixels": 7
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.86702,
-          "lon": 13.85736
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.54\u03c3, ~265.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.24133,
-          "lon": 13.49411,
-          "confidence_db": 5.49,
-          "intensity_db": -0.86,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.24133,
-          "lon": 13.49411
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.49\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.86937,
-          "lon": 13.86644,
-          "confidence_db": 5.48,
-          "intensity_db": -6.65,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.86937,
-          "lon": 13.86644
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.48\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 67.21521,
-          "lon": 13.04307,
-          "confidence_db": 5.45,
-          "intensity_db": 1.02,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 67.21521,
-          "lon": 13.04307
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.45\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.361,
-          "lon": 13.48805,
-          "confidence_db": 5.41,
-          "intensity_db": -4.65,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.361,
-          "lon": 13.48805
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.41\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 67.2942,
-          "lon": 12.44067,
-          "confidence_db": 5.41,
-          "intensity_db": -3.08,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 67.2942,
-          "lon": 12.44067
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.41\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.73015,
-          "lon": 13.72417,
-          "confidence_db": 5.38,
-          "intensity_db": -7.41,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.73015,
-          "lon": 13.72417
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.38\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.24603,
-          "lon": 12.90079,
-          "confidence_db": 5.38,
-          "intensity_db": -7.07,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.24603,
-          "lon": 12.90079
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.38\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.84903,
-          "lon": 13.80287,
-          "confidence_db": 5.36,
-          "intensity_db": -6.37,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.84903,
-          "lon": 13.80287
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.36\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.4658,
-          "lon": 13.36697,
-          "confidence_db": 5.35,
-          "intensity_db": -5.95,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.4658,
-          "lon": 13.36697
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.35\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.88423,
-          "lon": 13.8846,
-          "confidence_db": 5.33,
-          "intensity_db": -3.78,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.88423,
-          "lon": 13.8846
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.33\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.89596,
-          "lon": 13.9512,
-          "confidence_db": 5.32,
-          "intensity_db": -2.21,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.89596,
-          "lon": 13.9512
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.32\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.53932,
-          "lon": 14.72311,
-          "confidence_db": 5.28,
-          "intensity_db": -8.07,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.53932,
-          "lon": 14.72311
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.28\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.67775,
-          "lon": 14.3084,
-          "confidence_db": 5.27,
-          "intensity_db": -3.71,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.67775,
-          "lon": 14.3084
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.27\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 67.19566,
-          "lon": 13.48503,
-          "confidence_db": 5.27,
-          "intensity_db": -5.09,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 67.19566,
-          "lon": 13.48503
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.27\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.54088,
-          "lon": 12.85236,
+          "lat": 69.20809,
+          "lon": 15.47432,
           "confidence_db": 5.23,
-          "intensity_db": -3.87,
+          "intensity_db": -6.74,
           "estimated_length_m": 100.0,
           "blob_size_pixels": 1
         },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
+        "tile_id": "S1C_IW_GRDH_1SDV_20260813T161443_20260813T161508_008979_011D13_618B_COG.SAFE",
         "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
+        "tile_datetime": "2026-08-13T16:14:43Z",
         "nearest_ais_km": null,
         "search_radius_km": 5.0,
         "ais_search_window_min": 60,
         "last_position": {
-          "lat": 68.54088,
-          "lon": 12.85236
+          "lat": 69.20809,
+          "lon": 15.47432
         }
       },
       "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.23\u03c3, ~100.0 m)"
@@ -1094,29 +374,29 @@
       "mmsi": null,
       "vessel_name": "Unknown",
       "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
+      "detected_at": "2026-08-13T16:14:43Z",
+      "formatted_time": "Aug 13, 16:14",
       "details": {
         "detection": {
-          "lat": 68.63864,
-          "lon": 13.87855,
-          "confidence_db": 5.12,
-          "intensity_db": -8.08,
+          "lat": 67.5144,
+          "lon": 14.37485,
+          "confidence_db": 5.14,
+          "intensity_db": -3.15,
           "estimated_length_m": 100.0,
           "blob_size_pixels": 1
         },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
+        "tile_id": "S1C_IW_GRDH_1SDV_20260813T161443_20260813T161508_008979_011D13_618B_COG.SAFE",
         "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
+        "tile_datetime": "2026-08-13T16:14:43Z",
         "nearest_ais_km": null,
         "search_radius_km": 5.0,
         "ais_search_window_min": 60,
         "last_position": {
-          "lat": 68.63864,
-          "lon": 13.87855
+          "lat": 67.5144,
+          "lon": 14.37485
         }
       },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.12\u03c3, ~100.0 m)"
+      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.14\u03c3, ~100.0 m)"
     },
     {
       "anomaly_type": "dark_vessel",
@@ -1124,179 +404,29 @@
       "mmsi": null,
       "vessel_name": "Unknown",
       "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
+      "detected_at": "2026-08-13T16:14:43Z",
+      "formatted_time": "Aug 13, 16:14",
       "details": {
         "detection": {
-          "lat": 67.69699,
-          "lon": 14.08439,
-          "confidence_db": 5.09,
-          "intensity_db": -6.0,
+          "lat": 68.37886,
+          "lon": 17.02705,
+          "confidence_db": 5.06,
+          "intensity_db": -1.79,
           "estimated_length_m": 100.0,
           "blob_size_pixels": 1
         },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
+        "tile_id": "S1C_IW_GRDH_1SDV_20260813T161443_20260813T161508_008979_011D13_618B_COG.SAFE",
         "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
+        "tile_datetime": "2026-08-13T16:14:43Z",
         "nearest_ais_km": null,
         "search_radius_km": 5.0,
         "ais_search_window_min": 60,
         "last_position": {
-          "lat": 67.69699,
-          "lon": 14.08439
+          "lat": 68.37886,
+          "lon": 17.02705
         }
       },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.09\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 68.89596,
-          "lon": 13.99055,
-          "confidence_db": 5.08,
-          "intensity_db": -7.48,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 68.89596,
-          "lon": 13.99055
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.08\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-12T16:23:05Z",
-      "formatted_time": "Aug 12, 16:23",
-      "details": {
-        "detection": {
-          "lat": 67.18784,
-          "lon": 13.53346,
-          "confidence_db": 5.01,
-          "intensity_db": -6.48,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260812T162305_20260812T162330_004095_00778C_4C98_COG.SAFE",
-        "tile_zone": "hotspot_68.5N_17E_4v",
-        "tile_datetime": "2026-08-12T16:23:05Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 67.18784,
-          "lon": 13.53346
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.01\u03c3, ~100.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "medium",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-11T04:22:02Z",
-      "formatted_time": "Aug 11, 04:22",
-      "details": {
-        "detection": {
-          "lat": 69.88548,
-          "lon": 36.18314,
-          "confidence_db": 8.41,
-          "intensity_db": -0.36,
-          "estimated_length_m": 332.0,
-          "blob_size_pixels": 11
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260811T042202_20260811T042227_004073_0076CC_E8A2_COG.SAFE",
-        "tile_zone": "hotspot_70.5N_32E_13v",
-        "tile_datetime": "2026-08-11T04:22:02Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 69.88548,
-          "lon": 36.18314
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 8.41\u03c3, ~332.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-11T04:22:02Z",
-      "formatted_time": "Aug 11, 04:22",
-      "details": {
-        "detection": {
-          "lat": 71.4316,
-          "lon": 35.22266,
-          "confidence_db": 5.95,
-          "intensity_db": 6.32,
-          "estimated_length_m": 265.0,
-          "blob_size_pixels": 7
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260811T042202_20260811T042227_004073_0076CC_E8A2_COG.SAFE",
-        "tile_zone": "hotspot_70.5N_32E_13v",
-        "tile_datetime": "2026-08-11T04:22:02Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 71.4316,
-          "lon": 35.22266
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.95\u03c3, ~265.0 m)"
-    },
-    {
-      "anomaly_type": "dark_vessel",
-      "severity": "low",
-      "mmsi": null,
-      "vessel_name": "Unknown",
-      "country": "Unknown",
-      "detected_at": "2026-08-11T04:22:02Z",
-      "formatted_time": "Aug 11, 04:22",
-      "details": {
-        "detection": {
-          "lat": 71.15099,
-          "lon": 37.03082,
-          "confidence_db": 5.44,
-          "intensity_db": -10.91,
-          "estimated_length_m": 100.0,
-          "blob_size_pixels": 1
-        },
-        "tile_id": "S1D_IW_GRDH_1SDV_20260811T042202_20260811T042227_004073_0076CC_E8A2_COG.SAFE",
-        "tile_zone": "hotspot_70.5N_32E_13v",
-        "tile_datetime": "2026-08-11T04:22:02Z",
-        "nearest_ais_km": null,
-        "search_radius_km": 5.0,
-        "ais_search_window_min": 60,
-        "last_position": {
-          "lat": 71.15099,
-          "lon": 37.03082
-        }
-      },
-      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.44\u03c3, ~100.0 m)"
+      "description": "Vessel detected on SAR with no AIS signal within 5 km (confidence 5.06\u03c3, ~100.0 m)"
     }
   ]
 }
