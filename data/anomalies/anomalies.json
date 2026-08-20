@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-19T23:54:13.080150Z",
+  "timestamp": "2026-08-20T00:07:10.113402Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 374,
-  "total_positions": 57302,
-  "anomalies_detected": 17431,
+  "total_positions": 57474,
+  "anomalies_detected": 17433,
   "anomalies": [
     {
       "mmsi": "273437550",
@@ -326578,6 +326578,25 @@
       }
     },
     {
+      "mmsi": "412067000",
+      "vessel_name": "YUAN HAI BAI YU",
+      "country": "China",
+      "anomaly_type": "transmission_gap",
+      "severity": "medium",
+      "detected_at": "2026-08-19T23:09:07Z",
+      "details": {
+        "gap_duration_minutes": 108.0,
+        "gap_start": "2026-08-19T21:21:07Z",
+        "gap_end": "2026-08-19T23:09:07Z",
+        "last_position": {
+          "lat": 75.4867,
+          "lon": 8.0583
+        },
+        "near_border": false,
+        "coverage_edge": false
+      }
+    },
+    {
       "mmsi": "372002000",
       "vessel_name": "CITY OF ROTTERDAM",
       "country": "Panama",
@@ -329491,6 +329510,33 @@
       }
     },
     {
+      "mmsi": "412067000",
+      "vessel_name": "YUAN HAI BAI YU",
+      "country": "China",
+      "anomaly_type": "impossible_speed",
+      "severity": "critical",
+      "detected_at": "2026-08-19T23:09:07Z",
+      "details": {
+        "calculated_speed_knots": 255.1,
+        "max_allowed_knots": 30,
+        "vessel_type": "Cargo",
+        "distance_km": 850.35,
+        "time_delta_minutes": 108.0,
+        "positions": [
+          {
+            "lat": 75.4867,
+            "lon": 8.0583,
+            "time": "2026-08-19T21:21:07Z"
+          },
+          {
+            "lat": 70.4167,
+            "lon": -11.7733,
+            "time": "2026-08-19T23:09:07Z"
+          }
+        ]
+      }
+    },
+    {
       "mmsi": "229767000",
       "vessel_name": "ARCTIC AURORA",
       "country": "Malta",
@@ -330865,7 +330911,7 @@
       "country": "Barbados,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-13T22:58:22Z",
+      "detected_at": "2026-08-14T11:55:24Z",
       "details": {
         "vessel1": {
           "mmsi": "314635000",
@@ -330894,7 +330940,7 @@
       "country": "Barbados,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-14T11:55:24Z",
+      "detected_at": "2026-08-13T22:58:22Z",
       "details": {
         "vessel1": {
           "mmsi": "314635000",
@@ -331010,7 +331056,36 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-16T15:31:33Z",
+      "detected_at": "2026-08-16T18:01:29Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538001757",
+          "name": "NOBLE ENDEAVOR",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.44,
+            "lon": 5.1026
+          }
+        },
+        "vessel2": {
+          "mmsi": "538010662",
+          "name": "NOBLE INTERCEPTOR",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.4429,
+            "lon": 5.1008
+          }
+        },
+        "distance_km": 0.33
+      }
+    },
+    {
+      "mmsi": "538001757,538010662",
+      "vessel_name": "NOBLE ENDEAVOR & NOBLE INTERCEPTOR",
+      "country": "Marshall Islands,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-16T16:22:30Z",
       "details": {
         "vessel1": {
           "mmsi": "538001757",
@@ -331030,6 +331105,35 @@
             "lon": 5.1009
           }
         },
+        "distance_km": 0.34
+      }
+    },
+    {
+      "mmsi": "538001757,538010662",
+      "vessel_name": "NOBLE ENDEAVOR & NOBLE INTERCEPTOR",
+      "country": "Marshall Islands,Marshall Islands",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-16T19:31:29Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "538001757",
+          "name": "NOBLE ENDEAVOR",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.44,
+            "lon": 5.1026
+          }
+        },
+        "vessel2": {
+          "mmsi": "538010662",
+          "name": "NOBLE INTERCEPTOR",
+          "country": "Marshall Islands",
+          "position": {
+            "lat": 60.4428,
+            "lon": 5.1009
+          }
+        },
         "distance_km": 0.33
       }
     },
@@ -331039,7 +331143,7 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-16T18:01:29Z",
+      "detected_at": "2026-08-16T15:31:33Z",
       "details": {
         "vessel1": {
           "mmsi": "538001757",
@@ -331056,7 +331160,7 @@
           "country": "Marshall Islands",
           "position": {
             "lat": 60.4429,
-            "lon": 5.1008
+            "lon": 5.1009
           }
         },
         "distance_km": 0.33
@@ -331126,35 +331230,6 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-16T19:31:29Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538001757",
-          "name": "NOBLE ENDEAVOR",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.44,
-            "lon": 5.1026
-          }
-        },
-        "vessel2": {
-          "mmsi": "538010662",
-          "name": "NOBLE INTERCEPTOR",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.4428,
-            "lon": 5.1009
-          }
-        },
-        "distance_km": 0.33
-      }
-    },
-    {
-      "mmsi": "538001757,538010662",
-      "vessel_name": "NOBLE ENDEAVOR & NOBLE INTERCEPTOR",
-      "country": "Marshall Islands,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-08-16T17:37:30Z",
       "details": {
         "vessel1": {
@@ -331173,35 +331248,6 @@
           "position": {
             "lat": 60.4429,
             "lon": 5.101
-          }
-        },
-        "distance_km": 0.34
-      }
-    },
-    {
-      "mmsi": "538001757,538010662",
-      "vessel_name": "NOBLE ENDEAVOR & NOBLE INTERCEPTOR",
-      "country": "Marshall Islands,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-16T16:22:30Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538001757",
-          "name": "NOBLE ENDEAVOR",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.44,
-            "lon": 5.1026
-          }
-        },
-        "vessel2": {
-          "mmsi": "538010662",
-          "name": "NOBLE INTERCEPTOR",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.4429,
-            "lon": 5.1009
           }
         },
         "distance_km": 0.34
@@ -331271,209 +331317,6 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-14T12:38:14.847424Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305453000",
-          "name": "KLAUDIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3815,
-            "lon": 1.527
-          }
-        },
-        "vessel2": {
-          "mmsi": "305076300",
-          "name": "SCOT BAY",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3794,
-            "lon": 1.5286
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305453000,305076300",
-      "vessel_name": "KLAUDIA & SCOT BAY",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-14T07:01:30.978078Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305453000",
-          "name": "KLAUDIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3815,
-            "lon": 1.527
-          }
-        },
-        "vessel2": {
-          "mmsi": "305076300",
-          "name": "SCOT BAY",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3794,
-            "lon": 1.5286
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305453000,305076300",
-      "vessel_name": "KLAUDIA & SCOT BAY",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-14T02:42:33.710563Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305453000",
-          "name": "KLAUDIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3815,
-            "lon": 1.527
-          }
-        },
-        "vessel2": {
-          "mmsi": "305076300",
-          "name": "SCOT BAY",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3794,
-            "lon": 1.5286
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305453000,305076300",
-      "vessel_name": "KLAUDIA & SCOT BAY",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-14T15:35:08.984508Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305453000",
-          "name": "KLAUDIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3815,
-            "lon": 1.527
-          }
-        },
-        "vessel2": {
-          "mmsi": "305076300",
-          "name": "SCOT BAY",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3794,
-            "lon": 1.5286
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305453000,305076300",
-      "vessel_name": "KLAUDIA & SCOT BAY",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-14T21:04:56.239916Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305453000",
-          "name": "KLAUDIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3815,
-            "lon": 1.527
-          }
-        },
-        "vessel2": {
-          "mmsi": "305076300",
-          "name": "SCOT BAY",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3794,
-            "lon": 1.5286
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305453000,305076300",
-      "vessel_name": "KLAUDIA & SCOT BAY",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-14T08:16:51.812712Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305453000",
-          "name": "KLAUDIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3815,
-            "lon": 1.527
-          }
-        },
-        "vessel2": {
-          "mmsi": "305076300",
-          "name": "SCOT BAY",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3794,
-            "lon": 1.5286
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305453000,305076300",
-      "vessel_name": "KLAUDIA & SCOT BAY",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-14T23:08:40.651907Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305453000",
-          "name": "KLAUDIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3815,
-            "lon": 1.527
-          }
-        },
-        "vessel2": {
-          "mmsi": "305076300",
-          "name": "SCOT BAY",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3794,
-            "lon": 1.5286
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305453000,305076300",
-      "vessel_name": "KLAUDIA & SCOT BAY",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-08-14T13:59:47.041208Z",
       "details": {
         "vessel1": {
@@ -331503,94 +331346,7 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-14T11:56:49.306692Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305453000",
-          "name": "KLAUDIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3815,
-            "lon": 1.527
-          }
-        },
-        "vessel2": {
-          "mmsi": "305076300",
-          "name": "SCOT BAY",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3794,
-            "lon": 1.5286
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305453000,305076300",
-      "vessel_name": "KLAUDIA & SCOT BAY",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-14T20:48:23.336070Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305453000",
-          "name": "KLAUDIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3815,
-            "lon": 1.527
-          }
-        },
-        "vessel2": {
-          "mmsi": "305076300",
-          "name": "SCOT BAY",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3794,
-            "lon": 1.5286
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305453000,305076300",
-      "vessel_name": "KLAUDIA & SCOT BAY",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-14T21:34:17.546798Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305453000",
-          "name": "KLAUDIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3815,
-            "lon": 1.527
-          }
-        },
-        "vessel2": {
-          "mmsi": "305076300",
-          "name": "SCOT BAY",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3794,
-            "lon": 1.5286
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305453000,305076300",
-      "vessel_name": "KLAUDIA & SCOT BAY",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-14T10:29:02.031235Z",
+      "detected_at": "2026-08-14T22:33:42.367465Z",
       "details": {
         "vessel1": {
           "mmsi": "305453000",
@@ -331648,7 +331404,36 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-14T21:53:08.673058Z",
+      "detected_at": "2026-08-14T07:01:30.978078Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305453000",
+          "name": "KLAUDIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3815,
+            "lon": 1.527
+          }
+        },
+        "vessel2": {
+          "mmsi": "305076300",
+          "name": "SCOT BAY",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3794,
+            "lon": 1.5286
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305453000,305076300",
+      "vessel_name": "KLAUDIA & SCOT BAY",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-14T21:34:17.546798Z",
       "details": {
         "vessel1": {
           "mmsi": "305453000",
@@ -331706,7 +331491,7 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-14T09:22:02.736692Z",
+      "detected_at": "2026-08-14T23:33:12.461577Z",
       "details": {
         "vessel1": {
           "mmsi": "305453000",
@@ -331735,123 +331520,7 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-14T19:11:03.931831Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305453000",
-          "name": "KLAUDIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3815,
-            "lon": 1.527
-          }
-        },
-        "vessel2": {
-          "mmsi": "305076300",
-          "name": "SCOT BAY",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3794,
-            "lon": 1.5286
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305453000,305076300",
-      "vessel_name": "KLAUDIA & SCOT BAY",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-14T14:47:58.089318Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305453000",
-          "name": "KLAUDIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3815,
-            "lon": 1.527
-          }
-        },
-        "vessel2": {
-          "mmsi": "305076300",
-          "name": "SCOT BAY",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3794,
-            "lon": 1.5286
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305453000,305076300",
-      "vessel_name": "KLAUDIA & SCOT BAY",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-14T17:24:28.743356Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305453000",
-          "name": "KLAUDIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3815,
-            "lon": 1.527
-          }
-        },
-        "vessel2": {
-          "mmsi": "305076300",
-          "name": "SCOT BAY",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3794,
-            "lon": 1.5286
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305453000,305076300",
-      "vessel_name": "KLAUDIA & SCOT BAY",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-14T16:27:19.646629Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "305453000",
-          "name": "KLAUDIA",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3815,
-            "lon": 1.527
-          }
-        },
-        "vessel2": {
-          "mmsi": "305076300",
-          "name": "SCOT BAY",
-          "country": "Antigua and Barbuda",
-          "position": {
-            "lat": 58.3794,
-            "lon": 1.5286
-          }
-        },
-        "distance_km": 0.25
-      }
-    },
-    {
-      "mmsi": "305453000,305076300",
-      "vessel_name": "KLAUDIA & SCOT BAY",
-      "country": "Antigua and Barbuda,Antigua and Barbuda",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-14T18:11:37.551286Z",
+      "detected_at": "2026-08-14T02:42:33.710563Z",
       "details": {
         "vessel1": {
           "mmsi": "305453000",
@@ -331938,7 +331607,94 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2026-08-14T08:16:51.812712Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305453000",
+          "name": "KLAUDIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3815,
+            "lon": 1.527
+          }
+        },
+        "vessel2": {
+          "mmsi": "305076300",
+          "name": "SCOT BAY",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3794,
+            "lon": 1.5286
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305453000,305076300",
+      "vessel_name": "KLAUDIA & SCOT BAY",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-14T21:04:56.239916Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305453000",
+          "name": "KLAUDIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3815,
+            "lon": 1.527
+          }
+        },
+        "vessel2": {
+          "mmsi": "305076300",
+          "name": "SCOT BAY",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3794,
+            "lon": 1.5286
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305453000,305076300",
+      "vessel_name": "KLAUDIA & SCOT BAY",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2026-08-14T20:18:15.114539Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305453000",
+          "name": "KLAUDIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3815,
+            "lon": 1.527
+          }
+        },
+        "vessel2": {
+          "mmsi": "305076300",
+          "name": "SCOT BAY",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3794,
+            "lon": 1.5286
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305453000,305076300",
+      "vessel_name": "KLAUDIA & SCOT BAY",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-14T20:48:23.336070Z",
       "details": {
         "vessel1": {
           "mmsi": "305453000",
@@ -331996,7 +331752,7 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-14T22:33:42.367465Z",
+      "detected_at": "2026-08-14T19:11:03.931831Z",
       "details": {
         "vessel1": {
           "mmsi": "305453000",
@@ -332025,7 +331781,297 @@
       "country": "Antigua and Barbuda,Antigua and Barbuda",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-14T23:33:12.461577Z",
+      "detected_at": "2026-08-14T12:38:14.847424Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305453000",
+          "name": "KLAUDIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3815,
+            "lon": 1.527
+          }
+        },
+        "vessel2": {
+          "mmsi": "305076300",
+          "name": "SCOT BAY",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3794,
+            "lon": 1.5286
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305453000,305076300",
+      "vessel_name": "KLAUDIA & SCOT BAY",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-14T21:53:08.673058Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305453000",
+          "name": "KLAUDIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3815,
+            "lon": 1.527
+          }
+        },
+        "vessel2": {
+          "mmsi": "305076300",
+          "name": "SCOT BAY",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3794,
+            "lon": 1.5286
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305453000,305076300",
+      "vessel_name": "KLAUDIA & SCOT BAY",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-14T16:27:19.646629Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305453000",
+          "name": "KLAUDIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3815,
+            "lon": 1.527
+          }
+        },
+        "vessel2": {
+          "mmsi": "305076300",
+          "name": "SCOT BAY",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3794,
+            "lon": 1.5286
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305453000,305076300",
+      "vessel_name": "KLAUDIA & SCOT BAY",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-14T09:22:02.736692Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305453000",
+          "name": "KLAUDIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3815,
+            "lon": 1.527
+          }
+        },
+        "vessel2": {
+          "mmsi": "305076300",
+          "name": "SCOT BAY",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3794,
+            "lon": 1.5286
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305453000,305076300",
+      "vessel_name": "KLAUDIA & SCOT BAY",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-14T10:29:02.031235Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305453000",
+          "name": "KLAUDIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3815,
+            "lon": 1.527
+          }
+        },
+        "vessel2": {
+          "mmsi": "305076300",
+          "name": "SCOT BAY",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3794,
+            "lon": 1.5286
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305453000,305076300",
+      "vessel_name": "KLAUDIA & SCOT BAY",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-14T14:47:58.089318Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305453000",
+          "name": "KLAUDIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3815,
+            "lon": 1.527
+          }
+        },
+        "vessel2": {
+          "mmsi": "305076300",
+          "name": "SCOT BAY",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3794,
+            "lon": 1.5286
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305453000,305076300",
+      "vessel_name": "KLAUDIA & SCOT BAY",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-14T15:35:08.984508Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305453000",
+          "name": "KLAUDIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3815,
+            "lon": 1.527
+          }
+        },
+        "vessel2": {
+          "mmsi": "305076300",
+          "name": "SCOT BAY",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3794,
+            "lon": 1.5286
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305453000,305076300",
+      "vessel_name": "KLAUDIA & SCOT BAY",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-14T23:08:40.651907Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305453000",
+          "name": "KLAUDIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3815,
+            "lon": 1.527
+          }
+        },
+        "vessel2": {
+          "mmsi": "305076300",
+          "name": "SCOT BAY",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3794,
+            "lon": 1.5286
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305453000,305076300",
+      "vessel_name": "KLAUDIA & SCOT BAY",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-14T18:11:37.551286Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305453000",
+          "name": "KLAUDIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3815,
+            "lon": 1.527
+          }
+        },
+        "vessel2": {
+          "mmsi": "305076300",
+          "name": "SCOT BAY",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3794,
+            "lon": 1.5286
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305453000,305076300",
+      "vessel_name": "KLAUDIA & SCOT BAY",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-14T11:56:49.306692Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "305453000",
+          "name": "KLAUDIA",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3815,
+            "lon": 1.527
+          }
+        },
+        "vessel2": {
+          "mmsi": "305076300",
+          "name": "SCOT BAY",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 58.3794,
+            "lon": 1.5286
+          }
+        },
+        "distance_km": 0.25
+      }
+    },
+    {
+      "mmsi": "305453000,305076300",
+      "vessel_name": "KLAUDIA & SCOT BAY",
+      "country": "Antigua and Barbuda,Antigua and Barbuda",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-14T17:24:28.743356Z",
       "details": {
         "vessel1": {
           "mmsi": "305453000",
@@ -332141,6 +332187,35 @@
       "country": "Malta,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2026-08-19T09:17:23Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "249587000",
+          "name": "TRANS SOL",
+          "country": "Malta",
+          "position": {
+            "lat": 59.338,
+            "lon": 5.307
+          }
+        },
+        "vessel2": {
+          "mmsi": "229015000",
+          "name": "KEY EAST",
+          "country": "Malta",
+          "position": {
+            "lat": 59.3362,
+            "lon": 5.2988
+          }
+        },
+        "distance_km": 0.51
+      }
+    },
+    {
+      "mmsi": "249587000,229015000",
+      "vessel_name": "TRANS SOL & KEY EAST",
+      "country": "Malta,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2026-08-19T14:56:25Z",
       "details": {
         "vessel1": {
@@ -332191,35 +332266,6 @@
           }
         },
         "distance_km": 0.5
-      }
-    },
-    {
-      "mmsi": "249587000,229015000",
-      "vessel_name": "TRANS SOL & KEY EAST",
-      "country": "Malta,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-19T09:17:23Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "249587000",
-          "name": "TRANS SOL",
-          "country": "Malta",
-          "position": {
-            "lat": 59.338,
-            "lon": 5.307
-          }
-        },
-        "vessel2": {
-          "mmsi": "229015000",
-          "name": "KEY EAST",
-          "country": "Malta",
-          "position": {
-            "lat": 59.3362,
-            "lon": 5.2988
-          }
-        },
-        "distance_km": 0.51
       }
     },
     {
@@ -332282,15 +332328,15 @@
     }
   ],
   "statistics": {
-    "transmission_gaps": 17239,
-    "impossible_speeds": 72,
+    "transmission_gaps": 17240,
+    "impossible_speeds": 73,
     "loitering": 69,
     "rendezvous": 51
   },
   "severity_breakdown": {
-    "critical": 23,
+    "critical": 24,
     "high": 329,
-    "medium": 3839,
+    "medium": 3840,
     "low": 13240
   }
 }
