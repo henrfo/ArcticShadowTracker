@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-23T21:50:42.205246Z",
+  "timestamp": "2026-08-23T22:01:20.249330Z",
   "analysis_period_days": 7,
   "vessels_analyzed": 394,
-  "total_positions": 62478,
-  "anomalies_detected": 17509,
+  "total_positions": 62473,
+  "anomalies_detected": 17513,
   "anomalies": [
     {
       "mmsi": "273890200",
@@ -99408,25 +99408,6 @@
         "last_position": {
           "lat": 60.3019,
           "lon": 2.1573
-        },
-        "near_border": false,
-        "coverage_edge": false
-      }
-    },
-    {
-      "mmsi": "538080020",
-      "vessel_name": "HYPERION",
-      "country": "Marshall Islands",
-      "anomaly_type": "transmission_gap",
-      "severity": "low",
-      "detected_at": "2026-08-16T21:58:25Z",
-      "details": {
-        "gap_duration_minutes": 33.0,
-        "gap_start": "2026-08-16T21:25:25Z",
-        "gap_end": "2026-08-16T21:58:25Z",
-        "last_position": {
-          "lat": 60.8846,
-          "lon": 6.8467
         },
         "near_border": false,
         "coverage_edge": false
@@ -309972,6 +309953,25 @@
       }
     },
     {
+      "mmsi": "273615590",
+      "vessel_name": "AJAX",
+      "country": "Russia",
+      "anomaly_type": "transmission_gap",
+      "severity": "low",
+      "detected_at": "2026-08-23T21:58:53Z",
+      "details": {
+        "gap_duration_minutes": 45.2,
+        "gap_start": "2026-08-23T21:13:39Z",
+        "gap_end": "2026-08-23T21:58:53Z",
+        "last_position": {
+          "lat": 68.1924,
+          "lon": 9.9963
+        },
+        "near_border": false,
+        "coverage_edge": false
+      }
+    },
+    {
       "mmsi": "538005799",
       "vessel_name": "SEAGAS INVICTUS",
       "country": "Marshall Islands",
@@ -329440,6 +329440,33 @@
       }
     },
     {
+      "mmsi": "273534110",
+      "vessel_name": "LIRA",
+      "country": "Russia",
+      "anomaly_type": "impossible_speed",
+      "severity": "low",
+      "detected_at": "2026-08-23T21:56:46Z",
+      "details": {
+        "calculated_speed_knots": 15.0,
+        "max_allowed_knots": 15,
+        "vessel_type": "Fishing",
+        "distance_km": 5.2,
+        "time_delta_minutes": 11.2,
+        "positions": [
+          {
+            "lat": 72.4732,
+            "lon": 23.9842,
+            "time": "2026-08-23T21:45:33Z"
+          },
+          {
+            "lat": 72.4473,
+            "lon": 23.8548,
+            "time": "2026-08-23T21:56:46Z"
+          }
+        ]
+      }
+    },
+    {
       "mmsi": "273611360",
       "vessel_name": "ORION",
       "country": "Russia",
@@ -332611,6 +332638,25 @@
       }
     },
     {
+      "mmsi": "304146000",
+      "vessel_name": "KARIN LEHMANN",
+      "country": "Antigua and Barbuda",
+      "anomaly_type": "loitering",
+      "severity": "medium",
+      "detected_at": "2026-08-23T21:59:26Z",
+      "details": {
+        "duration_hours": 6.0,
+        "radius_km": 5,
+        "center_position": {
+          "lat": 66.326,
+          "lon": 14.138
+        },
+        "start_time": "2026-08-23T15:59:26Z",
+        "end_time": "2026-08-23T21:59:26Z",
+        "position_count": 20
+      }
+    },
+    {
       "mmsi": "538006781",
       "vessel_name": "FEDERAL KUMANO",
       "country": "Marshall Islands",
@@ -332760,6 +332806,25 @@
         "start_time": "2026-08-22T21:31:12Z",
         "end_time": "2026-08-23T03:31:12Z",
         "position_count": 13
+      }
+    },
+    {
+      "mmsi": "636023959",
+      "vessel_name": "PACIFIC ROSE",
+      "country": "Liberia",
+      "anomaly_type": "loitering",
+      "severity": "medium",
+      "detected_at": "2026-08-23T21:59:59Z",
+      "details": {
+        "duration_hours": 6.0,
+        "radius_km": 5,
+        "center_position": {
+          "lat": 59.3267,
+          "lon": 10.5152
+        },
+        "start_time": "2026-08-23T15:59:59Z",
+        "end_time": "2026-08-23T21:59:59Z",
+        "position_count": 20
       }
     },
     {
@@ -332913,35 +332978,6 @@
       "country": "Russia,Russia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-20T21:03:50.948807Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273218630",
-          "name": "GOGLAND REEFER",
-          "country": "Russia",
-          "position": {
-            "lat": 72.3336,
-            "lon": 23.1869
-          }
-        },
-        "vessel2": {
-          "mmsi": "273532110",
-          "name": "KURSHSKAYA KOSA",
-          "country": "Russia",
-          "position": {
-            "lat": 72.334,
-            "lon": 23.188
-          }
-        },
-        "distance_km": 0.06
-      }
-    },
-    {
-      "mmsi": "273218630,273532110",
-      "vessel_name": "GOGLAND REEFER & KURSHSKAYA KOSA",
-      "country": "Russia,Russia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-08-23T21:06:32Z",
       "details": {
         "vessel1": {
@@ -333024,6 +333060,35 @@
       }
     },
     {
+      "mmsi": "273218630,273532110",
+      "vessel_name": "GOGLAND REEFER & KURSHSKAYA KOSA",
+      "country": "Russia,Russia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-20T21:03:50.948807Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273218630",
+          "name": "GOGLAND REEFER",
+          "country": "Russia",
+          "position": {
+            "lat": 72.3336,
+            "lon": 23.1869
+          }
+        },
+        "vessel2": {
+          "mmsi": "273532110",
+          "name": "KURSHSKAYA KOSA",
+          "country": "Russia",
+          "position": {
+            "lat": 72.334,
+            "lon": 23.188
+          }
+        },
+        "distance_km": 0.06
+      }
+    },
+    {
       "mmsi": "273218630,273534110",
       "vessel_name": "GOGLAND REEFER & LIRA",
       "country": "Russia,Russia",
@@ -333058,15 +333123,15 @@
       "country": "Russia,Russia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-22T18:51:34Z",
+      "detected_at": "2026-08-21T21:38:23Z",
       "details": {
         "vessel1": {
           "mmsi": "273218630",
           "name": "GOGLAND REEFER",
           "country": "Russia",
           "position": {
-            "lat": 72.9467,
-            "lon": 26.495
+            "lat": 72.6133,
+            "lon": 24.8389
           }
         },
         "vessel2": {
@@ -333074,11 +333139,11 @@
           "name": "LIRA",
           "country": "Russia",
           "position": {
-            "lat": 72.9472,
-            "lon": 26.4968
+            "lat": 72.6133,
+            "lon": 24.8406
           }
         },
-        "distance_km": 0.08
+        "distance_km": 0.06
       }
     },
     {
@@ -333116,15 +333181,15 @@
       "country": "Russia,Russia",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-21T21:38:23Z",
+      "detected_at": "2026-08-22T18:51:34Z",
       "details": {
         "vessel1": {
           "mmsi": "273218630",
           "name": "GOGLAND REEFER",
           "country": "Russia",
           "position": {
-            "lat": 72.6133,
-            "lon": 24.8389
+            "lat": 72.9467,
+            "lon": 26.495
           }
         },
         "vessel2": {
@@ -333132,40 +333197,11 @@
           "name": "LIRA",
           "country": "Russia",
           "position": {
-            "lat": 72.6133,
-            "lon": 24.8406
+            "lat": 72.9472,
+            "lon": 26.4968
           }
         },
-        "distance_km": 0.06
-      }
-    },
-    {
-      "mmsi": "273522400,273529800",
-      "vessel_name": "ZAKHAR SOROKIN & BORIS SYROMYATNIKOV",
-      "country": "Russia,Russia",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-20T13:28:11Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "273522400",
-          "name": "ZAKHAR SOROKIN",
-          "country": "Russia",
-          "position": {
-            "lat": 72.2641,
-            "lon": 22.6027
-          }
-        },
-        "vessel2": {
-          "mmsi": "273529800",
-          "name": "BORIS SYROMYATNIKOV",
-          "country": "Russia",
-          "position": {
-            "lat": 72.2646,
-            "lon": 22.6024
-          }
-        },
-        "distance_km": 0.05
+        "distance_km": 0.08
       }
     },
     {
@@ -333192,6 +333228,35 @@
           "position": {
             "lat": 72.2741,
             "lon": 22.7571
+          }
+        },
+        "distance_km": 0.05
+      }
+    },
+    {
+      "mmsi": "273522400,273529800",
+      "vessel_name": "ZAKHAR SOROKIN & BORIS SYROMYATNIKOV",
+      "country": "Russia,Russia",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-20T13:28:11Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "273522400",
+          "name": "ZAKHAR SOROKIN",
+          "country": "Russia",
+          "position": {
+            "lat": 72.2641,
+            "lon": 22.6027
+          }
+        },
+        "vessel2": {
+          "mmsi": "273529800",
+          "name": "BORIS SYROMYATNIKOV",
+          "country": "Russia",
+          "position": {
+            "lat": 72.2646,
+            "lon": 22.6024
           }
         },
         "distance_km": 0.05
@@ -333290,7 +333355,65 @@
       "country": "Antigua and Barbuda,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2026-08-23T17:02:03Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "304688000",
+          "name": "ARCTIC TRADER",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 60.3849,
+            "lon": 5.3153
+          }
+        },
+        "vessel2": {
+          "mmsi": "354742000",
+          "name": "7-STARS",
+          "country": "Panama",
+          "position": {
+            "lat": 60.3845,
+            "lon": 5.316
+          }
+        },
+        "distance_km": 0.06
+      }
+    },
+    {
+      "mmsi": "304688000,354742000",
+      "vessel_name": "ARCTIC TRADER & 7-STARS",
+      "country": "Antigua and Barbuda,Panama",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2026-08-23T21:32:03Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "304688000",
+          "name": "ARCTIC TRADER",
+          "country": "Antigua and Barbuda",
+          "position": {
+            "lat": 60.3849,
+            "lon": 5.3153
+          }
+        },
+        "vessel2": {
+          "mmsi": "354742000",
+          "name": "7-STARS",
+          "country": "Panama",
+          "position": {
+            "lat": 60.3845,
+            "lon": 5.3161
+          }
+        },
+        "distance_km": 0.06
+      }
+    },
+    {
+      "mmsi": "304688000,354742000",
+      "vessel_name": "ARCTIC TRADER & 7-STARS",
+      "country": "Antigua and Barbuda,Panama",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-23T21:59:02Z",
       "details": {
         "vessel1": {
           "mmsi": "304688000",
@@ -333343,32 +333466,32 @@
       }
     },
     {
-      "mmsi": "304688000,354742000",
-      "vessel_name": "ARCTIC TRADER & 7-STARS",
-      "country": "Antigua and Barbuda,Panama",
+      "mmsi": "538001757,538006218",
+      "vessel_name": "NOBLE ENDEAVOR & NOBLE CLAUS BACHMANN",
+      "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-23T17:02:03Z",
+      "detected_at": "2026-08-19T00:01:48Z",
       "details": {
         "vessel1": {
-          "mmsi": "304688000",
-          "name": "ARCTIC TRADER",
-          "country": "Antigua and Barbuda",
+          "mmsi": "538001757",
+          "name": "NOBLE ENDEAVOR",
+          "country": "Marshall Islands",
           "position": {
-            "lat": 60.3849,
-            "lon": 5.3153
+            "lat": 60.44,
+            "lon": 5.1026
           }
         },
         "vessel2": {
-          "mmsi": "354742000",
-          "name": "7-STARS",
-          "country": "Panama",
+          "mmsi": "538006218",
+          "name": "NOBLE CLAUS BACHMANN",
+          "country": "Marshall Islands",
           "position": {
-            "lat": 60.3845,
-            "lon": 5.316
+            "lat": 60.4374,
+            "lon": 5.1039
           }
         },
-        "distance_km": 0.06
+        "distance_km": 0.3
       }
     },
     {
@@ -333406,35 +333529,6 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-19T00:01:48Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "538001757",
-          "name": "NOBLE ENDEAVOR",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.44,
-            "lon": 5.1026
-          }
-        },
-        "vessel2": {
-          "mmsi": "538006218",
-          "name": "NOBLE CLAUS BACHMANN",
-          "country": "Marshall Islands",
-          "position": {
-            "lat": 60.4374,
-            "lon": 5.1039
-          }
-        },
-        "distance_km": 0.3
-      }
-    },
-    {
-      "mmsi": "538001757,538006218",
-      "vessel_name": "NOBLE ENDEAVOR & NOBLE CLAUS BACHMANN",
-      "country": "Marshall Islands,Marshall Islands",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
       "detected_at": "2026-08-22T19:29:11Z",
       "details": {
         "vessel1": {
@@ -333464,7 +333558,7 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-22T10:38:10Z",
+      "detected_at": "2026-08-22T04:38:07Z",
       "details": {
         "vessel1": {
           "mmsi": "538001757",
@@ -333480,11 +333574,11 @@
           "name": "NOBLE INTERCEPTOR",
           "country": "Marshall Islands",
           "position": {
-            "lat": 60.4429,
-            "lon": 5.1009
+            "lat": 60.4427,
+            "lon": 5.101
           }
         },
-        "distance_km": 0.35
+        "distance_km": 0.33
       }
     },
     {
@@ -333522,7 +333616,7 @@
       "country": "Marshall Islands,Marshall Islands",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-22T04:38:07Z",
+      "detected_at": "2026-08-22T10:38:10Z",
       "details": {
         "vessel1": {
           "mmsi": "538001757",
@@ -333538,11 +333632,11 @@
           "name": "NOBLE INTERCEPTOR",
           "country": "Marshall Islands",
           "position": {
-            "lat": 60.4427,
-            "lon": 5.101
+            "lat": 60.4429,
+            "lon": 5.1009
           }
         },
-        "distance_km": 0.33
+        "distance_km": 0.35
       }
     },
     {
@@ -333638,7 +333732,7 @@
       "country": "Marshall Islands,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-20T17:17:28.982814Z",
+      "detected_at": "2026-08-20T17:48:42.692159Z",
       "details": {
         "vessel1": {
           "mmsi": "538010630",
@@ -333654,11 +333748,11 @@
           "name": "SLEIPNIR",
           "country": "Panama",
           "position": {
-            "lat": 59.8704,
-            "lon": 2.5542
+            "lat": 59.8705,
+            "lon": 2.5613
           }
         },
-        "distance_km": 0.76
+        "distance_km": 0.37
       }
     },
     {
@@ -333696,7 +333790,7 @@
       "country": "Marshall Islands,Panama",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-20T17:48:42.692159Z",
+      "detected_at": "2026-08-20T17:17:28.982814Z",
       "details": {
         "vessel1": {
           "mmsi": "538010630",
@@ -333712,11 +333806,11 @@
           "name": "SLEIPNIR",
           "country": "Panama",
           "position": {
-            "lat": 59.8705,
-            "lon": 2.5613
+            "lat": 59.8704,
+            "lon": 2.5542
           }
         },
-        "distance_km": 0.37
+        "distance_km": 0.76
       }
     },
     {
@@ -333812,6 +333906,35 @@
       "country": "Liberia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
+      "detected_at": "2026-08-20T05:50:54Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "636015944",
+          "name": "NAVIGATOR GUSTO",
+          "country": "Liberia",
+          "position": {
+            "lat": 59.1069,
+            "lon": 9.6257
+          }
+        },
+        "vessel2": {
+          "mmsi": "249652000",
+          "name": "INEOS INDEPENDENCE",
+          "country": "Malta",
+          "position": {
+            "lat": 59.1088,
+            "lon": 9.6165
+          }
+        },
+        "distance_km": 0.57
+      }
+    },
+    {
+      "mmsi": "636015944,249652000",
+      "vessel_name": "NAVIGATOR GUSTO & INEOS INDEPENDENCE",
+      "country": "Liberia,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
       "detected_at": "2026-08-20T07:02:54Z",
       "details": {
         "vessel1": {
@@ -333833,35 +333956,6 @@
           }
         },
         "distance_km": 0.48
-      }
-    },
-    {
-      "mmsi": "636015944,249652000",
-      "vessel_name": "NAVIGATOR GUSTO & INEOS INDEPENDENCE",
-      "country": "Liberia,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-20T04:50:54Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "636015944",
-          "name": "NAVIGATOR GUSTO",
-          "country": "Liberia",
-          "position": {
-            "lat": 59.1065,
-            "lon": 9.6258
-          }
-        },
-        "vessel2": {
-          "mmsi": "249652000",
-          "name": "INEOS INDEPENDENCE",
-          "country": "Malta",
-          "position": {
-            "lat": 59.1083,
-            "lon": 9.616
-          }
-        },
-        "distance_km": 0.59
       }
     },
     {
@@ -333899,15 +333993,15 @@
       "country": "Liberia,Malta",
       "anomaly_type": "rendezvous",
       "severity": "high",
-      "detected_at": "2026-08-20T05:50:54Z",
+      "detected_at": "2026-08-20T04:50:54Z",
       "details": {
         "vessel1": {
           "mmsi": "636015944",
           "name": "NAVIGATOR GUSTO",
           "country": "Liberia",
           "position": {
-            "lat": 59.1069,
-            "lon": 9.6257
+            "lat": 59.1065,
+            "lon": 9.6258
           }
         },
         "vessel2": {
@@ -333915,11 +334009,40 @@
           "name": "INEOS INDEPENDENCE",
           "country": "Malta",
           "position": {
-            "lat": 59.1088,
-            "lon": 9.6165
+            "lat": 59.1083,
+            "lon": 9.616
           }
         },
-        "distance_km": 0.57
+        "distance_km": 0.59
+      }
+    },
+    {
+      "mmsi": "249587000,229015000",
+      "vessel_name": "TRANS SOL & KEY EAST",
+      "country": "Malta,Malta",
+      "anomaly_type": "rendezvous",
+      "severity": "high",
+      "detected_at": "2026-08-19T09:17:23Z",
+      "details": {
+        "vessel1": {
+          "mmsi": "249587000",
+          "name": "TRANS SOL",
+          "country": "Malta",
+          "position": {
+            "lat": 59.338,
+            "lon": 5.307
+          }
+        },
+        "vessel2": {
+          "mmsi": "229015000",
+          "name": "KEY EAST",
+          "country": "Malta",
+          "position": {
+            "lat": 59.3362,
+            "lon": 5.2988
+          }
+        },
+        "distance_km": 0.51
       }
     },
     {
@@ -333978,35 +334101,6 @@
           }
         },
         "distance_km": 0.5
-      }
-    },
-    {
-      "mmsi": "249587000,229015000",
-      "vessel_name": "TRANS SOL & KEY EAST",
-      "country": "Malta,Malta",
-      "anomaly_type": "rendezvous",
-      "severity": "high",
-      "detected_at": "2026-08-19T09:17:23Z",
-      "details": {
-        "vessel1": {
-          "mmsi": "249587000",
-          "name": "TRANS SOL",
-          "country": "Malta",
-          "position": {
-            "lat": 59.338,
-            "lon": 5.307
-          }
-        },
-        "vessel2": {
-          "mmsi": "229015000",
-          "name": "KEY EAST",
-          "country": "Malta",
-          "position": {
-            "lat": 59.3362,
-            "lon": 5.2988
-          }
-        },
-        "distance_km": 0.51
       }
     },
     {
@@ -334099,14 +334193,14 @@
   ],
   "statistics": {
     "transmission_gaps": 17269,
-    "impossible_speeds": 120,
-    "loitering": 74,
-    "rendezvous": 46
+    "impossible_speeds": 121,
+    "loitering": 76,
+    "rendezvous": 47
   },
   "severity_breakdown": {
     "critical": 31,
-    "high": 284,
-    "medium": 2699,
-    "low": 14495
+    "high": 285,
+    "medium": 2701,
+    "low": 14496
   }
 }
