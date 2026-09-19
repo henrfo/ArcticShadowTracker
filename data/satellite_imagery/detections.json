@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-18T02:11:57.720636Z",
+  "generated_at": "2026-09-19T02:14:04.838455Z",
   "algorithm": "Two-stage CFAR with VV+VH fusion and shape filtering",
   "params": {
     "variant": "median-MAD robust CFAR, dual-band OR fusion",
@@ -13,9 +13,51 @@
     "max_aspect_ratio": 8.0
   },
   "history_window_days": 14,
-  "tiles_in_history": 56,
-  "total_detections_in_history": 4,
+  "tiles_in_history": 57,
+  "total_detections_in_history": 0,
   "tiles": [
+    {
+      "tile_id": "S1C_IW_GRDH_1SDV_20260918T161534_20260918T161559_009504_012E90_FC0B_COG.SAFE",
+      "filename": "20260918_161534_S1C_IW_G.tiff",
+      "tile_datetime": "2026-09-18T16:15:34Z",
+      "zone": "hotspot_71.0N_20E_3v",
+      "bbox": [
+        11.6919,
+        70.2516,
+        19.6059,
+        72.2457
+      ],
+      "detection_count": 0,
+      "detections": []
+    },
+    {
+      "tile_id": "S1C_IW_GRDH_1SDV_20260918T161509_20260918T161534_009504_012E90_BC8F_COG.SAFE",
+      "filename": "20260918_161509_S1C_IW_G.tiff",
+      "tile_datetime": "2026-09-18T16:15:09Z",
+      "zone": "hotspot_71.0N_19E_2v",
+      "bbox": [
+        13.0422,
+        68.793,
+        20.3863,
+        70.7664
+      ],
+      "detection_count": 0,
+      "detections": []
+    },
+    {
+      "tile_id": "S1D_IW_GRDH_1SDV_20260918T152602_20260918T152627_004634_008A50_AD85_COG.SAFE",
+      "filename": "20260918_152602_S1D_IW_G.tiff",
+      "tile_datetime": "2026-09-18T15:26:02Z",
+      "zone": "hotspot_70.5N_32E_11v",
+      "bbox": [
+        25.2458,
+        68.9575,
+        32.6325,
+        70.9327
+      ],
+      "detection_count": 0,
+      "detections": []
+    },
     {
       "tile_id": "S1D_IW_GRDH_1SDV_20260917T162306_20260917T162331_004620_0089D8_EEF5_COG.SAFE",
       "filename": "20260917_162306_S1D_IW_G.tiff",
@@ -45,10 +87,24 @@
       "detections": []
     },
     {
+      "tile_id": "S1D_IW_GRDH_1SDV_20260917T050315_20260917T050340_004613_008999_EF25_COG.SAFE",
+      "filename": "20260917_050315_S1D_IW_G.tiff",
+      "tile_datetime": "2026-09-17T05:03:15Z",
+      "zone": "hotspot_71.0N_21E_3v",
+      "bbox": [
+        20.3989,
+        69.4809,
+        27.9849,
+        71.4622
+      ],
+      "detection_count": 0,
+      "detections": []
+    },
+    {
       "tile_id": "S1C_IW_GRDH_1SDV_20260917T041346_20260917T041411_009482_012DCF_65AA_COG.SAFE",
       "filename": "20260917_041346_S1C_IW_G.tiff",
       "tile_datetime": "2026-09-17T04:13:46Z",
-      "zone": "hotspot_71.0N_33E_4v",
+      "zone": "hotspot_71.0N_33E_3v",
       "bbox": [
         32.5587,
         69.1237,
@@ -111,125 +167,8 @@
         38.4501,
         71.6496
       ],
-      "detection_count": 4,
-      "detections": [
-        {
-          "lat": 70.25485,
-          "lon": 35.70707,
-          "intensity_db": -0.82,
-          "background_mean_db": -18.26,
-          "background_std_db": 2.02,
-          "confidence_db": 8.64,
-          "blob_size_pixels": 3,
-          "estimated_length_m": 173.0,
-          "bbox_pixels": [
-            1440,
-            1754,
-            1442,
-            1756
-          ],
-          "bbox_geo": [
-            35.70707,
-            70.25326,
-            35.71391,
-            70.25485
-          ],
-          "severity": "medium",
-          "tile_id": "S1D_IW_GRDH_1SDV_20260916T042203_20260916T042228_004598_00891B_F750_COG.SAFE",
-          "tile_datetime": "2026-09-16T04:22:03Z",
-          "tile_zone": "hotspot_70.5N_32E_10v",
-          "matched_ais": false,
-          "nearest_ais_km": null,
-          "matched_vessel": null
-        },
-        {
-          "lat": 70.91307,
-          "lon": 33.97752,
-          "intensity_db": -1.57,
-          "background_mean_db": -18.4,
-          "background_std_db": 2.05,
-          "confidence_db": 8.22,
-          "blob_size_pixels": 14,
-          "estimated_length_m": 374.0,
-          "bbox_pixels": [
-            932,
-            925,
-            937,
-            929
-          ],
-          "bbox_geo": [
-            33.97068,
-            70.91069,
-            33.98777,
-            70.91387
-          ],
-          "severity": "medium",
-          "tile_id": "S1D_IW_GRDH_1SDV_20260916T042203_20260916T042228_004598_00891B_F750_COG.SAFE",
-          "tile_datetime": "2026-09-16T04:22:03Z",
-          "tile_zone": "hotspot_70.5N_32E_10v",
-          "matched_ais": false,
-          "nearest_ais_km": null,
-          "matched_vessel": null
-        },
-        {
-          "lat": 70.44325,
-          "lon": 37.90149,
-          "intensity_db": 5.1,
-          "background_mean_db": -15.6,
-          "background_std_db": 3.14,
-          "confidence_db": 6.59,
-          "blob_size_pixels": 3,
-          "estimated_length_m": 173.0,
-          "bbox_pixels": [
-            2082,
-            1517,
-            2084,
-            1519
-          ],
-          "bbox_geo": [
-            37.90149,
-            70.44166,
-            37.90833,
-            70.44325
-          ],
-          "severity": "low",
-          "tile_id": "S1D_IW_GRDH_1SDV_20260916T042203_20260916T042228_004598_00891B_F750_COG.SAFE",
-          "tile_datetime": "2026-09-16T04:22:03Z",
-          "tile_zone": "hotspot_70.5N_32E_10v",
-          "matched_ais": false,
-          "nearest_ais_km": null,
-          "matched_vessel": null
-        },
-        {
-          "lat": 70.44087,
-          "lon": 37.90833,
-          "intensity_db": 6.89,
-          "background_mean_db": -15.07,
-          "background_std_db": 3.8,
-          "confidence_db": 5.78,
-          "blob_size_pixels": 4,
-          "estimated_length_m": 200.0,
-          "bbox_pixels": [
-            2084,
-            1519,
-            2086,
-            1522
-          ],
-          "bbox_geo": [
-            37.90833,
-            70.43928,
-            37.91517,
-            70.44166
-          ],
-          "severity": "low",
-          "tile_id": "S1D_IW_GRDH_1SDV_20260916T042203_20260916T042228_004598_00891B_F750_COG.SAFE",
-          "tile_datetime": "2026-09-16T04:22:03Z",
-          "tile_zone": "hotspot_70.5N_32E_10v",
-          "matched_ais": false,
-          "nearest_ais_km": null,
-          "matched_vessel": null
-        }
-      ]
+      "detection_count": 0,
+      "detections": []
     },
     {
       "tile_id": "S1D_IW_GRDH_1SDV_20260915T163918_20260915T163943_004591_0088D3_1D11_COG.SAFE",
@@ -874,51 +813,9 @@
       ],
       "detection_count": 0,
       "detections": []
-    },
-    {
-      "tile_id": "S1C_IW_GRDH_1SDV_20260904T163152_20260904T163217_009300_0127CA_EF58_COG.SAFE",
-      "filename": "20260904_163152_S1C_IW_G.tiff",
-      "tile_datetime": "2026-09-04T16:31:52Z",
-      "zone": "hotspot_71.0N_16E_3v",
-      "bbox": [
-        8.0617,
-        69.7549,
-        15.7602,
-        71.7417
-      ],
-      "detection_count": 0,
-      "detections": []
-    },
-    {
-      "tile_id": "S1C_IW_GRDH_1SDV_20260904T051141_20260904T051206_009293_01278A_1E23_COG.SAFE",
-      "filename": "20260904_051141_S1C_IW_G.tiff",
-      "tile_datetime": "2026-09-04T05:11:41Z",
-      "zone": "hotspot_69.5N_19E_3v",
-      "bbox": [
-        17.5983,
-        67.9762,
-        24.6258,
-        69.9391
-      ],
-      "detection_count": 0,
-      "detections": []
-    },
-    {
-      "tile_id": "S1D_IW_GRDH_1SDV_20260904T042203_20260904T042228_004423_008311_3C40_COG.SAFE",
-      "filename": "20260904_042203_S1D_IW_G.tiff",
-      "tile_datetime": "2026-09-04T04:22:03Z",
-      "zone": "hotspot_70.5N_32E_12v",
-      "bbox": [
-        30.7858,
-        69.6637,
-        38.4526,
-        71.6495
-      ],
-      "detection_count": 0,
-      "detections": []
     }
   ],
-  "correlated_at": "2026-09-18T02:11:58.626325Z",
+  "correlated_at": "2026-09-19T02:14:05.302208Z",
   "matched_to_ais": 0,
-  "dark_vessel_candidates": 4
+  "dark_vessel_candidates": 0
 }
