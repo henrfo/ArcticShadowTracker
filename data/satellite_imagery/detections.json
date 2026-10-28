@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-27T02:55:27.097924Z",
+  "generated_at": "2026-10-28T03:12:10.499432Z",
   "algorithm": "Two-stage CFAR with VV+VH fusion and shape filtering",
   "params": {
     "variant": "median-MAD robust CFAR, dual-band OR fusion",
@@ -14,13 +14,2929 @@
   },
   "history_window_days": 14,
   "tiles_in_history": 58,
-  "total_detections_in_history": 6,
+  "total_detections_in_history": 88,
   "tiles": [
+    {
+      "tile_id": "S1C_IW_GRDH_1SDV_20261027T163855_20261027T163920_010073_0141B3_D9EB_COG.SAFE",
+      "filename": "20261027_163855_S1C_IW_G.tiff",
+      "tile_datetime": "2026-10-27T16:38:55Z",
+      "zone": "hotspot_66.0N_13E_3v",
+      "bbox": [
+        9.3233,
+        65.5742,
+        15.6573,
+        67.5135
+      ],
+      "detection_count": 0,
+      "detections": []
+    },
+    {
+      "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+      "filename": "20261027_051953_S1C_IW_G.tiff",
+      "tile_datetime": "2026-10-27T05:19:53Z",
+      "zone": "hotspot_69.5N_19E_4v",
+      "bbox": [
+        15.5998,
+        68.0956,
+        22.6548,
+        70.0585
+      ],
+      "detection_count": 47,
+      "detections": [
+        {
+          "lat": 69.97505,
+          "lon": 17.18872,
+          "intensity_db": -4.49,
+          "background_mean_db": -20.5,
+          "background_std_db": 1.92,
+          "confidence_db": 8.32,
+          "blob_size_pixels": 5,
+          "estimated_length_m": 224.0,
+          "bbox_pixels": [
+            538,
+            103,
+            541,
+            106
+          ],
+          "bbox_geo": [
+            17.18872,
+            69.97345,
+            17.19758,
+            69.97585
+          ],
+          "severity": "medium",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.02057,
+          "lon": 19.3663,
+          "intensity_db": 4.99,
+          "background_mean_db": -24.84,
+          "background_std_db": 4.0,
+          "confidence_db": 7.45,
+          "blob_size_pixels": 9,
+          "estimated_length_m": 300.0,
+          "bbox_pixels": [
+            1275,
+            46,
+            1278,
+            50
+          ],
+          "bbox_geo": [
+            19.36335,
+            70.01817,
+            19.3722,
+            70.02137
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 2.608,
+          "matched_vessel": {
+            "mmsi": "257731700",
+            "name": "SMAVAER",
+            "country": "Norway",
+            "ais_position": [
+              69.99888,
+              19.34015
+            ],
+            "projected_position": [
+              69.99888,
+              19.34015
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.67478,
+          "lon": 18.95616,
+          "intensity_db": -1.96,
+          "background_mean_db": -17.54,
+          "background_std_db": 2.36,
+          "confidence_db": 6.61,
+          "blob_size_pixels": 7,
+          "estimated_length_m": 265.0,
+          "bbox_pixels": [
+            1136,
+            480,
+            1141,
+            482
+          ],
+          "bbox_geo": [
+            18.95321,
+            69.67319,
+            18.96796,
+            69.67478
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 0.873,
+          "matched_vessel": {
+            "mmsi": "231160000",
+            "name": "FRAM",
+            "country": "Faroe Islands",
+            "ais_position": [
+              69.67128,
+              18.9764
+            ],
+            "projected_position": [
+              69.67128,
+              18.9764
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.80815,
+          "lon": 17.40412,
+          "intensity_db": 3.35,
+          "background_mean_db": -16.76,
+          "background_std_db": 3.09,
+          "confidence_db": 6.52,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            611,
+            313,
+            612,
+            314
+          ],
+          "bbox_geo": [
+            17.40412,
+            69.80735,
+            17.40707,
+            69.80815
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 68.97363,
+          "lon": 16.16485,
+          "intensity_db": -1.52,
+          "background_mean_db": -18.53,
+          "background_std_db": 2.63,
+          "confidence_db": 6.48,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            191,
+            1358,
+            192,
+            1359
+          ],
+          "bbox_geo": [
+            16.16485,
+            68.97284,
+            16.1678,
+            68.97363
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 3.726,
+          "matched_vessel": {
+            "mmsi": "257702800",
+            "name": "BEKKEBAATEN",
+            "country": "Norway",
+            "ais_position": [
+              68.96502,
+              16.25508
+            ],
+            "projected_position": [
+              68.96502,
+              16.25508
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.43441,
+          "lon": 15.60128,
+          "intensity_db": -5.49,
+          "background_mean_db": -19.6,
+          "background_std_db": 2.23,
+          "confidence_db": 6.33,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            0,
+            781,
+            1,
+            782
+          ],
+          "bbox_geo": [
+            15.60128,
+            69.43361,
+            15.60423,
+            69.43441
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 69.83769,
+          "lon": 16.97038,
+          "intensity_db": 5.3,
+          "background_mean_db": -19.25,
+          "background_std_db": 3.91,
+          "confidence_db": 6.27,
+          "blob_size_pixels": 3,
+          "estimated_length_m": 173.0,
+          "bbox_pixels": [
+            464,
+            276,
+            466,
+            278
+          ],
+          "bbox_geo": [
+            16.97038,
+            69.8361,
+            16.97628,
+            69.83769
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 69.28668,
+          "lon": 18.00015,
+          "intensity_db": -6.83,
+          "background_mean_db": -23.71,
+          "background_std_db": 2.72,
+          "confidence_db": 6.2,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            813,
+            966,
+            814,
+            967
+          ],
+          "bbox_geo": [
+            18.00015,
+            69.28588,
+            18.0031,
+            69.28668
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 1.027,
+          "matched_vessel": {
+            "mmsi": "258425000",
+            "name": "FISKESKJER",
+            "country": "Norway",
+            "ais_position": [
+              69.35004,
+              18.08666
+            ],
+            "projected_position": [
+              69.29517,
+              18.01044
+            ],
+            "projection_travel_km": 6.79
+          }
+        },
+        {
+          "lat": 69.99821,
+          "lon": 17.13561,
+          "intensity_db": -5.28,
+          "background_mean_db": -17.29,
+          "background_std_db": 1.95,
+          "confidence_db": 6.17,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            520,
+            75,
+            521,
+            76
+          ],
+          "bbox_geo": [
+            17.13561,
+            69.99741,
+            17.13856,
+            69.99821
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 69.85526,
+          "lon": 19.49318,
+          "intensity_db": -4.58,
+          "background_mean_db": -23.46,
+          "background_std_db": 3.19,
+          "confidence_db": 5.91,
+          "blob_size_pixels": 5,
+          "estimated_length_m": 224.0,
+          "bbox_pixels": [
+            1318,
+            253,
+            1321,
+            256
+          ],
+          "bbox_geo": [
+            19.49023,
+            69.85367,
+            19.49908,
+            69.85606
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 3.559,
+          "matched_vessel": {
+            "mmsi": "257063150",
+            "name": "FLATVAER",
+            "country": "Norway",
+            "ais_position": [
+              69.87412,
+              19.41804
+            ],
+            "projected_position": [
+              69.87412,
+              19.41804
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.60371,
+          "lon": 18.82338,
+          "intensity_db": -7.44,
+          "background_mean_db": -20.08,
+          "background_std_db": 2.17,
+          "confidence_db": 5.83,
+          "blob_size_pixels": 3,
+          "estimated_length_m": 173.0,
+          "bbox_pixels": [
+            1092,
+            569,
+            1094,
+            571
+          ],
+          "bbox_geo": [
+            18.82338,
+            69.60211,
+            18.82928,
+            69.60371
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 4.269,
+          "matched_vessel": {
+            "mmsi": "259183000",
+            "name": "RO MASTER",
+            "country": "Norway",
+            "ais_position": [
+              69.54796,
+              18.63235
+            ],
+            "projected_position": [
+              69.56625,
+              18.79933
+            ],
+            "projection_travel_km": 6.79
+          }
+        },
+        {
+          "lat": 69.02874,
+          "lon": 16.56909,
+          "intensity_db": -0.67,
+          "background_mean_db": -17.88,
+          "background_std_db": 3.04,
+          "confidence_db": 5.67,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            328,
+            1289,
+            329,
+            1290
+          ],
+          "bbox_geo": [
+            16.56909,
+            69.02794,
+            16.57204,
+            69.02874
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 3.098,
+          "matched_vessel": {
+            "mmsi": "257931800",
+            "name": "KVERNSUND",
+            "country": "Norway",
+            "ais_position": [
+              69.00093,
+              16.56433
+            ],
+            "projected_position": [
+              69.00093,
+              16.56433
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.67239,
+          "lon": 18.97092,
+          "intensity_db": -1.54,
+          "background_mean_db": -16.83,
+          "background_std_db": 2.7,
+          "confidence_db": 5.66,
+          "blob_size_pixels": 3,
+          "estimated_length_m": 173.0,
+          "bbox_pixels": [
+            1142,
+            483,
+            1144,
+            485
+          ],
+          "bbox_geo": [
+            18.97092,
+            69.67079,
+            18.97682,
+            69.67239
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 0.375,
+          "matched_vessel": {
+            "mmsi": "257153000",
+            "name": "SKREIGRUNN",
+            "country": "Norway",
+            "ais_position": [
+              69.6731,
+              18.98041
+            ],
+            "projected_position": [
+              69.6731,
+              18.98041
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.79297,
+          "lon": 19.1096,
+          "intensity_db": 8.8,
+          "background_mean_db": -16.33,
+          "background_std_db": 4.45,
+          "confidence_db": 5.65,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1189,
+            332,
+            1190,
+            333
+          ],
+          "bbox_geo": [
+            19.1096,
+            69.79217,
+            19.11255,
+            69.79297
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 3.841,
+          "matched_vessel": {
+            "mmsi": "258241000",
+            "name": "FAKTOR",
+            "country": "Norway",
+            "ais_position": [
+              69.7543,
+              19.13149
+            ],
+            "projected_position": [
+              69.7644,
+              19.1658
+            ],
+            "projection_travel_km": 1.73
+          }
+        },
+        {
+          "lat": 69.84009,
+          "lon": 18.51357,
+          "intensity_db": 2.6,
+          "background_mean_db": -17.78,
+          "background_std_db": 3.64,
+          "confidence_db": 5.59,
+          "blob_size_pixels": 7,
+          "estimated_length_m": 265.0,
+          "bbox_pixels": [
+            986,
+            272,
+            990,
+            276
+          ],
+          "bbox_geo": [
+            18.51061,
+            69.83769,
+            18.52242,
+            69.84089
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 2.86,
+          "matched_vessel": {
+            "mmsi": "257292400",
+            "name": "KARLSOY",
+            "country": "Norway",
+            "ais_position": [
+              69.83697,
+              18.58764
+            ],
+            "projected_position": [
+              69.83697,
+              18.58764
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.7203,
+          "lon": 17.78476,
+          "intensity_db": 4.43,
+          "background_mean_db": -18.6,
+          "background_std_db": 4.12,
+          "confidence_db": 5.59,
+          "blob_size_pixels": 8,
+          "estimated_length_m": 283.0,
+          "bbox_pixels": [
+            738,
+            422,
+            744,
+            425
+          ],
+          "bbox_geo": [
+            17.77885,
+            69.71871,
+            17.79656,
+            69.7211
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 1.822,
+          "matched_vessel": {
+            "mmsi": "109080352",
+            "name": "BOUY 90 3",
+            "country": "Unknown",
+            "ais_position": [
+              69.71945,
+              17.84306
+            ],
+            "projected_position": [
+              69.7207,
+              17.83201
+            ],
+            "projection_travel_km": 0.45
+          }
+        },
+        {
+          "lat": 69.82731,
+          "lon": 18.56078,
+          "intensity_db": 2.2,
+          "background_mean_db": -16.67,
+          "background_std_db": 3.41,
+          "confidence_db": 5.53,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1003,
+            289,
+            1004,
+            290
+          ],
+          "bbox_geo": [
+            18.56078,
+            69.82651,
+            18.56373,
+            69.82731
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 1.488,
+          "matched_vessel": {
+            "mmsi": "257292400",
+            "name": "KARLSOY",
+            "country": "Norway",
+            "ais_position": [
+              69.83697,
+              18.58764
+            ],
+            "projected_position": [
+              69.83697,
+              18.58764
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.91436,
+          "lon": 17.18872,
+          "intensity_db": -6.99,
+          "background_mean_db": -18.63,
+          "background_std_db": 2.11,
+          "confidence_db": 5.51,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            538,
+            180,
+            539,
+            181
+          ],
+          "bbox_geo": [
+            17.18872,
+            69.91356,
+            17.19167,
+            69.91436
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 69.88721,
+          "lon": 17.33921,
+          "intensity_db": -5.77,
+          "background_mean_db": -16.63,
+          "background_std_db": 1.98,
+          "confidence_db": 5.48,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            589,
+            214,
+            590,
+            215
+          ],
+          "bbox_geo": [
+            17.33921,
+            69.88641,
+            17.34216,
+            69.88721
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.04852,
+          "lon": 19.85906,
+          "intensity_db": -3.33,
+          "background_mean_db": -20.51,
+          "background_std_db": 3.14,
+          "confidence_db": 5.47,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1443,
+            12,
+            1444,
+            13
+          ],
+          "bbox_geo": [
+            19.85906,
+            70.04772,
+            19.86201,
+            70.04852
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 1.826,
+          "matched_vessel": {
+            "mmsi": "586706474",
+            "name": "AUSTHAVET BUOY",
+            "country": "Unknown",
+            "ais_position": [
+              70.04189,
+              19.90307
+            ],
+            "projected_position": [
+              70.04189,
+              19.90307
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 70.03334,
+          "lon": 19.71743,
+          "intensity_db": -8.66,
+          "background_mean_db": -22.86,
+          "background_std_db": 2.6,
+          "confidence_db": 5.46,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1395,
+            31,
+            1396,
+            32
+          ],
+          "bbox_geo": [
+            19.71743,
+            70.03255,
+            19.72038,
+            70.03334
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 2.914,
+          "matched_vessel": {
+            "mmsi": "257045680",
+            "name": "FOSNA GYME",
+            "country": "Norway",
+            "ais_position": [
+              70.05259,
+              19.76954
+            ],
+            "projected_position": [
+              70.05259,
+              19.76954
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 70.05491,
+          "lon": 19.8089,
+          "intensity_db": -5.81,
+          "background_mean_db": -21.6,
+          "background_std_db": 2.94,
+          "confidence_db": 5.37,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1426,
+            4,
+            1427,
+            5
+          ],
+          "bbox_geo": [
+            19.8089,
+            70.05411,
+            19.81185,
+            70.05491
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 1.515,
+          "matched_vessel": {
+            "mmsi": "257045680",
+            "name": "FOSNA GYME",
+            "country": "Norway",
+            "ais_position": [
+              70.05259,
+              19.76954
+            ],
+            "projected_position": [
+              70.05259,
+              19.76954
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.79217,
+          "lon": 19.10665,
+          "intensity_db": 5.63,
+          "background_mean_db": -15.87,
+          "background_std_db": 4.0,
+          "confidence_db": 5.37,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1188,
+            333,
+            1189,
+            334
+          ],
+          "bbox_geo": [
+            19.10665,
+            69.79138,
+            19.1096,
+            69.79217
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 3.834,
+          "matched_vessel": {
+            "mmsi": "258241000",
+            "name": "FAKTOR",
+            "country": "Norway",
+            "ais_position": [
+              69.7543,
+              19.13149
+            ],
+            "projected_position": [
+              69.7644,
+              19.1658
+            ],
+            "projection_travel_km": 1.73
+          }
+        },
+        {
+          "lat": 69.555,
+          "lon": 18.64044,
+          "intensity_db": -8.36,
+          "background_mean_db": -19.57,
+          "background_std_db": 2.09,
+          "confidence_db": 5.37,
+          "blob_size_pixels": 5,
+          "estimated_length_m": 224.0,
+          "bbox_pixels": [
+            1030,
+            630,
+            1032,
+            633
+          ],
+          "bbox_geo": [
+            18.64044,
+            69.5526,
+            18.64634,
+            69.555
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 69.79377,
+          "lon": 19.11255,
+          "intensity_db": 7.37,
+          "background_mean_db": -16.57,
+          "background_std_db": 4.48,
+          "confidence_db": 5.35,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1190,
+            331,
+            1191,
+            332
+          ],
+          "bbox_geo": [
+            19.11255,
+            69.79297,
+            19.1155,
+            69.79377
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 3.854,
+          "matched_vessel": {
+            "mmsi": "258241000",
+            "name": "FAKTOR",
+            "country": "Norway",
+            "ais_position": [
+              69.7543,
+              19.13149
+            ],
+            "projected_position": [
+              69.7644,
+              19.1658
+            ],
+            "projection_travel_km": 1.73
+          }
+        },
+        {
+          "lat": 69.07266,
+          "lon": 16.07633,
+          "intensity_db": -6.39,
+          "background_mean_db": -19.19,
+          "background_std_db": 2.41,
+          "confidence_db": 5.31,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            161,
+            1234,
+            162,
+            1235
+          ],
+          "bbox_geo": [
+            16.07633,
+            69.07186,
+            16.07928,
+            69.07266
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 1.835,
+          "matched_vessel": {
+            "mmsi": "941501042",
+            "name": "ANDOYVAERING B 1",
+            "country": "Unknown",
+            "ais_position": [
+              69.06866,
+              16.1227
+            ],
+            "projected_position": [
+              69.07314,
+              16.12252
+            ],
+            "projection_travel_km": 0.5
+          }
+        },
+        {
+          "lat": 69.0495,
+          "lon": 16.48647,
+          "intensity_db": -6.68,
+          "background_mean_db": -23.95,
+          "background_std_db": 3.28,
+          "confidence_db": 5.26,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            300,
+            1263,
+            301,
+            1264
+          ],
+          "bbox_geo": [
+            16.48647,
+            69.0487,
+            16.48942,
+            69.0495
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 68.41383,
+          "lon": 16.8671,
+          "intensity_db": -6.89,
+          "background_mean_db": -21.46,
+          "background_std_db": 2.77,
+          "confidence_db": 5.25,
+          "blob_size_pixels": 3,
+          "estimated_length_m": 173.0,
+          "bbox_pixels": [
+            429,
+            2059,
+            431,
+            2061
+          ],
+          "bbox_geo": [
+            16.8671,
+            68.41224,
+            16.873,
+            68.41383
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 3.44,
+          "matched_vessel": {
+            "mmsi": "259405000",
+            "name": "EIDSVAAG MARIN",
+            "country": "Norway",
+            "ais_position": [
+              68.41842,
+              16.78393
+            ],
+            "projected_position": [
+              68.41842,
+              16.78393
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.82731,
+          "lon": 16.87891,
+          "intensity_db": -2.49,
+          "background_mean_db": -20.27,
+          "background_std_db": 3.4,
+          "confidence_db": 5.23,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            433,
+            289,
+            434,
+            290
+          ],
+          "bbox_geo": [
+            16.87891,
+            69.82651,
+            16.88186,
+            69.82731
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 68.98402,
+          "lon": 16.156,
+          "intensity_db": -5.24,
+          "background_mean_db": -20.56,
+          "background_std_db": 2.93,
+          "confidence_db": 5.23,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            188,
+            1345,
+            189,
+            1346
+          ],
+          "bbox_geo": [
+            16.156,
+            68.98322,
+            16.15895,
+            68.98402
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 4.482,
+          "matched_vessel": {
+            "mmsi": "257702800",
+            "name": "BEKKEBAATEN",
+            "country": "Norway",
+            "ais_position": [
+              68.96502,
+              16.25508
+            ],
+            "projected_position": [
+              68.96502,
+              16.25508
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.64604,
+          "lon": 18.84404,
+          "intensity_db": 4.7,
+          "background_mean_db": -15.11,
+          "background_std_db": 3.83,
+          "confidence_db": 5.17,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1099,
+            516,
+            1100,
+            517
+          ],
+          "bbox_geo": [
+            18.84404,
+            69.64524,
+            18.84699,
+            69.64604
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 3.861,
+          "matched_vessel": {
+            "mmsi": "257723900",
+            "name": "HAVCRUISE",
+            "country": "Norway",
+            "ais_position": [
+              69.63832,
+              18.94135
+            ],
+            "projected_position": [
+              69.63832,
+              18.94135
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.43122,
+          "lon": 15.60718,
+          "intensity_db": -2.34,
+          "background_mean_db": -16.27,
+          "background_std_db": 2.69,
+          "confidence_db": 5.17,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            2,
+            785,
+            3,
+            786
+          ],
+          "bbox_geo": [
+            15.60718,
+            69.43042,
+            15.61013,
+            69.43122
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 68.95367,
+          "lon": 16.14715,
+          "intensity_db": -3.39,
+          "background_mean_db": -21.52,
+          "background_std_db": 3.52,
+          "confidence_db": 5.15,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            185,
+            1383,
+            186,
+            1384
+          ],
+          "bbox_geo": [
+            16.14715,
+            68.95287,
+            16.1501,
+            68.95367
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 4.49,
+          "matched_vessel": {
+            "mmsi": "257702800",
+            "name": "BEKKEBAATEN",
+            "country": "Norway",
+            "ais_position": [
+              68.96502,
+              16.25508
+            ],
+            "projected_position": [
+              68.96502,
+              16.25508
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.70114,
+          "lon": 18.93551,
+          "intensity_db": 6.44,
+          "background_mean_db": -15.98,
+          "background_std_db": 4.36,
+          "confidence_db": 5.14,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1130,
+            447,
+            1131,
+            448
+          ],
+          "bbox_geo": [
+            18.93551,
+            69.70034,
+            18.93846,
+            69.70114
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 1.349,
+          "matched_vessel": {
+            "mmsi": "257129510",
+            "name": "FDA MIMMI",
+            "country": "Norway",
+            "ais_position": [
+              69.70524,
+              18.96843
+            ],
+            "projected_position": [
+              69.70524,
+              18.96843
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 70.05171,
+          "lon": 19.85021,
+          "intensity_db": -7.1,
+          "background_mean_db": -21.84,
+          "background_std_db": 2.88,
+          "confidence_db": 5.11,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1440,
+            8,
+            1441,
+            9
+          ],
+          "bbox_geo": [
+            19.85021,
+            70.05091,
+            19.85316,
+            70.05171
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 2.284,
+          "matched_vessel": {
+            "mmsi": "586706474",
+            "name": "AUSTHAVET BUOY",
+            "country": "Unknown",
+            "ais_position": [
+              70.04189,
+              19.90307
+            ],
+            "projected_position": [
+              70.04189,
+              19.90307
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 70.05091,
+          "lon": 16.56909,
+          "intensity_db": -8.34,
+          "background_mean_db": -25.67,
+          "background_std_db": 3.41,
+          "confidence_db": 5.09,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            328,
+            9,
+            329,
+            10
+          ],
+          "bbox_geo": [
+            16.56909,
+            70.05011,
+            16.57204,
+            70.05091
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 69.69954,
+          "lon": 18.93846,
+          "intensity_db": 1.95,
+          "background_mean_db": -19.33,
+          "background_std_db": 4.18,
+          "confidence_db": 5.09,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1131,
+            449,
+            1132,
+            450
+          ],
+          "bbox_geo": [
+            18.93846,
+            69.69874,
+            18.94141,
+            69.69954
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 1.317,
+          "matched_vessel": {
+            "mmsi": "257747930",
+            "name": "KAREN",
+            "country": "Norway",
+            "ais_position": [
+              69.70502,
+              18.96874
+            ],
+            "projected_position": [
+              69.70502,
+              18.96874
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.72669,
+          "lon": 18.18309,
+          "intensity_db": -5.29,
+          "background_mean_db": -17.18,
+          "background_std_db": 2.34,
+          "confidence_db": 5.08,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            875,
+            415,
+            876,
+            416
+          ],
+          "bbox_geo": [
+            18.18309,
+            69.72589,
+            18.18604,
+            69.72669
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 3.184,
+          "matched_vessel": {
+            "mmsi": "257028310",
+            "name": "RO FORTUNE",
+            "country": "Norway",
+            "ais_position": [
+              69.74496,
+              18.24676
+            ],
+            "projected_position": [
+              69.74496,
+              18.24676
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.82651,
+          "lon": 18.55782,
+          "intensity_db": 1.7,
+          "background_mean_db": -16.8,
+          "background_std_db": 3.66,
+          "confidence_db": 5.05,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1002,
+            290,
+            1003,
+            291
+          ],
+          "bbox_geo": [
+            18.55782,
+            69.82572,
+            18.56078,
+            69.82651
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 1.631,
+          "matched_vessel": {
+            "mmsi": "257292400",
+            "name": "KARLSOY",
+            "country": "Norway",
+            "ais_position": [
+              69.83697,
+              18.58764
+            ],
+            "projected_position": [
+              69.83697,
+              18.58764
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.98064,
+          "lon": 17.13561,
+          "intensity_db": -1.79,
+          "background_mean_db": -17.42,
+          "background_std_db": 3.1,
+          "confidence_db": 5.04,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            520,
+            97,
+            521,
+            98
+          ],
+          "bbox_geo": [
+            17.13561,
+            69.97984,
+            17.13856,
+            69.98064
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 69.83769,
+          "lon": 18.52242,
+          "intensity_db": 0.39,
+          "background_mean_db": -17.59,
+          "background_std_db": 3.57,
+          "confidence_db": 5.04,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            990,
+            276,
+            991,
+            277
+          ],
+          "bbox_geo": [
+            18.52242,
+            69.8369,
+            18.52537,
+            69.83769
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 2.501,
+          "matched_vessel": {
+            "mmsi": "257292400",
+            "name": "KARLSOY",
+            "country": "Norway",
+            "ais_position": [
+              69.83697,
+              18.58764
+            ],
+            "projected_position": [
+              69.83697,
+              18.58764
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.77381,
+          "lon": 17.86147,
+          "intensity_db": -8.01,
+          "background_mean_db": -22.83,
+          "background_std_db": 2.94,
+          "confidence_db": 5.04,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            766,
+            356,
+            767,
+            357
+          ],
+          "bbox_geo": [
+            17.86147,
+            69.77301,
+            17.86442,
+            69.77381
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 0.314,
+          "matched_vessel": {
+            "mmsi": "109050862",
+            "name": "J V BUOY 3 100",
+            "country": "Unknown",
+            "ais_position": [
+              69.76796,
+              17.88051
+            ],
+            "projected_position": [
+              69.77365,
+              17.86962
+            ],
+            "projection_travel_km": 0.76
+          }
+        },
+        {
+          "lat": 69.48153,
+          "lon": 18.22145,
+          "intensity_db": -5.81,
+          "background_mean_db": -17.77,
+          "background_std_db": 2.37,
+          "confidence_db": 5.04,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            888,
+            722,
+            889,
+            723
+          ],
+          "bbox_geo": [
+            18.22145,
+            69.48073,
+            18.2244,
+            69.48153
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 2.927,
+          "matched_vessel": {
+            "mmsi": "258541000",
+            "name": "BERG SENIOR",
+            "country": "Norway",
+            "ais_position": [
+              69.513,
+              18.40483
+            ],
+            "projected_position": [
+              69.49521,
+              18.28564
+            ],
+            "projection_travel_km": 5.04
+          }
+        },
+        {
+          "lat": 70.01897,
+          "lon": 19.67612,
+          "intensity_db": -7.71,
+          "background_mean_db": -24.06,
+          "background_std_db": 3.25,
+          "confidence_db": 5.03,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1381,
+            49,
+            1382,
+            50
+          ],
+          "bbox_geo": [
+            19.67612,
+            70.01817,
+            19.67907,
+            70.01897
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 4.981,
+          "matched_vessel": {
+            "mmsi": "586706479",
+            "name": "AUSTHAVET BUOY",
+            "country": "Unknown",
+            "ais_position": [
+              70.05649,
+              19.60445
+            ],
+            "projected_position": [
+              70.05649,
+              19.60445
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 69.26751,
+          "lon": 17.95294,
+          "intensity_db": -5.91,
+          "background_mean_db": -24.38,
+          "background_std_db": 3.67,
+          "confidence_db": 5.03,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            797,
+            990,
+            798,
+            991
+          ],
+          "bbox_geo": [
+            17.95294,
+            69.26671,
+            17.95589,
+            69.26751
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 0.981,
+          "matched_vessel": {
+            "mmsi": "257008720",
+            "name": "VIKABUEN",
+            "country": "Norway",
+            "ais_position": [
+              69.25976,
+              17.94105
+            ],
+            "projected_position": [
+              69.25976,
+              17.94105
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 70.02296,
+          "lon": 17.14446,
+          "intensity_db": -6.67,
+          "background_mean_db": -17.71,
+          "background_std_db": 2.2,
+          "confidence_db": 5.02,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            523,
+            44,
+            524,
+            45
+          ],
+          "bbox_geo": [
+            17.14446,
+            70.02216,
+            17.14742,
+            70.02296
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 4.441,
+          "matched_vessel": {
+            "mmsi": "257742500",
+            "name": "SENJATIND",
+            "country": "Norway",
+            "ais_position": [
+              70.06286,
+              17.0755
+            ],
+            "projected_position": [
+              70.05369,
+              17.06973
+            ],
+            "projection_travel_km": 1.04
+          }
+        },
+        {
+          "lat": 69.64444,
+          "lon": 18.85584,
+          "intensity_db": -4.07,
+          "background_mean_db": -17.21,
+          "background_std_db": 2.7,
+          "confidence_db": 4.87,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1103,
+            518,
+            1104,
+            519
+          ],
+          "bbox_geo": [
+            18.85584,
+            69.64364,
+            18.85879,
+            69.64444
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051953_20261027T052018_010066_01417A_68EA_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:53Z",
+          "tile_zone": "hotspot_69.5N_19E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 3.377,
+          "matched_vessel": {
+            "mmsi": "257723900",
+            "name": "HAVCRUISE",
+            "country": "Norway",
+            "ais_position": [
+              69.63832,
+              18.94135
+            ],
+            "projected_position": [
+              69.63832,
+              18.94135
+            ],
+            "projection_travel_km": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+      "filename": "20261027_051928_S1C_IW_G.tiff",
+      "tile_datetime": "2026-10-27T05:19:28Z",
+      "zone": "hotspot_70.0N_22E_4v",
+      "bbox": [
+        16.3284,
+        69.5581,
+        23.9524,
+        71.5384
+      ],
+      "detection_count": 35,
+      "detections": [
+        {
+          "lat": 71.06124,
+          "lon": 16.52827,
+          "intensity_db": 3.51,
+          "background_mean_db": -18.49,
+          "background_std_db": 2.45,
+          "confidence_db": 8.99,
+          "blob_size_pixels": 5,
+          "estimated_length_m": 224.0,
+          "bbox_pixels": [
+            55,
+            592,
+            57,
+            595
+          ],
+          "bbox_geo": [
+            16.52827,
+            71.05883,
+            16.53548,
+            71.06124
+          ],
+          "severity": "medium",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 71.43572,
+          "lon": 18.54501,
+          "intensity_db": 1.84,
+          "background_mean_db": -16.03,
+          "background_std_db": 2.39,
+          "confidence_db": 7.47,
+          "blob_size_pixels": 10,
+          "estimated_length_m": 316.0,
+          "bbox_pixels": [
+            614,
+            125,
+            617,
+            131
+          ],
+          "bbox_geo": [
+            18.54141,
+            71.4325,
+            18.55222,
+            71.43733
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.33564,
+          "lon": 20.31326,
+          "intensity_db": -3.43,
+          "background_mean_db": -16.12,
+          "background_std_db": 1.86,
+          "confidence_db": 6.81,
+          "blob_size_pixels": 3,
+          "estimated_length_m": 173.0,
+          "bbox_pixels": [
+            1106,
+            1493,
+            1108,
+            1495
+          ],
+          "bbox_geo": [
+            20.31326,
+            70.33403,
+            20.32047,
+            70.33564
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.89696,
+          "lon": 23.89298,
+          "intensity_db": -3.5,
+          "background_mean_db": -25.41,
+          "background_std_db": 3.23,
+          "confidence_db": 6.79,
+          "blob_size_pixels": 5,
+          "estimated_length_m": 224.0,
+          "bbox_pixels": [
+            2099,
+            796,
+            2102,
+            798
+          ],
+          "bbox_geo": [
+            23.88938,
+            70.89535,
+            23.90018,
+            70.89696
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.09082,
+          "lon": 18.5162,
+          "intensity_db": 8.27,
+          "background_mean_db": -16.73,
+          "background_std_db": 3.72,
+          "confidence_db": 6.72,
+          "blob_size_pixels": 4,
+          "estimated_length_m": 200.0,
+          "bbox_pixels": [
+            606,
+            1797,
+            609,
+            1799
+          ],
+          "bbox_geo": [
+            18.5126,
+            70.08921,
+            18.52341,
+            70.09082
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.81159,
+          "lon": 19.38052,
+          "intensity_db": -1.47,
+          "background_mean_db": -22.97,
+          "background_std_db": 3.47,
+          "confidence_db": 6.19,
+          "blob_size_pixels": 3,
+          "estimated_length_m": 173.0,
+          "bbox_pixels": [
+            847,
+            902,
+            849,
+            904
+          ],
+          "bbox_geo": [
+            19.38052,
+            70.80998,
+            19.38772,
+            70.81159
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.32598,
+          "lon": 20.1368,
+          "intensity_db": -4.02,
+          "background_mean_db": -16.14,
+          "background_std_db": 1.96,
+          "confidence_db": 6.19,
+          "blob_size_pixels": 3,
+          "estimated_length_m": 173.0,
+          "bbox_pixels": [
+            1057,
+            1505,
+            1059,
+            1507
+          ],
+          "bbox_geo": [
+            20.1368,
+            70.32437,
+            20.144,
+            70.32598
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 71.3874,
+          "lon": 21.63495,
+          "intensity_db": -1.58,
+          "background_mean_db": -15.44,
+          "background_std_db": 2.25,
+          "confidence_db": 6.15,
+          "blob_size_pixels": 3,
+          "estimated_length_m": 173.0,
+          "bbox_pixels": [
+            1473,
+            187,
+            1475,
+            189
+          ],
+          "bbox_geo": [
+            21.63495,
+            71.38579,
+            21.64215,
+            71.3874
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.33403,
+          "lon": 18.90155,
+          "intensity_db": -6.15,
+          "background_mean_db": -16.8,
+          "background_std_db": 1.82,
+          "confidence_db": 5.86,
+          "blob_size_pixels": 5,
+          "estimated_length_m": 224.0,
+          "bbox_pixels": [
+            713,
+            1495,
+            716,
+            1498
+          ],
+          "bbox_geo": [
+            18.89794,
+            70.33162,
+            18.90875,
+            70.33403
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 4.316,
+          "matched_vessel": {
+            "mmsi": "109080102",
+            "name": "BUOY 1",
+            "country": "Unknown",
+            "ais_position": [
+              70.30058,
+              18.96001
+            ],
+            "projected_position": [
+              70.30058,
+              18.96001
+            ],
+            "projection_travel_km": 0.0
+          }
+        },
+        {
+          "lat": 71.0999,
+          "lon": 18.57022,
+          "intensity_db": -3.08,
+          "background_mean_db": -18.99,
+          "background_std_db": 2.77,
+          "confidence_db": 5.74,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            622,
+            544,
+            623,
+            545
+          ],
+          "bbox_geo": [
+            18.57022,
+            71.09909,
+            18.57382,
+            71.0999
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 71.12084,
+          "lon": 18.18848,
+          "intensity_db": 10.64,
+          "background_mean_db": -15.08,
+          "background_std_db": 4.51,
+          "confidence_db": 5.7,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            516,
+            518,
+            517,
+            519
+          ],
+          "bbox_geo": [
+            18.18848,
+            71.12003,
+            18.19208,
+            71.12084
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 71.50417,
+          "lon": 23.11509,
+          "intensity_db": 0.45,
+          "background_mean_db": -16.82,
+          "background_std_db": 3.04,
+          "confidence_db": 5.68,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1884,
+            42,
+            1885,
+            43
+          ],
+          "bbox_geo": [
+            23.11509,
+            71.50337,
+            23.11869,
+            71.50417
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.16814,
+          "lon": 17.22333,
+          "intensity_db": 2.17,
+          "background_mean_db": -17.66,
+          "background_std_db": 3.51,
+          "confidence_db": 5.65,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            248,
+            1701,
+            249,
+            1702
+          ],
+          "bbox_geo": [
+            17.22333,
+            70.16733,
+            17.22693,
+            70.16814
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 3.347,
+          "matched_vessel": {
+            "mmsi": "586706650",
+            "name": "ROTTFISK NET BOUY 26",
+            "country": "Unknown",
+            "ais_position": [
+              70.13567,
+              17.2237
+            ],
+            "projected_position": [
+              70.13817,
+              17.21521
+            ],
+            "projection_travel_km": 0.42
+          }
+        },
+        {
+          "lat": 70.62556,
+          "lon": 16.53908,
+          "intensity_db": -2.49,
+          "background_mean_db": -20.41,
+          "background_std_db": 3.2,
+          "confidence_db": 5.61,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            58,
+            1133,
+            59,
+            1134
+          ],
+          "bbox_geo": [
+            16.53908,
+            70.62476,
+            16.54268,
+            70.62556
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 71.07816,
+          "lon": 16.57509,
+          "intensity_db": -0.82,
+          "background_mean_db": -22.51,
+          "background_std_db": 3.88,
+          "confidence_db": 5.6,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            68,
+            571,
+            69,
+            572
+          ],
+          "bbox_geo": [
+            16.57509,
+            71.07735,
+            16.57869,
+            71.07816
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 71.22714,
+          "lon": 21.47649,
+          "intensity_db": -0.22,
+          "background_mean_db": -18.34,
+          "background_std_db": 3.24,
+          "confidence_db": 5.59,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1429,
+            386,
+            1430,
+            387
+          ],
+          "bbox_geo": [
+            21.47649,
+            71.22634,
+            21.48009,
+            71.22714
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 71.47679,
+          "lon": 22.0383,
+          "intensity_db": -0.24,
+          "background_mean_db": -19.71,
+          "background_std_db": 3.49,
+          "confidence_db": 5.58,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1585,
+            76,
+            1586,
+            77
+          ],
+          "bbox_geo": [
+            22.0383,
+            71.47599,
+            22.0419,
+            71.47679
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.62153,
+          "lon": 19.96754,
+          "intensity_db": -1.08,
+          "background_mean_db": -16.62,
+          "background_std_db": 2.79,
+          "confidence_db": 5.57,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1010,
+            1138,
+            1011,
+            1139
+          ],
+          "bbox_geo": [
+            19.96754,
+            70.62073,
+            19.97114,
+            70.62153
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.8889,
+          "lon": 19.29049,
+          "intensity_db": -1.15,
+          "background_mean_db": -15.2,
+          "background_std_db": 2.53,
+          "confidence_db": 5.55,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            822,
+            806,
+            823,
+            807
+          ],
+          "bbox_geo": [
+            19.29049,
+            70.8881,
+            19.29409,
+            70.8889
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 71.20379,
+          "lon": 20.17281,
+          "intensity_db": -0.46,
+          "background_mean_db": -17.16,
+          "background_std_db": 3.03,
+          "confidence_db": 5.5,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1067,
+            415,
+            1068,
+            416
+          ],
+          "bbox_geo": [
+            20.17281,
+            71.20298,
+            20.17641,
+            71.20379
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 71.38337,
+          "lon": 20.01796,
+          "intensity_db": 0.39,
+          "background_mean_db": -15.99,
+          "background_std_db": 3.03,
+          "confidence_db": 5.41,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1024,
+            192,
+            1025,
+            193
+          ],
+          "bbox_geo": [
+            20.01796,
+            71.38257,
+            20.02156,
+            71.38337
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.96299,
+          "lon": 20.09718,
+          "intensity_db": -1.4,
+          "background_mean_db": -17.87,
+          "background_std_db": 3.05,
+          "confidence_db": 5.4,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1046,
+            714,
+            1047,
+            715
+          ],
+          "bbox_geo": [
+            20.09718,
+            70.96219,
+            20.10079,
+            70.96299
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 71.45424,
+          "lon": 17.1405,
+          "intensity_db": -1.46,
+          "background_mean_db": -15.05,
+          "background_std_db": 2.52,
+          "confidence_db": 5.39,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            225,
+            104,
+            226,
+            105
+          ],
+          "bbox_geo": [
+            17.1405,
+            71.45344,
+            17.1441,
+            71.45424
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.30021,
+          "lon": 18.52341,
+          "intensity_db": -4.04,
+          "background_mean_db": -15.18,
+          "background_std_db": 2.1,
+          "confidence_db": 5.31,
+          "blob_size_pixels": 3,
+          "estimated_length_m": 173.0,
+          "bbox_pixels": [
+            609,
+            1537,
+            611,
+            1539
+          ],
+          "bbox_geo": [
+            18.52341,
+            70.2986,
+            18.53061,
+            70.30021
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 71.13855,
+          "lon": 20.38529,
+          "intensity_db": 2.15,
+          "background_mean_db": -15.84,
+          "background_std_db": 3.39,
+          "confidence_db": 5.3,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1126,
+            496,
+            1127,
+            497
+          ],
+          "bbox_geo": [
+            20.38529,
+            71.13775,
+            20.38889,
+            71.13855
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.86233,
+          "lon": 18.98077,
+          "intensity_db": -3.11,
+          "background_mean_db": -18.31,
+          "background_std_db": 2.88,
+          "confidence_db": 5.29,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            736,
+            839,
+            737,
+            840
+          ],
+          "bbox_geo": [
+            18.98077,
+            70.86152,
+            18.98438,
+            70.86233
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.61912,
+          "lon": 20.24124,
+          "intensity_db": 2.37,
+          "background_mean_db": -20.6,
+          "background_std_db": 4.36,
+          "confidence_db": 5.26,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1086,
+            1141,
+            1087,
+            1142
+          ],
+          "bbox_geo": [
+            20.24124,
+            70.61831,
+            20.24484,
+            70.61912
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 71.31331,
+          "lon": 20.07197,
+          "intensity_db": 5.29,
+          "background_mean_db": -15.59,
+          "background_std_db": 3.98,
+          "confidence_db": 5.24,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1039,
+            279,
+            1040,
+            280
+          ],
+          "bbox_geo": [
+            20.07197,
+            71.31251,
+            20.07558,
+            71.31331
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.1923,
+          "lon": 17.70591,
+          "intensity_db": -0.34,
+          "background_mean_db": -23.11,
+          "background_std_db": 4.35,
+          "confidence_db": 5.24,
+          "blob_size_pixels": 3,
+          "estimated_length_m": 173.0,
+          "bbox_pixels": [
+            382,
+            1671,
+            384,
+            1673
+          ],
+          "bbox_geo": [
+            17.70591,
+            70.19068,
+            17.71311,
+            70.1923
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 71.15063,
+          "lon": 22.52448,
+          "intensity_db": -2.97,
+          "background_mean_db": -16.67,
+          "background_std_db": 2.62,
+          "confidence_db": 5.23,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1720,
+            481,
+            1721,
+            482
+          ],
+          "bbox_geo": [
+            22.52448,
+            71.14983,
+            22.52808,
+            71.15063
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 71.45344,
+          "lon": 21.48729,
+          "intensity_db": -6.29,
+          "background_mean_db": -20.53,
+          "background_std_db": 2.73,
+          "confidence_db": 5.21,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1432,
+            105,
+            1433,
+            106
+          ],
+          "bbox_geo": [
+            21.48729,
+            71.45263,
+            21.4909,
+            71.45344
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 3.307,
+          "matched_vessel": {
+            "mmsi": "314977000",
+            "name": "MARIGOLD",
+            "country": "Barbados",
+            "ais_position": [
+              71.40735,
+              21.36779
+            ],
+            "projected_position": [
+              71.43696,
+              21.5651
+            ],
+            "projection_travel_km": 7.73
+          }
+        },
+        {
+          "lat": 71.4937,
+          "lon": 21.64215,
+          "intensity_db": -1.83,
+          "background_mean_db": -15.08,
+          "background_std_db": 2.57,
+          "confidence_db": 5.16,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1475,
+            55,
+            1476,
+            56
+          ],
+          "bbox_geo": [
+            21.64215,
+            71.4929,
+            21.64575,
+            71.4937
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 71.538,
+          "lon": 16.83439,
+          "intensity_db": -3.98,
+          "background_mean_db": -16.39,
+          "background_std_db": 2.41,
+          "confidence_db": 5.15,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            140,
+            0,
+            141,
+            1
+          ],
+          "bbox_geo": [
+            16.83439,
+            71.53719,
+            16.83799,
+            71.538
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 70.86474,
+          "lon": 18.97717,
+          "intensity_db": -5.14,
+          "background_mean_db": -18.17,
+          "background_std_db": 2.56,
+          "confidence_db": 5.08,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            735,
+            836,
+            736,
+            837
+          ],
+          "bbox_geo": [
+            18.97717,
+            70.86394,
+            18.98077,
+            70.86474
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": false,
+          "nearest_ais_km": null,
+          "matched_vessel": null
+        },
+        {
+          "lat": 69.5738,
+          "lon": 20.60137,
+          "intensity_db": -1.37,
+          "background_mean_db": -15.46,
+          "background_std_db": 2.8,
+          "confidence_db": 5.03,
+          "blob_size_pixels": 1,
+          "estimated_length_m": 100.0,
+          "bbox_pixels": [
+            1186,
+            2439,
+            1187,
+            2440
+          ],
+          "bbox_geo": [
+            20.60137,
+            69.573,
+            20.60497,
+            69.5738
+          ],
+          "severity": "low",
+          "tile_id": "S1C_IW_GRDH_1SDV_20261027T051928_20261027T051953_010066_01417A_47C4_COG.SAFE",
+          "tile_datetime": "2026-10-27T05:19:28Z",
+          "tile_zone": "hotspot_70.0N_22E_4v",
+          "matched_ais": true,
+          "nearest_ais_km": 4.565,
+          "matched_vessel": {
+            "mmsi": "258968000",
+            "name": "IBESTAD",
+            "country": "Norway",
+            "ais_position": [
+              69.59769,
+              20.4477
+            ],
+            "projected_position": [
+              69.6106,
+              20.65354
+            ],
+            "projection_travel_km": 8.1
+          }
+        }
+      ]
+    },
     {
       "tile_id": "S1C_IW_GRDH_1SDV_20261026T155852_20261026T155917_010058_014135_B6F9_COG.SAFE",
       "filename": "20261026_155852_S1C_IW_G.tiff",
       "tile_datetime": "2026-10-26T15:58:52Z",
-      "zone": "hotspot_70.0N_21E_4v",
+      "zone": "hotspot_70.0N_21E_3v",
       "bbox": [
         16.5688,
         69.452,
@@ -48,7 +2964,7 @@
       "tile_id": "S1D_IW_GRDH_1SDV_20261026T150952_20261026T151017_005188_009D9B_208D_COG.SAFE",
       "filename": "20261026_150952_S1D_IW_G.tiff",
       "tile_datetime": "2026-10-26T15:09:52Z",
-      "zone": "hotspot_70.5N_32E_17v",
+      "zone": "hotspot_70.5N_32E_18v",
       "bbox": [
         28.4637,
         69.934,
@@ -81,7 +2997,7 @@
           "severity": "medium",
           "tile_id": "S1D_IW_GRDH_1SDV_20261026T150952_20261026T151017_005188_009D9B_208D_COG.SAFE",
           "tile_datetime": "2026-10-26T15:09:52Z",
-          "tile_zone": "hotspot_70.5N_32E_17v",
+          "tile_zone": "hotspot_70.5N_32E_18v",
           "matched_ais": false,
           "nearest_ais_km": null,
           "matched_vessel": null
@@ -110,7 +3026,7 @@
           "severity": "low",
           "tile_id": "S1D_IW_GRDH_1SDV_20261026T150952_20261026T151017_005188_009D9B_208D_COG.SAFE",
           "tile_datetime": "2026-10-26T15:09:52Z",
-          "tile_zone": "hotspot_70.5N_32E_17v",
+          "tile_zone": "hotspot_70.5N_32E_18v",
           "matched_ais": false,
           "nearest_ais_km": null,
           "matched_vessel": null
@@ -139,7 +3055,7 @@
           "severity": "low",
           "tile_id": "S1D_IW_GRDH_1SDV_20261026T150952_20261026T151017_005188_009D9B_208D_COG.SAFE",
           "tile_datetime": "2026-10-26T15:09:52Z",
-          "tile_zone": "hotspot_70.5N_32E_17v",
+          "tile_zone": "hotspot_70.5N_32E_18v",
           "matched_ais": false,
           "nearest_ais_km": null,
           "matched_vessel": null
@@ -168,7 +3084,7 @@
           "severity": "low",
           "tile_id": "S1D_IW_GRDH_1SDV_20261026T150952_20261026T151017_005188_009D9B_208D_COG.SAFE",
           "tile_datetime": "2026-10-26T15:09:52Z",
-          "tile_zone": "hotspot_70.5N_32E_17v",
+          "tile_zone": "hotspot_70.5N_32E_18v",
           "matched_ais": false,
           "nearest_ais_km": null,
           "matched_vessel": null
@@ -197,7 +3113,7 @@
           "severity": "low",
           "tile_id": "S1D_IW_GRDH_1SDV_20261026T150952_20261026T151017_005188_009D9B_208D_COG.SAFE",
           "tile_datetime": "2026-10-26T15:09:52Z",
-          "tile_zone": "hotspot_70.5N_32E_17v",
+          "tile_zone": "hotspot_70.5N_32E_18v",
           "matched_ais": false,
           "nearest_ais_km": null,
           "matched_vessel": null
@@ -226,7 +3142,7 @@
           "severity": "low",
           "tile_id": "S1D_IW_GRDH_1SDV_20261026T150952_20261026T151017_005188_009D9B_208D_COG.SAFE",
           "tile_datetime": "2026-10-26T15:09:52Z",
-          "tile_zone": "hotspot_70.5N_32E_17v",
+          "tile_zone": "hotspot_70.5N_32E_18v",
           "matched_ais": false,
           "nearest_ais_km": null,
           "matched_vessel": null
@@ -960,51 +3876,9 @@
       ],
       "detection_count": 0,
       "detections": []
-    },
-    {
-      "tile_id": "S1C_IW_GRDH_1SDV_20261013T151802_20261013T151827_009868_013AC7_E644_COG.SAFE",
-      "filename": "20261013_151802_S1C_IW_G.tiff",
-      "tile_datetime": "2026-10-13T15:18:02Z",
-      "zone": "hotspot_71.5N_33E_3v",
-      "bbox": [
-        25.8775,
-        70.4695,
-        33.8893,
-        72.4663
-      ],
-      "detection_count": 0,
-      "detections": []
-    },
-    {
-      "tile_id": "S1C_IW_GRDH_1SDV_20261013T151737_20261013T151802_009868_013AC7_A7C6_COG.SAFE",
-      "filename": "20261013_151737_S1C_IW_G.tiff",
-      "tile_datetime": "2026-10-13T15:17:37Z",
-      "zone": "hotspot_70.5N_32E_19v",
-      "bbox": [
-        27.2664,
-        69.0118,
-        34.6659,
-        70.9883
-      ],
-      "detection_count": 0,
-      "detections": []
-    },
-    {
-      "tile_id": "S1C_IW_GRDH_1SDV_20261013T053620_20261013T053645_009862_013A8B_582A_COG.SAFE",
-      "filename": "20261013_053620_S1C_IW_G.tiff",
-      "tile_datetime": "2026-10-13T05:36:20Z",
-      "zone": "hotspot_69.5N_19E_4v",
-      "bbox": [
-        11.4949,
-        68.1118,
-        18.5743,
-        70.0738
-      ],
-      "detection_count": 0,
-      "detections": []
     }
   ],
-  "correlated_at": "2026-10-27T02:55:28.570885Z",
-  "matched_to_ais": 0,
-  "dark_vessel_candidates": 6
+  "correlated_at": "2026-10-28T03:12:18.815812Z",
+  "matched_to_ais": 38,
+  "dark_vessel_candidates": 50
 }
